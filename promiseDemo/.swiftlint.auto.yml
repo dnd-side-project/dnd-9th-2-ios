@@ -1,0 +1,8 @@
+# 빌드시 자동으로 적용해주는 규칙입니다.
+
+whitelist_rules:
+  - leading_whitespace # 파일 첫 줄 공백 불가
+  - trailing_whitespace # 마지막 줄 공백 불가 (스페이스 바 등)
+  - vertical_whitespace # 공백 줄에 공백 불가 (스페이스 바 등)
+  - vertical_whitespace_closing_braces # 코드 블럭 마지막 줄 공백 불가
+  - trailing_newline # 파일 마지막 줄 공백 추가
