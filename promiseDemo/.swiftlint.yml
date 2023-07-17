@@ -1,0 +1,39 @@
+# swiftlint 규칙
+
+# 기본 룰 에서 적용되지 않는 룰
+disabled_rules:
+  - nesting # 타입 내부 중첩
+  - file_types_order # 파일 순서
+
+# 추가 룰
+opt_in_rules:
+  - empty_count # isEmpty 사용 (count == 0 x)
+  - empty_string # 문자열 isEmpty 사용 ((count == 0 x)
+  - file_name_no_space # 파일 이름 공백 불가
+  - force_unwrapping # 강제 언래핑
+  - multiline_arguments # 인자 줄 바꿈 (한 줄에 다 넣거나, 한 줄에 하나씩만 넣거나)
+  - multiline_function_chains # 메소드 사용시 한 줄에 하나씩
+  - multiline_parameters_brackets # 파라미터 괄호 줄 바꿈
+  - unused_import # 사용 안 하는 import
+  - sorted_imports # import 알파벳 순서
+  - vertical_parameter_alignment_on_call # 인자 줄 맞춤
+  - vertical_whitespace_closing_braces # 괄호 마지막 공백 불가
+  - weak_delegate # delegate 이름을 가진 인자는 weak 필요
+  
+# 제외 폴더
+excluded:
+  - ${TARGETNAME}/Resources
+
+# 줄 수 제한
+line_length: 100
+
+# 파일 줄 수 제한
+file_length:
+  warning: 700
+  error: 700
+
+# 룰 제외할 변수 이름
+identifier_name:
+  excluded:
+    - id
+    - URL
