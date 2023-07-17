@@ -11,6 +11,9 @@
 		140E88132A64B626005119F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88122A64B626005119F8 /* ContentView.swift */; };
 		140E88152A64B627005119F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88142A64B627005119F8 /* Assets.xcassets */; };
 		140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88172A64B627005119F8 /* Preview Assets.xcassets */; };
+		140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 140E881F2A64C3A8005119F8 /* ComposableArchitecture */; };
+		140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 140E88222A64C3C2005119F8 /* CombineMoya */; };
+		140E88252A64C3C2005119F8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 140E88242A64C3C2005119F8 /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */,
+				140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */,
+				140E88252A64C3C2005119F8 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +89,11 @@
 			dependencies = (
 			);
 			name = promiseDemo;
+			packageProductDependencies = (
+				140E881F2A64C3A8005119F8 /* ComposableArchitecture */,
+				140E88222A64C3C2005119F8 /* CombineMoya */,
+				140E88242A64C3C2005119F8 /* Moya */,
+			);
 			productName = promiseDemo;
 			productReference = 140E880D2A64B626005119F8 /* promiseDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +122,10 @@
 				Base,
 			);
 			mainGroup = 140E88042A64B626005119F8;
+			packageReferences = (
+				140E881E2A64C3A8005119F8 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 140E880E2A64B626005119F8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -345,6 +360,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		140E881E2A64C3A8005119F8 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
+		140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		140E881F2A64C3A8005119F8 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 140E881E2A64C3A8005119F8 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		140E88222A64C3C2005119F8 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		140E88242A64C3C2005119F8 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 140E88052A64B626005119F8 /* Project object */;
 }
