@@ -11,5 +11,6 @@
 - Combine
 
 ## 규칙
-- Swift Style Guide
-- Github Convention
+- [🟧 Swift Style Guide](https://github.com/dnd-side-project/dnd-9th-2-ios/wiki/Swift-Style-Guide)
+- [🟦 SwiftUI Style Guide](https://github.com/dnd-side-project/dnd-9th-2-ios/wiki/SwiftUI-Style-Guide)
+- [😺 Github Guide](https://github.com/dnd-side-project/dnd-9th-2-ios/wiki/Github-Guide)
