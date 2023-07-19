@@ -23,14 +23,14 @@ struct MainTabView: View {
                     send: MainTabFeature.Action.selectTab
                 )
             ) {
-                    Text("Hello")
+                    HomeView()
                     .tabItem {
                         Image(systemName: "house")
                         Text("홈")
                     }
                     .tag(TapType.home)
 
-                    Text("마이페이지")
+                    MyPageView()
                     .tabItem {
                         Image(systemName: "person")
                         Text("마이페이지")
