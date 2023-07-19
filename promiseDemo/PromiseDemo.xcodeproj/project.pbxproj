@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* promiseDemoApp.swift */; };
-		140E88132A64B626005119F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88122A64B626005119F8 /* ContentView.swift */; };
+		140E88132A64B626005119F8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88122A64B626005119F8 /* AppView.swift */; };
 		140E88152A64B627005119F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88142A64B627005119F8 /* Assets.xcassets */; };
 		140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88172A64B627005119F8 /* Preview Assets.xcassets */; };
 		140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 140E881F2A64C3A8005119F8 /* ComposableArchitecture */; };
@@ -26,13 +26,14 @@
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
 		1432BE642A68168A0098AAA9 /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE632A68168A0098AAA9 /* TabType.swift */; };
 		1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE652A681A600098AAA9 /* LoginFeature.swift */; };
+		1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE672A681B630098AAA9 /* AppFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		140E880D2A64B626005119F8 /* PromiseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PromiseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		140E88102A64B626005119F8 /* promiseDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = promiseDemoApp.swift; sourceTree = "<group>"; };
-		140E88122A64B626005119F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		140E88122A64B626005119F8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		140E88142A64B627005119F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140E88172A64B627005119F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		14134D3C2A64C53E004A6AC4 /* Extensions+temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+temp.swift"; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
 		1432BE632A68168A0098AAA9 /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
 		1432BE652A681A600098AAA9 /* LoginFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeature.swift; sourceTree = "<group>"; };
+		1432BE672A681B630098AAA9 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				140E88102A64B626005119F8 /* promiseDemoApp.swift */,
-				140E88122A64B626005119F8 /* ContentView.swift */,
+				1432BE672A681B630098AAA9 /* AppFeature.swift */,
+				140E88122A64B626005119F8 /* AppView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -322,8 +325,9 @@
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
 				14134D4B2A64C5F0004A6AC4 /* View+Temp.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
-				140E88132A64B626005119F8 /* ContentView.swift in Sources */,
+				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
+				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

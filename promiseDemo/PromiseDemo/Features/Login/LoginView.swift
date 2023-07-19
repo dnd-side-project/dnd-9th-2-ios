@@ -7,46 +7,57 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 struct LoginView: View {
+
+    let store: StoreOf<LoginFeature>
 
     var body: some View {
 
-        VStack {
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            VStack {
 
-            Spacer()
+                Spacer()
 
-            Circle()
-                .fill(Color.blue)
-                .frame(width: 200, height: 200)
-                .padding()
+                Circle()
+                    .fill(Color.blue)
+                    .frame(width: 200, height: 200)
+                    .padding()
 
-            Spacer()
+                Spacer()
 
-            Button {
-                print("login")
-            } label: {
-                HStack {
+                Button {
+                    viewStore.send(.kakaoLoginButtonTapped)
+                } label: {
+                    HStack {
 
-                    Spacer()
+                        Spacer()
 
-                    Text("로그인")
-                        .font(.title)
-                        .padding()
+                        Text("로그인")
+                            .font(.title)
+                            .padding()
 
-                    Spacer()
+                        Spacer()
+                    }
                 }
-            }
-            .padding()
-            .buttonStyle(.borderedProminent)
+                .padding()
+                .buttonStyle(.borderedProminent)
 
-            Spacer()
-            Spacer()
+                Spacer()
+                Spacer()
+            }
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(
+            store: Store(
+                initialState: LoginFeature.State(),
+                reducer: LoginFeature()
+            )
+        )
     }
 }
