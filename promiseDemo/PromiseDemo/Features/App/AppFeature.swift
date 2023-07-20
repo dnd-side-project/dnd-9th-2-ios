@@ -27,7 +27,7 @@ struct AppFeature: ReducerProtocol {
         Reduce { state, action in
             switch action {
 
-            case .login(.completeLogin):
+            case .login(.loginSuccess):
                 state.isLoggedIn = true
                 return .none
 

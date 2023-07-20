@@ -14,7 +14,7 @@ struct LoginFeature: ReducerProtocol {
 
     enum Action: Equatable {
         case kakaoLoginButtonTapped
-        case completeLogin
+        case loginSuccess
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -23,10 +23,10 @@ struct LoginFeature: ReducerProtocol {
             switch action {
             case .kakaoLoginButtonTapped:
                 return .run { send in
-                    await send(.completeLogin)
+                    await send(.loginSuccess)
                 }
 
-            case .completeLogin:
+            case .loginSuccess:
                 return .none
             }
         }
