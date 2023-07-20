@@ -7,11 +7,21 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 @main
 struct PromiseDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView(
+                store: Store(
+                    initialState: AppFeature.State(
+                        isLoggedIn: false,
+                        loginFeature: LoginFeature.State()
+                    ),
+                    reducer: AppFeature()
+                )
+            )
         }
     }
 }
