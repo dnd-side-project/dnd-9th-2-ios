@@ -32,6 +32,9 @@
 		2BD5D54C2A6C48490070C196 /* SsangButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D54B2A6C48490070C196 /* SsangButtonType.swift */; };
 		2BD5D54E2A6C48AB0070C196 /* SsangButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D54D2A6C48AB0070C196 /* SsangButtonStyle.swift */; };
 		2BD5D5502A6C49440070C196 /* SsangButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D54F2A6C49440070C196 /* SsangButton.swift */; };
+		2BD5D5532A6C4DF20070C196 /* SsangTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5522A6C4DF20070C196 /* SsangTextFieldType.swift */; };
+		2BD5D5552A6C4E280070C196 /* SsangTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5542A6C4E280070C196 /* SsangTextField.swift */; };
+		2BD5D5572A6C4EBE0070C196 /* Extensions+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,9 @@
 		2BD5D54B2A6C48490070C196 /* SsangButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangButtonType.swift; sourceTree = "<group>"; };
 		2BD5D54D2A6C48AB0070C196 /* SsangButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangButtonStyle.swift; sourceTree = "<group>"; };
 		2BD5D54F2A6C49440070C196 /* SsangButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangButton.swift; sourceTree = "<group>"; };
+		2BD5D5522A6C4DF20070C196 /* SsangTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangTextFieldType.swift; sourceTree = "<group>"; };
+		2BD5D5542A6C4E280070C196 /* SsangTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangTextField.swift; sourceTree = "<group>"; };
+		2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+View.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				14134D3C2A64C53E004A6AC4 /* Extensions+temp.swift */,
+				2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 		14134D482A64C5CD004A6AC4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2BD5D5512A6C4DDB0070C196 /* TextField */,
 				2BD5D54A2A6C47930070C196 /* Button */,
 				14134D4A2A64C5F0004A6AC4 /* View+Temp.swift */,
 			);
@@ -269,6 +277,15 @@
 				2BD5D54F2A6C49440070C196 /* SsangButton.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		2BD5D5512A6C4DDB0070C196 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				2BD5D5522A6C4DF20070C196 /* SsangTextFieldType.swift */,
+				2BD5D5542A6C4E280070C196 /* SsangTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,13 +396,16 @@
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
 				1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
+				2BD5D5572A6C4EBE0070C196 /* Extensions+View.swift in Sources */,
 				14134D3D2A64C53E004A6AC4 /* Extensions+temp.swift in Sources */,
 				2BD5D54E2A6C48AB0070C196 /* SsangButtonStyle.swift in Sources */,
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
+				2BD5D5532A6C4DF20070C196 /* SsangTextFieldType.swift in Sources */,
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
 				14134D4B2A64C5F0004A6AC4 /* View+Temp.swift in Sources */,
+				2BD5D5552A6C4E280070C196 /* SsangTextField.swift in Sources */,
 				2BD5D54C2A6C48490070C196 /* SsangButtonType.swift in Sources */,
 				2BD5D5502A6C49440070C196 /* SsangButton.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,

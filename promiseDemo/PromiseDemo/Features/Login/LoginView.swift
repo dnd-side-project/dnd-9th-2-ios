@@ -14,6 +14,7 @@ struct LoginView: View {
     let store: StoreOf<LoginFeature>
     
     @State private var loginButtonState: ButtonState = .enable
+    @State var textfield: String = ""
 
     var body: some View {
 
