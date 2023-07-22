@@ -21,7 +21,7 @@ struct MyPageView: View {
                 Text("마이페이지입니다. 마이페이지입니다. 마이페이지입니다.")
 
                 Button {
-                    viewStore.send(.logOut)
+                    viewStore.send(.logoutMyPage)
                 } label: {
                     HStack {
 

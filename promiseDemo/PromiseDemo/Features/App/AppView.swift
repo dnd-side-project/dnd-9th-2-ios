@@ -19,9 +19,9 @@ struct AppView: View {
 
             if viewStore.isLoggedIn {
                 MainTabView(
-                    store: Store(
-                        initialState: MainTabFeature.State(),
-                        reducer: MainTabFeature()
+                    store: self.store.scope(
+                        state: \.mainTabFeature,
+                        action: AppFeature.Action.logout
                     )
                 )
             } else {
@@ -42,7 +42,10 @@ struct ContentView_Previews: PreviewProvider {
                     Store(
                         initialState: AppFeature.State(
                             isLoggedIn: false,
-                            loginFeature: LoginFeature.State()
+                            loginFeature: LoginFeature.State(),
+                            mainTabFeature: MainTabFeature.State(
+                                myPageFeature: MyPageFeature.State()
+                            )
                         ),
                         reducer: AppFeature()
                 )

@@ -13,7 +13,7 @@ struct MyPageFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
-        case logOut
+        case logoutMyPage
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -21,7 +21,7 @@ struct MyPageFeature: ReducerProtocol {
         Reduce { state, action in
             switch action {
 
-            case .logOut:
+            case .logoutMyPage:
                 return .none
             }
         }

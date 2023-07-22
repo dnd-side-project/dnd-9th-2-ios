@@ -31,9 +31,9 @@ struct MainTabView: View {
                     .tag(TapType.home)
 
                     MyPageView(
-                        store: Store(
-                            initialState: MyPageFeature.State(),
-                            reducer: MyPageFeature()
+                        store: self.store.scope(
+                            state: \.myPageFeature,
+                            action: MainTabFeature.Action.logoutMainTab
                         )
                     )
                     .tabItem {
@@ -50,7 +50,9 @@ struct TabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView(
             store: Store(
-                initialState: MainTabFeature.State(),
+                initialState: MainTabFeature.State(
+                    myPageFeature: MyPageFeature.State()
+                ),
                 reducer: MainTabFeature()
             )
         )
