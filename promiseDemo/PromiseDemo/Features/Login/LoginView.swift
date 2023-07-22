@@ -12,6 +12,8 @@ import ComposableArchitecture
 struct LoginView: View {
 
     let store: StoreOf<LoginFeature>
+    
+    @State private var loginButtonState: ButtonState = .enable
 
     var body: some View {
 
@@ -26,23 +28,12 @@ struct LoginView: View {
                     .padding()
 
                 Spacer()
-
-                Button {
+                
+                SsangButton(action: {
                     viewStore.send(.kakaoLoginButtonTapped)
-                } label: {
-                    HStack {
-
-                        Spacer()
-
-                        Text("로그인")
-                            .font(.title)
-                            .padding()
-
-                        Spacer()
-                    }
-                }
-                .padding()
-                .buttonStyle(.borderedProminent)
+                }, label: {
+                    Text("로그인")
+                }, state: $loginButtonState)
 
                 Spacer()
                 Spacer()
