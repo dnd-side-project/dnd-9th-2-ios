@@ -39,9 +39,7 @@ struct LoginView: View {
                 state: \.$signUpNickname,
                 action: { .signUpNickname($0) })
             ) { signupStore in
-                NavigationStack {
-                    SignUpNicknameView(store: signupStore)
-                }
+                SignUpNicknameView(store: signupStore)
             }
         }
     }
