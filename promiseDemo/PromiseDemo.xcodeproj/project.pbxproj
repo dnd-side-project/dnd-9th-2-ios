@@ -28,6 +28,8 @@
 		1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE672A681B630098AAA9 /* AppFeature.swift */; };
 		1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6C2A682FCB0098AAA9 /* HomeView.swift */; };
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
+		14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */; };
+		14E506502A6B8913008D5778 /* SignUpNicknameViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		1432BE672A681B630098AAA9 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		1432BE6C2A682FCB0098AAA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
+		14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,9 +238,19 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		14E5064C2A6B88ED008D5778 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */,
+				14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		14EBE4BC2A681308007537C8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				14E5064C2A6B88ED008D5778 /* SignUp */,
 				14EBE4BD2A68130F007537C8 /* LoginView.swift */,
 				1432BE652A681A600098AAA9 /* LoginFeature.swift */,
 			);
@@ -370,6 +384,8 @@
 				14134D4B2A64C5F0004A6AC4 /* View+Temp.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
+				14E506502A6B8913008D5778 /* SignUpNicknameViewFeature.swift in Sources */,
+				14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
