@@ -30,7 +30,12 @@ struct MainTabView: View {
                     }
                     .tag(TapType.home)
 
-                    MyPageView()
+                    MyPageView(
+                        store: Store(
+                            initialState: MyPageFeature.State(),
+                            reducer: MyPageFeature()
+                        )
+                    )
                     .tabItem {
                         Image(systemName: "person")
                         Text("마이페이지")
