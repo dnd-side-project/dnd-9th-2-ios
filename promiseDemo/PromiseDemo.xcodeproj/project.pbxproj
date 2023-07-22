@@ -236,8 +236,8 @@
 		1432BE712A68302F0098AAA9 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				1432BE672A681B630098AAA9 /* AppFeature.swift */,
 				140E88122A64B626005119F8 /* AppView.swift */,
+				1432BE672A681B630098AAA9 /* AppFeature.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";

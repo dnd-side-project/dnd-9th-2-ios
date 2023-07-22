@@ -14,8 +14,14 @@ struct SignUpProfileImageFeature: ReducerProtocol {
 
     enum Action: Equatable {
         case nextButtonTapped
-        case backButtonTapped
-        case loginSuccess
+        case signUpSuccess
+        case signUpFailed
+
+        case delegate(Delegate)
+
+        enum Delegate: Equatable {
+            case moveToHome
+        }
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -24,12 +30,21 @@ struct SignUpProfileImageFeature: ReducerProtocol {
             switch action {
 
             case .nextButtonTapped:
+                return .run { send in
+                    // todo: 실패 Alert
+                    await send(.signUpSuccess)
+                }
+
+            case .signUpSuccess:
+                return .run { send in
+                    await send(.delegate(.moveToHome))
+                }
+
+            case .signUpFailed:
+                // todo: 실패 Alert
                 return .none
 
-            case .backButtonTapped:
-                return .none
-
-            case .loginSuccess:
+            case .delegate:
                 return .none
             }
         }

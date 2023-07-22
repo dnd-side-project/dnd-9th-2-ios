@@ -14,9 +14,17 @@ struct LoginFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
+
+        // Button Tapped
+
         case kakaoLoginButtonTapped
         case signUpButtonTapped
+
+        // Dependency
+
         case loginSuccess
+
+        // Child Action
 
         case signUpNickname(PresentationAction<SignUpNicknameFeature.Action>)
     }
@@ -25,6 +33,9 @@ struct LoginFeature: ReducerProtocol {
         Reduce { state, action in
 
             switch action {
+
+            // Button Tapped
+
             case .kakaoLoginButtonTapped:
                 return .run { send in
                     await send(.loginSuccess)
@@ -34,8 +45,17 @@ struct LoginFeature: ReducerProtocol {
                 state.signUpNickname = SignUpNicknameFeature.State()
                 return .none
 
+            // Dependency
+
             case .loginSuccess:
                 return .none
+
+            // Child Action
+
+            case .signUpNickname(.presented(.delegate(.successSignUp))):
+                return .run { send in
+                    await send(.loginSuccess)
+                }
 
             case .signUpNickname:
                 return .none
