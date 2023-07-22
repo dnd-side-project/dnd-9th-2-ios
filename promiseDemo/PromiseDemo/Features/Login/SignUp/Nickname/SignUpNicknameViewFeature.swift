@@ -11,6 +11,8 @@ struct SignUpNicknameFeature: ReducerProtocol {
 
     struct State: Equatable {
         var path = StackState<SignUpProfileImageFeature.State>()
+
+        var disableDismissAnimation: Bool = false
     }
 
     enum Action: Equatable {
@@ -45,14 +47,26 @@ struct SignUpNicknameFeature: ReducerProtocol {
             // Button Tapped
 
             case .nextButtonTapped:
+
+                // 애니메이션 활성화
+                state.disableDismissAnimation = false
+
                 return .none
 
             case .cancelButtonTapped:
+
+                // 애니메이션 활성화
+                state.disableDismissAnimation = false
+
                 return .run { _ in await self.dismiss() }
 
             // Screen Move
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):
+
+                // 회원 가입 완료하고 홈 화면 이동시 애니메이션 비활성화
+                state.disableDismissAnimation = true
+
                 state.path.pop(from: id)
                 return .run { send in
                     await send(.moveToHome)

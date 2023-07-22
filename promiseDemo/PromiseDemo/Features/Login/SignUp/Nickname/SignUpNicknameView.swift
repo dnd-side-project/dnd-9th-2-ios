@@ -31,6 +31,9 @@ struct SignUpNicknameView: View {
                             .foregroundColor(Color.white)
                             .background(Color.blue)
                     }
+                    .transaction { transaction in
+                        transaction.disablesAnimations = viewStore.disableDismissAnimation
+                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

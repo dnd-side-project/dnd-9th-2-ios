@@ -41,6 +41,9 @@ struct LoginView: View {
             ) { signupStore in
                 SignUpNicknameView(store: signupStore)
             }
+            .transaction { transaction in
+                transaction.disablesAnimations = viewStore.disableDismissAnimation
+            }
         }
     }
 }

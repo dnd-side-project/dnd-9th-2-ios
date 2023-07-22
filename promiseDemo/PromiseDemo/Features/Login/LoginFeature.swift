@@ -11,6 +11,8 @@ struct LoginFeature: ReducerProtocol {
 
     struct State: Equatable {
         @PresentationState var signUpNickname: SignUpNicknameFeature.State?
+
+        var disableDismissAnimation: Bool = false
     }
 
     enum Action: Equatable {
@@ -42,6 +44,10 @@ struct LoginFeature: ReducerProtocol {
                 }
 
             case .signUpButtonTapped:
+
+                // 애니메이션 활성화
+                state.disableDismissAnimation = false
+
                 state.signUpNickname = SignUpNicknameFeature.State()
                 return .none
 
@@ -53,6 +59,10 @@ struct LoginFeature: ReducerProtocol {
             // Child Action
 
             case .signUpNickname(.presented(.delegate(.successSignUp))):
+
+                // 홈 화면 이동시 애니메이션 비활성화
+                state.disableDismissAnimation = true
+
                 return .run { send in
                     await send(.loginSuccess)
                 }
