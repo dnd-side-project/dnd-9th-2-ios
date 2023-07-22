@@ -7,26 +7,28 @@
 
 import SwiftUI
 
-struct SsangAlert : View {
+struct SsangAlert: View {
     private let screenSize: CGRect = UIScreen.main.bounds
     private var alertWidth: CGFloat {
         screenSize.width - 40
     }
-    
+
     @Binding private var isPresented: Bool
     @Binding private var rightButtonTapped: Bool
-    
+
     private var title: String
     private var description: String?
     private var leftButtonTitle: String
     private var rightButtonTitle: String
-    
-    init(isPresented: Binding<Bool>,
-         title: String,
-         description: String? = nil,
-         leftButtonTitle: String = "아니오",
-         rightButtonTitle: String = "네",
-         rightButtonAction: Binding<Bool>) {
+
+    init(
+        isPresented: Binding<Bool>,
+        title: String,
+        description: String? = nil,
+        leftButtonTitle: String = "아니오",
+        rightButtonTitle: String = "네",
+        rightButtonAction: Binding<Bool>
+    ) {
         self._isPresented = isPresented
         self.title = title
         self.description = description
@@ -34,18 +36,18 @@ struct SsangAlert : View {
         self.rightButtonTitle = rightButtonTitle
         self._rightButtonTapped = rightButtonAction
     }
-    
+
     var body: some View {
         ZStack {
             BackgroundDimmerView(isPresented: $isPresented)
-            
+
             VStack(spacing: 20) {
                 Spacer()
-                
+
                 Text(title)
                     .font(.title3)
                     .multilineTextAlignment(.center)
-                
+
                 if let description {
                     Text(description)
                         .multilineTextAlignment(.center)
@@ -54,7 +56,7 @@ struct SsangAlert : View {
                 } else {
                     Spacer()
                 }
-                
+
                 HStack {
                     Button {
                         isPresented.toggle()
@@ -63,7 +65,7 @@ struct SsangAlert : View {
                             .frame(width: alertWidth/2,
                                    height: 52)
                     }
-                    
+
                     Button {
                         rightButtonTapped.toggle()
                         isPresented.toggle()

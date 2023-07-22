@@ -9,11 +9,11 @@ import SwiftUI
 
 struct BackgroundDimmerView: View {
     @Binding private var isPresented: Bool
-    
+
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
     }
-    
+
     var body: some View {
         Color.black
             .opacity(isPresented ? 0.2 : 0)

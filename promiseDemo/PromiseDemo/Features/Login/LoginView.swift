@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct LoginView: View {
 
     let store: StoreOf<LoginFeature>
-    
+
     @State private var loginButtonState: ButtonState = .enable
     @State var textfield: String = ""
 
@@ -29,7 +29,7 @@ struct LoginView: View {
                     .padding()
 
                 Spacer()
-                
+
                 SsangButton(action: {
                     viewStore.send(.kakaoLoginButtonTapped)
                 }, label: {

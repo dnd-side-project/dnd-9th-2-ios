@@ -10,13 +10,15 @@ import SwiftUI
 struct SsangButtonStyle: ButtonStyle {
     private var type: ButtonType
     @Binding var state: ButtonState
-    
-    init(type: ButtonType = ButtonType(size: .large, shape: .square),
-         state: Binding<ButtonState>) {
+
+    init(
+        type: ButtonType = ButtonType(size: .large, shape: .square),
+        state: Binding<ButtonState>
+    ) {
         self.type = type
         self._state = state
     }
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: UIScreen.main.bounds.width*type.size.ratio, height: 62)

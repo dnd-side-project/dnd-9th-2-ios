@@ -12,7 +12,7 @@ enum ButtonSize {
     case small
     case medium
     case large
-    
+
     var ratio: CGFloat {
         switch self {
         case .small: return 0.5
@@ -26,7 +26,7 @@ enum ButtonSize {
 enum ButtonShape {
     case square
     case round
-    
+
     var radius: CGFloat {
         switch self {
         case .square: return 6
@@ -45,14 +45,14 @@ struct ButtonType {
 enum ButtonState {
     case disable
     case enable
-    
+
     var bgColor: Color {
         switch self {
         case .disable: return .gray
         case .enable: return .blue
         }
     }
-    
+
     var fgColor: Color {
         switch self {
         case .disable: return .white

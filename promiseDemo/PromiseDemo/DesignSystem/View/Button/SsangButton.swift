@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct SsangButton<Label: View>: View {
-    private let action: () -> ()
+    private let action: () -> Void
     private let label: () -> Label
     private let type: ButtonType
-    
+
     @State private var isPressed: Bool = false
     @Binding var state: ButtonState
-    
-    init(action: @escaping () -> (),
-         @ViewBuilder label: @escaping () -> Label,
-         state: Binding<ButtonState>,
-         type: ButtonType = ButtonType(size: .large, shape: .square)) {
+
+    init(
+        action: @escaping () -> Void,
+        @ViewBuilder label: @escaping () -> Label,
+        state: Binding<ButtonState>,
+        type: ButtonType = ButtonType(size: .large, shape: .square)
+    ) {
         self.action = action
         self.label = label
         self._state = state
         self.type = type
     }
-    
+
     var body: some View {
         Button(action: action) {
             HStack {
