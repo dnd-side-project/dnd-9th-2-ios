@@ -10,24 +10,29 @@ import ComposableArchitecture
 struct SignUpNicknameFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var path = StackState<SignUpProfileImageFeature.State>()
-
         var disableDismissAnimation: Bool = false
+
+        // MARK: - Child State
+
+        var path = StackState<SignUpProfileImageFeature.State>()
     }
 
     enum Action: Equatable {
 
-        // Button Tapped
+        // MARK: - Button Tapped
 
         case nextButtonTapped
         case cancelButtonTapped
 
-        // Screen Move
+        // MARK: - Screen Move
 
-        case path(StackAction<SignUpProfileImageFeature.State, SignUpProfileImageFeature.Action>)
         case moveToHome
 
-        // Delegate
+        // MARK: - Child Action
+
+        case path(StackAction<SignUpProfileImageFeature.State, SignUpProfileImageFeature.Action>)
+
+        // MARK: - Delegate
 
         case delegate(Delegate)
 
@@ -44,28 +49,30 @@ struct SignUpNicknameFeature: ReducerProtocol {
 
             switch action {
 
-            // Button Tapped
+                // MARK: - Button Tapped
 
             case .nextButtonTapped:
-
-                // 애니메이션 활성화
-                state.disableDismissAnimation = false
+                state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
 
                 return .none
 
             case .cancelButtonTapped:
-
-                // 애니메이션 활성화
-                state.disableDismissAnimation = false
+                state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
 
                 return .run { _ in await self.dismiss() }
 
-            // Screen Move
+                // MARK: - Screen Move
+
+            case .moveToHome:
+                return .run { send in
+                    await send(.delegate(.successSignUp))
+                    await self.dismiss()
+                }
+
+                // MARK: - Child Action
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):
-
-                // 회원 가입 완료하고 홈 화면 이동시 애니메이션 비활성화
-                state.disableDismissAnimation = true
+                state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
 
                 state.path.pop(from: id)
                 return .run { send in
@@ -75,13 +82,7 @@ struct SignUpNicknameFeature: ReducerProtocol {
             case .path:
                 return .none
 
-            case .moveToHome:
-                return .run { send in
-                    await send(.delegate(.successSignUp))
-                    await self.dismiss()
-                }
-
-            // Delegate
+                // MARK: - Delegate
 
             case .delegate:
                 return . none

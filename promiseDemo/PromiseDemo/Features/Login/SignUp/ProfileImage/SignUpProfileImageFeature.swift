@@ -31,7 +31,7 @@ struct SignUpProfileImageFeature: ReducerProtocol {
 
             case .nextButtonTapped:
                 return .run { send in
-                    // todo: 실패 Alert
+                    // todo: 성공 & 실패 분기 처리
                     await send(.signUpSuccess)
                 }
 

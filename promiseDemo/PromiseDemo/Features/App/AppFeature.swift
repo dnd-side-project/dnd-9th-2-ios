@@ -11,11 +11,17 @@ struct AppFeature: ReducerProtocol {
 
     struct State: Equatable {
         var isLoggedIn: Bool
+
+        // MARK: - Scope State
+
         var loginFeature: LoginFeature.State
         var mainTabFeature: MainTabFeature.State
     }
 
     enum Action: Equatable {
+
+        // MARK: - Scope Action
+
         case login(LoginFeature.Action)
         case logout(MainTabFeature.Action)
     }
