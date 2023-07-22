@@ -35,6 +35,9 @@
 		2BD5D5532A6C4DF20070C196 /* SsangTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5522A6C4DF20070C196 /* SsangTextFieldType.swift */; };
 		2BD5D5552A6C4E280070C196 /* SsangTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5542A6C4E280070C196 /* SsangTextField.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* Extensions+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */; };
+		2BD5D55A2A6C51490070C196 /* SsangAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5592A6C51490070C196 /* SsangAlert.swift */; };
+		2BD5D55D2A6C51AE0070C196 /* BackgroundDimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D55C2A6C51AE0070C196 /* BackgroundDimmerView.swift */; };
+		2BD5D55F2A6C51D80070C196 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D55E2A6C51D80070C196 /* UnderlineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		2BD5D5522A6C4DF20070C196 /* SsangTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangTextFieldType.swift; sourceTree = "<group>"; };
 		2BD5D5542A6C4E280070C196 /* SsangTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangTextField.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+View.swift"; sourceTree = "<group>"; };
+		2BD5D5592A6C51490070C196 /* SsangAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsangAlert.swift; sourceTree = "<group>"; };
+		2BD5D55C2A6C51AE0070C196 /* BackgroundDimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDimmerView.swift; sourceTree = "<group>"; };
+		2BD5D55E2A6C51D80070C196 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +198,8 @@
 		14134D482A64C5CD004A6AC4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2BD5D55B2A6C519F0070C196 /* Common */,
+				2BD5D5582A6C51400070C196 /* Alert */,
 				2BD5D5512A6C4DDB0070C196 /* TextField */,
 				2BD5D54A2A6C47930070C196 /* Button */,
 				14134D4A2A64C5F0004A6AC4 /* View+Temp.swift */,
@@ -286,6 +294,23 @@
 				2BD5D5542A6C4E280070C196 /* SsangTextField.swift */,
 			);
 			path = TextField;
+			sourceTree = "<group>";
+		};
+		2BD5D5582A6C51400070C196 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				2BD5D5592A6C51490070C196 /* SsangAlert.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		2BD5D55B2A6C519F0070C196 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2BD5D55C2A6C51AE0070C196 /* BackgroundDimmerView.swift */,
+				2BD5D55E2A6C51D80070C196 /* UnderlineView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,11 +433,14 @@
 				2BD5D5552A6C4E280070C196 /* SsangTextField.swift in Sources */,
 				2BD5D54C2A6C48490070C196 /* SsangButtonType.swift in Sources */,
 				2BD5D5502A6C49440070C196 /* SsangButton.swift in Sources */,
+				2BD5D55D2A6C51AE0070C196 /* BackgroundDimmerView.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
+				2BD5D55A2A6C51490070C196 /* SsangAlert.swift in Sources */,
+				2BD5D55F2A6C51D80070C196 /* UnderlineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
