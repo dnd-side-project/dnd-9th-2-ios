@@ -1,5 +1,5 @@
 //
-//  SsangButton.swift
+//  BaggleButton.swift
 //  PromiseDemo
 //
 //  Created by 양수빈 on 2023/07/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SsangButton<Label: View>: View {
+struct BaggleButton<Label: View>: View {
     private let action: () -> Void
     private let label: () -> Label
     private let type: ButtonType
@@ -34,6 +34,6 @@ struct SsangButton<Label: View>: View {
             }
             .allowsHitTesting(false)
         }
-        .buttonStyle(SsangButtonStyle(type: type, state: $state))
+        .buttonStyle(BaggleButtonStyle(type: type, state: $state))
     }
 }

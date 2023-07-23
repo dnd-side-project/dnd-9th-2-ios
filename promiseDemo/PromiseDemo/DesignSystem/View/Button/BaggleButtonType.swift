@@ -1,5 +1,5 @@
 //
-//  SsangButtonType.swift
+//  BaggleButtonType.swift
 //  PromiseDemo
 //
 //  Created by 양수빈 on 2023/07/23.

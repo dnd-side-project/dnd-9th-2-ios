@@ -1,5 +1,5 @@
 //
-//  SsangTextFieldType.swift
+//  BaggleTextFieldType.swift
 //  PromiseDemo
 //
 //  Created by 양수빈 on 2023/07/23.

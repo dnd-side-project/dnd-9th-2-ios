@@ -1,5 +1,5 @@
 //
-//  SsangAlert.swift
+//  BaggleAlert.swift
 //  PromiseDemo
 //
 //  Created by 양수빈 on 2023/07/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SsangAlert: View {
+struct BaggleAlert: View {
     private let screenSize: CGRect = UIScreen.main.bounds
     private var alertWidth: CGFloat {
         screenSize.width - 40

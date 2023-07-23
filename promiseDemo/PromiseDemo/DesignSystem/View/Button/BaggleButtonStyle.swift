@@ -1,5 +1,5 @@
 //
-//  SsangButtonStyle.swift
+//  BaggleButtonStyle.swift
 //  PromiseDemo
 //
 //  Created by 양수빈 on 2023/07/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SsangButtonStyle: ButtonStyle {
+struct BaggleButtonStyle: ButtonStyle {
     private var type: ButtonType
     @Binding var state: ButtonState
 

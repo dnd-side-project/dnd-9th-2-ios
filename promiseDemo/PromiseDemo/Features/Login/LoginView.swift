@@ -30,7 +30,7 @@ struct LoginView: View {
 
                 Spacer()
 
-                SsangButton(action: {
+                BaggleButton(action: {
                     viewStore.send(.kakaoLoginButtonTapped)
                 }, label: {
                     Text("로그인")

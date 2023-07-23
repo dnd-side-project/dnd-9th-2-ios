@@ -1,5 +1,5 @@
 //
-//  SsangTextField.swift
+//  BaggleTextField.swift
 //  PromiseDemo
 //
 //  Created by 양수빈 on 2023/07/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SsangTextField: View {
+struct BaggleTextField: View {
     private var placeholder: String
     private var type: TextFieldType
     private var title: String?
