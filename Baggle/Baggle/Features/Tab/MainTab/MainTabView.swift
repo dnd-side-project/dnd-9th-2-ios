@@ -25,11 +25,8 @@ struct MainTabView: View {
             ) {
                 HomeView()
                     .tabItem {
-                        Button {
-                        } label: {
-                            Image(systemName: "house")
-                            Text("홈")
-                        }
+                        Image(systemName: "house")
+                        Text("홈")
                     }
                     .tag(TapType.home)
 
