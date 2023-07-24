@@ -16,7 +16,7 @@ struct PromiseDemoApp: App {
             AppView(
                 store: Store(
                     initialState: AppFeature.State(
-                        isLoggedIn: false,
+                        isLoggedIn: true,
                         loginFeature: LoginFeature.State(),
                         mainTabFeature: MainTabFeature.State(
                             selectedTab: .home,
