@@ -15,8 +15,19 @@ struct CreateMeetingView: View {
 
     var body: some View {
 
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Text("Hello, World")
+        NavigationStack {
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                VStack {
+                    Text("모임 생성")
+                }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("취소") {
+                            viewStore.send(.cancelButtonTapped)
+                        }
+                    }
+                }
+            }
         }
     }
 }

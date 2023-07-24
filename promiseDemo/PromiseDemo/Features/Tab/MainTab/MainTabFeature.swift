@@ -13,6 +13,10 @@ struct MainTabFeature: ReducerProtocol {
         var selectedTab: TapType = .home
 
         var myPageFeature: MyPageFeature.State
+
+        // MARK: - Child State
+
+        @PresentationState var createMeeting: CreateMeetingFeature.State?
     }
 
     enum Action: Equatable {
@@ -23,6 +27,7 @@ struct MainTabFeature: ReducerProtocol {
 
         // MARK: - Child Action
 
+        case createMeeting(PresentationAction<CreateMeetingFeature.Action>)
         case logoutMainTab(MyPageFeature.Action)
     }
 
@@ -43,10 +48,17 @@ struct MainTabFeature: ReducerProtocol {
                 // MARK: - Tap
 
             case .selectTab(let tabType):
-                state.selectedTab = tabType
+                if tabType == .createMeeting {
+                    state.createMeeting = CreateMeetingFeature.State()
+                } else {
+                    state.selectedTab = tabType
+                }
                 return .none
 
                 // MARK: - Child Action
+
+            case .createMeeting:
+                return .none
 
             case .logoutMainTab(.logoutMyPage):
                 state.selectedTab = .home // 로그아웃 후 재 진입시 기본 화면 홈 화면으로 설정
@@ -55,6 +67,9 @@ struct MainTabFeature: ReducerProtocol {
             case .logoutMainTab:
                 return.none
             }
+        }
+        .ifLet(\.$createMeeting, action: /Action.createMeeting) {
+            CreateMeetingFeature()
         }
     }
 }

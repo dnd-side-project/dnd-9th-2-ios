@@ -34,7 +34,6 @@ struct MainTabView: View {
                     .tag(TapType.home)
 
                 ZStack {
-                    
                 }
                 .tabItem {
                     Image(systemName: "plus.square")
@@ -53,6 +52,13 @@ struct MainTabView: View {
                     Text("마이페이지")
                 }
                 .tag(TapType.myPage)
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$createMeeting,
+                    action: { .createMeeting($0) })
+            ) { createMeetingStore in
+                CreateMeetingView(store: createMeetingStore)
             }
         }
     }

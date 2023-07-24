@@ -14,8 +14,14 @@ struct CreateMeetingFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
+
+        // MARK: - Tap
+        case cancelButtonTapped
+
         // MARK: - Scope Action
     }
+
+    @Dependency(\.dismiss) var dismiss
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -26,6 +32,8 @@ struct CreateMeetingFeature: ReducerProtocol {
         Reduce { state, action in
 
             switch action {
+            case .cancelButtonTapped:
+                return .run { _ in await self.dismiss() }
             }
         }
     }
