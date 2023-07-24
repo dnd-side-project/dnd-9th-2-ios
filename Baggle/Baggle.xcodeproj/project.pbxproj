@@ -27,6 +27,8 @@
 		1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE672A681B630098AAA9 /* AppFeature.swift */; };
 		1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6C2A682FCB0098AAA9 /* HomeView.swift */; };
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
+		14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */; };
+		14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */; };
 		14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */; };
 		14E506502A6B8913008D5778 /* SignUpNicknameViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */; };
 		14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506532A6B8ED3008D5778 /* SignUpProfileImageView.swift */; };
@@ -63,6 +65,8 @@
 		1432BE672A681B630098AAA9 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		1432BE6C2A682FCB0098AAA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingView.swift; sourceTree = "<group>"; };
+		14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingFeature.swift; sourceTree = "<group>"; };
 		14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewFeature.swift; sourceTree = "<group>"; };
 		14E506532A6B8ED3008D5778 /* SignUpProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageView.swift; sourceTree = "<group>"; };
@@ -254,6 +258,15 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		14E4C4B32A6E43CA008643D9 /* CreateMeeting */ = {
+			isa = PBXGroup;
+			children = (
+				14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */,
+				14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */,
+			);
+			path = CreateMeeting;
+			sourceTree = "<group>";
+		};
 		14E5064C2A6B88ED008D5778 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +310,7 @@
 				1432BE6A2A682FB80098AAA9 /* Common */,
 				1432BE692A682FB10098AAA9 /* MainTab */,
 				1432BE6B2A682FBE0098AAA9 /* Home */,
+				14E4C4B32A6E43CA008643D9 /* CreateMeeting */,
 				1432BE6E2A682FCE0098AAA9 /* MyPage */,
 			);
 			path = Tab;
@@ -480,6 +494,8 @@
 				14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
+				14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */,
+				14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

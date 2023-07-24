@@ -23,24 +23,39 @@ struct MainTabView: View {
                     send: MainTabFeature.Action.selectTab
                 )
             ) {
-                    HomeView()
+                HomeView()
                     .tabItem {
                         Image(systemName: "house")
                         Text("홈")
                     }
                     .tag(TapType.home)
 
-                    MyPageView(
-                        store: self.store.scope(
-                            state: \.myPageFeature,
-                            action: MainTabFeature.Action.logoutMainTab
-                        )
+                ZStack {
+                }
+                .tabItem {
+                    Image(systemName: "plus.square")
+                    Text("모임 생성")
+                }
+                .tag(TapType.createMeeting)
+
+                MyPageView(
+                    store: self.store.scope(
+                        state: \.myPageFeature,
+                        action: MainTabFeature.Action.logoutMainTab
                     )
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("마이페이지")
-                    }
-                    .tag(TapType.myPage)
+                )
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("마이페이지")
+                }
+                .tag(TapType.myPage)
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$createMeeting,
+                    action: { .createMeeting($0) })
+            ) { createMeetingStore in
+                CreateMeetingView(store: createMeetingStore)
             }
         }
     }
