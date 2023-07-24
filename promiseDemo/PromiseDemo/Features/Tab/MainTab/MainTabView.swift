@@ -30,7 +30,12 @@ struct MainTabView: View {
                     }
                     .tag(TapType.home)
 
-                    MyPageView()
+                    MyPageView(
+                        store: self.store.scope(
+                            state: \.myPageFeature,
+                            action: MainTabFeature.Action.logoutMainTab
+                        )
+                    )
                     .tabItem {
                         Image(systemName: "person")
                         Text("마이페이지")
@@ -45,7 +50,9 @@ struct TabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView(
             store: Store(
-                initialState: MainTabFeature.State(),
+                initialState: MainTabFeature.State(
+                    myPageFeature: MyPageFeature.State()
+                ),
                 reducer: MainTabFeature()
             )
         )
