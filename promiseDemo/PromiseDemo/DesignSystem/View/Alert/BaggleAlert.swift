@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+/**
+ - description:
+
+        Baggle Custom Alert 입니다.
+ 
+ - parameters:
+    - isPresented: 부모 뷰에서 alert를 보이기 위한 Binding<Bool> 변수
+    - title : alert 타이틀
+    - description: 타이틀 하단의 설명
+    - leftButtonTitle: 왼쪽 버튼 타이틀 (default: 아니오
+    - rightButtonTitiel: 오른쪽 버튼 타이틀 (default: 네)
+    - rightButtonAction: 오른쪽 버튼 탭했을 때 실행할 액션
+ 
+- note:
+ 
+     @State var isAlertPresented: Bool = false
+    
+     var body: some View {
+        ZStack {
+            // 보여질 뷰
+                
+            BaggleAlert(isPresented: $isAlertPresented, title: "제목입니다") {
+                // 오른쪽 버튼 탭했을 때 수행할 액션
+            }
+        }
+     }
+ 
+ */
+
 struct BaggleAlert: View {
     private let screenSize: CGRect = UIScreen.main.bounds
     private var alertWidth: CGFloat {

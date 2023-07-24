@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+/**
+ - description:
+        
+        View 하단에 선을 그려주는 메서드입니다.
+        textField 하단에 선을 그리는 용도로 사용되고 있습니다.
+ 
+ - parameters:
+    - spacing: view 하단으로부터 거리
+    - height : 선의 두께
+    - color : 선의 색상
+ 
+ - note:
+ 
+        HStack { ... }
+            .drawUnderline()
+ */
+
 extension View {
     func drawUnderline(
         spacing: CGFloat = 3,
