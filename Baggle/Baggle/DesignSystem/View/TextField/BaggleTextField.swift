@@ -35,7 +35,9 @@ struct BaggleTextField: View {
     private var maxCount: Int = 0
     private var buttonType: TextFieldButton
 
-    @Binding var text: String
+    @Binding private var text: String
+    @State private var state: TextFieldState = .inactive
+    @FocusState private var isFocused: Bool
 
     init(
         text: Binding<String>,
@@ -52,38 +54,54 @@ struct BaggleTextField: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             if case let .title(title) = type {
                 Text(title)
                     .font(.caption)
+                    .padding(EdgeInsets(top: 0, leading: 2, bottom: 0, trailing: 0))
             }
 
             HStack(alignment: .center) {
-                TextField(placeholder, text: $text)
-                    .font(.body)
-                    .padding(EdgeInsets(top: 4, leading: 0, bottom: 10, trailing: 0))
+                TextField(placeholder, text: $text, onEditingChanged: { editingChanged in
+                    if editingChanged {
+                        state = .active
+                    } else {
+                        state = text.isEmpty ? .inactive : .fill
+                    }
+                })
+                .focused($isFocused)
+                .font(.body)
+                .foregroundColor(state.fgColor)
 
-                if maxCount > 0 {
-                    Text("\(text.count) / \(maxCount)")
-                        .foregroundColor(.gray)
+                if maxCount > 0 && state != .fill {
+                    Text("\(text.count)/\(maxCount)")
+                        .foregroundColor(state.fgColor)
                         .font(.callout)
                 }
 
-                switch buttonType {
-                case .delete:
-                    Button {
-                        text = ""
-                    } label: {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.gray)
-                    }
+                if state == .active {
+                    switch buttonType {
+                    case .delete:
+                        Button {
+                            text = ""
+                        } label: {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.gray)
+                        }
 
-                case .iconImage(let icon):
-                    Image(systemName: icon)
-                        .foregroundColor(text.isEmpty ? .purple : .gray)
+                    case .iconImage(let icon):
+                        Image(systemName: icon)
+                            .foregroundColor(text.isEmpty ? .purple : .gray)
+                    }
                 }
             }
-            .drawUnderline(color: text.isEmpty ? .gray : .gray.opacity(0.3))
+            .padding(EdgeInsets(top: 18.5, leading: 16, bottom: 18.5, trailing: 16))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(state.borderColor))
+        }
+        .onChange(of: self.text) { _ in
+            if text.count > maxCount {
+                text = String(text.prefix(maxCount))
+            }
         }
     }
 }

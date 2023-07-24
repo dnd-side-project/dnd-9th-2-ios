@@ -5,7 +5,7 @@
 //  Created by 양수빈 on 2023/07/23.
 //
 
-import Foundation
+import SwiftUI
 
 /// 상단 타이틀 유무에 따른 TextFieldType
 enum TextFieldTitle {
@@ -18,6 +18,29 @@ enum TextFieldTitle {
 enum TextFieldState {
     case inactive
     case active
+    case fill
+
+    var fgColor: Color {
+        switch self {
+        case .inactive:
+            return Color.gray
+        case .active:
+            return Color.blue
+        case .fill:
+            return Color.black
+        }
+    }
+
+    var borderColor: Color {
+        switch self {
+        case .inactive:
+            return Color.gray.opacity(0.3)
+        case .active:
+            return Color.blue
+        case .fill:
+            return Color.black.opacity(0.8)
+        }
+    }
 }
 
 /// 우측 버튼에 따른 TextFieldButton
