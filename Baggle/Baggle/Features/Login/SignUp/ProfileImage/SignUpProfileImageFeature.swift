@@ -25,7 +25,7 @@ struct SignUpProfileImageFeature: ReducerProtocol {
     }
 
     var body: some ReducerProtocolOf<Self> {
-        Reduce { state, action in
+        Reduce { _, action in
 
             switch action {
 

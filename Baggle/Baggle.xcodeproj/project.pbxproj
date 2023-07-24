@@ -17,7 +17,6 @@
 		14134D3D2A64C53E004A6AC4 /* Extensions+temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D3C2A64C53E004A6AC4 /* Extensions+temp.swift */; };
 		14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D3F2A64C558004A6AC4 /* Model+temp.swift */; };
 		14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D422A64C573004A6AC4 /* Service+Temp.swift */; };
-		14134D4B2A64C5F0004A6AC4 /* View+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D4A2A64C5F0004A6AC4 /* View+Temp.swift */; };
 		14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */; };
 		14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D522A64C944004A6AC4 /* .swiftlint.yml */; };
 		14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */; };
@@ -34,6 +33,15 @@
 		14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */; };
 		14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506572A6BC576008D5778 /* MyPageFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
+		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
+		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
+		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
+		2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469642A6E7AE200D75D32 /* ShadeView.swift */; };
+		2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469652A6E7AE200D75D32 /* UnderlineView.swift */; };
+		2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469672A6E7AE200D75D32 /* BaggleButton.swift */; };
+		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
+		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
+		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +53,6 @@
 		14134D3C2A64C53E004A6AC4 /* Extensions+temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+temp.swift"; sourceTree = "<group>"; };
 		14134D3F2A64C558004A6AC4 /* Model+temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+temp.swift"; sourceTree = "<group>"; };
 		14134D422A64C573004A6AC4 /* Service+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+Temp.swift"; sourceTree = "<group>"; };
-		14134D4A2A64C5F0004A6AC4 /* View+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Temp.swift"; sourceTree = "<group>"; };
 		14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Temp.swift"; sourceTree = "<group>"; };
 		14134D522A64C944004A6AC4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.auto.yml; sourceTree = "<group>"; };
@@ -62,6 +69,15 @@
 		14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageFeature.swift; sourceTree = "<group>"; };
 		14E506572A6BC576008D5778 /* MyPageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
+		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
+		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
+		2B8469642A6E7AE200D75D32 /* ShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
+		2B8469652A6E7AE200D75D32 /* UnderlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
+		2B8469672A6E7AE200D75D32 /* BaggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButton.swift; sourceTree = "<group>"; };
+		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
+		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
+		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,23 +196,16 @@
 		14134D452A64C582004A6AC4 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				14134D482A64C5CD004A6AC4 /* View */,
+				2B84695D2A6E7AE200D75D32 /* View */,
 				14134D492A64C5CF004A6AC4 /* Extension */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
-		14134D482A64C5CD004A6AC4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				14134D4A2A64C5F0004A6AC4 /* View+Temp.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		14134D492A64C5CF004A6AC4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */,
 				14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */,
 			);
 			path = Extension;
@@ -291,6 +300,53 @@
 				1432BE6E2A682FCE0098AAA9 /* MyPage */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		2B84695D2A6E7AE200D75D32 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2B84695E2A6E7AE200D75D32 /* Alert */,
+				2B8469602A6E7AE200D75D32 /* TextField */,
+				2B8469632A6E7AE200D75D32 /* Common */,
+				2B8469662A6E7AE200D75D32 /* Button */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2B84695E2A6E7AE200D75D32 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		2B8469602A6E7AE200D75D32 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */,
+				2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		2B8469632A6E7AE200D75D32 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2B8469642A6E7AE200D75D32 /* ShadeView.swift */,
+				2B8469652A6E7AE200D75D32 /* UnderlineView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2B8469662A6E7AE200D75D32 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				2B8469672A6E7AE200D75D32 /* BaggleButton.swift */,
+				2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */,
+				2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,23 +454,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
+				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
+				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
 				1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
+				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
+				2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */,
 				14134D3D2A64C53E004A6AC4 /* Extensions+temp.swift in Sources */,
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */,
+				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
+				2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */,
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
-				14134D4B2A64C5F0004A6AC4 /* View+Temp.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpNicknameViewFeature.swift in Sources */,
+				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
+				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */,
+				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
 			);
