@@ -39,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		140E880D2A64B626005119F8 /* PromiseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PromiseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		140E880D2A64B626005119F8 /* Baggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		140E88102A64B626005119F8 /* promiseDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = promiseDemoApp.swift; sourceTree = "<group>"; };
 		140E88122A64B626005119F8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		140E88142A64B627005119F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 			children = (
 				14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */,
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
-				140E880F2A64B626005119F8 /* PromiseDemo */,
+				140E880F2A64B626005119F8 /* Baggle */,
 				140E880E2A64B626005119F8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,12 +95,12 @@
 		140E880E2A64B626005119F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				140E880D2A64B626005119F8 /* PromiseDemo.app */,
+				140E880D2A64B626005119F8 /* Baggle.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		140E880F2A64B626005119F8 /* PromiseDemo */ = {
+		140E880F2A64B626005119F8 /* Baggle */ = {
 			isa = PBXGroup;
 			children = (
 				14134D382A64C4CC004A6AC4 /* Resources */,
@@ -109,7 +109,7 @@
 				14134D442A64C57E004A6AC4 /* Features */,
 				14134D452A64C582004A6AC4 /* DesignSystem */,
 			);
-			path = PromiseDemo;
+			path = Baggle;
 			sourceTree = "<group>";
 		};
 		140E88162A64B627005119F8 /* Preview Content */ = {
@@ -310,9 +310,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		140E880C2A64B626005119F8 /* PromiseDemo */ = {
+		140E880C2A64B626005119F8 /* Baggle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 140E881B2A64B627005119F8 /* Build configuration list for PBXNativeTarget "PromiseDemo" */;
+			buildConfigurationList = 140E881B2A64B627005119F8 /* Build configuration list for PBXNativeTarget "Baggle" */;
 			buildPhases = (
 				140E88092A64B626005119F8 /* Sources */,
 				140E880A2A64B626005119F8 /* Frameworks */,
@@ -323,14 +323,14 @@
 			);
 			dependencies = (
 			);
-			name = PromiseDemo;
+			name = Baggle;
 			packageProductDependencies = (
 				140E881F2A64C3A8005119F8 /* ComposableArchitecture */,
 				140E88222A64C3C2005119F8 /* CombineMoya */,
 				140E88242A64C3C2005119F8 /* Moya */,
 			);
 			productName = promiseDemo;
-			productReference = 140E880D2A64B626005119F8 /* PromiseDemo.app */;
+			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -348,7 +348,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 140E88082A64B626005119F8 /* Build configuration list for PBXProject "PromiseDemo" */;
+			buildConfigurationList = 140E88082A64B626005119F8 /* Build configuration list for PBXProject "Baggle" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -365,7 +365,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				140E880C2A64B626005119F8 /* PromiseDemo */,
+				140E880C2A64B626005119F8 /* Baggle */,
 			);
 		};
 /* End PBXProject section */
@@ -558,10 +558,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PromiseDemo/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = YK6FBNFSV5;
+				DEVELOPMENT_ASSET_PATHS = "\"Baggle/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YK6FBNFSV5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -574,8 +576,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.PromiseDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.Baggle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Baggle development";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -590,10 +594,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PromiseDemo/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = YK6FBNFSV5;
+				DEVELOPMENT_ASSET_PATHS = "\"Baggle/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YK6FBNFSV5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -606,8 +612,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.PromiseDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.Baggle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Baggle Distribution";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -620,7 +628,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		140E88082A64B626005119F8 /* Build configuration list for PBXProject "PromiseDemo" */ = {
+		140E88082A64B626005119F8 /* Build configuration list for PBXProject "Baggle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				140E88192A64B627005119F8 /* Debug */,
@@ -629,7 +637,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		140E881B2A64B627005119F8 /* Build configuration list for PBXNativeTarget "PromiseDemo" */ = {
+		140E881B2A64B627005119F8 /* Build configuration list for PBXNativeTarget "Baggle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				140E881C2A64B627005119F8 /* Debug */,
