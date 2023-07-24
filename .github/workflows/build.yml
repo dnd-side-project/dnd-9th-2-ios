@@ -12,8 +12,8 @@ jobs:
     runs-on: macos-latest
     
     env:
-        xcodeproj: PromiseDemo.xcodeproj
-        scheme: PromiseDemo
+        xcodeproj: Baggle.xcodeproj
+        scheme: Baggle
         platform: iOS Simulator
         simulator: iPhone 14
 
@@ -27,4 +27,4 @@ jobs:
           -project "$xcodeproj" \
           -scheme "$scheme" \
           -destination "platform=$platform,name=$simulator"
-        working-directory: "./promiseDemo"
+        working-directory: "./baggle"
