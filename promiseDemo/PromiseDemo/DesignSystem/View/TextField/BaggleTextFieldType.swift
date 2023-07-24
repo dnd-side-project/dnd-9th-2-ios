@@ -8,7 +8,7 @@
 import Foundation
 
 /// 상단 타이틀 유무에 따른 TextFieldType
-enum TextFieldType {
+enum TextFieldTitle {
     case basic // 상단 타이틀 X (default)
     case title(String) // 상단 타이틀 O
 }
@@ -23,5 +23,5 @@ enum TextFieldState {
 /// 우측 버튼에 따른 TextFieldButton
 enum TextFieldButton {
     case delete // 텍스트 삭제 버튼 (default)
-    case other(String) // 그 외 아이콘 string 값을 직접 받아 커스텀할 버튼
+    case iconImage(String) // 그 외 아이콘 string 값을 직접 받아 커스텀할 버튼
 }

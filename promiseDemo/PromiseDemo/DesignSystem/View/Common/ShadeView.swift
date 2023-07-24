@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BackgroundDimmerView: View {
+struct ShadeView: View {
     @Binding private var isPresented: Bool
 
     init(isPresented: Binding<Bool>) {

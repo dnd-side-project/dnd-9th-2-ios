@@ -14,8 +14,8 @@ struct BaggleAlert: View {
     }
 
     @Binding private var isPresented: Bool
-    @Binding private var rightButtonTapped: Bool
 
+    private let rightButtonAction: () -> Void
     private var title: String
     private var description: String?
     private var leftButtonTitle: String
@@ -27,19 +27,19 @@ struct BaggleAlert: View {
         description: String? = nil,
         leftButtonTitle: String = "아니오",
         rightButtonTitle: String = "네",
-        rightButtonAction: Binding<Bool>
+        rightButtonAction: @escaping () -> Void
     ) {
         self._isPresented = isPresented
         self.title = title
         self.description = description
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
-        self._rightButtonTapped = rightButtonAction
+        self.rightButtonAction = rightButtonAction
     }
 
     var body: some View {
         ZStack {
-            BackgroundDimmerView(isPresented: $isPresented)
+            ShadeView(isPresented: $isPresented)
 
             VStack(spacing: 20) {
                 Spacer()
@@ -62,20 +62,18 @@ struct BaggleAlert: View {
                         isPresented.toggle()
                     } label: {
                         Text(leftButtonTitle)
-                            .frame(width: alertWidth/2,
-                                   height: 52)
+                            .frame(width: alertWidth/2, height: 52)
                     }
 
                     Button {
-                        rightButtonTapped.toggle()
+                        rightButtonAction()
                         isPresented.toggle()
                     } label: {
                         Text(rightButtonTitle)
-                            .frame(width: alertWidth/2,
-                                   height: 52)
+                            .frame(width: alertWidth/2, height: 52)
                     }
                 }
-                .frame(width: alertWidth)
+                .frame(width: alertWidth, height: 52)
             }
             .padding()
             .frame(width: alertWidth)

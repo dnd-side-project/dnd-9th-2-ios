@@ -36,7 +36,7 @@
 		2BD5D5552A6C4E280070C196 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5542A6C4E280070C196 /* BaggleTextField.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* Extensions+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */; };
 		2BD5D55A2A6C51490070C196 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5592A6C51490070C196 /* BaggleAlert.swift */; };
-		2BD5D55D2A6C51AE0070C196 /* BackgroundDimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D55C2A6C51AE0070C196 /* BackgroundDimmerView.swift */; };
+		2BD5D55D2A6C51AE0070C196 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D55C2A6C51AE0070C196 /* ShadeView.swift */; };
 		2BD5D55F2A6C51D80070C196 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D55E2A6C51D80070C196 /* UnderlineView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 		2BD5D5542A6C4E280070C196 /* BaggleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* Extensions+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+View.swift"; sourceTree = "<group>"; };
 		2BD5D5592A6C51490070C196 /* BaggleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
-		2BD5D55C2A6C51AE0070C196 /* BackgroundDimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDimmerView.swift; sourceTree = "<group>"; };
+		2BD5D55C2A6C51AE0070C196 /* ShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
 		2BD5D55E2A6C51D80070C196 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,7 +307,7 @@
 		2BD5D55B2A6C519F0070C196 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2BD5D55C2A6C51AE0070C196 /* BackgroundDimmerView.swift */,
+				2BD5D55C2A6C51AE0070C196 /* ShadeView.swift */,
 				2BD5D55E2A6C51D80070C196 /* UnderlineView.swift */,
 			);
 			path = Common;
@@ -433,7 +433,7 @@
 				2BD5D5552A6C4E280070C196 /* BaggleTextField.swift in Sources */,
 				2BD5D54C2A6C48490070C196 /* BaggleButtonType.swift in Sources */,
 				2BD5D5502A6C49440070C196 /* BaggleButton.swift in Sources */,
-				2BD5D55D2A6C51AE0070C196 /* BackgroundDimmerView.swift in Sources */,
+				2BD5D55D2A6C51AE0070C196 /* ShadeView.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
@@ -566,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PromiseDemo/Resources/Preview Content\"";
@@ -584,6 +585,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.PromiseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -598,6 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PromiseDemo/Resources/Preview Content\"";
@@ -616,6 +619,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.PromiseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

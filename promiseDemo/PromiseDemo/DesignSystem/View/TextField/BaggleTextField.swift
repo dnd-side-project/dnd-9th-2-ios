@@ -9,21 +9,21 @@ import SwiftUI
 
 struct BaggleTextField: View {
     private var placeholder: String
-    private var type: TextFieldType
+    private var type: TextFieldTitle
     private var title: String?
     private var maxCount: Int = 0
     private var buttonType: TextFieldButton
 
-    @Binding var textfield: String
+    @Binding var text: String
 
     init(
         textfield: Binding<String>,
         placeholder: String = "입력해주세요",
-        type: TextFieldType = .basic,
+        type: TextFieldTitle = .basic,
         maxCount: Int = 0,
         buttonType: TextFieldButton = .delete
     ) {
-        self._textfield = textfield
+        self._text = textfield
         self.placeholder = placeholder
         self.type = type
         self.maxCount = maxCount
@@ -32,18 +32,18 @@ struct BaggleTextField: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if case let .title(str) = type {
-                Text(str)
+            if case let .title(title) = type {
+                Text(title)
                     .font(.caption)
             }
 
             HStack(alignment: .center) {
-                TextField(placeholder, text: $textfield)
+                TextField(placeholder, text: $text)
                     .font(.body)
                     .padding(EdgeInsets(top: 4, leading: 0, bottom: 10, trailing: 0))
 
                 if maxCount > 0 {
-                    Text("\(textfield.count) / \(maxCount)")
+                    Text("\(text.count) / \(maxCount)")
                         .foregroundColor(.gray)
                         .font(.callout)
                 }
@@ -51,18 +51,18 @@ struct BaggleTextField: View {
                 switch buttonType {
                 case .delete:
                     Button {
-                        textfield = ""
+                        text = ""
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundColor(.gray)
                     }
 
-                case .other(let icon):
+                case .iconImage(let icon):
                     Image(systemName: icon)
-                        .foregroundColor(textfield.isEmpty ? .purple : .gray)
+                        .foregroundColor(text.isEmpty ? .purple : .gray)
                 }
             }
-            .drawUnderline(color: textfield.isEmpty ? .gray : .gray.opacity(0.3))
+            .drawUnderline(color: text.isEmpty ? .gray : .gray.opacity(0.3))
         }
     }
 }
