@@ -29,7 +29,7 @@ struct CreateMeetingFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { state, action in
+        Reduce { _, action in
 
             switch action {
             case .cancelButtonTapped:
