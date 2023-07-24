@@ -12,7 +12,6 @@ struct BaggleButton<Label: View>: View {
     private let label: () -> Label
     private let type: ButtonType
 
-    @State private var isPressed: Bool = false
     @Binding var state: ButtonState
 
     init(
@@ -35,5 +34,6 @@ struct BaggleButton<Label: View>: View {
             .allowsHitTesting(false)
         }
         .buttonStyle(BaggleButtonStyle(type: type, state: $state))
+        .disabled(state == .disable)
     }
 }
