@@ -17,7 +17,11 @@ struct PromiseDemoApp: App {
                 store: Store(
                     initialState: AppFeature.State(
                         isLoggedIn: false,
-                        loginFeature: LoginFeature.State()
+                        loginFeature: LoginFeature.State(),
+                        mainTabFeature: MainTabFeature.State(
+                            selectedTab: .home,
+                            myPageFeature: MyPageFeature.State()
+                        )
                     ),
                     reducer: AppFeature()
                 )
