@@ -26,14 +26,21 @@ import Foundation
     
  */
 
-enum UserDefaultKey: String {
-    case accessToken = "accessToken"
-    case platform = "platform"
-    case count = "count"
+enum UserDefaultKey {
+    case accessToken
+    case platform
+
+    var rawValue: String {
+        switch self {
+        case .accessToken:
+            return "accessToken"
+        case .platform:
+            return "platform"
+        }
+    }
 }
 
 public struct UserDefaultList {
     @UserDefaultWrapper<String>(key: .accessToken) public static var accessToken
     @UserDefaultWrapper<String>(key: .platform) public static var platform
-    @UserDefaultWrapper<Int>(key: .count) public static var count
 }
