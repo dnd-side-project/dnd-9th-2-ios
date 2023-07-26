@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-/// 상단 타이틀 유무에 따른 TextFieldType
+/// 상단 타이틀 유무에 따른 TextFieldTitle
 enum TextFieldTitle {
     case basic // 상단 타이틀 X (default)
     case title(String) // 상단 타이틀 O
 }
 
 /// 사용 가능 여부에 따른 TextFieldState
-/// - 추후 디자인 반영 수정
-enum TextFieldState {
-    case inactive
-    case active
-    case fill
+enum TextFieldState: Equatable {
+    case inactive // 입력 전
+    case active // 입력 중
+    case valid // 입력 후 (사용 가능)
+    case invalid(String) // 입력 후 (사용 불가능)
 
     var fgColor: Color {
         switch self {
@@ -26,8 +26,10 @@ enum TextFieldState {
             return Color.gray
         case .active:
             return Color.blue
-        case .fill:
+        case .valid:
             return Color.black
+        case .invalid:
+            return Color.red
         }
     }
 
@@ -37,8 +39,10 @@ enum TextFieldState {
             return Color.gray.opacity(0.3)
         case .active:
             return Color.blue
-        case .fill:
+        case .valid:
             return Color.black.opacity(0.8)
+        case .invalid:
+            return Color.red
         }
     }
 }
