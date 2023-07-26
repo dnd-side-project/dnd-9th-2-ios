@@ -8,6 +8,7 @@
 import SwiftUI
 
 import ComposableArchitecture
+import KakaoSDKUser
 
 struct LoginView: View {
 
@@ -31,11 +32,8 @@ struct LoginView: View {
 
                 Spacer()
 
-                Button("테스트용") {
-                    loginButtonState = (loginButtonState == .disable) ? .enable : .disable
-                }
-
-                loginButton()
+                kakaoLoginButton()
+                appleLoginButton()
                 signUp()
 
                 Spacer()
@@ -56,11 +54,51 @@ struct LoginView: View {
 
 extension LoginView {
 
-    func loginButton() -> some View {
+    func requestKakaoLogin(completion: @escaping (String?) -> Void) {
+        if UserApi.isKakaoTalkLoginAvailable() {
+            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                if let error = error {
+                    dump(error)
+                    completion(nil)
+                } else {
+                    if let accessToken = oauthToken?.accessToken {
+                        completion(accessToken)
+                    }
+                }
+            }
+        } else {
+            UserApi.shared.loginWithKakaoAccount { oauthToken, error in
+                if let error = error {
+                    dump(error)
+                    completion(nil)
+                } else {
+                    if let accessToken = oauthToken?.accessToken {
+                        completion(accessToken)
+                    }
+                }
+            }
+        }
+    }
+
+    func kakaoLoginButton() -> some View {
         BaggleButton(action: {
-            ViewStore(self.store).send(.kakaoLoginButtonTapped)
+            requestKakaoLogin { token in
+                if let token {
+                    ViewStore(self.store).send(.loginButtonTapped(token))
+                } else {
+                    print("Invalid Token")
+                }
+            }
         }, label: {
-            Text("로그인")
+            Text("카카오 로그인")
+        }, state: $loginButtonState)
+    }
+
+    func appleLoginButton() -> some View {
+        BaggleButton(action: {
+            print("애플 로그인")
+        }, label: {
+            Text("애플 로그인")
         }, state: $loginButtonState)
     }
 

@@ -24,7 +24,7 @@ struct BaggleApp: App {
             AppView(
                 store: Store(
                     initialState: AppFeature.State(
-                        isLoggedIn: true,
+                        isLoggedIn: false,
                         loginFeature: LoginFeature.State(),
                         mainTabFeature: MainTabFeature.State(
                             selectedTab: .home,
@@ -34,6 +34,12 @@ struct BaggleApp: App {
                     reducer: AppFeature()
                 )
             )
+            .onOpenURL { url in
+                print("url: \(url)")
+                if AuthApi.isKakaoTalkLoginUrl(url) {
+                    _ = AuthController.handleOpenUrl(url: url)
+                }
+            }
         }
     }
 }

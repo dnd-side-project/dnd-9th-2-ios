@@ -22,12 +22,13 @@ struct LoginFeature: ReducerProtocol {
 
         // MARK: - Button Tapped
 
-        case kakaoLoginButtonTapped
+        case loginButtonTapped(String)
         case signUpButtonTapped
 
         // MARK: - Dependency
 
         case loginSuccess
+        case loginFail
 
         // MARK: - Child Action
 
@@ -41,7 +42,8 @@ struct LoginFeature: ReducerProtocol {
 
                 // MARK: - Button Tapped
 
-            case .kakaoLoginButtonTapped:
+            case .loginButtonTapped(let token):
+                print("token 확인용: \(token)")
                 return .run { send in
                     await send(.loginSuccess)
                 }
@@ -55,6 +57,9 @@ struct LoginFeature: ReducerProtocol {
                 // MARK: - Dependency
 
             case .loginSuccess:
+                return .none
+
+            case .loginFail:
                 return .none
 
                 // MARK: - Child Action
