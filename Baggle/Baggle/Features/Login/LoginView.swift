@@ -5,6 +5,7 @@
 //  Created by youtak on 2023/07/19.
 //
 
+import AuthenticationServices
 import SwiftUI
 
 import ComposableArchitecture
@@ -84,9 +85,9 @@ extension LoginView {
         BaggleButton(action: {
             requestKakaoLogin { token in
                 if let token {
-                    ViewStore(self.store).send(.loginButtonTapped(token))
+                    ViewStore(self.store).send(.loginButtonTapped(.kakao, token))
                 } else {
-                    print("Invalid Token")
+                    ViewStore(self.store).send(.loginFail)
                 }
             }
         }, label: {
@@ -95,11 +96,30 @@ extension LoginView {
     }
 
     func appleLoginButton() -> some View {
-        BaggleButton(action: {
-            ViewStore(self.store).send(.loginSuccess)
-        }, label: {
-            Text("애플 로그인")
-        }, state: $loginButtonState)
+        SignInWithAppleButton(
+            onRequest: { request in
+                request.requestedScopes = [.fullName, .email]
+            },
+            onCompletion: { result in
+                switch result {
+                case .success(let authResults):
+                    switch authResults.credential {
+                    case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                        guard let identityToken = appleIDCredential.identityToken,
+                              let token = String(data: identityToken, encoding: .utf8)
+                        else { return }
+                        ViewStore(self.store).send(.loginButtonTapped(.apple, token))
+                    default:
+                        break
+                    }
+                case .failure(let error):
+                    print("error: ", error.localizedDescription)
+                    ViewStore(self.store).send(.loginFail)
+                }
+            }
+        )
+        .frame(width: UIScreen.main.bounds.width * 0.9, height: 50)
+        .cornerRadius(5)
     }
 
     func signUp() -> some View {
