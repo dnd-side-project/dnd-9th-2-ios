@@ -96,7 +96,7 @@ extension LoginView {
 
     func appleLoginButton() -> some View {
         BaggleButton(action: {
-            print("애플 로그인")
+            ViewStore(self.store).send(.loginSuccess)
         }, label: {
             Text("애플 로그인")
         }, state: $loginButtonState)

@@ -44,6 +44,7 @@
 		2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469672A6E7AE200D75D32 /* BaggleButton.swift */; };
 		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
 		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
+		2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86CBBF2A70F00900800B02 /* HomeFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		2B8469672A6E7AE200D75D32 /* BaggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButton.swift; sourceTree = "<group>"; };
 		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
 		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
+		2B86CBBF2A70F00900800B02 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				1432BE6C2A682FCB0098AAA9 /* HomeView.swift */,
+				2B86CBBF2A70F00900800B02 /* HomeFeature.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */,
+				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
