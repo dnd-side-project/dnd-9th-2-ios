@@ -16,10 +16,17 @@ jobs:
         scheme: Baggle
         platform: iOS Simulator
         simulator: iPhone 14
+        APP_KEY: ${{ secrets.APP_KEY }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: Create Baggle.xcconfig
+        run: |
+            echo "APP_KEY = ${APP_KEY}" >> Baggle.xcconfig
+        working-directory: ./Baggle
+        
       - name: Start xcode build
         run: |
           xcodebuild clean build-for-testing \
