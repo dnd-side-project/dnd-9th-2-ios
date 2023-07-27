@@ -25,7 +25,7 @@ jobs:
       - name: Create Baggle.xcconfig
         run: |
             echo "APP_KEY = ${APP_KEY}" >> Baggle.xcconfig
-        working-directory: ./Baggle
+        working-directory: ./Baggle/XCConfig
         
       - name: Start xcode build
         run: |
