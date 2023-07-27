@@ -35,6 +35,9 @@
 		14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */; };
 		14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506572A6BC576008D5778 /* MyPageFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
+		2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */; };
+		2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */; };
+		2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* attributedString.swift */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
@@ -43,6 +46,8 @@
 		2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469672A6E7AE200D75D32 /* BaggleButton.swift */; };
 		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
 		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
+		2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */; };
+		2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +78,9 @@
 		14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageFeature.swift; sourceTree = "<group>"; };
 		14E506572A6BC576008D5778 /* MyPageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
+		2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
+		2B5CF2672A6EC889004D3033 /* attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributedString.swift; sourceTree = "<group>"; };
 		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
@@ -81,6 +89,8 @@
 		2B8469672A6E7AE200D75D32 /* BaggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButton.swift; sourceTree = "<group>"; };
 		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
 		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
+		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
+		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				14134D3C2A64C53E004A6AC4 /* Extensions+temp.swift */,
+				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
+				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -211,6 +223,7 @@
 			children = (
 				2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */,
 				14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */,
+				2B5CF2672A6EC889004D3033 /* attributedString.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -319,6 +332,7 @@
 		2B84695D2A6E7AE200D75D32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2BA345A32A6EB00900B7E2BD /* Tag */,
 				2B84695E2A6E7AE200D75D32 /* Alert */,
 				2B8469602A6E7AE200D75D32 /* TextField */,
 				2B8469632A6E7AE200D75D32 /* Common */,
@@ -361,6 +375,15 @@
 				2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		2BA345A32A6EB00900B7E2BD /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */,
+				2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */,
+			);
+			path = Tag;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,14 +498,17 @@
 				1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
+				2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */,
 				2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */,
 				14134D3D2A64C53E004A6AC4 /* Extensions+temp.swift in Sources */,
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
+				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
 				2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */,
+				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
@@ -493,8 +519,10 @@
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
+				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */,
+				2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
 			);
