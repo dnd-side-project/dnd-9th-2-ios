@@ -5,6 +5,7 @@
 //  Created by youtak on 2023/07/22.
 //
 
+import PhotosUI
 import SwiftUI
 
 import ComposableArchitecture
@@ -20,6 +21,26 @@ struct SignUpView: View {
             action: { .path($0)})
         ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
+
+                PhotosPicker(
+                    selection: viewStore.binding(
+                        get: \.imageSelection,
+                        send: { item in
+                            SignUpFeature.Action.imageChanged(item)
+                        }
+                    ),
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    ProfileImageView(imageState: viewStore.imageState)
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .frame(width: 160, height: 160)
+                        .background {
+                            Circle()
+                                .tint(Color.gray.opacity(0.2))
+                        }
+                }
 
                 VStack {
                     Text("닉네임 입력")
