@@ -22,27 +22,34 @@ struct SignUpView: View {
         ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-                PhotosPicker(
-                    selection: viewStore.binding(
-                        get: \.imageSelection,
-                        send: { item in
-                            SignUpFeature.Action.imageChanged(item)
-                        }
-                    ),
-                    matching: .images,
-                    photoLibrary: .shared()
-                ) {
-                    ProfileImageView(imageState: viewStore.imageState)
-                        .scaledToFill()
-                        .clipShape(Circle())
-                        .frame(width: 160, height: 160)
-                        .background {
-                            Circle()
-                                .tint(Color.gray.opacity(0.2))
-                        }
-                }
-
                 VStack {
+                    
+                    description
+                    
+                    Spacer()
+
+                    PhotosPicker(
+                        selection: viewStore.binding(
+                            get: \.imageSelection,
+                            send: { item in
+                                SignUpFeature.Action.imageChanged(item)
+                            }
+                        ),
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
+                        ProfileImageView(imageState: viewStore.imageState)
+                            .scaledToFill()
+                            .clipShape(Circle())
+                            .frame(width: 160, height: 160)
+                            .background {
+                                Circle()
+                                    .tint(Color.gray.opacity(0.2))
+                            }
+                    }
+
+                    
+                    
                     Text("닉네임 입력")
                         .font(.largeTitle)
 
@@ -55,6 +62,8 @@ struct SignUpView: View {
                     .transaction { transaction in
                         transaction.disablesAnimations = viewStore.disableDismissAnimation
                     }
+                    
+                    Spacer()
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
@@ -66,6 +75,26 @@ struct SignUpView: View {
             }
         } destination: { store in
             SignUpSuccessView(store: store)
+        }
+    }
+}
+
+extension SignUpView {
+
+    @ViewBuilder
+    var description: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("안녕하세요!")
+
+                Text("Baggle에서 쓸 프로필을")
+
+                Text("설정해주세요.")
+            }
+            .font(.title)
+            .padding()
+            
+            Spacer()
         }
     }
 }
