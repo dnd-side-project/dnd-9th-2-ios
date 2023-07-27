@@ -22,10 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Create Baggle.xcconfig
+      - name: Create xcconfig
         run: |
-            echo "APP_KEY = ${APP_KEY}" >> Baggle.xcconfig
-        working-directory: ./Baggle/XCConfig
+            mkdir ./Baggle/XCConfig
+            echo "APP_KEY = ${APP_KEY}" >> ./Bagle/XCConfig/Baggle.xcconfig
         
       - name: Start xcode build
         run: |
