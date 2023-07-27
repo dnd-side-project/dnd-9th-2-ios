@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct SignUpProfileImageView: View {
+struct SignUpSuccessView: View {
 
-    let store: StoreOf<SignUpProfileImageFeature>
+    let store: StoreOf<SignUpSuccessFeature>
 
     var body: some View {
 
@@ -41,10 +41,10 @@ struct SignUpProfileImageView: View {
 struct SignUpProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            SignUpProfileImageView(
+            SignUpSuccessView(
                 store: Store(
-                    initialState: SignUpProfileImageFeature.State(),
-                    reducer: SignUpProfileImageFeature()
+                    initialState: SignUpSuccessFeature.State(),
+                    reducer: SignUpSuccessFeature()
                 )
             )
         }

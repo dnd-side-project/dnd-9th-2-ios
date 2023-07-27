@@ -45,7 +45,7 @@ struct LoginView: View {
                 state: \.$signUpNickname,
                 action: { .signUpNickname($0) })
             ) { signupStore in
-                SignUpNicknameView(store: signupStore)
+                SignUpView(store: signupStore)
             }
             .transaction { transaction in
                 transaction.disablesAnimations = viewStore.disableDismissAnimation

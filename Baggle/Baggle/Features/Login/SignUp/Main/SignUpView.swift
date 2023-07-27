@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct SignUpNicknameView: View {
+struct SignUpView: View {
 
-    let store: StoreOf<SignUpNicknameFeature>
+    let store: StoreOf<SignUpFeature>
 
     var body: some View {
 
@@ -25,7 +25,7 @@ struct SignUpNicknameView: View {
                     Text("닉네임 입력")
                         .font(.largeTitle)
 
-                    NavigationLink(state: SignUpProfileImageFeature.State()) {
+                    NavigationLink(state: SignUpSuccessFeature.State()) {
                         Text("다음")
                             .padding()
                             .foregroundColor(Color.white)
@@ -44,17 +44,17 @@ struct SignUpNicknameView: View {
                 }
             }
         } destination: { store in
-            SignUpProfileImageView(store: store)
+            SignUpSuccessView(store: store)
         }
     }
 }
 
 struct SignUpNicknameView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpNicknameView(
+        SignUpView(
             store: Store(
-                initialState: SignUpNicknameFeature.State(),
-                reducer: SignUpNicknameFeature()
+                initialState: SignUpFeature.State(),
+                reducer: SignUpFeature()
             )
         )
     }

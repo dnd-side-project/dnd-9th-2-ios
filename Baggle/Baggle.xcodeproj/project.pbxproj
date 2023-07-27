@@ -29,10 +29,10 @@
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
 		14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */; };
 		14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */; };
-		14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */; };
+		14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpView.swift */; };
 		14E506502A6B8913008D5778 /* SignUpNicknameViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */; };
-		14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506532A6B8ED3008D5778 /* SignUpProfileImageView.swift */; };
-		14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */; };
+		14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506532A6B8ED3008D5778 /* SignUpSuccessView.swift */; };
+		14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */; };
 		14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506572A6BC576008D5778 /* MyPageFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 		2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */; };
@@ -72,10 +72,10 @@
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingView.swift; sourceTree = "<group>"; };
 		14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingFeature.swift; sourceTree = "<group>"; };
-		14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
+		14E5064D2A6B88F7008D5778 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewFeature.swift; sourceTree = "<group>"; };
-		14E506532A6B8ED3008D5778 /* SignUpProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageView.swift; sourceTree = "<group>"; };
-		14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageFeature.swift; sourceTree = "<group>"; };
+		14E506532A6B8ED3008D5778 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
+		14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessFeature.swift; sourceTree = "<group>"; };
 		14E506572A6BC576008D5778 /* MyPageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
@@ -283,28 +283,28 @@
 		14E5064C2A6B88ED008D5778 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				14E506512A6B8EB6008D5778 /* Nickname */,
-				14E506522A6B8EBB008D5778 /* ProfileImage */,
+				14E506512A6B8EB6008D5778 /* Main */,
+				14E506522A6B8EBB008D5778 /* Success */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		14E506512A6B8EB6008D5778 /* Nickname */ = {
+		14E506512A6B8EB6008D5778 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */,
+				14E5064D2A6B88F7008D5778 /* SignUpView.swift */,
 				14E5064F2A6B8913008D5778 /* SignUpNicknameViewFeature.swift */,
 			);
-			path = Nickname;
+			path = Main;
 			sourceTree = "<group>";
 		};
-		14E506522A6B8EBB008D5778 /* ProfileImage */ = {
+		14E506522A6B8EBB008D5778 /* Success */ = {
 			isa = PBXGroup;
 			children = (
-				14E506532A6B8ED3008D5778 /* SignUpProfileImageView.swift */,
-				14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */,
+				14E506532A6B8ED3008D5778 /* SignUpSuccessView.swift */,
+				14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */,
 			);
-			path = ProfileImage;
+			path = Success;
 			sourceTree = "<group>";
 		};
 		14EBE4BC2A681308007537C8 /* Login */ = {
@@ -505,7 +505,7 @@
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
-				14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */,
+				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
 				2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
@@ -515,9 +515,9 @@
 				14E506502A6B8913008D5778 /* SignUpNicknameViewFeature.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
-				14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */,
+				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
-				14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */,
+				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,

@@ -7,14 +7,14 @@
 
 import ComposableArchitecture
 
-struct SignUpNicknameFeature: ReducerProtocol {
+struct SignUpFeature: ReducerProtocol {
 
     struct State: Equatable {
         var disableDismissAnimation: Bool = false
 
         // MARK: - Child State
 
-        var path = StackState<SignUpProfileImageFeature.State>()
+        var path = StackState<SignUpSuccessFeature.State>()
     }
 
     enum Action: Equatable {
@@ -30,7 +30,7 @@ struct SignUpNicknameFeature: ReducerProtocol {
 
         // MARK: - Child Action
 
-        case path(StackAction<SignUpProfileImageFeature.State, SignUpProfileImageFeature.Action>)
+        case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
 
         // MARK: - Delegate
 
@@ -89,7 +89,7 @@ struct SignUpNicknameFeature: ReducerProtocol {
             }
         }
         .forEach(\.path, action: /Action.path) {
-            SignUpProfileImageFeature()
+            SignUpSuccessFeature()
         }
     }
 }

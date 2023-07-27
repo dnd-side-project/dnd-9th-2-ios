@@ -15,7 +15,7 @@ struct LoginFeature: ReducerProtocol {
 
         // MARK: - Child State
 
-        @PresentationState var signUpNickname: SignUpNicknameFeature.State?
+        @PresentationState var signUpNickname: SignUpFeature.State?
     }
 
     enum Action: Equatable {
@@ -31,7 +31,7 @@ struct LoginFeature: ReducerProtocol {
 
         // MARK: - Child Action
 
-        case signUpNickname(PresentationAction<SignUpNicknameFeature.Action>)
+        case signUpNickname(PresentationAction<SignUpFeature.Action>)
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -49,7 +49,7 @@ struct LoginFeature: ReducerProtocol {
             case .signUpButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
 
-                state.signUpNickname = SignUpNicknameFeature.State()
+                state.signUpNickname = SignUpFeature.State()
                 return .none
 
                 // MARK: - Dependency
@@ -71,7 +71,7 @@ struct LoginFeature: ReducerProtocol {
             }
         }
         .ifLet(\.$signUpNickname, action: /Action.signUpNickname) {
-            SignUpNicknameFeature()
+            SignUpFeature()
         }
     }
 }
