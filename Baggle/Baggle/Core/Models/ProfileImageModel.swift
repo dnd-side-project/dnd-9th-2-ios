@@ -32,7 +32,7 @@ enum AlbumImageState: Equatable {
     case empty
 
     /// 이미지 로딩 중 - iCloud에서 가져오는 경우가 있으므로 로딩이 길어질 수 있음
-    case loading(Progress)
+    case loading
 
     /// 로딩 성공 - 결과 이미지
     case success(Image)
