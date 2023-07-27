@@ -23,9 +23,9 @@ struct SignUpView: View {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
 
                 VStack {
-                    
+
                     description
-                    
+
                     Spacer()
 
                     PhotosPicker(
@@ -48,8 +48,6 @@ struct SignUpView: View {
                             }
                     }
 
-                    
-                    
                     Text("닉네임 입력")
                         .font(.largeTitle)
 
@@ -62,7 +60,7 @@ struct SignUpView: View {
                     .transaction { transaction in
                         transaction.disablesAnimations = viewStore.disableDismissAnimation
                     }
-                    
+
                     Spacer()
                 }
                 .toolbar {
@@ -82,7 +80,7 @@ struct SignUpView: View {
 extension SignUpView {
 
     @ViewBuilder
-    var description: some View {
+    private var description: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text("안녕하세요!")
@@ -93,7 +91,7 @@ extension SignUpView {
             }
             .font(.title)
             .padding()
-            
+
             Spacer()
         }
     }
