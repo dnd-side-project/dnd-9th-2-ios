@@ -31,7 +31,7 @@ struct ProfileImageView: View {
 struct ProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ProfileImageView(imageState: .empty)
+            ProfileImageView(imageState: .success(Image("sampleImage")))
                 .previewLayout(.sizeThatFits)
         }
     }
