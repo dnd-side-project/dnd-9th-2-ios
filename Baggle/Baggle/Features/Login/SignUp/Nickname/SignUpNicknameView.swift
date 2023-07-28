@@ -25,15 +25,16 @@ struct SignUpNicknameView: View {
                     Text("닉네임 입력")
                         .font(.largeTitle)
 
-                    NavigationLink(state: SignUpProfileImageFeature.State()) {
-                        Text("다음")
-                            .padding()
-                            .foregroundColor(Color.white)
-                            .background(Color.blue)
+                    Button {
+                    } label: {
+                        NavigationLink(state: SignUpProfileImageFeature.State()) {
+                            Text("다음")
+                        }
+                        .transaction { transaction in
+                            transaction.disablesAnimations = viewStore.disableDismissAnimation
+                        }
                     }
-                    .transaction { transaction in
-                        transaction.disablesAnimations = viewStore.disableDismissAnimation
-                    }
+                    .buttonStyle(BagglePrimaryStyle())
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

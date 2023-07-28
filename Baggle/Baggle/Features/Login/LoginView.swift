@@ -17,8 +17,6 @@ struct LoginView: View {
 
     let store: StoreOf<LoginFeature>
 
-    @State var loginButtonState: ButtonState = .enable
-
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
@@ -87,7 +85,7 @@ extension LoginView {
     }
 
     func kakaoLoginButton() -> some View {
-        BaggleButton(action: {
+        Button {
             Task {
                 do {
                     let token = try await requestKakaoLogin()
@@ -96,9 +94,10 @@ extension LoginView {
                     print("error: \(error)")
                 }
             }
-        }, label: {
+        } label: {
             Text("카카오 로그인")
-        }, state: $loginButtonState)
+        }
+        .buttonStyle(BagglePrimaryStyle())
     }
 
     func appleLoginButton() -> some View {

@@ -18,11 +18,12 @@ struct HomeView: View {
             VStack(spacing: 20) {
                 Text("Home View 입니다")
 
-                BaggleButton(action: {
+                Button {
                     viewStore.send(.shareButtonTapped)
-                }, label: {
+                } label: {
                     Text("카카오톡 공유하기")
-                }, state: viewStore.state.$shareButtonState)
+                }
+                .buttonStyle(BagglePrimaryStyle())
             }
         }
     }

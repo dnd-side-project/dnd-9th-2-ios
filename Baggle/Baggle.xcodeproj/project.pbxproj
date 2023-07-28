@@ -27,6 +27,7 @@
 		1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE672A681B630098AAA9 /* AppFeature.swift */; };
 		1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6C2A682FCB0098AAA9 /* HomeView.swift */; };
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
+		148E34F32A73A0E000945D95 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 148E34F22A73A0E000945D95 /* Baggle.xcconfig */; };
 		14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */; };
 		14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */; };
 		14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */; };
@@ -45,7 +46,6 @@
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
 		2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469642A6E7AE200D75D32 /* ShadeView.swift */; };
 		2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469652A6E7AE200D75D32 /* UnderlineView.swift */; };
-		2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469672A6E7AE200D75D32 /* BaggleButton.swift */; };
 		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
 		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
 		2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86CBBF2A70F00900800B02 /* HomeFeature.swift */; };
@@ -73,6 +73,7 @@
 		1432BE672A681B630098AAA9 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		1432BE6C2A682FCB0098AAA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		148E34F22A73A0E000945D95 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
 		14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingView.swift; sourceTree = "<group>"; };
 		14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingFeature.swift; sourceTree = "<group>"; };
 		14E5064D2A6B88F7008D5778 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
 		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
-		2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Baggle.xcconfig; path = XCConfig/Baggle.xcconfig; sourceTree = SOURCE_ROOT; };
 		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributedString.swift; sourceTree = "<group>"; };
@@ -93,7 +93,6 @@
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
 		2B8469642A6E7AE200D75D32 /* ShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
 		2B8469652A6E7AE200D75D32 /* UnderlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
-		2B8469672A6E7AE200D75D32 /* BaggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButton.swift; sourceTree = "<group>"; };
 		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
 		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
 		2B86CBBF2A70F00900800B02 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
@@ -346,7 +345,7 @@
 		2B30E3442A6FA70100949151 /* XCConfig */ = {
 			isa = PBXGroup;
 			children = (
-				2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */,
+				148E34F22A73A0E000945D95 /* Baggle.xcconfig */,
 			);
 			path = XCConfig;
 			sourceTree = "<group>";
@@ -392,7 +391,6 @@
 		2B8469662A6E7AE200D75D32 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				2B8469672A6E7AE200D75D32 /* BaggleButton.swift */,
 				2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */,
 				2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */,
 			);
@@ -480,6 +478,7 @@
 			files = (
 				14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */,
 				14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */,
+				148E34F32A73A0E000945D95 /* Baggle.xcconfig in Resources */,
 				140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */,
 				140E88152A64B627005119F8 /* Assets.xcassets in Resources */,
 			);
@@ -531,7 +530,6 @@
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
-				2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
@@ -559,7 +557,6 @@
 /* Begin XCBuildConfiguration section */
 		140E88192A64B627005119F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -620,7 +617,6 @@
 		};
 		140E881A2A64B627005119F8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
