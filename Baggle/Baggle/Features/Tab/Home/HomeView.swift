@@ -11,8 +11,6 @@ import ComposableArchitecture
 
 struct HomeView: View {
 
-    @State var shareButtonState: ButtonState = .enable
-
     let store: StoreOf<HomeFeature>
 
     var body: some View {
@@ -24,7 +22,7 @@ struct HomeView: View {
                     viewStore.send(.shareButtonTapped)
                 }, label: {
                     Text("카카오톡 공유하기")
-                }, state: $shareButtonState)
+                }, state: viewStore.state.$shareButtonState)
             }
         }
     }

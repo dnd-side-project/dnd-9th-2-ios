@@ -18,7 +18,13 @@ struct HomeFeature: ReducerProtocol {
     @Environment(\.openURL) private var openURL
 
     struct State: Equatable {
+        static func == (lhs: HomeFeature.State, rhs: HomeFeature.State) -> Bool {
+            return lhs.shareButtonState == rhs.shareButtonState
+        }
+
         // MARK: - Scope State
+
+        @SwiftUI.State var shareButtonState: ButtonState = .enable
     }
 
     enum Action: Equatable {
