@@ -37,8 +37,8 @@ import SwiftUI
 
 struct BagglePrimaryStyle: ButtonStyle {
 
-    let size: ButtonSize
-    let shape: ButtonShape
+    private let size: ButtonSize
+    private let shape: ButtonShape
 
     private let foregroundColor: Color = .white
     private let backgroundColor: Color = .blue
@@ -73,7 +73,6 @@ struct BagglePrimaryStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: UIScreen.main.bounds.width * size.ratio, height: 62)
-            .cornerRadius(shape.radius)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))
             .cornerRadius(shape.radius)
