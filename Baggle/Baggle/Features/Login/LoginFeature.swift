@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-enum Platform {
+enum LoginPlatform {
     case kakao
     case apple
 }
@@ -27,7 +27,7 @@ struct LoginFeature: ReducerProtocol {
 
         // MARK: - Button Tapped
 
-        case loginButtonTapped(Platform, String)
+        case loginButtonTapped(LoginPlatform, String)
         case signUpButtonTapped
 
         // MARK: - Dependency

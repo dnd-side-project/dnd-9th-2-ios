@@ -55,39 +55,45 @@ struct LoginView: View {
 
 extension LoginView {
 
-    func requestKakaoLogin(completion: @escaping (String?) -> Void) {
-        if UserApi.isKakaoTalkLoginAvailable() {
-            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
-                if let error = error {
-                    dump(error)
-                    completion(nil)
+    func requestKakaoLogin() async throws -> String {
+        typealias TokenContinuation = CheckedContinuation<String, Error>
+        return try await withCheckedThrowingContinuation({ (continuation: TokenContinuation) in
+            DispatchQueue.main.async {
+                if UserApi.isKakaoTalkLoginAvailable() {
+                    UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                        if let error {
+                            dump(error)
+                            continuation.resume(throwing: error)
+                        } else {
+                            if let accessToken = oauthToken?.accessToken {
+                                continuation.resume(returning: accessToken)
+                            }
+                        }
+                    }
                 } else {
-                    if let accessToken = oauthToken?.accessToken {
-                        completion(accessToken)
+                    UserApi.shared.loginWithKakaoAccount { oauthToken, error in
+                        if let error {
+                            dump(error)
+                            continuation.resume(throwing: error)
+                        } else {
+                            if let accessToken = oauthToken?.accessToken {
+                                continuation.resume(returning: accessToken)
+                            }
+                        }
                     }
                 }
             }
-        } else {
-            UserApi.shared.loginWithKakaoAccount { oauthToken, error in
-                if let error = error {
-                    dump(error)
-                    completion(nil)
-                } else {
-                    if let accessToken = oauthToken?.accessToken {
-                        completion(accessToken)
-                    }
-                }
-            }
-        }
+        })
     }
 
     func kakaoLoginButton() -> some View {
         BaggleButton(action: {
-            requestKakaoLogin { token in
-                if let token {
+            Task {
+                do {
+                    let token = try await requestKakaoLogin()
                     ViewStore(self.store).send(.loginButtonTapped(.kakao, token))
-                } else {
-                    ViewStore(self.store).send(.loginFail)
+                } catch {
+                    print("error: \(error)")
                 }
             }
         }, label: {
