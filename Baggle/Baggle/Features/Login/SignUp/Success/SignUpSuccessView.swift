@@ -28,7 +28,7 @@ struct SignUpSuccessView: View {
                     Text("완료")
                         .padding()
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(BagglePrimaryStyle())
             }
             .navigationBarBackButtonHidden()
         }
