@@ -15,7 +15,7 @@ struct LoginView: View {
 
     let store: StoreOf<LoginFeature>
 
-    @State var loginButtonState: ButtonState = .enable
+    @State var loginButtonDisabled: Bool = false
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -30,10 +30,6 @@ struct LoginView: View {
                     .padding()
 
                 Spacer()
-
-                Button("테스트용") {
-                    loginButtonState = (loginButtonState == .disable) ? .enable : .disable
-                }
 
                 loginButton()
                 signUp()
@@ -57,11 +53,13 @@ struct LoginView: View {
 extension LoginView {
 
     func loginButton() -> some View {
-        BaggleButton(action: {
+        Button(action: {
             ViewStore(self.store).send(.kakaoLoginButtonTapped)
         }, label: {
             Text("로그인")
-        }, state: $loginButtonState)
+        })
+        .buttonStyle(BagglePrimaryStyle())
+//        .disabled(loginButtonDisabled)
     }
 
     func signUp() -> some View {
