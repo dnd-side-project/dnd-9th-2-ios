@@ -7,6 +7,34 @@
 
 import SwiftUI
 
+/**
+ - description:
+
+            Baggle 앱에서 사용하는 Button Style 입니다.
+ 
+ - parameters:
+    - size: 버튼 사이즈
+    - shape: 버튼 모양 (네모 or 둥그럼)
+    
+- note:
+ 
+        기본 사용법
+ 
+        Button {
+            //...
+        }
+        .buttonStyle(BagglePrimaryStyle())
+        
+ 
+        size와 shape 설정시
+         
+        Button {
+             //...
+         }
+         .buttonStyle(BagglePrimaryStyle(size: .medium, shape: .round))
+ 
+ */
+
 struct BagglePrimaryStyle: ButtonStyle {
 
     let size: ButtonSize
