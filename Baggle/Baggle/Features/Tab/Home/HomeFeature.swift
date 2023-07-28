@@ -16,6 +16,7 @@ import KakaoSDKTemplate
 struct HomeFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
+    @Dependency(\.sendInvitation) private var sendInvitation
 
     struct State: Equatable {
         static func == (lhs: HomeFeature.State, rhs: HomeFeature.State) -> Bool {
@@ -31,6 +32,8 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case shareButtonTapped
+        case invitationSuccess
+        case invitationFailed
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -43,37 +46,27 @@ struct HomeFeature: ReducerProtocol {
 
             switch action {
             case .shareButtonTapped:
-                sendKakaoMessage()
+                return .run { send in
+                    if ShareApi.isKakaoTalkSharingAvailable() {
+                        if let url = await sendInvitation(name: "집들이집들") {
+                            openURL(url)
+                            await send(.invitationSuccess)
+                        } else {
+                            await send(.invitationFailed)
+                        }
+                    } else {
+                        moveToAppStore()
+                    }
+                }
+
+            case .invitationSuccess:
+                print("초대하기 성공")
+                return .none
+
+            case .invitationFailed:
+                print("초대하기 실패")
                 return .none
             }
-        }
-    }
-
-    func sendKakaoMessage() {
-        if ShareApi.isKakaoTalkSharingAvailable() {
-            let appLink = Link(iosExecutionParams: ["name": "콩이네 집들이"])
-            let button = Button(title: "모임 참여하기", link: appLink)
-            let thumbnailUrl = URL(string: "https://picsum.photos/200")
-
-            let content = Content(title: "콩이네 집들이",
-                                  imageUrl: thumbnailUrl!,
-                                  link: appLink)
-            let template = FeedTemplate(content: content, buttons: [button])
-
-            if let templateJsonData = (try? SdkJSONEncoder.custom.encode(template)),
-               let templateJsonObject = SdkUtils.toJsonObject(templateJsonData) {
-                ShareApi.shared
-                    .shareDefault(templateObject: templateJsonObject) { linkresult, error in
-                        if let error = error {
-                            print("error: \(error)")
-                        } else {
-                            guard let linkresult = linkresult else { return }
-                            openURL(linkresult.url)
-                        }
-                    }
-            }
-        } else {
-            moveToAppStore()
         }
     }
 

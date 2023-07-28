@@ -41,7 +41,7 @@ struct ContentView_Previews: PreviewProvider {
         AppView(store:
                     Store(
                         initialState: AppFeature.State(
-                            isLoggedIn: false,
+                            isLoggedIn: true,
                             loginFeature: LoginFeature.State(),
                             mainTabFeature: MainTabFeature.State(
                                 myPageFeature: MyPageFeature.State()
