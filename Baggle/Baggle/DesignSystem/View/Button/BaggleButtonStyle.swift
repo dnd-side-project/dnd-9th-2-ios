@@ -34,7 +34,7 @@ struct BagglePrimaryStyle: ButtonStyle {
 
     private func backgroundColor(_ isPressed: Bool) -> Color {
         if !isEnabled {
-            return backgroundColor
+            return Color.gray // 디자인 확정 시 수정
         } else if isPressed {
             return backgroundColor.opacity(0.5)
         } else {

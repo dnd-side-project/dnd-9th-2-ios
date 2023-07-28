@@ -97,6 +97,7 @@ extension LoginView {
         } label: {
             Text("카카오 로그인")
         }
+        .buttonStyle(BagglePrimaryStyle())
     }
 
     func appleLoginButton() -> some View {
