@@ -13,7 +13,6 @@ struct MyPageView: View {
 
     let store: StoreOf<MyPageFeature>
 
-    @State private var loginButtonState: ButtonState = .enable
     @State var textfield: String = ""
 
     var body: some View {

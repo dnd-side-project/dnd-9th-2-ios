@@ -34,29 +34,3 @@ enum ButtonShape {
         }
     }
 }
-
-struct ButtonType {
-    var size: ButtonSize
-    var shape: ButtonShape
-}
-
-/// 버튼 상태
-/// - 추후 디자인 반영 수정
-enum ButtonState {
-    case disable
-    case enable
-
-    var bgColor: Color {
-        switch self {
-        case .disable: return .gray
-        case .enable: return .blue
-        }
-    }
-
-    var fgColor: Color {
-        switch self {
-        case .disable: return .white
-        case .enable: return .white
-        }
-    }
-}
