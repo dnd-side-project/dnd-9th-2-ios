@@ -7,6 +7,11 @@
 
 import ComposableArchitecture
 
+enum LoginPlatform {
+    case kakao
+    case apple
+}
+
 struct LoginFeature: ReducerProtocol {
 
     struct State: Equatable {
@@ -22,12 +27,13 @@ struct LoginFeature: ReducerProtocol {
 
         // MARK: - Button Tapped
 
-        case kakaoLoginButtonTapped
+        case loginButtonTapped(LoginPlatform, String)
         case signUpButtonTapped
 
         // MARK: - Dependency
 
         case loginSuccess
+        case loginFail
 
         // MARK: - Child Action
 
@@ -41,7 +47,8 @@ struct LoginFeature: ReducerProtocol {
 
                 // MARK: - Button Tapped
 
-            case .kakaoLoginButtonTapped:
+            case .loginButtonTapped(let platform, let token):
+                print("확인용 - token: \(token), platform: \(platform)")
                 return .run { send in
                     await send(.loginSuccess)
                 }
@@ -55,6 +62,9 @@ struct LoginFeature: ReducerProtocol {
                 // MARK: - Dependency
 
             case .loginSuccess:
+                return .none
+
+            case .loginFail:
                 return .none
 
                 // MARK: - Child Action

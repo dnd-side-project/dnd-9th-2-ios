@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* promiseDemoApp.swift */; };
+		140E88112A64B626005119F8 /* BaggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* BaggleApp.swift */; };
 		140E88132A64B626005119F8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88122A64B626005119F8 /* AppView.swift */; };
 		140E88152A64B627005119F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88142A64B627005119F8 /* Assets.xcassets */; };
 		140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88172A64B627005119F8 /* Preview Assets.xcassets */; };
@@ -37,6 +37,8 @@
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 		2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */; };
 		2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */; };
+		2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2B35E4EC2A70B6DB00915876 /* KakaoSDK */; };
+		2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39F21B2A738BB100E034A3 /* SendInvitation.swift */; };
 		2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* attributedString.swift */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
@@ -46,6 +48,7 @@
 		2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469672A6E7AE200D75D32 /* BaggleButton.swift */; };
 		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
 		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
+		2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86CBBF2A70F00900800B02 /* HomeFeature.swift */; };
 		2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */; };
 		2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
@@ -53,7 +56,7 @@
 
 /* Begin PBXFileReference section */
 		140E880D2A64B626005119F8 /* Baggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		140E88102A64B626005119F8 /* promiseDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = promiseDemoApp.swift; sourceTree = "<group>"; };
+		140E88102A64B626005119F8 /* BaggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleApp.swift; sourceTree = "<group>"; };
 		140E88122A64B626005119F8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		140E88142A64B627005119F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140E88172A64B627005119F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -78,8 +81,12 @@
 		14E506552A6B8F67008D5778 /* SignUpProfileImageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageFeature.swift; sourceTree = "<group>"; };
 		14E506572A6BC576008D5778 /* MyPageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
 		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
+		2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Baggle.xcconfig; path = XCConfig/Baggle.xcconfig; sourceTree = SOURCE_ROOT; };
+		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributedString.swift; sourceTree = "<group>"; };
 		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
@@ -89,6 +96,7 @@
 		2B8469672A6E7AE200D75D32 /* BaggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButton.swift; sourceTree = "<group>"; };
 		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
 		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
+		2B86CBBF2A70F00900800B02 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
@@ -100,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */,
+				2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */,
 				140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */,
 				140E88252A64C3C2005119F8 /* Moya in Frameworks */,
 			);
@@ -113,6 +122,7 @@
 			children = (
 				14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */,
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
+				2B30E3442A6FA70100949151 /* XCConfig */,
 				140E880F2A64B626005119F8 /* Baggle */,
 				140E880E2A64B626005119F8 /* Products */,
 			);
@@ -129,6 +139,8 @@
 		140E880F2A64B626005119F8 /* Baggle */ = {
 			isa = PBXGroup;
 			children = (
+				2B0A07352A7171F700BA4182 /* Baggle.entitlements */,
+				2B30E3452A6FA8E800949151 /* Info.plist */,
 				14134D382A64C4CC004A6AC4 /* Resources */,
 				14134D392A64C4ED004A6AC4 /* Sources */,
 				14134D3A2A64C50D004A6AC4 /* Core */,
@@ -158,7 +170,7 @@
 		14134D392A64C4ED004A6AC4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				140E88102A64B626005119F8 /* promiseDemoApp.swift */,
+				140E88102A64B626005119F8 /* BaggleApp.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -176,6 +188,7 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2B39F21B2A738BB100E034A3 /* SendInvitation.swift */,
 				14134D3C2A64C53E004A6AC4 /* Extensions+temp.swift */,
 				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
 				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
@@ -249,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				1432BE6C2A682FCB0098AAA9 /* HomeView.swift */,
+				2B86CBBF2A70F00900800B02 /* HomeFeature.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -329,6 +343,14 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		2B30E3442A6FA70100949151 /* XCConfig */ = {
+			isa = PBXGroup;
+			children = (
+				2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */,
+			);
+			path = XCConfig;
+			sourceTree = "<group>";
+		};
 		2B84695D2A6E7AE200D75D32 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +429,7 @@
 				140E881F2A64C3A8005119F8 /* ComposableArchitecture */,
 				140E88222A64C3C2005119F8 /* CombineMoya */,
 				140E88242A64C3C2005119F8 /* Moya */,
+				2B35E4EC2A70B6DB00915876 /* KakaoSDK */,
 			);
 			productName = promiseDemo;
 			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
@@ -439,6 +462,7 @@
 			packageReferences = (
 				140E881E2A64C3A8005119F8 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */,
+				2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 140E880E2A64B626005119F8 /* Products */;
 			projectDirPath = "";
@@ -518,13 +542,15 @@
 				14E5064E2A6B88F7008D5778 /* SignUpNicknameView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpProfileImageFeature.swift in Sources */,
+				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */,
-				140E88112A64B626005119F8 /* promiseDemoApp.swift in Sources */,
+				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
+				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +559,7 @@
 /* Begin XCBuildConfiguration section */
 		140E88192A64B627005119F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -593,6 +620,7 @@
 		};
 		140E881A2A64B627005119F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B30E3432A6FA6ED00949151 /* Baggle.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -650,6 +678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Baggle/Baggle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -658,6 +687,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YK6FBNFSV5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Baggle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -686,6 +716,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Baggle/Baggle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -694,6 +725,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YK6FBNFSV5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Baggle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -757,6 +789,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -774,6 +814,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		2B35E4EC2A70B6DB00915876 /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

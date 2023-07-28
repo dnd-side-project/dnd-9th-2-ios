@@ -23,12 +23,17 @@ struct MainTabView: View {
                     send: MainTabFeature.Action.selectTab
                 )
             ) {
-                HomeView()
-                    .tabItem {
-                        Image(systemName: "house")
-                        Text("홈")
-                    }
-                    .tag(TapType.home)
+                HomeView(
+                    store: Store(
+                        initialState: HomeFeature.State(),
+                        reducer: HomeFeature()
+                    )
+                )
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("홈")
+                }
+                .tag(TapType.home)
 
                 ZStack {
                 }
