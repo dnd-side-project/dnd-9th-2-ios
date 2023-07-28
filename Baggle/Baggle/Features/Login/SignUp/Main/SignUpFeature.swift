@@ -5,16 +5,23 @@
 //  Created by youtak on 2023/07/22.
 //
 
+import PhotosUI
+import SwiftUI
+
 import ComposableArchitecture
 
-struct SignUpNicknameFeature: ReducerProtocol {
+struct SignUpFeature: ReducerProtocol {
 
     struct State: Equatable {
         var disableDismissAnimation: Bool = false
 
+        // MARK: - 이미지
+        var imageState: AlbumImageState = .empty
+        var imageSelection: PhotosPickerItem?
+
         // MARK: - Child State
 
-        var path = StackState<SignUpProfileImageFeature.State>()
+        var path = StackState<SignUpSuccessFeature.State>()
     }
 
     enum Action: Equatable {
@@ -28,9 +35,16 @@ struct SignUpNicknameFeature: ReducerProtocol {
 
         case moveToHome
 
+        // MARK: - Image
+
+        case imageChanged(PhotosPickerItem?)
+        case loading
+        case successImageChange(Image)
+        case failImageChange
+
         // MARK: - Child Action
 
-        case path(StackAction<SignUpProfileImageFeature.State, SignUpProfileImageFeature.Action>)
+        case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
 
         // MARK: - Delegate
 
@@ -69,6 +83,33 @@ struct SignUpNicknameFeature: ReducerProtocol {
                     await self.dismiss()
                 }
 
+                // MARK: - Image
+
+            case let .imageChanged(photoPickerItem):
+                return .run { send in
+                    await send(.loading)
+
+                    if let profileImage = try? await photoPickerItem?.loadTransferable(
+                        type: ProfileImageModel.self
+                    ) {
+                        await send(.successImageChange(profileImage.image))
+                    } else {
+                        await send(.failImageChange)
+                    }
+                }
+
+            case .loading:
+                state.imageState = .loading
+                return .none
+
+            case let .successImageChange(image):
+                state.imageState = .success(image)
+                return .none
+
+            case .failImageChange:
+                state.imageState = .failure
+                return .none
+
                 // MARK: - Child Action
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):
@@ -89,7 +130,7 @@ struct SignUpNicknameFeature: ReducerProtocol {
             }
         }
         .forEach(\.path, action: /Action.path) {
-            SignUpProfileImageFeature()
+            SignUpSuccessFeature()
         }
     }
 }

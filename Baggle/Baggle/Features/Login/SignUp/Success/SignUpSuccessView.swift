@@ -9,42 +9,54 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct SignUpProfileImageView: View {
+struct SignUpSuccessView: View {
 
-    let store: StoreOf<SignUpProfileImageFeature>
+    let store: StoreOf<SignUpSuccessFeature>
 
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
             VStack {
-                Text("프로필 이미지 설정")
-                    .font(.largeTitle)
+                description
 
-                Circle()
-                    .fill(Color.gray)
-                    .frame(width: 200, height: 200)
-                    .padding()
+                Spacer()
 
                 Button {
                     viewStore.send(.nextButtonTapped)
                 } label: {
-                    Text("다음")
+                    Text("완료")
                         .padding()
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(BagglePrimaryStyle())
             }
+            .navigationBarBackButtonHidden()
         }
+    }
+}
+
+extension SignUpSuccessView {
+
+    @ViewBuilder
+    private var description: some View {
+        VStack(spacing: 8) {
+            Text("Welcome")
+
+            Text("To")
+
+            Text("Baggle")
+        }
+        .font(.title)
     }
 }
 
 struct SignUpProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            SignUpProfileImageView(
+            SignUpSuccessView(
                 store: Store(
-                    initialState: SignUpProfileImageFeature.State(),
-                    reducer: SignUpProfileImageFeature()
+                    initialState: SignUpSuccessFeature.State(),
+                    reducer: SignUpSuccessFeature()
                 )
             )
         }

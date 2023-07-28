@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct SignUpProfileImageFeature: ReducerProtocol {
+struct SignUpSuccessFeature: ReducerProtocol {
 
     struct State: Equatable {
     }
