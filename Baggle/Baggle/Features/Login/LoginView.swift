@@ -5,9 +5,11 @@
 //  Created by youtak on 2023/07/19.
 //
 
+import AuthenticationServices
 import SwiftUI
 
 import ComposableArchitecture
+import KakaoSDKUser
 
 struct LoginView: View {
 
@@ -31,7 +33,8 @@ struct LoginView: View {
 
                 Spacer()
 
-                loginButton()
+                kakaoLoginButton()
+                appleLoginButton()
                 signUp()
 
                 Spacer()
@@ -52,14 +55,77 @@ struct LoginView: View {
 
 extension LoginView {
 
-    func loginButton() -> some View {
-        Button(action: {
-            ViewStore(self.store).send(.kakaoLoginButtonTapped)
-        }, label: {
-            Text("로그인")
+    func requestKakaoLogin() async throws -> String {
+        typealias TokenContinuation = CheckedContinuation<String, Error>
+        return try await withCheckedThrowingContinuation({ (continuation: TokenContinuation) in
+            DispatchQueue.main.async {
+                if UserApi.isKakaoTalkLoginAvailable() {
+                    UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                        if let error {
+                            dump(error)
+                            continuation.resume(throwing: error)
+                        } else {
+                            if let accessToken = oauthToken?.accessToken {
+                                continuation.resume(returning: accessToken)
+                            }
+                        }
+                    }
+                } else {
+                    UserApi.shared.loginWithKakaoAccount { oauthToken, error in
+                        if let error {
+                            dump(error)
+                            continuation.resume(throwing: error)
+                        } else {
+                            if let accessToken = oauthToken?.accessToken {
+                                continuation.resume(returning: accessToken)
+                            }
+                        }
+                    }
+                }
+            }
         })
-        .buttonStyle(BagglePrimaryStyle())
-//        .disabled(loginButtonDisabled)
+    }
+
+    func kakaoLoginButton() -> some View {
+        BaggleButton(action: {
+            Task {
+                do {
+                    let token = try await requestKakaoLogin()
+                    ViewStore(self.store).send(.loginButtonTapped(.kakao, token))
+                } catch {
+                    print("error: \(error)")
+                }
+            }
+        }, label: {
+            Text("카카오 로그인")
+        }, state: $loginButtonState)
+    }
+
+    func appleLoginButton() -> some View {
+        SignInWithAppleButton(
+            onRequest: { request in
+                request.requestedScopes = [.fullName, .email]
+            },
+            onCompletion: { result in
+                switch result {
+                case .success(let authResults):
+                    switch authResults.credential {
+                    case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                        guard let identityToken = appleIDCredential.identityToken,
+                              let token = String(data: identityToken, encoding: .utf8)
+                        else { return }
+                        ViewStore(self.store).send(.loginButtonTapped(.apple, token))
+                    default:
+                        break
+                    }
+                case .failure(let error):
+                    print("error: ", error.localizedDescription)
+                    ViewStore(self.store).send(.loginFail)
+                }
+            }
+        )
+        .frame(width: UIScreen.main.bounds.width * 0.9, height: 50)
+        .cornerRadius(5)
     }
 
     func signUp() -> some View {
