@@ -43,7 +43,6 @@
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
 		2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469642A6E7AE200D75D32 /* ShadeView.swift */; };
 		2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469652A6E7AE200D75D32 /* UnderlineView.swift */; };
-		2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469672A6E7AE200D75D32 /* BaggleButton.swift */; };
 		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
 		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
 		2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */; };
@@ -86,7 +85,6 @@
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
 		2B8469642A6E7AE200D75D32 /* ShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
 		2B8469652A6E7AE200D75D32 /* UnderlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
-		2B8469672A6E7AE200D75D32 /* BaggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButton.swift; sourceTree = "<group>"; };
 		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
 		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
@@ -370,7 +368,6 @@
 		2B8469662A6E7AE200D75D32 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				2B8469672A6E7AE200D75D32 /* BaggleButton.swift */,
 				2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */,
 				2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */,
 			);
@@ -507,7 +504,6 @@
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpProfileImageView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
-				2B84696F2A6E7AE200D75D32 /* BaggleButton.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
 				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
