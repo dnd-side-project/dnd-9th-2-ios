@@ -41,7 +41,7 @@ struct MockUpSignUpService {
 
     func signUp(nickname: String) async throws -> SignUpServiceState {
         return try await withCheckedThrowingContinuation({ continuation in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 if nickname == "중복" {
                     continuation.resume(returning: .nicknameDuplicated)
                 } else if nickname == "에러" {

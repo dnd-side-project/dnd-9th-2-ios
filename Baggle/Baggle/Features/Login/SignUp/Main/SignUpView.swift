@@ -22,62 +22,78 @@ struct SignUpView: View {
         ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-                VStack {
+                ZStack {
 
-                    description
-
-                    Spacer()
-
-                    PhotosPicker(
-                        selection: viewStore.binding(
-                            get: \.imageSelection,
-                            send: { item in
-                                SignUpFeature.Action.imageChanged(item)
+                    if viewStore.isLoading {
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
                             }
-                        ),
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
-                        ProfileImageView(imageState: viewStore.imageState)
-                            .scaledToFill()
-                            .clipShape(Circle())
-                            .frame(width: 160, height: 160)
-                            .background {
-                                Circle()
-                                    .tint(Color.gray.opacity(0.2))
-                            }
+                            Spacer()
+                        }
+                        .background(.gray.opacity(0.1))
+                        .zIndex(2)
+                    }
+
+                    VStack {
+                        description
+
+                        Spacer()
+
+                        PhotosPicker(
+                            selection: viewStore.binding(
+                                get: \.imageSelection,
+                                send: { item in
+                                    SignUpFeature.Action.imageChanged(item)
+                                }
+                            ),
+                            matching: .images,
+                            photoLibrary: .shared()
+                        ) {
+                            ProfileImageView(imageState: viewStore.imageState)
+                                .scaledToFill()
+                                .clipShape(Circle())
+                                .frame(width: 160, height: 160)
+                                .background {
+                                    Circle()
+                                        .tint(Color.gray.opacity(0.2))
+                                }
+                        }
+                        .padding()
+
+                        BaggleTextField(
+                            text: viewStore.binding(
+                                get: \.nickname,
+                                send: SignUpFeature.Action.nicknameChanged
+                            ),
+                            state: viewStore.binding(
+                                get: \.textfieldState,
+                                send: SignUpFeature.Action.textfieldStateChanged
+                            ),
+                            placeholder: "닉네임 (한, 영, 숫자, _, -, 2-10자)",
+                            maxCount: 8
+                        )
+
+                        Spacer()
+                        Spacer()
+                        Spacer()
+
+                        Button {
+                            viewStore.send(.nextButtonTapped)
+                        } label: {
+                            Text("다음")
+                        }
+                        .buttonStyle(BagglePrimaryStyle())
                     }
                     .padding()
-
-                    BaggleTextField(
-                        text: viewStore.binding(
-                            get: \.nickname,
-                            send: SignUpFeature.Action.nicknameChanged
-                        ),
-                        state: viewStore.binding(
-                            get: \.textfieldState,
-                            send: SignUpFeature.Action.textfieldStateChanged
-                        ),
-                        placeholder: "닉네임 (한, 영, 숫자, _, -, 2-10자)",
-                        maxCount: 8
-                    )
-
-                    Spacer()
-                    Spacer()
-                    Spacer()
-
-                    Button {
-                        viewStore.send(.nextButtonTapped)
-                    } label: {
-                        Text("다음")
-                    }
-                    .buttonStyle(BagglePrimaryStyle())
-                }
-                .padding()
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("취소") {
-                            viewStore.send(.cancelButtonTapped)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("취소") {
+                                viewStore.send(.cancelButtonTapped)
+                            }
                         }
                     }
                 }

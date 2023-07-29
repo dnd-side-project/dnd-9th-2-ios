@@ -15,7 +15,11 @@ struct SignUpFeature: ReducerProtocol {
     private let nicknameMaxCount: Int = 8
 
     struct State: Equatable {
+
+        // MARK: - View
+
         var disableDismissAnimation: Bool = false
+        var isLoading: Bool = false
 
         // MARK: - 이미지
 
@@ -47,7 +51,7 @@ struct SignUpFeature: ReducerProtocol {
         // MARK: - Image
 
         case imageChanged(PhotosPickerItem?)
-        case loading
+        case imageLoading
         case successImageChange(Image)
         case failImageChange
 
@@ -59,6 +63,7 @@ struct SignUpFeature: ReducerProtocol {
         // MARK: - Network
 
         case trySignUp(String)
+        case networkLoading(Bool)
 
         // MARK: - Child Action
 
@@ -90,6 +95,7 @@ struct SignUpFeature: ReducerProtocol {
                 if nicknameValidator.isValidate(state.nickname) {
                     let nickname = state.nickname
                     return .run { send in
+                        await send(.networkLoading(true))
                         await send(.trySignUp(nickname))
                     }
                 } else {
@@ -119,7 +125,7 @@ struct SignUpFeature: ReducerProtocol {
 
             case let .imageChanged(photoPickerItem):
                 return .run { send in
-                    await send(.loading)
+                    await send(.imageLoading)
 
                     if let profileImage = try? await photoPickerItem?.loadTransferable(
                         type: ProfileImageModel.self
@@ -130,7 +136,7 @@ struct SignUpFeature: ReducerProtocol {
                     }
                 }
 
-            case .loading:
+            case .imageLoading:
                 state.imageState = .loading
                 return .none
 
@@ -162,6 +168,7 @@ struct SignUpFeature: ReducerProtocol {
             case let .trySignUp(nickname):
                 return .run { send in
                     let result = await signUpService.signUp(nickname)
+                    await send(.networkLoading(false))
 
                     switch result {
                     case .success:
@@ -172,6 +179,10 @@ struct SignUpFeature: ReducerProtocol {
                         await send(.textfieldStateChanged(.invalid("네트워크 에러입니다."))) // Alert으로 변경 필요
                     }
                 }
+
+            case let .networkLoading(isLoading):
+                state.isLoading = isLoading
+                return .none
 
                 // MARK: - Child Action
 
