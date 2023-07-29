@@ -15,29 +15,39 @@ struct HomeView: View {
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack(spacing: 20) {
-                Text("Home View 입니다")
+            ZStack {
+                VStack(spacing: 20) {
+                    Text("Home View 입니다")
 
-                Button {
-                    viewStore.send(.shareButtonTapped)
-                } label: {
-                    Text("카카오톡 공유하기")
+                    Button {
+                        viewStore.send(.shareButtonTapped)
+                    } label: {
+                        Text("카카오톡 공유하기")
+                    }
+                    .buttonStyle(BagglePrimaryStyle())
+
+                    BaggleTextField(
+                        store: self.store.scope(
+                            state: \.textFieldState,
+                            action: HomeFeature.Action.textFieldAction),
+                        placeholder: "place holder"
+                    )
+                    .padding()
+
+                    Text("textField: \(viewStore.textFieldState.text)")
+
+                    Button("alert 띄우기") {
+                        viewStore.send(.alertAction(.changeState))
+                    }
                 }
-                .buttonStyle(BagglePrimaryStyle())
 
-                BaggleTextField(
+                BaggleAlert(
                     store: self.store.scope(
-                        state: \.textFieldState,
-                        action: HomeFeature.Action.textFieldAction),
-                    placeholder: "place holder"
-                )
-                .padding()
-
-                Text("textField: \(viewStore.textFieldState.text)")
-
-                Button("에러 띄우기") {
-                    viewStore.send(.textFieldAction(.changeState(.invalid("그냥 에러입니다"))))
-                }
+                        state: \.alertState,
+                        action: HomeFeature.Action.alertAction),
+                    title: "안녕하세요") {
+                        print("ㅎㅎㅎㅎ")
+                    }
             }
         }
     }

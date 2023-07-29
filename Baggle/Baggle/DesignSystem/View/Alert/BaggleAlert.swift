@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 /**
  - description:
 
@@ -37,13 +39,15 @@ import SwiftUI
  */
 
 struct BaggleAlert: View {
+
     private let screenSize: CGRect = UIScreen.main.bounds
     private var alertWidth: CGFloat {
         screenSize.width - 40
     }
 
-    @Binding private var isPresented: Bool
+    @State var isPresented: Bool = false
 
+    private let store: StoreOf<BaggleAlertFeature>
     private let rightButtonAction: () -> Void
     private var title: String
     private var description: String?
@@ -51,14 +55,14 @@ struct BaggleAlert: View {
     private var rightButtonTitle: String
 
     init(
-        isPresented: Binding<Bool>,
+        store: StoreOf<BaggleAlertFeature>,
         title: String,
         description: String? = nil,
         leftButtonTitle: String = "아니오",
         rightButtonTitle: String = "네",
         rightButtonAction: @escaping () -> Void
     ) {
-        self._isPresented = isPresented
+        self.store = store
         self.title = title
         self.description = description
         self.leftButtonTitle = leftButtonTitle
@@ -67,52 +71,56 @@ struct BaggleAlert: View {
     }
 
     var body: some View {
-        ZStack {
-            ShadeView(isPresented: $isPresented)
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            ZStack {
+                ShadeView(isPresented: $isPresented)
 
-            VStack(spacing: 20) {
-                Spacer()
-
-                Text(title)
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-
-                if let description {
-                    Text(description)
-                        .multilineTextAlignment(.center)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                } else {
+                VStack(spacing: 20) {
                     Spacer()
-                }
 
-                HStack {
-                    Button {
-                        isPresented.toggle()
-                    } label: {
-                        Text(leftButtonTitle)
-                            .frame(width: alertWidth/2, height: 52)
+                    Text(title)
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+
+                    if let description {
+                        Text(description)
+                            .multilineTextAlignment(.center)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    } else {
+                        Spacer()
                     }
 
-                    Button {
-                        rightButtonAction()
-                        isPresented.toggle()
-                    } label: {
-                        Text(rightButtonTitle)
-                            .frame(width: alertWidth/2, height: 52)
+                    HStack {
+                        Button {
+                            isPresented.toggle()
+                            viewStore.send(.changeState)
+                        } label: {
+                            Text(leftButtonTitle)
+                                .frame(width: alertWidth/2, height: 52)
+                        }
+
+                        Button {
+                            rightButtonAction()
+                            isPresented.toggle()
+                            viewStore.send(.changeState)
+                        } label: {
+                            Text(rightButtonTitle)
+                                .frame(width: alertWidth/2, height: 52)
+                        }
                     }
+                    .frame(width: alertWidth, height: 52)
                 }
-                .frame(width: alertWidth, height: 52)
+                .padding()
+                .frame(width: alertWidth)
+                .frame(minHeight: screenSize.height * 0.2,
+                       maxHeight: screenSize.height * 0.24)
+                .background(.white)
+                .cornerRadius(20)
+                .opacity(viewStore.isPresented ? 1 : 0)
+                .transition(.opacity.animation(.easeInOut))
+                .animation(.easeInOut(duration: 0.2), value: viewStore.isPresented)
             }
-            .padding()
-            .frame(width: alertWidth)
-            .frame(minHeight: screenSize.height * 0.2,
-                   maxHeight: screenSize.height * 0.24)
-            .background(.white)
-            .cornerRadius(20)
-            .opacity(isPresented ? 1 : 0)
-            .transition(.opacity.animation(.easeInOut))
-            .animation(.easeInOut(duration: 0.2), value: self.isPresented)
         }
     }
 }

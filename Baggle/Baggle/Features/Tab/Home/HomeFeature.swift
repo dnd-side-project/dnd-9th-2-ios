@@ -23,6 +23,7 @@ struct HomeFeature: ReducerProtocol {
 
         var textFieldState = BaggleTextFieldFeature.State(maxCount: 10,
                                                           textFieldState: .inactive)
+        var alertState = BaggleAlertFeature.State(isPresented: false)
     }
 
     enum Action: Equatable {
@@ -32,11 +33,20 @@ struct HomeFeature: ReducerProtocol {
         case invitationSuccess
         case invitationFailed
         case textFieldAction(BaggleTextFieldFeature.Action)
+        case alertAction(BaggleAlertFeature.Action)
     }
 
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
+
+        Scope(state: \.textFieldState, action: /Action.textFieldAction) {
+            BaggleTextFieldFeature()
+        }
+
+        Scope(state: \.alertState, action: /Action.alertAction) {
+            BaggleAlertFeature()
+        }
 
         // MARK: - Reduce
 
@@ -68,9 +78,6 @@ struct HomeFeature: ReducerProtocol {
             default:
                 return .none
             }
-        }
-        Scope(state: \.textFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
         }
     }
 
