@@ -47,26 +47,37 @@ struct SignUpView: View {
                                     .tint(Color.gray.opacity(0.2))
                             }
                     }
+                    .padding()
 
-                    Text("닉네임 입력")
-                        .font(.largeTitle)
+                    BaggleTextField(
+                        text: viewStore.binding(
+                            get: \.nickname,
+                            send: SignUpFeature.Action.nicknameChanged
+                        ),
+                        state: viewStore.binding(
+                            get: \.textfieldState,
+                            send: SignUpFeature.Action.textfieldStateChanged
+                        ),
+                        placeholder: "닉네임 (한, 영, 숫자, _, -, 2-10자)",
+                        maxCount: 8
+                    )
+
+                    Spacer()
+                    Spacer()
+                    Spacer()
 
                     Button {
                     } label: {
                         NavigationLink(state: SignUpSuccessFeature.State()) {
                             Text("다음")
-                                .padding()
-                                .foregroundColor(Color.white)
-                                .background(Color.blue)
                         }
                         .transaction { transaction in
                             transaction.disablesAnimations = viewStore.disableDismissAnimation
                         }
                     }
                     .buttonStyle(BagglePrimaryStyle())
-
-                    Spacer()
                 }
+                .padding()
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("취소") {
@@ -94,7 +105,6 @@ extension SignUpView {
                 Text("설정해주세요.")
             }
             .font(.title)
-            .padding()
 
             Spacer()
         }

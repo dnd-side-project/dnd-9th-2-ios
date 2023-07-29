@@ -50,10 +50,10 @@ struct BaggleTextField: View {
 
     init(
         text: Binding<String>,
-        placeholder: String = "입력해주세요",
         state: Binding<TextFieldState>,
+        placeholder: String = "입력해주세요",
         title: TextFieldTitle = .basic,
-        maxCount: Int = 0,
+        maxCount: Int = 10,
         buttonType: TextFieldButton = .delete
     ) {
         self._text = text

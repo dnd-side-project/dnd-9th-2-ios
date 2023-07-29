@@ -12,12 +12,20 @@ import ComposableArchitecture
 
 struct SignUpFeature: ReducerProtocol {
 
+    private let nicknameMaxCount: Int = 8
+
     struct State: Equatable {
         var disableDismissAnimation: Bool = false
 
         // MARK: - 이미지
+
         var imageState: AlbumImageState = .empty
         var imageSelection: PhotosPickerItem?
+
+        // MARK: - 닉네임 TextField
+
+        var nickname: String = ""
+        var textfieldState: TextFieldState = .inactive
 
         // MARK: - Child State
 
@@ -41,6 +49,11 @@ struct SignUpFeature: ReducerProtocol {
         case loading
         case successImageChange(Image)
         case failImageChange
+
+        // MARK: - Nickname
+
+        case nicknameChanged(String)
+        case textfieldStateChanged
 
         // MARK: - Child Action
 
@@ -110,6 +123,19 @@ struct SignUpFeature: ReducerProtocol {
                 state.imageState = .failure
                 return .none
 
+                // MARK: - Nickname TextField
+
+            case .nicknameChanged(let text):
+                state.nickname = text
+                if state.nickname.isEmpty {
+                    state.textfieldState = .inactive
+                } else {
+                    state.textfieldState = .active
+                }
+                return .none
+
+            case .textfieldStateChanged:
+                return .none
                 // MARK: - Child Action
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):
