@@ -12,6 +12,8 @@ import ComposableArchitecture
 
 struct SignUpView: View {
 
+    private typealias SignUpViewStore = ViewStore<SignUpFeature.State, SignUpFeature.Action>
+
     let store: StoreOf<SignUpFeature>
 
     var body: some View {
@@ -22,50 +24,35 @@ struct SignUpView: View {
         ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-                VStack {
+                ZStack {
 
-                    description
+                    loadingView(viewStore: viewStore)
+                        .background(.gray.opacity(0.4))
+                        .zIndex(10)
 
-                    Spacer()
+                    VStack {
 
-                    PhotosPicker(
-                        selection: viewStore.binding(
-                            get: \.imageSelection,
-                            send: { item in
-                                SignUpFeature.Action.imageChanged(item)
+                        ScrollView {
+
+                            VStack {
+                                description
+
+                                Spacer()
+
+                                photoPicker(viewStore: viewStore)
+                                    .padding()
+
+                                nicknameTextField(viewStore: viewStore)
+
+                                Spacer()
+                                Spacer()
+                                Spacer()
                             }
-                        ),
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
-                        ProfileImageView(imageState: viewStore.imageState)
-                            .scaledToFill()
-                            .clipShape(Circle())
-                            .frame(width: 160, height: 160)
-                            .background {
-                                Circle()
-                                    .tint(Color.gray.opacity(0.2))
-                            }
-                    }
-
-                    Text("닉네임 입력")
-                        .font(.largeTitle)
-
-                    Button {
-                    } label: {
-                        NavigationLink(state: SignUpSuccessFeature.State()) {
-                            Text("다음")
-                                .padding()
-                                .foregroundColor(Color.white)
-                                .background(Color.blue)
+                            .padding()
                         }
-                        .transaction { transaction in
-                            transaction.disablesAnimations = viewStore.disableDismissAnimation
-                        }
-                    }
-                    .buttonStyle(BagglePrimaryStyle())
 
-                    Spacer()
+                        nextButton(viewStore: viewStore)
+                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
@@ -75,6 +62,9 @@ struct SignUpView: View {
                     }
                 }
             }
+            .onTapGesture {
+                hideKeyboard()
+            }
         } destination: { store in
             SignUpSuccessView(store: store)
         }
@@ -82,6 +72,21 @@ struct SignUpView: View {
 }
 
 extension SignUpView {
+
+    @ViewBuilder
+    private func loadingView(viewStore: SignUpViewStore) -> some View {
+        if viewStore.isLoading {
+            HStack {
+                Spacer()
+                VStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                Spacer()
+            }
+        }
+    }
 
     @ViewBuilder
     private var description: some View {
@@ -94,10 +99,56 @@ extension SignUpView {
                 Text("설정해주세요.")
             }
             .font(.title)
-            .padding()
 
             Spacer()
         }
+    }
+
+    @ViewBuilder
+    private func photoPicker(viewStore: SignUpViewStore) -> some View {
+        PhotosPicker(
+            selection: viewStore.binding(
+                get: \.imageSelection,
+                send: { item in
+                    SignUpFeature.Action.imageChanged(item)
+                }
+            ),
+            matching: .images,
+            photoLibrary: .shared()
+        ) {
+            ProfileImageView(imageState: viewStore.imageState)
+                .scaledToFill()
+                .clipShape(Circle())
+                .frame(width: 160, height: 160)
+                .background {
+                    Circle()
+                        .tint(Color.gray.opacity(0.2))
+                }
+        }
+    }
+
+    @ViewBuilder
+    private func nicknameTextField(viewStore: SignUpViewStore) -> some View {
+
+        BaggleTextField(
+            store: self.store.scope(
+                state: \.nickNameTextFieldState,
+                action: SignUpFeature.Action.textFieldAction
+            ),
+            placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)"
+        )
+    }
+
+    @ViewBuilder
+    private func nextButton(viewStore: SignUpViewStore) -> some View {
+        Button {
+            viewStore.send(.nextButtonTapped)
+        } label: {
+            Text("다음")
+        }
+        .buttonStyle(BagglePrimaryStyle())
+        .padding(.horizontal)
+        .padding(.bottom)
     }
 }
 

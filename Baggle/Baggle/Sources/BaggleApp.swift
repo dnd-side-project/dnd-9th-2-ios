@@ -24,7 +24,7 @@ struct BaggleApp: App {
             AppView(
                 store: Store(
                     initialState: AppFeature.State(
-                        isLoggedIn: true,
+                        isLoggedIn: false,
                         loginFeature: LoginFeature.State(),
                         mainTabFeature: MainTabFeature.State(
                             selectedTab: .home,

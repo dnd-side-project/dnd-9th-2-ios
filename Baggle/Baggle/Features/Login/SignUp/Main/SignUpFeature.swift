@@ -13,11 +13,23 @@ import ComposableArchitecture
 struct SignUpFeature: ReducerProtocol {
 
     struct State: Equatable {
+
+        // MARK: - View
+
         var disableDismissAnimation: Bool = false
+        var isLoading: Bool = false
 
         // MARK: - 이미지
+
         var imageState: AlbumImageState = .empty
         var imageSelection: PhotosPickerItem?
+
+        // MARK: - 닉네임 TextField
+
+        var nickNameTextFieldState = BaggleTextFieldFeature.State(
+            maxCount: 8,
+            textFieldState: .inactive
+        )
 
         // MARK: - Child State
 
@@ -33,14 +45,24 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Screen Move
 
+        case moveToSignUpSuccess
         case moveToHome
 
         // MARK: - Image
 
         case imageChanged(PhotosPickerItem?)
-        case loading
+        case imageLoading
         case successImageChange(Image)
         case failImageChange
+
+        // MARK: - Nickname
+
+        case textFieldAction(BaggleTextFieldFeature.Action)
+
+        // MARK: - Network
+
+        case requestSignUp(String)
+        case networkLoading(Bool)
 
         // MARK: - Child Action
 
@@ -56,8 +78,16 @@ struct SignUpFeature: ReducerProtocol {
     }
 
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.nicknameValidator) var nicknameValidator
+    @Dependency(\.signUpService) var signUpService
 
     var body: some ReducerProtocolOf<Self> {
+
+        // MARK: - Scope
+
+        Scope(state: \.nickNameTextFieldState, action: /Action.textFieldAction) {
+            BaggleTextFieldFeature()
+        }
 
         Reduce { state, action in
 
@@ -67,8 +97,20 @@ struct SignUpFeature: ReducerProtocol {
 
             case .nextButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
+                let nickname = state.nickNameTextFieldState.text
 
-                return .none
+                if nicknameValidator.isValidate(nickname) {
+                    return .run { send in
+                        await send(.networkLoading(true))
+                        await send(.requestSignUp(nickname))
+                    }
+                } else {
+                    return .run { send in
+                        await send(.textFieldAction(.changeState(.invalid(
+                            "닉네임이 조건에 맞지 않습니다. (한, 영, 숫자, _, -, 2-10자)"
+                        ))))
+                    }
+                }
 
             case .cancelButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
@@ -76,6 +118,10 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
                 // MARK: - Screen Move
+
+            case .moveToSignUpSuccess:
+                state.path.append(SignUpSuccessFeature.State())
+                return .none
 
             case .moveToHome:
                 return .run { send in
@@ -87,7 +133,7 @@ struct SignUpFeature: ReducerProtocol {
 
             case let .imageChanged(photoPickerItem):
                 return .run { send in
-                    await send(.loading)
+                    await send(.imageLoading)
 
                     if let profileImage = try? await photoPickerItem?.loadTransferable(
                         type: ProfileImageModel.self
@@ -98,7 +144,7 @@ struct SignUpFeature: ReducerProtocol {
                     }
                 }
 
-            case .loading:
+            case .imageLoading:
                 state.imageState = .loading
                 return .none
 
@@ -108,6 +154,33 @@ struct SignUpFeature: ReducerProtocol {
 
             case .failImageChange:
                 state.imageState = .failure
+                return .none
+
+                // MARK: - Nickname TextField
+
+            case .textFieldAction:
+                return .none
+
+                // MARK: - Network
+
+            case let .requestSignUp(nickname):
+                return .run { send in
+                    let result = await signUpService.signUp(nickname)
+                    await send(.networkLoading(false))
+
+                    switch result {
+                    case .success:
+                        await send(.moveToSignUpSuccess)
+                    case .nicknameDuplicated:
+                        await send(.textFieldAction(.changeState(.invalid("중복되는 닉네임이 있습니다."))))
+                    case .fail:
+                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다."))))
+                        // Alert으로 변경 필요
+                    }
+                }
+
+            case let .networkLoading(isLoading):
+                state.isLoading = isLoading
                 return .none
 
                 // MARK: - Child Action
