@@ -31,6 +31,7 @@
 		148E34F32A73A0E000945D95 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 148E34F22A73A0E000945D95 /* Baggle.xcconfig */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* NetworkError.swift */; };
+		14B7A0472A7548BD00B8E202 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0462A7548BD00B8E202 /* View+.swift */; };
 		14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */; };
 		14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */; };
 		14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpView.swift */; };
@@ -83,6 +84,7 @@
 		148E34F22A73A0E000945D95 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		14B7A0462A7548BD00B8E202 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		14E4C4B42A6E43CA008643D9 /* CreateMeetingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingView.swift; sourceTree = "<group>"; };
 		14E4C4B52A6E43CA008643D9 /* CreateMeetingFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMeetingFeature.swift; sourceTree = "<group>"; };
 		14E5064D2A6B88F7008D5778 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */,
 				14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */,
 				2B5CF2672A6EC889004D3033 /* attributedString.swift */,
+				14B7A0462A7548BD00B8E202 /* View+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				140C543E2A74F54B00CF1CB4 /* String+Regex.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
+				14B7A0472A7548BD00B8E202 /* View+.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,

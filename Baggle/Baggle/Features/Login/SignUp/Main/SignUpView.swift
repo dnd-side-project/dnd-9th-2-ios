@@ -38,65 +38,73 @@ struct SignUpView: View {
                         .zIndex(2)
                     }
 
-                    VStack {
-                        description
+                ScrollView {
 
-                        Spacer()
+                        VStack {
+                            description
 
-                        PhotosPicker(
-                            selection: viewStore.binding(
-                                get: \.imageSelection,
-                                send: { item in
-                                    SignUpFeature.Action.imageChanged(item)
-                                }
-                            ),
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
-                            ProfileImageView(imageState: viewStore.imageState)
-                                .scaledToFill()
-                                .clipShape(Circle())
-                                .frame(width: 160, height: 160)
-                                .background {
-                                    Circle()
-                                        .tint(Color.gray.opacity(0.2))
-                                }
+                            Spacer()
+
+                            PhotosPicker(
+                                selection: viewStore.binding(
+                                    get: \.imageSelection,
+                                    send: { item in
+                                        SignUpFeature.Action.imageChanged(item)
+                                    }
+                                ),
+                                matching: .images,
+                                photoLibrary: .shared()
+                            ) {
+                                ProfileImageView(imageState: viewStore.imageState)
+                                    .scaledToFill()
+                                    .clipShape(Circle())
+                                    .frame(width: 160, height: 160)
+                                    .background {
+                                        Circle()
+                                            .tint(Color.gray.opacity(0.2))
+                                    }
+                            }
+                            .padding()
+
+                            BaggleTextField(
+                                text: viewStore.binding(
+                                    get: \.nickname,
+                                    send: SignUpFeature.Action.nicknameChanged
+                                ),
+                                state: viewStore.binding(
+                                    get: \.textfieldState,
+                                    send: SignUpFeature.Action.textfieldStateChanged
+                                ),
+                                placeholder: "닉네임 (한, 영, 숫자, _, -, 2-10자)",
+                                maxCount: 8
+                            )
+
+                            Spacer()
+                            Spacer()
+                            Spacer()
                         }
                         .padding()
-
-                        BaggleTextField(
-                            text: viewStore.binding(
-                                get: \.nickname,
-                                send: SignUpFeature.Action.nicknameChanged
-                            ),
-                            state: viewStore.binding(
-                                get: \.textfieldState,
-                                send: SignUpFeature.Action.textfieldStateChanged
-                            ),
-                            placeholder: "닉네임 (한, 영, 숫자, _, -, 2-10자)",
-                            maxCount: 8
-                        )
-
-                        Spacer()
-                        Spacer()
-                        Spacer()
-
-                        Button {
-                            viewStore.send(.nextButtonTapped)
-                        } label: {
-                            Text("다음")
-                        }
-                        .buttonStyle(BagglePrimaryStyle())
                     }
-                    .padding()
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("취소") {
-                                viewStore.send(.cancelButtonTapped)
-                            }
+                }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("취소") {
+                            viewStore.send(.cancelButtonTapped)
                         }
                     }
                 }
+
+                Button {
+                    viewStore.send(.nextButtonTapped)
+                } label: {
+                    Text("다음")
+                }
+                .buttonStyle(BagglePrimaryStyle())
+                .padding(.horizontal)
+                .padding(.bottom)
+            }
+            .onTapGesture {
+                hideKeyboard()
             }
         } destination: { store in
             SignUpSuccessView(store: store)
