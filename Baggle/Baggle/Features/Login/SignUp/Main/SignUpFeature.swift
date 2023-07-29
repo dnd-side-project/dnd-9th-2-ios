@@ -30,7 +30,6 @@ struct SignUpFeature: ReducerProtocol {
             maxCount: 8,
             textFieldState: .inactive
         )
-        var nickname: String = ""
 
         // MARK: - Child State
 
@@ -58,12 +57,11 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Nickname
 
-        case nicknameChanged(String)
         case textFieldAction(BaggleTextFieldFeature.Action)
 
         // MARK: - Network
 
-        case trySignUp(String)
+        case requestSignUp(String)
         case networkLoading(Bool)
 
         // MARK: - Child Action
@@ -99,11 +97,12 @@ struct SignUpFeature: ReducerProtocol {
 
             case .nextButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
-                if nicknameValidator.isValidate(state.nickname) {
-                    let nickname = state.nickname
+                let nickname = state.nickNameTextFieldState.text
+
+                if nicknameValidator.isValidate(nickname) {
                     return .run { send in
                         await send(.networkLoading(true))
-                        await send(.trySignUp(nickname))
+                        await send(.requestSignUp(nickname))
                     }
                 } else {
                     return .run { send in
@@ -159,20 +158,12 @@ struct SignUpFeature: ReducerProtocol {
 
                 // MARK: - Nickname TextField
 
-            case .nicknameChanged(let text):
-                state.nickname = text
-                if state.nickname.isEmpty {
-                    return .run { send in await send(.textFieldAction(.changeState(.inactive))) }
-                } else {
-                    return .run { send in await send(.textFieldAction(.changeState(.active))) }
-                }
-
             case .textFieldAction:
                 return .none
 
                 // MARK: - Network
 
-            case let .trySignUp(nickname):
+            case let .requestSignUp(nickname):
                 return .run { send in
                     let result = await signUpService.signUp(nickname)
                     await send(.networkLoading(false))
@@ -183,7 +174,8 @@ struct SignUpFeature: ReducerProtocol {
                     case .nicknameDuplicated:
                         await send(.textFieldAction(.changeState(.invalid("중복되는 닉네임이 있습니다."))))
                     case .fail:
-                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다.")))) // Alert으로 변경 필요
+                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다."))))
+                        // Alert으로 변경 필요
                     }
                 }
 
