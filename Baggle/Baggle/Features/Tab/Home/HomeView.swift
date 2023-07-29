@@ -37,17 +37,17 @@ struct HomeView: View {
                     Text("textField: \(viewStore.textFieldState.text)")
 
                     Button("alert 띄우기") {
-                        viewStore.send(.alertAction(.changeState))
+                        viewStore.send(.alertButtonTapped)
                     }
                 }
 
-                BaggleAlert(
-                    store: self.store.scope(
-                        state: \.alertState,
-                        action: HomeFeature.Action.alertAction),
-                    title: "안녕하세요") {
-                        print("ㅎㅎㅎㅎ")
-                    }
+                BaggleAlert(isPrsented: Binding(
+                    get: { viewStore.state.isAlertPresented },
+                    set: { _ in
+                        viewStore.send(.alertButtonTapped)
+                    }), title: "Alert입니다") {
+                        print("Alert 인데용")
+                }
             }
         }
     }
