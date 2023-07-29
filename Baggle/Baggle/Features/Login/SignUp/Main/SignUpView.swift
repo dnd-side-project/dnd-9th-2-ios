@@ -12,6 +12,8 @@ import ComposableArchitecture
 
 struct SignUpView: View {
 
+    private typealias SignUpViewStore = ViewStore<SignUpFeature.State, SignUpFeature.Action>
+
     let store: StoreOf<SignUpFeature>
 
     var body: some View {
@@ -24,66 +26,32 @@ struct SignUpView: View {
 
                 ZStack {
 
-                    if viewStore.isLoading {
-                        HStack {
-                            Spacer()
+                    loadingView(viewStore: viewStore)
+                        .background(.gray.opacity(0.4))
+                        .zIndex(10)
+
+                    VStack {
+
+                        ScrollView {
+
                             VStack {
+                                description
+
                                 Spacer()
-                                ProgressView()
+
+                                photoPicker(viewStore: viewStore)
+                                    .padding()
+
+                                nicknameTextField(viewStore: viewStore)
+
                                 Spacer()
-                            }
-                            Spacer()
-                        }
-                        .background(.gray.opacity(0.1))
-                        .zIndex(2)
-                    }
-
-                ScrollView {
-
-                        VStack {
-                            description
-
-                            Spacer()
-
-                            PhotosPicker(
-                                selection: viewStore.binding(
-                                    get: \.imageSelection,
-                                    send: { item in
-                                        SignUpFeature.Action.imageChanged(item)
-                                    }
-                                ),
-                                matching: .images,
-                                photoLibrary: .shared()
-                            ) {
-                                ProfileImageView(imageState: viewStore.imageState)
-                                    .scaledToFill()
-                                    .clipShape(Circle())
-                                    .frame(width: 160, height: 160)
-                                    .background {
-                                        Circle()
-                                            .tint(Color.gray.opacity(0.2))
-                                    }
+                                Spacer()
+                                Spacer()
                             }
                             .padding()
-
-                            BaggleTextField(
-                                text: viewStore.binding(
-                                    get: \.nickname,
-                                    send: SignUpFeature.Action.nicknameChanged
-                                ),
-                                state: viewStore.binding(
-                                    get: \.textfieldState,
-                                    send: SignUpFeature.Action.textfieldStateChanged
-                                ),
-                                placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)",
-                                maxCount: 8
-                            )
-
-                            Spacer()
-                            Spacer()
-                            Spacer()
                         }
-                        .padding()
+
+                        nextButton(viewStore: viewStore)
                     }
                 }
                 .toolbar {
@@ -93,15 +61,6 @@ struct SignUpView: View {
                         }
                     }
                 }
-
-                Button {
-                    viewStore.send(.nextButtonTapped)
-                } label: {
-                    Text("다음")
-                }
-                .buttonStyle(BagglePrimaryStyle())
-                .padding(.horizontal)
-                .padding(.bottom)
             }
             .onTapGesture {
                 hideKeyboard()
@@ -113,6 +72,21 @@ struct SignUpView: View {
 }
 
 extension SignUpView {
+
+    @ViewBuilder
+    private func loadingView(viewStore: SignUpViewStore) -> some View {
+        if viewStore.isLoading {
+            HStack {
+                Spacer()
+                VStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                Spacer()
+            }
+        }
+    }
 
     @ViewBuilder
     private var description: some View {
@@ -128,6 +102,57 @@ extension SignUpView {
 
             Spacer()
         }
+    }
+
+    @ViewBuilder
+    private func photoPicker(viewStore: SignUpViewStore) -> some View {
+        PhotosPicker(
+            selection: viewStore.binding(
+                get: \.imageSelection,
+                send: { item in
+                    SignUpFeature.Action.imageChanged(item)
+                }
+            ),
+            matching: .images,
+            photoLibrary: .shared()
+        ) {
+            ProfileImageView(imageState: viewStore.imageState)
+                .scaledToFill()
+                .clipShape(Circle())
+                .frame(width: 160, height: 160)
+                .background {
+                    Circle()
+                        .tint(Color.gray.opacity(0.2))
+                }
+        }
+    }
+
+    @ViewBuilder
+    private func nicknameTextField(viewStore: SignUpViewStore) -> some View {
+        BaggleTextField(
+            text: viewStore.binding(
+                get: \.nickname,
+                send: SignUpFeature.Action.nicknameChanged
+            ),
+            state: viewStore.binding(
+                get: \.textfieldState,
+                send: SignUpFeature.Action.textfieldStateChanged
+            ),
+            placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)",
+            maxCount: 8
+        )
+    }
+
+    @ViewBuilder
+    private func nextButton(viewStore: SignUpViewStore) -> some View {
+        Button {
+            viewStore.send(.nextButtonTapped)
+        } label: {
+            Text("다음")
+        }
+        .buttonStyle(BagglePrimaryStyle())
+        .padding(.horizontal)
+        .padding(.bottom)
     }
 }
 
