@@ -29,7 +29,6 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Child State
 
-        var loginSuccess: Bool = false
         var path = StackState<SignUpSuccessFeature.State>()
     }
 
@@ -42,6 +41,7 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Screen Move
 
+        case moveToSignUpSuccess
         case moveToHome
 
         // MARK: - Image
@@ -54,11 +54,14 @@ struct SignUpFeature: ReducerProtocol {
         // MARK: - Nickname
 
         case nicknameChanged(String)
-        case textfieldStateChanged
+        case textfieldStateChanged(TextFieldState)
+
+        // MARK: - Network
+
+        case trySignUp(String)
 
         // MARK: - Child Action
 
-        case loginSuccess
         case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
 
         // MARK: - Delegate
@@ -72,6 +75,7 @@ struct SignUpFeature: ReducerProtocol {
 
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.nicknameValidator) var nicknameValidator
+    @Dependency(\.signUpService) var signUpService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -84,8 +88,10 @@ struct SignUpFeature: ReducerProtocol {
             case .nextButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
                 if nicknameValidator.isValidate(state.nickname) {
-//                    state.loginSuccess = true
-                    state.path.append(SignUpSuccessFeature.State())
+                    let nickname = state.nickname
+                    return .run { send in
+                        await send(.trySignUp(nickname))
+                    }
                 } else {
                     state.textfieldState = .invalid("닉네임이 조건에 맞지 않습니다. (한, 영, 숫자, _, -, 2-10자)")
                 }
@@ -98,6 +104,10 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
                 // MARK: - Screen Move
+
+            case .moveToSignUpSuccess:
+                state.path.append(SignUpSuccessFeature.State())
+                return .none
 
             case .moveToHome:
                 return .run { send in
@@ -143,13 +153,27 @@ struct SignUpFeature: ReducerProtocol {
                 }
                 return .none
 
-            case .textfieldStateChanged:
+            case let .textfieldStateChanged(textFieldState):
+                state.textfieldState = textFieldState
                 return .none
+
+                // MARK: - Network
+
+            case let .trySignUp(nickname):
+                return .run { send in
+                    let result = await signUpService.signUp(nickname)
+
+                    switch result {
+                    case .success:
+                        await send(.moveToSignUpSuccess)
+                    case .nicknameDuplicated:
+                        await send(.textfieldStateChanged(.invalid("중복되는 닉네임이 있습니다.")))
+                    case .fail:
+                        await send(.textfieldStateChanged(.invalid("네트워크 에러입니다."))) // Alert으로 변경 필요
+                    }
+                }
 
                 // MARK: - Child Action
-
-            case .loginSuccess:
-                return .none
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):
                 state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
