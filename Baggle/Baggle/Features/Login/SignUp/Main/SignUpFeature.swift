@@ -12,8 +12,6 @@ import ComposableArchitecture
 
 struct SignUpFeature: ReducerProtocol {
 
-    private let nicknameMaxCount: Int = 8
-
     struct State: Equatable {
 
         // MARK: - View
@@ -28,8 +26,11 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - 닉네임 TextField
 
+        var nickNameTextFieldState = BaggleTextFieldFeature.State(
+            maxCount: 8,
+            textFieldState: .inactive
+        )
         var nickname: String = ""
-        var textfieldState: TextFieldState = .inactive
 
         // MARK: - Child State
 
@@ -58,7 +59,7 @@ struct SignUpFeature: ReducerProtocol {
         // MARK: - Nickname
 
         case nicknameChanged(String)
-        case textfieldStateChanged(TextFieldState)
+        case textFieldAction(BaggleTextFieldFeature.Action)
 
         // MARK: - Network
 
@@ -84,6 +85,12 @@ struct SignUpFeature: ReducerProtocol {
 
     var body: some ReducerProtocolOf<Self> {
 
+        // MARK: - Scope
+
+        Scope(state: \.nickNameTextFieldState, action: /Action.textFieldAction) {
+            BaggleTextFieldFeature()
+        }
+
         Reduce { state, action in
 
             switch action {
@@ -99,10 +106,12 @@ struct SignUpFeature: ReducerProtocol {
                         await send(.trySignUp(nickname))
                     }
                 } else {
-                    state.textfieldState = .invalid("닉네임이 조건에 맞지 않습니다. (한, 영, 숫자, _, -, 2-10자)")
+                    return .run { send in
+                        await send(.textFieldAction(.changeState(.invalid(
+                            "닉네임이 조건에 맞지 않습니다. (한, 영, 숫자, _, -, 2-10자)"
+                        ))))
+                    }
                 }
-
-                return .none
 
             case .cancelButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
@@ -153,14 +162,12 @@ struct SignUpFeature: ReducerProtocol {
             case .nicknameChanged(let text):
                 state.nickname = text
                 if state.nickname.isEmpty {
-                    state.textfieldState = .inactive
+                    return .run { send in await send(.textFieldAction(.changeState(.inactive))) }
                 } else {
-                    state.textfieldState = .active
+                    return .run { send in await send(.textFieldAction(.changeState(.active))) }
                 }
-                return .none
 
-            case let .textfieldStateChanged(textFieldState):
-                state.textfieldState = textFieldState
+            case .textFieldAction:
                 return .none
 
                 // MARK: - Network
@@ -174,9 +181,9 @@ struct SignUpFeature: ReducerProtocol {
                     case .success:
                         await send(.moveToSignUpSuccess)
                     case .nicknameDuplicated:
-                        await send(.textfieldStateChanged(.invalid("중복되는 닉네임이 있습니다.")))
+                        await send(.textFieldAction(.changeState(.invalid("중복되는 닉네임이 있습니다."))))
                     case .fail:
-                        await send(.textfieldStateChanged(.invalid("네트워크 에러입니다."))) // Alert으로 변경 필요
+                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다.")))) // Alert으로 변경 필요
                     }
                 }
 

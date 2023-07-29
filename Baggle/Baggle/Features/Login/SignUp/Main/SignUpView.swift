@@ -129,17 +129,13 @@ extension SignUpView {
 
     @ViewBuilder
     private func nicknameTextField(viewStore: SignUpViewStore) -> some View {
+
         BaggleTextField(
-            text: viewStore.binding(
-                get: \.nickname,
-                send: SignUpFeature.Action.nicknameChanged
+            store: self.store.scope(
+                state: \.nickNameTextFieldState,
+                action: SignUpFeature.Action.textFieldAction
             ),
-            state: viewStore.binding(
-                get: \.textfieldState,
-                send: SignUpFeature.Action.textfieldStateChanged
-            ),
-            placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)",
-            maxCount: 8
+            placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)"
         )
     }
 

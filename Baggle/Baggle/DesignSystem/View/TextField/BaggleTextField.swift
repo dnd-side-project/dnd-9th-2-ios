@@ -98,7 +98,7 @@ struct BaggleTextField: View {
                     .focused($isFocused)
                     .font(.body)
                     .foregroundColor(viewStore.textFieldState.fgColor)
-                    
+
                     Text("\(viewStore.text.count)/\(viewStore.maxCount)")
                         .foregroundColor(viewStore.textFieldState.fgColor)
                         .font(.callout)
