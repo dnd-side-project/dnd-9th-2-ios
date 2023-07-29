@@ -67,13 +67,15 @@ struct SignUpView: View {
                     Spacer()
 
                     Button {
+                        viewStore.send(.nextButtonTapped)
                     } label: {
-                        NavigationLink(state: SignUpSuccessFeature.State()) {
-                            Text("다음")
-                        }
-                        .transaction { transaction in
-                            transaction.disablesAnimations = viewStore.disableDismissAnimation
-                        }
+                        Text("다음")
+//                        NavigationLink(state: SignUpSuccessFeature.State()) {
+//                            Text("다음")
+//                        }
+//                        .transaction { transaction in
+//                            transaction.disablesAnimations = viewStore.disableDismissAnimation
+//                        }
                     }
                     .buttonStyle(BagglePrimaryStyle())
                 }

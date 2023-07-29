@@ -69,6 +69,7 @@ struct SignUpFeature: ReducerProtocol {
     }
 
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.nicknameValidator) var nicknameValidator
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -80,6 +81,10 @@ struct SignUpFeature: ReducerProtocol {
 
             case .nextButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
+                if nicknameValidator.isValidate(state.nickname) {
+                } else {
+                    state.textfieldState = .invalid("닉네임이 조건에 맞지 않습니다. (한, 영, 숫자, _, -, 2-10자)")
+                }
 
                 return .none
 

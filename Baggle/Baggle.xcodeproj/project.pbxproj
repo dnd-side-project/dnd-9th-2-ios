@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C54372A74F42900CF1CB4 /* NicknameValidator.swift */; };
+		140C543E2A74F54B00CF1CB4 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C543D2A74F54B00CF1CB4 /* String+Regex.swift */; };
 		140E88112A64B626005119F8 /* BaggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* BaggleApp.swift */; };
 		140E88132A64B626005119F8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88122A64B626005119F8 /* AppView.swift */; };
 		140E88152A64B627005119F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88142A64B627005119F8 /* Assets.xcassets */; };
@@ -36,7 +38,7 @@
 		14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506572A6BC576008D5778 /* MyPageFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 		14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */; };
-		14F2D7B12A728A2B000ED0EE /* Extension+PhotosPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* Extension+PhotosPickerItem.swift */; };
+		14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */; };
 		14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */; };
 		2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */; };
 		2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		140C54372A74F42900CF1CB4 /* NicknameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameValidator.swift; sourceTree = "<group>"; };
+		140C543D2A74F54B00CF1CB4 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		140E880D2A64B626005119F8 /* Baggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		140E88102A64B626005119F8 /* BaggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleApp.swift; sourceTree = "<group>"; };
 		140E88122A64B626005119F8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -84,7 +88,7 @@
 		14E506572A6BC576008D5778 /* MyPageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFeature.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
-		14F2D7B02A728A2B000ED0EE /* Extension+PhotosPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+PhotosPickerItem.swift"; sourceTree = "<group>"; };
+		14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+loadTransferable.swift"; sourceTree = "<group>"; };
 		14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
 		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
@@ -120,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140C54362A74F40E00CF1CB4 /* Nickname */ = {
+			isa = PBXGroup;
+			children = (
+				140C54372A74F42900CF1CB4 /* NicknameValidator.swift */,
+			);
+			path = Nickname;
+			sourceTree = "<group>";
+		};
 		140E88042A64B626005119F8 = {
 			isa = PBXGroup;
 			children = (
@@ -191,7 +203,6 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2B39F21B2A738BB100E034A3 /* SendInvitation.swift */,
 				14F2D7AF2A728A14000ED0EE /* Extensions */,
 				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
 				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
@@ -211,6 +222,8 @@
 		14134D412A64C561004A6AC4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				140C54362A74F40E00CF1CB4 /* Nickname */,
+				2B39F21B2A738BB100E034A3 /* SendInvitation.swift */,
 				14134D422A64C573004A6AC4 /* Service+Temp.swift */,
 			);
 			path = Services;
@@ -351,7 +364,8 @@
 		14F2D7AF2A728A14000ED0EE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				14F2D7B02A728A2B000ED0EE /* Extension+PhotosPickerItem.swift */,
+				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
+				140C543D2A74F54B00CF1CB4 /* String+Regex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -545,10 +559,11 @@
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
 				2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */,
 				2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */,
-				14F2D7B12A728A2B000ED0EE /* Extension+PhotosPickerItem.swift in Sources */,
+				14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */,
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
+				140C543E2A74F54B00CF1CB4 /* String+Regex.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
@@ -565,6 +580,7 @@
 				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
+				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
 				14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,

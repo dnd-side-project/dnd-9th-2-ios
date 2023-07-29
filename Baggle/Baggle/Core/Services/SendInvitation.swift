@@ -12,13 +12,6 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
-extension DependencyValues {
-    public var sendInvitation: SendInvitationEffect {
-        get { self[SendInvitationKey.self] }
-        set { self[SendInvitationKey.self] = newValue }
-    }
-}
-
 public struct SendInvitationEffect: Sendable {
 
     var send: (@MainActor @Sendable (URL?) -> Void)?
@@ -78,6 +71,13 @@ public struct SendInvitationEffect: Sendable {
 extension SendInvitationEffect {
     public init(_ send: @escaping @MainActor @Sendable (URL?) -> Void) {
         self.send = send
+    }
+}
+
+extension DependencyValues {
+    public var sendInvitation: SendInvitationEffect {
+        get { self[SendInvitationKey.self] }
+        set { self[SendInvitationKey.self] = newValue }
     }
 }
 
