@@ -54,14 +54,14 @@ struct BaggleAlert: View {
     private var rightButtonTitle: String
 
     init(
-        isPrsented: Binding<Bool>,
+        isPresented: Binding<Bool>,
         title: String,
         description: String? = nil,
         leftButtonTitle: String = "아니오",
         rightButtonTitle: String = "네",
         rightButtonAction: @escaping () -> Void
     ) {
-        self._isPresented = isPrsented
+        self._isPresented = isPresented
         self.title = title
         self.description = description
         self.leftButtonTitle = leftButtonTitle

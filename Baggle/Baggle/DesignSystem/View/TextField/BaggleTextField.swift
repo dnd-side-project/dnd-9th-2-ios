@@ -98,12 +98,10 @@ struct BaggleTextField: View {
                     .focused($isFocused)
                     .font(.body)
                     .foregroundColor(viewStore.textFieldState.fgColor)
-
-                    if viewStore.maxCount > 0 {
-                        Text("\(viewStore.text.count)/\(viewStore.maxCount)")
-                            .foregroundColor(viewStore.textFieldState.fgColor)
-                            .font(.callout)
-                    }
+                    
+                    Text("\(viewStore.text.count)/\(viewStore.maxCount)")
+                        .foregroundColor(viewStore.textFieldState.fgColor)
+                        .font(.callout)
 
                     if viewStore.state.textFieldState == .active {
                         switch buttonType {
@@ -121,7 +119,7 @@ struct BaggleTextField: View {
                         }
                     }
                 }
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                .padding(16)
                 .overlay(RoundedRectangle(cornerRadius: 8)
                     .stroke(viewStore.textFieldState.borderColor))
 

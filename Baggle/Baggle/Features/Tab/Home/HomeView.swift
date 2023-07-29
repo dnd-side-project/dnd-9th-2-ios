@@ -41,7 +41,7 @@ struct HomeView: View {
                     }
                 }
 
-                BaggleAlert(isPrsented: Binding(
+                BaggleAlert(isPresented: Binding(
                     get: { viewStore.state.isAlertPresented },
                     set: { _ in
                         viewStore.send(.alertButtonTapped)

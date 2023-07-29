@@ -76,7 +76,7 @@ struct HomeFeature: ReducerProtocol {
                 print("isAlertPresented: ", state.isAlertPresented)
                 return .none
 
-            default:
+            case .textFieldAction:
                 return .none
             }
         }
