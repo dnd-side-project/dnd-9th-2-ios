@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 /**
  - description:
 
@@ -37,12 +39,13 @@ import SwiftUI
  */
 
 struct BaggleAlert: View {
+
     private let screenSize: CGRect = UIScreen.main.bounds
     private var alertWidth: CGFloat {
         screenSize.width - 40
     }
 
-    @Binding private var isPresented: Bool
+    @Binding var isPresented: Bool
 
     private let rightButtonAction: () -> Void
     private var title: String
@@ -110,7 +113,7 @@ struct BaggleAlert: View {
                    maxHeight: screenSize.height * 0.24)
             .background(.white)
             .cornerRadius(20)
-            .opacity(isPresented ? 1 : 0)
+            .opacity(self.isPresented ? 1 : 0)
             .transition(.opacity.animation(.easeInOut))
             .animation(.easeInOut(duration: 0.2), value: self.isPresented)
         }

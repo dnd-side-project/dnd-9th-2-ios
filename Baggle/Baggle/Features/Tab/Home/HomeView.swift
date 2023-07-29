@@ -15,15 +15,39 @@ struct HomeView: View {
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack(spacing: 20) {
-                Text("Home View 입니다")
+            ZStack {
+                VStack(spacing: 20) {
+                    Text("Home View 입니다")
 
-                Button {
-                    viewStore.send(.shareButtonTapped)
-                } label: {
-                    Text("카카오톡 공유하기")
+                    Button {
+                        viewStore.send(.shareButtonTapped)
+                    } label: {
+                        Text("카카오톡 공유하기")
+                    }
+                    .buttonStyle(BagglePrimaryStyle())
+
+                    BaggleTextField(
+                        store: self.store.scope(
+                            state: \.textFieldState,
+                            action: HomeFeature.Action.textFieldAction),
+                        placeholder: "place holder"
+                    )
+                    .padding()
+
+                    Text("textField: \(viewStore.textFieldState.text)")
+
+                    Button("alert 띄우기") {
+                        viewStore.send(.alertButtonTapped)
+                    }
                 }
-                .buttonStyle(BagglePrimaryStyle())
+
+                BaggleAlert(isPresented: Binding(
+                    get: { viewStore.state.isAlertPresented },
+                    set: { _ in
+                        viewStore.send(.alertButtonTapped)
+                    }), title: "Alert입니다") {
+                        print("Alert 인데용")
+                }
             }
         }
     }
