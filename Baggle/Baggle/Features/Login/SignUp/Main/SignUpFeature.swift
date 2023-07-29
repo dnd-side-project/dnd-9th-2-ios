@@ -29,6 +29,7 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Child State
 
+        var loginSuccess: Bool = false
         var path = StackState<SignUpSuccessFeature.State>()
     }
 
@@ -57,6 +58,7 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Child Action
 
+        case loginSuccess
         case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
 
         // MARK: - Delegate
@@ -82,6 +84,8 @@ struct SignUpFeature: ReducerProtocol {
             case .nextButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
                 if nicknameValidator.isValidate(state.nickname) {
+//                    state.loginSuccess = true
+                    state.path.append(SignUpSuccessFeature.State())
                 } else {
                     state.textfieldState = .invalid("닉네임이 조건에 맞지 않습니다. (한, 영, 숫자, _, -, 2-10자)")
                 }
@@ -141,7 +145,11 @@ struct SignUpFeature: ReducerProtocol {
 
             case .textfieldStateChanged:
                 return .none
+
                 // MARK: - Child Action
+
+            case .loginSuccess:
+                return .none
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):
                 state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
