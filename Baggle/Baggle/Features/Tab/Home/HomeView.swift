@@ -24,6 +24,20 @@ struct HomeView: View {
                     Text("카카오톡 공유하기")
                 }
                 .buttonStyle(BagglePrimaryStyle())
+
+                BaggleTextField(
+                    store: self.store.scope(
+                        state: \.textFieldState,
+                        action: HomeFeature.Action.textFieldAction),
+                    placeholder: "place holder"
+                )
+                .padding()
+
+                Text("textField: \(viewStore.textFieldState.text)")
+
+                Button("에러 띄우기") {
+                    viewStore.send(.textFieldAction(.changeState(.invalid("그냥 에러입니다"))))
+                }
             }
         }
     }

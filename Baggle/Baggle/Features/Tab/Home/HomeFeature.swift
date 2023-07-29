@@ -20,6 +20,9 @@ struct HomeFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State
+
+        var textFieldState = BaggleTextFieldFeature.State(maxCount: 10,
+                                                          textFieldState: .inactive)
     }
 
     enum Action: Equatable {
@@ -28,6 +31,7 @@ struct HomeFeature: ReducerProtocol {
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
+        case textFieldAction(BaggleTextFieldFeature.Action)
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -60,7 +64,13 @@ struct HomeFeature: ReducerProtocol {
             case .invitationFailed:
                 print("초대하기 실패")
                 return .none
+
+            default:
+                return .none
             }
+        }
+        Scope(state: \.textFieldState, action: /Action.textFieldAction) {
+            BaggleTextFieldFeature()
         }
     }
 
