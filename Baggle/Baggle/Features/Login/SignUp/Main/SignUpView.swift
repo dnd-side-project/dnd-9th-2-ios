@@ -75,7 +75,7 @@ struct SignUpView: View {
                                     get: \.textfieldState,
                                     send: SignUpFeature.Action.textfieldStateChanged
                                 ),
-                                placeholder: "닉네임 (한, 영, 숫자, _, -, 2-10자)",
+                                placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)",
                                 maxCount: 8
                             )
 

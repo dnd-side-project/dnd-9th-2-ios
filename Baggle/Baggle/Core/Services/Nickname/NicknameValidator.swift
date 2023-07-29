@@ -15,7 +15,7 @@ struct NicknameValidator {
 
 extension NicknameValidator: DependencyKey {
 
-    static let nicknameRegex = "^[가-힣a-zA-Z0-9_-]{2,10}$"
+    static let nicknameRegex = "^[가-힣a-zA-Z0-9_-]{2,8}$"
 
     static var liveValue = Self { text in
         return text.isValidRegex(regex: nicknameRegex)
