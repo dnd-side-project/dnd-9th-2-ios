@@ -10,7 +10,6 @@ import SwiftUI
 import ComposableArchitecture
 import KakaoSDKAuth
 import KakaoSDKCommon
-import FirebaseCore
 
 @main
 struct BaggleApp: App {
@@ -18,7 +17,6 @@ struct BaggleApp: App {
     init() {
         let kakaoNativeAppKey = Bundle.main.object(forInfoDictionaryKey: "AppKey") as? String ?? ""
         KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
-        FirebaseApp.configure()
     }
 
     var body: some Scene {
