@@ -11,6 +11,8 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State
+
+        var path = StackState<CreateMeetingPlaceFeature.State>()
     }
 
     enum Action: Equatable {
@@ -19,6 +21,8 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
         case cancelButtonTapped
 
         // MARK: - Scope Action
+
+        case path(StackAction<CreateMeetingPlaceFeature.State, CreateMeetingPlaceFeature.Action>)
     }
 
     @Dependency(\.dismiss) var dismiss
@@ -29,12 +33,18 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { _, action in
+        Reduce { state, action in
 
             switch action {
             case .cancelButtonTapped:
                 return .run { _ in await self.dismiss() }
+
+            case .path:
+                return .none
             }
+        }
+        .forEach(\.path, action: /Action.path) {
+            CreateMeetingPlaceFeature()
         }
     }
 }

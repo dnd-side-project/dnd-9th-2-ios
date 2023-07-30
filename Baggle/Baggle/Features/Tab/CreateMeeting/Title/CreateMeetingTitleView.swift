@@ -15,10 +15,32 @@ struct CreateMeetingTitleView: View {
 
     var body: some View {
 
-        NavigationStack {
+        NavigationStackStore(self.store.scope(
+            state: \.path,
+            action: { .path($0)})
+        ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
                 VStack {
-                    Text("모임 생성")
+                    Text("제목을 정하세요")
+                        .font(.largeTitle)
+
+                    Spacer()
+
+                    Button {
+                    } label: {
+                        NavigationLink(state: CreateMeetingPlaceFeature.State()) {
+                            HStack {
+                                Spacer()
+                                VStack {
+                                    Spacer()
+                                    Text("다음")
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                        }
+                    }
+                    .buttonStyle(BagglePrimaryStyle())
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
@@ -28,6 +50,8 @@ struct CreateMeetingTitleView: View {
                     }
                 }
             }
+        } destination: { store in
+            CreateMeetingPlaceView(store: store)
         }
     }
 }
