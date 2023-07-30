@@ -65,6 +65,8 @@
 		2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */; };
 		2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB242A76D03300AFECA3 /* AppDelegate.swift */; };
 		2BABCB282A76D08400AFECA3 /* postObserverAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB272A76D08300AFECA3 /* postObserverAction.swift */; };
+		2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */; };
+		2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFieldFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFieldFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
 /* End PBXBuildFile section */
@@ -125,6 +127,8 @@
 		2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2BABCB242A76D03300AFECA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BABCB272A76D08300AFECA3 /* postObserverAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postObserverAction.swift; sourceTree = "<group>"; };
+		2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailFeature.swift; sourceTree = "<group>"; };
+		2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFieldFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,6 +265,7 @@
 				1432BE712A68302F0098AAA9 /* App */,
 				14EBE4BC2A681308007537C8 /* Login */,
 				14EBE4BF2A681311007537C8 /* Tab */,
+				2BABCB292A76D19000AFECA3 /* MeetingDetail */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -497,6 +502,15 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
+		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */,
+				2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */,
+			);
+			path = MeetingDetail;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -641,6 +655,7 @@
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
+				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFieldFeature.swift in Sources */,
@@ -651,6 +666,7 @@
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
 				14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */,
+				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateMeetingFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
