@@ -61,6 +61,7 @@
 		2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */; };
 		2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */; };
 		2BABCB1B2A76CF4700AFECA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */; };
+		2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB212A76CFDC00AFECA3 /* NotiList.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFieldFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFieldFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
 /* End PBXBuildFile section */
@@ -117,6 +118,7 @@
 		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
 		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
 		2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2BABCB212A76CFDC00AFECA3 /* NotiList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotiList.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFieldFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,9 +220,8 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2BABCB202A76CFD100AFECA3 /* Const */,
 				14F2D7AF2A728A14000ED0EE /* Extensions */,
-				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
-				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -477,6 +478,16 @@
 			path = XCConfig;
 			sourceTree = "<group>";
 		};
+		2BABCB202A76CFD100AFECA3 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				2BABCB212A76CFDC00AFECA3 /* NotiList.swift */,
+				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
+				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
+			);
+			path = Const;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -633,6 +644,7 @@
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
+				2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
