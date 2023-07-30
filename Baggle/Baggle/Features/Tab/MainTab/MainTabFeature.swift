@@ -16,7 +16,7 @@ struct MainTabFeature: ReducerProtocol {
 
         // MARK: - Child State
 
-        @PresentationState var createMeeting: CreateMeetingFeature.State?
+        @PresentationState var createMeeting: CreateMeetingTitleFeature.State?
     }
 
     enum Action: Equatable {
@@ -27,7 +27,7 @@ struct MainTabFeature: ReducerProtocol {
 
         // MARK: - Child Action
 
-        case createMeeting(PresentationAction<CreateMeetingFeature.Action>)
+        case createMeeting(PresentationAction<CreateMeetingTitleFeature.Action>)
         case logoutMainTab(MyPageFeature.Action)
     }
 
@@ -49,7 +49,7 @@ struct MainTabFeature: ReducerProtocol {
 
             case .selectTab(let tabType):
                 if tabType == .createMeeting {
-                    state.createMeeting = CreateMeetingFeature.State()
+                    state.createMeeting = CreateMeetingTitleFeature.State()
                 } else {
                     state.selectedTab = tabType
                 }
@@ -69,7 +69,7 @@ struct MainTabFeature: ReducerProtocol {
             }
         }
         .ifLet(\.$createMeeting, action: /Action.createMeeting) {
-            CreateMeetingFeature()
+            CreateMeetingTitleFeature()
         }
     }
 }

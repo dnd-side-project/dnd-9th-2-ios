@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct CreateMeetingView: View {
+struct CreateMeetingTitleView: View {
 
-    let store: StoreOf<CreateMeetingFeature>
+    let store: StoreOf<CreateMeetingTitleFeature>
 
     var body: some View {
 
@@ -34,10 +34,10 @@ struct CreateMeetingView: View {
 
 struct CreateMeetingView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateMeetingView(
+        CreateMeetingTitleView(
             store: Store(
-                initialState: CreateMeetingFeature.State(),
-                reducer: CreateMeetingFeature()
+                initialState: CreateMeetingTitleFeature.State(),
+                reducer: CreateMeetingTitleFeature()
             )
         )
     }

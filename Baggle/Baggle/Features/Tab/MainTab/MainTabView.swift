@@ -59,8 +59,8 @@ struct MainTabView: View {
                 store: self.store.scope(
                     state: \.$createMeeting,
                     action: { .createMeeting($0) })
-            ) { createMeetingStore in
-                CreateMeetingView(store: createMeetingStore)
+            ) { createMeetingTitleStore in
+                CreateMeetingTitleView(store: createMeetingTitleStore)
             }
         }
     }
