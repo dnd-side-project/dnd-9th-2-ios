@@ -60,6 +60,7 @@
 		2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */; };
 		2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */; };
 		2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */; };
+		2BABCB1B2A76CF4700AFECA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFieldFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFieldFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* drawUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */; };
 /* End PBXBuildFile section */
@@ -115,6 +116,7 @@
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
 		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
+		2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFieldFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* drawUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 			children = (
 				14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */,
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
+				2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */,
 				2BABCB172A76CDD400AFECA3 /* XCConfig */,
 				140E880F2A64B626005119F8 /* Baggle */,
 				140E880E2A64B626005119F8 /* Products */,
@@ -552,6 +555,7 @@
 				2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */,
 				140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */,
 				140E88152A64B627005119F8 /* Assets.xcassets in Resources */,
+				2BABCB1B2A76CF4700AFECA3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
