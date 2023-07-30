@@ -21,5 +21,7 @@
 		<string>kakaolink</string>
 		<string>itms-apps</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array/>
 </dict>
 </plist>
