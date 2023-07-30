@@ -15,6 +15,8 @@ struct BaggleTextFieldFeature: ReducerProtocol {
         var text: String = ""
         var maxCount: Int
         var textFieldState: TextFieldState
+        var errorMessage: String?
+        var isFocused: Bool = false
     }
 
     enum Action: Equatable {
@@ -35,19 +37,46 @@ struct BaggleTextFieldFeature: ReducerProtocol {
 
             switch action {
             case .textChanged(let newText):
+                if state.text != newText && state.errorMessage != nil {
+                    if state.isFocused {
+                        state.textFieldState = .active
+                    } else {
+                        state.textFieldState = (newText.isEmpty ? .inactive : .valid)
+                    }
+                    state.errorMessage = nil
+                }
+
                 if newText.count > state.maxCount {
                     state.text = String(newText.prefix(state.maxCount))
                 } else {
                     state.text = newText
                 }
+
                 return .none
 
             case .isFocused(let isFocus):
-                state.textFieldState = isFocus ? .active : (state.text.isEmpty ? .inactive : .valid)
+                state.isFocused.toggle()
+
+                if let error = state.errorMessage {
+                    state.textFieldState = .invalid(error)
+                } else {
+                    if isFocus {
+                        state.textFieldState = .active
+                    } else {
+                        state.textFieldState = state.text.isEmpty ? .inactive : .valid
+                    }
+                }
+
                 return .none
 
             case .changeState(let newState):
+                if case let .invalid(error) = newState {
+                    state.errorMessage = error
+                } else {
+                    state.errorMessage = nil
+                }
                 state.textFieldState = newState
+
                 return .none
             }
         }
