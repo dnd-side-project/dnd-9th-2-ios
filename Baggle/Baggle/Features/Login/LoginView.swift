@@ -89,7 +89,7 @@ extension LoginView {
             Task {
                 do {
                     let token = try await requestKakaoLogin()
-                    ViewStore(self.store).send(.loginButtonTapped(.kakao, token))
+                    ViewStore(self.store, observe: { $0 }).send(.loginButtonTapped(.kakao, token))
                 } catch {
                     print("error: \(error)")
                 }
@@ -113,13 +113,13 @@ extension LoginView {
                         guard let identityToken = appleIDCredential.identityToken,
                               let token = String(data: identityToken, encoding: .utf8)
                         else { return }
-                        ViewStore(self.store).send(.loginButtonTapped(.apple, token))
+                        ViewStore(self.store, observe: { $0 }).send(.loginButtonTapped(.apple, token))
                     default:
                         break
                     }
                 case .failure(let error):
                     print("error: ", error.localizedDescription)
-                    ViewStore(self.store).send(.loginFail)
+                    ViewStore(self.store, observe: { $0 }).send(.loginFail)
                 }
             }
         )
@@ -129,7 +129,7 @@ extension LoginView {
 
     func signUp() -> some View {
         Button {
-            ViewStore(self.store).send(.signUpButtonTapped)
+            ViewStore(self.store, observe: { $0 }).send(.signUpButtonTapped)
         } label: {
             HStack {
 

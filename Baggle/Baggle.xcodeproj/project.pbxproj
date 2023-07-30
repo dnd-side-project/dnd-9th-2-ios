@@ -163,7 +163,6 @@
 			children = (
 				14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */,
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
-				2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */,
 				2BABCB172A76CDD400AFECA3 /* XCConfig */,
 				140E880F2A64B626005119F8 /* Baggle */,
 				140E880E2A64B626005119F8 /* Products */,
@@ -183,6 +182,7 @@
 			children = (
 				2B0A07352A7171F700BA4182 /* Baggle.entitlements */,
 				2B30E3452A6FA8E800949151 /* Info.plist */,
+				2BABCB1A2A76CF4700AFECA3 /* GoogleService-Info.plist */,
 				14134D382A64C4CC004A6AC4 /* Resources */,
 				14134D392A64C4ED004A6AC4 /* Sources */,
 				14134D3A2A64C50D004A6AC4 /* Core */,
