@@ -21,8 +21,24 @@ struct CreateTitleView: View {
         ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
                 VStack {
-                    Text("제목을 정하세요")
-                        .font(.largeTitle)
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("친구들과 약속을 잡아보세요!")
+                            .font(.title2)
+
+                        BaggleTextField(
+                            store: self.store.scope(
+                                state: \.textFieldState,
+                                action: CreateTitleFeature.Action.textFieldAction
+                            ),
+                            placeholder: "ex. 바글이와 저녁 약속",
+                            title: .title("어떤 약속인가요?")
+                        )
+                        .submitLabel(.done)
+                        .onSubmit {
+                            viewStore.send(.submitButtonTapped)
+                        }
+                    }
+                    .padding()
 
                     Spacer()
 
@@ -31,7 +47,9 @@ struct CreateTitleView: View {
                     } label: {
                         Text("다음")
                     }
+                    .padding(.bottom, 10)
                     .buttonStyle(BagglePrimaryStyle())
+                    .disabled(viewStore.state.nextButtonDisabled)
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
@@ -39,6 +57,9 @@ struct CreateTitleView: View {
                             viewStore.send(.cancelButtonTapped)
                         }
                     }
+                }
+                .onAppear {
+                    viewStore.send(.onAppear)
                 }
             }
         } destination: { pathState in
