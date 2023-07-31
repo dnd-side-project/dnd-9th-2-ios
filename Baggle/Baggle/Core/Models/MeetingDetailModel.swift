@@ -30,9 +30,10 @@ struct MeetingDetailModel: Equatable {
     let date: String
     let time: String
     let memo: String?
+    let members: [MemberModel]
     let isConfirmed: Bool // 약속 확정 여부
     let emergencyButtonActive: Bool
-    let emergencyButtonActiveTime: String
+    let emergencyButtonActiveTime: String?
     // 본인 인증, 방장 여부 추가 가능
 
     static func == (lhs: MeetingDetailModel, rhs: MeetingDetailModel) -> Bool {
