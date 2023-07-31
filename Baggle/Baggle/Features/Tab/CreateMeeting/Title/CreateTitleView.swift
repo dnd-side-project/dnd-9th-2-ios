@@ -59,7 +59,11 @@ struct CreateTitleView: View {
                     }
                 }
                 .onAppear {
-                    viewStore.send(.onAppear)
+//                    viewStore.send(.onAppear)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    hideKeyboard()
                 }
             }
         } destination: { pathState in

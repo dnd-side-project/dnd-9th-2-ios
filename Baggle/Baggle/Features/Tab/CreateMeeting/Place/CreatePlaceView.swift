@@ -47,6 +47,10 @@ struct CreatePlaceView: View {
                 .buttonStyle(BagglePrimaryStyle())
                 .disabled(viewStore.state.nextButtonDisabled)
             }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
 }

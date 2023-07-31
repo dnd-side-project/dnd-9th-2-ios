@@ -89,7 +89,7 @@ struct CreateTitleFeature: ReducerProtocol {
 
                 // View
             case .onAppear:
-                return .none
+                return .run { send in await send(.textFieldAction(.isFocused(true)))}
 
                 // Tap
             case .cancelButtonTapped:
