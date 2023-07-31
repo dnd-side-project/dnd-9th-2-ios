@@ -16,17 +16,20 @@ struct CreateMeetingSuccessView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Text("모임 생성이 완료됐어요!")
-                .font(.largeTitle)
+            VStack {
+                Text("모임 생성이 완료됐어요!")
+                    .font(.largeTitle)
 
-            Spacer()
+                Spacer()
 
-            Button {
-                viewStore.send(.completeButtonTapped)
-            } label: {
-                Text("완료")
+                Button {
+                    viewStore.send(.completeButtonTapped)
+                } label: {
+                    Text("완료")
+                }
+                .buttonStyle(BagglePrimaryStyle())
             }
-            .buttonStyle(BagglePrimaryStyle())
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }
