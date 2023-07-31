@@ -15,52 +15,53 @@ struct MainTabView: View {
 
     var body: some View {
 
-        WithViewStore(self.store) { viewStore in
-
-            TabView(
-                selection: viewStore.binding(
-                    get: \.selectedTab,
-                    send: MainTabFeature.Action.selectTab
-                )
-            ) {
-                HomeView(
-                    store: Store(
-                        initialState: HomeFeature.State(),
-                        reducer: HomeFeature()
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            NavigationStack {
+                TabView(
+                    selection: viewStore.binding(
+                        get: \.selectedTab,
+                        send: MainTabFeature.Action.selectTab
                     )
-                )
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("홈")
-                }
-                .tag(TapType.home)
+                ) {
+                    HomeView(
+                        store: Store(
+                            initialState: HomeFeature.State(),
+                            reducer: HomeFeature()
+                        )
+                    )
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("홈")
+                    }
+                    .tag(TapType.home)
 
-                ZStack {
-                }
-                .tabItem {
-                    Image(systemName: "plus.square")
-                    Text("모임 생성")
-                }
-                .tag(TapType.createMeeting)
+                    ZStack {
+                    }
+                    .tabItem {
+                        Image(systemName: "plus.square")
+                        Text("모임 생성")
+                    }
+                    .tag(TapType.createMeeting)
 
-                MyPageView(
+                    MyPageView(
+                        store: self.store.scope(
+                            state: \.myPageFeature,
+                            action: MainTabFeature.Action.logoutMainTab
+                        )
+                    )
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("마이페이지")
+                    }
+                    .tag(TapType.myPage)
+                }
+                .fullScreenCover(
                     store: self.store.scope(
-                        state: \.myPageFeature,
-                        action: MainTabFeature.Action.logoutMainTab
-                    )
-                )
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("마이페이지")
+                        state: \.$createMeeting,
+                        action: { .createMeeting($0) })
+                ) { createMeetingStore in
+                    CreateMeetingView(store: createMeetingStore)
                 }
-                .tag(TapType.myPage)
-            }
-            .fullScreenCover(
-                store: self.store.scope(
-                    state: \.$createMeeting,
-                    action: { .createMeeting($0) })
-            ) { createMeetingStore in
-                CreateMeetingView(store: createMeetingStore)
             }
         }
     }
