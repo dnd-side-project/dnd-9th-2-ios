@@ -9,7 +9,7 @@ import ComposableArchitecture
 
 enum MeetingDetailState {
     case empty
-    case updatedData(MeetingDetailModel)
+    case updatedData(MeetingDetail)
 }
 
 struct MeetingDetailFeature: ReducerProtocol {
@@ -19,14 +19,14 @@ struct MeetingDetailFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var meetingData: MeetingDetailModel?
+        var meetingData: MeetingDetail?
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
         case onAppear
-        case updateData(MeetingDetailModel?)
+        case updateData(MeetingDetail?)
     }
 
     @Dependency(\.meetingDetailService) var meetingService
@@ -42,7 +42,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 return .run { send in
-                    let data = await meetingService.getMeetingDetail(meetingId)
+                    let data = await meetingService.fetchMeetingDetail(meetingId)
                     await send(.updateData(data))
                 }
 

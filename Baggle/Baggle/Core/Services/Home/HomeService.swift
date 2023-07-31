@@ -10,14 +10,14 @@ import Foundation
 import ComposableArchitecture
 
 struct HomeService {
-    var getMeetingList: (MeetingType) async -> [MeetingModel]?
+    var fetchMeetingList: (MeetingStatus) async -> [Meeting]?
 }
 
 extension HomeService: DependencyKey {
 
     static var liveValue = Self { type in
         do {
-            return try await MockUpMeetingService().getMeetingList(type)
+            return try await MockUpMeetingService().fetchMeetingList(type)
         } catch {
             return nil
         }
@@ -32,15 +32,15 @@ extension DependencyValues {
 }
 
 struct MockUpMeetingService {
-    func getMeetingList(_ type: MeetingType) async throws -> [MeetingModel] {
+    func fetchMeetingList(_ type: MeetingStatus) async throws -> [Meeting] {
         return try await withCheckedThrowingContinuation({ continuation in
-            continuation.resume(returning: makeMeetingList(type))
+            continuation.resume(returning: makeMockMeetingList(type))
         })
     }
 
-    private func makeMeetingList(_ type: MeetingType) -> [MeetingModel] {
+    private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
         let ongoing = [
-            MeetingModel(
+            Meeting(
                 id: 1,
                 name: "진행 중인 모임",
                 place: "우리집",
@@ -52,7 +52,7 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
                 isConfirmed: false),
-            MeetingModel(
+            Meeting(
                 id: 2,
                 name: "진행 중인 모임2",
                 place: "남의 집",
@@ -66,7 +66,7 @@ struct MockUpMeetingService {
         ]
 
         let complete = [
-            MeetingModel(
+            Meeting(
                 id: 1,
                 name: "진행 중인 모임",
                 place: "우리집",

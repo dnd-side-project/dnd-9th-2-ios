@@ -10,13 +10,13 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingDetailService {
-    var getMeetingDetail: (Int) async -> MeetingDetailModel?
+    var fetchMeetingDetail: (Int) async -> MeetingDetail?
 }
 
 extension MeetingDetailService: DependencyKey {
     static var liveValue = Self { id in
         do {
-            return try await MockUpMeetingService().getMeetingDetail(id)
+            return try await MockUpMeetingDetailService().fetchMeetingDetail(id)
         } catch {
             return nil
         }
@@ -30,29 +30,29 @@ extension DependencyValues {
     }
 }
 
-extension MockUpMeetingService {
-    func getMeetingDetail(_ id: Int) async throws -> MeetingDetailModel {
+struct MockUpMeetingDetailService {
+    func fetchMeetingDetail(_ id: Int) async throws -> MeetingDetail {
         return try await withCheckedThrowingContinuation({ continuation in
-            continuation.resume(returning: makeMeetingDetail(id))
+            continuation.resume(returning: makeMockMeetingDetail(id))
         })
     }
 
-    private func makeMeetingDetail(_ id: Int) -> MeetingDetailModel {
+    private func makeMockMeetingDetail(_ id: Int) -> MeetingDetail {
         let members = [
-            MemberModel(userid: 1,
-                        name: "안녕",
-                        profile: "",
-                        owner: true,
-                        certified: false,
-                        certImage: ""),
-            MemberModel(userid: 2,
-                        name: "안녕222",
-                        profile: "",
-                        owner: true,
-                        certified: false,
-                        certImage: "")
+            Member(userid: 1,
+                   name: "안녕",
+                   profileURL: "",
+                   isOwner: true,
+                   certified: false,
+                   certImage: ""),
+            Member(userid: 2,
+                   name: "안녕222",
+                   profileURL: "",
+                   isOwner: true,
+                   certified: false,
+                   certImage: "")
         ]
-        return MeetingDetailModel(
+        return MeetingDetail(
             id: id,
             name: "안녕하세요",
             place: "우리집",

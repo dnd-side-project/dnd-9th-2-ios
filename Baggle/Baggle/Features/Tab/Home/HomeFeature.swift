@@ -13,7 +13,7 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
-enum MeetingType {
+enum MeetingStatus {
     case ongoing
     case complete
 }
@@ -26,19 +26,19 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var meetingType: MeetingType = .ongoing
+        var meetingType: MeetingStatus = .ongoing
         var pushMeetingDetail: Bool = false
         var pushMeetingDetailId: Int = 0
-        var ongoingList: [MeetingModel] = []
-        var completedList: [MeetingModel] = []
+        var ongoingList: [Meeting] = []
+        var completedList: [Meeting] = []
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
         case onAppear
-        case getMeetings(MeetingType)
-        case updateMeetings(MeetingType, [MeetingModel]?)
+        case fetchMeetingList(MeetingStatus)
+        case updateMeetings(MeetingStatus, [Meeting]?)
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
@@ -58,12 +58,12 @@ struct HomeFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 return .run { send in
-                    await send(.getMeetings(.ongoing))
+                    await send(.fetchMeetingList(.ongoing))
                 }
 
-            case .getMeetings(let type):
+            case .fetchMeetingList(let type):
                 return .run { send in
-                    let list = await meetingService.getMeetingList(type)
+                    let list = await meetingService.fetchMeetingList(type)
                     await send(.updateMeetings(type, list))
                 }
 
