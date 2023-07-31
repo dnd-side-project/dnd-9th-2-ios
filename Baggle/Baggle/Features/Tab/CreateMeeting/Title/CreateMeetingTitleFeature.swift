@@ -99,7 +99,7 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
                 // 성공
             case let .path(.element(id: id, action: .createSuccess(.delegate(.moveToHome)))):
                 _ = id
-                return .none
+                return .run { _ in await dismiss() }
 
             case .path:
                 return .none
