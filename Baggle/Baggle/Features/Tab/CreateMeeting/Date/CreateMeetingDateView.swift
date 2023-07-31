@@ -16,7 +16,19 @@ struct CreateMeetingDateView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Text("Hello, World")
+            VStack {
+                Text("날짜를 정하세요")
+                    .font(.largeTitle)
+
+                Spacer()
+
+                Button {
+                    viewStore.send(.nextButtonTapped)
+                } label: {
+                    Text("다음")
+                }
+                .buttonStyle(BagglePrimaryStyle())
+            }
         }
     }
 }

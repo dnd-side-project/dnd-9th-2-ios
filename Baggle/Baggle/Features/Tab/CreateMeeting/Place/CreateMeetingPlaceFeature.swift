@@ -11,8 +11,6 @@ struct CreateMeetingPlaceFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State
-
-        var path = StackState<CreateMeetingDateFeature.State>()
     }
 
     enum Action: Equatable {
@@ -22,8 +20,11 @@ struct CreateMeetingPlaceFeature: ReducerProtocol {
         case nextButtonTapped
 
         // MARK: - Scope Action
+        case delegate(Delegate)
 
-        case path(StackAction<CreateMeetingDateFeature.State, CreateMeetingDateFeature.Action>)
+        enum Delegate {
+            case moveToNext
+        }
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -32,14 +33,14 @@ struct CreateMeetingPlaceFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { state, action in
+        Reduce { _, action in
 
             switch action {
 
-            case .nextButtonTapped: 
-                return .none
+            case .nextButtonTapped:
+                return .run { send in await send(.delegate(.moveToNext)) }
 
-            case .path:
+            case .delegate(.moveToNext):
                 return .none
             }
         }

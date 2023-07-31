@@ -27,18 +27,9 @@ struct CreateMeetingTitleView: View {
                     Spacer()
 
                     Button {
+                        viewStore.send(.nextButtonTapped)
                     } label: {
-                        NavigationLink(state: CreateMeetingPlaceFeature.State()) {
-                            HStack {
-                                Spacer()
-                                VStack {
-                                    Spacer()
-                                    Text("다음")
-                                    Spacer()
-                                }
-                                Spacer()
-                            }
-                        }
+                        Text("다음")
                     }
                     .buttonStyle(BagglePrimaryStyle())
                 }
@@ -50,13 +41,42 @@ struct CreateMeetingTitleView: View {
                     }
                 }
             }
-        } destination: { store in
-            CreateMeetingPlaceView(store: store)
+        } destination: { pathState in
+            switch pathState {
+            case .meetingPlace:
+                CaseLet(
+                    /CreateMeetingTitleFeature.Child.State.meetingPlace,
+                    action: CreateMeetingTitleFeature.Child.Action.meetingPlace
+                ) { store in
+                    CreateMeetingPlaceView(store: store)
+                }
+            case .meetingDate:
+                CaseLet(
+                    /CreateMeetingTitleFeature.Child.State.meetingDate,
+                    action: CreateMeetingTitleFeature.Child.Action.meetingDate
+                ) { store in
+                    CreateMeetingDateView(store: store)
+                }
+            case .meetingMemo:
+                CaseLet(
+                    /CreateMeetingTitleFeature.Child.State.meetingMemo,
+                    action: CreateMeetingTitleFeature.Child.Action.meetingMemo
+                ) { store in
+                    CreateMeetingMemoView(store: store)
+                }
+            case .createSuccess:
+                CaseLet(
+                    /CreateMeetingTitleFeature.Child.State.createSuccess,
+                    action: CreateMeetingTitleFeature.Child.Action.createSuccess
+                ) { store in
+                    CreateMeetingSuccessView(store: store)
+                }
+            }
         }
     }
 }
 
-struct CreateMeetingView_Previews: PreviewProvider {
+struct CreateMeetingTitleView_Previews: PreviewProvider {
     static var previews: some View {
         CreateMeetingTitleView(
             store: Store(

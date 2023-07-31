@@ -14,7 +14,15 @@ struct CreateMeetingMemoFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
-        // MARK: - Scope Action
+
+        case nextButtonTapped
+
+        // MARK: - Delegate
+        case delegate(Delegate)
+
+        enum Delegate {
+            case moveToNext
+        }
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -23,9 +31,15 @@ struct CreateMeetingMemoFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { state, action in
+        Reduce { _, action in
 
             switch action {
+
+            case .nextButtonTapped:
+                return .run { send in await send(.delegate(.moveToNext)) }
+
+            case .delegate(.moveToNext):
+                return .none
             }
         }
     }
