@@ -43,12 +43,14 @@ extension MockUpMeetingService {
                         name: "안녕",
                         profile: "",
                         owner: true,
-                        certified: false),
+                        certified: false,
+                        certImage: ""),
             MemberModel(userid: 2,
                         name: "안녕222",
                         profile: "",
                         owner: true,
-                        certified: false)
+                        certified: false,
+                        certImage: "")
         ]
         return MeetingDetailModel(
             id: id,
