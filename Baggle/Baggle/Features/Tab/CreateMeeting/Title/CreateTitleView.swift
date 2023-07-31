@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct CreateMeetingTitleView: View {
+struct CreateTitleView: View {
 
-    let store: StoreOf<CreateMeetingTitleFeature>
+    let store: StoreOf<CreateTitleFeature>
 
     var body: some View {
 
@@ -45,31 +45,31 @@ struct CreateMeetingTitleView: View {
             switch pathState {
             case .meetingPlace:
                 CaseLet(
-                    /CreateMeetingTitleFeature.Child.State.meetingPlace,
-                    action: CreateMeetingTitleFeature.Child.Action.meetingPlace
+                    /CreateTitleFeature.Child.State.meetingPlace,
+                    action: CreateTitleFeature.Child.Action.meetingPlace
                 ) { store in
-                    CreateMeetingPlaceView(store: store)
+                    CreatePlaceView(store: store)
                 }
             case .meetingDate:
                 CaseLet(
-                    /CreateMeetingTitleFeature.Child.State.meetingDate,
-                    action: CreateMeetingTitleFeature.Child.Action.meetingDate
+                    /CreateTitleFeature.Child.State.meetingDate,
+                    action: CreateTitleFeature.Child.Action.meetingDate
                 ) { store in
-                    CreateMeetingDateView(store: store)
+                    CreateDateView(store: store)
                 }
             case .meetingMemo:
                 CaseLet(
-                    /CreateMeetingTitleFeature.Child.State.meetingMemo,
-                    action: CreateMeetingTitleFeature.Child.Action.meetingMemo
+                    /CreateTitleFeature.Child.State.meetingMemo,
+                    action: CreateTitleFeature.Child.Action.meetingMemo
                 ) { store in
-                    CreateMeetingMemoView(store: store)
+                    CreateMemoView(store: store)
                 }
             case .createSuccess:
                 CaseLet(
-                    /CreateMeetingTitleFeature.Child.State.createSuccess,
-                    action: CreateMeetingTitleFeature.Child.Action.createSuccess
+                    /CreateTitleFeature.Child.State.createSuccess,
+                    action: CreateTitleFeature.Child.Action.createSuccess
                 ) { store in
-                    CreateMeetingSuccessView(store: store)
+                    CreateSuccessView(store: store)
                 }
             }
         }
@@ -78,10 +78,10 @@ struct CreateMeetingTitleView: View {
 
 struct CreateMeetingTitleView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateMeetingTitleView(
+        CreateTitleView(
             store: Store(
-                initialState: CreateMeetingTitleFeature.State(),
-                reducer: CreateMeetingTitleFeature()
+                initialState: CreateTitleFeature.State(),
+                reducer: CreateTitleFeature()
             )
         )
     }

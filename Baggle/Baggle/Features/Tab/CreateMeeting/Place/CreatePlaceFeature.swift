@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct CreateMeetingPlaceFeature: ReducerProtocol {
+struct CreatePlaceFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State

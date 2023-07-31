@@ -1,13 +1,13 @@
 //
-//  CreateMeetingSuccessFeature.swift
+//  CreateMeetingMemoFeature.swift
 //  Baggle
 //
-//  Created by youtak on 2023/07/31.
+//  Created by youtak on 2023/07/30.
 //
 
 import ComposableArchitecture
 
-struct CreateMeetingSuccessFeature: ReducerProtocol {
+struct CreateMemoFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State
@@ -15,13 +15,13 @@ struct CreateMeetingSuccessFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
-        case completeButtonTapped
+        case nextButtonTapped
 
         // MARK: - Delegate
         case delegate(Delegate)
 
         enum Delegate {
-            case moveToHome
+            case moveToNext
         }
     }
 
@@ -35,10 +35,10 @@ struct CreateMeetingSuccessFeature: ReducerProtocol {
 
             switch action {
 
-            case .completeButtonTapped:
-                return .run { send in await send(.delegate(.moveToHome)) }
+            case .nextButtonTapped:
+                return .run { send in await send(.delegate(.moveToNext)) }
 
-            case .delegate(.moveToHome):
+            case .delegate(.moveToNext):
                 return .none
             }
         }

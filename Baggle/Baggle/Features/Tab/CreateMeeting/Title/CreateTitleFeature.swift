@@ -9,7 +9,7 @@ import Foundation
 
 import ComposableArchitecture
 
-struct CreateMeetingTitleFeature: ReducerProtocol {
+struct CreateTitleFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State
@@ -31,31 +31,31 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
     struct Child: ReducerProtocol {
 
         enum State: Equatable {
-            case meetingPlace(CreateMeetingPlaceFeature.State)
-            case meetingDate(CreateMeetingDateFeature.State)
-            case meetingMemo(CreateMeetingMemoFeature.State)
-            case createSuccess(CreateMeetingSuccessFeature.State)
+            case meetingPlace(CreatePlaceFeature.State)
+            case meetingDate(CreateMeetingFeature.State)
+            case meetingMemo(CreateMemoFeature.State)
+            case createSuccess(CreateSuccessFeature.State)
         }
 
         enum Action: Equatable {
-            case meetingPlace(CreateMeetingPlaceFeature.Action)
-            case meetingDate(CreateMeetingDateFeature.Action)
-            case meetingMemo(CreateMeetingMemoFeature.Action)
-            case createSuccess(CreateMeetingSuccessFeature.Action)
+            case meetingPlace(CreatePlaceFeature.Action)
+            case meetingDate(CreateMeetingFeature.Action)
+            case meetingMemo(CreateMemoFeature.Action)
+            case createSuccess(CreateSuccessFeature.Action)
         }
 
         var body: some ReducerProtocolOf<Self> {
             Scope(state: /State.meetingPlace, action: /Action.meetingPlace) {
-                CreateMeetingPlaceFeature()
+                CreatePlaceFeature()
             }
             Scope(state: /State.meetingDate, action: /Action.meetingDate) {
-                CreateMeetingDateFeature()
+                CreateMeetingFeature()
             }
             Scope(state: /State.meetingMemo, action: /Action.meetingMemo) {
-                CreateMeetingMemoFeature()
+                CreateMemoFeature()
             }
             Scope(state: /State.createSuccess, action: /Action.createSuccess) {
-                CreateMeetingSuccessFeature()
+                CreateSuccessFeature()
             }
         }
     }
@@ -73,7 +73,7 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
             case .nextButtonTapped:
-                state.path.append(.meetingPlace(CreateMeetingPlaceFeature.State()))
+                state.path.append(.meetingPlace(CreatePlaceFeature.State()))
                 return .none
 
                 // MARK: - Child
@@ -81,19 +81,19 @@ struct CreateMeetingTitleFeature: ReducerProtocol {
                 // 모임 장소
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext)))):
                 _ = id
-                state.path.append(.meetingDate(CreateMeetingDateFeature.State()))
+                state.path.append(.meetingDate(CreateMeetingFeature.State()))
                 return .none
 
                 // 모임 날짜
             case let .path(.element(id: id, action: .meetingDate(.delegate(.moveToNext)))):
                 _ = id
-                state.path.append(.meetingMemo(CreateMeetingMemoFeature.State()))
+                state.path.append(.meetingMemo(CreateMemoFeature.State()))
                 return .none
 
                 // 모임 메모
             case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToNext)))):
                 _ = id
-                state.path.append(.createSuccess(CreateMeetingSuccessFeature.State()))
+                state.path.append(.createSuccess(CreateSuccessFeature.State()))
                 return .none
 
                 // 성공

@@ -60,7 +60,7 @@ struct MainTabView: View {
                     state: \.$createMeeting,
                     action: { .createMeeting($0) })
             ) { createMeetingTitleStore in
-                CreateMeetingTitleView(store: createMeetingTitleStore)
+                CreateTitleView(store: createMeetingTitleStore)
             }
         }
     }
