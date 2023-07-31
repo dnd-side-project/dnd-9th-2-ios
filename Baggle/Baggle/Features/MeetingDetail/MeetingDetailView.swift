@@ -18,6 +18,7 @@ struct MeetingDetailView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 20) {
                 Text("모임 생성")
+                    .font(.title)
 
                 if let data = viewStore.meetingData {
                     Text("모임명: \(data.name), 모임 id: \(data.id)")

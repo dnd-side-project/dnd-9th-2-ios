@@ -9,7 +9,6 @@ import Foundation
 
 import ComposableArchitecture
 
-// HomeService와 합쳐서 MeetingService로 해도 될 것 같음
 struct MeetingDetailService {
     var getMeetingDetail: (Int) async -> MeetingDetailModel?
 }
