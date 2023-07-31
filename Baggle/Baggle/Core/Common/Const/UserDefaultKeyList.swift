@@ -28,15 +28,19 @@ import Foundation
 
 enum UserDefaultKey {
     case platform
+    case fcmToken
 
     var rawValue: String {
         switch self {
         case .platform:
             return "platform"
+        case .fcmToken:
+            return "fcmToken"
         }
     }
 }
 
 public struct UserDefaultList {
     @UserDefaultWrapper<String>(key: .platform) public static var platform
+    @UserDefaultWrapper<String>(key: .fcmToken) public static var fcmToken
 }
