@@ -48,20 +48,22 @@ struct HomeView: View {
                        perform: { noti in
                 print("noti: \(noti)")
                 // noti로부터 id 값 받아서 넣기
-                viewStore.send(.moveToMeetingDetail(100))
+                viewStore.send(.moveToMeetingDetail(Int.random(in: 1..<10)))
             })
             // 푸시알림 탭해서 들어오는 경우
             .navigationDestination(
                 isPresented: Binding(
-                    get: { viewStore.pushMeetingDetail },
+                    get: { viewStore.pushMeetingDetailId != nil },
                     set: { _ in
-                        viewStore.send(.moveToMeetingDetail(viewStore.pushMeetingDetailId))
+                        viewStore.send(.moveToMeetingDetail(viewStore.pushMeetingDetailId ?? 0))
                     })
             ) {
                 MeetingDetailView(
                     store: Store(
                         initialState: MeetingDetailFeature.State(),
-                        reducer: MeetingDetailFeature(meetingId: viewStore.pushMeetingDetailId))
+                        reducer: MeetingDetailFeature(
+                            meetingId: viewStore.pushMeetingDetailId ?? 0)
+                    )
                 )
             }
         }

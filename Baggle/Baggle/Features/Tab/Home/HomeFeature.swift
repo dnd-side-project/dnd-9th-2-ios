@@ -27,8 +27,7 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope State
 
         var meetingType: MeetingStatus = .ongoing
-        var pushMeetingDetail: Bool = false
-        var pushMeetingDetailId: Int = 0
+        var pushMeetingDetailId: Int?
         var ongoingList: [Meeting] = []
         var completedList: [Meeting] = []
     }
@@ -101,7 +100,6 @@ struct HomeFeature: ReducerProtocol {
 
             case .moveToMeetingDetail(let id):
                 state.pushMeetingDetailId = id
-                state.pushMeetingDetail.toggle()
                 return .none
             }
         }
