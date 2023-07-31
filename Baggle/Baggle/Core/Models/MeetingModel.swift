@@ -8,20 +8,18 @@
 import Foundation
 
 /// 서버에서 받은 Entity를 View에 바로 적용가능하도록 가공한 Model
-/// - 모임까지 남은 날짜(D-Day), 모임 이름, 장소, 시간, 참여자 프로필 이미지, 참여자 수, 약속 확정 여부
-
 struct MeetingListModel {
     let meetings: [MeetingModel]
 }
 
 struct MeetingModel: Equatable {
-    let id: Int
-    let name: String
-    let place: String
-    let date: String
-    let time: String
-    let profileImages: [String]
-    let isConfirmed: Bool
+    let id: Int // 모임 id
+    let name: String // 모임 이름
+    let place: String // 장소
+    let date: String // 날짜
+    let time: String // 시간
+    let profileImages: [String] // 프로필 이미지
+    let isConfirmed: Bool // 약속 확정 여부
 
     static func == (lhs: MeetingModel, rhs: MeetingModel) -> Bool {
         return lhs.id == rhs.id
