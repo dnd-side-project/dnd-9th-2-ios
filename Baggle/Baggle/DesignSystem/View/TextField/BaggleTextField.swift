@@ -133,6 +133,9 @@ struct BaggleTextField: View {
             .onChange(of: self.isFocused) { newValue in
                 viewStore.send(.isFocused(newValue))
             }
+            .onAppear {
+                isFocused = viewStore.state.isFocused
+            }
         }
     }
 }

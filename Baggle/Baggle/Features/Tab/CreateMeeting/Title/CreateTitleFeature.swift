@@ -17,7 +17,11 @@ struct CreateTitleFeature: ReducerProtocol {
         var nextButtonDisabled: Bool = true
 
         // Child State
-        var textFieldState = BaggleTextFieldFeature.State(maxCount: 20, textFieldState: .inactive)
+        var textFieldState = BaggleTextFieldFeature.State(
+            maxCount: 20,
+            textFieldState: .inactive,
+            isFocused: true
+        )
         var path = StackState<Child.State>()
     }
 
