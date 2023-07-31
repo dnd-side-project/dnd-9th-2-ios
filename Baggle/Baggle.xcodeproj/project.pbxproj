@@ -681,6 +681,7 @@
 /* Begin XCBuildConfiguration section */
 		140E88192A64B627005119F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -741,6 +742,7 @@
 		};
 		140E881A2A64B627005119F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
