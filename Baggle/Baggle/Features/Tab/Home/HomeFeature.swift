@@ -23,7 +23,7 @@ struct HomeFeature: ReducerProtocol {
 
         var textFieldState = BaggleTextFieldFeature.State(maxCount: 10,
                                                           textFieldState: .inactive)
-        var isAlertPresented: Bool = false
+        var showMeetingDetail: Bool = false
     }
 
     enum Action: Equatable {
@@ -33,7 +33,7 @@ struct HomeFeature: ReducerProtocol {
         case invitationSuccess
         case invitationFailed
         case textFieldAction(BaggleTextFieldFeature.Action)
-        case alertButtonTapped
+        case moveToMeetingDetail
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -71,9 +71,8 @@ struct HomeFeature: ReducerProtocol {
                 print("초대하기 실패")
                 return .none
 
-            case .alertButtonTapped:
-                state.isAlertPresented.toggle()
-                print("isAlertPresented: ", state.isAlertPresented)
+            case .moveToMeetingDetail:
+                state.showMeetingDetail.toggle()
                 return .none
 
             case .textFieldAction:

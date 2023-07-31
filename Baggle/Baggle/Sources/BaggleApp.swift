@@ -14,6 +14,8 @@ import KakaoSDKCommon
 @main
 struct BaggleApp: App {
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     init() {
         let kakaoNativeAppKey = Bundle.main.object(forInfoDictionaryKey: "AppKey") as? String ?? ""
         KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
@@ -24,7 +26,7 @@ struct BaggleApp: App {
             AppView(
                 store: Store(
                     initialState: AppFeature.State(
-                        isLoggedIn: false,
+                        isLoggedIn: true,
                         loginFeature: LoginFeature.State(),
                         mainTabFeature: MainTabFeature.State(
                             selectedTab: .home,

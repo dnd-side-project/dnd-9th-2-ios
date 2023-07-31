@@ -21,19 +21,18 @@ public struct SendInvitationEffect: Sendable {
         if let templateJsonObject = createKakaoObject(name: name) {
             do {
                 typealias ShareContinuation = CheckedContinuation<URL, Error>
-                let linkResult = try await withCheckedThrowingContinuation({ (
-                    cont: ShareContinuation) in
-                    ShareApi.shared
-                        .shareDefault(templateObject: templateJsonObject) { linkresult, error in
-                            if let error {
-                                print("error: \(error)")
-                                cont.resume(throwing: error)
-                            } else {
-                                guard let linkresult = linkresult?.url else { return }
-                                cont.resume(returning: linkresult)
+                let linkResult = try await withCheckedThrowingContinuation({ (cont: ShareContinuation) in
+                        ShareApi.shared
+                            .shareDefault(templateObject: templateJsonObject) { linkresult, error in
+                                if let error {
+                                    print("error: \(error)")
+                                    cont.resume(throwing: error)
+                                } else {
+                                    guard let linkresult = linkresult?.url else { return }
+                                    cont.resume(returning: linkresult)
+                                }
                             }
-                        }
-                })
+                    })
                 send?(linkResult)
                 return linkResult
             } catch {
