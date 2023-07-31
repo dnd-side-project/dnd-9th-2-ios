@@ -15,9 +15,16 @@ struct MeetingDetailView: View {
 
     var body: some View {
 
-        WithViewStore(self.store, observe: { $0 }) { _ in
-            VStack {
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            VStack(spacing: 20) {
                 Text("모임 생성")
+
+                if let data = viewStore.meetingData {
+                    Text("모임명: \(data.name), 모임 id: \(data.id)")
+                }
+            }
+            .onAppear {
+                viewStore.send(.onAppear)
             }
         }
     }
@@ -28,7 +35,7 @@ struct MeetingDetailView_Previews: PreviewProvider {
         MeetingDetailView(
             store: Store(
                 initialState: MeetingDetailFeature.State(),
-                reducer: MeetingDetailFeature()
+                reducer: MeetingDetailFeature(meetingId: 1)
             )
         )
     }

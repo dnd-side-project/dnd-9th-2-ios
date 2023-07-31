@@ -27,7 +27,8 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope State
 
         var meetingType: MeetingType = .ongoing
-        var showMeetingDetail: Bool = false
+        var pushMeetingDetail: Bool = false
+        var pushMeetingDetailId: Int = 0
         var ongoingList: [MeetingModel] = []
         var completedList: [MeetingModel] = []
     }
@@ -41,7 +42,7 @@ struct HomeFeature: ReducerProtocol {
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
-        case moveToMeetingDetail
+        case moveToMeetingDetail(Int)
     }
 
     @Dependency(\.meetingService) var meetingService
@@ -98,8 +99,9 @@ struct HomeFeature: ReducerProtocol {
                 print("초대하기 실패")
                 return .none
 
-            case .moveToMeetingDetail:
-                state.showMeetingDetail.toggle()
+            case .moveToMeetingDetail(let id):
+                state.pushMeetingDetailId = id
+                state.pushMeetingDetail.toggle()
                 return .none
             }
         }

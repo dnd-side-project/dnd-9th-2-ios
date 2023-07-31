@@ -31,7 +31,9 @@ struct HomeView: View {
                         MeetingDetailView(
                             store: Store(
                                 initialState: MeetingDetailFeature.State(),
-                                reducer: MeetingDetailFeature())
+                                reducer: MeetingDetailFeature(
+                                    meetingId: viewStore.ongoingList.first?.id ?? 1)
+                            )
                         )
                     } label: {
                         Text("모임 상세 이동")
@@ -45,18 +47,21 @@ struct HomeView: View {
             .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
                        perform: { noti in
                 print("noti: \(noti)")
-                viewStore.send(.moveToMeetingDetail)
+                // noti로부터 id 값 받아서 넣기
+                viewStore.send(.moveToMeetingDetail(100))
             })
             // 푸시알림 탭해서 들어오는 경우
             .navigationDestination(
                 isPresented: Binding(
-                    get: { viewStore.showMeetingDetail },
-                    set: { _ in viewStore.send(.moveToMeetingDetail) })
+                    get: { viewStore.pushMeetingDetail },
+                    set: { _ in
+                        viewStore.send(.moveToMeetingDetail(viewStore.pushMeetingDetailId))
+                    })
             ) {
                 MeetingDetailView(
                     store: Store(
                         initialState: MeetingDetailFeature.State(),
-                        reducer: MeetingDetailFeature())
+                        reducer: MeetingDetailFeature(meetingId: viewStore.pushMeetingDetailId))
                 )
             }
         }
