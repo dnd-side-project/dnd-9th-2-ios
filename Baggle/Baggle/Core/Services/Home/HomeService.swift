@@ -17,7 +17,7 @@ extension HomeService: DependencyKey {
 
     static var liveValue = Self { type in
         do {
-            return try await MockUpHomeService().getMeetingList(type)
+            return try await MockUpMeetingService().getMeetingList(type)
         } catch {
             return nil
         }
@@ -31,7 +31,7 @@ extension DependencyValues {
     }
 }
 
-struct MockUpHomeService {
+struct MockUpMeetingService {
     func getMeetingList(_ type: MeetingType) async throws -> [MeetingModel] {
         return try await withCheckedThrowingContinuation({ continuation in
             continuation.resume(returning: makeMeetingList(type))

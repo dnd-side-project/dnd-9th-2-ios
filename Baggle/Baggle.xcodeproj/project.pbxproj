@@ -47,6 +47,7 @@
 		2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2B35E4EC2A70B6DB00915876 /* KakaoSDK */; };
 		2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39F21B2A738BB100E034A3 /* SendInvitation.swift */; };
 		2B5BE6AF2A779C8E00F25474 /* MeetingDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6AE2A779C8E00F25474 /* MeetingDetailModel.swift */; };
+		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* attributedString.swift */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
@@ -114,6 +115,7 @@
 		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
 		2B5BE6AE2A779C8E00F25474 /* MeetingDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailModel.swift; sourceTree = "<group>"; };
+		2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributedString.swift; sourceTree = "<group>"; };
 		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				14B7A0432A75409400B8E202 /* Error */,
+				2B5BE6B02A77A3F600F25474 /* MeetingDetail */,
 				2BF268212A7785FE00F32ADF /* Home */,
 				14B7A0422A753DA500B8E202 /* SignUp */,
 				140C54362A74F40E00CF1CB4 /* Nickname */,
@@ -434,6 +437,14 @@
 				14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2B5BE6B02A77A3F600F25474 /* MeetingDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */,
+			);
+			path = MeetingDetail;
 			sourceTree = "<group>";
 		};
 		2B84695D2A6E7AE200D75D32 /* View */ = {
@@ -671,6 +682,7 @@
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
+				2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
