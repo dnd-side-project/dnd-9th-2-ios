@@ -21,7 +21,8 @@ public struct SendInvitationEffect: Sendable {
         if let templateJsonObject = createKakaoObject(name: name) {
             do {
                 typealias ShareContinuation = CheckedContinuation<URL, Error>
-                let linkResult = try await withCheckedThrowingContinuation({ (cont: ShareContinuation) in
+                let linkResult =
+                    try await withCheckedThrowingContinuation({(cont: ShareContinuation) in
                         ShareApi.shared
                             .shareDefault(templateObject: templateJsonObject) { linkresult, error in
                                 if let error {
@@ -46,11 +47,9 @@ public struct SendInvitationEffect: Sendable {
     func createKakaoObject(name: String) -> [String: Any]? {
         let appLink = Link(iosExecutionParams: ["name": name])
         let button = Button(title: "모임 참여하기", link: appLink)
-        let thumbnailUrl = URL(string: "https://picsum.photos/200")
+        guard let thumbnailUrl = URL(string: "https://picsum.photos/200") else { return nil }
 
-        let content = Content(title: "콩이네 집들이",
-                              imageUrl: thumbnailUrl!,
-                              link: appLink)
+        let content = Content(title: "콩이네 집들이", imageUrl: thumbnailUrl, link: appLink)
         let template = FeedTemplate(content: content, buttons: [button])
         do {
             let templateJsonData = try SdkJSONEncoder.custom.encode(template)
