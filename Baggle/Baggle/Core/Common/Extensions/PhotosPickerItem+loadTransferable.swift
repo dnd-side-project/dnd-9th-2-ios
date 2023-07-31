@@ -10,7 +10,7 @@ import SwiftUI
 
 /// 기존 함수 async/await으로 변환
 ///
-/// 기존 함수 : public func loadTransferable<T>(type: T.Type, completionHandler: @escaping (Result<T?, Error>) -> Void) -> Progress where T : Transferable
+/// 기존 함수 : public func loadTransferable<T>
 extension PhotosPickerItem {
     func loadTransferable<T>(type: T.Type) async throws -> T? where T: Transferable {
         return try await withCheckedThrowingContinuation { continuation in
