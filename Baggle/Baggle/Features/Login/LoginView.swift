@@ -113,7 +113,8 @@ extension LoginView {
                         guard let identityToken = appleIDCredential.identityToken,
                               let token = String(data: identityToken, encoding: .utf8)
                         else { return }
-                        ViewStore(self.store, observe: { $0 }).send(.loginButtonTapped(.apple, token))
+                        ViewStore(self.store, observe: { $0 })
+                            .send(.loginButtonTapped(.apple, token))
                     default:
                         break
                     }
