@@ -10,14 +10,14 @@ import Foundation
 import ComposableArchitecture
 
 struct HomeService {
-    var getMeetingList: () async -> [MeetingModel]?
+    var getMeetingList: (MeetingType) async -> [MeetingModel]?
 }
 
 extension HomeService: DependencyKey {
 
-    static var liveValue = Self {
+    static var liveValue = Self { type in
         do {
-            return try await MockUpHomeService().getMeetingList()
+            return try await MockUpHomeService().getMeetingList(type)
         } catch {
             return nil
         }
@@ -32,24 +32,53 @@ extension DependencyValues {
 }
 
 struct MockUpHomeService {
-    func getMeetingList() async throws -> [MeetingModel] {
+    func getMeetingList(_ type: MeetingType) async throws -> [MeetingModel] {
         return try await withCheckedThrowingContinuation({ continuation in
-            continuation.resume(returning: makeMeetingList())
+            continuation.resume(returning: makeMeetingList(type))
         })
     }
 
-    private func makeMeetingList() -> [MeetingModel] {
-        return [
+    private func makeMeetingList(_ type: MeetingType) -> [MeetingModel] {
+        let ongoing = [
             MeetingModel(
-                id: 1, name: "안녕하세요", place: "우리집",
-                date: "2023년 04월 22일", time: "15:30",
-                profileImages: ["https://avatars.githubusercontent.com/u/71167956?s=64&v=4", "https://avatars.githubusercontent.com/u/81167570?s=64&v=4", "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"],
+                id: 1,
+                name: "진행 중인 모임",
+                place: "우리집",
+                date: "2023년 04월 22일",
+                time: "15:30",
+                profileImages: [
+                    "https://avatars.githubusercontent.com/u/71167956?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
+                ],
                 isConfirmed: false),
             MeetingModel(
-            id: 2, name: "끌끌", place: "남의 집",
-            date: "2023년 08년 23일", time: "15:30",
-            profileImages: [ "https://avatars.githubusercontent.com/u/81167570?s=64&v=4", "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"],
-            isConfirmed: false)
+                id: 2,
+                name: "진행 중인 모임2",
+                place: "남의 집",
+                date: "2023년 08년 23일",
+                time: "15:30",
+                profileImages: [
+                    "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
+                ],
+                isConfirmed: false)
         ]
+
+        let complete = [
+            MeetingModel(
+                id: 1,
+                name: "진행 중인 모임",
+                place: "우리집",
+                date: "2023년 04월 22일",
+                time: "15:30",
+                profileImages: [
+                    "https://avatars.githubusercontent.com/u/71167956?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
+                ],
+                isConfirmed: false)
+        ]
+        return type == .ongoing ? ongoing : complete
     }
 }

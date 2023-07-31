@@ -13,6 +13,11 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
+enum MeetingType {
+    case ongoing
+    case complete
+}
+
 struct HomeFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
@@ -21,34 +26,56 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var textFieldState = BaggleTextFieldFeature.State(maxCount: 10,
-                                                          textFieldState: .inactive)
+        var meetingType: MeetingType = .ongoing
         var showMeetingDetail: Bool = false
+        var ongoingList: [MeetingModel] = []
+        var completedList: [MeetingModel] = []
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
+        case onAppear
+        case getMeetings(MeetingType)
+        case updateMeetings(MeetingType, [MeetingModel]?)
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
-        case textFieldAction(BaggleTextFieldFeature.Action)
         case moveToMeetingDetail
     }
+
+    @Dependency(\.meetingService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
-
-        Scope(state: \.textFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
-        }
 
         // MARK: - Reduce
 
         Reduce { state, action in
 
             switch action {
+            case .onAppear:
+                return .run { send in
+                    await send(.getMeetings(.ongoing))
+                }
+
+            case .getMeetings(let type):
+                return .run { send in
+                    let list = await meetingService.getMeetingList(type)
+                    await send(.updateMeetings(type, list))
+                }
+
+            case .updateMeetings(let type, let model):
+                if let model {
+                    if type == .ongoing {
+                        state.ongoingList.append(contentsOf: model)
+                    } else {
+                        state.completedList.append(contentsOf: model)
+                    }
+                }
+                return .none
+
             case .shareButtonTapped:
                 return .run { send in
                     if ShareApi.isKakaoTalkSharingAvailable() {
@@ -73,9 +100,6 @@ struct HomeFeature: ReducerProtocol {
 
             case .moveToMeetingDetail:
                 state.showMeetingDetail.toggle()
-                return .none
-
-            case .textFieldAction:
                 return .none
             }
         }

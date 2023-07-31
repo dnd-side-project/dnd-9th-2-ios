@@ -27,14 +27,16 @@ struct HomeView: View {
                         }
                         .buttonStyle(BagglePrimaryStyle())
 
-                        BaggleTextField(
-                            store: self.store.scope(
-                                state: \.textFieldState,
-                                action: HomeFeature.Action.textFieldAction),
-                            placeholder: "place holder"
-                        )
-                        .padding()
+                        Button {
+                            viewStore.send(.moveToMeetingDetail)
+                        } label: {
+                            Text("모임 상세 이동")
+                        }
+                        .buttonStyle(BagglePrimaryStyle())
                     }
+                }
+                .onAppear {
+                    viewStore.send(.onAppear)
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
                            perform: { noti in
