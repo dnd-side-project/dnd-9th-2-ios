@@ -45,9 +45,9 @@
 		14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpView.swift */; };
 		14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064F2A6B8913008D5778 /* SignUpFeature.swift */; };
 		14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506532A6B8ED3008D5778 /* SignUpSuccessView.swift */; };
-		14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */; };
 		14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506572A6BC576008D5778 /* MyPageFeature.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
+		14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */; };
 		14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */; };
 		14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */; };
 		14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */; };
@@ -641,6 +641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
@@ -677,8 +678,6 @@
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
-				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
-				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFieldFeature.swift in Sources */,
