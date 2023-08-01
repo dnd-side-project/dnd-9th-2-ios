@@ -75,7 +75,7 @@ struct MainTabView: View {
                         print("MainTabView - id: \(id)")
                         // 모임 참여 여부 확인 후 분기처리
                         // 모임 참여 중 > 모임 상세로 이동
-//                        postObserverAction(.moveMeetingDetail)
+//                        postObserverAction(.moveMeetingDetail, object: id)
 
                         // 모임 참여 전 > 모임 정보 확인
                         viewStore.send(.moveToJoinMeeting(id))

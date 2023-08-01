@@ -11,9 +11,6 @@ import ComposableArchitecture
 
 struct JoinMeetingFeature: ReducerProtocol {
 
-    // TODO: - State에서 제거
-//    let meetingId: Int
-
     struct State: Equatable {
         // MARK: - Scope State
         var meetingId: Int
@@ -36,7 +33,7 @@ struct JoinMeetingFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { _, action in
+        Reduce { state, action in
 
             switch action {
             case .exitButtonTapped:
@@ -49,9 +46,14 @@ struct JoinMeetingFeature: ReducerProtocol {
                 }
 
             case .joinSuccess:
-                return .none
+                let id = state.meetingId
+                return .run { _ in
+                    await self.dismiss()
+                    postObserverAction(.moveMeetingDetail, object: id)
+                }
 
             case .joinFailed:
+
                 return .none
             }
         }
