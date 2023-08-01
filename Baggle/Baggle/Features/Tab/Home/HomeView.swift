@@ -15,43 +15,101 @@ struct HomeView: View {
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            NavigationStack {
-                ZStack {
-                    VStack(spacing: 20) {
-                        Text("Home View 입니다")
+            ZStack {
+                VStack(spacing: 10) {
+                    Text("Home View")
+                        .padding()
+
+                    Button {
+                        viewStore.send(.shareButtonTapped)
+                    } label: {
+                        Text("카카오톡 공유하기")
+                    }
+                    .buttonStyle(BagglePrimaryStyle())
+
+                    HStack(spacing: 20) {
+                        Button {
+                            viewStore.send(.changeMeetingStatus(.ongoing))
+                        } label: {
+                            Text("진행중인 모임")
+                        }
 
                         Button {
-                            viewStore.send(.shareButtonTapped)
+                            viewStore.send(.changeMeetingStatus(.complete))
                         } label: {
-                            Text("카카오톡 공유하기")
+                            Text("지난 모임")
                         }
-                        .buttonStyle(BagglePrimaryStyle())
 
-                        BaggleTextField(
-                            store: self.store.scope(
-                                state: \.textFieldState,
-                                action: HomeFeature.Action.textFieldAction),
-                            placeholder: "place holder"
-                        )
-                        .padding()
+                        Button {
+                            viewStore.send(.refreshMeetingList)
+                        } label: {
+                            Text("모임 리프레시")
+                        }
                     }
+                    .padding()
+
+                    List((viewStore.meetingStatus == .ongoing)
+                         ? viewStore.ongoingList : viewStore.completedList) { meeting in
+                        NavigationLink {
+                            MeetingDetailView(
+                                store: Store(
+                                    initialState: MeetingDetailFeature.State(),
+                                    reducer: MeetingDetailFeature(
+                                        meetingId: meeting.id)
+                                )
+                            )
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text("\(meeting.id)")
+                                    .font(.caption)
+                                Text(meeting.name)
+                            }
+                        }
+                    }
+
+                    HStack(spacing: 20) {
+                        Button {
+                            viewStore.send(.fetchMeetingList(.ongoing))
+                        } label: {
+                            Text("진행중인 모임 업데이트")
+                        }
+
+                        Button {
+                            viewStore.send(.fetchMeetingList(.complete))
+                        } label: {
+                            Text("지난 모임 업데이트")
+                        }
+                    }
+                    .padding()
                 }
-                .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
-                           perform: { noti in
-                    print("noti: \(noti)")
-                    viewStore.send(.moveToMeetingDetail)
-                })
-                .navigationDestination(
-                    isPresented: Binding(
-                        get: { viewStore.showMeetingDetail },
-                        set: { _ in viewStore.send(.moveToMeetingDetail) })
-                ) {
-                    MeetingDetailView(
-                        store: Store(
-                            initialState: MeetingDetailFeature.State(),
-                            reducer: MeetingDetailFeature())
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .refreshMeetingList),
+                       perform: { _ in
+                viewStore.send(.refreshMeetingList)
+            })
+            .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
+                       perform: { noti in
+                // noti로부터 id 값 받아서 넣기
+                viewStore.send(.moveToMeetingDetail(Int.random(in: 1..<10)))
+            })
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
+            // 푸시알림 탭해서 들어오는 경우
+            .navigationDestination(
+                isPresented: Binding(
+                    get: { viewStore.pushMeetingDetailId != nil },
+                    set: { _ in
+                        viewStore.send(.moveToMeetingDetail(viewStore.pushMeetingDetailId ?? 0))
+                    })
+            ) {
+                MeetingDetailView(
+                    store: Store(
+                        initialState: MeetingDetailFeature.State(),
+                        reducer: MeetingDetailFeature(
+                            meetingId: viewStore.pushMeetingDetailId ?? 0)
                     )
-                }
+                )
             }
         }
     }

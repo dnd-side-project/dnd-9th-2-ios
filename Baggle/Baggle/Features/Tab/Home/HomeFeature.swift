@@ -13,6 +13,11 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
+enum MeetingStatus {
+    case ongoing
+    case complete
+}
+
 struct HomeFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
@@ -21,33 +26,81 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var textFieldState = BaggleTextFieldFeature.State(maxCount: 10, textFieldState: .inactive)
-        var showMeetingDetail: Bool = false
+        var meetingStatus: MeetingStatus = .ongoing
+        var pushMeetingDetailId: Int?
+        var ongoingList: [Meeting] = []
+        var completedList: [Meeting] = []
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
+        case onAppear
+        case fetchMeetingList(MeetingStatus)
+        case updateMeetingList(MeetingStatus, [Meeting]?)
+        case refreshMeetingList
+        case changeMeetingStatus(MeetingStatus)
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
-        case textFieldAction(BaggleTextFieldFeature.Action)
-        case moveToMeetingDetail
+        case moveToMeetingDetail(Int)
     }
+
+    @Dependency(\.meetingService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
-
-        Scope(state: \.textFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
-        }
 
         // MARK: - Reduce
 
         Reduce { state, action in
 
             switch action {
+            case .onAppear:
+                if state.ongoingList.isEmpty && state.completedList.isEmpty {
+                    return .run { send in
+                        await send(.fetchMeetingList(.ongoing))
+                    }
+                } else {
+                    return .none
+                }
+
+            case .fetchMeetingList(let status):
+                state.meetingStatus = status
+                return .run { send in
+                    let list = await meetingService.fetchMeetingList(status)
+                    await send(.updateMeetingList(status, list))
+                }
+
+            case .refreshMeetingList:
+                state.ongoingList.removeAll()
+                state.completedList.removeAll()
+                state.meetingStatus = .ongoing
+                return .run { send in
+                    let list = await meetingService.fetchMeetingList(.ongoing)
+                    await send(.updateMeetingList(.ongoing, list))
+                }
+
+            case .changeMeetingStatus(let status):
+                state.meetingStatus = status
+                if status == .complete && state.completedList.isEmpty {
+                    return .run { send in
+                        await send(.fetchMeetingList(.complete))
+                    }
+                }
+                return .none
+
+            case .updateMeetingList(let type, let model):
+                if let model {
+                    if type == .ongoing {
+                        state.ongoingList.append(contentsOf: model)
+                    } else {
+                        state.completedList.append(contentsOf: model)
+                    }
+                }
+                return .none
+
             case .shareButtonTapped:
                 return .run { send in
                     if ShareApi.isKakaoTalkSharingAvailable() {
@@ -70,20 +123,17 @@ struct HomeFeature: ReducerProtocol {
                 print("초대하기 실패")
                 return .none
 
-            case .moveToMeetingDetail:
-                state.showMeetingDetail.toggle()
-                return .none
-
-            case .textFieldAction:
+            case .moveToMeetingDetail(let id):
+                state.pushMeetingDetailId = id
                 return .none
             }
-        }
-    }
 
-    func moveToAppStore() {
-        let url = "itms-apps://itunes.apple.com/app/362057947"
-        if let url = URL(string: url) {
-            openURL(url)
+            func moveToAppStore() {
+                let url = "itms-apps://itunes.apple.com/app/362057947"
+                if let url = URL(string: url) {
+                    openURL(url)
+                }
+            }
         }
     }
 }
