@@ -21,8 +21,7 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var textFieldState = BaggleTextFieldFeature.State(maxCount: 10,
-                                                          textFieldState: .inactive)
+        var textFieldState = BaggleTextFieldFeature.State(maxCount: 10, textFieldState: .inactive)
         var showMeetingDetail: Bool = false
     }
 
