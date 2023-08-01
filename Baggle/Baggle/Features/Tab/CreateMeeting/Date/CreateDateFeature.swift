@@ -13,6 +13,7 @@ struct CreateDateFeature: ReducerProtocol {
 
     struct State: Equatable {
         var meetingDate: Date = Date.now().meetingStartTime()
+        var description: String = "설명 글"
         // MARK: - Scope State
         @PresentationState var yearMonthDate: YearMonthDateFeature.State?
         @PresentationState var hourMinute: HourMinuteFeature.State?
@@ -48,7 +49,11 @@ struct CreateDateFeature: ReducerProtocol {
                 // Tap
 
             case .nextButtonTapped:
-                print(state.meetingDate)
+                if state.meetingDate.canMeeting {
+                    state.description = "모임 가능 시간"
+                } else {
+                    state.description = "모임은 2시간 이후부터 가능해요."
+                }
                 return .none
 //                return .run { send in await send(.delegate(.moveToNext)) }
 

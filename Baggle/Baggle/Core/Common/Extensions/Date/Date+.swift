@@ -124,15 +124,24 @@ extension Date {
         return toString(format: format)
     }
 
+    // n 시간 이후 생성
+    func later(hours: Int) -> Date {
+        // swiftlint:disable:next force_unwrapping
+        let hoursFromNow = Calendar.current.date(byAdding: .hour, value: hours, to: self)!
+        return hoursFromNow
+    }
+
     /// 약속 생성 가능 시간 리턴
     func meetingStartTime() -> Date {
         // 2시간 이후
-        let hours = 2
-        let hoursFromNow = Calendar.current.date(byAdding: .hour, value: hours, to: self)!
-
+        let result = later(hours: 2)
         // 2시간 이후 가장 가까운 30분 혹은 00분
 
-        return hoursFromNow
+        return result
+    }
+
+    var canMeeting: Bool {
+        return self > Date().later(hours: 2)
     }
 
     // 인자로 들어온 newDate의 `년`, `월`, `일`로 업데이트 해서 리턴

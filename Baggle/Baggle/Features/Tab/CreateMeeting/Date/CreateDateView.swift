@@ -63,6 +63,9 @@ struct CreateDateView: View {
                     }
                 }
 
+                Text(viewStore.description)
+                    .padding()
+
                 Spacer()
 
                 Button {
