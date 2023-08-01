@@ -33,7 +33,7 @@
 		1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6C2A682FCB0098AAA9 /* HomeView.swift */; };
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
 		143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27012A761FCF00DFC0EE /* CreatePlaceFeature.swift */; };
-		143B27052A761FEE00DFC0EE /* CreateMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27042A761FEE00DFC0EE /* CreateMeetingFeature.swift */; };
+		143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */; };
 		143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27072A76200200DFC0EE /* CreateMemoFeature.swift */; };
 		143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27092A76214500DFC0EE /* CreatePlaceView.swift */; };
 		143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B270B2A76245F00DFC0EE /* CreateDateView.swift */; };
@@ -45,6 +45,8 @@
 		146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */; };
 		146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */; };
 		146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */; };
+		146C51EE2A79429400FF3142 /* YearMonthDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51ED2A79429400FF3142 /* YearMonthDateFeature.swift */; };
+		146C51F02A79429E00FF3142 /* YearMonthDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EF2A79429E00FF3142 /* YearMonthDateView.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
@@ -128,7 +130,7 @@
 		1432BE6C2A682FCB0098AAA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		143B27012A761FCF00DFC0EE /* CreatePlaceFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceFeature.swift; sourceTree = "<group>"; };
-		143B27042A761FEE00DFC0EE /* CreateMeetingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingFeature.swift; sourceTree = "<group>"; };
+		143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateFeature.swift; sourceTree = "<group>"; };
 		143B27072A76200200DFC0EE /* CreateMemoFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoFeature.swift; sourceTree = "<group>"; };
 		143B27092A76214500DFC0EE /* CreatePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceView.swift; sourceTree = "<group>"; };
 		143B270B2A76245F00DFC0EE /* CreateDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,8 @@
 		146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDatePickerFeature.swift; sourceTree = "<group>"; };
 		146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDatePickerView.swift; sourceTree = "<group>"; };
 		146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTimePickerView.swift; sourceTree = "<group>"; };
+		146C51ED2A79429400FF3142 /* YearMonthDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthDateFeature.swift; sourceTree = "<group>"; };
+		146C51EF2A79429E00FF3142 /* YearMonthDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthDateView.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -434,8 +438,9 @@
 		143B27032A761FDB00DFC0EE /* Date */ = {
 			isa = PBXGroup;
 			children = (
+				146C51EC2A79422300FF3142 /* Components */,
 				143B270B2A76245F00DFC0EE /* CreateDateView.swift */,
-				143B27042A761FEE00DFC0EE /* CreateMeetingFeature.swift */,
+				143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -499,6 +504,15 @@
 				146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */,
 			);
 			path = Date;
+			sourceTree = "<group>";
+		};
+		146C51EC2A79422300FF3142 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				146C51EF2A79429E00FF3142 /* YearMonthDateView.swift */,
+				146C51ED2A79429400FF3142 /* YearMonthDateFeature.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		149C0F442A7784F100B95A36 /* Success */ = {
@@ -893,6 +907,7 @@
 				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,
 				146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
+				146C51F02A79429E00FF3142 /* YearMonthDateView.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
@@ -915,7 +930,8 @@
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
-				143B27052A761FEE00DFC0EE /* CreateMeetingFeature.swift in Sources */,
+				146C51EE2A79429400FF3142 /* YearMonthDateFeature.swift in Sources */,
+				143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */,
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */,

@@ -14,7 +14,7 @@ struct CreateDateView: View {
     private let dateButtonSpace: CGFloat = 10
     private let dateWidthRatio = 0.65
 
-    let store: StoreOf<CreateMeetingFeature>
+    let store: StoreOf<CreateDateFeature>
 
     @State var pickerDate = Date()
 
@@ -41,6 +41,9 @@ struct CreateDateView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .onTapGesture {
+                            viewStore.send(.yearMonthDateButtonTapped)
+                        }
 
                         HStack {
                             Text("21:30")
@@ -65,6 +68,14 @@ struct CreateDateView: View {
                 .buttonStyle(BagglePrimaryStyle())
             }
             .padding()
+            .sheet(
+                store: self.store.scope(
+                    state: \.$yearMonthDate,
+                    action: { .yearMonthDate($0) })
+            ) { yearMonthDateStore in
+                YearMonthDateView(store: yearMonthDateStore)
+                    .presentationDetents([.height(360)])
+            }
         }
     }
 }
@@ -73,8 +84,8 @@ struct CreateMeetingDateView_Previews: PreviewProvider {
     static var previews: some View {
         CreateDateView(
             store: Store(
-                initialState: CreateMeetingFeature.State(),
-                reducer: CreateMeetingFeature()
+                initialState: CreateDateFeature.State(),
+                reducer: CreateDateFeature()
             )
         )
     }

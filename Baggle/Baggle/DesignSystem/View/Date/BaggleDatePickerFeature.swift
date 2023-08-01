@@ -17,7 +17,7 @@ struct BaggleDatePickerFeature: ReducerProtocol {
 
     enum Action: Equatable {
         // MARK: - Scope Action
-        case dateChanged
+        case dateChanged(Date)
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -27,7 +27,8 @@ struct BaggleDatePickerFeature: ReducerProtocol {
         Reduce { state, action in
 
             switch action {
-            case .dateChanged:
+            case let .dateChanged(newDate):
+                state.date = newDate
                 return .none
             }
         }

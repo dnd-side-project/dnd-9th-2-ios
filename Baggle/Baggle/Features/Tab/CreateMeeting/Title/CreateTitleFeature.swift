@@ -47,14 +47,14 @@ struct CreateTitleFeature: ReducerProtocol {
 
         enum State: Equatable {
             case meetingPlace(CreatePlaceFeature.State)
-            case meetingDate(CreateMeetingFeature.State)
+            case meetingDate(CreateDateFeature.State)
             case meetingMemo(CreateMemoFeature.State)
             case createSuccess(CreateSuccessFeature.State)
         }
 
         enum Action: Equatable {
             case meetingPlace(CreatePlaceFeature.Action)
-            case meetingDate(CreateMeetingFeature.Action)
+            case meetingDate(CreateDateFeature.Action)
             case meetingMemo(CreateMemoFeature.Action)
             case createSuccess(CreateSuccessFeature.Action)
         }
@@ -64,7 +64,7 @@ struct CreateTitleFeature: ReducerProtocol {
                 CreatePlaceFeature()
             }
             Scope(state: /State.meetingDate, action: /Action.meetingDate) {
-                CreateMeetingFeature()
+                CreateDateFeature()
             }
             Scope(state: /State.meetingMemo, action: /Action.meetingMemo) {
                 CreateMemoFeature()
@@ -132,7 +132,7 @@ struct CreateTitleFeature: ReducerProtocol {
                 // 모임 장소
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext)))):
                 _ = id
-                state.path.append(.meetingDate(CreateMeetingFeature.State()))
+                state.path.append(.meetingDate(CreateDateFeature.State()))
                 return .none
 
                 // 모임 날짜
