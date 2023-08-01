@@ -13,11 +13,11 @@ struct MainTabFeature: ReducerProtocol {
         var selectedTab: TapType = .home
 
         var myPageFeature: MyPageFeature.State
-        var joinMeetingId: Int?
 
         // MARK: - Child State
 
         @PresentationState var createMeeting: CreateTitleFeature.State?
+        @PresentationState var joinMeeting: JoinMeetingFeature.State?
     }
 
     enum Action: Equatable {
@@ -30,6 +30,7 @@ struct MainTabFeature: ReducerProtocol {
 
         case createMeeting(PresentationAction<CreateTitleFeature.Action>)
         case logoutMainTab(MyPageFeature.Action)
+        case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
         case moveToJoinMeeting(Int)
     }
 
@@ -69,13 +70,19 @@ struct MainTabFeature: ReducerProtocol {
             case .logoutMainTab:
                 return.none
 
+            case .joinMeeting:
+                return .none
+
             case .moveToJoinMeeting(let id):
-                state.joinMeetingId = id
+                state.joinMeeting = JoinMeetingFeature.State(meetingId: id)
                 return .none
             }
         }
         .ifLet(\.$createMeeting, action: /Action.createMeeting) {
             CreateTitleFeature()
+        }
+        .ifLet(\.$joinMeeting, action: /Action.joinMeeting) {
+            JoinMeetingFeature()
         }
     }
 }

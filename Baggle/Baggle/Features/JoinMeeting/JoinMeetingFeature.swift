@@ -11,21 +11,24 @@ import ComposableArchitecture
 
 struct JoinMeetingFeature: ReducerProtocol {
 
-    let meetingId: Int
+    // TODO: - State에서 제거
+//    let meetingId: Int
 
     struct State: Equatable {
         // MARK: - Scope State
-        var moveToMeetingDetail: Bool = false
+        var meetingId: Int
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
-        case dismiss
+        case exitButtonTapped
         case joinButtonTapped
         case joinSuccess
         case joinFailed
     }
+
+    @Dependency(\.dismiss) var dismiss
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -33,11 +36,11 @@ struct JoinMeetingFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { state, action in
+        Reduce { _, action in
 
             switch action {
-            case .dismiss:
-                return .none
+            case .exitButtonTapped:
+                return .run { _ in await self.dismiss() }
 
             case .joinButtonTapped:
                 return .run { send in
@@ -46,7 +49,6 @@ struct JoinMeetingFeature: ReducerProtocol {
                 }
 
             case .joinSuccess:
-                state.moveToMeetingDetail = true
                 return .none
 
             case .joinFailed:
