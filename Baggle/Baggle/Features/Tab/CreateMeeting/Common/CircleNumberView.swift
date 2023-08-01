@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CircleNumberView: View {
 
-    let number: Int
+    let number: String
     let isSelected: Bool
 
     var body: some View {
@@ -18,7 +18,7 @@ struct CircleNumberView: View {
                 .fill(isSelected ? .blue : .gray)
                 .frame(width: 22, height: 22)
 
-            Text("\(number)")
+            Text(number)
                 .foregroundColor(.white)
                 .font(.caption)
         }
@@ -27,7 +27,7 @@ struct CircleNumberView: View {
 
 struct CircleNumberView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleNumberView(number: 1, isSelected: true)
+        CircleNumberView(number: "1", isSelected: true)
             .previewLayout(.sizeThatFits)
     }
 }
