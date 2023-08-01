@@ -15,7 +15,7 @@ struct CreatePlaceFeature: ReducerProtocol {
         var nextButtonDisabled: Bool = true
 
         // Child State
-        var textFieldState = BaggleTextFieldFeature.State(
+        var textFieldState = BaggleTextFeature.State(
             maxCount: 20,
             textFieldState: .inactive,
             isFocused: true
@@ -32,7 +32,7 @@ struct CreatePlaceFeature: ReducerProtocol {
         case moveToNextScreen
 
         // Child Action
-        case textFieldAction(BaggleTextFieldFeature.Action)
+        case textFieldAction(BaggleTextFeature.Action)
 
         // Delegate
         case delegate(Delegate)
@@ -47,7 +47,7 @@ struct CreatePlaceFeature: ReducerProtocol {
         // MARK: - Scope
 
         Scope(state: \.textFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
+            BaggleTextFeature()
         }
 
         // MARK: - Reduce

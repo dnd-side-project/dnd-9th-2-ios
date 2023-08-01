@@ -26,7 +26,7 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - 닉네임 TextField
 
-        var nickNameTextFieldState = BaggleTextFieldFeature.State(
+        var nickNameTextFieldState = BaggleTextFeature.State(
             maxCount: 8,
             textFieldState: .inactive
         )
@@ -57,7 +57,7 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Nickname
 
-        case textFieldAction(BaggleTextFieldFeature.Action)
+        case textFieldAction(BaggleTextFeature.Action)
 
         // MARK: - Network
 
@@ -86,7 +86,7 @@ struct SignUpFeature: ReducerProtocol {
         // MARK: - Scope
 
         Scope(state: \.nickNameTextFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
+            BaggleTextFeature()
         }
 
         Reduce { state, action in
