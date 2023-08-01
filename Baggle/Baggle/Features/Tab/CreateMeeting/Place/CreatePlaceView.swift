@@ -19,7 +19,7 @@ struct CreatePlaceView: View {
             VStack {
                 VStack(alignment: .leading, spacing: 16) {
 
-                    NumberListView(data: CreateStatus.array, selectedStatus: .place)
+                    PageIndicator(data: CreateStatus.data, selectedStatus: .place)
 
                     Text("약속 장소는 어디인가요?")
                         .font(.title2)

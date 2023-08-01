@@ -18,7 +18,7 @@ struct CreateMemoView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading, spacing: 16) {
 
-                NumberListView(data: CreateStatus.array, selectedStatus: .memo)
+                PageIndicator(data: CreateStatus.data, selectedStatus: .memo)
 
                 Text("메모를 입력하세요")
                     .font(.largeTitle)

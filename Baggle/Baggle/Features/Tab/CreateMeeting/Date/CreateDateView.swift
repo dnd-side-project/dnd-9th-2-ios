@@ -18,7 +18,7 @@ struct CreateDateView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading, spacing: 16) {
 
-                NumberListView(data: CreateStatus.array, selectedStatus: .date)
+                PageIndicator(data: CreateStatus.data, selectedStatus: .date)
 
                 Text("날짜를 정하세요")
                     .font(.largeTitle)

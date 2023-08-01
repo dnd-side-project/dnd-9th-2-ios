@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NumberListView: View {
+struct PageIndicator: View {
 
     let data: [String]
     let selectedStatus: CreateStatus
@@ -23,7 +23,7 @@ struct NumberListView: View {
 
 struct NumberListView_Previews: PreviewProvider {
     static var previews: some View {
-        NumberListView(data: CreateStatus.array, selectedStatus: .title)
+        PageIndicator(data: CreateStatus.data, selectedStatus: .title)
             .previewLayout(.sizeThatFits)
     }
 }

@@ -22,7 +22,7 @@ enum CreateStatus: CaseIterable {
         }
     }
 
-    static var array: [String] {
+    static var data: [String] {
         return Array(1...CreateStatus.allCases.count).map { String($0) }
     }
 }
