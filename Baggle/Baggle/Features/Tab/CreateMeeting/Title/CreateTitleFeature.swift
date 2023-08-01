@@ -17,7 +17,7 @@ struct CreateTitleFeature: ReducerProtocol {
         var nextButtonDisabled: Bool = true
 
         // Child State
-        var textFieldState = BaggleTextFieldFeature.State(
+        var textFieldState = BaggleTextFeature.State(
             maxCount: 20,
             textFieldState: .inactive,
             isFocused: true
@@ -39,7 +39,7 @@ struct CreateTitleFeature: ReducerProtocol {
         case moveToNextScreen
 
         // Child Action
-        case textFieldAction(BaggleTextFieldFeature.Action)
+        case textFieldAction(BaggleTextFeature.Action)
         case path(StackAction<Child.State, Child.Action>)
     }
 
@@ -82,7 +82,7 @@ struct CreateTitleFeature: ReducerProtocol {
         // MARK: - Scope
 
         Scope(state: \.textFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
+            BaggleTextFeature()
         }
 
         // MARK: - Reduce

@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct BaggleTextFieldFeature: ReducerProtocol {
+struct BaggleTextFeature: ReducerProtocol {
 
     struct State: Equatable {
         // MARK: - Scope State

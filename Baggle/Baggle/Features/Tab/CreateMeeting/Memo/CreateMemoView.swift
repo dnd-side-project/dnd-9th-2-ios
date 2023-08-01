@@ -19,14 +19,31 @@ struct CreateMemoView: View {
             Text("메모를 입력하세요")
                 .font(.largeTitle)
 
-            Spacer()
+            VStack {
+                Text("메모를 입력하세요")
+                    .font(.largeTitle)
 
-            Button {
-                viewStore.send(.nextButtonTapped)
-            } label: {
-                Text("다음")
+                BaggleTextEditor(
+                    store: self.store.scope(
+                        state: \.textEditorState,
+                        action: CreateMemoFeature.Action.textEditorAction
+                    ),
+                    title: .title("메모를 입력하세요. (선택)")
+                )
+
+                Spacer()
+
+                Button {
+                    viewStore.send(.nextButtonTapped)
+                } label: {
+                    Text("다음")
+                }
+                .padding(.bottom, 10)
+                .buttonStyle(BagglePrimaryStyle())
             }
-            .buttonStyle(BagglePrimaryStyle())
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
 }
