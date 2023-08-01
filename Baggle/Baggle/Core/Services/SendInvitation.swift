@@ -17,8 +17,8 @@ public struct SendInvitationEffect: Sendable {
     var send: (@MainActor @Sendable (URL?) -> Void)?
 
     @MainActor
-    public func callAsFunction(name: String) async -> URL? {
-        if let templateJsonObject = createKakaoObject(name: name) {
+    public func callAsFunction(name: String, id: Int) async -> URL? {
+        if let templateJsonObject = createKakaoObject(name: name, id: id) {
             do {
                 typealias ShareContinuation = CheckedContinuation<URL, Error>
                 let linkResult =
@@ -44,12 +44,12 @@ public struct SendInvitationEffect: Sendable {
         return nil
     }
 
-    func createKakaoObject(name: String) -> [String: Any]? {
-        let appLink = Link(iosExecutionParams: ["name": name])
-        let button = Button(title: "모임 참여하기", link: appLink)
+    func createKakaoObject(name: String, id: Int) -> [String: Any]? {
+        let appLink = Link(iosExecutionParams: ["name": name, "id": "\(id)"])
+        let button = Button(title: "약속 참여하기", link: appLink)
         guard let thumbnailUrl = URL(string: "https://picsum.photos/200") else { return nil }
 
-        let content = Content(title: "콩이네 집들이", imageUrl: thumbnailUrl, link: appLink)
+        let content = Content(title: name, imageUrl: thumbnailUrl, description: "\(name) 약속에 초대합니다.\n지금 바로 참여해보세요!", link: appLink)
         let template = FeedTemplate(content: content, buttons: [button])
         do {
             let templateJsonData = try SdkJSONEncoder.custom.encode(template)

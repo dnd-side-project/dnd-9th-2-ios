@@ -79,7 +79,7 @@ struct HomeFeature: ReducerProtocol {
             case .shareButtonTapped:
                 return .run { send in
                     if ShareApi.isKakaoTalkSharingAvailable() {
-                        if let url = await sendInvitation(name: "집들이집들") {
+                        if let url = await sendInvitation(name: "집들이집들", id: 1000) {
                             openURL(url)
                             await send(.invitationSuccess)
                         } else {
