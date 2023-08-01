@@ -43,30 +43,30 @@ struct BaggleTextEditor: View {
 
                 // MARK: - 본문
 
-                ZStack(alignment: .bottomTrailing) {
+                VStack(alignment: .trailing) {
                     TextEditor(
                         text: viewStore.binding(
                             get: \.text,
                             send: BaggleTextFeature.Action.textChanged
                         )
                     )
-                        .lineSpacing(5)
-                        .padding()
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 120)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(viewStore.textFieldState.fgColor, lineWidth: 1)
-                        )
-                        .focused($isFocused)
-                        .onChange(of: isFocused) { newValue in
-                            viewStore.send(.isFocused(newValue))
-                        }
+                    .lineSpacing(5)
+                    .padding([.horizontal, .top])
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 100)
+                    .focused($isFocused)
+                    .onChange(of: isFocused) { newValue in
+                        viewStore.send(.isFocused(newValue))
+                    }
 
                     Text("\(viewStore.text.count) / 50")
                         .foregroundColor(viewStore.textFieldState.borderColor)
-                        .padding()
+                        .padding([.bottom, .trailing])
                 }
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(viewStore.textFieldState.fgColor, lineWidth: 1)
+                )
 
                 // MARK: - 에러메시지
 
