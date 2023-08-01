@@ -1,5 +1,5 @@
 //
-//  YearMonthDateView.swift
+//  HourMinuteView.swift
 //  Baggle
 //
 //  Created by youtak on 2023/08/01.
@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct YearMonthDateView: View {
+struct HourMinuteView: View {
 
-    let store: StoreOf<YearMonthDateFeature>
+    let store: StoreOf<HourMinuteFeature>
 
     var body: some View {
 
@@ -29,10 +29,10 @@ struct YearMonthDateView: View {
                     }
                 }
 
-                BaggleDatePickerView(
+                BaggleTimePickerView(
                     store: self.store.scope(
                         state: \.baggleDatePicker,
-                        action: YearMonthDateFeature.Action.baggleDatePicker
+                        action: HourMinuteFeature.Action.baggleDatePicker
                     )
                 )
 
@@ -48,14 +48,13 @@ struct YearMonthDateView: View {
     }
 }
 
-struct YearMonthDateView_Previews: PreviewProvider {
+struct HourMinuteView_Previews: PreviewProvider {
     static var previews: some View {
-        YearMonthDateView(
+        HourMinuteView(
             store: Store(
-                initialState: YearMonthDateFeature.State(),
-                reducer: YearMonthDateFeature()
+                initialState: HourMinuteFeature.State(),
+                reducer: HourMinuteFeature()
             )
         )
-        .presentationDetents([.height(300)])
     }
 }

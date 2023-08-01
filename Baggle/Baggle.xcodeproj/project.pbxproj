@@ -47,6 +47,8 @@
 		146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */; };
 		146C51EE2A79429400FF3142 /* YearMonthDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51ED2A79429400FF3142 /* YearMonthDateFeature.swift */; };
 		146C51F02A79429E00FF3142 /* YearMonthDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EF2A79429E00FF3142 /* YearMonthDateView.swift */; };
+		146C51F22A7950F000FF3142 /* HourMinuteFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F12A7950F000FF3142 /* HourMinuteFeature.swift */; };
+		146C51F42A7950F500FF3142 /* HourMinuteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F32A7950F500FF3142 /* HourMinuteView.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
@@ -143,6 +145,8 @@
 		146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTimePickerView.swift; sourceTree = "<group>"; };
 		146C51ED2A79429400FF3142 /* YearMonthDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthDateFeature.swift; sourceTree = "<group>"; };
 		146C51EF2A79429E00FF3142 /* YearMonthDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthDateView.swift; sourceTree = "<group>"; };
+		146C51F12A7950F000FF3142 /* HourMinuteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourMinuteFeature.swift; sourceTree = "<group>"; };
+		146C51F32A7950F500FF3142 /* HourMinuteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourMinuteView.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -511,6 +515,8 @@
 			children = (
 				146C51EF2A79429E00FF3142 /* YearMonthDateView.swift */,
 				146C51ED2A79429400FF3142 /* YearMonthDateFeature.swift */,
+				146C51F32A7950F500FF3142 /* HourMinuteView.swift */,
+				146C51F12A7950F000FF3142 /* HourMinuteFeature.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -887,6 +893,7 @@
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
+				146C51F42A7950F500FF3142 /* HourMinuteView.swift in Sources */,
 				143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */,
 				143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */,
 				143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */,
@@ -920,6 +927,7 @@
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
 				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
+				146C51F22A7950F000FF3142 /* HourMinuteFeature.swift in Sources */,
 				14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,

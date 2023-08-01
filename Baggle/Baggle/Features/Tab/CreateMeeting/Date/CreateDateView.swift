@@ -41,6 +41,7 @@ struct CreateDateView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             viewStore.send(.yearMonthDateButtonTapped)
                         }
@@ -55,6 +56,10 @@ struct CreateDateView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.black, lineWidth: 1)
                         )
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewStore.send(.hourMinuteButtonTapped)
+                        }
                     }
                 }
 
@@ -74,6 +79,14 @@ struct CreateDateView: View {
                     action: { .yearMonthDate($0) })
             ) { yearMonthDateStore in
                 YearMonthDateView(store: yearMonthDateStore)
+                    .presentationDetents([.height(360)])
+            }
+            .sheet(
+                store: self.store.scope(
+                    state: \.$hourMinute,
+                    action: { .hourMinute($0) })
+            ) { hourMinuteStore in
+                HourMinuteView(store: hourMinuteStore)
                     .presentationDetents([.height(360)])
             }
         }

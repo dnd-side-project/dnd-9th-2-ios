@@ -1,5 +1,5 @@
 //
-//  YearMonthDateFeature.swift
+//  HourMinuteFeature.swift
 //  Baggle
 //
 //  Created by youtak on 2023/08/01.
@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct YearMonthDateFeature: ReducerProtocol {
+struct HourMinuteFeature: ReducerProtocol {
 
     struct State: Equatable {
         // Scope State
