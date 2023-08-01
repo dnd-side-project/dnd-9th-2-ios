@@ -16,7 +16,10 @@ struct CreateDateView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack {
+            VStack(alignment: .leading, spacing: 16) {
+
+                NumberListView(data: CreateStatus.array, selectedStatus: .date)
+
                 Text("날짜를 정하세요")
                     .font(.largeTitle)
 

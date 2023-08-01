@@ -18,6 +18,9 @@ struct CreatePlaceView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack {
                 VStack(alignment: .leading, spacing: 16) {
+
+                    NumberListView(data: CreateStatus.array, selectedStatus: .place)
+
                     Text("약속 장소는 어디인가요?")
                         .font(.title2)
 

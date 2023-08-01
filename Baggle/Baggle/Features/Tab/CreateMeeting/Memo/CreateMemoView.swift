@@ -16,17 +16,22 @@ struct CreateMemoView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Text("메모를 입력하세요")
-                .font(.largeTitle)
+            VStack(alignment: .leading, spacing: 16) {
 
-            Spacer()
+                NumberListView(data: CreateStatus.array, selectedStatus: .memo)
 
-            Button {
-                viewStore.send(.nextButtonTapped)
-            } label: {
-                Text("다음")
+                Text("메모를 입력하세요")
+                    .font(.largeTitle)
+
+                Spacer()
+
+                Button {
+                    viewStore.send(.nextButtonTapped)
+                } label: {
+                    Text("다음")
+                }
+                .buttonStyle(BagglePrimaryStyle())
             }
-            .buttonStyle(BagglePrimaryStyle())
         }
     }
 }

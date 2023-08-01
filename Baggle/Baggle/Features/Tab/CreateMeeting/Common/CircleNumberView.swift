@@ -15,7 +15,7 @@ struct CircleNumberView: View {
     var body: some View {
         ZStack(alignment: .center) {
             Circle()
-                .fill(isSelected ? .blue : .gray)
+                .fill(isSelected ? .blue : .gray.opacity(0.4))
                 .frame(width: 22, height: 22)
 
             Text(number)
