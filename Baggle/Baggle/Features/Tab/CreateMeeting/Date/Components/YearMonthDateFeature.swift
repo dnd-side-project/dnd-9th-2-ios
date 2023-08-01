@@ -19,6 +19,7 @@ struct YearMonthDateFeature: ReducerProtocol {
         // Tap
         case completeButtonTapped
         case cancelButtonTapped
+
         // Scope Action
         case baggleDatePicker(BaggleDatePickerFeature.Action)
     }
@@ -39,7 +40,6 @@ struct YearMonthDateFeature: ReducerProtocol {
             switch action {
 
             case .completeButtonTapped:
-                print(state.baggleDatePicker.date)
                 return .run { _ in await self.dismiss() }
 
             case .cancelButtonTapped:

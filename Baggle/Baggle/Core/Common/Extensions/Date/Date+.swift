@@ -11,6 +11,98 @@ extension Date {
 
     var calendar: Calendar { Calendar.current }
 
+    var year: Int {
+        get {
+            return calendar.component(.year, from: self)
+        }
+        set {
+            guard newValue > 0 else { return }
+            let currentYear = calendar.component(.year, from: self)
+            let yearsToAdd = newValue - currentYear
+            if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: self) {
+                self = date
+            }
+        }
+    }
+
+    var month: Int {
+        get {
+            return calendar.component(.month, from: self)
+        }
+        set {
+            // swiftlint:disable:next force_unwrapping
+            let allowedRange = calendar.range(of: .month, in: .year, for: self)!
+            guard allowedRange.contains(newValue) else { return }
+
+            let currentMonth = calendar.component(.month, from: self)
+            let monthsToAdd = newValue - currentMonth
+            if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: self) {
+                self = date
+            }
+        }
+    }
+
+    var day: Int {
+        get {
+            return calendar.component(.day, from: self)
+        }
+        set {
+            // swiftlint:disable:next force_unwrapping
+            let allowedRange = calendar.range(of: .day, in: .month, for: self)!
+            guard allowedRange.contains(newValue) else { return }
+
+            let currentDay = calendar.component(.day, from: self)
+            let daysToAdd = newValue - currentDay
+            if let date = calendar.date(byAdding: .day, value: daysToAdd, to: self) {
+                self = date
+            }
+        }
+    }
+
+    var hour: Int {
+        get {
+            return calendar.component(.hour, from: self)
+        }
+        set {
+            // swiftlint:disable:next force_unwrapping
+            let allowedRange = calendar.range(of: .hour, in: .day, for: self)!
+            guard allowedRange.contains(newValue) else { return }
+
+            let currentHour = calendar.component(.hour, from: self)
+            let hoursToAdd = newValue - currentHour
+            if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: self) {
+                self = date
+            }
+        }
+    }
+
+    var minute: Int {
+        get {
+            return calendar.component(.minute, from: self)
+        }
+        set {
+            // swiftlint:disable:next force_unwrapping
+            let allowedRange = calendar.range(of: .minute, in: .hour, for: self)!
+            guard allowedRange.contains(newValue) else { return }
+
+            let currentMinutes = calendar.component(.minute, from: self)
+            let minutesToAdd = newValue - currentMinutes
+            if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: self) {
+                self = date
+            }
+        }
+    }
+
+    // 현재 시간을 분 단위 까지 나타내주며 생성
+    // 초 단위는 짤림
+    // ex. 2023년 9월 1일 12시 30분 35.23232초 -> 2023년 9월 1일 12시 30분 00 초
+    static func now() -> Date {
+        let calendar = Calendar.current
+        let component = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        // swiftlint:disable:next force_unwrapping
+        return calendar.date(from: component)!
+    }
+
     // format에 해당하는 문자열 리턴
     func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
@@ -41,5 +133,22 @@ extension Date {
         // 2시간 이후 가장 가까운 30분 혹은 00분
 
         return hoursFromNow
+    }
+
+    // 인자로 들어온 newDate의 `년`, `월`, `일`로 업데이트 해서 리턴
+    func yearMonthDate(of newDate: Date) -> Date {
+        var result = self
+        result.year = newDate.year
+        result.month = newDate.month
+        result.day = newDate.day
+        return result
+    }
+
+    // 인자로 들어온 newDate의 `시간`, "분"으로 업데이트 해서 리턴
+    func hourMinute(of newDate: Date) -> Date {
+        var result = self
+        result.hour = newDate.hour
+        result.minute = newDate.minute
+        return result
     }
 }

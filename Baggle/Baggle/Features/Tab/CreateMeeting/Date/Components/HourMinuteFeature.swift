@@ -39,7 +39,6 @@ struct HourMinuteFeature: ReducerProtocol {
             switch action {
 
             case .completeButtonTapped:
-                print(state.baggleDatePicker.date)
                 return .run { _ in await self.dismiss() }
 
             case .cancelButtonTapped:

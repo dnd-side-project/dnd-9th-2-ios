@@ -32,7 +32,7 @@ struct CreateDateView: View {
                     HStack(spacing: dateButtonSpace) {
 
                         HStack {
-                            Text("2023년 7월 23일")
+                            Text(viewStore.meetingDate.koreanDate())
                             Spacer()
                         }
                         .padding()
@@ -47,7 +47,7 @@ struct CreateDateView: View {
                         }
 
                         HStack {
-                            Text("21:30")
+                            Text(viewStore.meetingDate.hourMinute())
                             Spacer()
                         }
                         .padding()

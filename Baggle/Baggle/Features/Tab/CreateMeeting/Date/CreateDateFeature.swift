@@ -5,11 +5,14 @@
 //  Created by youtak on 2023/07/30.
 //
 
+import SwiftUI
+
 import ComposableArchitecture
 
 struct CreateDateFeature: ReducerProtocol {
 
     struct State: Equatable {
+        var meetingDate: Date = Date.now().meetingStartTime()
         // MARK: - Scope State
         @PresentationState var yearMonthDate: YearMonthDateFeature.State?
         @PresentationState var hourMinute: HourMinuteFeature.State?
@@ -45,7 +48,9 @@ struct CreateDateFeature: ReducerProtocol {
                 // Tap
 
             case .nextButtonTapped:
-                return .run { send in await send(.delegate(.moveToNext)) }
+                print(state.meetingDate)
+                return .none
+//                return .run { send in await send(.delegate(.moveToNext)) }
 
             case .yearMonthDateButtonTapped:
                 state.yearMonthDate = YearMonthDateFeature.State()
@@ -56,7 +61,24 @@ struct CreateDateFeature: ReducerProtocol {
                 return .none
 
                 // Child
+
+            case .yearMonthDate(.presented(.completeButtonTapped)):
+                if let yearMonthDateState = state.yearMonthDate {
+                    let newDate = yearMonthDateState.baggleDatePicker.date
+                    let newYearMonthDate = state.meetingDate.yearMonthDate(of: newDate)
+                    state.meetingDate = newYearMonthDate
+                }
+                return .none
+
             case .yearMonthDate:
+                return .none
+
+            case .hourMinute(.presented(.completeButtonTapped)):
+                if let hourMinuteState = state.hourMinute {
+                    let newDate = hourMinuteState.baggleDatePicker.date
+                    let newHourMinute = state.meetingDate.hourMinute(of: newDate)
+                    state.meetingDate = newHourMinute
+                }
                 return .none
 
             case .hourMinute:
