@@ -5,7 +5,9 @@
 //  Created by 양수빈 on 2023/07/30.
 //
 
-import SwiftUI
+import Foundation
+
+import ComposableArchitecture
 
 extension NSObject {
     func postObserverAction(
@@ -21,7 +23,7 @@ extension NSObject {
     }
 }
 
-extension View {
+extension ReducerProtocol {
     func postObserverAction(
         _ keyName: Notification.Name,
         object: Any? = nil,
