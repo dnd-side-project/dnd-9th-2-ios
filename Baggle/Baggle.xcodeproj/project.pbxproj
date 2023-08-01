@@ -39,6 +39,8 @@
 		143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B270B2A76245F00DFC0EE /* CreateDateView.swift */; };
 		143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateTitleView.swift */; };
 		144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144733432A78C8D00090D15E /* BaggleTextEditor.swift */; };
+		146C51D52A79139900FF3142 /* BaggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleTests.swift */; };
+		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
@@ -87,6 +89,16 @@
 		2BF268232A77861300F32ADF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF268222A77861300F32ADF /* HomeService.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		146C51D62A79139900FF3142 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140E88052A64B626005119F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 140E880C2A64B626005119F8;
+			remoteInfo = Baggle;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		140C54372A74F42900CF1CB4 /* NicknameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameValidator.swift; sourceTree = "<group>"; };
 		140C543D2A74F54B00CF1CB4 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
@@ -117,6 +129,8 @@
 		143B27092A76214500DFC0EE /* CreatePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceView.swift; sourceTree = "<group>"; };
 		143B270B2A76245F00DFC0EE /* CreateDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateView.swift; sourceTree = "<group>"; };
 		144733432A78C8D00090D15E /* BaggleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextEditor.swift; sourceTree = "<group>"; };
+		146C51D22A79139900FF3142 /* BaggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		146C51D42A79139900FF3142 /* BaggleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTests.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -179,6 +193,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		146C51CF2A79139900FF3142 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -197,7 +219,9 @@
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
 				2BABCB172A76CDD400AFECA3 /* XCConfig */,
 				140E880F2A64B626005119F8 /* Baggle */,
+				146C51D32A79139900FF3142 /* BaggleTests */,
 				140E880E2A64B626005119F8 /* Products */,
+				146C51DB2A7913B400FF3142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				140E880D2A64B626005119F8 /* Baggle.app */,
+				146C51D22A79139900FF3142 /* BaggleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -433,6 +458,21 @@
 				144733422A78C8B50090D15E /* TextEditor */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		146C51D32A79139900FF3142 /* BaggleTests */ = {
+			isa = PBXGroup;
+			children = (
+				146C51D42A79139900FF3142 /* BaggleTests.swift */,
+			);
+			path = BaggleTests;
+			sourceTree = "<group>";
+		};
+		146C51DB2A7913B400FF3142 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		149C0F442A7784F100B95A36 /* Success */ = {
@@ -668,6 +708,27 @@
 			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
 			productType = "com.apple.product-type.application";
 		};
+		146C51D12A79139900FF3142 /* BaggleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146C51DA2A79139900FF3142 /* Build configuration list for PBXNativeTarget "BaggleTests" */;
+			buildPhases = (
+				146C51CE2A79139900FF3142 /* Sources */,
+				146C51CF2A79139900FF3142 /* Frameworks */,
+				146C51D02A79139900FF3142 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				146C51D72A79139900FF3142 /* PBXTargetDependency */,
+			);
+			name = BaggleTests;
+			packageProductDependencies = (
+				146C51DC2A7913B400FF3142 /* FirebaseMessaging */,
+			);
+			productName = BaggleTests;
+			productReference = 146C51D22A79139900FF3142 /* BaggleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -680,6 +741,10 @@
 				TargetAttributes = {
 					140E880C2A64B626005119F8 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					146C51D12A79139900FF3142 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 140E880C2A64B626005119F8;
 					};
 				};
 			};
@@ -703,6 +768,7 @@
 			projectRoot = "";
 			targets = (
 				140E880C2A64B626005119F8 /* Baggle */,
+				146C51D12A79139900FF3142 /* BaggleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -718,6 +784,13 @@
 				140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */,
 				140E88152A64B627005119F8 /* Assets.xcassets in Resources */,
 				2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		146C51D02A79139900FF3142 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,7 +892,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		146C51CE2A79139900FF3142 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146C51D52A79139900FF3142 /* BaggleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		146C51D72A79139900FF3142 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 140E880C2A64B626005119F8 /* Baggle */;
+			targetProxy = 146C51D62A79139900FF3142 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		140E88192A64B627005119F8 /* Debug */ = {
@@ -1014,6 +1103,44 @@
 			};
 			name = Release;
 		};
+		146C51D82A79139900FF3142 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YK6FBNFSV5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.BaggleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Baggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Baggle";
+			};
+			name = Debug;
+		};
+		146C51D92A79139900FF3142 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YK6FBNFSV5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.BaggleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Baggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Baggle";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1031,6 +1158,15 @@
 			buildConfigurations = (
 				140E881C2A64B627005119F8 /* Debug */,
 				140E881D2A64B627005119F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		146C51DA2A79139900FF3142 /* Build configuration list for PBXNativeTarget "BaggleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146C51D82A79139900FF3142 /* Debug */,
+				146C51D92A79139900FF3142 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1087,6 +1223,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		146C51DC2A7913B400FF3142 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		2B35E4EC2A70B6DB00915876 /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
