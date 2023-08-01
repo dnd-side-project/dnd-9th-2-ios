@@ -11,6 +11,9 @@ import ComposableArchitecture
 
 struct CreateDateView: View {
 
+    private let dateButtonSpace:CGFloat = 10
+    private let dateWidthRatio = 0.65
+
     let store: StoreOf<CreateMeetingFeature>
 
     var body: some View {
@@ -23,6 +26,33 @@ struct CreateDateView: View {
                 Text("날짜를 정하세요")
                     .font(.largeTitle)
 
+                GeometryReader { proxy in
+                    HStack(spacing: dateButtonSpace) {
+
+                        HStack {
+                            Text("2023년 7월 23일")
+                            Spacer()
+                        }
+                        .padding()
+                        .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.black, lineWidth: 1)
+                        )
+
+                        HStack {
+                            Text("21:30")
+                            Spacer()
+                        }
+                        .padding()
+                        .frame(width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.black, lineWidth: 1)
+                        )
+                    }
+                }
+
                 Spacer()
 
                 Button {
@@ -32,6 +62,7 @@ struct CreateDateView: View {
                 }
                 .buttonStyle(BagglePrimaryStyle())
             }
+            .padding()
         }
     }
 }
