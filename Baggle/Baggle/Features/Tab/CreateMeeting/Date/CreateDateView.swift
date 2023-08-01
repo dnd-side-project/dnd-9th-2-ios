@@ -11,10 +11,12 @@ import ComposableArchitecture
 
 struct CreateDateView: View {
 
-    private let dateButtonSpace:CGFloat = 10
+    private let dateButtonSpace: CGFloat = 10
     private let dateWidthRatio = 0.65
 
     let store: StoreOf<CreateMeetingFeature>
+
+    @State var pickerDate = Date()
 
     var body: some View {
 
