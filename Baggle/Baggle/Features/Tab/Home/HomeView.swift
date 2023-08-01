@@ -34,6 +34,15 @@ struct HomeView: View {
                             placeholder: "place holder"
                         )
                         .padding()
+
+                        BaggleTextEditor(
+                            store: self.store.scope(
+                                state: \.textEditorState,
+                                action: HomeFeature.Action.textEditorAction
+                            ),
+                            title: .title("뭐야"),
+                            placeholder: "ex. 뿌셔 뿌셔"
+                        )
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),

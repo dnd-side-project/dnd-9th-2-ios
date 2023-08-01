@@ -21,7 +21,8 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var textFieldState = BaggleTextFieldFeature.State(maxCount: 10, textFieldState: .inactive)
+        var textFieldState = BaggleTextFeature.State(maxCount: 10, textFieldState: .inactive)
+        var textEditorState = BaggleTextFeature.State(maxCount: 50, textFieldState: .inactive)
         var showMeetingDetail: Bool = false
     }
 
@@ -31,7 +32,8 @@ struct HomeFeature: ReducerProtocol {
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
-        case textFieldAction(BaggleTextFieldFeature.Action)
+        case textFieldAction(BaggleTextFeature.Action)
+        case textEditorAction(BaggleTextFeature.Action)
         case moveToMeetingDetail
     }
 
@@ -40,7 +42,11 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope
 
         Scope(state: \.textFieldState, action: /Action.textFieldAction) {
-            BaggleTextFieldFeature()
+            BaggleTextFeature()
+        }
+
+        Scope(state: \.textEditorState, action: /Action.textEditorAction) {
+            BaggleTextFeature()
         }
 
         // MARK: - Reduce
@@ -75,6 +81,9 @@ struct HomeFeature: ReducerProtocol {
                 return .none
 
             case .textFieldAction:
+                return .none
+
+            case .textEditorAction:
                 return .none
             }
         }
