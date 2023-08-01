@@ -10,14 +10,26 @@ import ComposableArchitecture
 struct CreateMemoFeature: ReducerProtocol {
 
     struct State: Equatable {
-        // MARK: - Scope State
+        // Child
+        var textEditorState = BaggleTextFeature.State(
+            maxCount: 50,
+            textFieldState: .inactive,
+            isFocused: true
+        )
     }
 
     enum Action: Equatable {
 
+        // Button
         case nextButtonTapped
 
-        // MARK: - Delegate
+        // View
+        case moveToNextScreen
+
+        // Child
+        case textEditorAction(BaggleTextFeature.Action)
+
+        // Delegate
         case delegate(Delegate)
 
         enum Delegate {
@@ -29,14 +41,30 @@ struct CreateMemoFeature: ReducerProtocol {
 
         // MARK: - Scope
 
+        Scope(state: \.textEditorState, action: /Action.textEditorAction) {
+            BaggleTextFeature()
+        }
+
         // MARK: - Reduce
 
         Reduce { _, action in
 
             switch action {
 
+                // Button
+
             case .nextButtonTapped:
+                return .run { send in await send(.moveToNextScreen) }
+
+            case .moveToNextScreen:
                 return .run { send in await send(.delegate(.moveToNext)) }
+
+                // TextField
+
+            case .textEditorAction:
+                return .none
+
+                // Delegate
 
             case .delegate(.moveToNext):
                 return .none

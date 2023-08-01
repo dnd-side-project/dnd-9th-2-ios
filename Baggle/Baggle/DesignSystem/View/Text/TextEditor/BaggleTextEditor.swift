@@ -79,6 +79,9 @@ struct BaggleTextEditor: View {
                 }
             }
             .padding()
+            .onAppear {
+                isFocused = viewStore.state.isFocused
+            }
         }
     }
 }
