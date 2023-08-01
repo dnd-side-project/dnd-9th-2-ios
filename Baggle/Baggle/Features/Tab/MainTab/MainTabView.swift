@@ -62,6 +62,25 @@ struct MainTabView: View {
                 ) { createMeetingTitleStore in
                     CreateTitleView(store: createMeetingTitleStore)
                 }
+                .fullScreenCover(
+                    store: self.store.scope(
+                        state: \.$joinMeeting,
+                        action: { .joinMeeting($0) })
+                ) { store in
+                    JoinMeetingView(store: store)
+                }
+                .onOpenURL { url in
+                    if let id = url.params()?["id"] as? String,
+                       let id = Int(id) {
+                        print("MainTabView - id: \(id)")
+                        // 모임 참여 여부 확인 후 분기처리
+                        // 모임 참여 중 > 모임 상세로 이동
+//                        postObserverAction(.moveMeetingDetail, object: id)
+
+                        // 모임 참여 전 > 모임 정보 확인
+                        viewStore.send(.moveToJoinMeeting(id))
+                    }
+                }
             }
         }
     }

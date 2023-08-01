@@ -44,9 +44,9 @@ struct MeetingDetailView: View {
                 // onReceive가 onAppear보다 먼저 실행되기 때문에
                 // 딜레이 주지 않는 경우 refresh와 onappear(fetch) 둘다 실행됨
                 // onReceive - refreshMeetingList 한번만 실행되도록
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2) {
-                    postObserverAction(.refreshMeetingList)
-                }
+//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2) {
+//                    postObserverAction(.refreshMeetingList)
+//                }
             }
         }
     }

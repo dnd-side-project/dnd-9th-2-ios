@@ -90,7 +90,9 @@ struct HomeView: View {
             .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
                        perform: { noti in
                 // noti로부터 id 값 받아서 넣기
-                viewStore.send(.moveToMeetingDetail(Int.random(in: 1..<10)))
+                if let id = noti.object as? Int {
+                    viewStore.send(.moveToMeetingDetail(id))
+                }
             })
             .onAppear {
                 viewStore.send(.onAppear)
