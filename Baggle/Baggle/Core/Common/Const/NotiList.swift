@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let moveMeetingDetail = Notification.Name(rawValue: "moveMeetingDetail")
+    static let refreshMeetingList = Notification.Name("refreshMeetingList")
 }

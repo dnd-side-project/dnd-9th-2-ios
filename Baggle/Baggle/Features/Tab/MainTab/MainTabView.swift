@@ -15,52 +15,72 @@ struct MainTabView: View {
 
     var body: some View {
 
-        WithViewStore(self.store) { viewStore in
-
-            TabView(
-                selection: viewStore.binding(
-                    get: \.selectedTab,
-                    send: MainTabFeature.Action.selectTab
-                )
-            ) {
-                HomeView(
-                    store: Store(
-                        initialState: HomeFeature.State(),
-                        reducer: HomeFeature()
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            NavigationStack {
+                TabView(
+                    selection: viewStore.binding(
+                        get: \.selectedTab,
+                        send: MainTabFeature.Action.selectTab
                     )
-                )
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("홈")
-                }
-                .tag(TapType.home)
+                ) {
+                    HomeView(
+                        store: Store(
+                            initialState: HomeFeature.State(),
+                            reducer: HomeFeature()
+                        )
+                    )
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("홈")
+                    }
+                    .tag(TapType.home)
 
-                ZStack {
-                }
-                .tabItem {
-                    Image(systemName: "plus.square")
-                    Text("모임 생성")
-                }
-                .tag(TapType.createMeeting)
+                    ZStack {
+                    }
+                    .tabItem {
+                        Image(systemName: "plus.square")
+                        Text("모임 생성")
+                    }
+                    .tag(TapType.createMeeting)
 
-                MyPageView(
+                    MyPageView(
+                        store: self.store.scope(
+                            state: \.myPageFeature,
+                            action: MainTabFeature.Action.logoutMainTab
+                        )
+                    )
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("마이페이지")
+                    }
+                    .tag(TapType.myPage)
+                }
+                .fullScreenCover(
                     store: self.store.scope(
-                        state: \.myPageFeature,
-                        action: MainTabFeature.Action.logoutMainTab
-                    )
-                )
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("마이페이지")
+                        state: \.$createMeeting,
+                        action: { .createMeeting($0) })
+                ) { createMeetingTitleStore in
+                    CreateTitleView(store: createMeetingTitleStore)
                 }
-                .tag(TapType.myPage)
-            }
-            .fullScreenCover(
-                store: self.store.scope(
-                    state: \.$createMeeting,
-                    action: { .createMeeting($0) })
-            ) { createMeetingStore in
-                CreateMeetingView(store: createMeetingStore)
+                .fullScreenCover(
+                    store: self.store.scope(
+                        state: \.$joinMeeting,
+                        action: { .joinMeeting($0) })
+                ) { store in
+                    JoinMeetingView(store: store)
+                }
+                .onOpenURL { url in
+                    if let id = url.params()?["id"] as? String,
+                       let id = Int(id) {
+                        print("MainTabView - id: \(id)")
+                        // 모임 참여 여부 확인 후 분기처리
+                        // 모임 참여 중 > 모임 상세로 이동
+//                        postObserverAction(.moveMeetingDetail, object: id)
+
+                        // 모임 참여 전 > 모임 정보 확인
+                        viewStore.send(.moveToJoinMeeting(id))
+                    }
+                }
             }
         }
     }

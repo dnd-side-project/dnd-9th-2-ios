@@ -61,7 +61,7 @@ import ComposableArchitecture
 
 struct BaggleTextField: View {
 
-    private let store: StoreOf<BaggleTextFieldFeature>
+    private let store: StoreOf<BaggleTextFeature>
     private var placeholder: String
     private var title: TextFieldTitle
     private var buttonType: TextFieldButton
@@ -69,7 +69,7 @@ struct BaggleTextField: View {
     @FocusState private var isFocused: Bool
 
     init(
-        store: StoreOf<BaggleTextFieldFeature>,
+        store: StoreOf<BaggleTextFeature>,
         placeholder: String = "입력해주세요",
         title: TextFieldTitle = .basic,
         buttonType: TextFieldButton = .delete
@@ -93,7 +93,7 @@ struct BaggleTextField: View {
                     TextField(placeholder,
                               text: viewStore.binding(
                                 get: \.text,
-                                send: BaggleTextFieldFeature.Action.textChanged)
+                                send: BaggleTextFeature.Action.textChanged)
                     )
                     .focused($isFocused)
                     .font(.body)
@@ -132,6 +132,9 @@ struct BaggleTextField: View {
             }
             .onChange(of: self.isFocused) { newValue in
                 viewStore.send(.isFocused(newValue))
+            }
+            .onAppear {
+                isFocused = viewStore.state.isFocused
             }
         }
     }

@@ -20,7 +20,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
             let userInfo = notification.notification.request.content.userInfo
             print("userInfo: \(userInfo)")
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-                self.postObserverAction(.moveMeetingDetail)
+                self.postObserverAction(.moveMeetingDetail, object: 111)
             }
         }
     }

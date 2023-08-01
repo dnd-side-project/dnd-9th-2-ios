@@ -36,12 +36,6 @@ struct BaggleApp: App {
                     reducer: AppFeature()
                 )
             )
-            .onOpenURL { url in
-                print("url: \(url)")
-                if AuthApi.isKakaoTalkLoginUrl(url) {
-                    _ = AuthController.handleOpenUrl(url: url)
-                }
-            }
         }
     }
 }
