@@ -20,6 +20,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         // MARK: - Scope State
 
         var meetingData: MeetingDetail?
+        var isDeleted: Bool = false
     }
 
     enum Action: Equatable {
@@ -27,6 +28,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         case onAppear
         case updateData(MeetingDetail?)
+        case deleteMeeting
     }
 
     @Dependency(\.meetingDetailService) var meetingService
@@ -48,6 +50,10 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .updateData(let data):
                 state.meetingData = data
+                return .none
+
+            case .deleteMeeting:
+                state.isDeleted = true
                 return .none
             }
         }
