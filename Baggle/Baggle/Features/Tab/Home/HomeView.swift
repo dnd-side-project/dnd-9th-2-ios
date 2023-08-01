@@ -30,7 +30,8 @@ struct HomeView: View {
                         BaggleTextField(
                             store: self.store.scope(
                                 state: \.textFieldState,
-                                action: HomeFeature.Action.textFieldAction),
+                                action: HomeFeature.Action.textFieldAction
+                            ),
                             placeholder: "place holder"
                         )
                         .padding()
@@ -40,25 +41,28 @@ struct HomeView: View {
                                 state: \.textEditorState,
                                 action: HomeFeature.Action.textEditorAction
                             ),
-                            title: .title("뭐야"),
-                            placeholder: "ex. 뿌셔 뿌셔"
+                            title: .title("메모를 입력하세요. (선택)")
                         )
                     }
                 }
-                .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
-                           perform: { noti in
-                    print("noti: \(noti)")
-                    viewStore.send(.moveToMeetingDetail)
-                })
+                .onReceive(
+                    NotificationCenter.default.publisher(for: .moveMeetingDetail),
+                    perform: { noti in
+                        print("noti: \(noti)")
+                        viewStore.send(.moveToMeetingDetail)
+                    }
+                )
                 .navigationDestination(
                     isPresented: Binding(
                         get: { viewStore.showMeetingDetail },
-                        set: { _ in viewStore.send(.moveToMeetingDetail) })
+                        set: { _ in viewStore.send(.moveToMeetingDetail) }
+                    )
                 ) {
                     MeetingDetailView(
                         store: Store(
                             initialState: MeetingDetailFeature.State(),
-                            reducer: MeetingDetailFeature())
+                            reducer: MeetingDetailFeature()
+                        )
                     )
                 }
             }

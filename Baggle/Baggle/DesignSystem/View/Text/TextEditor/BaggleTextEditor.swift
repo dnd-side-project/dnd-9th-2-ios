@@ -11,14 +11,18 @@ import ComposableArchitecture
 
 struct BaggleTextEditor: View {
 
-    let store: StoreOf<BaggleTextFeature>
-    private var title: TextFieldTitle
+    private let store: StoreOf<BaggleTextFeature>
     private var placeholder: String
+    private var title: TextFieldTitle
 
-    init(store: StoreOf<BaggleTextFeature>, title: TextFieldTitle, placeholder: String) {
+    init(
+        store: StoreOf<BaggleTextFeature>,
+        placeholder: String = "ex. 오늘 성수 뿌셔",
+        title: TextFieldTitle = .basic
+    ) {
         self.store = store
-        self.title = title
         self.placeholder = placeholder
+        self.title = title
     }
 
     @FocusState private var isFocused: Bool
@@ -86,8 +90,8 @@ struct BaggleTextEditor_Previews: PreviewProvider {
                 initialState: BaggleTextFeature.State(maxCount: 50, textFieldState: .inactive),
                 reducer: BaggleTextFeature()
             ),
-            title: .title("메모를 입력하세요. (선택)"),
-            placeholder: "ex. 오늘 성수 뿌셔!"
+            placeholder: "ex. 오늘 성수 뿌셔!",
+            title: .title("메모를 입력하세요. (선택)")
         )
     }
 }
