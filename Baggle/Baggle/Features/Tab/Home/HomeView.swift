@@ -41,7 +41,7 @@ struct HomeView: View {
                         }
 
                         Button {
-                            viewStore.send(.refreshMeetingList(.ongoing))
+                            viewStore.send(.refreshMeetingList)
                         } label: {
                             Text("모임 리프레시")
                         }
@@ -83,15 +83,18 @@ struct HomeView: View {
                     .padding()
                 }
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
+            .onReceive(NotificationCenter.default.publisher(for: .refreshMeetingList),
+                       perform: { _ in
+                viewStore.send(.refreshMeetingList)
+            })
             .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
                        perform: { noti in
-                print("noti: \(noti)")
                 // noti로부터 id 값 받아서 넣기
                 viewStore.send(.moveToMeetingDetail(Int.random(in: 1..<10)))
             })
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             // 푸시알림 탭해서 들어오는 경우
             .navigationDestination(
                 isPresented: Binding(

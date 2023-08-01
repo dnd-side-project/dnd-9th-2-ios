@@ -38,7 +38,7 @@ struct HomeFeature: ReducerProtocol {
         case onAppear
         case fetchMeetingList(MeetingStatus)
         case updateMeetingList(MeetingStatus, [Meeting]?)
-        case refreshMeetingList(MeetingStatus)
+        case refreshMeetingList
         case changeMeetingStatus(MeetingStatus)
         case shareButtonTapped
         case invitationSuccess
