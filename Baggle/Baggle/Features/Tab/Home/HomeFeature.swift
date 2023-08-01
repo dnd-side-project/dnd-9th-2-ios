@@ -21,7 +21,6 @@ enum MeetingStatus {
 struct HomeFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
-    @Dependency(\.sendInvitation) private var sendInvitation
 
     struct State: Equatable {
         // MARK: - Scope State
@@ -46,6 +45,7 @@ struct HomeFeature: ReducerProtocol {
         case moveToMeetingDetail(Int)
     }
 
+    @Dependency(\.sendInvitation) private var sendInvitation
     @Dependency(\.meetingService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
@@ -128,7 +128,7 @@ struct HomeFeature: ReducerProtocol {
                 return .none
             }
 
-            func moveToAppStore() {
+            @Sendable func moveToAppStore() {
                 let url = "itms-apps://itunes.apple.com/app/362057947"
                 if let url = URL(string: url) {
                     openURL(url)
