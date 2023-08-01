@@ -21,6 +21,7 @@
 		14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */; };
 		14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D522A64C944004A6AC4 /* .swiftlint.yml */; };
 		14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */; };
+		1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413925D2A78E66600249C8A /* CircleNumberView.swift */; };
 		141D376F2A681552001067E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D376E2A681552001067E3 /* MainTabView.swift */; };
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
 		14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14315D852A76B1CB008F8064 /* CreateMemoView.swift */; };
@@ -34,7 +35,6 @@
 		143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27072A76200200DFC0EE /* CreateMemoFeature.swift */; };
 		143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27092A76214500DFC0EE /* CreatePlaceView.swift */; };
 		143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B270B2A76245F00DFC0EE /* CreateDateView.swift */; };
-		143B9CF12A77A336003CC5E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143B9CF02A77A336003CC5E5 /* GoogleService-Info.plist */; };
 		143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateTitleView.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
@@ -93,6 +93,7 @@
 		14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Temp.swift"; sourceTree = "<group>"; };
 		14134D522A64C944004A6AC4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.auto.yml; sourceTree = "<group>"; };
+		1413925D2A78E66600249C8A /* CircleNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleNumberView.swift; sourceTree = "<group>"; };
 		141D376E2A681552001067E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
 		14315D852A76B1CB008F8064 /* CreateMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoView.swift; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		143B27072A76200200DFC0EE /* CreateMemoFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoFeature.swift; sourceTree = "<group>"; };
 		143B27092A76214500DFC0EE /* CreatePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceView.swift; sourceTree = "<group>"; };
 		143B270B2A76245F00DFC0EE /* CreateDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateView.swift; sourceTree = "<group>"; };
-		143B9CF02A77A336003CC5E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -308,6 +308,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		1413925C2A78E64900249C8A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1413925D2A78E66600249C8A /* CircleNumberView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		1432BE692A682FB10098AAA9 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +424,7 @@
 		14E4C4B32A6E43CA008643D9 /* CreateMeeting */ = {
 			isa = PBXGroup;
 			children = (
+				1413925C2A78E64900249C8A /* Common */,
 				143B26FF2A761F9B00DFC0EE /* Title */,
 				143B27002A761FB600DFC0EE /* Place */,
 				143B27032A761FDB00DFC0EE /* Date */,
@@ -724,11 +733,11 @@
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
+				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
-				14E506562A6B8F67008D5778 /* SignUpSuccessFeature.swift in Sources */,
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
@@ -739,7 +748,6 @@
 				14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
-				14E4C4B62A6E43CA008643D9 /* CreateMeetingView.swift in Sources */,
 				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
