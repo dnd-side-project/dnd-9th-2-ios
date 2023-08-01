@@ -22,6 +22,9 @@ struct CreateTitleView: View {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
                 VStack {
                     VStack(alignment: .leading, spacing: 16) {
+
+                        PageIndicator(data: CreateStatus.data, selectedStatus: .title)
+
                         Text("친구들과 약속을 잡아보세요!")
                             .font(.title2)
 

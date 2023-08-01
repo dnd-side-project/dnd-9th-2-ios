@@ -16,6 +16,8 @@ struct CreateMemoView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
+            Text("메모를 입력하세요")
+                .font(.largeTitle)
 
             VStack {
                 Text("메모를 입력하세요")
