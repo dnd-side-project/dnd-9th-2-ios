@@ -13,6 +13,7 @@ struct MainTabFeature: ReducerProtocol {
         var selectedTab: TapType = .home
 
         var myPageFeature: MyPageFeature.State
+        var joinMeetingId: Int?
 
         // MARK: - Child State
 
@@ -29,6 +30,7 @@ struct MainTabFeature: ReducerProtocol {
 
         case createMeeting(PresentationAction<CreateTitleFeature.Action>)
         case logoutMainTab(MyPageFeature.Action)
+        case moveToJoinMeeting(Int)
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -66,6 +68,10 @@ struct MainTabFeature: ReducerProtocol {
 
             case .logoutMainTab:
                 return.none
+
+            case .moveToJoinMeeting(let id):
+                state.joinMeetingId = id
+                return .none
             }
         }
         .ifLet(\.$createMeeting, action: /Action.createMeeting) {
