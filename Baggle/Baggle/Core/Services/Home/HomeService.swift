@@ -32,6 +32,7 @@ extension DependencyValues {
 }
 
 struct MockUpMeetingService {
+
     func fetchMeetingList(_ type: MeetingStatus) async throws -> [Meeting] {
         return try await withCheckedThrowingContinuation({ continuation in
             continuation.resume(returning: makeMockMeetingList(type))
@@ -41,7 +42,7 @@ struct MockUpMeetingService {
     private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
         let ongoing = [
             Meeting(
-                id: 1,
+                id: Int.random(in: 1...100),
                 name: "진행 중인 모임",
                 place: "우리집",
                 date: "2023년 04월 22일",
@@ -53,7 +54,7 @@ struct MockUpMeetingService {
                 ],
                 isConfirmed: false),
             Meeting(
-                id: 2,
+                id: Int.random(in: 101...200),
                 name: "진행 중인 모임2",
                 place: "남의 집",
                 date: "2023년 08년 23일",
@@ -67,8 +68,8 @@ struct MockUpMeetingService {
 
         let complete = [
             Meeting(
-                id: 1,
-                name: "진행 중인 모임",
+                id: Int.random(in: 1...100),
+                name: "지난 모임",
                 place: "우리집",
                 date: "2023년 04월 22일",
                 time: "15:30",

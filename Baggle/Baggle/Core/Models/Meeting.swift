@@ -8,7 +8,7 @@
 import Foundation
 
 /// 서버에서 받은 Entity를 View에 바로 적용가능하도록 가공한 Model
-struct Meeting: Equatable {
+struct Meeting: Equatable, Identifiable {
     let id: Int // 모임 id
     let name: String // 모임 이름
     let place: String // 장소

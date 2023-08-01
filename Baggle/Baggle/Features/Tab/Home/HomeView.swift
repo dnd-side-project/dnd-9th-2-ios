@@ -16,8 +16,9 @@ struct HomeView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
-                VStack(spacing: 20) {
-                    Text("Home View 입니다")
+                VStack(spacing: 10) {
+                    Text("Home View")
+                        .padding()
 
                     Button {
                         viewStore.send(.shareButtonTapped)
@@ -26,19 +27,60 @@ struct HomeView: View {
                     }
                     .buttonStyle(BagglePrimaryStyle())
 
-                    // 리스트를 탭해서 들어가는 경우
-                    NavigationLink {
-                        MeetingDetailView(
-                            store: Store(
-                                initialState: MeetingDetailFeature.State(),
-                                reducer: MeetingDetailFeature(
-                                    meetingId: viewStore.ongoingList.first?.id ?? 1)
-                            )
-                        )
-                    } label: {
-                        Text("모임 상세 이동")
+                    HStack(spacing: 20) {
+                        Button {
+                            viewStore.send(.changeMeetingStatus(.ongoing))
+                        } label: {
+                            Text("진행중인 모임")
+                        }
+
+                        Button {
+                            viewStore.send(.changeMeetingStatus(.complete))
+                        } label: {
+                            Text("지난 모임")
+                        }
+
+                        Button {
+                            viewStore.send(.refreshMeetingList(.ongoing))
+                        } label: {
+                            Text("모임 리프레시")
+                        }
                     }
-                    .buttonStyle(BagglePrimaryStyle())
+                    .padding()
+
+                    List((viewStore.meetingStatus == .ongoing)
+                         ? viewStore.ongoingList : viewStore.completedList) { meeting in
+                        NavigationLink {
+                            MeetingDetailView(
+                                store: Store(
+                                    initialState: MeetingDetailFeature.State(),
+                                    reducer: MeetingDetailFeature(
+                                        meetingId: meeting.id)
+                                )
+                            )
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text("\(meeting.id)")
+                                    .font(.caption)
+                                Text(meeting.name)
+                            }
+                        }
+                    }
+
+                    HStack(spacing: 20) {
+                        Button {
+                            viewStore.send(.fetchMeetingList(.ongoing))
+                        } label: {
+                            Text("진행중인 모임 업데이트")
+                        }
+
+                        Button {
+                            viewStore.send(.fetchMeetingList(.complete))
+                        } label: {
+                            Text("지난 모임 업데이트")
+                        }
+                    }
+                    .padding()
                 }
             }
             .onAppear {

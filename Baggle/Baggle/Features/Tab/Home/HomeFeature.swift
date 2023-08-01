@@ -26,7 +26,7 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var meetingType: MeetingStatus = .ongoing
+        var meetingStatus: MeetingStatus = .ongoing
         var pushMeetingDetailId: Int?
         var ongoingList: [Meeting] = []
         var completedList: [Meeting] = []
@@ -37,7 +37,9 @@ struct HomeFeature: ReducerProtocol {
 
         case onAppear
         case fetchMeetingList(MeetingStatus)
-        case updateMeetings(MeetingStatus, [Meeting]?)
+        case updateMeetingList(MeetingStatus, [Meeting]?)
+        case refreshMeetingList(MeetingStatus)
+        case changeMeetingStatus(MeetingStatus)
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
@@ -56,17 +58,40 @@ struct HomeFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                return .run { send in
-                    await send(.fetchMeetingList(.ongoing))
+                if state.ongoingList.isEmpty && state.completedList.isEmpty {
+                    return .run { send in
+                        await send(.fetchMeetingList(.ongoing))
+                    }
+                } else {
+                    return .none
                 }
 
-            case .fetchMeetingList(let type):
+            case .fetchMeetingList(let status):
+                state.meetingStatus = status
                 return .run { send in
-                    let list = await meetingService.fetchMeetingList(type)
-                    await send(.updateMeetings(type, list))
+                    let list = await meetingService.fetchMeetingList(status)
+                    await send(.updateMeetingList(status, list))
                 }
 
-            case .updateMeetings(let type, let model):
+            case .refreshMeetingList:
+                state.ongoingList.removeAll()
+                state.completedList.removeAll()
+                state.meetingStatus = .ongoing
+                return .run { send in
+                    let list = await meetingService.fetchMeetingList(.ongoing)
+                    await send(.updateMeetingList(.ongoing, list))
+                }
+
+            case .changeMeetingStatus(let status):
+                state.meetingStatus = status
+                if status == .complete && state.completedList.isEmpty {
+                    return .run { send in
+                        await send(.fetchMeetingList(.complete))
+                    }
+                }
+                return .none
+
+            case .updateMeetingList(let type, let model):
                 if let model {
                     if type == .ongoing {
                         state.ongoingList.append(contentsOf: model)
@@ -102,13 +127,13 @@ struct HomeFeature: ReducerProtocol {
                 state.pushMeetingDetailId = id
                 return .none
             }
-        }
-    }
 
-    func moveToAppStore() {
-        let url = "itms-apps://itunes.apple.com/app/362057947"
-        if let url = URL(string: url) {
-            openURL(url)
+            func moveToAppStore() {
+                let url = "itms-apps://itunes.apple.com/app/362057947"
+                if let url = URL(string: url) {
+                    openURL(url)
+                }
+            }
         }
     }
 }
