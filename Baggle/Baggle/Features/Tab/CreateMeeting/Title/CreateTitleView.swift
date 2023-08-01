@@ -62,6 +62,11 @@ struct CreateTitleView: View {
                 .onTapGesture {
                     hideKeyboard()
                 }
+                .onOpenURL { url in
+                    if let id = url.params()?["id"] as? String {
+                        viewStore.send(.cancelButtonTapped)
+                    }
+                }
             }
         } destination: { pathState in
             switch pathState {
