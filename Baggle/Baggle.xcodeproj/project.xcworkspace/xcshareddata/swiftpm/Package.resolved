@@ -30,7 +30,7 @@
     {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
+      "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
         "revision" : "a580250a9ff49ec38da5430cef20f88ddc831db2",
         "version" : "10.12.0"
@@ -176,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture",
       "state" : {
-        "revision" : "4cf2104cf14d57ec3dfb8cbd90d29f2b81a32028",
-        "version" : "0.58.0"
+        "revision" : "db2a55fd89ee5d88aa18a2325ba15654e619dc45",
+        "version" : "0.57.0"
       }
     },
     {
