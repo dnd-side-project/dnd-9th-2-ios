@@ -16,8 +16,6 @@
 		140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 140E881F2A64C3A8005119F8 /* ComposableArchitecture */; };
 		140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 140E88222A64C3C2005119F8 /* CombineMoya */; };
 		140E88252A64C3C2005119F8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 140E88242A64C3C2005119F8 /* Moya */; };
-		14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D3F2A64C558004A6AC4 /* Model+temp.swift */; };
-		14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D422A64C573004A6AC4 /* Service+Temp.swift */; };
 		14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */; };
 		14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D522A64C944004A6AC4 /* .swiftlint.yml */; };
 		14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */; };
@@ -84,10 +82,10 @@
 		2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */; };
 		2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */; };
 		2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */; };
-		2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB212A76CFDC00AFECA3 /* NotiList.swift */; };
+		2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */; };
 		2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */; };
 		2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB242A76D03300AFECA3 /* AppDelegate.swift */; };
-		2BABCB282A76D08400AFECA3 /* postObserverAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB272A76D08300AFECA3 /* postObserverAction.swift */; };
+		2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */; };
 		2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */; };
 		2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */; };
@@ -117,8 +115,6 @@
 		140E88122A64B626005119F8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		140E88142A64B627005119F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140E88172A64B627005119F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		14134D3F2A64C558004A6AC4 /* Model+temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+temp.swift"; sourceTree = "<group>"; };
-		14134D422A64C573004A6AC4 /* Service+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+Temp.swift"; sourceTree = "<group>"; };
 		14134D4C2A64C60F004A6AC4 /* Color+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Temp.swift"; sourceTree = "<group>"; };
 		14134D522A64C944004A6AC4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.auto.yml; sourceTree = "<group>"; };
@@ -184,10 +180,10 @@
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
 		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
-		2BABCB212A76CFDC00AFECA3 /* NotiList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotiList.swift; sourceTree = "<group>"; };
+		2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2BABCB242A76D03300AFECA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2BABCB272A76D08300AFECA3 /* postObserverAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postObserverAction.swift; sourceTree = "<group>"; };
+		2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostObserverAction.swift; sourceTree = "<group>"; };
 		2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailFeature.swift; sourceTree = "<group>"; };
 		2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFeature.swift; sourceTree = "<group>"; };
@@ -309,7 +305,7 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2BABCB202A76CFD100AFECA3 /* Const */,
+				2BABCB202A76CFD100AFECA3 /* Foundation */,
 				14F2D7AF2A728A14000ED0EE /* Extensions */,
 			);
 			path = Common;
@@ -318,7 +314,6 @@
 		14134D3E2A64C54F004A6AC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				14134D3F2A64C558004A6AC4 /* Model+temp.swift */,
 				14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */,
 				2BF2681F2A77828100F32ADF /* Meeting.swift */,
 				2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */,
@@ -335,7 +330,6 @@
 				14B7A0422A753DA500B8E202 /* SignUp */,
 				140C54362A74F40E00CF1CB4 /* Nickname */,
 				2B39F21B2A738BB100E034A3 /* SendInvitation.swift */,
-				14134D422A64C573004A6AC4 /* Service+Temp.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -626,7 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				146C51DE2A79143400FF3142 /* Date */,
-				2BABCB272A76D08300AFECA3 /* postObserverAction.swift */,
+				2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */,
 				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
 				140C543D2A74F54B00CF1CB4 /* String+Regex.swift */,
 			);
@@ -713,14 +707,14 @@
 			path = XCConfig;
 			sourceTree = "<group>";
 		};
-		2BABCB202A76CFD100AFECA3 /* Const */ = {
+		2BABCB202A76CFD100AFECA3 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				2BABCB212A76CFDC00AFECA3 /* NotiList.swift */,
+				2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */,
 				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
 				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
 			);
-			path = Const;
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
@@ -899,7 +893,7 @@
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
-				2BABCB282A76D08400AFECA3 /* postObserverAction.swift in Sources */,
+				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
 				1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
@@ -912,7 +906,6 @@
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */,
 				14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */,
-				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */,
@@ -928,7 +921,6 @@
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
 				14134D4D2A64C60F004A6AC4 /* Color+Temp.swift in Sources */,
-				14134D432A64C573004A6AC4 /* Service+Temp.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
@@ -966,7 +958,7 @@
 				143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */,
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
-				2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */,
+				2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */,
 				146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */,
 				2BF268202A77828100F32ADF /* Meeting.swift in Sources */,
 			);
