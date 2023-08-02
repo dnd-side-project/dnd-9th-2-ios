@@ -19,6 +19,9 @@ struct BaggleTimePickerView: View {
             selection: $date,
             displayedComponents: .hourAndMinute
         )
+        .onAppear {
+            UIDatePicker.appearance().minuteInterval = 5
+        }
         .labelsHidden()
         .datePickerStyle(.wheel)
         .environment(\.locale, Locale.init(identifier: "KO"))
