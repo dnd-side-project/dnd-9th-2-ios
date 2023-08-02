@@ -34,7 +34,7 @@ struct SelectTimeFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { state, action in
+        Reduce { _, action in
 
             switch action {
 

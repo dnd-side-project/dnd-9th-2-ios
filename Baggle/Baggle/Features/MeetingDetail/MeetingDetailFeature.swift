@@ -43,7 +43,7 @@ struct MeetingDetailFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var meetingId: Int?
+        var meetingId: Int
         var meetingData: MeetingDetail?
 
         // Alert
@@ -52,6 +52,10 @@ struct MeetingDetailFeature: ReducerProtocol {
         var alertTitle: String = ""
         var alertDescription: String?
         var alertRightButtonTitle: String = ""
+
+        // delete
+        @PresentationState var selectOwner: SelectOwnerFeature.State?
+        var nextOwnerId: Int?
     }
 
     enum Action: Equatable {
@@ -66,6 +70,8 @@ struct MeetingDetailFeature: ReducerProtocol {
         case deleteButtonTapped
         case leaveButtonTapped
         case backButtonTapped
+
+        case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
 
         // delegate
         case delegate(Delegate)
@@ -90,8 +96,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .onAppear:
                 let id = state.meetingId
                 return .run { send in
-                    if let id,
-                       let data = await meetingService.fetchMeetingDetail(id) {
+                    if let data = await meetingService.fetchMeetingDetail(id) {
                         await send(.updateData(data))
                     }
                 }
@@ -109,6 +114,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .deleteMeeting:
                 return .run { send in
+                    // 삭제 서버 통신
                     await send(.delegate(.deleteSuccess))
                 }
 
@@ -120,14 +126,25 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .leaveButtonTapped:
                 state.alertType = .leave
-                return .run { send in
-                    await send(.presentAlert)
-                }
+                state.selectOwner = SelectOwnerFeature.State(
+                    memberList: state.meetingData?.members ?? [])
+                return .none
 
             case .backButtonTapped:
                 return .run { _ in
                     await dismiss()
                 }
+
+            case .selectOwner(.presented(.leaveButtonTapped)):
+                if let nextOwnerId = state.selectOwner?.selectedMemberId {
+                    state.nextOwnerId = nextOwnerId
+                }
+                return .run { send in
+                    await send(.presentAlert)
+                }
+
+            case .selectOwner:
+                return .none
 
             case .delegate(.deleteSuccess):
                 state.isAlertPresented.toggle()
@@ -138,6 +155,9 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .delegate:
                 return .none
             }
+        }
+        .ifLet(\.$selectOwner, action: /Action.selectOwner) {
+            SelectOwnerFeature()
         }
     }
 }

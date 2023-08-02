@@ -1,5 +1,5 @@
 //
-//  SelectHostFeature.swift
+//  SelectOwnerFeature.swift
 //  Baggle
 //
 //  Created by 양수빈 on 2023/08/03.
@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct SelectHostFeature: ReducerProtocol {
+struct SelectOwnerFeature: ReducerProtocol {
 
     struct State: Equatable {
 
@@ -25,6 +25,8 @@ struct SelectHostFeature: ReducerProtocol {
         case selectMember(Int)
     }
 
+    @Dependency(\.dismiss) var dismiss
+
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
@@ -35,7 +37,7 @@ struct SelectHostFeature: ReducerProtocol {
 
             switch action {
             case .leaveButtonTapped:
-                return .none
+                return .run { _ in await self.dismiss() }
 
             case .selectMember(let id):
                 state.selectedMemberId = id

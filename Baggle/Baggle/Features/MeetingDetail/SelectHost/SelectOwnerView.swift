@@ -9,15 +9,16 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct SelectHostView: View {
+struct SelectOwnerView: View {
 
-    let store: StoreOf<SelectHostFeature>
+    let store: StoreOf<SelectOwnerFeature>
 
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 20) {
                 Text("방장을 넘길 친구를 선택해주세요")
+                    .padding(.top, 30)
 
                 Spacer()
 
@@ -45,9 +46,9 @@ struct SelectHostView: View {
 
 struct HostPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectHostView(
+        SelectOwnerView(
             store: Store(
-                initialState: SelectHostFeature.State(
+                initialState: SelectOwnerFeature.State(
                     memberList: [
                         // swiftlint:disable:next multiline_arguments
                         Member(userid: 100, name: "유저1", profileURL: "",
@@ -63,7 +64,7 @@ struct HostPickerView_Previews: PreviewProvider {
                                isOwner: false, certified: false, certImage: "")
                     ]
                 ),
-                reducer: SelectHostFeature()
+                reducer: SelectOwnerFeature()
             )
         )
     }

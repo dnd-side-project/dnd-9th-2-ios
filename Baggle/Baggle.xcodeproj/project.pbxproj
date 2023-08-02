@@ -64,8 +64,8 @@
 		14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */; };
 		14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */; };
 		14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */; };
-		2B2BA5292A7AB67800A90AE7 /* SelectHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA5282A7AB67800A90AE7 /* SelectHostView.swift */; };
-		2B2BA52B2A7AB6A900A90AE7 /* SelectHostFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52A2A7AB6A900A90AE7 /* SelectHostFeature.swift */; };
+		2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */; };
+		2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */; };
 		2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */; };
 		2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */; };
 		2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */; };
@@ -169,8 +169,8 @@
 		14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+loadTransferable.swift"; sourceTree = "<group>"; };
 		14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
-		2B2BA5282A7AB67800A90AE7 /* SelectHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHostView.swift; sourceTree = "<group>"; };
-		2B2BA52A2A7AB6A900A90AE7 /* SelectHostFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHostFeature.swift; sourceTree = "<group>"; };
+		2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerView.swift; sourceTree = "<group>"; };
+		2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerFeature.swift; sourceTree = "<group>"; };
 		2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
 		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
@@ -650,8 +650,8 @@
 		2B2BA5272A7AB45300A90AE7 /* SelectHost */ = {
 			isa = PBXGroup;
 			children = (
-				2B2BA5282A7AB67800A90AE7 /* SelectHostView.swift */,
-				2B2BA52A2A7AB6A900A90AE7 /* SelectHostFeature.swift */,
+				2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */,
+				2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */,
 				2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */,
 			);
 			path = SelectHost;
@@ -930,7 +930,7 @@
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */,
 				14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */,
-				2B2BA5292A7AB67800A90AE7 /* SelectHostView.swift in Sources */,
+				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
@@ -951,7 +951,7 @@
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
-				2B2BA52B2A7AB6A900A90AE7 /* SelectHostFeature.swift in Sources */,
+				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,

@@ -52,6 +52,15 @@ struct MeetingDetailView: View {
                         viewStore.send(.deleteMeeting)
                     }
             }
+            .sheet(
+                store: self.store.scope(
+                    state: \.$selectOwner,
+                    action: { .selectOwner($0) })
+            ) { selectOwnerStore in
+                SelectOwnerView(store: selectOwnerStore)
+                    .presentationDetents([.height(340)])
+                    .presentationDragIndicator(.visible)
+            }
             .onAppear {
                 viewStore.send(.onAppear)
             }
