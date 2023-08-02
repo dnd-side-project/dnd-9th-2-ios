@@ -16,8 +16,6 @@ struct CreateDateView: View {
 
     let store: StoreOf<CreateDateFeature>
 
-    @State var pickerDate = Date()
-
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -80,16 +78,16 @@ struct CreateDateView: View {
                 store: self.store.scope(
                     state: \.$yearMonthDate,
                     action: { .yearMonthDate($0) })
-            ) { yearMonthDateStore in
-                YearMonthDateView(store: yearMonthDateStore)
+            ) { selectDateStore in
+                SelectDateView(store: selectDateStore)
                     .presentationDetents([.height(360)])
             }
             .sheet(
                 store: self.store.scope(
                     state: \.$hourMinute,
                     action: { .hourMinute($0) })
-            ) { hourMinuteStore in
-                HourMinuteView(store: hourMinuteStore)
+            ) { selectTimeStore in
+                SelectTimeView(store: selectTimeStore)
                     .presentationDetents([.height(360)])
             }
         }

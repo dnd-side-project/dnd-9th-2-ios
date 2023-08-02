@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct YearMonthDateView: View {
+struct SelectDateView: View {
 
-    let store: StoreOf<YearMonthDateFeature>
+    let store: StoreOf<SelectDateFeature>
 
     var body: some View {
 
@@ -32,7 +32,7 @@ struct YearMonthDateView: View {
                 BaggleDatePickerView(
                     store: self.store.scope(
                         state: \.baggleDatePicker,
-                        action: YearMonthDateFeature.Action.baggleDatePicker
+                        action: SelectDateFeature.Action.baggleDatePicker
                     )
                 )
 
@@ -50,10 +50,10 @@ struct YearMonthDateView: View {
 
 struct YearMonthDateView_Previews: PreviewProvider {
     static var previews: some View {
-        YearMonthDateView(
+        SelectDateView(
             store: Store(
-                initialState: YearMonthDateFeature.State(),
-                reducer: YearMonthDateFeature()
+                initialState: SelectDateFeature.State(),
+                reducer: SelectDateFeature()
             )
         )
         .presentationDetents([.height(300)])

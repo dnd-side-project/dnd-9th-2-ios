@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct HourMinuteFeature: ReducerProtocol {
+struct SelectTimeFeature: ReducerProtocol {
 
     struct State: Equatable {
         // Scope State

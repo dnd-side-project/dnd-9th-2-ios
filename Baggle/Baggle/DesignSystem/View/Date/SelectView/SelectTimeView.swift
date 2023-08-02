@@ -9,9 +9,9 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct HourMinuteView: View {
+struct SelectTimeView: View {
 
-    let store: StoreOf<HourMinuteFeature>
+    let store: StoreOf<SelectTimeFeature>
 
     var body: some View {
 
@@ -32,7 +32,7 @@ struct HourMinuteView: View {
                 BaggleTimePickerView(
                     store: self.store.scope(
                         state: \.baggleDatePicker,
-                        action: HourMinuteFeature.Action.baggleDatePicker
+                        action: SelectTimeFeature.Action.baggleDatePicker
                     )
                 )
 
@@ -48,12 +48,12 @@ struct HourMinuteView: View {
     }
 }
 
-struct HourMinuteView_Previews: PreviewProvider {
+struct SelectTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        HourMinuteView(
+        SelectTimeView(
             store: Store(
-                initialState: HourMinuteFeature.State(),
-                reducer: HourMinuteFeature()
+                initialState: SelectTimeFeature.State(),
+                reducer: SelectTimeFeature()
             )
         )
     }

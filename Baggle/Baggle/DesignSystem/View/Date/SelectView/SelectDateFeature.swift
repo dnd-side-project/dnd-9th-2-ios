@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct YearMonthDateFeature: ReducerProtocol {
+struct SelectDateFeature: ReducerProtocol {
 
     struct State: Equatable {
         // Scope State

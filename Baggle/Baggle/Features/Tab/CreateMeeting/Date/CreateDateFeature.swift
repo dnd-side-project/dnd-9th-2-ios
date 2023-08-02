@@ -15,8 +15,8 @@ struct CreateDateFeature: ReducerProtocol {
         var meetingDate: Date = Date.now().meetingStartTime()
         var description: String = "설명 글"
         // MARK: - Scope State
-        @PresentationState var yearMonthDate: YearMonthDateFeature.State?
-        @PresentationState var hourMinute: HourMinuteFeature.State?
+        @PresentationState var yearMonthDate: SelectDateFeature.State?
+        @PresentationState var hourMinute: SelectTimeFeature.State?
     }
 
     enum Action: Equatable {
@@ -26,8 +26,8 @@ struct CreateDateFeature: ReducerProtocol {
         case hourMinuteButtonTapped
 
         // Child
-        case yearMonthDate(PresentationAction<YearMonthDateFeature.Action>)
-        case hourMinute(PresentationAction<HourMinuteFeature.Action>)
+        case yearMonthDate(PresentationAction<SelectDateFeature.Action>)
+        case hourMinute(PresentationAction<SelectTimeFeature.Action>)
         // Delegate
         case delegate(Delegate)
 
@@ -58,11 +58,11 @@ struct CreateDateFeature: ReducerProtocol {
 //                return .run { send in await send(.delegate(.moveToNext)) }
 
             case .yearMonthDateButtonTapped:
-                state.yearMonthDate = YearMonthDateFeature.State()
+                state.yearMonthDate = SelectDateFeature.State()
                 return .none
 
             case .hourMinuteButtonTapped:
-                state.hourMinute = HourMinuteFeature.State()
+                state.hourMinute = SelectTimeFeature.State()
                 return .none
 
                 // Child
@@ -95,10 +95,10 @@ struct CreateDateFeature: ReducerProtocol {
             }
         }
         .ifLet(\.$yearMonthDate, action: /Action.yearMonthDate) {
-            YearMonthDateFeature()
+            SelectDateFeature()
         }
         .ifLet(\.$hourMinute, action: /Action.hourMinute) {
-            HourMinuteFeature()
+            SelectTimeFeature()
         }
     }
 }
