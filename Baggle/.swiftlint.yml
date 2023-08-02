@@ -24,6 +24,7 @@ opt_in_rules:
 # 제외 폴더
 excluded:
   - ${TARGETNAME}/Resources
+  - ${TARGETNAME}Tests/*
 
 # 줄 수 제한
 line_length: 100
