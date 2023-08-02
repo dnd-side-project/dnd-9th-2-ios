@@ -132,10 +132,20 @@ extension Date {
     }
 
     /// 약속 생성 가능 시간 리턴
+    /// ex
+    /// 2시 03분 -> 2시 05분
+    /// 2시 05분 -> 2시 10분
     func meetingStartTime() -> Date {
         // 2시간 이후
-        let result = later(hours: 2)
-        // 2시간 이후 가장 가까운 30분 혹은 00분
+        var result = later(hours: 2)
+        
+        // 2시 5분이면 생성이 불가능 -> 2시 6분으로
+        result.minute += 1
+
+        // 2시 10분으로
+        while result.minute % 5 != 0 {
+            result.minute += 1
+        }
 
         return result
     }
