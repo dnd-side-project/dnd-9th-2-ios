@@ -18,29 +18,29 @@ struct CreateDateFeature: ReducerProtocol {
         var errorMessage: String?
 
         // 날짜 버튼
-        var yearMonthDateBeforeStatus: DateButtonStatus = .inactive
-        var hourMinuteBeforeStatue: DateButtonStatus = .inactive
+        var dateButtonBeforeStatus: DateButtonStatus = .inactive
+        var timeButtonBeforeStatus: DateButtonStatus = .inactive
 
-        var yearMonthDateStatus: DateButtonStatus = .inactive
-        var hourMinuteStatus: DateButtonStatus = .inactive
+        var dateButtonStatus: DateButtonStatus = .inactive
+        var timeButtonStatus: DateButtonStatus = .inactive
 
         // MARK: - Scope State
-        @PresentationState var yearMonthDate: SelectDateFeature.State?
-        @PresentationState var hourMinute: SelectTimeFeature.State?
+        @PresentationState var selectDateState: SelectDateFeature.State?
+        @PresentationState var selectTimeState: SelectTimeFeature.State?
     }
 
     enum Action: Equatable {
 
         // Tap
         case nextButtonTapped
-        case yearMonthDateButtonTapped
-        case hourMinuteButtonTapped
+        case selectDateButtonTapped
+        case selectTimeButtonTapped
 
         case statusChanged
 
         // Child
-        case yearMonthDate(PresentationAction<SelectDateFeature.Action>)
-        case hourMinute(PresentationAction<SelectTimeFeature.Action>)
+        case selectDateAction(PresentationAction<SelectDateFeature.Action>)
+        case selectTimeAction(PresentationAction<SelectTimeFeature.Action>)
         // Delegate
         case delegate(Delegate)
 
@@ -66,35 +66,35 @@ struct CreateDateFeature: ReducerProtocol {
                     return .run { send in await send(.delegate(.moveToNext)) }
                 } else {
                     state.errorMessage = "모임은 2시간 이후부터 가능해요."
-                    state.yearMonthDateStatus = .invalid
-                    state.hourMinuteStatus = .invalid
+                    state.dateButtonStatus = .invalid
+                    state.timeButtonStatus = .invalid
                 }
                 return .none
 
-            case .yearMonthDateButtonTapped:
-                state.yearMonthDate = SelectDateFeature.State(date: state.meetingDate)
-                state.yearMonthDateStatus = .active
+            case .selectDateButtonTapped:
+                state.selectDateState = SelectDateFeature.State(date: state.meetingDate)
+                state.dateButtonStatus = .active
 
                 // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고, 에러메시지를 없애주기 위함
-                if state.hourMinuteStatus == .invalid {
-                    state.hourMinuteStatus = .valid
+                if state.timeButtonStatus == .invalid {
+                    state.timeButtonStatus = .valid
                     state.errorMessage = nil
                 }
                 return .none
 
-            case .hourMinuteButtonTapped:
-                state.hourMinute = SelectTimeFeature.State(date: state.meetingDate)
-                state.hourMinuteStatus = .active
+            case .selectTimeButtonTapped:
+                state.selectTimeState = SelectTimeFeature.State(date: state.meetingDate)
+                state.timeButtonStatus = .active
 
                 // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고를 없애주기 위함
-                if state.yearMonthDateStatus == .invalid {
-                    state.yearMonthDateStatus = .valid
+                if state.dateButtonStatus == .invalid {
+                    state.dateButtonStatus = .valid
                     state.errorMessage = nil
                 }
                 return .none
 
             case .statusChanged:
-                if state.yearMonthDateStatus == .inactive || state.hourMinuteStatus == .inactive {
+                if state.dateButtonStatus == .inactive || state.timeButtonStatus == .inactive {
                     state.buttonDisabled = true
                 } else {
                     state.buttonDisabled = false
@@ -104,38 +104,38 @@ struct CreateDateFeature: ReducerProtocol {
                 // MARK: - Child
 
                 // 연, 월, 일 버튼
-            case .yearMonthDate(.presented(.completeButtonTapped)):
-                if let yearMonthDateState = state.yearMonthDate {
+            case .selectDateAction(.presented(.completeButtonTapped)):
+                if let yearMonthDateState = state.selectDateState {
                     let newDate = yearMonthDateState.date
                     let newYearMonthDate = state.meetingDate.yearMonthDate(of: newDate)
                     state.meetingDate = newYearMonthDate
                 }
-                state.yearMonthDateBeforeStatus = .valid
+                state.dateButtonBeforeStatus = .valid
                 return .run { send in await send(.statusChanged) }
 
-            case .yearMonthDate(.dismiss):
-                state.yearMonthDateStatus = state.yearMonthDateBeforeStatus
+            case .selectDateAction(.dismiss):
+                state.dateButtonStatus = state.dateButtonBeforeStatus
                 return .none
 
-            case .yearMonthDate:
+            case .selectDateAction:
                 return .none
 
                 // 시간, 분 버튼
 
-            case .hourMinute(.presented(.completeButtonTapped)):
-                if let hourMinuteState = state.hourMinute {
+            case .selectTimeAction(.presented(.completeButtonTapped)):
+                if let hourMinuteState = state.selectTimeState {
                     let newDate = hourMinuteState.date
                     let newHourMinute = state.meetingDate.hourMinute(of: newDate)
                     state.meetingDate = newHourMinute
                 }
-                state.hourMinuteBeforeStatue = .valid
+                state.timeButtonBeforeStatus = .valid
                 return .run { send in await send(.statusChanged) }
 
-            case .hourMinute(.dismiss):
-                state.hourMinuteStatus = state.hourMinuteBeforeStatue
+            case .selectTimeAction(.dismiss):
+                state.timeButtonStatus = state.timeButtonBeforeStatus
                 return .none
 
-            case .hourMinute:
+            case .selectTimeAction:
                 return .none
 
                 // MARK: - Delegate
@@ -144,10 +144,10 @@ struct CreateDateFeature: ReducerProtocol {
                 return .none
             }
         }
-        .ifLet(\.$yearMonthDate, action: /Action.yearMonthDate) {
+        .ifLet(\.$selectDateState, action: /Action.selectDateAction) {
             SelectDateFeature()
         }
-        .ifLet(\.$hourMinute, action: /Action.hourMinute) {
+        .ifLet(\.$selectTimeState, action: /Action.selectTimeAction) {
             SelectTimeFeature()
         }
     }

@@ -38,32 +38,32 @@ struct CreateDateView: View {
                             Text(viewStore.meetingDate.koreanDate())
                             Spacer()
                         }
-                        .foregroundColor(viewStore.yearMonthDateStatus.color)
+                        .foregroundColor(viewStore.dateButtonStatus.color)
                         .padding()
                         .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(viewStore.yearMonthDateStatus.color, lineWidth: 1)
+                                .stroke(viewStore.dateButtonStatus.color, lineWidth: 1)
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewStore.send(.yearMonthDateButtonTapped)
+                            viewStore.send(.selectDateButtonTapped)
                         }
 
                         HStack {
                             Text(viewStore.meetingDate.hourMinute())
                             Spacer()
                         }
-                        .foregroundColor(viewStore.hourMinuteStatus.color)
+                        .foregroundColor(viewStore.timeButtonStatus.color)
                         .padding()
                         .frame(width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(viewStore.hourMinuteStatus.color, lineWidth: 1)
+                                .stroke(viewStore.timeButtonStatus.color, lineWidth: 1)
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewStore.send(.hourMinuteButtonTapped)
+                            viewStore.send(.selectTimeButtonTapped)
                         }
                     }
                 }
@@ -88,16 +88,16 @@ struct CreateDateView: View {
             .padding()
             .sheet(
                 store: self.store.scope(
-                    state: \.$yearMonthDate,
-                    action: { .yearMonthDate($0) })
+                    state: \.$selectDateState,
+                    action: { .selectDateAction($0) })
             ) { selectDateStore in
                 SelectDateView(store: selectDateStore)
                     .presentationDetents([.height(360)])
             }
             .sheet(
                 store: self.store.scope(
-                    state: \.$hourMinute,
-                    action: { .hourMinute($0) })
+                    state: \.$selectTimeState,
+                    action: { .selectTimeAction($0) })
             ) { selectTimeStore in
                 SelectTimeView(store: selectTimeStore)
                     .presentationDetents([.height(360)])
