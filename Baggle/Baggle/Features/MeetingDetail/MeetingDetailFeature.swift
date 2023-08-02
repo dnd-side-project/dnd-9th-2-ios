@@ -40,22 +40,18 @@ enum MeetingDeleteType {
 
 struct MeetingDetailFeature: ReducerProtocol {
 
-    var meetingId: Int
-
     struct State: Equatable {
         // MARK: - Scope State
 
+        var meetingId: Int?
         var meetingData: MeetingDetail?
 
         // Alert
-
         var alertType: MeetingDeleteType = .delete
         var isAlertPresented: Bool = false
         var alertTitle: String = ""
         var alertDescription: String?
         var alertRightButtonTitle: String = ""
-
-        var isDeleted: Bool = false
     }
 
     enum Action: Equatable {
@@ -63,10 +59,23 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         case onAppear
         case updateData(MeetingDetail)
-        case showAlert(MeetingDeleteType)
+        case showAlert
         case deleteMeeting
+
+        // button
+        case deleteButtonTapped
+        case leaveButtonTapped
+        case backButtonTapped
+
+        // delegate
+        case delegate(Delegate)
+
+        enum Delegate: Equatable {
+            case deleteSuccess
+        }
     }
 
+    @Dependency(\.dismiss) var dismiss
     @Dependency(\.meetingDetailService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
@@ -79,8 +88,10 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
+                let id = state.meetingId
                 return .run { send in
-                    if let data = await meetingService.fetchMeetingDetail(meetingId) {
+                    if let id,
+                       let data = await meetingService.fetchMeetingDetail(id) {
                         await send(.updateData(data))
                     }
                 }
@@ -89,15 +100,42 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.meetingData = data
                 return .none
 
-            case .showAlert(let type):
-                state.alertTitle = (state.meetingData?.name ?? "-") + type.title
-                state.alertDescription = type.description
-                state.alertRightButtonTitle = type.rightButtonTitle
+            case .showAlert:
+                state.alertTitle = (state.meetingData?.name ?? "-") + state.alertType.title
+                state.alertDescription = state.alertType.description
+                state.alertRightButtonTitle = state.alertType.rightButtonTitle
                 state.isAlertPresented.toggle()
                 return .none
 
             case .deleteMeeting:
-                state.isDeleted = true
+                return .run { send in
+                    await send(.delegate(.deleteSuccess))
+                }
+
+            case .deleteButtonTapped:
+                state.alertType = .delete
+                return .run { send in
+                    await send(.showAlert)
+                }
+
+            case .leaveButtonTapped:
+                state.alertType = .leave
+                return .run { send in
+                    await send(.showAlert)
+                }
+
+            case .backButtonTapped:
+                return .run { _ in
+                    await dismiss()
+                }
+
+            case .delegate(.deleteSuccess):
+                state.isAlertPresented.toggle()
+                return .run { _ in
+                    await dismiss()
+                }
+
+            case .delegate:
                 return .none
             }
         }

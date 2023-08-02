@@ -29,6 +29,7 @@ struct HomeFeature: ReducerProtocol {
         var pushMeetingDetailId: Int?
         var ongoingList: [Meeting] = []
         var completedList: [Meeting] = []
+        var path = StackState<MeetingDetailFeature.State>()
     }
 
     enum Action: Equatable {
@@ -43,6 +44,7 @@ struct HomeFeature: ReducerProtocol {
         case invitationSuccess
         case invitationFailed
         case moveToMeetingDetail(Int)
+        case path(StackAction<MeetingDetailFeature.State, MeetingDetailFeature.Action>)
     }
 
     @Dependency(\.sendInvitation) private var sendInvitation
@@ -126,6 +128,14 @@ struct HomeFeature: ReducerProtocol {
             case .moveToMeetingDetail(let id):
                 state.pushMeetingDetailId = id
                 return .none
+
+            case .path(.element(id: _, action: .delegate(.deleteSuccess))):
+                return .run { send in
+                    await send(.refreshMeetingList)
+                }
+
+            case .path:
+                return .none
             }
 
             @Sendable func moveToAppStore() {
@@ -134,6 +144,9 @@ struct HomeFeature: ReducerProtocol {
                     openURL(url)
                 }
             }
+        }
+        .forEach(\.path, action: /Action.path) {
+            MeetingDetailFeature()
         }
     }
 }
