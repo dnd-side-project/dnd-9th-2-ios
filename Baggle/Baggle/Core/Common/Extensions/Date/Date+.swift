@@ -138,7 +138,7 @@ extension Date {
     func meetingStartTime() -> Date {
         // 2시간 이후
         var result = later(hours: 2)
-        
+
         // 2시 5분이면 생성이 불가능 -> 2시 6분으로
         result.minute += 1
 
