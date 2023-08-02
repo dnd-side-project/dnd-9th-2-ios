@@ -33,12 +33,22 @@
 		1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6C2A682FCB0098AAA9 /* HomeView.swift */; };
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
 		143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27012A761FCF00DFC0EE /* CreatePlaceFeature.swift */; };
-		143B27052A761FEE00DFC0EE /* CreateMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27042A761FEE00DFC0EE /* CreateMeetingFeature.swift */; };
+		143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */; };
 		143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27072A76200200DFC0EE /* CreateMemoFeature.swift */; };
 		143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27092A76214500DFC0EE /* CreatePlaceView.swift */; };
 		143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B270B2A76245F00DFC0EE /* CreateDateView.swift */; };
 		143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateTitleView.swift */; };
 		144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144733432A78C8D00090D15E /* BaggleTextEditor.swift */; };
+		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
+		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
+		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
+		146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */; };
+		146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */; };
+		146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */; };
+		146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51ED2A79429400FF3142 /* SelectDateFeature.swift */; };
+		146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EF2A79429E00FF3142 /* SelectDateView.swift */; };
+		146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */; };
+		146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F32A7950F500FF3142 /* SelectTimeView.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
@@ -89,6 +99,16 @@
 		2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8F9162A78DFD700510EFA /* JoinMeetingView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		146C51D62A79139900FF3142 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140E88052A64B626005119F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 140E880C2A64B626005119F8;
+			remoteInfo = Baggle;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		140C54372A74F42900CF1CB4 /* NicknameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameValidator.swift; sourceTree = "<group>"; };
 		140C543D2A74F54B00CF1CB4 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
@@ -114,11 +134,21 @@
 		1432BE6C2A682FCB0098AAA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		143B27012A761FCF00DFC0EE /* CreatePlaceFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceFeature.swift; sourceTree = "<group>"; };
-		143B27042A761FEE00DFC0EE /* CreateMeetingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingFeature.swift; sourceTree = "<group>"; };
+		143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateFeature.swift; sourceTree = "<group>"; };
 		143B27072A76200200DFC0EE /* CreateMemoFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoFeature.swift; sourceTree = "<group>"; };
 		143B27092A76214500DFC0EE /* CreatePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceView.swift; sourceTree = "<group>"; };
 		143B270B2A76245F00DFC0EE /* CreateDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateView.swift; sourceTree = "<group>"; };
 		144733432A78C8D00090D15E /* BaggleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextEditor.swift; sourceTree = "<group>"; };
+		146C51D22A79139900FF3142 /* BaggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		146C51D42A79139900FF3142 /* BaggleDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDateTests.swift; sourceTree = "<group>"; };
+		146C51DF2A79143A00FF3142 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDatePickerFeature.swift; sourceTree = "<group>"; };
+		146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDatePickerView.swift; sourceTree = "<group>"; };
+		146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTimePickerView.swift; sourceTree = "<group>"; };
+		146C51ED2A79429400FF3142 /* SelectDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateFeature.swift; sourceTree = "<group>"; };
+		146C51EF2A79429E00FF3142 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
+		146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeFeature.swift; sourceTree = "<group>"; };
+		146C51F32A7950F500FF3142 /* SelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeView.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -183,6 +213,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		146C51CF2A79139900FF3142 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -201,7 +239,9 @@
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
 				2BABCB172A76CDD400AFECA3 /* XCConfig */,
 				140E880F2A64B626005119F8 /* Baggle */,
+				146C51D32A79139900FF3142 /* BaggleTests */,
 				140E880E2A64B626005119F8 /* Products */,
+				146C51DB2A7913B400FF3142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				140E880D2A64B626005119F8 /* Baggle.app */,
+				146C51D22A79139900FF3142 /* BaggleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,7 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				143B270B2A76245F00DFC0EE /* CreateDateView.swift */,
-				143B27042A761FEE00DFC0EE /* CreateMeetingFeature.swift */,
+				143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -438,6 +479,59 @@
 				144733422A78C8B50090D15E /* TextEditor */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		146C51D32A79139900FF3142 /* BaggleTests */ = {
+			isa = PBXGroup;
+			children = (
+				146C51D42A79139900FF3142 /* BaggleDateTests.swift */,
+			);
+			path = BaggleTests;
+			sourceTree = "<group>";
+		};
+		146C51DB2A7913B400FF3142 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		146C51DE2A79143400FF3142 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				146C51DF2A79143A00FF3142 /* Date+.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		146C51E52A793D2100FF3142 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				147899982A79EC6C0071DAE3 /* SelectView */,
+				147899972A79EC640071DAE3 /* Picker */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		147899972A79EC640071DAE3 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */,
+				146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */,
+				146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
+		147899982A79EC6C0071DAE3 /* SelectView */ = {
+			isa = PBXGroup;
+			children = (
+				146C51EF2A79429E00FF3142 /* SelectDateView.swift */,
+				146C51ED2A79429400FF3142 /* SelectDateFeature.swift */,
+				146C51F32A7950F500FF3142 /* SelectTimeView.swift */,
+				146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */,
+			);
+			path = SelectView;
 			sourceTree = "<group>";
 		};
 		149C0F442A7784F100B95A36 /* Success */ = {
@@ -531,6 +625,7 @@
 		14F2D7AF2A728A14000ED0EE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				146C51DE2A79143400FF3142 /* Date */,
 				2BABCB272A76D08300AFECA3 /* postObserverAction.swift */,
 				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
 				140C543D2A74F54B00CF1CB4 /* String+Regex.swift */,
@@ -557,6 +652,7 @@
 		2B84695D2A6E7AE200D75D32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				146C51E52A793D2100FF3142 /* Date */,
 				144733452A78CAE20090D15E /* Text */,
 				2BA345A32A6EB00900B7E2BD /* Tag */,
 				2B84695E2A6E7AE200D75D32 /* Alert */,
@@ -682,6 +778,27 @@
 			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
 			productType = "com.apple.product-type.application";
 		};
+		146C51D12A79139900FF3142 /* BaggleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146C51DA2A79139900FF3142 /* Build configuration list for PBXNativeTarget "BaggleTests" */;
+			buildPhases = (
+				146C51CE2A79139900FF3142 /* Sources */,
+				146C51CF2A79139900FF3142 /* Frameworks */,
+				146C51D02A79139900FF3142 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				146C51D72A79139900FF3142 /* PBXTargetDependency */,
+			);
+			name = BaggleTests;
+			packageProductDependencies = (
+				146C51DC2A7913B400FF3142 /* FirebaseMessaging */,
+			);
+			productName = BaggleTests;
+			productReference = 146C51D22A79139900FF3142 /* BaggleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -694,6 +811,10 @@
 				TargetAttributes = {
 					140E880C2A64B626005119F8 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					146C51D12A79139900FF3142 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 140E880C2A64B626005119F8;
 					};
 				};
 			};
@@ -717,6 +838,7 @@
 			projectRoot = "";
 			targets = (
 				140E880C2A64B626005119F8 /* Baggle */,
+				146C51D12A79139900FF3142 /* BaggleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -732,6 +854,13 @@
 				140E88182A64B627005119F8 /* Preview Assets.xcassets in Resources */,
 				140E88152A64B627005119F8 /* Assets.xcassets in Resources */,
 				2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		146C51D02A79139900FF3142 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,6 +915,7 @@
 				14134D402A64C558004A6AC4 /* Model+temp.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
+				146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */,
 				143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */,
 				143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */,
 				143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */,
@@ -805,7 +935,9 @@
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,
+				146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
+				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
@@ -816,7 +948,9 @@
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
+				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
+				146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */,
 				14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
@@ -828,14 +962,33 @@
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
-				143B27052A761FEE00DFC0EE /* CreateMeetingFeature.swift in Sources */,
+				146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */,
+				143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */,
+				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */,
+				146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */,
 				2BF268202A77828100F32ADF /* Meeting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		146C51CE2A79139900FF3142 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		146C51D72A79139900FF3142 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 140E880C2A64B626005119F8 /* Baggle */;
+			targetProxy = 146C51D62A79139900FF3142 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		140E88192A64B627005119F8 /* Debug */ = {
@@ -1030,6 +1183,44 @@
 			};
 			name = Release;
 		};
+		146C51D82A79139900FF3142 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YK6FBNFSV5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.BaggleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Baggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Baggle";
+			};
+			name = Debug;
+		};
+		146C51D92A79139900FF3142 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YK6FBNFSV5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.BaggleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Baggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Baggle";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1047,6 +1238,15 @@
 			buildConfigurations = (
 				140E881C2A64B627005119F8 /* Debug */,
 				140E881D2A64B627005119F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		146C51DA2A79139900FF3142 /* Build configuration list for PBXNativeTarget "BaggleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146C51D82A79139900FF3142 /* Debug */,
+				146C51D92A79139900FF3142 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1103,6 +1303,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		146C51DC2A7913B400FF3142 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		2B35E4EC2A70B6DB00915876 /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
