@@ -57,7 +57,7 @@ struct BaggleAlert: View {
         isPresented: Binding<Bool>,
         title: String,
         description: String? = nil,
-        leftButtonTitle: String = "아니오",
+        leftButtonTitle: String = "취소",
         rightButtonTitle: String = "네",
         rightButtonAction: @escaping () -> Void
     ) {
@@ -77,13 +77,13 @@ struct BaggleAlert: View {
                 Spacer()
 
                 Text(title)
-                    .font(.title3)
+                    .font(.body)
                     .multilineTextAlignment(.center)
 
                 if let description {
                     Text(description)
                         .multilineTextAlignment(.center)
-                        .font(.subheadline)
+                        .font(.caption)
                         .foregroundColor(.gray)
                 } else {
                     Spacer()
@@ -94,6 +94,8 @@ struct BaggleAlert: View {
                         isPresented.toggle()
                     } label: {
                         Text(leftButtonTitle)
+                            .font(.body)
+                            .foregroundColor(.black)
                             .frame(width: alertWidth/2, height: 52)
                     }
 
@@ -102,6 +104,8 @@ struct BaggleAlert: View {
                         isPresented.toggle()
                     } label: {
                         Text(rightButtonTitle)
+                            .font(.body)
+                            .foregroundColor(.red)
                             .frame(width: alertWidth/2, height: 52)
                     }
                 }
