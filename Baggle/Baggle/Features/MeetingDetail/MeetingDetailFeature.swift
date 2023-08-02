@@ -59,7 +59,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         case onAppear
         case updateData(MeetingDetail)
-        case showAlert
+        case presentAlert
         case deleteMeeting
 
         // button
@@ -100,7 +100,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.meetingData = data
                 return .none
 
-            case .showAlert:
+            case .presentAlert:
                 state.alertTitle = (state.meetingData?.name ?? "-") + state.alertType.title
                 state.alertDescription = state.alertType.description
                 state.alertRightButtonTitle = state.alertType.rightButtonTitle
@@ -115,13 +115,13 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .deleteButtonTapped:
                 state.alertType = .delete
                 return .run { send in
-                    await send(.showAlert)
+                    await send(.presentAlert)
                 }
 
             case .leaveButtonTapped:
                 state.alertType = .leave
                 return .run { send in
-                    await send(.showAlert)
+                    await send(.presentAlert)
                 }
 
             case .backButtonTapped:

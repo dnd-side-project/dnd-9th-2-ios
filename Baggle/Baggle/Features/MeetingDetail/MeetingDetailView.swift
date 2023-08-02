@@ -45,7 +45,7 @@ struct MeetingDetailView: View {
                 BaggleAlert(
                     isPresented: Binding(
                         get: { viewStore.isAlertPresented },
-                        set: { _ in viewStore.send(.showAlert) }),
+                        set: { _ in viewStore.send(.presentAlert) }),
                     title: viewStore.alertTitle,
                     description: viewStore.alertDescription,
                     rightButtonTitle: viewStore.alertRightButtonTitle) {
