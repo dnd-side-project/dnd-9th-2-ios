@@ -58,18 +58,18 @@ struct CreateDateFeature: ReducerProtocol {
 //                return .run { send in await send(.delegate(.moveToNext)) }
 
             case .yearMonthDateButtonTapped:
-                state.yearMonthDate = SelectDateFeature.State()
+                state.yearMonthDate = SelectDateFeature.State(date: state.meetingDate)
                 return .none
 
             case .hourMinuteButtonTapped:
-                state.hourMinute = SelectTimeFeature.State()
+                state.hourMinute = SelectTimeFeature.State(date: state.meetingDate)
                 return .none
 
                 // Child
 
             case .yearMonthDate(.presented(.completeButtonTapped)):
                 if let yearMonthDateState = state.yearMonthDate {
-                    let newDate = yearMonthDateState.baggleDatePicker.date
+                    let newDate = yearMonthDateState.date
                     let newYearMonthDate = state.meetingDate.yearMonthDate(of: newDate)
                     state.meetingDate = newYearMonthDate
                 }
@@ -80,7 +80,7 @@ struct CreateDateFeature: ReducerProtocol {
 
             case .hourMinute(.presented(.completeButtonTapped)):
                 if let hourMinuteState = state.hourMinute {
-                    let newDate = hourMinuteState.baggleDatePicker.date
+                    let newDate = hourMinuteState.date
                     let newHourMinute = state.meetingDate.hourMinute(of: newDate)
                     state.meetingDate = newHourMinute
                 }

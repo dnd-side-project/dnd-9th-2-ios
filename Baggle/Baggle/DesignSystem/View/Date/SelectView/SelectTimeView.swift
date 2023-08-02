@@ -30,9 +30,11 @@ struct SelectTimeView: View {
                 }
 
                 BaggleTimePickerView(
-                    store: self.store.scope(
-                        state: \.baggleDatePicker,
-                        action: SelectTimeFeature.Action.baggleDatePicker
+                    date: viewStore.binding(
+                        get: \.date,
+                        send: { value in
+                            SelectTimeFeature.Action.dateChanged(value)
+                        }
                     )
                 )
 
@@ -52,7 +54,9 @@ struct SelectTimeView_Previews: PreviewProvider {
     static var previews: some View {
         SelectTimeView(
             store: Store(
-                initialState: SelectTimeFeature.State(),
+                initialState: SelectTimeFeature.State(
+                    date: Date()
+                ),
                 reducer: SelectTimeFeature()
             )
         )
