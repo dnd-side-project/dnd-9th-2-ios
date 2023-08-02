@@ -33,11 +33,12 @@ struct CreateDateView: View {
                             Text(viewStore.meetingDate.koreanDate())
                             Spacer()
                         }
+                        .foregroundColor(viewStore.yearMonthDateStatus.color)
                         .padding()
                         .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1)
+                                .stroke(viewStore.yearMonthDateStatus.color, lineWidth: 1)
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -48,11 +49,12 @@ struct CreateDateView: View {
                             Text(viewStore.meetingDate.hourMinute())
                             Spacer()
                         }
+                        .foregroundColor(viewStore.hourMinuteStatus.color)
                         .padding()
                         .frame(width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1)
+                                .stroke(viewStore.hourMinuteStatus.color, lineWidth: 1)
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -72,6 +74,7 @@ struct CreateDateView: View {
                     Text("다음")
                 }
                 .buttonStyle(BagglePrimaryStyle())
+                .disabled(viewStore.buttonDisabled)
             }
             .padding()
             .sheet(

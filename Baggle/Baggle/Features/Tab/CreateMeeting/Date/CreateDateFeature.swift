@@ -12,8 +12,18 @@ import ComposableArchitecture
 struct CreateDateFeature: ReducerProtocol {
 
     struct State: Equatable {
+
         var meetingDate: Date = Date.now().meetingStartTime()
+        var buttonDisabled: Bool = true
         var description: String = "설명 글"
+
+        // 날짜 버튼
+        var yearMonthDateBeforeStatus: DateButtonStatus = .inactive
+        var hourMinuteBeforeStatue: DateButtonStatus = .inactive
+
+        var yearMonthDateStatus: DateButtonStatus = .inactive
+        var hourMinuteStatus: DateButtonStatus = .inactive
+
         // MARK: - Scope State
         @PresentationState var yearMonthDate: SelectDateFeature.State?
         @PresentationState var hourMinute: SelectTimeFeature.State?
@@ -21,9 +31,12 @@ struct CreateDateFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Tap
         case nextButtonTapped
         case yearMonthDateButtonTapped
         case hourMinuteButtonTapped
+
+        case statusChanged
 
         // Child
         case yearMonthDate(PresentationAction<SelectDateFeature.Action>)
@@ -46,37 +59,67 @@ struct CreateDateFeature: ReducerProtocol {
 
             switch action {
 
-                // Tap
+                // MARK: - Tap
 
             case .nextButtonTapped:
                 if state.meetingDate.canMeeting {
                     state.description = "모임 가능 시간"
                 } else {
                     state.description = "모임은 2시간 이후부터 가능해요."
+                    state.yearMonthDateStatus = .invalid
+                    state.hourMinuteStatus = .invalid
                 }
                 return .none
 //                return .run { send in await send(.delegate(.moveToNext)) }
 
             case .yearMonthDateButtonTapped:
                 state.yearMonthDate = SelectDateFeature.State(date: state.meetingDate)
+                state.yearMonthDateStatus = .active
+
+                // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고를 없애주기 위함
+                if state.hourMinuteStatus == .invalid {
+                    state.hourMinuteStatus = .valid
+                }
                 return .none
 
             case .hourMinuteButtonTapped:
                 state.hourMinute = SelectTimeFeature.State(date: state.meetingDate)
+                state.hourMinuteStatus = .active
+
+                // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고를 없애주기 위함
+                if state.yearMonthDateStatus == .invalid {
+                    state.yearMonthDateStatus = .valid
+                }
                 return .none
 
-                // Child
+            case .statusChanged:
+                if state.yearMonthDateStatus == .inactive || state.hourMinuteStatus == .inactive {
+                    state.buttonDisabled = true
+                } else {
+                    state.buttonDisabled = false
+                }
+                return .none
 
+                // MARK: - Child
+
+                // 연, 월, 일 버튼
             case .yearMonthDate(.presented(.completeButtonTapped)):
                 if let yearMonthDateState = state.yearMonthDate {
                     let newDate = yearMonthDateState.date
                     let newYearMonthDate = state.meetingDate.yearMonthDate(of: newDate)
                     state.meetingDate = newYearMonthDate
                 }
+                state.yearMonthDateBeforeStatus = .valid
+                return .run { send in await send(.statusChanged) }
+
+            case .yearMonthDate(.dismiss):
+                state.yearMonthDateStatus = state.yearMonthDateBeforeStatus
                 return .none
 
             case .yearMonthDate:
                 return .none
+
+                // 시간, 분 버튼
 
             case .hourMinute(.presented(.completeButtonTapped)):
                 if let hourMinuteState = state.hourMinute {
@@ -84,11 +127,17 @@ struct CreateDateFeature: ReducerProtocol {
                     let newHourMinute = state.meetingDate.hourMinute(of: newDate)
                     state.meetingDate = newHourMinute
                 }
+                state.hourMinuteBeforeStatue = .valid
+                return .run { send in await send(.statusChanged) }
+
+            case .hourMinute(.dismiss):
+                state.hourMinuteStatus = state.hourMinuteBeforeStatue
                 return .none
 
             case .hourMinute:
                 return .none
-                // Delegate
+
+                // MARK: - Delegate
 
             case .delegate(.moveToNext):
                 return .none
