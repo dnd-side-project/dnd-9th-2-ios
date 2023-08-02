@@ -23,8 +23,13 @@ struct CreateDateView: View {
 
                 PageIndicator(data: CreateStatus.data, selectedStatus: .date)
 
-                Text("날짜를 정하세요")
-                    .font(.largeTitle)
+                Text("언제 만나기로 했나요?")
+                    .font(.title)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 2)
+
+                Text("날짜와 시간을 입력하세요.")
+                    .padding(.horizontal, 2)
 
                 GeometryReader { proxy in
                     HStack(spacing: dateButtonSpace) {
@@ -62,9 +67,13 @@ struct CreateDateView: View {
                         }
                     }
                 }
+                .frame(height: 52)
 
-                Text(viewStore.description)
-                    .padding()
+                if let errorMessage = viewStore.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.horizontal, 2)
+                }
 
                 Spacer()
 

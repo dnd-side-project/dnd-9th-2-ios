@@ -15,7 +15,7 @@ struct CreateDateFeature: ReducerProtocol {
 
         var meetingDate: Date = Date.now().meetingStartTime()
         var buttonDisabled: Bool = true
-        var description: String = "설명 글"
+        var errorMessage: String?
 
         // 날짜 버튼
         var yearMonthDateBeforeStatus: DateButtonStatus = .inactive
@@ -63,22 +63,22 @@ struct CreateDateFeature: ReducerProtocol {
 
             case .nextButtonTapped:
                 if state.meetingDate.canMeeting {
-                    state.description = "모임 가능 시간"
+                    return .run { send in await send(.delegate(.moveToNext)) }
                 } else {
-                    state.description = "모임은 2시간 이후부터 가능해요."
+                    state.errorMessage = "모임은 2시간 이후부터 가능해요."
                     state.yearMonthDateStatus = .invalid
                     state.hourMinuteStatus = .invalid
                 }
                 return .none
-//                return .run { send in await send(.delegate(.moveToNext)) }
 
             case .yearMonthDateButtonTapped:
                 state.yearMonthDate = SelectDateFeature.State(date: state.meetingDate)
                 state.yearMonthDateStatus = .active
 
-                // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고를 없애주기 위함
+                // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고, 에러메시지를 없애주기 위함
                 if state.hourMinuteStatus == .invalid {
                     state.hourMinuteStatus = .valid
+                    state.errorMessage = nil
                 }
                 return .none
 
@@ -89,6 +89,7 @@ struct CreateDateFeature: ReducerProtocol {
                 // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고를 없애주기 위함
                 if state.yearMonthDateStatus == .invalid {
                     state.yearMonthDateStatus = .valid
+                    state.errorMessage = nil
                 }
                 return .none
 
