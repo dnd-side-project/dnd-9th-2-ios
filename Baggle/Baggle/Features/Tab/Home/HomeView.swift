@@ -52,7 +52,9 @@ struct HomeView: View {
 
                         List((viewStore.meetingStatus == .ongoing)
                              ? viewStore.ongoingList : viewStore.completedList) { meeting in
-                            NavigationLink(state: MeetingDetailFeature.State(meetingId: meeting.id)) {
+                            NavigationLink(state: MeetingDetailFeature.State(
+                                meetingId: meeting.id)
+                            ) {
                                 VStack(alignment: .leading, spacing: 10) {
                                     Text("\(meeting.id)")
                                         .font(.caption)

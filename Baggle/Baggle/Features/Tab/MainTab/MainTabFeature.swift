@@ -62,8 +62,10 @@ struct MainTabFeature: ReducerProtocol {
                 // MARK: - Child Action
 
             case .createMeeting(PresentationAction.dismiss):
-                state.selectedTab = state.previousTab
-                return .none
+                let previousTab = state.previousTab
+                return .run { send in
+                    await send(.selectTab(previousTab))
+                }
 
             case .createMeeting:
                 return .none
@@ -74,6 +76,12 @@ struct MainTabFeature: ReducerProtocol {
 
             case .logoutMainTab:
                 return.none
+
+            case .joinMeeting(PresentationAction.dismiss):
+                state.selectedTab = .myPage
+                return .run { send in
+                    await send(.selectTab(.home))
+                }
 
             case .joinMeeting:
                 return .none

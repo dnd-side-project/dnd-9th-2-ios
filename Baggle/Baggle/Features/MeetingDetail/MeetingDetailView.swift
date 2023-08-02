@@ -64,6 +64,7 @@ struct MeetingDetailView: View {
             .onAppear {
                 viewStore.send(.onAppear)
             }
+            .toolbar(.hidden, for: .tabBar)
         }
     }
 }
