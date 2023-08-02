@@ -82,11 +82,14 @@ struct BaggleTextField: View {
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
+
             VStack(alignment: .leading) {
+
                 if case let .title(title) = title {
                     Text(title)
                         .font(.caption)
-                        .padding(EdgeInsets(top: 0, leading: 2, bottom: 6, trailing: 0))
+                        .padding(.horizontal, 2)
+                        .padding(.bottom, 6)
                 }
 
                 HStack(alignment: .center, spacing: 8) {
@@ -126,7 +129,8 @@ struct BaggleTextField: View {
                 if case let .invalid(error) = viewStore.textFieldState {
                     Text(error)
                         .font(.caption)
-                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 0))
+                        .padding(.horizontal, 8)
+                        .padding(.top, 8)
                         .foregroundColor(viewStore.textFieldState.fgColor)
                 }
             }

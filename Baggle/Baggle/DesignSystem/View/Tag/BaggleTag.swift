@@ -19,7 +19,8 @@ struct BaggleTag: View {
     var body: some View {
         Text(text)
             .kerning(-0.5)
-            .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
             .foregroundColor(color.fgColor)
             .background(color.bgColor)
             .cornerRadius(6)
