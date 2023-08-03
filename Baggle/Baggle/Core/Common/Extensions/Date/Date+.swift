@@ -131,23 +131,31 @@ extension Date {
         return hoursFromNow
     }
 
+    // n 분 이후 생성
+    func later(minutes: Int) -> Date {
+        // swiftlint:disable:next force_unwrapping
+        let hoursFromNow = Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+        return hoursFromNow
+    }
+
     /// 약속 생성 가능 시간 리턴
     /// ex
     /// 2시 03분 -> 2시 05분
     /// 2시 05분 -> 2시 10분
     func meetingStartTime() -> Date {
+
         // 2시간 이후
-        var result = later(hours: 2)
+        let twoHoursLater = self.later(hours: 2)
 
-        // 2시 5분이면 생성이 불가능 -> 2시 6분으로
-        result.minute += 1
+        // 5분 이후
+        var twoHoursFiveMinutesLater = twoHoursLater.later(minutes: 5)
 
-        // 2시 10분으로
-        while result.minute % 5 != 0 {
-            result.minute += 1
+        // 5분 단위로 만들기
+        while twoHoursFiveMinutesLater.minute % 5 != 0 {
+            twoHoursFiveMinutesLater.minute -= 1
         }
 
-        return result
+        return twoHoursFiveMinutesLater
     }
 
     var canMeeting: Bool {
