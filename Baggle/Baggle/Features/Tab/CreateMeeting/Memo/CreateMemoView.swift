@@ -35,7 +35,6 @@ struct CreateMemoView: View {
                 } label: {
                     Text("다음")
                 }
-                .padding(.bottom, 10)
                 .buttonStyle(BagglePrimaryStyle())
             }
             .contentShape(Rectangle())

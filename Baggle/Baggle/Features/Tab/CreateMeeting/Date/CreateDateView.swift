@@ -85,7 +85,6 @@ struct CreateDateView: View {
                 } label: {
                     Text("다음")
                 }
-                .padding(.bottom, 10)
                 .buttonStyle(BagglePrimaryStyle())
                 .disabled(viewStore.buttonDisabled)
             }
