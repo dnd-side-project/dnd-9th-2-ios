@@ -28,6 +28,8 @@ struct LoginFeature: ReducerProtocol {
         // MARK: - Button Tapped
 
         case loginButtonTapped(LoginPlatform, String)
+        case kakaoLoginButtonTapped
+        case appleLoginButtonTapped
         case signUpButtonTapped
 
         // MARK: - Dependency
@@ -39,6 +41,8 @@ struct LoginFeature: ReducerProtocol {
 
         case signUpNickname(PresentationAction<SignUpFeature.Action>)
     }
+
+    @Dependency(\.kakaoLoginService) private var kakaoLoginService
 
     var body: some ReducerProtocolOf<Self> {
         Reduce { state, action in
@@ -52,6 +56,20 @@ struct LoginFeature: ReducerProtocol {
                 return .run { send in
                     await send(.loginSuccess)
                 }
+
+            case .kakaoLoginButtonTapped:
+                return .run { _ in
+                    do {
+                        let token = try await kakaoLoginService.login()
+                        print("카카오 토큰 \(token)")
+                    } catch {
+                        print("카카오 로그인 에러")
+                        print(error)
+                    }
+                }
+
+            case .appleLoginButtonTapped:
+                return .none
 
             case .signUpButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화

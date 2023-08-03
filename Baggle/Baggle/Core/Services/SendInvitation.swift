@@ -49,8 +49,14 @@ public struct SendInvitationEffect: Sendable {
         let button = Button(title: "약속 참여하기", link: appLink)
         guard let thumbnailUrl = URL(string: "https://picsum.photos/200") else { return nil }
 
-        let content = Content(title: name, imageUrl: thumbnailUrl, description: "\(name) 약속에 초대합니다.\n지금 바로 참여해보세요!", link: appLink)
+        let content = Content(
+            title: name,
+            imageUrl: thumbnailUrl,
+            description: "\(name) 약속에 초대합니다.\n지금 바로 참여해보세요!",
+            link: appLink
+        )
         let template = FeedTemplate(content: content, buttons: [button])
+
         do {
             let templateJsonData = try SdkJSONEncoder.custom.encode(template)
             let templateJsonObject = SdkUtils.toJsonObject(templateJsonData)

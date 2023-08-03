@@ -30,9 +30,11 @@ struct SelectDateView: View {
                 }
 
                 BaggleDatePickerView(
-                    store: self.store.scope(
-                        state: \.baggleDatePicker,
-                        action: SelectDateFeature.Action.baggleDatePicker
+                    date: viewStore.binding(
+                        get: \.date,
+                        send: { value in
+                            SelectDateFeature.Action.dateChanged(value)
+                        }
                     )
                 )
 
@@ -52,7 +54,9 @@ struct YearMonthDateView_Previews: PreviewProvider {
     static var previews: some View {
         SelectDateView(
             store: Store(
-                initialState: SelectDateFeature.State(),
+                initialState: SelectDateFeature.State(
+                    date: Date()
+                ),
                 reducer: SelectDateFeature()
             )
         )

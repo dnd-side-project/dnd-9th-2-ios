@@ -53,47 +53,9 @@ struct LoginView: View {
 
 extension LoginView {
 
-    func requestKakaoLogin() async throws -> String {
-        typealias TokenContinuation = CheckedContinuation<String, Error>
-        return try await withCheckedThrowingContinuation({ (continuation: TokenContinuation) in
-            DispatchQueue.main.async {
-                if UserApi.isKakaoTalkLoginAvailable() {
-                    UserApi.shared.loginWithKakaoTalk { oauthToken, error in
-                        if let error {
-                            dump(error)
-                            continuation.resume(throwing: error)
-                        } else {
-                            if let accessToken = oauthToken?.accessToken {
-                                continuation.resume(returning: accessToken)
-                            }
-                        }
-                    }
-                } else {
-                    UserApi.shared.loginWithKakaoAccount { oauthToken, error in
-                        if let error {
-                            dump(error)
-                            continuation.resume(throwing: error)
-                        } else {
-                            if let accessToken = oauthToken?.accessToken {
-                                continuation.resume(returning: accessToken)
-                            }
-                        }
-                    }
-                }
-            }
-        })
-    }
-
     func kakaoLoginButton() -> some View {
         Button {
-            Task {
-                do {
-                    let token = try await requestKakaoLogin()
-                    ViewStore(self.store, observe: { $0 }).send(.loginButtonTapped(.kakao, token))
-                } catch {
-                    print("error: \(error)")
-                }
-            }
+            ViewStore(self.store, observe: { $0 }).send(.kakaoLoginButtonTapped)
         } label: {
             Text("카카오 로그인")
         }
