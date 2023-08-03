@@ -13,6 +13,7 @@ struct CreateDateView: View {
 
     private let dateButtonSpace: CGFloat = 10
     private let dateWidthRatio = 0.65
+    private let dateButtonHeight:CGFloat = 54
 
     let store: StoreOf<CreateDateFeature>
 
@@ -38,7 +39,9 @@ struct CreateDateView: View {
                             }
                             .foregroundColor(viewStore.dateButtonStatus.color)
                             .padding()
-                            .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
+                            .frame(
+                                width: abs(proxy.size.width - dateButtonSpace) * dateWidthRatio
+                            )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(viewStore.dateButtonStatus.color, lineWidth: 1)
@@ -55,7 +58,7 @@ struct CreateDateView: View {
                             .foregroundColor(viewStore.timeButtonStatus.color)
                             .padding()
                             .frame(
-                                width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio)
+                                width: abs(proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio)
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
