@@ -14,23 +14,48 @@ enum MeetingDetailState {
 
 struct MeetingDetailFeature: ReducerProtocol {
 
-    var meetingId: Int
-
     struct State: Equatable {
         // MARK: - Scope State
 
+        var meetingId: Int
         var meetingData: MeetingDetail?
-        var isDeleted: Bool = false
+
+        // Alert
+        var alertType: MeetingDeleteType = .delete
+        var isAlertPresented: Bool = false
+        var alertTitle: String = ""
+        var alertDescription: String?
+        var alertRightButtonTitle: String = ""
+
+        // delete
+        @PresentationState var selectOwner: SelectOwnerFeature.State?
+        var nextOwnerId: Int?
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
         case onAppear
-        case updateData(MeetingDetail?)
+        case updateData(MeetingDetail)
+        case presentAlert
         case deleteMeeting
+
+        // button
+        case deleteButtonTapped
+        case leaveButtonTapped
+        case backButtonTapped
+
+        case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
+
+        // delegate
+        case delegate(Delegate)
+
+        enum Delegate: Equatable {
+            case deleteSuccess
+        }
     }
 
+    @Dependency(\.dismiss) var dismiss
     @Dependency(\.meetingDetailService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
@@ -43,19 +68,70 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
+                let id = state.meetingId
                 return .run { send in
-                    let data = await meetingService.fetchMeetingDetail(meetingId)
-                    await send(.updateData(data))
+                    if let data = await meetingService.fetchMeetingDetail(id) {
+                        await send(.updateData(data))
+                    }
                 }
 
             case .updateData(let data):
                 state.meetingData = data
                 return .none
 
+            case .presentAlert:
+                state.alertTitle = (state.meetingData?.name ?? "-") + state.alertType.title
+                state.alertDescription = state.alertType.description
+                state.alertRightButtonTitle = state.alertType.rightButtonTitle
+                state.isAlertPresented.toggle()
+                return .none
+
             case .deleteMeeting:
-                state.isDeleted = true
+                return .run { send in
+                    // 삭제 서버 통신
+                    await send(.delegate(.deleteSuccess))
+                }
+
+            case .deleteButtonTapped:
+                state.alertType = .delete
+                return .run { send in
+                    await send(.presentAlert)
+                }
+
+            case .leaveButtonTapped:
+                state.alertType = .leave
+                state.selectOwner = SelectOwnerFeature.State(
+                    memberList: state.meetingData?.members ?? [])
+                return .none
+
+            case .backButtonTapped:
+                return .run { _ in
+                    await dismiss()
+                }
+
+            case .selectOwner(.presented(.leaveButtonTapped)):
+                if let nextOwnerId = state.selectOwner?.selectedMemberId {
+                    state.nextOwnerId = nextOwnerId
+                }
+                return .run { send in
+                    await send(.presentAlert)
+                }
+
+            case .selectOwner:
+                return .none
+
+            case .delegate(.deleteSuccess):
+                state.isAlertPresented.toggle()
+                return .run { _ in
+                    await dismiss()
+                }
+
+            case .delegate:
                 return .none
             }
+        }
+        .ifLet(\.$selectOwner, action: /Action.selectOwner) {
+            SelectOwnerFeature()
         }
     }
 }

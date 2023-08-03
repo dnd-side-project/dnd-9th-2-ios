@@ -11,6 +11,7 @@ struct MainTabFeature: ReducerProtocol {
 
     struct State: Equatable {
         var selectedTab: TapType = .home
+        var previousTab: TapType = .home
 
         var myPageFeature: MyPageFeature.State
 
@@ -53,12 +54,18 @@ struct MainTabFeature: ReducerProtocol {
             case .selectTab(let tabType):
                 if tabType == .createMeeting {
                     state.createMeeting = CreateTitleFeature.State()
-                } else {
-                    state.selectedTab = tabType
+                    state.previousTab = state.selectedTab
                 }
+                state.selectedTab = tabType
                 return .none
 
                 // MARK: - Child Action
+
+            case .createMeeting(PresentationAction.dismiss):
+                let previousTab = state.previousTab
+                return .run { send in
+                    await send(.selectTab(previousTab))
+                }
 
             case .createMeeting:
                 return .none
@@ -69,6 +76,12 @@ struct MainTabFeature: ReducerProtocol {
 
             case .logoutMainTab:
                 return.none
+
+            case .joinMeeting(PresentationAction.dismiss):
+                state.selectedTab = .myPage
+                return .run { send in
+                    await send(.selectTab(.home))
+                }
 
             case .joinMeeting:
                 return .none

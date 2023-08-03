@@ -35,7 +35,7 @@ struct SelectDateFeature: ReducerProtocol {
 
             switch action {
 
-                //State
+                // State
             case let .dateChanged(newDate):
                 state.date = newDate
                 return .none

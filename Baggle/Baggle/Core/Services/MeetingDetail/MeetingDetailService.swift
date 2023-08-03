@@ -39,13 +39,13 @@ struct MockUpMeetingDetailService {
 
     private func makeMockMeetingDetail(_ id: Int) -> MeetingDetail {
         let members = [
-            Member(userid: 1,
+            Member(id: 1,
                    name: "안녕",
                    profileURL: "",
                    isOwner: true,
                    certified: false,
                    certImage: ""),
-            Member(userid: 2,
+            Member(id: 2,
                    name: "안녕222",
                    profileURL: "",
                    isOwner: true,
