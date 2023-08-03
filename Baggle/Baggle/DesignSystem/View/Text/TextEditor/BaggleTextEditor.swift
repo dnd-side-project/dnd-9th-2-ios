@@ -37,7 +37,7 @@ struct BaggleTextEditor: View {
                 if case let .title(title) = title {
                     Text(title)
                         .font(.caption)
-                        .padding(.horizontal, 2)
+                        .padding(.horizontal, 4)
                         .padding(.bottom, 6)
                 }
 
@@ -60,7 +60,7 @@ struct BaggleTextEditor: View {
                     }
 
                     Text("\(viewStore.text.count) / 50")
-                        .foregroundColor(viewStore.textFieldState.borderColor)
+                        .foregroundColor(viewStore.textFieldState.fgColor)
                         .padding([.bottom, .trailing])
                 }
                 .cornerRadius(10)

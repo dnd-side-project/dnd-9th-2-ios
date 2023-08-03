@@ -16,12 +16,20 @@ struct CreateMemoView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Text("메모를 입력하세요")
-                .font(.largeTitle)
+            VStack(spacing: 0) {
 
-            VStack {
-                Text("메모를 입력하세요")
-                    .font(.largeTitle)
+                VStack(alignment: .leading, spacing: 16) {
+                    PageIndicator(data: CreateStatus.data, selectedStatus: .memo)
+
+                    HStack {
+                        Text("약속 메모를 남겨보세요.")
+                            .font(.title2)
+
+                        Spacer()
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top)
 
                 BaggleTextEditor(
                     store: self.store.scope(
