@@ -14,7 +14,7 @@ struct MemberInfoView: View {
     var body: some View {
 
         VStack(spacing: 10) {
-            Text("\(memberInfo.userid)")
+            Text("\(memberInfo.id)")
 
             Text(memberInfo.name)
         }
@@ -31,7 +31,7 @@ struct MemberInfoView_Previews: PreviewProvider {
         MemberInfoView(memberInfo:
                         Member(
                             // swiftlint:disable:next multiline_arguments
-                            userid: 100, name: "유저1", profileURL: "",
+                            id: 100, name: "유저1", profileURL: "",
                             // swiftlint:disable:next multiline_arguments
                             isOwner: false, certified: false, certImage: ""),
                        selected: false

@@ -23,11 +23,11 @@ struct SelectOwnerView: View {
                 Spacer()
 
                 HStack {
-                    ForEach(viewStore.memberList, id: \.userid) { member in
+                    ForEach(viewStore.memberList, id: \.id) { member in
                         MemberInfoView(memberInfo: member,
-                                       selected: viewStore.selectedMemberId == member.userid)
+                                       selected: viewStore.selectedMemberId == member.id)
                         .onTapGesture {
-                            viewStore.send(.selectMember(member.userid))
+                            viewStore.send(.selectMember(member.id))
                         }
                     }
                 }
@@ -51,15 +51,15 @@ struct HostPickerView_Previews: PreviewProvider {
                 initialState: SelectOwnerFeature.State(
                     memberList: [
                         // swiftlint:disable:next multiline_arguments
-                        Member(userid: 100, name: "유저1", profileURL: "",
+                        Member(id: 100, name: "유저1", profileURL: "",
                                // swiftlint:disable:next multiline_arguments
                                isOwner: false, certified: false, certImage: ""),
                         // swiftlint:disable:next multiline_arguments
-                        Member(userid: 200, name: "유저2", profileURL: "",
+                        Member(id: 200, name: "유저2", profileURL: "",
                                // swiftlint:disable:next multiline_arguments
                                isOwner: false, certified: false, certImage: ""),
                         // swiftlint:disable:next multiline_arguments
-                        Member(userid: 300, name: "유저3", profileURL: "",
+                        Member(id: 300, name: "유저3", profileURL: "",
                                // swiftlint:disable:next multiline_arguments
                                isOwner: false, certified: false, certImage: "")
                     ]

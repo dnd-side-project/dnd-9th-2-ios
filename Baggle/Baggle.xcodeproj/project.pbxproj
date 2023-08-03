@@ -71,6 +71,7 @@
 		2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */; };
 		2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2B35E4EC2A70B6DB00915876 /* KakaoSDK */; };
 		2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39F21B2A738BB100E034A3 /* SendInvitation.swift */; };
+		2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45F2202A7B634400874783 /* MeetingDeleteType.swift */; };
 		2B5BE6AF2A779C8E00F25474 /* MeetingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */; };
 		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* attributedString.swift */; };
@@ -176,6 +177,7 @@
 		2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
 		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
+		2B45F2202A7B634400874783 /* MeetingDeleteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteType.swift; sourceTree = "<group>"; };
 		2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetail.swift; sourceTree = "<group>"; };
 		2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributedString.swift; sourceTree = "<group>"; };
@@ -745,6 +747,7 @@
 				2B2BA5272A7AB45300A90AE7 /* SelectHost */,
 				2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */,
 				2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */,
+				2B45F2202A7B634400874783 /* MeetingDeleteType.swift */,
 			);
 			path = MeetingDetail;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
 				14B7A0472A7548BD00B8E202 /* View+.swift in Sources */,
+				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,

@@ -81,7 +81,7 @@ struct MeetingDetailView_Previews: PreviewProvider {
                         date: "2023년 4월 9일", time: "16:40", memo: "ㅇㅇ",
                         members: [Member(
                             // swiftlint:disable:next multiline_arguments
-                            userid: 1, name: "콩이", profileURL: "",
+                            id: 1, name: "콩이", profileURL: "",
                             // swiftlint:disable:next multiline_arguments
                             isOwner: true, certified: false, certImage: "")],
                         isConfirmed: false,
