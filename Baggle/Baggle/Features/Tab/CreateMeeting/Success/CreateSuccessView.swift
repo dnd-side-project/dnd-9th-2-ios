@@ -82,14 +82,14 @@ struct CreateSuccessView: View {
                 // MARK: - 버튼
 
                 Button {
-                    viewStore.send(.completeButtonTapped)
+                    viewStore.send(.kakaoInviteButtonTapped)
                 } label: {
                     Text("카카오톡으로 초대장 보내기")
                 }
                 .buttonStyle(BagglePrimaryStyle())
 
                 Button {
-                    viewStore.send(.completeButtonTapped)
+                    viewStore.send(.sendLaterButtonTapped)
                 } label: {
                     Text("나중에 보내기")
                         .foregroundColor(Color.gray)
