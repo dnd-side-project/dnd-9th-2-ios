@@ -16,12 +16,9 @@ struct CreateMemoView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Text("메모를 입력하세요")
-                .font(.largeTitle)
+            VStack(spacing: 0) {
 
-            VStack {
-                Text("메모를 입력하세요")
-                    .font(.largeTitle)
+                CreateDescription(createStatus: .memo, title: "약속 메모를 남겨보세요.")
 
                 BaggleTextEditor(
                     store: self.store.scope(
@@ -38,13 +35,14 @@ struct CreateMemoView: View {
                 } label: {
                     Text("다음")
                 }
-                .padding(.bottom, 10)
                 .buttonStyle(BagglePrimaryStyle())
             }
+            .contentShape(Rectangle())
             .onTapGesture {
                 hideKeyboard()
             }
         }
+        .padding()
     }
 }
 

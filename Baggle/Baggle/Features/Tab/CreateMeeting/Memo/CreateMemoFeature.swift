@@ -13,8 +13,7 @@ struct CreateMemoFeature: ReducerProtocol {
         // Child
         var textEditorState = BaggleTextFeature.State(
             maxCount: 50,
-            textFieldState: .inactive,
-            isFocused: true
+            textFieldState: .inactive
         )
     }
 

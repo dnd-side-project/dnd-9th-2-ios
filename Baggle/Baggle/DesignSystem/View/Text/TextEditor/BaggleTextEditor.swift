@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct BaggleTextEditor: View {
 
     private let store: StoreOf<BaggleTextFeature>
-    private var placeholder: String
+    @State private var placeholder: String
     private var title: TextFieldTitle
 
     init(
@@ -37,30 +37,43 @@ struct BaggleTextEditor: View {
                 if case let .title(title) = title {
                     Text(title)
                         .font(.caption)
-                        .padding(.horizontal, 2)
+                        .padding(.horizontal, 4)
                         .padding(.bottom, 6)
                 }
 
                 // MARK: - 본문
 
-                VStack(alignment: .trailing) {
-                    TextEditor(
-                        text: viewStore.binding(
-                            get: \.text,
-                            send: BaggleTextFeature.Action.textChanged
+                ZStack(alignment: .bottomTrailing) {
+
+                    ZStack(alignment: .topLeading) {
+                        TextEditor(
+                            text: viewStore.binding(
+                                get: \.text,
+                                send: BaggleTextFeature.Action.textChanged
+                            )
                         )
-                    )
-                    .lineSpacing(5)
-                    .padding([.horizontal, .top])
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 100)
-                    .focused($isFocused)
-                    .onChange(of: isFocused) { newValue in
-                        viewStore.send(.isFocused(newValue))
+                        .foregroundColor(viewStore.textFieldState.fgColor)
+                        .background(.clear)
+                        .lineSpacing(5)
+                        .padding()
+                        .focused($isFocused)
+                        .onChange(of: isFocused) { newValue in
+                            viewStore.send(.isFocused(newValue))
+                        }
+
+                        if viewStore.text.isEmpty && !isFocused {
+                            TextEditor(text: $placeholder)
+                                .font(.body)
+                                .foregroundColor(.gray)
+                                .disabled(true)
+                                .padding()
+                        }
                     }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 140)
 
                     Text("\(viewStore.text.count) / 50")
-                        .foregroundColor(viewStore.textFieldState.borderColor)
-                        .padding([.bottom, .trailing])
+                        .foregroundColor(viewStore.textFieldState.fgColor)
+                        .padding()
                 }
                 .cornerRadius(10)
                 .overlay(
@@ -78,7 +91,6 @@ struct BaggleTextEditor: View {
                         .foregroundColor(viewStore.textFieldState.fgColor)
                 }
             }
-            .padding()
             .onAppear {
                 isFocused = viewStore.state.isFocused
             }
