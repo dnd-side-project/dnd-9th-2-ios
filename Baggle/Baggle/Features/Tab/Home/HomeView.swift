@@ -86,25 +86,22 @@ struct HomeView: View {
                                perform: { noti in
                         // noti로부터 id 값 받아서 넣기
                         if let id = noti.object as? Int {
-                            viewStore.send(.moveToMeetingDetail(id))
+                            viewStore.send(.setMeetingDetailId(id))
                         }
                     })
                     .onAppear {
                         viewStore.send(.onAppear)
                     }
-                    // 푸시알림 탭해서 들어오는 경우
+                    // 외부에서 들어오는 경우 (카카오톡, 푸시알림)
                     .navigationDestination(
                         isPresented: Binding(
-                            get: { viewStore.pushMeetingDetailId != nil },
-                            set: { _ in
-                                viewStore.send(.moveToMeetingDetail(
-                                    viewStore.pushMeetingDetailId ?? 0))
-                            })
+                            get: { viewStore.pushMeetingDetail },
+                            set: { _ in viewStore.send(.pushMeetingDetail) })
                     ) {
                         MeetingDetailView(
                             store: Store(
                                 initialState: MeetingDetailFeature.State(
-                                    meetingId: viewStore.pushMeetingDetailId ?? 0),
+                                    meetingId: viewStore.meetingDetailId ?? 0),
                                 reducer: MeetingDetailFeature()
                             )
                         )

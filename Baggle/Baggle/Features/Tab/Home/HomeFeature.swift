@@ -26,7 +26,9 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope State
 
         var meetingStatus: MeetingStatus = .ongoing
-        var pushMeetingDetailId: Int?
+        var meetingDetailId: Int?
+        var pushMeetingDetail: Bool = false
+
         var ongoingList: [Meeting] = []
         var completedList: [Meeting] = []
         var path = StackState<MeetingDetailFeature.State>()
@@ -40,11 +42,20 @@ struct HomeFeature: ReducerProtocol {
         case updateMeetingList(MeetingStatus, [Meeting]?)
         case refreshMeetingList
         case changeMeetingStatus(MeetingStatus)
+
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
-        case moveToMeetingDetail(Int)
+
+        case setMeetingDetailId(Int)
+        case pushMeetingDetail
         case path(StackAction<MeetingDetailFeature.State, MeetingDetailFeature.Action>)
+
+        case delegate(Delegate)
+
+        enum Delegate: Equatable {
+            case moveToMeetingDetail
+        }
     }
 
     @Dependency(\.sendInvitation) private var sendInvitation
@@ -125,9 +136,12 @@ struct HomeFeature: ReducerProtocol {
                 print("초대하기 실패")
                 return .none
 
-            case .moveToMeetingDetail(let id):
-                state.pushMeetingDetailId = id
-                return .none
+            case .setMeetingDetailId(let id):
+                state.meetingDetailId = id
+                state.pushMeetingDetail = true
+                return .run { send in
+                    await send(.pushMeetingDetail)
+                }
 
             case .path(.element(id: _, action: .delegate(.deleteSuccess))):
                 return .run { send in
@@ -136,6 +150,15 @@ struct HomeFeature: ReducerProtocol {
 
             case .path:
                 return .none
+
+            case .delegate(.moveToMeetingDetail):
+                return .none
+
+            case .pushMeetingDetail:
+                state.pushMeetingDetail.toggle()
+                return .run { send in
+                    await send(.delegate(.moveToMeetingDetail))
+                }
             }
 
             @Sendable func moveToAppStore() {
