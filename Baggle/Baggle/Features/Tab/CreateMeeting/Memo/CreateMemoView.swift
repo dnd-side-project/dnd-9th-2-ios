@@ -38,6 +38,7 @@ struct CreateMemoView: View {
                 .padding(.bottom, 10)
                 .buttonStyle(BagglePrimaryStyle())
             }
+            .contentShape(Rectangle())
             .onTapGesture {
                 hideKeyboard()
             }
