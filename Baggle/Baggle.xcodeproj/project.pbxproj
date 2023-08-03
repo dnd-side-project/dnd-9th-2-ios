@@ -42,13 +42,13 @@
 		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
 		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
 		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
-		146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */; };
 		146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */; };
 		146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */; };
 		146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51ED2A79429400FF3142 /* SelectDateFeature.swift */; };
 		146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EF2A79429E00FF3142 /* SelectDateView.swift */; };
 		146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */; };
 		146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F32A7950F500FF3142 /* SelectTimeView.swift */; };
+		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
@@ -142,13 +142,13 @@
 		146C51D22A79139900FF3142 /* BaggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146C51D42A79139900FF3142 /* BaggleDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDateTests.swift; sourceTree = "<group>"; };
 		146C51DF2A79143A00FF3142 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDatePickerFeature.swift; sourceTree = "<group>"; };
 		146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDatePickerView.swift; sourceTree = "<group>"; };
 		146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTimePickerView.swift; sourceTree = "<group>"; };
 		146C51ED2A79429400FF3142 /* SelectDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateFeature.swift; sourceTree = "<group>"; };
 		146C51EF2A79429E00FF3142 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeFeature.swift; sourceTree = "<group>"; };
 		146C51F32A7950F500FF3142 /* SelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeView.swift; sourceTree = "<group>"; };
+		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -449,6 +449,7 @@
 			children = (
 				143B270B2A76245F00DFC0EE /* CreateDateView.swift */,
 				143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */,
+				147899992A7A0BC20071DAE3 /* DateInputStatus.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -518,7 +519,6 @@
 			children = (
 				146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */,
 				146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */,
-				146C51E62A793D3600FF3142 /* BaggleDatePickerFeature.swift */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -932,6 +932,7 @@
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
+				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,
@@ -967,7 +968,6 @@
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* NotiList.swift in Sources */,
-				146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */,
 				2BF268202A77828100F32ADF /* Meeting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

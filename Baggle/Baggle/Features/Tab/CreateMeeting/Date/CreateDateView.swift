@@ -23,8 +23,13 @@ struct CreateDateView: View {
 
                 PageIndicator(data: CreateStatus.data, selectedStatus: .date)
 
-                Text("날짜를 정하세요")
-                    .font(.largeTitle)
+                Text("언제 만나기로 했나요?")
+                    .font(.title)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 2)
+
+                Text("날짜와 시간을 입력하세요.")
+                    .padding(.horizontal, 2)
 
                 GeometryReader { proxy in
                     HStack(spacing: dateButtonSpace) {
@@ -33,36 +38,42 @@ struct CreateDateView: View {
                             Text(viewStore.meetingDate.koreanDate())
                             Spacer()
                         }
+                        .foregroundColor(viewStore.dateButtonStatus.color)
                         .padding()
                         .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1)
+                                .stroke(viewStore.dateButtonStatus.color, lineWidth: 1)
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewStore.send(.yearMonthDateButtonTapped)
+                            viewStore.send(.selectDateButtonTapped)
                         }
 
                         HStack {
                             Text(viewStore.meetingDate.hourMinute())
                             Spacer()
                         }
+                        .foregroundColor(viewStore.timeButtonStatus.color)
                         .padding()
                         .frame(width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1)
+                                .stroke(viewStore.timeButtonStatus.color, lineWidth: 1)
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewStore.send(.hourMinuteButtonTapped)
+                            viewStore.send(.selectTimeButtonTapped)
                         }
                     }
                 }
+                .frame(height: 52)
 
-                Text(viewStore.description)
-                    .padding()
+                if let errorMessage = viewStore.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.horizontal, 2)
+                }
 
                 Spacer()
 
@@ -72,20 +83,21 @@ struct CreateDateView: View {
                     Text("다음")
                 }
                 .buttonStyle(BagglePrimaryStyle())
+                .disabled(viewStore.buttonDisabled)
             }
             .padding()
             .sheet(
                 store: self.store.scope(
-                    state: \.$yearMonthDate,
-                    action: { .yearMonthDate($0) })
+                    state: \.$selectDateState,
+                    action: { .selectDateAction($0) })
             ) { selectDateStore in
                 SelectDateView(store: selectDateStore)
                     .presentationDetents([.height(360)])
             }
             .sheet(
                 store: self.store.scope(
-                    state: \.$hourMinute,
-                    action: { .hourMinute($0) })
+                    state: \.$selectTimeState,
+                    action: { .selectTimeAction($0) })
             ) { selectTimeStore in
                 SelectTimeView(store: selectTimeStore)
                     .presentationDetents([.height(360)])
