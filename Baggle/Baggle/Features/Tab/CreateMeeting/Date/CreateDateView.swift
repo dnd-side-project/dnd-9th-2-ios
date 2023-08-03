@@ -19,60 +19,60 @@ struct CreateDateView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack(alignment: .leading, spacing: 16) {
 
-                PageIndicator(data: CreateStatus.data, selectedStatus: .date)
+            VStack(spacing: 0) {
 
-                Text("언제 만나기로 했나요?")
-                    .font(.title)
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 2)
-
-                Text("날짜와 시간을 입력하세요.")
-                    .padding(.horizontal, 2)
+                CreateDescription(createStatus: .date, title: "언제 만나기로 했나요?")
 
                 GeometryReader { proxy in
-                    HStack(spacing: dateButtonSpace) {
+                    VStack(alignment: .leading) {
 
-                        HStack {
-                            Text(viewStore.meetingDate.koreanDate())
-                            Spacer()
-                        }
-                        .foregroundColor(viewStore.dateButtonStatus.color)
-                        .padding()
-                        .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(viewStore.dateButtonStatus.color, lineWidth: 1)
-                        )
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewStore.send(.selectDateButtonTapped)
+                        Text("날짜와 시간을 입력하세요.")
+                            .padding(.horizontal, 2)
+
+                        HStack(spacing: dateButtonSpace) {
+
+                            HStack {
+                                Text(viewStore.meetingDate.koreanDate())
+                                Spacer()
+                            }
+                            .foregroundColor(viewStore.dateButtonStatus.color)
+                            .padding()
+                            .frame(width: (proxy.size.width - dateButtonSpace) * dateWidthRatio)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(viewStore.dateButtonStatus.color, lineWidth: 1)
+                            )
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                viewStore.send(.selectDateButtonTapped)
+                            }
+
+                            HStack {
+                                Text(viewStore.meetingDate.hourMinute())
+                                Spacer()
+                            }
+                            .foregroundColor(viewStore.timeButtonStatus.color)
+                            .padding()
+                            .frame(
+                                width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(viewStore.timeButtonStatus.color, lineWidth: 1)
+                            )
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                viewStore.send(.selectTimeButtonTapped)
+                            }
                         }
 
-                        HStack {
-                            Text(viewStore.meetingDate.hourMinute())
-                            Spacer()
-                        }
-                        .foregroundColor(viewStore.timeButtonStatus.color)
-                        .padding()
-                        .frame(width: (proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(viewStore.timeButtonStatus.color, lineWidth: 1)
-                        )
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewStore.send(.selectTimeButtonTapped)
+                        if let errorMessage = viewStore.errorMessage {
+                            Text(errorMessage)
+                                .foregroundColor(.red)
+                                .padding(.horizontal, 2)
                         }
                     }
-                }
-                .frame(height: 52)
-
-                if let errorMessage = viewStore.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding(.horizontal, 2)
                 }
 
                 Spacer()
@@ -82,6 +82,7 @@ struct CreateDateView: View {
                 } label: {
                     Text("다음")
                 }
+                .padding(.bottom, 10)
                 .buttonStyle(BagglePrimaryStyle())
                 .disabled(viewStore.buttonDisabled)
             }

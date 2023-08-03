@@ -18,18 +18,7 @@ struct CreateMemoView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
 
-                VStack(alignment: .leading, spacing: 16) {
-                    PageIndicator(data: CreateStatus.data, selectedStatus: .memo)
-
-                    HStack {
-                        Text("약속 메모를 남겨보세요.")
-                            .font(.title2)
-
-                        Spacer()
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top)
+                CreateDescription(createStatus: .memo, title: "약속 메모를 남겨보세요.")
 
                 BaggleTextEditor(
                     store: self.store.scope(
@@ -53,6 +42,7 @@ struct CreateMemoView: View {
                 hideKeyboard()
             }
         }
+        .padding()
     }
 }
 

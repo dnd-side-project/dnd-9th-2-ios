@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406858A2A7B676D00824A93 /* CreateDescription.swift */; };
 		140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C54372A74F42900CF1CB4 /* NicknameValidator.swift */; };
 		140C543E2A74F54B00CF1CB4 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C543D2A74F54B00CF1CB4 /* String+Regex.swift */; };
 		140E88112A64B626005119F8 /* BaggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* BaggleApp.swift */; };
@@ -107,6 +108,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1406858A2A7B676D00824A93 /* CreateDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDescription.swift; sourceTree = "<group>"; };
 		140C54372A74F42900CF1CB4 /* NicknameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameValidator.swift; sourceTree = "<group>"; };
 		140C543D2A74F54B00CF1CB4 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		140E880D2A64B626005119F8 /* Baggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -369,6 +371,7 @@
 				1413925D2A78E66600249C8A /* CircleNumberView.swift */,
 				141392612A78EBD300249C8A /* CreateStatus.swift */,
 				1413925F2A78E81D00249C8A /* PageIndicator.swift */,
+				1406858A2A7B676D00824A93 /* CreateDescription.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
+				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
 				2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */,
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
@@ -964,7 +968,6 @@
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */,
-				146C51E72A793D3600FF3142 /* BaggleDatePickerFeature.swift in Sources */,
 				2BF268202A77828100F32ADF /* Meeting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,28 +20,22 @@ struct CreateTitleView: View {
             action: { .path($0)})
         ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
-                VStack {
-                    VStack(alignment: .leading, spacing: 16) {
+                VStack(spacing: 0) {
 
-                        PageIndicator(data: CreateStatus.data, selectedStatus: .title)
+                    CreateDescription(createStatus: .title, title: "친구들과 약속을 잡아보세요!")
 
-                        Text("친구들과 약속을 잡아보세요!")
-                            .font(.title2)
-
-                        BaggleTextField(
-                            store: self.store.scope(
-                                state: \.textFieldState,
-                                action: CreateTitleFeature.Action.textFieldAction
-                            ),
-                            placeholder: "ex. 바글이와 저녁 약속",
-                            title: .title("어떤 약속인가요?")
-                        )
-                        .submitLabel(.done)
-                        .onSubmit {
-                            viewStore.send(.submitButtonTapped)
-                        }
+                    BaggleTextField(
+                        store: self.store.scope(
+                            state: \.textFieldState,
+                            action: CreateTitleFeature.Action.textFieldAction
+                        ),
+                        placeholder: "ex. 바글이와 저녁 약속",
+                        title: .title("어떤 약속인가요?")
+                    )
+                    .submitLabel(.done)
+                    .onSubmit {
+                        viewStore.send(.submitButtonTapped)
                     }
-                    .padding()
 
                     Spacer()
 
@@ -54,6 +48,7 @@ struct CreateTitleView: View {
                     .buttonStyle(BagglePrimaryStyle())
                     .disabled(viewStore.state.nextButtonDisabled)
                 }
+                .padding()
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("취소") {

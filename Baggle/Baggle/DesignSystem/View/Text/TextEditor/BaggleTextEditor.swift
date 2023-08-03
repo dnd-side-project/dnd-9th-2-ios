@@ -79,7 +79,6 @@ struct BaggleTextEditor: View {
                         .foregroundColor(viewStore.textFieldState.fgColor)
                 }
             }
-            .padding()
             .onAppear {
                 isFocused = viewStore.state.isFocused
             }
