@@ -63,6 +63,7 @@
 		14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */; };
 		14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */; };
 		14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */; };
+		14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7B0952A7BABC30068B1E4 /* BubbleType.swift */; };
 		2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */; };
 		2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */; };
 		2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */; };
@@ -167,6 +168,7 @@
 		14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+loadTransferable.swift"; sourceTree = "<group>"; };
 		14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		14F7B0952A7BABC30068B1E4 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
 		2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerView.swift; sourceTree = "<group>"; };
 		2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerFeature.swift; sourceTree = "<group>"; };
@@ -496,8 +498,9 @@
 		1461B5FE2A7BA3EA00A15706 /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
-				1461B5FF2A7BA3F000A15706 /* BubbleView.swift */,
 				1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */,
+				14F7B0952A7BABC30068B1E4 /* BubbleType.swift */,
+				1461B5FF2A7BA3F000A15706 /* BubbleView.swift */,
 			);
 			path = Bubble;
 			sourceTree = "<group>";
@@ -999,6 +1002,7 @@
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
+				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,
 				146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */,
 				143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */,
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,

@@ -9,28 +9,28 @@ import SwiftUI
 
 struct BubbleView: View {
 
+    let type: BubbleType
     let text: String
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack(spacing: -3) {
             Text(text)
-                .foregroundColor(Color.white)
+                .foregroundColor(type.foregroundColor)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 14)
-                .background(Color.blue)
+                .background(type.backgroundColor)
                 .cornerRadius(50)
-            
+
             RoundedTriangle(radius: 2)
-                .fill(Color.blue)
+                .fill(type.backgroundColor)
                 .frame(width: 15, height: 12)
-                .offset(x: 0, y: 9)
         }
     }
 }
 
 struct BubbleView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleView(text: "최대 6명")
+        BubbleView(type: .primary, text: "최대 6명")
             .previewLayout(.sizeThatFits)
     }
 }
