@@ -53,7 +53,7 @@ struct HomeFeature: ReducerProtocol {
         // 모임 상세
 
         case meetingDetailAction(MeetingDetailFeature.Action)
-        case setMeetingDetailId(Int)
+        case pushToMeetingDetail(Int)
         case pushMeetingDetail
     }
 
@@ -139,7 +139,7 @@ struct HomeFeature: ReducerProtocol {
                 print("초대하기 실패")
                 return .none
 
-            case .setMeetingDetailId(let id):
+            case .pushToMeetingDetail(let id):
                 state.meetingDetailId = id
                 state.meetingDetailState = MeetingDetailFeature.State(meetingId: id)
                 return .run { send in

@@ -58,9 +58,8 @@ struct HomeView: View {
 
                         Spacer()
                     }
-                    .background(Color.red)
                     .onTapGesture {
-                        viewStore.send(.setMeetingDetailId(meeting.id))
+                        viewStore.send(.pushToMeetingDetail(meeting.id))
                     }
                 }
 
@@ -87,7 +86,7 @@ struct HomeView: View {
                        perform: { noti in
                 // noti로부터 id 값 받아서 넣기
                 if let id = noti.object as? Int {
-                    viewStore.send(.setMeetingDetailId(id))
+                    viewStore.send(.pushToMeetingDetail(id))
                 }
             })
             .onAppear {
