@@ -49,7 +49,9 @@ struct JoinMeetingFeature: ReducerProtocol {
                 let id = state.meetingId
                 return .run { _ in
                     await self.dismiss()
-                    postObserverAction(.moveMeetingDetail, object: id)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) {
+                        postObserverAction(.moveMeetingDetail, object: id)
+                    }
                 }
 
             case .joinFailed:

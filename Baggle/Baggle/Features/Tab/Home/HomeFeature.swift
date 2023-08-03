@@ -31,7 +31,8 @@ struct HomeFeature: ReducerProtocol {
 
         var ongoingList: [Meeting] = []
         var completedList: [Meeting] = []
-        var path = StackState<MeetingDetailFeature.State>()
+        var meetingDetailState: MeetingDetailFeature.State = MeetingDetailFeature.State(
+            meetingId: 0)
     }
 
     enum Action: Equatable {
@@ -43,19 +44,17 @@ struct HomeFeature: ReducerProtocol {
         case refreshMeetingList
         case changeMeetingStatus(MeetingStatus)
 
+        // 카카오톡 공유
+
         case shareButtonTapped
         case invitationSuccess
         case invitationFailed
 
+        // 모임 상세
+
+        case meetingDetailAction(MeetingDetailFeature.Action)
         case setMeetingDetailId(Int)
         case pushMeetingDetail
-        case path(StackAction<MeetingDetailFeature.State, MeetingDetailFeature.Action>)
-
-        case delegate(Delegate)
-
-        enum Delegate: Equatable {
-            case moveToMeetingDetail
-        }
     }
 
     @Dependency(\.sendInvitation) private var sendInvitation
@@ -64,6 +63,10 @@ struct HomeFeature: ReducerProtocol {
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
+
+        Scope(state: \.meetingDetailState, action: /Action.meetingDetailAction) {
+            MeetingDetailFeature()
+        }
 
         // MARK: - Reduce
 
@@ -138,27 +141,27 @@ struct HomeFeature: ReducerProtocol {
 
             case .setMeetingDetailId(let id):
                 state.meetingDetailId = id
-                state.pushMeetingDetail = true
+                state.meetingDetailState = MeetingDetailFeature.State(meetingId: id)
                 return .run { send in
                     await send(.pushMeetingDetail)
                 }
 
-            case .path(.element(id: _, action: .delegate(.deleteSuccess))):
+            case .pushMeetingDetail:
+                state.pushMeetingDetail = true
+                return .none
+
+            case .meetingDetailAction(.delegate(.onDisappear)):
+                state.pushMeetingDetail = false
+                state.meetingDetailId = nil
+                return .none
+
+            case .meetingDetailAction(.delegate(.deleteSuccess)):
                 return .run { send in
                     await send(.refreshMeetingList)
                 }
 
-            case .path:
+            case .meetingDetailAction:
                 return .none
-
-            case .delegate(.moveToMeetingDetail):
-                return .none
-
-            case .pushMeetingDetail:
-                state.pushMeetingDetail.toggle()
-                return .run { send in
-                    await send(.delegate(.moveToMeetingDetail))
-                }
             }
 
             @Sendable func moveToAppStore() {
@@ -167,9 +170,6 @@ struct HomeFeature: ReducerProtocol {
                     openURL(url)
                 }
             }
-        }
-        .forEach(\.path, action: /Action.path) {
-            MeetingDetailFeature()
         }
     }
 }

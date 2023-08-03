@@ -16,8 +16,7 @@ struct MainTabView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            // 수정 예정
-//            NavigationStack {
+            NavigationStack {
                 TabView(
                     selection: viewStore.binding(
                         get: \.selectedTab,
@@ -82,7 +81,7 @@ struct MainTabView: View {
                         viewStore.send(.moveToJoinMeeting(id))
                     }
                 }
-//            }
+            }
         }
     }
 }
