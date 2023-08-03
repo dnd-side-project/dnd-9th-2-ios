@@ -18,11 +18,11 @@ struct CreateDateFeature: ReducerProtocol {
         var errorMessage: String?
 
         // 날짜 버튼
-        var dateButtonBeforeStatus: DateButtonStatus = .inactive
-        var timeButtonBeforeStatus: DateButtonStatus = .inactive
+        var dateButtonBeforeStatus: DateInputStatus = .inactive
+        var timeButtonBeforeStatus: DateInputStatus = .inactive
 
-        var dateButtonStatus: DateButtonStatus = .inactive
-        var timeButtonStatus: DateButtonStatus = .inactive
+        var dateButtonStatus: DateInputStatus = .inactive
+        var timeButtonStatus: DateInputStatus = .inactive
 
         // MARK: - Scope State
         @PresentationState var selectDateState: SelectDateFeature.State?
@@ -83,7 +83,7 @@ struct CreateDateFeature: ReducerProtocol {
                 return .none
 
             case .selectTimeButtonTapped:
-                state.selectTimeState = SelectTimeFeature.State(date: state.meetingDate)
+                state.selectTimeState = SelectTimeFeature.State(time: state.meetingDate)
                 state.timeButtonStatus = .active
 
                 // 유효성 검사 실패 이후 터치 시, 버튼 2개다 경고를 없애주기 위함
@@ -124,7 +124,7 @@ struct CreateDateFeature: ReducerProtocol {
 
             case .selectTimeAction(.presented(.completeButtonTapped)):
                 if let hourMinuteState = state.selectTimeState {
-                    let newDate = hourMinuteState.date
+                    let newDate = hourMinuteState.time
                     let newHourMinute = state.meetingDate.hourMinute(of: newDate)
                     state.meetingDate = newHourMinute
                 }

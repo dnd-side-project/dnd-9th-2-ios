@@ -12,13 +12,13 @@ import SwiftUI
 struct SelectTimeFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var date: Date
+        var time: Date
     }
 
     enum Action: Equatable {
 
         // State
-        case dateChanged(Date)
+        case timeChanged(Date)
 
         // Tap
         case completeButtonTapped
@@ -35,8 +35,8 @@ struct SelectTimeFeature: ReducerProtocol {
 
             switch action {
 
-            case let .dateChanged(newDate):
-                state.date = newDate
+            case let .timeChanged(newDate):
+                state.time = newDate
                 return .none
 
             case .completeButtonTapped:

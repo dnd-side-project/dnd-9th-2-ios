@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-enum DateButtonStatus {
+enum DateInputStatus {
     case inactive // 사용 전
     case active // 사용 중
     case valid // 사용 후 유효성 검사 전
     case invalid // 사용 불가
 }
 
-extension DateButtonStatus {
+extension DateInputStatus {
 
     var color: Color {
         switch self {
