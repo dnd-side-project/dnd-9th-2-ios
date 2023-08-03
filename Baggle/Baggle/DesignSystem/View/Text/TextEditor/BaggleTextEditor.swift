@@ -50,6 +50,7 @@ struct BaggleTextEditor: View {
                             send: BaggleTextFeature.Action.textChanged
                         )
                     )
+                    .foregroundColor(viewStore.textFieldState.fgColor)
                     .lineSpacing(5)
                     .padding([.horizontal, .top])
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 100)
