@@ -113,4 +113,70 @@ final class BaggleDateTests: XCTestCase {
 
         XCTAssertEqual(result, "18:10")
     }
+
+    // 시각 : 2023년 8월 31일 21시 57분
+    // 약속 생성 가능 시각 : 2023년 9월 1일 0시 0분
+    // 테스트 결과값 : "2023년 9월 2일"
+    func test_약속가능시간_생성_날짜_04() throws {
+        let date = try createDate(2023, 8, 31, 21, 57)
+        let meetingDate = date.meetingStartTime()
+        let result = meetingDate.koreanDate()
+
+        XCTAssertEqual(result, "2023년 9월 1일")
+    }
+
+    // 시각 : 2023년 8월 31일 21시 57분
+    // 약속 생성 가능 시각 : 2023년 9월 1일 0시 0분
+    // 테스트 결과값 : "0:00"
+    func test_약속가능시간_생성_시간_04() throws {
+        let date = try createDate(2023, 8, 31, 21, 57)
+        let meetingDate = date.meetingStartTime()
+        let result = meetingDate.hourMinute()
+
+        XCTAssertEqual(result, "00:00")
+    }
+
+    // 시각 : 2023년 12월 31일 21시 57분
+    // 약속 생성 가능 시각 : 2024년 1월 1일 0시 0분
+    // 테스트 결과값 : "2024년 1월 1일"
+    func test_약속가능시간_생성_날짜_05() throws {
+        let date = try createDate(2023, 12, 31, 21, 57)
+        let meetingDate = date.meetingStartTime()
+        let result = meetingDate.koreanDate()
+
+        XCTAssertEqual(result, "2024년 1월 1일")
+    }
+
+    // 시각 : 2023년 12월 31일 21시 57분
+    // 약속 생성 가능 시각 : 2024년 1월 1일 0시 0분
+    // 테스트 결과값 : "0:00"
+    func test_약속가능시간_생성_시간_05() throws {
+        let date = try createDate(2024, 12, 31, 21, 57)
+        let meetingDate = date.meetingStartTime()
+        let result = meetingDate.hourMinute()
+
+        XCTAssertEqual(result, "00:00")
+    }
+
+    // 시각 : 2024년 2월 28일 23시 00분
+    // 약속 생성 가능 시각 : 2024년 2월 29일 1시 5분
+    // 테스트 결과값 : "2024년 2월 29일"
+    func test_약속가능시간_생성_날짜_06() throws {
+        let date = try createDate(2024, 2, 28, 23, 00)
+        let meetingDate = date.meetingStartTime()
+        let result = meetingDate.koreanDate()
+
+        XCTAssertEqual(result, "2024년 2월 29일")
+    }
+
+    // 시각 : 2024년 2월 28일 23시 00분
+    // 약속 생성 가능 시각 : 2024년 2월 29일 1시 5분
+    // 테스트 결과값 : "01:05"
+    func test_약속가능시간_생성_시간_06() throws {
+        let date = try createDate(2024, 2, 28, 23, 00)
+        let meetingDate = date.meetingStartTime()
+        let result = meetingDate.hourMinute()
+
+        XCTAssertEqual(result, "01:05")
+    }
 }

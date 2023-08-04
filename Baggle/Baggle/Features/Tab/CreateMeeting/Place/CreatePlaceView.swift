@@ -16,28 +16,22 @@ struct CreatePlaceView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack {
-                VStack(alignment: .leading, spacing: 16) {
+            VStack(spacing: 0) {
 
-                    PageIndicator(data: CreateStatus.data, selectedStatus: .place)
+                CreateDescription(createStatus: .place, title: "약속 장소는 어디인가요?")
 
-                    Text("약속 장소는 어디인가요?")
-                        .font(.title2)
-
-                    BaggleTextField(
-                        store: self.store.scope(
-                            state: \.textFieldState,
-                            action: CreatePlaceFeature.Action.textFieldAction
-                        ),
-                        placeholder: "ex. 성수역 2번 출구",
-                        title: .title("약속 장소를 입력하세요.")
-                    )
-                    .submitLabel(.done)
-                    .onSubmit {
-                        viewStore.send(.submitButtonTapped)
-                    }
+                BaggleTextField(
+                    store: self.store.scope(
+                        state: \.textFieldState,
+                        action: CreatePlaceFeature.Action.textFieldAction
+                    ),
+                    placeholder: "ex. 성수역 2번 출구",
+                    title: .title("약속 장소를 입력하세요.")
+                )
+                .submitLabel(.done)
+                .onSubmit {
+                    viewStore.send(.submitButtonTapped)
                 }
-                .padding()
 
                 Spacer()
 
@@ -46,10 +40,10 @@ struct CreatePlaceView: View {
                 } label: {
                     Text("다음")
                 }
-                .padding(.bottom, 10)
                 .buttonStyle(BagglePrimaryStyle())
                 .disabled(viewStore.state.nextButtonDisabled)
             }
+            .padding()
             .contentShape(Rectangle())
             .onTapGesture {
                 hideKeyboard()

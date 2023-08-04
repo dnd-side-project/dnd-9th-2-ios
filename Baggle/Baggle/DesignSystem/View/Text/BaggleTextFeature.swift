@@ -46,11 +46,8 @@ struct BaggleTextFeature: ReducerProtocol {
                     state.errorMessage = nil
                 }
 
-                if newText.count > state.maxCount {
-                    state.text = String(newText.prefix(state.maxCount))
-                } else {
-                    state.text = newText
-                }
+                let noNewLinesText = newText.removeTrailingNewlines()
+                state.text = String(noNewLinesText.prefix(state.maxCount))
 
                 return .none
 
