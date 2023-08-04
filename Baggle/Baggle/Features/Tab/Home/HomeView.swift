@@ -19,12 +19,16 @@ struct HomeView: View {
                 Text("Home View")
                     .padding()
 
-                Button {
-                    viewStore.send(.shareButtonTapped)
-                } label: {
-                    Text("카카오톡 공유하기")
-                }
-                .buttonStyle(BagglePrimaryStyle())
+                        Button {
+                            viewStore.send(.shareButtonTapped)
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "paperplane")
+
+                                Text("카카오톡 공유하기")
+                            }
+                        }
+                        .buttonStyle(BaggleSecondaryStyle())
 
                 HStack(spacing: 20) {
                     Button {

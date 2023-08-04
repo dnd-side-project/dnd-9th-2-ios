@@ -38,6 +38,11 @@ import ComposableArchitecture
  
  */
 
+enum AlertButton {
+    case onebutton
+    case twobutton
+}
+
 struct BaggleAlert: View {
 
     private let screenSize: CGRect = UIScreen.main.bounds
@@ -47,16 +52,18 @@ struct BaggleAlert: View {
 
     @Binding var isPresented: Bool
 
-    private let rightButtonAction: () -> Void
     private var title: String
     private var description: String?
+    private var alertButton: AlertButton
     private var leftButtonTitle: String
     private var rightButtonTitle: String
+    private let rightButtonAction: () -> Void
 
     init(
         isPresented: Binding<Bool>,
         title: String,
         description: String? = nil,
+        alertType: AlertButton = .twobutton,
         leftButtonTitle: String = "취소",
         rightButtonTitle: String = "네",
         rightButtonAction: @escaping () -> Void
@@ -64,6 +71,7 @@ struct BaggleAlert: View {
         self._isPresented = isPresented
         self.title = title
         self.description = description
+        self.alertButton = alertType
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
         self.rightButtonAction = rightButtonAction
@@ -73,30 +81,31 @@ struct BaggleAlert: View {
         ZStack {
             ShadeView(isPresented: $isPresented)
 
-            VStack(spacing: 20) {
-                Spacer()
+            VStack(spacing: 40) {
 
-                Text(title)
-                    .font(.body)
-                    .multilineTextAlignment(.center)
+                VStack(spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 20))
+                        .padding(.vertical, 5)
 
-                if let description {
-                    Text(description)
-                        .multilineTextAlignment(.center)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                } else {
-                    Spacer()
+                    if let description {
+                        Text(description)
+                            .font(.system(size: 16))
+                            .foregroundColor(.gray)
+                            .padding(.vertical, 4)
+                    }
                 }
+                .multilineTextAlignment(.center)
 
                 HStack {
-                    Button {
-                        isPresented.toggle()
-                    } label: {
-                        Text(leftButtonTitle)
-                            .font(.body)
-                            .foregroundColor(.black)
-                            .frame(width: alertWidth/2, height: 52)
+                    if alertButton == .twobutton {
+                        Button {
+                            isPresented.toggle()
+                        } label: {
+                            Text(leftButtonTitle)
+                                .frame(width: alertWidth/2, height: 52)
+                        }
+                        .buttonStyle(BagglePrimaryStyle(size: .small))
                     }
 
                     Button {
@@ -104,17 +113,17 @@ struct BaggleAlert: View {
                         isPresented.toggle()
                     } label: {
                         Text(rightButtonTitle)
-                            .font(.body)
-                            .foregroundColor(.red)
                             .frame(width: alertWidth/2, height: 52)
                     }
+                    .buttonStyle(alertButton == .onebutton
+                                 ? BagglePrimaryStyle(size: .medium) :
+                                    BagglePrimaryStyle(size: .small))
                 }
-                .frame(width: alertWidth, height: 52)
+                .frame(width: alertWidth, height: 54)
             }
-            .padding()
+            .padding(.top, 52)
+            .padding(.bottom, 20)
             .frame(width: alertWidth)
-            .frame(minHeight: screenSize.height * 0.2,
-                   maxHeight: screenSize.height * 0.24)
             .background(.white)
             .cornerRadius(20)
             .opacity(self.isPresented ? 1 : 0)
