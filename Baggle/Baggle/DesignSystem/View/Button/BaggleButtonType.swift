@@ -15,7 +15,7 @@ enum ButtonSize {
 
     var ratio: CGFloat {
         switch self {
-        case .small: return 0.5
+        case .small: return 0.4
         case .medium: return 0.79
         case .large: return 0.89
         }
