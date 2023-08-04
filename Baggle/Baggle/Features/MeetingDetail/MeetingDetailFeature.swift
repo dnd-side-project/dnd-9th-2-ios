@@ -120,15 +120,16 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .selectOwner:
                 return .none
 
-            case .delegate(let action):
-                switch action {
-                case .deleteSuccess:
-                    state.isAlertPresented = false
-                    state.dismiss = true
-                    return .none
-                case .onDisappear:
-                    return .none
-                }
+            case .delegate(.deleteSuccess):
+                state.isAlertPresented = false
+                state.dismiss = true
+                return .none
+
+            case .delegate(.onDisappear):
+                return .none
+
+            case .delegate:
+                return .none
             }
         }
         .ifLet(\.$selectOwner, action: /Action.selectOwner) {
