@@ -16,93 +16,42 @@ struct HomeView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
-                VStack(spacing: 10) {
-                    HStack {
-                        Text("2조최강킹짱왕님의 \nBaggle!")
-                            .font(.system(size: 24))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .lineSpacing(1.3)
-
-                        Spacer()
-
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 72, height: 72)
-                    }
-                    .padding(.top, 36)
-                    .padding(.horizontal, 20)
-
-                    Spacer()
-
-                    SegmentedPickerView(
-                        segment: [
-                            Segment(
-                                id: .ongoing,
-                                count: viewStore.ongoingList.count,
-                                isSelected: viewStore.meetingStatus == .ongoing,
-                                action: {
-                                    viewStore.send(.changeMeetingStatus(.ongoing))
-                                }),
-                            Segment(
-                                id: .complete,
-                                count: viewStore.completedList.count,
-                                isSelected: viewStore.meetingStatus == .complete,
-                                action: {
-                                    viewStore.send(.changeMeetingStatus(.complete))
-                                })
-                        ])
-                }
-                .frame(height: 260)
-                .background(.blue.opacity(0.4))
-
-                List((viewStore.meetingStatus == .ongoing)
-                     ? viewStore.ongoingList : viewStore.completedList) { meeting in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("\(meeting.id)")
-                                .font(.caption)
-                            Text(meeting.name)
+                ScrollView {
+                    // section 간의 간격을 없애기 위해 사용
+                    VStack(spacing: 0) {
+                        userHeader()
+                        
+                        // sticky header
+                        LazyVStack(pinnedViews: [.sectionHeaders]) {
+                            Section(header: listHeader(viewStore: viewStore)) {
+                                VStack(spacing: 0) {
+                                    ForEach((viewStore.meetingStatus == .ongoing)
+                                            ? viewStore.ongoingList : viewStore.completedList
+                                    ) { meeting in
+                                        // cell
+                                        HStack {
+                                            VStack(alignment: .leading, spacing: 10) {
+                                                Text("\(meeting.id)")
+                                                    .font(.caption)
+                                                Text(meeting.name)
+                                            }
+                                            
+                                            Spacer()
+                                        }
+                                        .onTapGesture {
+                                            viewStore.send(.pushToMeetingDetail(meeting.id))
+                                        }
+                                    }
+                                }
+                                .background(.white)
+                            }
                         }
-
-                        Spacer()
-                    }
-                    .onTapGesture {
-                        viewStore.send(.pushToMeetingDetail(meeting.id))
                     }
                 }
-
+                .clipped()
+                
                 // 임시 버튼
-
-                HStack(spacing: 20) {
-                    Button {
-                        viewStore.send(.fetchMeetingList(.ongoing))
-                    } label: {
-                        Text("예정된 약속 업데이트")
-                    }
-
-                    Button {
-                        viewStore.send(.fetchMeetingList(.complete))
-                    } label: {
-                        Text("지난 약속 업데이트")
-                    }
-                }
-                .padding()
-
-                HStack(spacing: 20) {
-                    Button {
-                        viewStore.send(.refreshMeetingList)
-                    } label: {
-                        Text("리프레시")
-                    }
-
-                    Button {
-                        viewStore.send(.shareButtonTapped)
-                    } label: {
-                        Text("카카오톡 공유")
-                    }
-                }
-                .padding()
+                tempButton(viewStore: viewStore)
             }
             .onReceive(NotificationCenter.default.publisher(for: .refreshMeetingList),
                        perform: { _ in
@@ -128,6 +77,88 @@ struct HomeView: View {
                         state: \.meetingDetailState,
                         action: HomeFeature.Action.meetingDetailAction))
             }
+        }
+    }
+}
+
+extension HomeView {
+    func userHeader() -> some View {
+        VStack(spacing: 10) {
+            HStack {
+                Text("2조최강킹짱왕님의 \nBaggle!")
+                    .font(.system(size: 24))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .lineSpacing(1.08)
+
+                Spacer()
+
+                Circle()
+                    .fill(.gray)
+                    .frame(width: 72, height: 72)
+            }
+            .padding(.top, 36)
+            .padding(.horizontal, 20)
+
+            Spacer()
+        }
+        .frame(height: 216)
+        .background(.blue)
+    }
+
+    func listHeader(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
+        SegmentedPickerView(
+            segment: [
+                Segment(
+                    id: .ongoing,
+                    count: viewStore.ongoingList.count,
+                    isSelected: viewStore.meetingStatus == .ongoing,
+                    action: {
+                        viewStore.send(.changeMeetingStatus(.ongoing))
+                    }),
+                Segment(
+                    id: .complete,
+                    count: viewStore.completedList.count,
+                    isSelected: viewStore.meetingStatus == .complete,
+                    action: {
+                        viewStore.send(.changeMeetingStatus(.complete))
+                    })
+            ])
+        .background(.gray)
+    }
+
+    // 임시 버튼
+    func tempButton(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
+        VStack {
+            HStack(spacing: 20) {
+                Button {
+                    viewStore.send(.fetchMeetingList(.ongoing))
+                } label: {
+                    Text("예정된 약속 업데이트")
+                }
+
+                Button {
+                    viewStore.send(.fetchMeetingList(.complete))
+                } label: {
+                    Text("지난 약속 업데이트")
+                }
+            }
+            .padding()
+
+            HStack(spacing: 20) {
+                Button {
+                    viewStore.send(.refreshMeetingList)
+                } label: {
+                    Text("리프레시")
+                }
+
+                Button {
+                    viewStore.send(.shareButtonTapped)
+                } label: {
+                    Text("카카오톡 공유")
+                }
+            }
+            .padding()
         }
     }
 }
