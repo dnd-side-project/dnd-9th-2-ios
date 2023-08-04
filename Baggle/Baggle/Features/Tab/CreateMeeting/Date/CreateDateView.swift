@@ -13,7 +13,7 @@ struct CreateDateView: View {
 
     private let dateButtonSpace: CGFloat = 10
     private let dateWidthRatio = 0.65
-    private let dateButtonHeight:CGFloat = 54
+    private let dateButtonHeight: CGFloat = 54
 
     let store: StoreOf<CreateDateFeature>
 

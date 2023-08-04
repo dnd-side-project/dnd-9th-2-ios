@@ -13,6 +13,8 @@ struct MeetingDetailView: View {
 
     let store: StoreOf<MeetingDetailFeature>
 
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -20,6 +22,8 @@ struct MeetingDetailView: View {
                 VStack(spacing: 20) {
                     Text("모임 생성")
                         .font(.title)
+
+                    Text("id: \(viewStore.meetingId)")
 
                     if let data = viewStore.meetingData {
                         Text("모임명: \(data.name), 모임 id: \(data.id)")
@@ -31,7 +35,6 @@ struct MeetingDetailView: View {
                         }
 
                         Button("방장 넘기기") {
-                            print("방장 넘기기 alert")
                             viewStore.send(.leaveButtonTapped)
                         }
                     }
@@ -61,10 +64,11 @@ struct MeetingDetailView: View {
                     .presentationDetents([.height(340)])
                     .presentationDragIndicator(.visible)
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
-            .toolbar(.hidden, for: .tabBar)
+            .onAppear { viewStore.send(.onAppear) }
+            .onDisappear { viewStore.send(.delegate(.onDisappear)) }
+            .onChange(of: viewStore.dismiss, perform: { _ in
+                dismiss()
+            })
         }
     }
 }

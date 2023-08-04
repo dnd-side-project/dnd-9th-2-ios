@@ -19,6 +19,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         var meetingId: Int
         var meetingData: MeetingDetail?
+        var dismiss: Bool = false
 
         // Alert
         var alertType: MeetingDeleteType = .delete
@@ -52,10 +53,10 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         enum Delegate: Equatable {
             case deleteSuccess
+            case onDisappear
         }
     }
 
-    @Dependency(\.dismiss) var dismiss
     @Dependency(\.meetingDetailService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
@@ -88,7 +89,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .deleteMeeting:
                 return .run { send in
-                    // 삭제 서버 통신
+                    // 삭제 서버 통신에 따라 분기처리
                     await send(.delegate(.deleteSuccess))
                 }
 
@@ -105,9 +106,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .backButtonTapped:
-                return .run { _ in
-                    await dismiss()
-                }
+                state.dismiss = true
+                return .none
 
             case .selectOwner(.presented(.leaveButtonTapped)):
                 if let nextOwnerId = state.selectOwner?.selectedMemberId {
@@ -121,10 +121,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .delegate(.deleteSuccess):
-                state.isAlertPresented.toggle()
-                return .run { _ in
-                    await dismiss()
-                }
+                state.isAlertPresented = false
+                state.dismiss = true
+                return .none
+
+            case .delegate(.onDisappear):
+                return .none
 
             case .delegate:
                 return .none
