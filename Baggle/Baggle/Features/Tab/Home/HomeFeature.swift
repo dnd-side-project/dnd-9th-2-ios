@@ -16,6 +16,13 @@ import KakaoSDKTemplate
 enum MeetingStatus {
     case ongoing
     case complete
+
+    var title: String {
+        switch self {
+        case .ongoing: return "예정된 약속"
+        case .complete: return "지난 약속"
+        }
+    }
 }
 
 struct HomeFeature: ReducerProtocol {
