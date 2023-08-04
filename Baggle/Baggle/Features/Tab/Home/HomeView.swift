@@ -25,9 +25,13 @@ struct HomeView: View {
                         Button {
                             viewStore.send(.shareButtonTapped)
                         } label: {
-                            Text("카카오톡 공유하기")
+                            HStack(spacing: 8) {
+                                Image(systemName: "paperplane")
+
+                                Text("카카오톡 공유하기")
+                            }
                         }
-                        .buttonStyle(BagglePrimaryStyle())
+                        .buttonStyle(BaggleSecondaryStyle())
 
                         HStack(spacing: 20) {
                             Button {

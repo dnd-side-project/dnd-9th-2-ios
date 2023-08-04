@@ -72,10 +72,47 @@ struct BagglePrimaryStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(width: UIScreen.main.bounds.width * size.ratio, height: 62)
+            .frame(width: UIScreen.main.bounds.width * size.ratio, height: 54)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))
             .cornerRadius(shape.radius)
-            .shadow(color: Color(.systemGray4).opacity(0.6), radius: 4)
+    }
+}
+
+struct BaggleSecondaryStyle: ButtonStyle {
+
+    private let foregroundColor: Color = .white
+    private let backgroundColor: Color = .black
+
+    @Environment(\.isEnabled) private var isEnabled
+
+    private func foregroundColor(_ isPressed: Bool) -> Color {
+        if !isEnabled {
+            return foregroundColor
+        } else if isPressed {
+            return foregroundColor.opacity(0.5)
+        } else {
+            return foregroundColor
+        }
+    }
+
+    private func backgroundColor(_ isPressed: Bool) -> Color {
+        if !isEnabled {
+            return Color.gray // 디자인 확정 시 수정
+        } else if isPressed {
+            return backgroundColor.opacity(0.5)
+        } else {
+            return backgroundColor
+        }
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(height: 54)
+            .padding(.leading, 34)
+            .padding(.trailing, 36)
+            .foregroundColor(foregroundColor(configuration.isPressed))
+            .background(backgroundColor(configuration.isPressed))
+            .cornerRadius(54/2)
     }
 }
