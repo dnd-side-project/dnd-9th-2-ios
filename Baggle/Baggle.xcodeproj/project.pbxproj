@@ -68,6 +68,8 @@
 		2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */; };
 		2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */; };
 		2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */; };
+		2B308B8F2A7CCE5A00B9846F /* SegmentedTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B308B8E2A7CCE5A00B9846F /* SegmentedTagView.swift */; };
+		2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B308B902A7CDA1400B9846F /* SegmentedPickerView.swift */; };
 		2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */; };
 		2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */; };
 		2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2B35E4EC2A70B6DB00915876 /* KakaoSDK */; };
@@ -175,6 +177,8 @@
 		2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerView.swift; sourceTree = "<group>"; };
 		2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerFeature.swift; sourceTree = "<group>"; };
 		2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
+		2B308B8E2A7CCE5A00B9846F /* SegmentedTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedTagView.swift; sourceTree = "<group>"; };
+		2B308B902A7CDA1400B9846F /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyList.swift; sourceTree = "<group>"; };
 		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -418,6 +422,7 @@
 		1432BE6B2A682FBE0098AAA9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2B308B8D2A7CCE4100B9846F /* Common */,
 				1432BE6C2A682FCB0098AAA9 /* HomeView.swift */,
 				2B86CBBF2A70F00900800B02 /* HomeFeature.swift */,
 			);
@@ -675,6 +680,15 @@
 				2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */,
 			);
 			path = SelectHost;
+			sourceTree = "<group>";
+		};
+		2B308B8D2A7CCE4100B9846F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2B308B8E2A7CCE5A00B9846F /* SegmentedTagView.swift */,
+				2B308B902A7CDA1400B9846F /* SegmentedPickerView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		2B5BE6B02A77A3F600F25474 /* MeetingDetail */ = {
@@ -999,9 +1013,11 @@
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
 				141392602A78E81D00249C8A /* PageIndicator.swift in Sources */,
+				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
 				2BF8F9152A78DFCA00510EFA /* JoinMeetingFeature.swift in Sources */,
 				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* View+.swift in Sources */,
+				2B308B8F2A7CCE5A00B9846F /* SegmentedTagView.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
