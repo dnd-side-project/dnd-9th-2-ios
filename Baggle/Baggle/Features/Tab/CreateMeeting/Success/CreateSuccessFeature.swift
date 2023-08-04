@@ -46,7 +46,7 @@ struct CreateSuccessFeature: ReducerProtocol {
             switch action {
 
             case .kakaoInviteButtonTapped:
-                return .run { send in
+                return .run { _ in
                     if ShareApi.isKakaoTalkSharingAvailable() {
                         if let url = await sendInvitation(name: "집들이집들", id: 1000) {
                             openURL(url)
