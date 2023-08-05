@@ -51,6 +51,8 @@
 		146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F32A7950F500FF3142 /* SelectTimeView.swift */; };
 		14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDC2A7E2F4C00EF58D5 /* Camera.swift */; };
 		14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */; };
+		14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE12A7E330700EF58D5 /* CameraFeature.swift */; };
+		14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE32A7E330D00EF58D5 /* CameraView.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
@@ -160,6 +162,8 @@
 		146C51F32A7950F500FF3142 /* SelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeView.swift; sourceTree = "<group>"; };
 		14783EDC2A7E2F4C00EF58D5 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetting.swift; sourceTree = "<group>"; };
+		14783EE12A7E330700EF58D5 /* CameraFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeature.swift; sourceTree = "<group>"; };
+		14783EE32A7E330D00EF58D5 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 		14134D412A64C561004A6AC4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				14783EDB2A7E2EE700EF58D5 /* Camera */,
 				14B7A0432A75409400B8E202 /* Error */,
 				1421C04F2A7A848E00C20497 /* Login */,
 				14B7A0422A753DA500B8E202 /* SignUp */,
@@ -365,7 +370,7 @@
 				14EBE4BF2A681311007537C8 /* Tab */,
 				2BABCB292A76D19000AFECA3 /* MeetingDetail */,
 				2BF8F9132A78DF3E00510EFA /* JoinMeeting */,
-				14783EDB2A7E2EE700EF58D5 /* Camera */,
+				14783EE02A7E32D100EF58D5 /* Camera */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -555,6 +560,15 @@
 			children = (
 				14783EDC2A7E2F4C00EF58D5 /* Camera.swift */,
 				14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		14783EE02A7E32D100EF58D5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				14783EE12A7E330700EF58D5 /* CameraFeature.swift */,
+				14783EE32A7E330D00EF58D5 /* CameraView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -981,6 +995,7 @@
 				14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */,
 				141392622A78EBD300249C8A /* CreateStatus.swift in Sources */,
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
+				14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */,
 				144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */,
 				14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */,
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
@@ -1001,6 +1016,7 @@
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
+				14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
