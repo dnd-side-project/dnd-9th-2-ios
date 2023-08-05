@@ -261,7 +261,6 @@ class Camera: NSObject {
 
             if videoOutputConnection.isVideoMirroringSupported {
                 videoOutputConnection.isVideoMirrored = true
-//                videoOutputConnection.isVideoMirrored = isUsingFrontCaptureDevice
             }
         }
     }
@@ -386,8 +385,15 @@ extension Camera: AVCapturePhotoCaptureDelegate {
 
         guard let imageData = photo.fileDataRepresentation() else { return }
         guard let image = UIImage(data: imageData) else { return }
+        guard let cropImage = image.cropToCenter() else { return }
+        guard let result = photoFlippedHorizontally(image: cropImage) else { return }
 
-        resultImageContinuation?.resume(returning: image)
+        resultImageContinuation?.resume(returning: result)
+    }
+
+    // 좌우 반전
+    func photoFlippedHorizontally(image: UIImage) -> UIImage? {
+        return isUsingFrontCaptureDevice ? image.flippedHorizontally() : image
     }
 }
 

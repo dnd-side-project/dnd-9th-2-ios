@@ -96,8 +96,7 @@ struct CameraFeature: ReducerProtocol {
             case .shutterTapped:
                 return .run { send in
                     let resultImage = await cameraService.takePhoto()
-                    let cropImage = resultImage.cropToCenter()
-                    await send(.completeTakePhoto(cropImage))
+                    await send(.completeTakePhoto(resultImage))
                 }
 
             case .switchButtonTapped:
