@@ -97,8 +97,6 @@ extension SignUpView {
     private var description: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("안녕하세요!")
-
                 Text("Baggle에서 쓸 프로필을")
 
                 Text("설정해주세요.")
@@ -123,13 +121,6 @@ extension SignUpView {
             photoLibrary: .shared()
         ) {
             ProfileImageView(imageState: viewStore.imageState)
-                .scaledToFill()
-                .clipShape(Circle())
-                .frame(width: 160, height: 160)
-                .background {
-                    Circle()
-                        .tint(Color.gray.opacity(0.2))
-                }
         }
         .padding(.top, 40)
     }
