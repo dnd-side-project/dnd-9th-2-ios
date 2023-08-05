@@ -191,10 +191,12 @@ extension Date {
     }
 
     // MARK: - Timer
-
     func remainingTime() -> Int {
         let components = calendar.dateComponents([.second], from: Date(), to: self)
-        // swiftlint:disable:next force_unwrapping
-        return components.second!
+        if let result = components.second, result > 0 {
+            return result
+        } else {
+            return 0
+        }
     }
 }
