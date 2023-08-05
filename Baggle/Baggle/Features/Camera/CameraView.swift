@@ -71,17 +71,29 @@ extension CameraView {
 
     private func viewFinderView(viewStore: CameraFeatureViewStore) -> some View {
         ZStack {
-            if let image = viewStore.state.viewFinderImage {
-                image
-                    .resizable()
-                    .scaledToFit()
-            }
+            if viewStore.isCompleted {
+                if let image = viewStore.state.resultImage {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 40))
+                        .foregroundColor(.red)
+                }
+            } else {
+                if let image = viewStore.state.viewFinderImage {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                }
 
-            if let flipImage = viewStore.state.flipImage {
-                flipImage
-                    .resizable()
-                    .scaledToFit()
-                    .blur(radius: 8, opaque: true)
+                if let flipImage = viewStore.state.flipImage {
+                    flipImage
+                        .resizable()
+                        .scaledToFit()
+                        .blur(radius: 8, opaque: true)
+                }
             }
         }
         .frame(width: viewFinderWidth, height: viewFinderHeight)
@@ -93,6 +105,19 @@ extension CameraView {
     // MARK: - Buttons View
 
     private func buttonsView(viewStore: CameraFeatureViewStore) -> some View {
+        VStack {
+            if viewStore.isCompleted {
+                photoButtons(viewStore: viewStore)
+            } else {
+                cameraButtons(viewStore: viewStore)
+            }
+        }
+        .frame(height: 62)
+        .padding(.top, 42)
+        .padding(.bottom, 90)
+    }
+
+    private func cameraButtons(viewStore: CameraFeatureViewStore) -> some View {
 
         HStack(alignment: .center, spacing: 0) {
 
@@ -150,7 +175,31 @@ extension CameraView {
             .frame(width: 60)
         }
         .padding(.horizontal, 56)
-        .padding(.top, 42)
-        .padding(.bottom, 90)
+    }
+
+    private func photoButtons(viewStore: CameraFeatureViewStore) -> some View {
+        HStack {
+            Button {
+                viewStore.send(.reTakeButtonTapped)
+            } label: {
+                Text("다시 찍기")
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 12)
+            }
+
+            Spacer()
+
+            Button {
+                viewStore.send(.uploadButtonTapped)
+            } label: {
+                Text("사진 업로드")
+                    .foregroundColor(.blue)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 12)
+            }
+        }
+        .font(.system(size: 18).bold())
+        .padding(.horizontal, 20)
     }
 }

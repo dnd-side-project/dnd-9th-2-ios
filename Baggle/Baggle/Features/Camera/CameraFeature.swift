@@ -13,23 +13,34 @@ struct CameraFeature: ReducerProtocol {
 
     struct State: Equatable {
         var viewFinderImage: Image?
+        var resultImage: Image?
 
+        var flipImage: Image?
         var isFlipped: Bool = false
         var flipDegree: Double = 0.0
-        var flipImage: Image?
+
+        var isCompleted: Bool = false
     }
 
     enum Action: Equatable {
         case onAppear
 
+        // Image
         case viewFinderUpdate(Image?)
         case flipImageRemove
+        case flipDegreeUpdate
+        case completeTakePhoto(Image)
 
+        // Tap - Camera
         case shutterTapped
         case switchButtonTapped
         case cancelButtonTapped
 
-        case flipDegreeUpdate
+        // Tap - Photo
+        case reTakeButtonTapped
+        case uploadButtonTapped
+
+        // Delegate
         case delegate(Delegate)
 
         enum Delegate: Equatable {
@@ -71,12 +82,21 @@ struct CameraFeature: ReducerProtocol {
                 state.flipImage = nil
                 return .none
 
-            // MARK: - Button Tapped
+            case let .completeTakePhoto(image):
+                state.isCompleted = true
+                state.resultImage = image
+                return .none
+
+            case .flipDegreeUpdate:
+                state.flipDegree += 180
+                return .none
+
+            // MARK: - Camera Tap
 
             case .shutterTapped:
                 return .run { send in
                     let resultImage = await cameraService.takePhoto()
-                    // 결과 View
+                    await send(.completeTakePhoto(resultImage))
                 }
 
             case .switchButtonTapped:
@@ -92,9 +112,15 @@ struct CameraFeature: ReducerProtocol {
                 cameraService.stop()
                 return .run { _ in await self.dismiss() }
 
-            case .flipDegreeUpdate:
-                state.flipDegree += 180
+                // MARK: Tap - Photo Tap
+
+            case .reTakeButtonTapped:
+                state.isCompleted = false
                 return .none
+
+            case .uploadButtonTapped:
+                // 이미지 업로드
+                return .run { _ in await self.dismiss() }
 
             // MARK: - Delegate
 
