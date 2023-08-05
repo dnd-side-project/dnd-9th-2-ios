@@ -13,7 +13,7 @@ struct CameraService {
     public let start: () async -> Void
     public let stop: () -> Void
     public let switchCaptureDevice: () async -> Void
-    public let takePhoto: () async -> Image
+    public let takePhoto: () async -> UIImage
     public let previewStream: () -> AsyncStream<CIImage>
 }
 

@@ -8,7 +8,6 @@
 import AVFoundation
 import CoreImage
 import UIKit
-import SwiftUI
 import os.log
 
 class Camera: NSObject {
@@ -60,8 +59,8 @@ class Camera: NSObject {
     // 현재 사용 가능한 카메라
     var availableCaptureDevices: [AVCaptureDevice] {
         captureDevices
-            .filter( { $0.isConnected } )
-            .filter( { !$0.isSuspended } )
+            .filter({ $0.isConnected })
+            .filter({ !$0.isSuspended })
     }
 
     // 현재 사용 중인 카메라
@@ -119,7 +118,7 @@ class Camera: NSObject {
     }()
 
     // 비동기로 리턴하는 `사진 결과`를 위한 async 프로퍼티
-    var resultImageContinuation: CheckedContinuation<Image, Never>?
+    var resultImageContinuation: CheckedContinuation<UIImage, Never>?
     var completeSwitchDevice: CheckedContinuation<Void, Never>?
 
     var dropFrame: Int = 0
@@ -191,7 +190,7 @@ class Camera: NSObject {
 
         isCaptureSessionConfigured = true
 
-        /// 배율 설정
+        // 배율 설정
         if captureDevice.position == .back {
             captureDevice.videoZoomFactor = CameraSetting.zoomFactorBackDevice
         }
@@ -261,7 +260,8 @@ class Camera: NSObject {
         if let videoOutput = videoOutput, let videoOutputConnection = videoOutput.connection(with: .video) {
 
             if videoOutputConnection.isVideoMirroringSupported {
-                videoOutputConnection.isVideoMirrored = isUsingFrontCaptureDevice
+                videoOutputConnection.isVideoMirrored = true
+//                videoOutputConnection.isVideoMirrored = isUsingFrontCaptureDevice
             }
         }
     }
@@ -345,8 +345,8 @@ class Camera: NSObject {
     }
 
     // 사진 촬영
-    func takePhoto() async -> Image {
-        return await withCheckedContinuation{ continuation in
+    func takePhoto() async -> UIImage {
+        return await withCheckedContinuation { continuation in
             guard let photoOutput = self.photoOutput else { return }
 
             self.resultImageContinuation = continuation
@@ -385,8 +385,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
         }
 
         guard let imageData = photo.fileDataRepresentation() else { return }
-        guard let uiImage = UIImage(data: imageData) else { return }
-        let image = Image(uiImage: uiImage)
+        guard let image = UIImage(data: imageData) else { return }
 
         resultImageContinuation?.resume(returning: image)
     }
@@ -405,7 +404,7 @@ extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         if dropFrame < CameraSetting.dropFrame {
             dropFrame += 1
-        } else  {
+        } else {
             addToPreviewStream?(CIImage(cvPixelBuffer: pixelBuffer))
 
             if dropFrame == CameraSetting.dropFrame {
@@ -426,9 +425,9 @@ fileprivate extension UIScreen {
         } else if point.x != 0 && point.y != 0 {
             return .portraitUpsideDown
         } else if point.x == 0 && point.y != 0 {
-            return .landscapeRight //.landscapeLeft
+            return .landscapeRight
         } else if point.x != 0 && point.y == 0 {
-            return .landscapeLeft //.landscapeRight
+            return .landscapeLeft
         } else {
             return .unknown
         }

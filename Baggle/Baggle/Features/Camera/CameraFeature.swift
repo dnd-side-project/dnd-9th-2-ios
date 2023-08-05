@@ -13,7 +13,7 @@ struct CameraFeature: ReducerProtocol {
 
     struct State: Equatable {
         var viewFinderImage: Image?
-        var resultImage: Image?
+        var resultImage: UIImage?
 
         var flipImage: Image?
         var isFlipped: Bool = false
@@ -29,7 +29,7 @@ struct CameraFeature: ReducerProtocol {
         case viewFinderUpdate(Image?)
         case flipImageRemove
         case flipDegreeUpdate
-        case completeTakePhoto(Image)
+        case completeTakePhoto(UIImage?)
 
         // Tap - Camera
         case shutterTapped
@@ -44,7 +44,7 @@ struct CameraFeature: ReducerProtocol {
         case delegate(Delegate)
 
         enum Delegate: Equatable {
-            case savePhoto(Image)
+            case savePhoto(UIImage)
         }
     }
 
@@ -96,7 +96,8 @@ struct CameraFeature: ReducerProtocol {
             case .shutterTapped:
                 return .run { send in
                     let resultImage = await cameraService.takePhoto()
-                    await send(.completeTakePhoto(resultImage))
+                    let cropImage = resultImage.cropToCenter()
+                    await send(.completeTakePhoto(cropImage))
                 }
 
             case .switchButtonTapped:

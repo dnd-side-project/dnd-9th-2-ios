@@ -72,34 +72,46 @@ extension CameraView {
     private func viewFinderView(viewStore: CameraFeatureViewStore) -> some View {
         ZStack {
             if viewStore.isCompleted {
-                if let image = viewStore.state.resultImage {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } else {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.system(size: 40))
-                        .foregroundColor(.red)
-                }
+                resultPhotoView(viewStore: viewStore)
             } else {
-                if let image = viewStore.state.viewFinderImage {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                }
-
-                if let flipImage = viewStore.state.flipImage {
-                    flipImage
-                        .resizable()
-                        .scaledToFit()
-                        .blur(radius: 8, opaque: true)
-                }
+                cameraPreview(viewStore: viewStore)
             }
         }
         .frame(width: viewFinderWidth, height: viewFinderHeight)
+        .clipped()
         .background(Color.gray)
-        .rotation3DEffect(.degrees(viewStore.state.flipDegree), axis: (x: 0, y: 1, z: 0))
         .padding(.top, 32)
+    }
+
+    private func cameraPreview(viewStore: CameraFeatureViewStore) -> some View {
+        ZStack {
+            if let image = viewStore.state.viewFinderImage {
+                image
+                    .resizable()
+            }
+
+            if let flipImage = viewStore.state.flipImage {
+                flipImage
+                    .resizable()
+                    .blur(radius: 8, opaque: true)
+            }
+        }
+        .scaledToFill()
+        .rotation3DEffect(.degrees(viewStore.state.flipDegree), axis: (x: 0, y: 1, z: 0))
+    }
+
+    private func resultPhotoView(viewStore: CameraFeatureViewStore) -> some View {
+        ZStack {
+            if let resultImage = viewStore.state.resultImage {
+                Image(uiImage: resultImage)
+                    .resizable()
+            } else {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 40))
+                    .foregroundColor(.red)
+            }
+        }
+        .scaledToFit()
     }
 
     // MARK: - Buttons View
