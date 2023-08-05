@@ -100,7 +100,10 @@ struct CameraView: View {
 
                 Button {
                     viewStore.send(.switchButtonTapped)
-                    viewStore.send(.flipDegreeUpdate , animation: Animation.linear(duration: flipAnimationDuration))
+                    viewStore.send(
+                        .flipDegreeUpdate,
+                        animation: Animation.linear(duration: flipAnimationDuration)
+                    )
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
                         .resizable()

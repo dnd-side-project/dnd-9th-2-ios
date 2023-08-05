@@ -31,6 +31,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
         var nextOwnerId: Int?
+
+        // Camera
+        @PresentationState var usingCamera: CameraFeature.State?
     }
 
     enum Action: Equatable {
@@ -45,8 +48,11 @@ struct MeetingDetailFeature: ReducerProtocol {
         case deleteButtonTapped
         case leaveButtonTapped
         case backButtonTapped
+        case cameraButtonTapped
 
+        // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
+        case usingCamera(PresentationAction<CameraFeature.Action>)
 
         // delegate
         case delegate(Delegate)
@@ -93,6 +99,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     await send(.delegate(.deleteSuccess))
                 }
 
+                // Tap
+
             case .deleteButtonTapped:
                 state.alertType = .delete
                 return .run { send in
@@ -109,6 +117,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.dismiss = true
                 return .none
 
+            case .cameraButtonTapped:
+                state.usingCamera = CameraFeature.State()
+                return .none
+
+                // Child - Delete
+
             case .selectOwner(.presented(.leaveButtonTapped)):
                 if let nextOwnerId = state.selectOwner?.selectedMemberId {
                     state.nextOwnerId = nextOwnerId
@@ -119,6 +133,13 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .selectOwner:
                 return .none
+
+                // Child - Camera
+
+            case .usingCamera:
+                return .none
+
+                // Child - Delegate
 
             case .delegate(.deleteSuccess):
                 state.isAlertPresented = false
