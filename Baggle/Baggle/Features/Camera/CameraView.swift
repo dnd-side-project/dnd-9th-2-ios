@@ -15,70 +15,102 @@ struct CameraView: View {
 
     let store: StoreOf<CameraFeature>
     let flipAnimationDuration: Double = 0.5
+    let viewFinderWidth = UIScreen.main.bounds.width
+    let viewFinderHeight = UIScreen.main.bounds.width * CameraSetting.ratio
 
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            GeometryReader { geometry in
+            VStack(spacing: 0) {
+                Spacer()
 
-                VStack {
+                description(viewStore: viewStore)
 
-                    Spacer()
+                timer(viewStore: viewStore)
 
-                    viewFinderView(viewStore: viewStore)
+                viewFinderView(viewStore: viewStore)
 
-                    buttonsView(viewStore: viewStore)
-                }
-                .background(Color.black)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            viewStore.send(.cancelButtonTapped)
-                        }
-                    }
-                }
+                buttonsView(viewStore: viewStore)
             }
+            .background(Color.black)
             .onAppear {
-                viewStore.send(.viewWillAppear)
+                viewStore.send(.onAppear)
+                print(viewStore)
             }
         }
     }
+}
+
+extension CameraView {
+
+    // MARK: - Description
+
+    private func description(viewStore: CameraFeatureViewStore) -> some View {
+        Text("실시간 상황을\n친구들에게 공유하세요!")
+            .multilineTextAlignment(.center)
+            .lineSpacing(1.4)
+            .font(.system(size: 22))
+            .fontWeight(.medium)
+            .foregroundColor(.white)
+    }
+
+    // MARK: - Timer
+
+    private func timer(viewStore: CameraFeatureViewStore) -> some View {
+        Text("03:39")
+            .padding(.vertical, 10)
+            .padding(.horizontal, 24)
+            .foregroundColor(Color.black)
+            .background(Color.white)
+            .cornerRadius(12)
+            .padding(.top, 12)
+    }
+
+    // MARK: - ViewFinder
 
     private func viewFinderView(viewStore: CameraFeatureViewStore) -> some View {
-        GeometryReader { geometry in
-            ZStack {
-                if let image = viewStore.state.viewFinderImage {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                }
-
-                if let flipImage = viewStore.state.flipImage {
-                    flipImage
-                        .resizable()
-                        .scaledToFit()
-                        .blur(radius: 8, opaque: true)
-                }
+        ZStack {
+            if let image = viewStore.state.viewFinderImage {
+                image
+                    .resizable()
+                    .scaledToFit()
             }
-            .frame(width: geometry.size.width, height: geometry.size.width * CameraSetting.ratio)
-            .background(Color.clear)
-            .rotation3DEffect(.degrees(viewStore.state.flipDegree), axis: (x: 0, y: 1, z: 0))
+
+            if let flipImage = viewStore.state.flipImage {
+                flipImage
+                    .resizable()
+                    .scaledToFit()
+                    .blur(radius: 8, opaque: true)
+            }
         }
+        .frame(width: viewFinderWidth, height: viewFinderHeight)
+        .background(Color.gray)
+        .rotation3DEffect(.degrees(viewStore.state.flipDegree), axis: (x: 0, y: 1, z: 0))
+        .padding(.top, 32)
     }
+
+    // MARK: - Buttons View
 
     private func buttonsView(viewStore: CameraFeatureViewStore) -> some View {
 
-        HStack() {
+        HStack(alignment: .center, spacing: 0) {
 
-            HStack {
-                Spacer()
-                Spacer()
+            // 왼쪽
+            Button {
+                viewStore.send(.cancelButtonTapped)
+            } label: {
+                Text("취소")
+                    .foregroundColor(Color.white)
+                    .padding(.vertical, 12)
             }
+            .frame(width: 60)
+
+            Spacer()
+
+            // 가운데
 
             HStack {
-                Spacer()
-
                 Button {
                     viewStore.send(.shutterTapped)
                 } label: {
@@ -91,41 +123,34 @@ struct CameraView: View {
                             .frame(width: 50, height: 50)
                     }
                 }
-
-                Spacer()
             }
 
-            HStack {
-                Spacer()
+            Spacer()
 
-                Button {
-                    viewStore.send(.switchButtonTapped)
-                    viewStore.send(
-                        .flipDegreeUpdate,
-                        animation: Animation.linear(duration: flipAnimationDuration)
-                    )
-                } label: {
+            // 오른쪽
+
+            Button {
+                viewStore.send(.switchButtonTapped)
+                viewStore.send(
+                    .flipDegreeUpdate,
+                    animation: Animation.linear(duration: flipAnimationDuration)
+                )
+            } label: {
+                ZStack {
                     Image(systemName: "arrow.triangle.2.circlepath")
                         .resizable()
                         .scaledToFit()
                         .tint(.white)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 24, height: 24)
                 }
-
-                Spacer()
+                .padding(8)
+                .background(Color.gray)
+                .cornerRadius(50)
             }
+            .frame(width: 60)
         }
-        .padding()
-    }
-}
-
-struct CameraView_Previews: PreviewProvider {
-    static var previews: some View {
-        CameraView(
-            store: Store(
-                initialState: CameraFeature.State(),
-                reducer: CameraFeature()
-            )
-        )
+        .padding(.horizontal, 56)
+        .padding(.top, 42)
+        .padding(.bottom, 90)
     }
 }

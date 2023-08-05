@@ -26,13 +26,13 @@ extension CameraService: DependencyKey {
         return Self { // start
             camera = Camera()
             await camera.start()
-        } stop : {
+        } stop: {
             camera.stop()
         } switchCaptureDevice: {
             await camera.switchCaptureDevice()
         } takePhoto: {
             await camera.takePhoto()
-        } previewStream : {
+        } previewStream: {
             camera.previewStream
         }
     }()

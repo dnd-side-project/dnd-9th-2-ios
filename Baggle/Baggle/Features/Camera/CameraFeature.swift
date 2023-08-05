@@ -15,16 +15,12 @@ struct CameraFeature: ReducerProtocol {
         var viewFinderImage: Image?
 
         var isFlipped: Bool = false
-        var flipDegree: Double = 0.0 {
-            didSet(oldValue) {
-                print(oldValue)
-            }
-        }
+        var flipDegree: Double = 0.0
         var flipImage: Image?
     }
 
     enum Action: Equatable {
-        case viewWillAppear
+        case onAppear
 
         case viewFinderUpdate(Image?)
         case flipImageRemove
@@ -51,8 +47,7 @@ struct CameraFeature: ReducerProtocol {
 
             // MARK: View Life Cycle
 
-            case .viewWillAppear:
-
+            case .onAppear:
                 return .run { send in
                     await cameraService.start()
 

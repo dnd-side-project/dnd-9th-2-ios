@@ -101,6 +101,12 @@ struct HomeView: View {
                     } label: {
                         Text("카카오톡 공유")
                     }
+
+                    Button {
+                        viewStore.send(.cameraButtonTapped)
+                    } label: {
+                        Text("카메라")
+                    }
                 }
                 .padding()
             }
@@ -127,6 +133,14 @@ struct HomeView: View {
                     store: self.store.scope(
                         state: \.meetingDetailState,
                         action: HomeFeature.Action.meetingDetailAction))
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$usingCamera,
+                    action: { .usingCamera($0)}
+                )
+            ) { cameraStore in
+                    CameraView(store: cameraStore)
             }
         }
     }

@@ -156,5 +156,8 @@ struct MeetingDetailFeature: ReducerProtocol {
         .ifLet(\.$selectOwner, action: /Action.selectOwner) {
             SelectOwnerFeature()
         }
+        .ifLet(\.$usingCamera, action: /Action.usingCamera) {
+            CameraFeature()
+        }
     }
 }
