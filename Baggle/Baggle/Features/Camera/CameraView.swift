@@ -42,17 +42,6 @@ struct CameraView: View {
             .onAppear {
                 viewStore.send(.viewWillAppear)
             }
-            .fullScreenCover(store: self.store.scope(
-                state: \.$cameraResult,
-                action: { .cameraResult($0)})
-            ) { cameraResultStore in
-                NavigationStack {
-                    CameraResultView(store: cameraResultStore)
-                }
-            }
-            .transaction { transaction in
-                transaction.disablesAnimations = viewStore.disableDismissAnimation
-            }
         }
     }
 

@@ -53,6 +53,8 @@
 		14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */; };
 		14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE12A7E330700EF58D5 /* CameraFeature.swift */; };
 		14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE32A7E330D00EF58D5 /* CameraView.swift */; };
+		14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE52A7E33B600EF58D5 /* CameraService.swift */; };
+		14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE72A7E340E00EF58D5 /* CIImage+.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
@@ -164,6 +166,8 @@
 		14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetting.swift; sourceTree = "<group>"; };
 		14783EE12A7E330700EF58D5 /* CameraFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeature.swift; sourceTree = "<group>"; };
 		14783EE32A7E330D00EF58D5 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		14783EE52A7E33B600EF58D5 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		14783EE72A7E340E00EF58D5 /* CIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+.swift"; sourceTree = "<group>"; };
 		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 			children = (
 				14783EDC2A7E2F4C00EF58D5 /* Camera.swift */,
 				14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */,
+				14783EE52A7E33B600EF58D5 /* CameraService.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -688,6 +693,7 @@
 				2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */,
 				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
 				140C543D2A74F54B00CF1CB4 /* String+.swift */,
+				14783EE72A7E340E00EF58D5 /* CIImage+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -974,6 +980,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
 				143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */,
 				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
@@ -1017,6 +1024,7 @@
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
 				14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */,
+				14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,

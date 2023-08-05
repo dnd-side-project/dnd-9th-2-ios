@@ -13,7 +13,6 @@ struct CameraFeature: ReducerProtocol {
 
     struct State: Equatable {
         var viewFinderImage: Image?
-        var disableDismissAnimation: Bool = true
 
         var isFlipped: Bool = false
         var flipDegree: Double = 0.0 {
@@ -29,7 +28,6 @@ struct CameraFeature: ReducerProtocol {
 
         case viewFinderUpdate(Image?)
         case flipImageRemove
-        case moveToCameraResult(Image)
 
         case shutterTapped
         case switchButtonTapped
@@ -38,7 +36,7 @@ struct CameraFeature: ReducerProtocol {
         case flipDegreeUpdate
         case delegate(Delegate)
 
-        enum Delegate:Equatable {
+        enum Delegate: Equatable {
             case savePhoto(Image)
         }
     }
@@ -77,7 +75,6 @@ struct CameraFeature: ReducerProtocol {
             case .flipImageRemove:
                 state.flipImage = nil
                 return .none
-
 
             // MARK: - Button Tapped
 
