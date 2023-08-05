@@ -10,7 +10,7 @@ import Foundation
 extension Date {
 
     // MARK: - Properties
-    
+
     var calendar: Calendar { Calendar.current }
 
     var year: Int {
@@ -96,7 +96,7 @@ extension Date {
     }
 
     // MARK: - Methods
-    
+
     // 현재 시간을 분 단위 까지 나타내주며 생성
     // 초 단위는 짤림
     // ex. 2023년 9월 1일 12시 30분 35.23232초 -> 2023년 9월 1일 12시 30분 00 초

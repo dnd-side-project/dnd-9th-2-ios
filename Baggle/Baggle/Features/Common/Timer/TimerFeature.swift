@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct TimerFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var targetDate: Date = Date().later(seconds: 4)
+        var targetDate: Date = Date().later(seconds: 80)
 
         var timerCount: Int = 0
         var isTimerRunning: Bool = false

@@ -12,16 +12,21 @@ import ComposableArchitecture
 struct LargeTimerView: View {
 
     let store: StoreOf<TimerFeature>
-    let minute: String = "05"
-    let second: String = "00"
+    let numberWidth: CGFloat = 17
 
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            HStack(spacing: 1) {
-                Text(minute)
+            HStack(alignment: .bottom, spacing: 0) {
+                Text("\(viewStore.timerCount.minutes.tenDigit)")
+                    .frame(width: numberWidth)
+                Text("\(viewStore.timerCount.minutes.oneDigit)")
+                    .frame(width: numberWidth)
                 Text(":")
-                Text(second)
+                Text("\(viewStore.timerCount.seconds.tenDigit)")
+                    .frame(width: numberWidth)
+                Text("\(viewStore.timerCount.seconds.oneDigit)")
+                    .frame(width: numberWidth)
             }
             .font(.system(size: 28).bold())
             .padding(.vertical, 20)
@@ -29,6 +34,9 @@ struct LargeTimerView: View {
             .foregroundColor(Color.black)
             .background(Color.white)
             .cornerRadius(12)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }
