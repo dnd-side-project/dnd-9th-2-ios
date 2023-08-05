@@ -5,6 +5,7 @@
 //  Created by youtak on 2023/07/22.
 //
 
+import Combine
 import PhotosUI
 import SwiftUI
 
@@ -15,6 +16,7 @@ struct SignUpView: View {
     private typealias SignUpViewStore = ViewStore<SignUpFeature.State, SignUpFeature.Action>
 
     let store: StoreOf<SignUpFeature>
+    let scrollBottomID: String = "scrollBottomID"
 
     var body: some View {
 
@@ -32,23 +34,26 @@ struct SignUpView: View {
 
                     VStack {
 
-                        ScrollView {
+                        ScrollViewReader { scrollProxy in
+                            ScrollView {
 
-                            VStack {
-                                description
+                                VStack {
+                                    description
 
-                                Spacer()
+                                    photoPicker(viewStore: viewStore)
 
-                                photoPicker(viewStore: viewStore)
-                                    .padding()
-
-                                nicknameTextField(viewStore: viewStore)
-
-                                Spacer()
-                                Spacer()
-                                Spacer()
+                                    nicknameTextField(viewStore: viewStore)
+                                        .id(scrollBottomID)
+                                }
+                                .padding()
                             }
-                            .padding()
+                            .onChange(of: viewStore.keyboardAppear) { _ in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    withAnimation {
+                                        scrollProxy.scrollTo(scrollBottomID)
+                                    }
+                                }
+                            }
                         }
 
                         nextButton(viewStore: viewStore)
@@ -102,6 +107,7 @@ extension SignUpView {
 
             Spacer()
         }
+        .padding(.vertical, 12)
     }
 
     @ViewBuilder
@@ -125,6 +131,7 @@ extension SignUpView {
                         .tint(Color.gray.opacity(0.2))
                 }
         }
+        .padding(.top, 40)
     }
 
     @ViewBuilder
@@ -137,6 +144,7 @@ extension SignUpView {
             ),
             placeholder: "닉네임 (한, 영, 숫자, _, -, 2-8자)"
         )
+        .padding(.vertical, 50)
     }
 
     @ViewBuilder
