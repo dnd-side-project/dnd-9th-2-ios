@@ -12,10 +12,9 @@ import ComposableArchitecture
 struct TimerFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var targetDate: Date = Date().later(seconds: 80)
+        var targetDate: Date = Date().later(seconds: 5)
 
         var timerCount: Int = 0
-        var isTimerRunning: Bool = false
         var isTimerOver: Bool = false
     }
 
@@ -45,26 +44,18 @@ struct TimerFeature: ReducerProtocol {
                     return .run { send in await send(.timerOver)}
                 }
 
-                state.isTimerRunning = true
-
-                if state.isTimerRunning {
-                    return .run { send in
-                        for await _ in self.clock.timer(interval: .seconds(1)) {
-                            await send(.timerTick)
-                        }
+                return .run { send in
+                    for await _ in self.clock.timer(interval: .seconds(1)) {
+                        await send(.timerTick)
                     }
-                    .cancellable(id: CancelID.timer)
-                } else {
-                    return .cancel(id: CancelID.timer)
                 }
-
+                .cancellable(id: CancelID.timer)
                 // MARK: - Timer
 
             case .timerTick:
                 state.timerCount -= 1
 
                 if state.timerCount <= 0 {
-                    state.isTimerRunning = false
                     return .run { send in await send(.timerOver) }
                 } else {
                     return .none
