@@ -57,6 +57,10 @@
 		14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE52A7E33B600EF58D5 /* CameraService.swift */; };
 		14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE72A7E340E00EF58D5 /* CIImage+.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
+		1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */; };
+		1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */; };
+		1493A9162A7DE7CB00A2D7CC /* LargeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */; };
+		1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9172A7E01D800A2D7CC /* Int+.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
@@ -171,6 +175,10 @@
 		14783EE52A7E33B600EF58D5 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		14783EE72A7E340E00EF58D5 /* CIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+.swift"; sourceTree = "<group>"; };
 		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
+		1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeature.swift; sourceTree = "<group>"; };
+		1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTimerView.swift; sourceTree = "<group>"; };
+		1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTimerView.swift; sourceTree = "<group>"; };
+		1493A9172A7E01D800A2D7CC /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
@@ -372,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				1432BE712A68302F0098AAA9 /* App */,
+				1493A90D2A7DE49000A2D7CC /* Common */,
 				14EBE4BC2A681308007537C8 /* Login */,
 				14EBE4BF2A681311007537C8 /* Tab */,
 				2BABCB292A76D19000AFECA3 /* MeetingDetail */,
@@ -600,6 +609,24 @@
 			path = SelectView;
 			sourceTree = "<group>";
 		};
+		1493A90D2A7DE49000A2D7CC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1493A90E2A7DE49B00A2D7CC /* Timer */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1493A90E2A7DE49B00A2D7CC /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */,
+				1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */,
+				1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		149C0F442A7784F100B95A36 /* Success */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,6 +724,7 @@
 				140C543D2A74F54B00CF1CB4 /* String+.swift */,
 				14783EE72A7E340E00EF58D5 /* CIImage+.swift */,
 				143410532A7E87460024FC75 /* UIImage+.swift */,
+				1493A9172A7E01D800A2D7CC /* Int+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1016,6 +1044,7 @@
 				143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */,
 				143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */,
 				140C543E2A74F54B00CF1CB4 /* String+.swift in Sources */,
+				1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */,
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
 				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
@@ -1034,6 +1063,7 @@
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,
 				146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */,
+				1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
@@ -1058,11 +1088,13 @@
 				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
 				14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */,
 				2BF8F9152A78DFCA00510EFA /* JoinMeetingFeature.swift in Sources */,
+				1493A9162A7DE7CB00A2D7CC /* LargeTimerView.swift in Sources */,
 				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* View+.swift in Sources */,
 				2B308B8F2A7CCE5A00B9846F /* SegmentedTagView.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
+				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,

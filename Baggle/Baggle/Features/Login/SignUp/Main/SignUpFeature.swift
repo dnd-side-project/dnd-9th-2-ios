@@ -18,6 +18,7 @@ struct SignUpFeature: ReducerProtocol {
 
         var disableDismissAnimation: Bool = false
         var isLoading: Bool = false
+        var keyboardAppear: Bool = false
 
         // MARK: - 이미지
 
@@ -58,6 +59,7 @@ struct SignUpFeature: ReducerProtocol {
         // MARK: - Nickname
 
         case textFieldAction(BaggleTextFeature.Action)
+        case keyboardAppear
 
         // MARK: - Network
 
@@ -158,7 +160,14 @@ struct SignUpFeature: ReducerProtocol {
 
                 // MARK: - Nickname TextField
 
+            case .textFieldAction(.isFocused):
+                return .run { send in await send(.keyboardAppear) }
+
             case .textFieldAction:
+                return .none
+
+            case .keyboardAppear:
+                state.keyboardAppear.toggle()
                 return .none
 
                 // MARK: - Network

@@ -11,19 +11,33 @@ struct ProfileImageView: View {
     let imageState: AlbumImageState
 
     var body: some View {
-        switch imageState {
-        case .empty:
-            Image(systemName: "plus")
-                .font(.system(size: 40))
+        ZStack {
+            switch imageState {
+            case .empty:
+                ZStack {}
+            case .loading:
+                ProgressView()
+            case .success(let image):
+                image.resizable()
+            case .failure:
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 40))
+                    .foregroundColor(.red)
+            }
+        }
+        .scaledToFill()
+        .clipShape(Circle())
+        .frame(width: 160, height: 160)
+        .background {
+            Circle()
+                .tint(Color.gray.opacity(0.2))
+        }
+        .overlay(alignment: .bottomTrailing) {
+            Image(systemName: "camera.circle.fill")
+                .symbolRenderingMode(.multicolor)
+                .font(.system(size: 30))
                 .foregroundColor(.blue)
-        case .loading:
-            ProgressView()
-        case .success(let image):
-            image.resizable()
-        case .failure:
-            Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 40))
-                .foregroundColor(.red)
+                .offset(x: -8, y: -8)
         }
     }
 }

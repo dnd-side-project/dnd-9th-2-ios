@@ -9,6 +9,8 @@ import Foundation
 
 extension Date {
 
+    // MARK: - Properties
+
     var calendar: Calendar { Calendar.current }
 
     var year: Int {
@@ -93,6 +95,8 @@ extension Date {
         }
     }
 
+    // MARK: - Methods
+
     // 현재 시간을 분 단위 까지 나타내주며 생성
     // 초 단위는 짤림
     // ex. 2023년 9월 1일 12시 30분 35.23232초 -> 2023년 9월 1일 12시 30분 00 초
@@ -134,8 +138,15 @@ extension Date {
     // n 분 이후 생성
     func later(minutes: Int) -> Date {
         // swiftlint:disable:next force_unwrapping
-        let hoursFromNow = Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
-        return hoursFromNow
+        let minutesFromNow = Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+        return minutesFromNow
+    }
+
+    // n 초 이후 생성
+    func later(seconds: Int) -> Date {
+        // swiftlint:disable:next force_unwrapping
+        let secondsFromNow = Calendar.current.date(byAdding: .second, value: seconds, to: self)!
+        return secondsFromNow
     }
 
     /// 약속 생성 가능 시간 리턴
@@ -177,5 +188,15 @@ extension Date {
         result.hour = newDate.hour
         result.minute = newDate.minute
         return result
+    }
+
+    // MARK: - Timer
+    func remainingTime() -> Int {
+        let components = calendar.dateComponents([.second], from: Date(), to: self)
+        if let result = components.second, result > 0 {
+            return result
+        } else {
+            return 0
+        }
     }
 }
