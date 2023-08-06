@@ -39,9 +39,18 @@ struct HomeView: View {
                             .padding(.top, 23)
                         }
                     }
+                    .refreshable {
+                        viewStore.send(.refreshMeetingList)
+                    }
 
                     // 임시 버튼
                     tempButton(viewStore: viewStore)
+                }
+
+                if viewStore.isRefreshing {
+                    ProgressView()
+                        .padding(.top, 60)
+                        .tint(.white)
                 }
 
                 gradientTop()
@@ -151,27 +160,6 @@ extension HomeView {
         .frame(height: 260)
     }
 
-    func listHeader(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
-        SegmentedPickerView(
-            segment: [
-                Segment(
-                    id: .ongoing,
-                    count: viewStore.ongoingList.count,
-                    isSelected: viewStore.meetingStatus == .ongoing,
-                    action: {
-                        viewStore.send(.changeMeetingStatus(.ongoing))
-                    }),
-                Segment(
-                    id: .complete,
-                    count: viewStore.completedList.count,
-                    isSelected: viewStore.meetingStatus == .complete,
-                    action: {
-                        viewStore.send(.changeMeetingStatus(.complete))
-                    })
-            ])
-        .background(.gray)
-    }
-
     // 임시 버튼
     func tempButton(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
         VStack {
@@ -191,11 +179,6 @@ extension HomeView {
             .padding()
 
             HStack(spacing: 20) {
-                Button {
-                    viewStore.send(.refreshMeetingList)
-                } label: {
-                    Text("리프레시")
-                }
 
                 Button {
                     viewStore.send(.shareButtonTapped)

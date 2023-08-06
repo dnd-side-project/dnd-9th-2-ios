@@ -48,6 +48,7 @@ struct HomeFeature: ReducerProtocol {
         var completedList: [Meeting] = []
         var meetingDetailState: MeetingDetailFeature.State = MeetingDetailFeature.State(
             meetingId: 0)
+        var isRefreshing: Bool = false
 
         @PresentationState var usingCamera: CameraFeature.State?
     }
@@ -110,12 +111,18 @@ struct HomeFeature: ReducerProtocol {
                 }
 
             case .refreshMeetingList:
+                state.isRefreshing = true
                 state.ongoingList.removeAll()
                 state.completedList.removeAll()
                 state.meetingStatus = .ongoing
                 return .run { send in
-                    let list = await meetingService.fetchMeetingList(.ongoing)
-                    await send(.updateMeetingList(.ongoing, list))
+                    do {
+                        try await Task.sleep(nanoseconds: 1_000_000_000)
+                        let list = await meetingService.fetchMeetingList(.ongoing)
+                        await send(.updateMeetingList(.ongoing, list))
+                    } catch {
+                        print("error")
+                    }
                 }
 
             case .changeMeetingStatus(let status):
@@ -135,6 +142,7 @@ struct HomeFeature: ReducerProtocol {
                         state.completedList.append(contentsOf: model)
                     }
                 }
+                state.isRefreshing = false
                 return .none
 
             case .shareButtonTapped:
