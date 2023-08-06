@@ -18,10 +18,11 @@ struct BaggleTag: View {
 
     var body: some View {
         Text(text)
+            .font(.system(size: 12, weight: .semibold))
             .kerning(-0.5)
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 10)
             .padding(.vertical, 6)
-            .foregroundColor(color.fgColor)
+            .foregroundColor(.white)
             .background(color.bgColor)
             .cornerRadius(6)
     }
@@ -29,8 +30,10 @@ struct BaggleTag: View {
 
 struct BaggleTag_Previews: PreviewProvider {
     static var previews: some View {
-        BaggleTag("장소")
+        VStack {
+            BaggleTag("D-30")
 
-        BaggleTag("시간", .pink)
+            BaggleTag("D-Day", .pink)
+        }
     }
 }

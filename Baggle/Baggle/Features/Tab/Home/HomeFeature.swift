@@ -15,12 +15,20 @@ import KakaoSDKTemplate
 
 enum MeetingStatus {
     case ongoing
+    case dday
     case complete
 
     var title: String {
         switch self {
-        case .ongoing: return "예정된 약속"
+        case .ongoing, .dday: return "예정된 약속"
         case .complete: return "지난 약속"
+        }
+    }
+
+    var fgColor: Color {
+        switch self {
+        case .ongoing, .complete: return .gray.opacity(0.5)
+        case .dday: return .pink
         }
     }
 }

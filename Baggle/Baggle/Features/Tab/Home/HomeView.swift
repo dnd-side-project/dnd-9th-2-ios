@@ -20,7 +20,7 @@ struct HomeView: View {
                     // section 간의 간격을 없애기 위해 사용
                     VStack(spacing: 0) {
                         userHeader()
-                        
+
                         // sticky header
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
                             Section(header: listHeader(viewStore: viewStore)) {
@@ -35,7 +35,7 @@ struct HomeView: View {
                                                     .font(.caption)
                                                 Text(meeting.name)
                                             }
-                                            
+
                                             Spacer()
                                         }
                                         .onTapGesture {
@@ -49,7 +49,7 @@ struct HomeView: View {
                     }
                 }
                 .clipped()
-                
+
                 // 임시 버튼
                 tempButton(viewStore: viewStore)
             }
