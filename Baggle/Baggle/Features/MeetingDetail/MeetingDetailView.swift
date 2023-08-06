@@ -34,7 +34,12 @@ struct MeetingDetailView: View {
 
                     // header
                     headerView(viewStore: viewStore)
-                        .padding(.top, 56)
+
+                    memberListView(viewStore: viewStore)
+                        .padding(.horizontal, 20)
+                        .drawUnderline(spacing: 0,
+                                       height: 0.5,
+                                       color: .gray.opacity(0.5))
 
                     if let data = viewStore.meetingData {
                         Text("모임명: \(data.name), 모임 id: \(data.id)")
@@ -89,28 +94,18 @@ struct MeetingDetailView: View {
 extension MeetingDetailView {
     typealias Viewstore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
 
-    func baggleAlert(viewStore: Viewstore) -> some View {
-        BaggleAlert(
-            isPresented: Binding(
-                get: { viewStore.isAlertPresented },
-                set: { _ in viewStore.send(.presentAlert) }),
-            title: viewStore.alertTitle,
-            description: viewStore.alertDescription,
-            rightButtonTitle: viewStore.alertRightButtonTitle) {
-                viewStore.send(.deleteMeeting)
-            }
-    }
-
     func headerView(viewStore: Viewstore) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             // 모임방 이름, 스탬프
             HStack(alignment: .top) {
                 Text("📌")
 
+                // TODO: - scaleToFit 수정
                 Text("수빈님네 집들이집들이 집들이집들이집")
                     .kerning(-0.5)
                     .lineSpacing(8)
-                    .frame(maxWidth: 190)
+                    .lineLimit(2)
+                    .frame(maxWidth: 190, alignment: .leading)
 
                 Image(systemName: "stamp")
                     .frame(width: 56, height: 23)
@@ -142,8 +137,43 @@ extension MeetingDetailView {
                 .background(.white)
                 .cornerRadius(8)
         }
-        .padding(EdgeInsets(top: 8, leading: 20, bottom: 24, trailing: 20))
+        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
         .background(.blue.opacity(0.2))
+    }
+
+    func memberListView(viewStore: Viewstore) -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 12) {
+                ForEach(viewStore.meetingData?.members ?? [], id: \.self) { member in
+                    VStack(spacing: 4) {
+                        // TODO: - 방장, 긴급 버튼 할당자 표시
+                        CircleProfileView(
+                            imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
+                            size: .medium)
+
+                        Text(member.name)
+                            .padding(.vertical, 2)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: 64)
+                    }
+                    .padding(.all, 2)
+                }
+            }
+        }
+        .padding(.top, 20)
+        .padding(.bottom, 16)
+    }
+
+    func baggleAlert(viewStore: Viewstore) -> some View {
+        BaggleAlert(
+            isPresented: Binding(
+                get: { viewStore.isAlertPresented },
+                set: { _ in viewStore.send(.presentAlert) }),
+            title: viewStore.alertTitle,
+            description: viewStore.alertDescription,
+            rightButtonTitle: viewStore.alertRightButtonTitle) {
+                viewStore.send(.deleteMeeting)
+            }
     }
 }
 
