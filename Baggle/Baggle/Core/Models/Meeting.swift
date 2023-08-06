@@ -14,7 +14,7 @@ struct Meeting: Equatable, Identifiable {
     let place: String // 장소
     let date: String // 날짜
     let time: String // 시간
-    let dday: Int?
+    let dDay: Int
     let profileImages: [String] // 프로필 이미지
     let status: MeetingStatus
     let isConfirmed: Bool // 약속 확정 여부

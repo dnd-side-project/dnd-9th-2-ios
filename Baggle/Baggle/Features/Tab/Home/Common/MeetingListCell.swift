@@ -15,13 +15,11 @@ struct MeetingListCell: View {
         ZStack(alignment: .bottomTrailing) {
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-
-                    if let dday = data.dday {
-                        if dday == 0 {
-                            BaggleTag("D-Day", .pink)
-                        } else {
-                            BaggleTag("D-\(dday)")
-                        }
+                    
+                    if data.dDay == 0 {
+                        BaggleTag("D-Day", .pink)
+                    } else if data.dDay > 0 {
+                        BaggleTag("D-\(data.dDay)")
                     }
 
                     HStack(spacing: 4) {
@@ -91,7 +89,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     place: "유탁님 없는 잠실",
                     date: "2023년 10월 23일",
                     time: "15:30",
-                    dday: 0,
+                    dDay: 0,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
                     status: .dday,
                     isConfirmed: true))
@@ -103,7 +101,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     place: "유탁님 없는 잠실",
                     date: "2023년 10월 23일",
                     time: "15:30",
-                    dday: 20,
+                    dDay: 20,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
                     status: .ongoing,
                     isConfirmed: false))
@@ -115,7 +113,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     place: "유탁님 없는 잠실",
                     date: "2023년 10월 23일",
                     time: "15:30",
-                    dday: nil,
+                    dDay: -10,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
                     status: .complete,
                     isConfirmed: true))
