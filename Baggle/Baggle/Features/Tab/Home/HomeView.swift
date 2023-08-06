@@ -15,37 +15,36 @@ struct HomeView: View {
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack(spacing: 0) {
-                ScrollView {
-                    // section 간의 간격을 없애기 위해 사용
-                    VStack(spacing: 0) {
-                        userHeader()
+            ZStack(alignment: .top) {
 
-                        // sticky header
-                        LazyVStack(pinnedViews: [.sectionHeaders]) {
-                            Section(header: listHeader(viewStore: viewStore)) {
-                                VStack(spacing: 12) {
-                                    ForEach((viewStore.meetingStatus == .ongoing)
-                                            ? viewStore.ongoingList : viewStore.completedList
-                                    ) { meeting in
-                                        // cell
-                                        MeetingListCell(data: meeting)
-                                            .onTapGesture {
-                                                viewStore.send(.pushToMeetingDetail(meeting.id))
-                                            }
+//                VStack { // 임시 버튼
+                ScrollView {
+                    header(viewStore: viewStore)
+                    
+                    Section {
+                        VStack(spacing: 12) {
+                            ForEach((viewStore.meetingStatus == .ongoing)
+                                    ? viewStore.ongoingList : viewStore.completedList
+                            ) { meeting in
+                                // cell
+                                MeetingListCell(data: meeting)
+                                    .onTapGesture {
+                                        viewStore.send(.pushToMeetingDetail(meeting.id))
                                     }
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.top, 23)
                             }
                         }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 23)
                     }
                 }
-                .clipped()
 
-                // 임시 버튼
-                tempButton(viewStore: viewStore)
+                    // 임시 버튼
+//                    tempButton(viewStore: viewStore)
+//                }
+
+                gradientTop()
             }
+            .edgesIgnoringSafeArea(.top)
             .onReceive(NotificationCenter.default.publisher(for: .refreshMeetingList),
                        perform: { _ in
                 viewStore.send(.refreshMeetingList)
@@ -75,28 +74,71 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    func userHeader() -> some View {
-        VStack(spacing: 10) {
-            HStack {
-                Text("2조최강킹짱왕님의 \nBaggle!")
-                    .font(.system(size: 24))
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .lineSpacing(1.08)
+    func gradientTop() -> some View {
+        Rectangle()
+            .fill(LinearGradient(gradient: Gradient(colors: [.blue, .clear]),
+                                 startPoint: .top,
+                                 endPoint: .bottom))
+            .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+    }
 
-                Spacer()
-
-                Circle()
-                    .fill(.gray)
-                    .frame(width: 72, height: 72)
-            }
-            .padding(.top, 36)
-            .padding(.horizontal, 20)
-
+    func userInfo() -> some View {
+        HStack {
+            Text("2조최강킹짱왕님의 \nBaggle!")
+                .font(.system(size: 24))
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            
             Spacer()
+            
+            Circle()
+                .fill(.gray)
+                .frame(width: 72, height: 72)
         }
-        .frame(height: 216)
-        .background(.blue)
+        .frame(height: 72)
+        .padding(.horizontal, 20)
+    }
+
+    func header(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
+        GeometryReader { geo in
+            let yoffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
+
+            ZStack(alignment: .bottomLeading) {
+
+                Image(systemName: "house")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: geo.size.width, height: geo.size.height - yoffset)
+                    .background(.blue)
+                    .offset(y: yoffset)
+
+                VStack(spacing: 64) {
+                    // 유저 정보
+                    userInfo()
+
+                    // segmentedPicker
+                    SegmentedPickerView(
+                        segment: [
+                            Segment(
+                                id: .ongoing,
+                                count: viewStore.ongoingList.count,
+                                isSelected: viewStore.meetingStatus == .ongoing,
+                                action: {
+                                    viewStore.send(.changeMeetingStatus(.ongoing))
+                                }),
+                            Segment(
+                                id: .complete,
+                                count: viewStore.completedList.count,
+                                isSelected: viewStore.meetingStatus == .complete,
+                                action: {
+                                    viewStore.send(.changeMeetingStatus(.complete))
+                                })
+                        ])
+                }
+                .offset(y: yoffset)
+            }
+        }
+        .frame(height: 260)
     }
 
     func listHeader(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
