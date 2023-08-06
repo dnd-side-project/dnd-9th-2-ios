@@ -47,22 +47,26 @@ struct MockUpMeetingService {
                 place: "우리집",
                 date: "2023년 04월 22일",
                 time: "15:30",
+                dday: 0,
                 profileImages: [
                     "https://avatars.githubusercontent.com/u/71167956?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                isConfirmed: false),
+                status: .dday,
+                isConfirmed: true),
             Meeting(
                 id: Int.random(in: 101...200),
                 name: "진행 중인 모임2",
                 place: "남의 집",
                 date: "2023년 08년 23일",
                 time: "15:30",
+                dday: 30,
                 profileImages: [
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
+                status: .ongoing,
                 isConfirmed: false)
         ]
 
@@ -73,12 +77,14 @@ struct MockUpMeetingService {
                 place: "우리집",
                 date: "2023년 04월 22일",
                 time: "15:30",
+                dday: nil,
                 profileImages: [
                     "https://avatars.githubusercontent.com/u/71167956?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                isConfirmed: false)
+                status: .complete,
+                isConfirmed: true)
         ]
         return type == .ongoing ? ongoing : complete
     }

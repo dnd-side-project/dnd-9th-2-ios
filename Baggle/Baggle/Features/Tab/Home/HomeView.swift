@@ -24,26 +24,19 @@ struct HomeView: View {
                         // sticky header
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
                             Section(header: listHeader(viewStore: viewStore)) {
-                                VStack(spacing: 0) {
+                                VStack(spacing: 12) {
                                     ForEach((viewStore.meetingStatus == .ongoing)
                                             ? viewStore.ongoingList : viewStore.completedList
                                     ) { meeting in
                                         // cell
-                                        HStack {
-                                            VStack(alignment: .leading, spacing: 10) {
-                                                Text("\(meeting.id)")
-                                                    .font(.caption)
-                                                Text(meeting.name)
+                                        MeetingListCell(data: meeting)
+                                            .onTapGesture {
+                                                viewStore.send(.pushToMeetingDetail(meeting.id))
                                             }
-
-                                            Spacer()
-                                        }
-                                        .onTapGesture {
-                                            viewStore.send(.pushToMeetingDetail(meeting.id))
-                                        }
                                     }
                                 }
-                                .background(.white)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 23)
                             }
                         }
                     }
