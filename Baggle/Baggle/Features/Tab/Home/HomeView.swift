@@ -17,30 +17,32 @@ struct HomeView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack(alignment: .top) {
 
-//                VStack { // 임시 버튼
-                ScrollView {
-                    header(viewStore: viewStore)
-                    
-                    Section {
-                        VStack(spacing: 12) {
-                            ForEach((viewStore.meetingStatus == .ongoing)
-                                    ? viewStore.ongoingList : viewStore.completedList
-                            ) { meeting in
-                                // cell
-                                MeetingListCell(data: meeting)
-                                    .onTapGesture {
-                                        viewStore.send(.pushToMeetingDetail(meeting.id))
-                                    }
+                VStack { // 임시 버튼용 Vstack
+
+                    ScrollView {
+                        // userInfo + segmentedPicker
+                        header(viewStore: viewStore)
+
+                        Section {
+                            VStack(spacing: 12) {
+                                ForEach((viewStore.meetingStatus == .ongoing)
+                                        ? viewStore.ongoingList : viewStore.completedList
+                                ) { meeting in
+                                    // cell
+                                    MeetingListCell(data: meeting)
+                                        .onTapGesture {
+                                            viewStore.send(.pushToMeetingDetail(meeting.id))
+                                        }
+                                }
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 23)
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 23)
                     }
-                }
 
                     // 임시 버튼
-//                    tempButton(viewStore: viewStore)
-//                }
+                    tempButton(viewStore: viewStore)
+                }
 
                 gradientTop()
             }
@@ -88,9 +90,9 @@ extension HomeView {
                 .font(.system(size: 24))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-            
+
             Spacer()
-            
+
             Circle()
                 .fill(.gray)
                 .frame(width: 72, height: 72)
