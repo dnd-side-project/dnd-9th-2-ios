@@ -25,6 +25,7 @@ opt_in_rules:
 excluded:
   - ${TARGETNAME}/Resources
   - ${TARGETNAME}Tests/*
+  - ${TARGETNAME}/Core/Services/Camera/Camera.swift
 
 # 줄 수 제한
 line_length: 100

@@ -39,6 +39,13 @@ struct MeetingDetailView: View {
                         }
                     }
 
+                    Button {
+                        viewStore.send(.cameraButtonTapped)
+                    } label: {
+                        Text("카메라")
+                    }
+                    .buttonStyle(BagglePrimaryStyle(size: .small))
+
                     Button("뒤로가기") {
                         viewStore.send(.backButtonTapped)
                     }
@@ -63,6 +70,14 @@ struct MeetingDetailView: View {
                 SelectOwnerView(store: selectOwnerStore)
                     .presentationDetents([.height(340)])
                     .presentationDragIndicator(.visible)
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$usingCamera,
+                    action: { .usingCamera($0)}
+                )
+            ) { cameraStore in
+                    CameraView(store: cameraStore)
             }
             .onAppear { viewStore.send(.onAppear) }
             .onDisappear { viewStore.send(.delegate(.onDisappear)) }

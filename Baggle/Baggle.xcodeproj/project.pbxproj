@@ -31,6 +31,7 @@
 		1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE672A681B630098AAA9 /* AppFeature.swift */; };
 		1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6C2A682FCB0098AAA9 /* HomeView.swift */; };
 		1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */; };
+		143410542A7E87460024FC75 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143410532A7E87460024FC75 /* UIImage+.swift */; };
 		143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27012A761FCF00DFC0EE /* CreatePlaceFeature.swift */; };
 		143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */; };
 		143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143B27072A76200200DFC0EE /* CreateMemoFeature.swift */; };
@@ -49,6 +50,12 @@
 		146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EF2A79429E00FF3142 /* SelectDateView.swift */; };
 		146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */; };
 		146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F32A7950F500FF3142 /* SelectTimeView.swift */; };
+		14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDC2A7E2F4C00EF58D5 /* Camera.swift */; };
+		14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */; };
+		14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE12A7E330700EF58D5 /* CameraFeature.swift */; };
+		14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE32A7E330D00EF58D5 /* CameraView.swift */; };
+		14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE52A7E33B600EF58D5 /* CameraService.swift */; };
+		14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE72A7E340E00EF58D5 /* CIImage+.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
 		1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */; };
 		1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */; };
@@ -143,6 +150,7 @@
 		1432BE672A681B630098AAA9 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		1432BE6C2A682FCB0098AAA9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		143410532A7E87460024FC75 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		143B27012A761FCF00DFC0EE /* CreatePlaceFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceFeature.swift; sourceTree = "<group>"; };
 		143B27042A761FEE00DFC0EE /* CreateDateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateFeature.swift; sourceTree = "<group>"; };
 		143B27072A76200200DFC0EE /* CreateMemoFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoFeature.swift; sourceTree = "<group>"; };
@@ -160,6 +168,12 @@
 		146C51EF2A79429E00FF3142 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeFeature.swift; sourceTree = "<group>"; };
 		146C51F32A7950F500FF3142 /* SelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeView.swift; sourceTree = "<group>"; };
+		14783EDC2A7E2F4C00EF58D5 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetting.swift; sourceTree = "<group>"; };
+		14783EE12A7E330700EF58D5 /* CameraFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeature.swift; sourceTree = "<group>"; };
+		14783EE32A7E330D00EF58D5 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		14783EE52A7E33B600EF58D5 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		14783EE72A7E340E00EF58D5 /* CIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+.swift"; sourceTree = "<group>"; };
 		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
 		1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeature.swift; sourceTree = "<group>"; };
 		1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTimerView.swift; sourceTree = "<group>"; };
@@ -350,6 +364,7 @@
 		14134D412A64C561004A6AC4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				14783EDB2A7E2EE700EF58D5 /* Camera */,
 				14B7A0432A75409400B8E202 /* Error */,
 				1421C04F2A7A848E00C20497 /* Login */,
 				14B7A0422A753DA500B8E202 /* SignUp */,
@@ -370,6 +385,7 @@
 				14EBE4BF2A681311007537C8 /* Tab */,
 				2BABCB292A76D19000AFECA3 /* MeetingDetail */,
 				2BF8F9132A78DF3E00510EFA /* JoinMeeting */,
+				14783EE02A7E32D100EF58D5 /* Camera */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -554,6 +570,25 @@
 			path = Date;
 			sourceTree = "<group>";
 		};
+		14783EDB2A7E2EE700EF58D5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				14783EDC2A7E2F4C00EF58D5 /* Camera.swift */,
+				14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */,
+				14783EE52A7E33B600EF58D5 /* CameraService.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		14783EE02A7E32D100EF58D5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				14783EE12A7E330700EF58D5 /* CameraFeature.swift */,
+				14783EE32A7E330D00EF58D5 /* CameraView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		147899972A79EC640071DAE3 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +722,8 @@
 				2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */,
 				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
 				140C543D2A74F54B00CF1CB4 /* String+.swift */,
+				14783EE72A7E340E00EF58D5 /* CIImage+.swift */,
+				143410532A7E87460024FC75 /* UIImage+.swift */,
 				1493A9172A7E01D800A2D7CC /* Int+.swift */,
 			);
 			path = Extensions;
@@ -974,10 +1011,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
 				143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */,
 				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
 				2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */,
+				14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */,
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
 				1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */,
@@ -994,6 +1033,7 @@
 				14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */,
 				141392622A78EBD300249C8A /* CreateStatus.swift in Sources */,
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
+				14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */,
 				144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */,
 				14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */,
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
@@ -1015,6 +1055,8 @@
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
+				14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */,
+				14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
@@ -1044,6 +1086,7 @@
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
 				141392602A78E81D00249C8A /* PageIndicator.swift in Sources */,
 				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
+				14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */,
 				2BF8F9152A78DFCA00510EFA /* JoinMeetingFeature.swift in Sources */,
 				1493A9162A7DE7CB00A2D7CC /* LargeTimerView.swift in Sources */,
 				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
@@ -1059,6 +1102,7 @@
 				143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */,
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
+				143410542A7E87460024FC75 /* UIImage+.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */,
 				2BF268202A77828100F32ADF /* Meeting.swift in Sources */,
 			);
@@ -1214,6 +1258,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baggle/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"카메라 권한이 필요합니다\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1252,6 +1297,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baggle/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"카메라 권한이 필요합니다\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
