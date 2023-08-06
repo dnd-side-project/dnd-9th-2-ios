@@ -71,6 +71,14 @@ struct HomeView: View {
                         state: \.meetingDetailState,
                         action: HomeFeature.Action.meetingDetailAction))
             }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$usingCamera,
+                    action: { .usingCamera($0)}
+                )
+            ) { cameraStore in
+                    CameraView(store: cameraStore)
+            }
         }
     }
 }
@@ -193,6 +201,12 @@ extension HomeView {
                     viewStore.send(.shareButtonTapped)
                 } label: {
                     Text("카카오톡 공유")
+                }
+
+                Button {
+                    viewStore.send(.cameraButtonTapped)
+                } label: {
+                    Text("카메라")
                 }
             }
             .padding()

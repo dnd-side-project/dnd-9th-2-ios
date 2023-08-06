@@ -48,6 +48,8 @@ struct HomeFeature: ReducerProtocol {
         var completedList: [Meeting] = []
         var meetingDetailState: MeetingDetailFeature.State = MeetingDetailFeature.State(
             meetingId: 0)
+
+        @PresentationState var usingCamera: CameraFeature.State?
     }
 
     enum Action: Equatable {
@@ -70,6 +72,9 @@ struct HomeFeature: ReducerProtocol {
         case meetingDetailAction(MeetingDetailFeature.Action)
         case pushToMeetingDetail(Int)
         case pushMeetingDetail
+
+        case cameraButtonTapped
+        case usingCamera(PresentationAction<CameraFeature.Action>)
     }
 
     @Dependency(\.sendInvitation) private var sendInvitation
@@ -177,6 +182,13 @@ struct HomeFeature: ReducerProtocol {
 
             case .meetingDetailAction:
                 return .none
+
+            case .cameraButtonTapped:
+                state.usingCamera = CameraFeature.State()
+                return .none
+
+            case .usingCamera:
+                return .none
             }
 
             @Sendable func moveToAppStore() {
@@ -185,6 +197,9 @@ struct HomeFeature: ReducerProtocol {
                     openURL(url)
                 }
             }
+        }
+        .ifLet(\.$usingCamera, action: /Action.usingCamera) {
+            CameraFeature()
         }
     }
 }
