@@ -89,6 +89,7 @@
 		2B5BE6AF2A779C8E00F25474 /* MeetingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */; };
 		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
+		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
@@ -110,6 +111,7 @@
 		2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* View+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */; };
+		2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5299D2A7D697800A53779 /* MeetingListCell.swift */; };
 		2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BE74F612A7771B600402068 /* GoogleService-Info.plist */; };
 		2BF268202A77828100F32ADF /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2681F2A77828100F32ADF /* Meeting.swift */; };
 		2BF268232A77861300F32ADF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF268222A77861300F32ADF /* HomeService.swift */; };
@@ -209,6 +211,7 @@
 		2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetail.swift; sourceTree = "<group>"; };
 		2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
 		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 		2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifier.swift"; sourceTree = "<group>"; };
+		2BE5299D2A7D697800A53779 /* MeetingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
 		2BE74F612A7771B600402068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BF2681F2A77828100F32ADF /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		2BF268222A77861300F32ADF /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -752,6 +756,8 @@
 			children = (
 				2B308B8E2A7CCE5A00B9846F /* SegmentedTagView.swift */,
 				2B308B902A7CDA1400B9846F /* SegmentedPickerView.swift */,
+				2BE5299D2A7D697800A53779 /* MeetingListCell.swift */,
+				2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1066,6 +1072,7 @@
 				1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
+				2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
@@ -1094,6 +1101,7 @@
 				2B308B8F2A7CCE5A00B9846F /* SegmentedTagView.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
+				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,

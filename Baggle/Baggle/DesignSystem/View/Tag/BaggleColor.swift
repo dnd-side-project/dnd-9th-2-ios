@@ -14,15 +14,6 @@ enum BaggleColor {
     var bgColor: Color {
         switch self {
         case .blue:
-            return Color.blue.opacity(0.2)
-        case .pink:
-            return Color.pink.opacity(0.2)
-        }
-    }
-
-    var fgColor: Color {
-        switch self {
-        case .blue:
             return Color.blue
         case .pink:
             return Color.pink

@@ -329,7 +329,7 @@ class Camera: NSObject {
 
     @objc
     func updateForDeviceOrientation() {
-        //TODO: Figure out if we need this for anything.
+        // TODO: Figure out if we need this for anything.
     }
 
     //  기기 방향에 따른 비디오 송출 방향
@@ -440,4 +440,4 @@ fileprivate extension UIScreen {
     }
 }
 
-fileprivate let logger = Logger(subsystem: "com.apple.swiftplaygroundscontent.capturingphotos", category: "Camera")
+private let logger = Logger(subsystem: "com.apple.swiftplaygroundscontent.capturingphotos", category: "Camera")
