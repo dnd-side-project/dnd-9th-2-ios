@@ -149,8 +149,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .emergencyAction(.presented(.delegate(.usingCamera))):
-                state.usingCamera = CameraFeature.State()
-                return .none
+                state.emergencyState = nil
+                return .run { send in await send(.cameraButtonTapped)}
 
             case .emergencyAction:
                 return .none

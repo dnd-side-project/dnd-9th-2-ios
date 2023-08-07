@@ -57,10 +57,7 @@ struct EmergencyFeature: ReducerProtocol {
                 return .none
 
             case .cameraButtonTapped:
-                return .run { send in
-                    await send(.delegate(.usingCamera))
-                    await self.dismiss()
-                }
+                return .run { send in await send(.delegate(.usingCamera)) }
 
                 // Timer
             case .timerAction:
