@@ -40,8 +40,8 @@ extension View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
     
-    /// baggleTypo 설정하는 함수
-    func setBaggleTypo(size: CGFloat, weight: Font.Weight) -> some View {
+    /// baggleFont + lineSpacing 설정하는 함수
+    func baggleTypoLineSpacing(size: CGFloat, weight: Font.Weight) -> some View {
         return self
             .font(.baggleFont(size: size, weight: weight))
             .lineSpacing(size*0.3)
