@@ -143,7 +143,7 @@ extension EmergencyView {
                     Text("사진 인증하기")
                 }
             }
-            .buttonStyle(BagglePrimaryStyle(size: .small, shape: .round))
+            .buttonStyle(BaggleSecondaryStyle())
             .padding(.bottom, 16)
         }
     }
