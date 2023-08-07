@@ -75,6 +75,13 @@ struct MeetingDetailView: View {
                 } label: {
                     Text("카메라")
                 }
+
+                Button {
+                    viewStore.send(.emergencyButtonTapped)
+                } label: {
+                    Text("긴급 버튼")
+                }
+
             })
             .sheet(
                 store: self.store.scope(
@@ -92,6 +99,14 @@ struct MeetingDetailView: View {
                 )
             ) { cameraStore in
                     CameraView(store: cameraStore)
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$emergencyState,
+                    action: { .emergencyAction($0) }
+                )
+            ) { emergencyStore in
+                    EmergencyView(store: emergencyStore)
             }
             .onAppear { viewStore.send(.onAppear) }
             .onDisappear { viewStore.send(.delegate(.onDisappear)) }

@@ -7,12 +7,38 @@
 
 import SwiftUI
 
-enum BubbleType {
+// MARK: - Bubble Size
+
+enum BubbleSize {
+    case medium
+    case small
+}
+
+extension BubbleSize {
+
+    var paddingHorizontal: CGFloat {
+        switch self {
+        case .medium: return 20
+        case .small: return 12
+        }
+    }
+
+    var paddingVertical: CGFloat {
+        switch self {
+        case .medium: return 14
+        case .small: return 8
+        }
+    }
+}
+
+// MARK: - Bubble Color
+
+enum BubbleColor {
     case primary
     case secondary
 }
 
-extension BubbleType {
+extension BubbleColor {
 
     var backgroundColor: Color {
         switch self {

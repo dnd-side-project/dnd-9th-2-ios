@@ -70,6 +70,8 @@
 		14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064F2A6B8913008D5778 /* SignUpFeature.swift */; };
 		14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506532A6B8ED3008D5778 /* SignUpSuccessView.swift */; };
 		14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506572A6BC576008D5778 /* MyPageFeature.swift */; };
+		14E577AA2A80973300119FB3 /* EmergencyFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E577A92A80973300119FB3 /* EmergencyFeature.swift */; };
+		14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E577AB2A80973B00119FB3 /* EmergencyView.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 		14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */; };
 		14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */; };
@@ -196,6 +198,8 @@
 		14E506532A6B8ED3008D5778 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessFeature.swift; sourceTree = "<group>"; };
 		14E506572A6BC576008D5778 /* MyPageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFeature.swift; sourceTree = "<group>"; };
+		14E577A92A80973300119FB3 /* EmergencyFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyFeature.swift; sourceTree = "<group>"; };
+		14E577AB2A80973B00119FB3 /* EmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+loadTransferable.swift"; sourceTree = "<group>"; };
@@ -707,6 +711,15 @@
 			path = Success;
 			sourceTree = "<group>";
 		};
+		14E577A82A80970C00119FB3 /* Emergency */ = {
+			isa = PBXGroup;
+			children = (
+				14E577A92A80973300119FB3 /* EmergencyFeature.swift */,
+				14E577AB2A80973B00119FB3 /* EmergencyView.swift */,
+			);
+			path = Emergency;
+			sourceTree = "<group>";
+		};
 		14EBE4BC2A681308007537C8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,6 +872,7 @@
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
+				14E577A82A80970C00119FB3 /* Emergency */,
 				2B2BA5272A7AB45300A90AE7 /* SelectHost */,
 				2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */,
 				2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */,
@@ -1067,6 +1081,7 @@
 				1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */,
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
+				14E577AA2A80973300119FB3 /* EmergencyFeature.swift in Sources */,
 				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
@@ -1097,6 +1112,7 @@
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
+				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
