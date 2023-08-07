@@ -62,7 +62,11 @@ struct MockUpMeetingDetailService {
             members: members,
             isConfirmed: false,
             emergencyButtonActive: false,
-            emergencyButtonActiveTime: nil
+            emergencyButtonActiveTime: nil,
+            feeds: [
+                Feed(id: 0, userId: 1, username: "수빈", userImageURL: "", feedImageURL: ""),
+                Feed(id: 1, userId: 2, username: "유탁", userImageURL: "", feedImageURL: "")
+            ]
         )
     }
 }

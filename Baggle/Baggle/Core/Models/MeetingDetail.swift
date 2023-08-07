@@ -8,7 +8,7 @@
 import Foundation
 
 /// 본인 포함 참여자 모델
-struct Member: Equatable, Identifiable {
+struct Member: Identifiable, Hashable {
     var id: Int // 유저 id
     let name: String // 유저 이름
     let profileURL: String // 유저 프로필 이미지 URL
@@ -19,6 +19,14 @@ struct Member: Equatable, Identifiable {
     static func == (lhs: Member, rhs: Member) -> Bool {
         return lhs.id == rhs.id
     }
+}
+
+struct Feed {
+    let id: Int
+    let userId: Int
+    let username: String
+    let userImageURL: String
+    let feedImageURL: String
 }
 
 /// 모임 상세 모델
@@ -33,6 +41,7 @@ struct MeetingDetail: Equatable {
     let isConfirmed: Bool // 약속 확정 여부
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: String? // 긴급 버튼 활성화 시간
+    let feeds: [Feed]
 
     static func == (lhs: MeetingDetail, rhs: MeetingDetail) -> Bool {
         return lhs.id == rhs.id
