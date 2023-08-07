@@ -142,6 +142,7 @@ extension MeetingDetailView {
                 Image.Stamp.complete
                     .resizable()
                     .frame(width: 56, height: 23)
+                    .padding(.top, 2.5)
 
                 Spacer()
             }
