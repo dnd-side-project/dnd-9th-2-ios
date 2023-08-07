@@ -46,6 +46,13 @@ struct MeetingDetailView: View {
                     }
                     .buttonStyle(BagglePrimaryStyle(size: .small))
 
+                    Button {
+                        viewStore.send(.emergencyButtonTapped)
+                    } label: {
+                        Text("긴급 버튼")
+                    }
+                    .buttonStyle(BagglePrimaryStyle(size: .small))
+
                     Button("뒤로가기") {
                         viewStore.send(.backButtonTapped)
                     }
@@ -78,6 +85,14 @@ struct MeetingDetailView: View {
                 )
             ) { cameraStore in
                     CameraView(store: cameraStore)
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$emergencyState,
+                    action: { .emergencyAction($0) }
+                )
+            ) { emergencyStore in
+                    EmergencyView(store: emergencyStore)
             }
             .onAppear { viewStore.send(.onAppear) }
             .onDisappear { viewStore.send(.delegate(.onDisappear)) }
