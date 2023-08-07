@@ -41,7 +41,7 @@ struct BagglePrimaryStyle: ButtonStyle {
     private let shape: ButtonShape
 
     private let foregroundColor: Color = .white
-    private let backgroundColor: Color = .blue
+    private let backgroundColor: Color = .primaryNormal
 
     init(size: ButtonSize = .large, shape: ButtonShape = .square) {
         self.size = size

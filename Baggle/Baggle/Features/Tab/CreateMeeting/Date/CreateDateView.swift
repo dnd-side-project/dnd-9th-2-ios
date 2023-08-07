@@ -37,14 +37,14 @@ struct CreateDateView: View {
                                 Text(viewStore.meetingDate.koreanDate())
                                 Spacer()
                             }
-                            .foregroundColor(viewStore.dateButtonStatus.color)
+                            .foregroundColor(viewStore.dateButtonStatus.foregroundColor)
                             .padding()
                             .frame(
                                 width: abs(proxy.size.width - dateButtonSpace) * dateWidthRatio
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(viewStore.dateButtonStatus.color, lineWidth: 1)
+                                    .stroke(viewStore.dateButtonStatus.borderColor, lineWidth: 1)
                             )
                             .contentShape(Rectangle())
                             .onTapGesture {
@@ -55,14 +55,14 @@ struct CreateDateView: View {
                                 Text(viewStore.meetingDate.hourMinute())
                                 Spacer()
                             }
-                            .foregroundColor(viewStore.timeButtonStatus.color)
+                            .foregroundColor(viewStore.timeButtonStatus.foregroundColor)
                             .padding()
                             .frame(
                                 width: abs(proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio)
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(viewStore.timeButtonStatus.color, lineWidth: 1)
+                                    .stroke(viewStore.timeButtonStatus.borderColor, lineWidth: 1)
                             )
                             .contentShape(Rectangle())
                             .onTapGesture {
@@ -72,7 +72,7 @@ struct CreateDateView: View {
 
                         if let errorMessage = viewStore.errorMessage {
                             Text(errorMessage)
-                                .foregroundColor(.red)
+                                .foregroundColor(.baggleRed)
                                 .padding(.horizontal, 2)
                         }
                     }

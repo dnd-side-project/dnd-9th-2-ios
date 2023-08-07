@@ -90,13 +90,16 @@ struct BaggleTextField: View {
                         .font(.caption)
                         .padding(.horizontal, 2)
                         .padding(.bottom, 6)
+                        .foregroundColor(.gray8C)
                 }
 
                 HStack(alignment: .center, spacing: 8) {
-                    TextField(placeholder,
-                              text: viewStore.binding(
-                                get: \.text,
-                                send: BaggleTextFeature.Action.textChanged)
+                    TextField(
+                        placeholder,
+                        text: viewStore.binding(
+                            get: \.text,
+                            send: BaggleTextFeature.Action.textChanged
+                        )
                     )
                     .focused($isFocused)
                     .font(.body)

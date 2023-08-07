@@ -86,12 +86,13 @@ struct BaggleAlert: View {
                 VStack(spacing: 2) {
                     Text(title)
                         .font(.system(size: 20))
+                        .foregroundColor(.gray14)
                         .padding(.vertical, 5)
 
                     if let description {
                         Text(description)
                             .font(.system(size: 16))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.gray43)
                             .padding(.vertical, 4)
                     }
                 }
@@ -103,6 +104,7 @@ struct BaggleAlert: View {
                             isPresented.toggle()
                         } label: {
                             Text(leftButtonTitle)
+                                .foregroundColor(.gray59)
                                 .frame(width: alertWidth/2, height: 52)
                         }
                         .buttonStyle(BagglePrimaryStyle(size: .small))
@@ -115,9 +117,10 @@ struct BaggleAlert: View {
                         Text(rightButtonTitle)
                             .frame(width: alertWidth/2, height: 52)
                     }
-                    .buttonStyle(alertButton == .onebutton
-                                 ? BagglePrimaryStyle(size: .medium) :
-                                    BagglePrimaryStyle(size: .small))
+                    .buttonStyle(
+                        alertButton == .onebutton ?
+                        BagglePrimaryStyle(size: .medium) : BagglePrimaryStyle(size: .small)
+                    )
                 }
                 .frame(width: alertWidth, height: 54)
             }

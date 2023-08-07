@@ -43,7 +43,7 @@ struct CircleProfileView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } placeholder: {
-            Color.gray
+            Color.grayF5
         }
         .frame(width: size.length, height: size.length)
         .clipShape(Circle())

@@ -18,14 +18,17 @@ struct SelectOwnerView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 20) {
                 Text("방장을 넘길 친구를 선택해주세요")
+                    .foregroundColor(.gray43)
                     .padding(.top, 30)
 
                 Spacer()
 
                 HStack {
                     ForEach(viewStore.memberList, id: \.id) { member in
-                        MemberInfoView(memberInfo: member,
-                                       selected: viewStore.selectedMemberId == member.id)
+                        MemberInfoView(
+                            memberInfo: member,
+                            selected: viewStore.selectedMemberId == member.id
+                        )
                         .onTapGesture {
                             viewStore.send(.selectMember(member.id))
                         }

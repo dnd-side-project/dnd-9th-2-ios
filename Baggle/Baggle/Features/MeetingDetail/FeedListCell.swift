@@ -27,7 +27,7 @@ struct FeedListCell: View {
                     Image(systemName: "ellipsis")
                 }
             }
-            .foregroundColor(.black)
+            .foregroundColor(.gray14)
 
             // swiftlint:disable:next line_length
             AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/81167570?v=4")) { image in
@@ -36,7 +36,7 @@ struct FeedListCell: View {
                     .aspectRatio(1.0, contentMode: .fill)
                     .cornerRadius(12)
             } placeholder: {
-                Color.gray
+                Color.grayF5
             }
             .clipped()
         }

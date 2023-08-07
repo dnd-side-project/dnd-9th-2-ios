@@ -30,13 +30,13 @@ struct ProfileImageView: View {
         .frame(width: 160, height: 160)
         .background {
             Circle()
-                .tint(Color.gray.opacity(0.2))
+                .tint(Color.grayF5)
         }
         .overlay(alignment: .bottomTrailing) {
             Image(systemName: "camera.circle.fill")
                 .symbolRenderingMode(.multicolor)
                 .font(.system(size: 30))
-                .foregroundColor(.blue)
+                .foregroundColor(.primaryNormal)
                 .offset(x: -8, y: -8)
         }
     }

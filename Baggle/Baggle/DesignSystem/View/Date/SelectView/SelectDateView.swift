@@ -25,7 +25,7 @@ struct SelectDateView: View {
                         viewStore.send(.cancelButtonTapped)
                     } label: {
                         Image(systemName: "xmark")
-                            .tint(Color.black)
+                            .tint(Color.gray59)
                     }
                 }
 

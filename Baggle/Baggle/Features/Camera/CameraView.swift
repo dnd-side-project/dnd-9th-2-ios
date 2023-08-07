@@ -79,7 +79,7 @@ extension CameraView {
         }
         .frame(width: viewFinderWidth, height: viewFinderHeight)
         .clipped()
-        .background(Color.gray)
+        .background(Color.grayF5)
         .padding(.top, 32)
     }
 
@@ -181,7 +181,7 @@ extension CameraView {
                         .frame(width: 24, height: 24)
                 }
                 .padding(8)
-                .background(Color.gray)
+                .background(Color.gray26)
                 .cornerRadius(50)
             }
             .frame(width: 60)
@@ -206,7 +206,7 @@ extension CameraView {
                 viewStore.send(.uploadButtonTapped)
             } label: {
                 Text("사진 업로드")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primaryNormal)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 12)
             }
