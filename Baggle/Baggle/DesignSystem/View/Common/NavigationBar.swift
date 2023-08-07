@@ -11,15 +11,15 @@ enum NaviType {
     case dismiss
     case more
 
-    var rightButton: String {
+    var rightButton: Image {
         switch self {
-        case .dismiss: return "xmark"
-        case .more: return "ellipsis"
+        case .dismiss: return Image.Icon.close
+        case .more: return Image.Icon.more
         }
     }
 }
 
-struct NaviBarView: View {
+struct NavigationBar: View {
 
     let naviType: NaviType
     let backButtonAction: () -> Void
@@ -30,7 +30,7 @@ struct NaviBarView: View {
             Button {
                 backButtonAction()
             } label: {
-                Image(systemName: "arrow.backward")
+                Image.Icon.backTail
                     .frame(width: 44, height: 44)
             }
 
@@ -39,7 +39,8 @@ struct NaviBarView: View {
             Button {
                 rightButtonAction()
             } label: {
-                Image(systemName: naviType.rightButton)
+//                Image(systemName: naviType.rightButton)
+                naviType.rightButton
                     .frame(width: 44, height: 44)
             }
         }
@@ -51,7 +52,7 @@ struct NaviBarView: View {
 
 struct NaviBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NaviBarView(
+        NavigationBar(
             naviType: .more,
             backButtonAction: {
                 print("뒤로가자")

@@ -8,7 +8,7 @@
 import Foundation
 
 /// 본인 포함 참여자 모델
-struct Member: Equatable, Identifiable, Hashable {
+struct Member: Identifiable, Hashable {
     var id: Int // 유저 id
     let name: String // 유저 이름
     let profileURL: String // 유저 프로필 이미지 URL

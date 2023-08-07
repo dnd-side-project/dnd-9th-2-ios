@@ -21,6 +21,7 @@ struct MeetingDetailView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
+            // zstack 순서: alert > navigationBar > scrollView
             ZStack(alignment: .top) {
                 ScrollView {
 
@@ -49,7 +50,7 @@ struct MeetingDetailView: View {
                 }
 
                 // navibar
-                NaviBarView(naviType: .more) {
+                NavigationBar(naviType: .more) {
                     viewStore.send(.backButtonTapped)
                 } rightButtonAction: {
                     isActionSheetShow = true
@@ -81,7 +82,6 @@ struct MeetingDetailView: View {
                 } label: {
                     Text("긴급 버튼")
                 }
-
             })
             .sheet(
                 store: self.store.scope(
