@@ -39,6 +39,13 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
+    
+    /// baggleFont + lineSpacing 설정하는 함수
+    func baggleTypoLineSpacing(size: CGFloat, weight: Font.Weight) -> some View {
+        return self
+            .font(.baggleFont(size: size, weight: weight))
+            .lineSpacing(size*0.3)
+    }
 }
 
 struct RoundedCorner: Shape {
