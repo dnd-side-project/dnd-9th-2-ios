@@ -45,7 +45,7 @@ struct MeetingDetailView: View {
                         Text("카메라")
                     }
                     .buttonStyle(BagglePrimaryStyle(size: .small))
-                    
+
                     Button {
                         viewStore.send(.emergencyButtonTapped)
                     } label: {

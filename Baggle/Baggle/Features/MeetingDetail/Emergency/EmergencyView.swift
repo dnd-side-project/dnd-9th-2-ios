@@ -11,40 +11,139 @@ import ComposableArchitecture
 
 struct EmergencyView: View {
 
+    typealias EmergencyViewStore = ViewStore<EmergencyFeature.State, EmergencyFeature.Action>
+
     let store: StoreOf<EmergencyFeature>
 
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            VStack {
+            GeometryReader { _ in
 
-                // MARK: - Description
+                // MARK: - Background
 
-                VStack {
-                    Text(attributedColorString(str: "긴급버튼을 눌러\n참여자를 호출하세요", targetStr: "긴급버튼", color: .black, targetColor: .baggleRed))
-                        .font(.system(size: 24).bold())
-                        .padding(.vertical, 8)
-
-                    Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
+                if viewStore.isEmergency {
+                    Image.Background.home
+                        .resizable()
+                        .scaledToFill()
+                        .ignoresSafeArea()
                 }
-                .padding(.top, 8)
-                .multilineTextAlignment(.center)
 
-                Spacer()
+                VStack(spacing: 0) {
 
-                // MARK: - Button
+                    // MARK: - Status Bar
 
-                VStack(spacing: 30) {
-                    BubbleView(size: .medium, color: .secondary, text: "긴급 버튼을 눌러보세요!")
+                    HStack {
+                        Spacer()
 
+                        Button {
+                            viewStore.send(.closeButtonTapped)
+                        } label: {
+                            Image.Icon.close
+                                .frame(width: 24, height: 24)
+                                .padding(10)
+                        }
+                    }
+                    .padding(.horizontal, 10)
+
+                    // MARK: - Content
+
+                    if viewStore.isEmergency {
+                        afterEmergency(viewStore: viewStore)
+                    } else {
+                        beforeEmergency(viewStore: viewStore)
+                    }
+                }
+            }
+            .animation(.easeIn(duration: 0.3), value: viewStore.isEmergency)
+        }
+    }
+}
+
+extension EmergencyView {
+
+    private func beforeEmergency(viewStore: EmergencyViewStore) -> some View {
+        VStack {
+
+            VStack {
+                Text(
+                    attributedColorString(
+                        str: "긴급버튼을 눌러\n참여자를 호출하세요",
+                        targetStr: "긴급버튼",
+                        color: .black,
+                        targetColor: .baggleRed)
+                )
+                .font(.system(size: 24).bold())
+                .padding(.vertical, 8)
+
+                Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
+            }
+            .padding(.top, 8)
+            .multilineTextAlignment(.center)
+
+            Spacer()
+
+            VStack(spacing: 30) {
+                BubbleView(
+                    size: .medium,
+                    color: .secondary,
+                    text: "긴급 버튼을 눌러보세요!"
+                )
+
+                Button {
+                    viewStore.send(.emergencyButtonTapped)
+                } label: {
                     Image(systemName: "light.beacon.max")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 220)
                 }
-                .padding(.bottom, 120)
             }
+            .padding(.bottom, 120)
+        }
+    }
+
+    private func afterEmergency(viewStore: EmergencyViewStore) -> some View {
+        ZStack(alignment: .bottom) {
+            VStack {
+
+                // Temp
+                VStack(spacing: 0) {
+                    Text("Warning")
+                        .font(.title)
+                }
+                .frame(width: 310, height: 96)
+                .background(Color.yellow)
+
+                LargeTimerView(
+                    store: self.store.scope(
+                        state: \.timerState,
+                        action: EmergencyFeature.Action.timerAction
+                    )
+                )
+                .padding(.top, 15)
+
+                Spacer()
+
+                Image(systemName: "light.beacon.max.fill")
+                    .resizable()
+                    .foregroundColor(.red)
+                    .scaledToFit()
+                    .frame(width: 220)
+                    .padding(.bottom, 120)
+            }
+
+            Button {
+            } label: {
+                HStack(spacing: 8) {
+                    Image.Icon.cameraColor
+
+                    Text("사진 인증하기")
+                }
+            }
+            .buttonStyle(BagglePrimaryStyle(size: .small, shape: .round))
+            .padding(.bottom, 16)
         }
     }
 }
