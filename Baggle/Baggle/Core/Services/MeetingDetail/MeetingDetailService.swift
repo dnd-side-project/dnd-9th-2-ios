@@ -60,7 +60,7 @@ struct MockUpMeetingDetailService {
             time: "15:30",
             memo: "어서오세요",
             members: members,
-            isConfirmed: false,
+            status: .confirmed,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
             feeds: [

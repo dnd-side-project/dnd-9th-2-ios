@@ -25,8 +25,8 @@ struct HomeView: View {
 
                         Section {
                             VStack(spacing: 12) {
-                                ForEach((viewStore.meetingStatus == .ongoing)
-                                        ? viewStore.ongoingList : viewStore.completedList
+                                ForEach((viewStore.meetingStatus == .ready)
+                                        ? viewStore.progressList : viewStore.completedList
                                 ) { meeting in
                                     // cell
                                     MeetingListCell(data: meeting)
@@ -139,18 +139,18 @@ extension HomeView {
                     SegmentedPickerView(
                         segment: [
                             Segment(
-                                id: .ongoing,
-                                count: viewStore.ongoingList.count,
-                                isSelected: viewStore.meetingStatus == .ongoing,
+                                id: .ready,
+                                count: viewStore.progressList.count,
+                                isSelected: viewStore.meetingStatus == .ready,
                                 action: {
-                                    viewStore.send(.changeMeetingStatus(.ongoing))
+                                    viewStore.send(.changeMeetingStatus(.ready))
                                 }),
                             Segment(
-                                id: .complete,
+                                id: .completed,
                                 count: viewStore.completedList.count,
-                                isSelected: viewStore.meetingStatus == .complete,
+                                isSelected: viewStore.meetingStatus == .completed,
                                 action: {
-                                    viewStore.send(.changeMeetingStatus(.complete))
+                                    viewStore.send(.changeMeetingStatus(.completed))
                                 })
                         ])
                 }
@@ -165,13 +165,13 @@ extension HomeView {
         VStack {
             HStack(spacing: 20) {
                 Button {
-                    viewStore.send(.fetchMeetingList(.ongoing))
+                    viewStore.send(.fetchMeetingList(.ready))
                 } label: {
                     Text("예정된 약속 업데이트")
                 }
 
                 Button {
-                    viewStore.send(.fetchMeetingList(.complete))
+                    viewStore.send(.fetchMeetingList(.completed))
                 } label: {
                     Text("지난 약속 업데이트")
                 }

@@ -14,21 +14,22 @@ import KakaoSDKShare
 import KakaoSDKTemplate
 
 enum MeetingStatus {
-    case ongoing
-    case dday
-    case complete
+    case ready // 약속 전날까지
+    case progress // 약속 당일
+    case confirmed // 약속 당일 + 약속 1시간 전
+    case completed // 지난 약속
 
     var title: String {
         switch self {
-        case .ongoing, .dday: return "예정된 약속"
-        case .complete: return "지난 약속"
+        case .ready, .progress, .confirmed: return "예정된 약속"
+        case .completed: return "지난 약속"
         }
     }
 
     var fgColor: Color {
         switch self {
-        case .ongoing, .complete: return .gray.opacity(0.5)
-        case .dday: return .pink
+        case .ready, .completed, .confirmed: return .gray.opacity(0.5)
+        case .progress: return .pink
         }
     }
 }
@@ -40,11 +41,12 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
-        var meetingStatus: MeetingStatus = .ongoing
+        // 예정된 약속(progress), 지난 약속(completed)
+        var meetingStatus: MeetingStatus = .progress
         var meetingDetailId: Int?
         var pushMeetingDetail: Bool = false
 
-        var ongoingList: [Meeting] = []
+        var progressList: [Meeting] = []
         var completedList: [Meeting] = []
         var meetingDetailState: MeetingDetailFeature.State = MeetingDetailFeature.State(
             meetingId: 0)
@@ -95,9 +97,9 @@ struct HomeFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                if state.ongoingList.isEmpty && state.completedList.isEmpty {
+                if state.progressList.isEmpty && state.completedList.isEmpty {
                     return .run { send in
-                        await send(.fetchMeetingList(.ongoing))
+                        await send(.fetchMeetingList(.progress))
                     }
                 } else {
                     return .none
@@ -112,14 +114,14 @@ struct HomeFeature: ReducerProtocol {
 
             case .refreshMeetingList:
                 state.isRefreshing = true
-                state.ongoingList.removeAll()
+                state.progressList.removeAll()
                 state.completedList.removeAll()
-                state.meetingStatus = .ongoing
+                state.meetingStatus = .progress
                 return .run { send in
                     do {
                         try await Task.sleep(nanoseconds: 1_000_000_000)
-                        let list = await meetingService.fetchMeetingList(.ongoing)
-                        await send(.updateMeetingList(.ongoing, list))
+                        let list = await meetingService.fetchMeetingList(.progress)
+                        await send(.updateMeetingList(.progress, list))
                     } catch {
                         print("error")
                     }
@@ -127,17 +129,17 @@ struct HomeFeature: ReducerProtocol {
 
             case .changeMeetingStatus(let status):
                 state.meetingStatus = status
-                if status == .complete && state.completedList.isEmpty {
+                if status == .completed && state.completedList.isEmpty {
                     return .run { send in
-                        await send(.fetchMeetingList(.complete))
+                        await send(.fetchMeetingList(.completed))
                     }
                 }
                 return .none
 
             case .updateMeetingList(let type, let model):
                 if let model {
-                    if type == .ongoing {
-                        state.ongoingList.append(contentsOf: model)
+                    if type == .progress {
+                        state.progressList.append(contentsOf: model)
                     } else {
                         state.completedList.append(contentsOf: model)
                     }

@@ -138,11 +138,17 @@ extension MeetingDetailView {
                     .padding(.trailing, 4)
                     .foregroundColor(.gray26)
 
-                // 분기처리
-                Image.Stamp.complete
-                    .resizable()
-                    .frame(width: 56, height: 23)
-                    .padding(.top, 2.5)
+                if data.status == .completed {
+                    Image.Stamp.complete
+                        .resizable()
+                        .frame(width: 56, height: 23)
+                        .padding(.top, 2.5)
+                } else if data.status == .confirmed {
+                    Image.Stamp.confirm
+                        .resizable()
+                        .frame(width: 56, height: 23)
+                        .padding(.top, 2.5)
+                }
 
                 Spacer()
             }
@@ -240,7 +246,7 @@ struct MeetingDetailView_Previews: PreviewProvider {
                             id: 1, name: "콩이", profileURL: "",
                             // swiftlint:disable:next multiline_arguments
                             isOwner: true, certified: false, certImage: "")],
-                        isConfirmed: false,
+                        status: .confirmed,
                         // swiftlint:disable:next multiline_arguments
                         emergencyButtonActive: false, emergencyButtonActiveTime: "",
                         feeds: [])),
