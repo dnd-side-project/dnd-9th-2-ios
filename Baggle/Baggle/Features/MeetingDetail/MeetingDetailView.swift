@@ -125,31 +125,26 @@ extension MeetingDetailView {
             // 모임방 이름, 스탬프
             HStack(alignment: .top) {
                 Text("📌")
-
-                // dynamin width 수정
+                
                 Text("\(data.name)")
-//                Text("수빈님네 집들이집들이 집들이집들이집")
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
-                    .kerning(-0.5)
-                    .lineSpacing(8)
-                    .frame(maxWidth: 190)
-                    .fixedSize(horizontal: true, vertical: false)
+                    .baggleTypoLineSpacing(size: 22, weight: .bold)
+                    // 두 줄인 경우 maxWidth 적용
+                    .frame(maxWidth: data.name.count > 9 ? 200 : .none, alignment: .leading)
                     .padding(.trailing, 4)
                     .foregroundColor(.gray26)
 
-                if data.status == .completed {
-                    Image.Stamp.complete
-                        .resizable()
-                        .frame(width: 56, height: 23)
-                        .padding(.top, 2.5)
-                } else if data.status == .confirmed {
-                    Image.Stamp.confirm
-                        .resizable()
-                        .frame(width: 56, height: 23)
-                        .padding(.top, 2.5)
+                Group {
+                    if data.status == .completed {
+                        Image.Stamp.complete
+                            .resizable()
+                    } else if data.status == .confirmed {
+                        Image.Stamp.confirm
+                            .resizable()
+                    }
                 }
-
+                .frame(width: 56, height: 23)
+                .padding(.top, data.name.count > 9 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
+                
                 Spacer()
             }
             .padding(.bottom, 10)
