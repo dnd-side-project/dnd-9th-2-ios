@@ -55,6 +55,7 @@ struct MainTabView: View {
                     }
                     .tag(TapType.myPage)
                 }
+                .tint(.black)
                 .fullScreenCover(
                     store: self.store.scope(
                         state: \.$createMeeting,
