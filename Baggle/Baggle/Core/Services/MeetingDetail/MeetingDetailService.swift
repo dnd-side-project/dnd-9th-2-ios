@@ -58,7 +58,7 @@ struct MockUpMeetingDetailService {
             place: "우리집",
             date: "2023년 08월 33일",
             time: "15:30",
-            memo: "어서오세요",
+            memo: "어서오세요어서오세요어서오세요 어서오세요어서오세요 어서오세요 어서오세요",
             members: members,
             status: .confirmed,
             emergencyButtonActive: false,

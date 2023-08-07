@@ -170,18 +170,24 @@ extension MeetingDetailView {
             .padding(.bottom, 20)
 
             // 메모
-            Text("작성된 메모가 있어요 작성된 메모가 있어요작성된 작성된 메모가 있어요작성된 메모가 있어요")
-                .font(.system(size: 15))
-                .lineSpacing(7)
-                .padding(.vertical, 14)
-                .padding(.horizontal, 20)
-                .frame(width: UIScreen.main.bounds.width-40)
-                .background(.white)
-                .cornerRadius(8)
+            Group {
+                if let memo = data.memo {
+                    Text(memo)
+                        .baggleTypoLineSpacing(size: 15, weight: .medium)
+                        .foregroundColor(.gray59)
+                } else {
+                    Text("작성된 메모가 없어요!")
+                        .baggleTypoLineSpacing(size: 15, weight: .medium)
+                        .foregroundColor(.grayBF)
+                }
+            }
+            .padding(.vertical, 14)
+            .padding(.horizontal, 20)
+            .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
+            .background(.white)
+            .cornerRadius(8)
         }
-        .padding(.top, 64)
-        .padding(.bottom, 24)
-        .padding(.horizontal, 20)
+        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
         .background(Color.PrimaryLight)
     }
 
