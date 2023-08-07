@@ -16,36 +16,34 @@ struct EmergencyView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            
+
             VStack {
-                
+
                 // MARK: - Description
-                
+
                 VStack {
                     Text(attributedColorString(str: "긴급버튼을 눌러\n참여자를 호출하세요", targetStr: "긴급버튼", color: .black, targetColor: .baggleRed))
                         .font(.system(size: 24).bold())
                         .padding(.vertical, 8)
-                    
+
                     Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
                 }
                 .padding(.top, 8)
                 .multilineTextAlignment(.center)
-                
+
                 Spacer()
-                
+
                 // MARK: - Button
-                
+
                 VStack(spacing: 30) {
-                    BubbleView(type: .secondary, text: "긴급 버튼을 눌러보세요!")
-                    
+                    BubbleView(size: .medium, color: .secondary, text: "긴급 버튼을 눌러보세요!")
+
                     Image(systemName: "light.beacon.max")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 220)
                 }
                 .padding(.bottom, 120)
-                
-                
             }
         }
     }
