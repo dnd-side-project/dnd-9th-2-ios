@@ -9,20 +9,21 @@ import SwiftUI
 
 struct BubbleView: View {
 
-    let type: BubbleType
+    let size: BubbleSize
+    let color: BubbleColor
     let text: String
 
     var body: some View {
         VStack(spacing: -3) {
             Text(text)
-                .foregroundColor(type.foregroundColor)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 14)
-                .background(type.backgroundColor)
+                .foregroundColor(color.foregroundColor)
+                .padding(.vertical, size.paddingVertical)
+                .padding(.horizontal, size.paddingHorizontal)
+                .background(color.backgroundColor)
                 .cornerRadius(50)
 
             RoundedTriangle(radius: 2)
-                .fill(type.backgroundColor)
+                .fill(color.backgroundColor)
                 .frame(width: 15, height: 12)
         }
     }
@@ -30,7 +31,7 @@ struct BubbleView: View {
 
 struct BubbleView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleView(type: .primary, text: "최대 6명")
+        BubbleView(size: .small, color: .primary, text: "최대 6명")
             .previewLayout(.sizeThatFits)
     }
 }
