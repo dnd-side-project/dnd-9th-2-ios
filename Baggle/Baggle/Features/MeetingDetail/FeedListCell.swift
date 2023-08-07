@@ -24,7 +24,7 @@ struct FeedListCell: View {
                 Button {
                     moreButtonAction()
                 } label: {
-                    Image(systemName: "ellipsis")
+                    Image.Icon.more
                 }
             }
             .foregroundColor(.gray14)

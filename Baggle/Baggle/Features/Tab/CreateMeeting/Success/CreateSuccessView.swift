@@ -80,10 +80,10 @@ struct CreateSuccessView: View {
 
                 // MARK: - 이미지
 
-                Image(systemName: "envelope")
+                Image.Illustration.invitationCreate
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
+                    .frame(width: 250, height: 237)
 
                 Spacer()
 

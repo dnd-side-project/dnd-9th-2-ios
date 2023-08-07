@@ -33,11 +33,20 @@ struct ProfileImageView: View {
                 .tint(Color.grayF5)
         }
         .overlay(alignment: .bottomTrailing) {
-            Image(systemName: "camera.circle.fill")
-                .symbolRenderingMode(.multicolor)
-                .font(.system(size: 30))
-                .foregroundColor(.primaryNormal)
-                .offset(x: -8, y: -8)
+            ZStack {
+                Circle()
+                    .foregroundColor(.primaryNormal)
+                    .frame(width: 30, height: 30)
+
+                Image.Icon.camera
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.primaryNormal)
+            }
+            .offset(x: -9, y: -9)
         }
     }
 }

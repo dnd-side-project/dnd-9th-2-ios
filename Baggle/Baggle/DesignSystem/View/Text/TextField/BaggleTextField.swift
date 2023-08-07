@@ -115,7 +115,10 @@ struct BaggleTextField: View {
                             Button {
                                 viewStore.send(.textChanged(""))
                             } label: {
-                                Image(systemName: "xmark")
+                                Image.Icon.delete
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
                                     .foregroundColor(viewStore.textFieldState.fgColor)
                             }
 

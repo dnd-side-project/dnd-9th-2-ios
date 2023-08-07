@@ -13,6 +13,11 @@ struct MainTabView: View {
 
     let store: StoreOf<MainTabFeature>
 
+    init(store: StoreOf<MainTabFeature>) {
+        self.store = store
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.grayD9)
+    }
+
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -30,7 +35,8 @@ struct MainTabView: View {
                         )
                     )
                     .tabItem {
-                        Image(systemName: "house")
+                        Image.Icon.homeFill
+                            .renderingMode(.template)
                         Text("홈")
                     }
                     .tag(TapType.home)
@@ -38,7 +44,8 @@ struct MainTabView: View {
                     ZStack {
                     }
                     .tabItem {
-                        Image(systemName: "plus.square")
+                        Image.Icon.plusFill
+                            .renderingMode(.template)
                         Text("모임 생성")
                     }
                     .tag(TapType.createMeeting)
@@ -50,7 +57,8 @@ struct MainTabView: View {
                         )
                     )
                     .tabItem {
-                        Image(systemName: "person")
+                        Image.Icon.myPageFill
+                            .renderingMode(.template)
                         Text("마이페이지")
                     }
                     .tag(TapType.myPage)

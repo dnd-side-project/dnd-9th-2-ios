@@ -174,10 +174,11 @@ extension CameraView {
                 )
             } label: {
                 ZStack {
-                    Image(systemName: "arrow.triangle.2.circlepath")
+                    Image.Icon.trans
                         .resizable()
+                        .renderingMode(.template)
                         .scaledToFit()
-                        .tint(.white)
+                        .foregroundColor(.white)
                         .frame(width: 24, height: 24)
                 }
                 .padding(8)
