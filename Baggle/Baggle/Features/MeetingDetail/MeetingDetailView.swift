@@ -89,7 +89,7 @@ struct MeetingDetailView: View {
             .fullScreenCover(
                 store: self.store.scope(
                     state: \.$emergencyState,
-                    action: { .emergencyState($0)}
+                    action: { .emergencyAction($0) }
                 )
             ) { emergencyStore in
                     EmergencyView(store: emergencyStore)

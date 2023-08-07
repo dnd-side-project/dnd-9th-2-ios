@@ -57,7 +57,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
-        case emergencyState(PresentationAction<EmergencyFeature.Action>)
+        case emergencyAction(PresentationAction<EmergencyFeature.Action>)
 
         // delegate
         case delegate(Delegate)
@@ -148,10 +148,14 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .usingCamera:
                 return .none
 
-            case .emergencyState:
+            case .emergencyAction(.presented(.delegate(.usingCamera))):
+                state.usingCamera = CameraFeature.State()
                 return .none
 
-                // Child - Delegate
+            case .emergencyAction:
+                return .none
+
+                // Delegate
 
             case .delegate(.deleteSuccess):
                 state.isAlertPresented = false
@@ -171,7 +175,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         .ifLet(\.$usingCamera, action: /Action.usingCamera) {
             CameraFeature()
         }
-        .ifLet(\.$emergencyState, action: /Action.emergencyState) {
+        .ifLet(\.$emergencyState, action: /Action.emergencyAction) {
             EmergencyFeature()
         }
     }

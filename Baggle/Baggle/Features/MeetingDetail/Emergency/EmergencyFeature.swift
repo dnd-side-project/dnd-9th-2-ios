@@ -22,9 +22,17 @@ struct EmergencyFeature: ReducerProtocol {
         // Tap
         case closeButtonTapped
         case emergencyButtonTapped
+        case cameraButtonTapped
 
         // Child
         case timerAction(TimerFeature.Action)
+
+        // Delegate
+        case delegate(Delegate)
+
+        enum Delegate {
+            case usingCamera
+        }
     }
 
     @Dependency(\.dismiss) var dismiss
@@ -48,8 +56,17 @@ struct EmergencyFeature: ReducerProtocol {
                 state.isEmergency = true
                 return .none
 
+            case .cameraButtonTapped:
+                return .run { send in
+                    await send(.delegate(.usingCamera))
+                    await self.dismiss()
+                }
+
                 // Timer
             case .timerAction:
+                return .none
+
+            case .delegate:
                 return .none
             }
         }

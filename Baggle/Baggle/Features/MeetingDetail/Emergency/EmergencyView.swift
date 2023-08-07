@@ -135,6 +135,7 @@ extension EmergencyView {
             }
 
             Button {
+                viewStore.send(.cameraButtonTapped)
             } label: {
                 HStack(spacing: 8) {
                     Image.Icon.cameraColor
