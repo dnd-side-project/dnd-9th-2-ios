@@ -8,43 +8,46 @@
 import SwiftUI
 
 struct FeedListCell: View {
+    let feed: Feed
+    let moreButtonAction: () -> Void
+
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 16) {
-                HStack(spacing: 12) {
-                    CircleProfileView(imageUrl: "", size: .small)
+        VStack(spacing: 16) {
+            HStack(spacing: 12) {
+                CircleProfileView(imageUrl: "", size: .small)
 
-                    Text("수빈")
-                        .font(.system(size: 16, weight: .bold))
+                Text(feed.username)
+                    .font(.system(size: 16, weight: .bold))
 
-                    Spacer()
+                Spacer()
 
-                    Button {
-                        print("더보기")
-                    } label: {
-                        Image(systemName: "ellipsis")
-                    }
+                Button {
+                    moreButtonAction()
+                } label: {
+                    Image(systemName: "ellipsis")
                 }
-                .foregroundColor(.black)
-
-                AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/81167570?v=4")) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(1.0, contentMode: .fill)
-                        .frame(width: geometry.size.width, height: geometry.size.width)
-                        .cornerRadius(12)
-                } placeholder: {
-                    Color.gray
-                }
-                .clipped()
             }
+            .foregroundColor(.black)
+
+            // swiftlint:disable:next line_length
+            AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/81167570?v=4")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fill)
+                    .cornerRadius(12)
+            } placeholder: {
+                Color.gray
+            }
+            .clipped()
         }
     }
 }
 
 struct FeedListCell_Previews: PreviewProvider {
     static var previews: some View {
-        FeedListCell()
+        // swiftlint:disable:next line_length
+        FeedListCell(feed: Feed(id: 0, userId: 1, username: "수빈", userImageURL: "", feedImageURL: ""),
+                     moreButtonAction: { print("더보기" )})
             .padding(20)
             .previewLayout(.sizeThatFits)
     }

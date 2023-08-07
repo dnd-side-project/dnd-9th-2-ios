@@ -21,6 +21,14 @@ struct Member: Equatable, Identifiable, Hashable {
     }
 }
 
+struct Feed {
+    let id: Int
+    let userId: Int
+    let username: String
+    let userImageURL: String
+    let feedImageURL: String
+}
+
 /// 모임 상세 모델
 struct MeetingDetail: Equatable {
     let id: Int // 모임 id
@@ -33,6 +41,7 @@ struct MeetingDetail: Equatable {
     let isConfirmed: Bool // 약속 확정 여부
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: String? // 긴급 버튼 활성화 시간
+    let feeds: [Feed]
 
     static func == (lhs: MeetingDetail, rhs: MeetingDetail) -> Bool {
         return lhs.id == rhs.id

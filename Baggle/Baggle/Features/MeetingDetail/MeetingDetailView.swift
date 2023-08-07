@@ -22,29 +22,37 @@ struct MeetingDetailView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack(alignment: .top) {
+                ScrollView {
+
+                    if let data = viewStore.meetingData {
+                        // header
+                        headerView(data: data)
+
+                        // 참여자 목록
+                        memberListView(viewStore: viewStore)
+                            .padding(.horizontal, 20)
+                            .drawUnderline(spacing: 0,
+                                           height: 0.5,
+                                           color: .gray.opacity(0.5))
+
+                        // 인증 피드
+                        if !data.feeds.isEmpty {
+                            feedView(feeds: data.feeds,
+                                     viewStroe: viewStore)
+                                .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
+                        } else {
+                            Text("엠티뷰")
+                        }
+                    }
+                }
+
                 // navibar
                 NaviBarView(naviType: .more) {
                     viewStore.send(.backButtonTapped)
                 } rightButtonAction: {
                     isActionSheetShow = true
                 }
-                .background(.blue.opacity(0.2))
-
-                ScrollView {
-
-                    // header
-                    headerView(viewStore: viewStore)
-
-                    memberListView(viewStore: viewStore)
-                        .padding(.horizontal, 20)
-                        .drawUnderline(spacing: 0,
-                                       height: 0.5,
-                                       color: .gray.opacity(0.5))
-
-                    if let data = viewStore.meetingData {
-                        Text("모임명: \(data.name), 모임 id: \(data.id)")
-                    }
-                }
+                .background(.blue)
 
                 // alert
                 baggleAlert(viewStore: viewStore)
@@ -94,18 +102,21 @@ struct MeetingDetailView: View {
 extension MeetingDetailView {
     typealias Viewstore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
 
-    func headerView(viewStore: Viewstore) -> some View {
+    func headerView(data: MeetingDetail) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             // 모임방 이름, 스탬프
             HStack(alignment: .top) {
                 Text("📌")
 
-                // TODO: - scaleToFit 수정
-                Text("수빈님네 집들이집들이 집들이집들이집")
+                Text("\(data.name)")
+//                Text("수빈님네 집들이집들이 집들이집들이집") // dynamin width 수정
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
                     .kerning(-0.5)
                     .lineSpacing(8)
-                    .lineLimit(2)
-                    .frame(maxWidth: 190, alignment: .leading)
+                    .frame(maxWidth: 190)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .padding(.trailing, 4)
 
                 Image(systemName: "stamp")
                     .frame(width: 56, height: 23)
@@ -117,13 +128,13 @@ extension MeetingDetailView {
             .font(.system(size: 22, weight: .bold))
 
             // 장소, 시간
-            Text(attributedColorString(str: "장소  |  수빈님 없는 수빈님네 집",
+            Text(attributedColorString(str: "장소  |  \(data.place)",
                                        targetStr: "장소  |",
                                        color: .black,
                                        targetColor: .gray))
             .font(.system(size: 15))
 
-            Text(attributedColorString(str: "시간  |  2023년 12월 30일 18:30",
+            Text(attributedColorString(str: "시간  |  \(data.date) \(data.time)",
                                        targetStr: "시간  |",
                                        color: .black,
                                        targetColor: .gray))
@@ -132,13 +143,18 @@ extension MeetingDetailView {
 
             // 메모
             Text("작성된 메모가 있어요 작성된 메모가 있어요작성된 작성된 메모가 있어요작성된 메모가 있어요")
+                .font(.system(size: 15))
+                .lineSpacing(7)
                 .padding(.vertical, 14)
                 .padding(.horizontal, 20)
+                .frame(width: UIScreen.main.bounds.width-40)
                 .background(.white)
                 .cornerRadius(8)
         }
-        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
-        .background(.blue.opacity(0.2))
+        .padding(.top, 64)
+        .padding(.bottom, 24)
+        .padding(.horizontal, 20)
+        .background(.blue)
     }
 
     func memberListView(viewStore: Viewstore) -> some View {
@@ -162,6 +178,16 @@ extension MeetingDetailView {
         }
         .padding(.top, 20)
         .padding(.bottom, 16)
+    }
+
+    func feedView(feeds: [Feed], viewStroe: Viewstore) -> some View {
+        VStack(spacing: 16) {
+            ForEach(feeds, id: \.id) { feed in
+                FeedListCell(feed: feed) {
+                    print("더보기 버튼 탭")
+                }
+            }
+        }
     }
 
     func baggleAlert(viewStore: Viewstore) -> some View {
@@ -194,7 +220,8 @@ struct MeetingDetailView_Previews: PreviewProvider {
                             isOwner: true, certified: false, certImage: "")],
                         isConfirmed: false,
                         // swiftlint:disable:next multiline_arguments
-                        emergencyButtonActive: false, emergencyButtonActiveTime: "")),
+                        emergencyButtonActive: false, emergencyButtonActiveTime: "",
+                        feeds: [])),
                 reducer: MeetingDetailFeature()
             )
         )
