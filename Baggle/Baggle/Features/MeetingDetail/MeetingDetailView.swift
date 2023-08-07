@@ -34,7 +34,7 @@ struct MeetingDetailView: View {
                             .padding(.horizontal, 20)
                             .drawUnderline(spacing: 0,
                                            height: 0.5,
-                                           color: .gray.opacity(0.5))
+                                           color: .grayD9)
 
                         // 인증 피드
                         if !data.feeds.isEmpty {
@@ -153,20 +153,20 @@ extension MeetingDetailView {
                 Spacer()
             }
             .padding(.bottom, 10)
-            .font(.system(size: 22, weight: .bold))
+            .baggleTypoLineSpacing(size: 22, weight: .bold)
 
             // 장소, 시간
             Text(attributedColorString(str: "장소  |  \(data.place)",
                                        targetStr: "장소  |",
                                        color: .gray26,
                                        targetColor: .gray8C))
-            .font(.system(size: 15))
+            .baggleTypoLineSpacing(size: 15, weight: .medium)
 
             Text(attributedColorString(str: "시간  |  \(data.date) \(data.time)",
                                        targetStr: "시간  |",
                                        color: .gray26,
                                        targetColor: .gray8C))
-            .font(.system(size: 15))
+            .baggleTypoLineSpacing(size: 15, weight: .medium)
             .padding(.bottom, 20)
 
             // 메모
@@ -196,14 +196,26 @@ extension MeetingDetailView {
             HStack(spacing: 12) {
                 ForEach(viewStore.meetingData?.members ?? [], id: \.self) { member in
                     VStack(spacing: 4) {
-                        // TODO: - 방장, 긴급 버튼 할당자 표시
-                        CircleProfileView(
-                            imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
-                            size: .medium)
+                        ZStack(alignment: .bottomTrailing) {
+                            CircleProfileView(
+                                imageUrl: member.profileURL,
+                                size: .medium,
+                                hasStroke: member.certified)
+                            
+                            HStack(spacing: -10) {
+                                if member.isOwner {
+                                    ProfileBadgeView(tag: .meeting)
+                                }
+
+                                if member.isButtonOwner {
+                                    ProfileBadgeView(tag: .button)
+                                }
+                            }
+                        }
 
                         Text(member.name)
                             .padding(.vertical, 2)
-                            .font(.system(size: 13))
+                            .baggleTypoLineSpacing(size: 13, weight: .medium)
                             .frame(maxWidth: 64)
                     }
                     .padding(.all, 2)
@@ -251,7 +263,7 @@ struct MeetingDetailView_Previews: PreviewProvider {
                             // swiftlint:disable:next multiline_arguments
                             id: 1, name: "콩이", profileURL: "",
                             // swiftlint:disable:next multiline_arguments
-                            isOwner: true, certified: false, certImage: "")],
+                            isOwner: true, isButtonOwner: false, certified: false, certImage: "")],
                         status: .confirmed,
                         // swiftlint:disable:next multiline_arguments
                         emergencyButtonActive: false, emergencyButtonActiveTime: "",

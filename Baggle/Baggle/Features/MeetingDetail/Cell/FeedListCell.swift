@@ -14,17 +14,18 @@ struct FeedListCell: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack(spacing: 12) {
-                CircleProfileView(imageUrl: "", size: .small)
+                CircleProfileView(imageUrl: feed.userImageURL, size: .small)
 
                 Text(feed.username)
-                    .font(.system(size: 16, weight: .bold))
+                    .baggleTypoLineSpacing(size: 16, weight: .bold)
+                    .foregroundColor(.gray14)
 
                 Spacer()
 
                 Button {
                     moreButtonAction()
                 } label: {
-                    Image(systemName: "ellipsis")
+                    Image.Icon.more
                 }
             }
             .foregroundColor(.black)
@@ -34,10 +35,12 @@ struct FeedListCell: View {
                 image
                     .resizable()
                     .aspectRatio(1.0, contentMode: .fill)
-                    .cornerRadius(12)
             } placeholder: {
                 Color.gray
+                    .frame(width: UIScreen.main.bounds.width-40,
+                           height: UIScreen.main.bounds.width-40)
             }
+            .cornerRadius(12)
             .clipped()
         }
     }

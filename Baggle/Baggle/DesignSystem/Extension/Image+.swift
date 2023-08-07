@@ -10,7 +10,10 @@ import SwiftUI
 extension Image {
 
     // MARK: - Profile
-    static let profileIn = Image("Profile_in")
+    struct Profile {
+        static let profileIn = Image("Profile_in")
+        static let profilDefault = Image("Profile_default")
+    }
 
     // MARK: - Icon
     struct Icon {

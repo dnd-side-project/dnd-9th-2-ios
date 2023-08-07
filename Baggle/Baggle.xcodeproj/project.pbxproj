@@ -104,6 +104,7 @@
 		2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */; };
 		2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */; };
 		2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86CBBF2A70F00900800B02 /* HomeFeature.swift */; };
+		2B9F27172A813AEA009ED284 /* ProfileBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */; };
 		2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */; };
 		2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */; };
 		2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */; };
@@ -233,6 +234,7 @@
 		2B8469682A6E7AE200D75D32 /* BaggleButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonType.swift; sourceTree = "<group>"; };
 		2B8469692A6E7AE200D75D32 /* BaggleButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleButtonStyle.swift; sourceTree = "<group>"; };
 		2B86CBBF2A70F00900800B02 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
+		2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadgeView.swift; sourceTree = "<group>"; };
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
 		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
@@ -845,6 +847,15 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		2B9F27152A813ABE009ED284 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2B3B64942A8014540082A05F /* FeedListCell.swift */,
+				2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		2BA345A32A6EB00900B7E2BD /* Tag */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,12 +886,12 @@
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
+				2B9F27152A813ABE009ED284 /* Cell */,
 				14E577A82A80970C00119FB3 /* Emergency */,
 				2B2BA5272A7AB45300A90AE7 /* SelectHost */,
 				2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */,
 				2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */,
 				2B45F2202A7B634400874783 /* MeetingDeleteType.swift */,
-				2B3B64942A8014540082A05F /* FeedListCell.swift */,
 			);
 			path = MeetingDetail;
 			sourceTree = "<group>";
@@ -1134,6 +1145,7 @@
 				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* View+.swift in Sources */,
 				2B308B8F2A7CCE5A00B9846F /* SegmentedTagView.swift in Sources */,
+				2B9F27172A813AEA009ED284 /* ProfileBadgeView.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,

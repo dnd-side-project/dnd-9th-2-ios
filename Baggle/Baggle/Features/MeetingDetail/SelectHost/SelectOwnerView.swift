@@ -53,15 +53,15 @@ struct HostPickerView_Previews: PreviewProvider {
                         // swiftlint:disable:next multiline_arguments
                         Member(id: 100, name: "유저1", profileURL: "",
                                // swiftlint:disable:next multiline_arguments
-                               isOwner: false, certified: false, certImage: ""),
+                               isOwner: false, isButtonOwner: false, certified: false, certImage: ""),
                         // swiftlint:disable:next multiline_arguments
                         Member(id: 200, name: "유저2", profileURL: "",
                                // swiftlint:disable:next multiline_arguments
-                               isOwner: false, certified: false, certImage: ""),
+                               isOwner: false, isButtonOwner: false, certified: false, certImage: ""),
                         // swiftlint:disable:next multiline_arguments
                         Member(id: 300, name: "유저3", profileURL: "",
                                // swiftlint:disable:next multiline_arguments
-                               isOwner: false, certified: false, certImage: "")
+                               isOwner: false, isButtonOwner: false, certified: false, certImage: "")
                     ]
                 ),
                 reducer: SelectOwnerFeature()
