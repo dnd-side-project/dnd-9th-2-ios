@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Invitation.png",
+      "filename" : "IllustrationCamera.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Invitation@2x.png",
+      "filename" : "IllustrationCamera@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Invitation@3x.png",
+      "filename" : "IllustrationCamera@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
