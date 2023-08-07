@@ -41,7 +41,9 @@ struct MeetingDetailView: View {
                                      viewStroe: viewStore)
                                 .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
                         } else {
-                            Text("엠티뷰")
+                            Text("아직 올라온 사진이 없어요!")
+                                .font(.system(size: 16))
+                                .foregroundColor(.gray8C)
                         }
                     }
                 }
@@ -52,11 +54,12 @@ struct MeetingDetailView: View {
                 } rightButtonAction: {
                     isActionSheetShow = true
                 }
-                .background(.blue)
+                .background(Color.PrimaryLight)
 
                 // alert
                 baggleAlert(viewStore: viewStore)
             }
+            .toolbar(.hidden, for: .navigationBar)
             // 임시 액션시트
             .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
                 Button("방 폭파하기") {
@@ -108,8 +111,9 @@ extension MeetingDetailView {
             HStack(alignment: .top) {
                 Text("📌")
 
+                // dynamin width 수정
                 Text("\(data.name)")
-//                Text("수빈님네 집들이집들이 집들이집들이집") // dynamin width 수정
+//                Text("수빈님네 집들이집들이 집들이집들이집")
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                     .kerning(-0.5)
@@ -117,10 +121,12 @@ extension MeetingDetailView {
                     .frame(maxWidth: 190)
                     .fixedSize(horizontal: true, vertical: false)
                     .padding(.trailing, 4)
+                    .foregroundColor(.gray26)
 
-                Image(systemName: "stamp")
+                // 분기처리
+                Image.Stamp.complete
+                    .resizable()
                     .frame(width: 56, height: 23)
-                    .background(.gray)
 
                 Spacer()
             }
@@ -130,14 +136,14 @@ extension MeetingDetailView {
             // 장소, 시간
             Text(attributedColorString(str: "장소  |  \(data.place)",
                                        targetStr: "장소  |",
-                                       color: .black,
-                                       targetColor: .gray))
+                                       color: .gray26,
+                                       targetColor: .gray8C))
             .font(.system(size: 15))
 
             Text(attributedColorString(str: "시간  |  \(data.date) \(data.time)",
                                        targetStr: "시간  |",
-                                       color: .black,
-                                       targetColor: .gray))
+                                       color: .gray26,
+                                       targetColor: .gray8C))
             .font(.system(size: 15))
             .padding(.bottom, 20)
 
@@ -154,7 +160,7 @@ extension MeetingDetailView {
         .padding(.top, 64)
         .padding(.bottom, 24)
         .padding(.horizontal, 20)
-        .background(.blue)
+        .background(Color.PrimaryLight)
     }
 
     func memberListView(viewStore: Viewstore) -> some View {
