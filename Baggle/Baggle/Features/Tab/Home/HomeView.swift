@@ -124,11 +124,11 @@ extension HomeView {
 
             ZStack(alignment: .bottomLeading) {
 
-                Image(systemName: "house")
+                Image.Background.homeShort
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: geo.size.width, height: geo.size.height - yoffset)
-                    .background(.blue)
+                    .clipped()
                     .offset(y: yoffset)
 
                 VStack(spacing: 64) {
