@@ -15,7 +15,7 @@ struct MeetingListCell: View {
         ZStack(alignment: .bottomTrailing) {
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    
+
                     if data.dDay == 0 {
                         BaggleTag("D-Day", .pink)
                     } else if data.dDay > 0 {
