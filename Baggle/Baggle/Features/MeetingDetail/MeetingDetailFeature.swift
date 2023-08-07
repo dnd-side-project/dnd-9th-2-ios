@@ -34,6 +34,9 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // Camera
         @PresentationState var usingCamera: CameraFeature.State?
+
+        // Emergency
+        @PresentationState var emergencyState: EmergencyFeature.State?
     }
 
     enum Action: Equatable {
@@ -49,10 +52,12 @@ struct MeetingDetailFeature: ReducerProtocol {
         case leaveButtonTapped
         case backButtonTapped
         case cameraButtonTapped
+        case emergencyButtonTapped
 
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
+        case emergencyState(PresentationAction<EmergencyFeature.Action>)
 
         // delegate
         case delegate(Delegate)
@@ -121,6 +126,10 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.usingCamera = CameraFeature.State()
                 return .none
 
+            case .emergencyButtonTapped:
+                state.emergencyState = EmergencyFeature.State()
+                return .none
+
                 // Child - Delete
 
             case .selectOwner(.presented(.leaveButtonTapped)):
@@ -137,6 +146,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Child - Camera
 
             case .usingCamera:
+                return .none
+
+            case .emergencyState:
                 return .none
 
                 // Child - Delegate
@@ -158,6 +170,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         }
         .ifLet(\.$usingCamera, action: /Action.usingCamera) {
             CameraFeature()
+        }
+        .ifLet(\.$emergencyState, action: /Action.emergencyState) {
+            EmergencyFeature()
         }
     }
 }
