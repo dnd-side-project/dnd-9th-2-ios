@@ -90,6 +90,7 @@
 		2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2B35E4EC2A70B6DB00915876 /* KakaoSDK */; };
 		2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39F21B2A738BB100E034A3 /* SendInvitation.swift */; };
 		2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3B64942A8014540082A05F /* FeedListCell.swift */; };
+		2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B409D7B2A80BE840051A3BC /* Font+.swift */; };
 		2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45F2202A7B634400874783 /* MeetingDeleteType.swift */; };
 		2B5BE6AF2A779C8E00F25474 /* MeetingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */; };
 		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
@@ -218,6 +219,7 @@
 		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
 		2B3B64942A8014540082A05F /* FeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListCell.swift; sourceTree = "<group>"; };
+		2B409D7B2A80BE840051A3BC /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		2B45F2202A7B634400874783 /* MeetingDeleteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteType.swift; sourceTree = "<group>"; };
 		2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetail.swift; sourceTree = "<group>"; };
 		2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				14F6D9FD2A807E5B00C8C19C /* Color+.swift */,
 				2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */,
 				2B5CF2672A6EC889004D3033 /* View+.swift */,
+				2B409D7B2A80BE840051A3BC /* Font+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1055,6 +1058,7 @@
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
+				2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */,
 				1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */,
 				2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
