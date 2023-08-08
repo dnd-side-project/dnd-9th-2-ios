@@ -148,6 +148,7 @@ extension SignUpView {
         .buttonStyle(BagglePrimaryStyle())
         .padding(.horizontal)
         .padding(.bottom)
+        .disabled(viewStore.disableButton)
     }
 }
 

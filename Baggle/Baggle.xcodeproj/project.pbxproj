@@ -76,6 +76,7 @@
 		14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E577AB2A80973B00119FB3 /* EmergencyView.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 		14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */; };
+		14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F055AB2A8220C50041B004 /* BadgeView.swift */; };
 		14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */; };
 		14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */; };
 		14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */; };
@@ -213,6 +214,7 @@
 		14E577A92A80973300119FB3 /* EmergencyFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyFeature.swift; sourceTree = "<group>"; };
 		14E577AB2A80973B00119FB3 /* EmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		14F055AB2A8220C50041B004 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		14F2D7AD2A7287AD000ED0EE /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+loadTransferable.swift"; sourceTree = "<group>"; };
 		14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
@@ -772,6 +774,14 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		14F055AA2A8220AB0041B004 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				14F055AB2A8220C50041B004 /* BadgeView.swift */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		14F2D7AF2A728A14000ED0EE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,6 +837,7 @@
 		2B84695D2A6E7AE200D75D32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				14F055AA2A8220AB0041B004 /* Badge */,
 				14458B422A81E6B900C810FA /* Stamp */,
 				1461B5FE2A7BA3EA00A15706 /* Bubble */,
 				146C51E52A793D2100FF3142 /* Date */,
@@ -1194,6 +1205,7 @@
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
+				14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,
