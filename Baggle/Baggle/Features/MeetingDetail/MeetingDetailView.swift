@@ -293,13 +293,16 @@ extension MeetingDetailView {
                     Text(viewStore.buttonState.buttonTitle)
 
                     if viewStore.buttonState == .authorize {
-                        // SmallTimerView 추가
-                        Text("타이머")
-                            .padding(.leading, 4)
+                        SmallTimerView(
+                            store: self.store.scope(
+                                state: \.timerState,
+                                action: MeetingDetailFeature.Action.timerAction
+                            )
+                        )
                     }
                 }
             }
-            .buttonStyle(BaggleSecondaryStyle())
+            .buttonStyle(BaggleSecondaryStyle(buttonType: viewStore.buttonState))
         }
     }
 

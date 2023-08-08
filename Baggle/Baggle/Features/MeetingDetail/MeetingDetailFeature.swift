@@ -34,6 +34,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         var alertDescription: String?
         var alertRightButtonTitle: String = ""
 
+        // Child
+        var timerState = TimerFeature.State(targetDate: Date().later(minutes: 1).later(seconds: 10))
+
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
         var nextOwnerId: Int?
@@ -69,6 +72,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
         case emergencyAction(PresentationAction<EmergencyFeature.Action>)
+        case timerAction(TimerFeature.Action)
 
         // delegate
         case delegate(Delegate)
@@ -85,6 +89,10 @@ struct MeetingDetailFeature: ReducerProtocol {
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
+
+        Scope(state: \.timerState, action: /Action.timerAction) {
+            TimerFeature()
+        }
 
         // MARK: - Reduce
 
@@ -214,6 +222,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .run { send in await send(.cameraButtonTapped)}
 
             case .emergencyAction:
+                return .none
+
+            case .timerAction:
                 return .none
 
                 // Delegate
