@@ -67,6 +67,7 @@ struct CircleProfileView: View {
             Circle()
                 .stroke(hasStroke ? size.borderColor : .clear,
                         lineWidth: size == .medium ? 3 : 1)
+          
             if isFailed {
                 Circle()
                     .fill(Color.gray1F.opacity(0.7))
