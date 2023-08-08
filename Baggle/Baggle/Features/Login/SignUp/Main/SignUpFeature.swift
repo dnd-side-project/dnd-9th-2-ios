@@ -19,6 +19,7 @@ struct SignUpFeature: ReducerProtocol {
         var disableDismissAnimation: Bool = false
         var isLoading: Bool = false
         var keyboardAppear: Bool = false
+        var disableButton: Bool = true
 
         // MARK: - 이미지
 
@@ -43,6 +44,8 @@ struct SignUpFeature: ReducerProtocol {
 
         case nextButtonTapped
         case cancelButtonTapped
+
+        case disableButtonChanged
 
         // MARK: - Screen Move
 
@@ -119,6 +122,17 @@ struct SignUpFeature: ReducerProtocol {
 
                 return .run { _ in await self.dismiss() }
 
+            case .disableButtonChanged:
+                let textCount = state.nickNameTextFieldState.text.count
+
+                // 실패 시에는 기본이미지로 회원가입
+                if textCount < 2 || state.imageState == .loading {
+                    state.disableButton = true
+                } else {
+                    state.disableButton = false
+                }
+                return .none
+
                 // MARK: - Screen Move
 
             case .moveToSignUpSuccess:
@@ -148,20 +162,23 @@ struct SignUpFeature: ReducerProtocol {
 
             case .imageLoading:
                 state.imageState = .loading
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
             case let .successImageChange(image):
                 state.imageState = .success(image)
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
             case .failImageChange:
                 state.imageState = .failure
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
                 // MARK: - Nickname TextField
 
             case .textFieldAction(.isFocused):
                 return .run { send in await send(.keyboardAppear) }
+
+            case .textFieldAction(.textChanged):
+                return .run { send in await send(.disableButtonChanged) }
 
             case .textFieldAction:
                 return .none

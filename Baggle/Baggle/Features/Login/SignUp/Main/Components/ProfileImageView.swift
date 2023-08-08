@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ProfileImageView: View {
+
     let imageState: AlbumImageState
 
     var body: some View {
         ZStack {
             switch imageState {
             case .empty:
-                ZStack {}
+                Image.Profile.profilDefault
+                    .resizable()
             case .loading:
                 ProgressView()
             case .success(let image):
@@ -26,12 +28,13 @@ struct ProfileImageView: View {
             }
         }
         .scaledToFill()
-        .clipShape(Circle())
         .frame(width: 160, height: 160)
         .background {
             Circle()
-                .tint(Color.grayF5)
+                .stroke(Color.grayD9, lineWidth: 1)
+                .background(Color.grayF5)
         }
+        .clipShape(Circle())
         .overlay(alignment: .bottomTrailing) {
             ZStack {
                 Circle()
@@ -54,8 +57,14 @@ struct ProfileImageView: View {
 struct ProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
+            ProfileImageView(imageState: .empty)
+
             ProfileImageView(imageState: .success(Image("sampleImage")))
-                .previewLayout(.sizeThatFits)
+
+            ProfileImageView(imageState: .loading)
+
+            ProfileImageView(imageState: .failure)
         }
+        .previewLayout(.sizeThatFits)
     }
 }
