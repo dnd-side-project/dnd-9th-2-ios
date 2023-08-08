@@ -46,7 +46,7 @@ struct CreateDateView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(viewStore.dateButtonStatus.borderColor, lineWidth: 1)
                             )
-                            .contentShape(Rectangle())
+                            .touchSpacer()
                             .onTapGesture {
                                 viewStore.send(.selectDateButtonTapped)
                             }
@@ -64,7 +64,7 @@ struct CreateDateView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(viewStore.timeButtonStatus.borderColor, lineWidth: 1)
                             )
-                            .contentShape(Rectangle())
+                            .touchSpacer()
                             .onTapGesture {
                                 viewStore.send(.selectTimeButtonTapped)
                             }

@@ -44,7 +44,7 @@ struct CreatePlaceView: View {
                 .disabled(viewStore.state.nextButtonDisabled)
             }
             .padding()
-            .contentShape(Rectangle())
+            .touchSpacer()
             .onTapGesture {
                 hideKeyboard()
             }
