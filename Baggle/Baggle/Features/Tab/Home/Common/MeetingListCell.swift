@@ -72,11 +72,10 @@ struct MeetingListCell: View {
 
             // 디데이 + 한시간 전인 경우와 이미 지나서 확정된 경우
             if data.isConfirmed {
-                // 스탬프로 이미지 변경
                 BaggleStamp(status: .confirm)
-                    .frame(width: 120, height: 88)
-                    .padding(.bottom, 12)
-                    .padding(.trailing, 12)
+                    .padding(.bottom, 34)
+                    .padding(.leading, 230)
+                    .padding(.trailing, 16)
             }
         }
         .overlay {
