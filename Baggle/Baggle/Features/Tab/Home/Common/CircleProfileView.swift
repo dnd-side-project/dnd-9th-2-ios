@@ -35,17 +35,21 @@ enum ProfileSize {
 }
 
 struct CircleProfileView: View {
+    
     let imageUrl: String
     let size: ProfileSize
+    let isFailed: Bool
     let hasStroke: Bool
-
+    
     init(
         imageUrl: String,
         size: ProfileSize,
+        isFailed: Bool = false,
         hasStroke: Bool = true
     ) {
         self.imageUrl = imageUrl
         self.size = size
+        self.isFailed = isFailed
         self.hasStroke = hasStroke
     }
 
@@ -64,14 +68,29 @@ struct CircleProfileView: View {
                 Circle()
                     .stroke(hasStroke ? size.borderColor : .clear,
                             lineWidth: size == .medium ? 3 : 1)
+                if isFailed {
+                    Circle()
+                        .fill(Color.gray1F.opacity(0.7))
+
+                    BaggleStamp(status: .fail)
+                }
             }
     }
 }
 
 struct CircleProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleProfileView(imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
-                          size: .large)
-            .previewLayout(.sizeThatFits)
+        Group {
+            CircleProfileView(
+                imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
+                size: .large
+            )
+
+            CircleProfileView(
+                imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
+                size: .small,
+                isFailed: true
+            )
+        }
     }
 }
