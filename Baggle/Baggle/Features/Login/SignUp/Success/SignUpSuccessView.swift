@@ -19,13 +19,21 @@ struct SignUpSuccessView: View {
 
             VStack {
                 description
+                    .padding(.top, 46) // 툴 바 높이
+
+                Image.Illustration.celebration
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 56)
+                    .padding(.top, 90)
+                    
 
                 Spacer()
 
                 Button {
                     viewStore.send(.nextButtonTapped)
                 } label: {
-                    Text("완료")
+                    Text("시작하기")
                         .padding()
                 }
                 .buttonStyle(BagglePrimaryStyle())
@@ -39,14 +47,17 @@ extension SignUpSuccessView {
 
     @ViewBuilder
     private var description: some View {
-        VStack(spacing: 8) {
-            Text("Welcome")
+        VStack(spacing: 0) {
+            Text("Baggle에 오신 걸\n환영합니다!")
+                .baggleTypoLineSpacing(size: 22, weight: .medium)
+                .foregroundColor(.primaryNormal)
+                .padding(.vertical, 8)
 
-            Text("To")
-
-            Text("Baggle")
+            Text("Baggle에서 특별한 추억을 만들어 보세요.")
+                .font(.system(size: 16))
+                .foregroundColor(.gray8C)
         }
-        .font(.title)
+        .multilineTextAlignment(.center)
     }
 }
 
