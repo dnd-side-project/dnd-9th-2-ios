@@ -42,7 +42,7 @@ struct LargeTimerView: View {
                 }
             }
             .font(.system(size: 28).bold())
-            .padding(.vertical, 20)
+            .padding(.vertical, 12)
             .padding(.horizontal, 24)
             .foregroundColor(color.foregroundColor)
             .background(viewStore.timerCount <= 10 ? Color.red : color.backgroundColor)

@@ -20,6 +20,9 @@ struct CameraFeature: ReducerProtocol {
         var flipDegree: Double = 0.0
 
         var isCompleted: Bool = false
+
+        //Timer
+        var timer = TimerFeature.State()
     }
 
     enum Action: Equatable {
@@ -40,6 +43,9 @@ struct CameraFeature: ReducerProtocol {
         case reTakeButtonTapped
         case uploadButtonTapped
 
+        // Timer
+        case timer(TimerFeature.Action)
+
         // Delegate
         case delegate(Delegate)
 
@@ -52,6 +58,15 @@ struct CameraFeature: ReducerProtocol {
     @Dependency(\.cameraService) var cameraService
 
     var body: some ReducerProtocolOf<Self> {
+
+        // MARK: - Scope
+
+        Scope(state: \.timer, action: /Action.timer) {
+            TimerFeature()
+        }
+
+        // MARK: - Reduce
+
         Reduce { state, action in
 
             switch action {
@@ -122,7 +137,12 @@ struct CameraFeature: ReducerProtocol {
                 // 이미지 업로드
                 return .run { _ in await self.dismiss() }
 
-            // MARK: - Delegate
+                // MARK: - Timer
+
+            case .timer:
+                return .none
+
+                // MARK: - Delegate
 
             case .delegate:
                 return .none

@@ -58,13 +58,13 @@ extension CameraView {
     // MARK: - Timer
 
     private func timer(viewStore: CameraFeatureViewStore) -> some View {
-        Text("03:39")
-            .padding(.vertical, 10)
-            .padding(.horizontal, 24)
-            .foregroundColor(Color.black)
-            .background(Color.white)
-            .cornerRadius(12)
-            .padding(.top, 12)
+        LargeTimerView(
+            store: self.store.scope(
+                state: \.timer,
+                action: CameraFeature.Action.timer
+            )
+        )
+        .padding(.top, 12)
     }
 
     // MARK: - ViewFinder
@@ -126,7 +126,7 @@ extension CameraView {
         }
         .frame(height: 62)
         .padding(.top, 42)
-        .padding(.bottom, 90)
+        .padding(.bottom, 64)
     }
 
     private func cameraButtons(viewStore: CameraFeatureViewStore) -> some View {
