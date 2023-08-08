@@ -15,8 +15,6 @@ import KakaoSDKTemplate
 
 struct HomeFeature: ReducerProtocol {
 
-    @Environment(\.openURL) private var openURL
-
     struct State: Equatable {
         // MARK: - Scope State
 
@@ -43,12 +41,6 @@ struct HomeFeature: ReducerProtocol {
         case refreshMeetingList
         case changeMeetingStatus(MeetingStatus)
 
-        // 카카오톡 공유
-
-        case shareButtonTapped
-        case invitationSuccess
-        case invitationFailed
-
         // 모임 상세
 
         case meetingDetailAction(MeetingDetailFeature.Action)
@@ -59,7 +51,6 @@ struct HomeFeature: ReducerProtocol {
         case usingCamera(PresentationAction<CameraFeature.Action>)
     }
 
-    @Dependency(\.sendInvitation) private var sendInvitation
     @Dependency(\.meetingService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
@@ -126,28 +117,6 @@ struct HomeFeature: ReducerProtocol {
                 state.isRefreshing = false
                 return .none
 
-            case .shareButtonTapped:
-                return .run { send in
-                    if ShareApi.isKakaoTalkSharingAvailable() {
-                        if let url = await sendInvitation(name: "집들이집들", id: 1000) {
-                            openURL(url)
-                            await send(.invitationSuccess)
-                        } else {
-                            await send(.invitationFailed)
-                        }
-                    } else {
-                        moveToAppStore()
-                    }
-                }
-
-            case .invitationSuccess:
-                print("초대하기 성공")
-                return .none
-
-            case .invitationFailed:
-                print("초대하기 실패")
-                return .none
-
             case .pushToMeetingDetail(let id):
                 state.meetingDetailId = id
                 state.meetingDetailState = MeetingDetailFeature.State(meetingId: id)
@@ -178,13 +147,6 @@ struct HomeFeature: ReducerProtocol {
 
             case .usingCamera:
                 return .none
-            }
-
-            @Sendable func moveToAppStore() {
-                let url = "itms-apps://itunes.apple.com/app/362057947"
-                if let url = URL(string: url) {
-                    openURL(url)
-                }
             }
         }
         .ifLet(\.$usingCamera, action: /Action.usingCamera) {

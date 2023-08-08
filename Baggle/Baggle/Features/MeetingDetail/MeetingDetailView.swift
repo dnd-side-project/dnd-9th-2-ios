@@ -63,15 +63,7 @@ struct MeetingDetailView: View {
                     .background(Color.PrimaryLight)
 
                     Spacer()
-
-                    if viewStore.buttonState == .invite {
-                        BubbleView(
-                            size: .small,
-                            color: .primary,
-                            text: "최대 6명"
-                        )
-                        .padding(.bottom, 4)
-                    }
+                        .allowsHitTesting(false)
 
                     if !(viewStore.buttonState == .none) {
                         buttonView(viewStore: viewStore)
@@ -80,7 +72,9 @@ struct MeetingDetailView: View {
                 }
 
                 // alert
-                baggleAlert(viewStore: viewStore)
+                if viewStore.isAlertPresented {
+                    baggleAlert(viewStore: viewStore)
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
             // 임시 액션시트
@@ -260,22 +254,32 @@ extension MeetingDetailView {
     }
 
     func buttonView(viewStore: Viewstore) -> some View {
-        Button {
-            print("아아")
-        } label: {
-            HStack(spacing: 8) {
-                viewStore.buttonState.buttonIcon
+        VStack(spacing: 4) {
+            if viewStore.buttonState == .invite {
+                BubbleView(
+                    size: .small,
+                    color: .primary,
+                    text: "최대 6명"
+                )
+            }
 
-                Text(viewStore.buttonState.buttonTitle)
+            Button {
+                viewStore.send(.eventButtonTapped)
+            } label: {
+                HStack(spacing: 8) {
+                    viewStore.buttonState.buttonIcon
 
-                if viewStore.buttonState == .authorize {
-                    // SmallTimerView 추가
-                    Text("타이머")
-                        .padding(.leading, 4)
+                    Text(viewStore.buttonState.buttonTitle)
+
+                    if viewStore.buttonState == .authorize {
+                        // SmallTimerView 추가
+                        Text("타이머")
+                            .padding(.leading, 4)
+                    }
                 }
             }
+            .buttonStyle(BaggleSecondaryStyle())
         }
-        .buttonStyle(BaggleSecondaryStyle())
     }
 
     func baggleAlert(viewStore: Viewstore) -> some View {

@@ -5,7 +5,10 @@
 //  Created by 양수빈 on 2023/07/30.
 //
 
+import SwiftUI
+
 import ComposableArchitecture
+import KakaoSDKShare
 
 enum MeetingDetailState {
     case empty
@@ -13,6 +16,8 @@ enum MeetingDetailState {
 }
 
 struct MeetingDetailFeature: ReducerProtocol {
+
+    @Environment(\.openURL) private var openURL
 
     struct State: Equatable {
         // MARK: - Scope State
@@ -54,7 +59,11 @@ struct MeetingDetailFeature: ReducerProtocol {
         case backButtonTapped
         case cameraButtonTapped
         case emergencyButtonTapped
+        case inviteButtonTapped
         case eventButtonTapped
+
+        // error
+        case invitationFailed
 
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
@@ -71,6 +80,7 @@ struct MeetingDetailFeature: ReducerProtocol {
     }
 
     @Dependency(\.meetingDetailService) var meetingService
+    @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -147,19 +157,38 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.emergencyState = EmergencyFeature.State()
                 return .none
 
+            case .inviteButtonTapped:
+                return .run { send in
+                    if ShareApi.isKakaoTalkSharingAvailable() {
+                        if let url = await sendInvitation(name: "집들이집들", id: 1000) {
+                            openURL(url)
+                        } else {
+                            await send(.invitationFailed)
+                        }
+                    } else {
+                        let url = "itms-apps://itunes.apple.com/app/362057947"
+                        if let url = URL(string: url) {
+                            openURL(url)
+                        }
+                    }
+                }
+
             case .eventButtonTapped:
                 switch state.buttonState {
                 case .emergency:
-                    print("긴급 버튼 누르기")
                     return .run { send in await send(.emergencyButtonTapped) }
                 case .invite:
                     print("초대장 보내기")
+                    return .run { send in await send(.inviteButtonTapped) }
                 case .authorize:
-                    print("인증하러 이동")
                     return .run { send in await send(.cameraButtonTapped) }
                 case .none:
                     break
                 }
+                return .none
+
+            case .invitationFailed:
+                print("초대 실패 alert")
                 return .none
 
                 // Child - Delete
