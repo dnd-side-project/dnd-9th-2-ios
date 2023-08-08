@@ -15,7 +15,7 @@ struct BaggleStamp: View {
         status.image
             .resizable()
             .scaledToFit()
-            .rotationEffect(.degrees(-25))
+            .rotationEffect(.degrees(status.degrees))
     }
 }
 

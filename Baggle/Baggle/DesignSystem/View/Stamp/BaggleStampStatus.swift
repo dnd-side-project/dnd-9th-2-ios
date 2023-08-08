@@ -22,4 +22,12 @@ extension BaggleStampStatus {
         case .fail: return Image.Stamp.fail
         }
     }
+
+    var degrees: Double {
+        switch self {
+        case .confirm: return -25
+        case .completed: return -25
+        case .fail: return -15
+        }
+    }
 }
