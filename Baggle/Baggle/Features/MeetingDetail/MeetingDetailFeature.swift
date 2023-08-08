@@ -20,6 +20,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         var meetingId: Int
         var meetingData: MeetingDetail?
         var dismiss: Bool = false
+        var buttonState: MeetingDetailButtonType = .none
 
         // Alert
         var alertType: MeetingDeleteType = .delete
@@ -53,6 +54,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         case backButtonTapped
         case cameraButtonTapped
         case emergencyButtonTapped
+        case eventButtonTapped
 
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
@@ -89,6 +91,21 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .updateData(let data):
                 state.meetingData = data
+
+                // 약속 상태가 ready 또는 progress이면 invite
+                // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
+                // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 certified이면
+//                if data.status == .ready || data.status == .progress {
+//                    state.buttonState = .invite
+//                } else if data.status == .confirmed {
+//                    // 본인이 button 관리자일때 조건 추가
+//                    if !data.emergencyButtonActive {
+//                        state.buttonState = .emergency
+//                    } else if data.emergencyButtonActive && !data.certified {
+//                        state.buttonState = .authorize
+//                    }
+//                }
+
                 return .none
 
             case .presentAlert:
@@ -128,6 +145,21 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .emergencyButtonTapped:
                 state.emergencyState = EmergencyFeature.State()
+                return .none
+
+            case .eventButtonTapped:
+                switch state.buttonState {
+                case .emergency:
+                    print("긴급 버튼 누르기")
+                    return .run { send in await send(.emergencyButtonTapped) }
+                case .invite:
+                    print("초대장 보내기")
+                case .authorize:
+                    print("인증하러 이동")
+                    return .run { send in await send(.cameraButtonTapped) }
+                case .none:
+                    break
+                }
                 return .none
 
                 // Child - Delete

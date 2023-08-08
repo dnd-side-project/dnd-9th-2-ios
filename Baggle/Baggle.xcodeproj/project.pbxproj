@@ -105,10 +105,9 @@
 		2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86CBBF2A70F00900800B02 /* HomeFeature.swift */; };
 		2B9F27172A813AEA009ED284 /* ProfileBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */; };
 		2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */; };
-		2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */; };
+		2BA345A72A6EB6BF00B7E2BD /* BaggleTagColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleTagColor.swift */; };
 		2BA760B72A81DD4A0089878D /* MeetingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA760B62A81DD4A0089878D /* MeetingStatus.swift */; };
 		2BA760BB2A81EB610089878D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C543D2A74F54B00CF1CB4 /* String+.swift */; };
-		2BA345A72A6EB6BF00B7E2BD /* BaggleTagColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleTagColor.swift */; };
 		2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */; };
 		2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */; };
 		2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */; };
@@ -118,6 +117,7 @@
 		2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */; };
 		2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */; };
 		2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */; };
+		2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* View+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */; };
 		2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5299D2A7D697800A53779 /* MeetingListCell.swift */; };
@@ -238,9 +238,8 @@
 		2B86CBBF2A70F00900800B02 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
 		2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadgeView.swift; sourceTree = "<group>"; };
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
-		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
-		2BA760B62A81DD4A0089878D /* MeetingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStatus.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleTagColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTagColor.swift; sourceTree = "<group>"; };
+		2BA760B62A81DD4A0089878D /* MeetingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStatus.swift; sourceTree = "<group>"; };
 		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
 		2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +247,7 @@
 		2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostObserverAction.swift; sourceTree = "<group>"; };
 		2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailFeature.swift; sourceTree = "<group>"; };
 		2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
+		2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailButtonType.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifier.swift"; sourceTree = "<group>"; };
 		2BE5299D2A7D697800A53779 /* MeetingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
@@ -852,13 +852,14 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
-		2B9F27152A813ABE009ED284 /* Cell */ = {
+		2B9F27152A813ABE009ED284 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				2B3B64942A8014540082A05F /* FeedListCell.swift */,
 				2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */,
+				2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */,
 			);
-			path = Cell;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		2BA345A32A6EB00900B7E2BD /* Tag */ = {
@@ -899,7 +900,7 @@
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
-				2B9F27152A813ABE009ED284 /* Cell */,
+				2B9F27152A813ABE009ED284 /* Common */,
 				14E577A82A80970C00119FB3 /* Emergency */,
 				2B2BA5272A7AB45300A90AE7 /* SelectHost */,
 				2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */,
@@ -1078,6 +1079,7 @@
 				14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */,
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
+				2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */,
 				1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,

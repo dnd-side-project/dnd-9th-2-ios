@@ -53,13 +53,31 @@ struct MeetingDetailView: View {
                     }
                 }
 
-                // navibar
-                NavigationBar(naviType: .more) {
-                    viewStore.send(.backButtonTapped)
-                } rightButtonAction: {
-                    isActionSheetShow = true
+                VStack {
+                    // navibar
+                    NavigationBar(naviType: .more) {
+                        viewStore.send(.backButtonTapped)
+                    } rightButtonAction: {
+                        isActionSheetShow = true
+                    }
+                    .background(Color.PrimaryLight)
+
+                    Spacer()
+
+                    if viewStore.buttonState == .invite {
+                        BubbleView(
+                            size: .small,
+                            color: .primary,
+                            text: "최대 6명"
+                        )
+                        .padding(.bottom, 4)
+                    }
+
+                    if !(viewStore.buttonState == .none) {
+                        buttonView(viewStore: viewStore)
+                            .padding(.bottom, 16)
+                    }
                 }
-                .background(Color.PrimaryLight)
 
                 // alert
                 baggleAlert(viewStore: viewStore)
@@ -239,6 +257,25 @@ extension MeetingDetailView {
                 }
             }
         }
+    }
+
+    func buttonView(viewStore: Viewstore) -> some View {
+        Button {
+            print("아아")
+        } label: {
+            HStack(spacing: 8) {
+                viewStore.buttonState.buttonIcon
+
+                Text(viewStore.buttonState.buttonTitle)
+
+                if viewStore.buttonState == .authorize {
+                    // SmallTimerView 추가
+                    Text("타이머")
+                        .padding(.leading, 4)
+                }
+            }
+        }
+        .buttonStyle(BaggleSecondaryStyle())
     }
 
     func baggleAlert(viewStore: Viewstore) -> some View {
