@@ -12,8 +12,14 @@ import ComposableArchitecture
 struct LargeTimerView: View {
 
     let store: StoreOf<TimerFeature>
+    let color: TimerColor
     let numberWidth: CGFloat = 18
     let deadline: Int = 10
+
+    init(store: StoreOf<TimerFeature>, color: TimerColor = .white) {
+        self.store = store
+        self.color = color
+    }
 
     var body: some View {
 
@@ -38,8 +44,8 @@ struct LargeTimerView: View {
             .font(.system(size: 28).bold())
             .padding(.vertical, 20)
             .padding(.horizontal, 24)
-            .foregroundColor(Color.black)
-            .background(viewStore.timerCount <= 10 ? Color.red : Color.white)
+            .foregroundColor(color.foregroundColor)
+            .background(viewStore.timerCount <= 10 ? Color.red : color.backgroundColor)
             .cornerRadius(12)
             .animation(.easeInOut(duration: 0.3), value: viewStore.isTimerOver)
             .onAppear {
