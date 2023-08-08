@@ -112,7 +112,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
                 // 약속 상태가 ready 또는 progress이면 invite
                 // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
-                // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 certified이면
+                // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 !certified이면
 //                if data.status == .ready || data.status == .progress {
 //                    state.buttonState = .invite
 //                } else if data.status == .confirmed {

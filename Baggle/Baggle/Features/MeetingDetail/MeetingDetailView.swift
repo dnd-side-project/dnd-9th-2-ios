@@ -64,7 +64,6 @@ struct MeetingDetailView: View {
                     .background(Color.PrimaryLight)
 
                     Spacer()
-                        .allowsHitTesting(false)
 
                     if !(viewStore.buttonState == .none) {
                         buttonView(viewStore: viewStore)
@@ -157,7 +156,7 @@ extension MeetingDetailView {
                 }
             }
             .frame(width: 56, height: 23)
-            .padding(.top, name.count > 9 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
+            .padding(.top, name.width > 200 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
 
             Spacer()
         }
@@ -190,7 +189,6 @@ extension MeetingDetailView {
         Group {
             if let memo {
                 Text(memo)
-                    .baggleTypoLineSpacing(size: 15, weight: .medium)
                     .foregroundColor(.gray59)
             } else {
                 Text("작성된 메모가 없어요!")
@@ -198,6 +196,7 @@ extension MeetingDetailView {
                     .foregroundColor(.grayBF)
             }
         }
+        .baggleTypoLineSpacing(size: 15, weight: .medium)
         .padding(.vertical, 14)
         .padding(.horizontal, 20)
         .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
