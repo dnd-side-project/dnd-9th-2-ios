@@ -80,8 +80,8 @@ struct MockUpMeetingDetailService {
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
             feeds: [
-                Feed(id: 0, userId: 1, username: "수빈", userImageURL: "", feedImageURL: ""),
-                Feed(id: 1, userId: 2, username: "유탁", userImageURL: "", feedImageURL: "")
+                Feed(id: 0, userId: 1, username: "수빈", userImageURL: "https://avatars.githubusercontent.com/u/81167570?v=4", feedImageURL: ""),
+                Feed(id: 1, userId: 2, username: "유탁", userImageURL: "", feedImageURL: "https://avatars.githubusercontent.com/u/81167570?v=4")
             ]
         )
     }

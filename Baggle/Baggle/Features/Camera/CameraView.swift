@@ -22,21 +22,26 @@ struct CameraView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            VStack(spacing: 0) {
-                Spacer()
+            ZStack {
+                VStack(spacing: 0) {
+                    Spacer()
 
-                description(viewStore: viewStore)
+                    description(viewStore: viewStore)
 
-                timer(viewStore: viewStore)
+                    timer(viewStore: viewStore)
 
-                viewFinderView(viewStore: viewStore)
+                    viewFinderView(viewStore: viewStore)
 
-                buttonsView(viewStore: viewStore)
+                    buttonsView(viewStore: viewStore)
+                }
+                .background(Color.black)
+
+                if viewStore.isTimeOver {
+                    timeOverView(viewStore: viewStore)
+                }
             }
-            .background(Color.black)
             .onAppear {
                 viewStore.send(.onAppear)
-                print(viewStore)
             }
         }
     }
@@ -58,13 +63,13 @@ extension CameraView {
     // MARK: - Timer
 
     private func timer(viewStore: CameraFeatureViewStore) -> some View {
-        Text("03:39")
-            .padding(.vertical, 10)
-            .padding(.horizontal, 24)
-            .foregroundColor(Color.black)
-            .background(Color.white)
-            .cornerRadius(12)
-            .padding(.top, 12)
+        LargeTimerView(
+            store: self.store.scope(
+                state: \.timer,
+                action: CameraFeature.Action.timer
+            )
+        )
+        .padding(.top, 12)
     }
 
     // MARK: - ViewFinder
@@ -126,7 +131,7 @@ extension CameraView {
         }
         .frame(height: 62)
         .padding(.top, 42)
-        .padding(.bottom, 90)
+        .padding(.bottom, 64)
     }
 
     private func cameraButtons(viewStore: CameraFeatureViewStore) -> some View {
@@ -214,5 +219,30 @@ extension CameraView {
         }
         .font(.system(size: 18).bold())
         .padding(.horizontal, 20)
+    }
+
+    // MARK: - 시간 초과
+
+    private func timeOverView(viewStore: CameraFeatureViewStore) -> some View {
+        ZStack {
+            ShadeView(
+                isPresented: viewStore.binding(
+                    get: \.isTimeOver,
+                    send: { CameraFeature.Action.isTimeOverChanged($0) }
+                )
+            )
+
+            Text("시간이 초과되었습니다.")
+                .font(.system(size: 22))
+                .foregroundColor(.white)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 16)
+                .background(.black)
+                .cornerRadius(12)
+        }
+        .animation(.easeInOut(duration: 0.2), value: viewStore.isTimeOver)
+        .onTapGesture {
+            viewStore.send(.isTimeOverChanged(false))
+        }
     }
 }

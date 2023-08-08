@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Kingfisher
+
 enum ProfileSize {
     case large // 홈, 본인 프로필 이미지
     case medium // 모임 상세, 멤버 프로필 이미지 -> 추가 수정 필요
@@ -33,12 +35,12 @@ enum ProfileSize {
 }
 
 struct CircleProfileView: View {
-
+    
     let imageUrl: String
     let size: ProfileSize
     let isFailed: Bool
     let hasStroke: Bool
-
+    
     init(
         imageUrl: String,
         size: ProfileSize,
@@ -53,28 +55,26 @@ struct CircleProfileView: View {
 
     var body: some View {
 
-        AsyncImage(url: URL(string: imageUrl)) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-        } placeholder: {
-            Image.Profile.profilDefault
-                .resizable()
-        }
-        .frame(width: size.length, height: size.length)
-        .clipShape(Circle())
-        .overlay {
-            Circle()
-                .stroke(hasStroke ? size.borderColor : .clear,
-                        lineWidth: size == .medium ? 3 : 1)
-
-            if isFailed {
-                Circle()
-                    .fill(Color.gray1F.opacity(0.7))
-
-                BaggleStamp(status: .fail)
+        KFImage(URL(string: imageUrl))
+            .placeholder { _ in
+                Image.Profile.profilDefault
+                    .resizable()
             }
-        }
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: size.length, height: size.length)
+            .clipShape(Circle())
+            .overlay {
+                Circle()
+                    .stroke(hasStroke ? size.borderColor : .clear,
+                            lineWidth: size == .medium ? 3 : 1)
+                if isFailed {
+                    Circle()
+                        .fill(Color.gray1F.opacity(0.7))
+
+                    BaggleStamp(status: .fail)
+                }
+            }
     }
 }
 

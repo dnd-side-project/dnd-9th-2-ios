@@ -5,7 +5,10 @@
 //  Created by 양수빈 on 2023/07/30.
 //
 
+import SwiftUI
+
 import ComposableArchitecture
+import KakaoSDKShare
 
 enum MeetingDetailState {
     case empty
@@ -14,12 +17,15 @@ enum MeetingDetailState {
 
 struct MeetingDetailFeature: ReducerProtocol {
 
+    @Environment(\.openURL) private var openURL
+
     struct State: Equatable {
         // MARK: - Scope State
 
         var meetingId: Int
         var meetingData: MeetingDetail?
         var dismiss: Bool = false
+        var buttonState: MeetingDetailButtonType = .none
 
         // Alert
         var alertType: MeetingDeleteType = .delete
@@ -27,6 +33,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         var alertTitle: String = ""
         var alertDescription: String?
         var alertRightButtonTitle: String = ""
+
+        // Child
+        var timerState = TimerFeature.State(targetDate: Date().later(minutes: 1).later(seconds: 10))
 
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
@@ -53,11 +62,17 @@ struct MeetingDetailFeature: ReducerProtocol {
         case backButtonTapped
         case cameraButtonTapped
         case emergencyButtonTapped
+        case inviteButtonTapped
+        case eventButtonTapped
+
+        // error
+        case invitationFailed
 
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
         case emergencyAction(PresentationAction<EmergencyFeature.Action>)
+        case timerAction(TimerFeature.Action)
 
         // delegate
         case delegate(Delegate)
@@ -69,10 +84,15 @@ struct MeetingDetailFeature: ReducerProtocol {
     }
 
     @Dependency(\.meetingDetailService) var meetingService
+    @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
+
+        Scope(state: \.timerState, action: /Action.timerAction) {
+            TimerFeature()
+        }
 
         // MARK: - Reduce
 
@@ -89,6 +109,21 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .updateData(let data):
                 state.meetingData = data
+
+                // 약속 상태가 ready 또는 progress이면 invite
+                // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
+                // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 !certified이면
+//                if data.status == .ready || data.status == .progress {
+//                    state.buttonState = .invite
+//                } else if data.status == .confirmed {
+//                    // 본인이 button 관리자일때 조건 추가
+//                    if !data.emergencyButtonActive {
+//                        state.buttonState = .emergency
+//                    } else if data.emergencyButtonActive && !data.certified {
+//                        state.buttonState = .authorize
+//                    }
+//                }
+
                 return .none
 
             case .presentAlert:
@@ -130,6 +165,40 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.emergencyState = EmergencyFeature.State()
                 return .none
 
+            case .inviteButtonTapped:
+                return .run { send in
+                    if ShareApi.isKakaoTalkSharingAvailable() {
+                        if let url = await sendInvitation(name: "집들이집들", id: 1000) {
+                            openURL(url)
+                        } else {
+                            await send(.invitationFailed)
+                        }
+                    } else {
+                        let url = "itms-apps://itunes.apple.com/app/362057947"
+                        if let url = URL(string: url) {
+                            openURL(url)
+                        }
+                    }
+                }
+
+            case .eventButtonTapped:
+                switch state.buttonState {
+                case .emergency:
+                    return .run { send in await send(.emergencyButtonTapped) }
+                case .invite:
+                    print("초대장 보내기")
+                    return .run { send in await send(.inviteButtonTapped) }
+                case .authorize:
+                    return .run { send in await send(.cameraButtonTapped) }
+                case .none:
+                    break
+                }
+                return .none
+
+            case .invitationFailed:
+                print("초대 실패 alert")
+                return .none
+
                 // Child - Delete
 
             case .selectOwner(.presented(.leaveButtonTapped)):
@@ -153,6 +222,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .run { send in await send(.cameraButtonTapped)}
 
             case .emergencyAction:
+                return .none
+
+            case .timerAction:
                 return .none
 
                 // Delegate

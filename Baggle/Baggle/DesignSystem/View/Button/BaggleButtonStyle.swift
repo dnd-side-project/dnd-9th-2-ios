@@ -83,6 +83,7 @@ struct BaggleSecondaryStyle: ButtonStyle {
 
     private let foregroundColor: Color = .white
     private let backgroundColor: Color = .black
+    var buttonType: MeetingDetailButtonType = .none // authorize 타입 외 모두 스타일 동일
 
     @Environment(\.isEnabled) private var isEnabled
 
@@ -109,8 +110,8 @@ struct BaggleSecondaryStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(height: 54)
-            .padding(.leading, 34)
-            .padding(.trailing, 36)
+            .padding(.leading, buttonType == .authorize ? 24 : 34)
+            .padding(.trailing, buttonType == .authorize ? 16 : 36)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))
             .cornerRadius(54/2)

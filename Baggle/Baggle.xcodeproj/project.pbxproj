@@ -24,6 +24,7 @@
 		141D376F2A681552001067E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D376E2A681552001067E3 /* MainTabView.swift */; };
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
 		1421C0512A7A84A200C20497 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* KakaoLoginService.swift */; };
+		142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BF96C2A81F50C0042737E /* TimerColor.swift */; };
 		14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14315D852A76B1CB008F8064 /* CreateMemoView.swift */; };
 		1432BE642A68168A0098AAA9 /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE632A68168A0098AAA9 /* TabType.swift */; };
 		1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE652A681A600098AAA9 /* LoginFeature.swift */; };
@@ -98,6 +99,8 @@
 		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
 		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
+		2B7EC32B2A8228F300D78141 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2B7EC32A2A8228F300D78141 /* Kingfisher */; };
+		2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
@@ -120,6 +123,7 @@
 		2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */; };
 		2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */; };
 		2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */; };
+		2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* View+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */; };
 		2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5299D2A7D697800A53779 /* MeetingListCell.swift */; };
@@ -158,6 +162,7 @@
 		141D376E2A681552001067E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
 		1421C0502A7A84A200C20497 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
+		142BF96C2A81F50C0042737E /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
 		14315D852A76B1CB008F8064 /* CreateMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoView.swift; sourceTree = "<group>"; };
 		1432BE632A68168A0098AAA9 /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
 		1432BE652A681A600098AAA9 /* LoginFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeature.swift; sourceTree = "<group>"; };
@@ -233,6 +238,7 @@
 		2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
+		2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
@@ -252,6 +258,7 @@
 		2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostObserverAction.swift; sourceTree = "<group>"; };
 		2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailFeature.swift; sourceTree = "<group>"; };
 		2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
+		2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailButtonType.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifier.swift"; sourceTree = "<group>"; };
 		2BE5299D2A7D697800A53779 /* MeetingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
@@ -270,6 +277,7 @@
 			files = (
 				2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */,
 				140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */,
+				2B7EC32B2A8228F300D78141 /* Kingfisher in Frameworks */,
 				2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */,
 				140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */,
 				2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */,
@@ -662,6 +670,7 @@
 			isa = PBXGroup;
 			children = (
 				1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */,
+				142BF96C2A81F50C0042737E /* TimerColor.swift */,
 				1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */,
 				1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */,
 			);
@@ -783,6 +792,7 @@
 				14783EE72A7E340E00EF58D5 /* CIImage+.swift */,
 				143410532A7E87460024FC75 /* UIImage+.swift */,
 				1493A9172A7E01D800A2D7CC /* Int+.swift */,
+				2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -875,13 +885,14 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
-		2B9F27152A813ABE009ED284 /* Cell */ = {
+		2B9F27152A813ABE009ED284 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				2B3B64942A8014540082A05F /* FeedListCell.swift */,
 				2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */,
+				2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */,
 			);
-			path = Cell;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		2BA345A32A6EB00900B7E2BD /* Tag */ = {
@@ -922,7 +933,7 @@
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
-				2B9F27152A813ABE009ED284 /* Cell */,
+				2B9F27152A813ABE009ED284 /* Common */,
 				14E577A82A80970C00119FB3 /* Emergency */,
 				2B2BA5272A7AB45300A90AE7 /* SelectHost */,
 				2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */,
@@ -973,6 +984,7 @@
 				2B35E4EC2A70B6DB00915876 /* KakaoSDK */,
 				2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */,
 				2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */,
+				2B7EC32A2A8228F300D78141 /* Kingfisher */,
 			);
 			productName = promiseDemo;
 			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
@@ -1032,6 +1044,7 @@
 				140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */,
 				2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 140E880E2A64B626005119F8 /* Products */;
 			projectDirPath = "";
@@ -1084,7 +1097,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --fix --config \".swiftlint.auto.yml\" && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1094,6 +1107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
+				142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */,
 				143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */,
 				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
@@ -1101,6 +1115,7 @@
 				14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */,
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
+				2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */,
 				1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
@@ -1124,6 +1139,7 @@
 				144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */,
 				14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */,
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
+				2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */,
@@ -1512,6 +1528,14 @@
 				kind = branch;
 			};
 		};
+		2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1547,6 +1571,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDK;
+		};
+		2B7EC32A2A8228F300D78141 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
