@@ -125,7 +125,8 @@ struct SignUpFeature: ReducerProtocol {
             case .disableButtonChanged:
                 let textCount = state.nickNameTextFieldState.text.count
 
-                if textCount < 2 || state.imageState == .loading || state.imageState == .failure {
+                // 실패 시에는 기본이미지로 회원가입
+                if textCount < 2 || state.imageState == .loading {
                     state.disableButton = true
                 } else {
                     state.disableButton = false
