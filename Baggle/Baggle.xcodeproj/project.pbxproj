@@ -24,6 +24,7 @@
 		141D376F2A681552001067E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D376E2A681552001067E3 /* MainTabView.swift */; };
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
 		1421C0512A7A84A200C20497 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* KakaoLoginService.swift */; };
+		142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BF96C2A81F50C0042737E /* TimerColor.swift */; };
 		14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14315D852A76B1CB008F8064 /* CreateMemoView.swift */; };
 		1432BE642A68168A0098AAA9 /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE632A68168A0098AAA9 /* TabType.swift */; };
 		1432BE662A681A600098AAA9 /* LoginFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE652A681A600098AAA9 /* LoginFeature.swift */; };
@@ -158,6 +159,7 @@
 		141D376E2A681552001067E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
 		1421C0502A7A84A200C20497 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
+		142BF96C2A81F50C0042737E /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
 		14315D852A76B1CB008F8064 /* CreateMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoView.swift; sourceTree = "<group>"; };
 		1432BE632A68168A0098AAA9 /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
 		1432BE652A681A600098AAA9 /* LoginFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeature.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 			isa = PBXGroup;
 			children = (
 				1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */,
+				142BF96C2A81F50C0042737E /* TimerColor.swift */,
 				1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */,
 				1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */,
 			);
@@ -1085,6 +1088,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
+				142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */,
 				143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */,
 				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
