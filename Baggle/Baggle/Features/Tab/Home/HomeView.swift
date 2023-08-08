@@ -23,20 +23,24 @@ struct HomeView: View {
                         // userInfo + segmentedPicker
                         header(viewStore: viewStore)
 
-                        Section {
-                            VStack(spacing: 12) {
-                                ForEach((viewStore.meetingStatus == .progress)
-                                        ? viewStore.progressList : viewStore.completedList
-                                ) { meeting in
-                                    // cell
-                                    MeetingListCell(data: meeting)
-                                        .onTapGesture {
-                                            viewStore.send(.pushToMeetingDetail(meeting.id))
-                                        }
+                        if viewStore.homeStatus == .normal {
+                            Section {
+                                VStack(spacing: 12) {
+                                    ForEach((viewStore.meetingStatus == .progress)
+                                            ? viewStore.progressList : viewStore.completedList
+                                    ) { meeting in
+                                        // cell
+                                        MeetingListCell(data: meeting)
+                                            .onTapGesture {
+                                                viewStore.send(.pushToMeetingDetail(meeting.id))
+                                            }
+                                    }
                                 }
+                                .padding(.horizontal, 20)
+                                .padding(.top, 23)
                             }
-                            .padding(.horizontal, 20)
-                            .padding(.top, 23)
+                        } else {
+                            emptyView(viewStore.homeStatus)
                         }
                     }
                     .refreshable {
@@ -69,7 +73,6 @@ struct HomeView: View {
             })
             .onAppear {
                 viewStore.send(.onAppear)
-                print("📌 list: \(viewStore.progressList) , \(viewStore.completedList)")
             }
             .navigationDestination(
                 isPresented: Binding(
@@ -104,6 +107,23 @@ extension HomeView {
                 )
             )
             .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+    }
+
+    func emptyView(_ status: HomeStatus) -> some View {
+        VStack(spacing: 12) {
+            Image.Background.empty
+                .padding(.top, screenSize.height*0.2)
+
+            VStack(spacing: 4) {
+                Text(status.title ?? "")
+                    .foregroundColor(.gray8C)
+                    .baggleTypoLineSpacing(size: 16, weight: .medium)
+
+                Text(status.description ?? "")
+                    .foregroundColor(.grayBF)
+                    .baggleTypoLineSpacing(size: 15, weight: .medium)
+            }
+        }
     }
 
     func userInfo() -> some View {

@@ -18,6 +18,8 @@ struct HomeFeature: ReducerProtocol {
     struct State: Equatable {
         // MARK: - Scope State
 
+        var homeStatus: HomeStatus = .empty
+
         // 예정된 약속(progress), 지난 약속(completed)
         var meetingStatus: MeetingStatus = .progress
         var meetingDetailId: Int?
@@ -36,6 +38,7 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case onAppear
+        case changeHomeStatus(HomeStatus)
         case fetchMeetingList(MeetingStatus)
         case updateMeetingList(MeetingStatus, [Meeting]?)
         case refreshMeetingList
@@ -75,6 +78,10 @@ struct HomeFeature: ReducerProtocol {
                     return .none
                 }
 
+            case .changeHomeStatus(let status):
+                state.homeStatus = status
+                return .none
+
             case .fetchMeetingList(let status):
                 state.meetingStatus = status
                 return .run { send in
@@ -84,6 +91,7 @@ struct HomeFeature: ReducerProtocol {
 
             case .refreshMeetingList:
                 state.isRefreshing = true
+                state.homeStatus = .loading
                 state.progressList.removeAll()
                 state.completedList.removeAll()
                 state.meetingStatus = .progress
@@ -93,7 +101,7 @@ struct HomeFeature: ReducerProtocol {
                         let list = await meetingService.fetchMeetingList(.progress)
                         await send(.updateMeetingList(.progress, list))
                     } catch {
-                        print("error")
+                        await send(.changeHomeStatus(.error))
                     }
                 }
 
@@ -104,14 +112,20 @@ struct HomeFeature: ReducerProtocol {
                         await send(.fetchMeetingList(.completed))
                     }
                 }
+
+                if status == .progress && state.progressList.isEmpty {
+                    return .run { send in await send(.fetchMeetingList(.progress))}
+                }
                 return .none
 
             case .updateMeetingList(let type, let model):
                 if let model {
                     if type == .progress {
                         state.progressList.append(contentsOf: model)
+                        state.homeStatus = state.progressList.isEmpty ? .empty : .normal
                     } else {
                         state.completedList.append(contentsOf: model)
+                        state.homeStatus = state.completedList.isEmpty ? .empty : .normal
                     }
                 }
                 state.isRefreshing = false
