@@ -9,7 +9,6 @@ import AuthenticationServices
 import SwiftUI
 
 import ComposableArchitecture
-import KakaoSDKUser
 
 struct LoginView: View {
 
