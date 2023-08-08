@@ -26,7 +26,11 @@ struct SignUpSuccessView: View {
                     .scaledToFit()
                     .padding(.horizontal, 56)
                     .padding(.top, 90)
-                    
+                    .overlay {
+                        BadgeView(text: "가입축하", foregroundColor: .white, backgroundColor: .baggleRed)
+                            .rotationEffect(.degrees(10))
+                            .offset(x: 80, y: -95)
+                    }
 
                 Spacer()
 
