@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Kingfisher
+
 struct FeedListCell: View {
     let feed: Feed
     let moreButtonAction: () -> Void
@@ -30,15 +32,14 @@ struct FeedListCell: View {
             }
             .foregroundColor(.gray14)
 
-            AsyncImage(url: URL(string: feed.feedImageURL)) { image in
-                image
-                    .resizable()
-            } placeholder: {
-                Color.grayF5
-            }
-            .aspectRatio(1.0, contentMode: .fill)
-            .cornerRadius(12)
-            .clipped()
+            KFImage(URL(string: feed.feedImageURL))
+                .placeholder({ _ in
+                    Color.grayF5
+                })
+                .resizable()
+                .aspectRatio(1.0, contentMode: .fill)
+                .cornerRadius(12)
+                .clipped()
         }
     }
 }

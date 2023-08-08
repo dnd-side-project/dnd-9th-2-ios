@@ -167,38 +167,26 @@ extension HomeView {
 
     // 임시 버튼
     func tempButton(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
-        VStack {
-            HStack(spacing: 20) {
-                Button {
-                    viewStore.send(.fetchMeetingList(.progress))
-                } label: {
-                    Text("예정된 약속 업데이트")
-                }
-
-                Button {
-                    viewStore.send(.fetchMeetingList(.completed))
-                } label: {
-                    Text("지난 약속 업데이트")
-                }
+        HStack(spacing: 20) {
+            Button {
+                viewStore.send(.fetchMeetingList(.progress))
+            } label: {
+                Text("예정된 약속 업데이트")
             }
-            .padding()
 
-            HStack(spacing: 20) {
-
-                Button {
-                    viewStore.send(.shareButtonTapped)
-                } label: {
-                    Text("카카오톡 공유")
-                }
-
-                Button {
-                    viewStore.send(.cameraButtonTapped)
-                } label: {
-                    Text("카메라")
-                }
+            Button {
+                viewStore.send(.fetchMeetingList(.completed))
+            } label: {
+                Text("지난 약속 업데이트")
             }
-            .padding()
+
+            Button {
+                viewStore.send(.cameraButtonTapped)
+            } label: {
+                Text("카메라")
+            }
         }
+        .padding()
     }
 }
 
