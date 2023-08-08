@@ -130,28 +130,28 @@ extension MeetingDetailView {
             HStack(alignment: .top) {
                 Text("📌")
 
-                // dynamin width 수정
                 Text("\(data.name)")
-//                Text("수빈님네 집들이집들이 집들이집들이집")
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
-                    .kerning(-0.5)
-                    .lineSpacing(8)
-                    .frame(maxWidth: 190)
-                    .fixedSize(horizontal: true, vertical: false)
+                    .baggleTypoLineSpacing(size: 22, weight: .bold)
+                    .frame(maxWidth: data.name.width > 200 ? 200 : .none, alignment: .leading)
                     .padding(.trailing, 4)
                     .foregroundColor(.gray26)
 
-                // 분기처리
-                Image.Stamp.complete
-                    .resizable()
-                    .frame(width: 56, height: 23)
-                    .padding(.top, 2.5)
+                Group {
+                    if data.status == .completed {
+                        Image.Stamp.complete
+                            .resizable()
+                    } else if data.status == .confirmed {
+                        Image.Stamp.confirm
+                            .resizable()
+                    }
+                }
+                .frame(width: 56, height: 23)
+                .padding(.top, data.name.count > 9 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
 
                 Spacer()
             }
             .padding(.bottom, 10)
-            .font(.system(size: 22, weight: .bold))
+            .baggleTypoLineSpacing(size: 22, weight: .bold)
 
             // 장소, 시간
             Text(
@@ -161,7 +161,7 @@ extension MeetingDetailView {
                     color: .gray26,
                     targetColor: .gray8C)
             )
-            .font(.system(size: 15))
+            .baggleTypoLineSpacing(size: 15, weight: .medium)
 
             Text(
                 attributedColorString(
@@ -170,22 +170,28 @@ extension MeetingDetailView {
                     color: .gray26,
                     targetColor: .gray8C)
             )
-            .font(.system(size: 15))
+            .baggleTypoLineSpacing(size: 15, weight: .medium)
             .padding(.bottom, 20)
 
             // 메모
-            Text("작성된 메모가 있어요 작성된 메모가 있어요작성된 작성된 메모가 있어요작성된 메모가 있어요")
-                .font(.system(size: 15))
-                .lineSpacing(7)
-                .padding(.vertical, 14)
-                .padding(.horizontal, 20)
-                .frame(width: UIScreen.main.bounds.width-40)
-                .background(.white)
-                .cornerRadius(8)
+            Group {
+                if let memo = data.memo {
+                    Text(memo)
+                        .baggleTypoLineSpacing(size: 15, weight: .medium)
+                        .foregroundColor(.gray59)
+                } else {
+                    Text("작성된 메모가 없어요!")
+                        .baggleTypoLineSpacing(size: 15, weight: .medium)
+                        .foregroundColor(.grayBF)
+                }
+            }
+            .padding(.vertical, 14)
+            .padding(.horizontal, 20)
+            .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
+            .background(.white)
+            .cornerRadius(8)
         }
-        .padding(.top, 64)
-        .padding(.bottom, 24)
-        .padding(.horizontal, 20)
+        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
         .background(Color.PrimaryLight)
     }
 
@@ -194,15 +200,27 @@ extension MeetingDetailView {
             HStack(spacing: 12) {
                 ForEach(viewStore.meetingData?.members ?? [], id: \.self) { member in
                     VStack(spacing: 4) {
-                        // TODO: - 방장, 긴급 버튼 할당자 표시
-                        CircleProfileView(
-                            imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
-                            size: .medium
-                        )
+                        ZStack(alignment: .bottomTrailing) {
+                            CircleProfileView(
+                                imageUrl: member.profileURL,
+                                size: .medium,
+                                hasStroke: member.certified
+                            )
+
+                            HStack(spacing: -10) {
+                                if member.isMeetingAuthority {
+                                    ProfileBadgeView(tag: .meeting)
+                                }
+
+                                if member.isButtonAuthority {
+                                    ProfileBadgeView(tag: .button)
+                                }
+                            }
+                        }
 
                         Text(member.name)
                             .padding(.vertical, 2)
-                            .font(.system(size: 13))
+                            .baggleTypoLineSpacing(size: 13, weight: .medium)
                             .frame(maxWidth: 64)
                     }
                     .padding(.all, 2)
@@ -249,9 +267,9 @@ struct MeetingDetailView_Previews: PreviewProvider {
                         members: [Member(
                             // swiftlint:disable:next multiline_arguments
                             id: 1, name: "콩이", profileURL: "",
-                            // swiftlint:disable:next multiline_arguments
-                            isOwner: true, certified: false, certImage: "")],
-                        isConfirmed: false,
+                            // swiftlint:disable:next multiline_arguments line_length
+                            isMeetingAuthority: true, isButtonAuthority: false, certified: false, certImage: "")],
+                        status: .confirmed,
                         // swiftlint:disable:next multiline_arguments
                         emergencyButtonActive: false, emergencyButtonActiveTime: "",
                         feeds: [])),

@@ -40,7 +40,7 @@ struct MockUpMeetingService {
     }
 
     private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
-        let ongoing = [
+        let progress = [
             Meeting(
                 id: Int.random(in: 1...100),
                 name: "진행 중인 모임",
@@ -53,7 +53,7 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .dday,
+                status: .progress,
                 isConfirmed: true),
             Meeting(
                 id: Int.random(in: 101...200),
@@ -66,7 +66,7 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .ongoing,
+                status: .ready,
                 isConfirmed: false)
         ]
 
@@ -83,9 +83,9 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .complete,
+                status: .completed,
                 isConfirmed: true)
         ]
-        return type == .ongoing ? ongoing : complete
+        return type == .progress ? progress : complete
     }
 }

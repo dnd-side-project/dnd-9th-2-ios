@@ -12,7 +12,8 @@ struct Member: Identifiable, Hashable {
     var id: Int // 유저 id
     let name: String // 유저 이름
     let profileURL: String // 유저 프로필 이미지 URL
-    let isOwner: Bool // 방장 여부
+    let isMeetingAuthority: Bool // 방장 여부
+    let isButtonAuthority: Bool // 긴급 버튼 할당자 여부
     let certified: Bool // 인증 여부
     let certImage: String // 인증 사진, 별도 분리 가능 O
 
@@ -21,6 +22,7 @@ struct Member: Identifiable, Hashable {
     }
 }
 
+/// 모임 인증 피드
 struct Feed {
     let id: Int
     let userId: Int
@@ -38,7 +40,7 @@ struct MeetingDetail: Equatable {
     let time: String // 모임 시간
     let memo: String? // 메모
     let members: [Member] // 참여자 정보
-    let isConfirmed: Bool // 약속 확정 여부
+    let status: MeetingStatus // 약속 상태
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: String? // 긴급 버튼 활성화 시간
     let feeds: [Feed]
