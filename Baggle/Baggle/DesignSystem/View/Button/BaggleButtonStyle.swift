@@ -117,3 +117,40 @@ struct BaggleSecondaryStyle: ButtonStyle {
             .cornerRadius(54/2)
     }
 }
+
+struct BaggleTertiaryStyle: ButtonStyle {
+    private let foregroundColor: Color = .gray14
+    private let backgroundColor: Color = .white
+
+    @Environment(\.isEnabled) private var isEnabled
+
+    private func foregroundColor(_ isPressed: Bool) -> Color {
+        if !isEnabled {
+            return foregroundColor
+        } else if isPressed {
+            return foregroundColor.opacity(0.5)
+        } else {
+            return foregroundColor
+        }
+    }
+
+    private func backgroundColor(_ isPressed: Bool) -> Color {
+        if !isEnabled {
+            return Color.gray // 디자인 확정 시 수정
+        } else if isPressed {
+            return backgroundColor.opacity(0.5)
+        } else {
+            return backgroundColor
+        }
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 16, weight: .semibold))
+            .frame(height: 54)
+            .padding(.horizontal, 32)
+            .foregroundColor(foregroundColor(configuration.isPressed))
+            .background(backgroundColor(configuration.isPressed))
+            .cornerRadius(27)
+    }
+}
