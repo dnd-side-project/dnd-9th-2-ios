@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileImageView: View {
+
     let imageState: AlbumImageState
 
     var body: some View {
@@ -29,10 +30,9 @@ struct ProfileImageView: View {
         .scaledToFill()
         .frame(width: 160, height: 160)
         .background {
-            Color.grayF5
-
-            RoundedRectangle(cornerRadius: 100)
+            Circle()
                 .stroke(Color.grayD9, lineWidth: 1)
+                .background(Color.grayF5)
         }
         .clipShape(Circle())
         .overlay(alignment: .bottomTrailing) {
