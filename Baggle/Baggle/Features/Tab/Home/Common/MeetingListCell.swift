@@ -73,9 +73,8 @@ struct MeetingListCell: View {
             // 디데이 + 한시간 전인 경우와 이미 지나서 확정된 경우
             if data.isConfirmed {
                 // 스탬프로 이미지 변경
-                Image(systemName: "moon")
-                    .frame(width: 121, height: 89)
-                    .background(.black.opacity(0.4))
+                BaggleStamp(status: .confirm)
+                    .frame(width: 120, height: 88)
                     .padding(.bottom, 12)
                     .padding(.trailing, 12)
             }
