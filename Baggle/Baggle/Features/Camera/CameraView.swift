@@ -22,21 +22,46 @@ struct CameraView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            VStack(spacing: 0) {
-                Spacer()
+            ZStack {
+                VStack(spacing: 0) {
+                    Spacer()
 
-                description(viewStore: viewStore)
+                    description(viewStore: viewStore)
 
-                timer(viewStore: viewStore)
+                    timer(viewStore: viewStore)
 
-                viewFinderView(viewStore: viewStore)
+                    viewFinderView(viewStore: viewStore)
 
-                buttonsView(viewStore: viewStore)
+                    buttonsView(viewStore: viewStore)
+                }
+                .background(Color.black)
+
+                if viewStore.isTimeOver {
+
+                    ZStack {
+                        ShadeView(
+                            isPresented: viewStore.binding(
+                                get: \.isTimeOver,
+                                send: CameraFeature.Action.isTimeOverChanged
+                            )
+                        )
+
+                        Text("시간이 초과되었습니다.")
+                            .font(.system(size: 22))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .background(.black)
+                            .cornerRadius(12)
+                    }
+                    .animation(.easeInOut(duration: 0.2), value: viewStore.isTimeOver)
+                    .onTapGesture {
+                        viewStore.send(.isTimeOverChanged)
+                    }
+                }
             }
-            .background(Color.black)
             .onAppear {
                 viewStore.send(.onAppear)
-                print(viewStore)
             }
         }
     }

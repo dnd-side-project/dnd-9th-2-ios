@@ -21,8 +21,9 @@ struct CameraFeature: ReducerProtocol {
 
         var isCompleted: Bool = false
 
-        //Timer
+        // Timer
         var timer = TimerFeature.State()
+        var isTimeOver: Bool = false
     }
 
     enum Action: Equatable {
@@ -45,6 +46,7 @@ struct CameraFeature: ReducerProtocol {
 
         // Timer
         case timer(TimerFeature.Action)
+        case isTimeOverChanged
 
         // Delegate
         case delegate(Delegate)
@@ -139,8 +141,16 @@ struct CameraFeature: ReducerProtocol {
 
                 // MARK: - Timer
 
+            case .timer(.timerOver):
+                state.isTimeOver = true
+                return .none
+
             case .timer:
                 return .none
+
+            case .isTimeOverChanged:
+                state.isTimeOver.toggle()
+                return .run { _ in await self.dismiss() }
 
                 // MARK: - Delegate
 
