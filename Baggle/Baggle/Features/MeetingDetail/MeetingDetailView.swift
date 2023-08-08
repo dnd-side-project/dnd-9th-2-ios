@@ -52,6 +52,7 @@ struct MeetingDetailView: View {
                         }
                     }
                 }
+                .refreshable { viewStore.send(.onAppear) }
 
                 VStack {
                     // navibar
@@ -136,72 +137,92 @@ struct MeetingDetailView: View {
 extension MeetingDetailView {
     typealias Viewstore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
 
-    func headerView(data: MeetingDetail) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            // 모임방 이름, 스탬프
-            HStack(alignment: .top) {
-                Text("📌")
+    func meetingTitleView(name: String, status: MeetingStatus) -> some View {
+        HStack(alignment: .top) {
+            Text("📌")
 
-                Text("\(data.name)")
-                    .baggleTypoLineSpacing(size: 22, weight: .bold)
-                    .frame(maxWidth: data.name.width > 200 ? 200 : .none, alignment: .leading)
-                    .padding(.trailing, 4)
-                    .foregroundColor(.gray26)
+            Text("\(name)")
+                .baggleTypoLineSpacing(size: 22, weight: .bold)
+                .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
+                .padding(.trailing, 4)
+                .foregroundColor(.gray26)
 
-                Group {
-                    if data.status == .completed {
-                        Image.Stamp.complete
-                            .resizable()
-                    } else if data.status == .confirmed {
-                        Image.Stamp.confirm
-                            .resizable()
-                    }
+            Group {
+                if status == .completed {
+                    Image.Stamp.complete
+                        .resizable()
+                } else if status == .confirmed {
+                    Image.Stamp.confirm
+                        .resizable()
                 }
-                .frame(width: 56, height: 23)
-                .padding(.top, data.name.count > 9 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
-
-                Spacer()
             }
-            .padding(.bottom, 10)
-            .baggleTypoLineSpacing(size: 22, weight: .bold)
+            .frame(width: 56, height: 23)
+            .padding(.top, name.count > 9 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
 
-            // 장소, 시간
+            Spacer()
+        }
+        .padding(.bottom, 10)
+        .baggleTypoLineSpacing(size: 22, weight: .bold)
+    }
+
+    func meetingDateView(place: String, date: String, time: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
             Text(
                 attributedColorString(
-                    str: "장소  |  \(data.place)",
+                    str: "장소  |  \(place)",
                     targetStr: "장소  |",
                     color: .gray26,
                     targetColor: .gray8C)
             )
-            .baggleTypoLineSpacing(size: 15, weight: .medium)
 
             Text(
                 attributedColorString(
-                    str: "시간  |  \(data.date) \(data.time)",
+                    str: "시간  |  \(date) \(time)",
                     targetStr: "시간  |",
                     color: .gray26,
                     targetColor: .gray8C)
             )
-            .baggleTypoLineSpacing(size: 15, weight: .medium)
-            .padding(.bottom, 20)
+        }
+        .baggleTypoLineSpacing(size: 15, weight: .medium)
+    }
+
+    func meetingMemoView(memo: String?) -> some View {
+        Group {
+            if let memo {
+                Text(memo)
+                    .baggleTypoLineSpacing(size: 15, weight: .medium)
+                    .foregroundColor(.gray59)
+            } else {
+                Text("작성된 메모가 없어요!")
+                    .baggleTypoLineSpacing(size: 15, weight: .medium)
+                    .foregroundColor(.grayBF)
+            }
+        }
+        .padding(.vertical, 14)
+        .padding(.horizontal, 20)
+        .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
+        .background(.white)
+        .cornerRadius(8)
+    }
+
+    func headerView(data: MeetingDetail) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            // 모임방 이름, 스탬프
+            meetingTitleView(
+                name: data.name,
+                status: data.status
+            )
+
+            // 장소, 시간
+            meetingDateView(
+                place: data.place,
+                date: data.date,
+                time: data.time
+            )
 
             // 메모
-            Group {
-                if let memo = data.memo {
-                    Text(memo)
-                        .baggleTypoLineSpacing(size: 15, weight: .medium)
-                        .foregroundColor(.gray59)
-                } else {
-                    Text("작성된 메모가 없어요!")
-                        .baggleTypoLineSpacing(size: 15, weight: .medium)
-                        .foregroundColor(.grayBF)
-                }
-            }
-            .padding(.vertical, 14)
-            .padding(.horizontal, 20)
-            .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
-            .background(.white)
-            .cornerRadius(8)
+            meetingMemoView(memo: data.memo)
+                .padding(.top, 10)
         }
         .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
         .background(Color.PrimaryLight)
