@@ -45,6 +45,8 @@ struct SignUpFeature: ReducerProtocol {
         case nextButtonTapped
         case cancelButtonTapped
 
+        case disableButtonChanged
+
         // MARK: - Screen Move
 
         case moveToSignUpSuccess
@@ -120,6 +122,16 @@ struct SignUpFeature: ReducerProtocol {
 
                 return .run { _ in await self.dismiss() }
 
+            case .disableButtonChanged:
+                let textCount = state.nickNameTextFieldState.text.count
+
+                if textCount < 2 || state.imageState == .loading || state.imageState == .failure {
+                    state.disableButton = true
+                } else {
+                    state.disableButton = false
+                }
+                return .none
+
                 // MARK: - Screen Move
 
             case .moveToSignUpSuccess:
@@ -149,18 +161,15 @@ struct SignUpFeature: ReducerProtocol {
 
             case .imageLoading:
                 state.imageState = .loading
-                state.disableButton = true
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
             case let .successImageChange(image):
                 state.imageState = .success(image)
-                state.disableButton = state.nickNameTextFieldState.text.count < 2
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
             case .failImageChange:
                 state.imageState = .failure
-                state.disableButton = true
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
                 // MARK: - Nickname TextField
 
@@ -168,11 +177,7 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { send in await send(.keyboardAppear) }
 
             case .textFieldAction(.textChanged):
-                let textCount = state.nickNameTextFieldState.text.count
-                state.disableButton = (
-                    textCount < 2 || state.imageState == .loading || state.imageState == .failure
-                )
-                return .none
+                return .run { send in await send(.disableButtonChanged) }
 
             case .textFieldAction:
                 return .none
