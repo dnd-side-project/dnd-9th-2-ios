@@ -46,6 +46,12 @@ extension View {
             .font(.baggleFont(size: size, weight: weight))
             .lineSpacing(size*0.3)
     }
+
+    // MARK: Spacer() 영역 터치
+
+    func touchSpacer() -> some View {
+        modifier(ContentShapeModifier())
+    }
 }
 
 struct RoundedCorner: Shape {
@@ -60,5 +66,14 @@ struct RoundedCorner: Shape {
                                     width: radius,
                                     height: radius))
         return Path(path.cgPath)
+    }
+}
+
+// MARK: - Spacer() 영역 터치
+
+struct ContentShapeModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .contentShape(Rectangle())
     }
 }
