@@ -32,8 +32,8 @@ struct MemberInfoView_Previews: PreviewProvider {
                         Member(
                             // swiftlint:disable:next multiline_arguments
                             id: 100, name: "유저1", profileURL: "",
-                            // swiftlint:disable:next multiline_arguments
-                            isOwner: false, isButtonOwner: true, certified: false, certImage: ""),
+                            // swiftlint:disable:next multiline_arguments line_length
+                            isMeetingAuthority: false, isButtonAuthority: true, certified: false, certImage: ""),
                        selected: false
         )
     }

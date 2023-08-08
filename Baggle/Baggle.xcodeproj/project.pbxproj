@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406858A2A7B676D00824A93 /* CreateDescription.swift */; };
 		140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C54372A74F42900CF1CB4 /* NicknameValidator.swift */; };
-		140C543E2A74F54B00CF1CB4 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C543D2A74F54B00CF1CB4 /* String+.swift */; };
 		140E88112A64B626005119F8 /* BaggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* BaggleApp.swift */; };
 		140E88132A64B626005119F8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88122A64B626005119F8 /* AppView.swift */; };
 		140E88152A64B627005119F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E88142A64B627005119F8 /* Assets.xcassets */; };
@@ -107,6 +106,8 @@
 		2B9F27172A813AEA009ED284 /* ProfileBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */; };
 		2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */; };
 		2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */; };
+		2BA760B72A81DD4A0089878D /* MeetingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA760B62A81DD4A0089878D /* MeetingStatus.swift */; };
+		2BA760BB2A81EB610089878D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C543D2A74F54B00CF1CB4 /* String+.swift */; };
 		2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */; };
 		2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */; };
 		2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */; };
@@ -237,6 +238,7 @@
 		2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadgeView.swift; sourceTree = "<group>"; };
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleColor.swift; sourceTree = "<group>"; };
+		2BA760B62A81DD4A0089878D /* MeetingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStatus.swift; sourceTree = "<group>"; };
 		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
 		2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2BA760B52A81DD3D0089878D /* Enum */,
 				2BABCB202A76CFD100AFECA3 /* Foundation */,
 				14F2D7AF2A728A14000ED0EE /* Extensions */,
 			);
@@ -865,6 +868,14 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
+		2BA760B52A81DD3D0089878D /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				2BA760B62A81DD4A0089878D /* MeetingStatus.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		2BABCB172A76CDD400AFECA3 /* XCConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -1092,7 +1103,6 @@
 				143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */,
 				143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */,
 				143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */,
-				140C543E2A74F54B00CF1CB4 /* String+.swift in Sources */,
 				1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */,
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleColor.swift in Sources */,
@@ -1117,6 +1127,7 @@
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
+				2BA760B72A81DD4A0089878D /* MeetingStatus.swift in Sources */,
 				2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
 				1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */,
@@ -1130,6 +1141,7 @@
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */,
+				2BA760BB2A81EB610089878D /* String+.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
 				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,

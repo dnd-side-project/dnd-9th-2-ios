@@ -125,11 +125,10 @@ extension MeetingDetailView {
             // 모임방 이름, 스탬프
             HStack(alignment: .top) {
                 Text("📌")
-                
+
                 Text("\(data.name)")
                     .baggleTypoLineSpacing(size: 22, weight: .bold)
-                    // 두 줄인 경우 maxWidth 적용
-                    .frame(maxWidth: data.name.count > 9 ? 200 : .none, alignment: .leading)
+                    .frame(maxWidth: data.name.width > 200 ? 200 : .none, alignment: .leading)
                     .padding(.trailing, 4)
                     .foregroundColor(.gray26)
 
@@ -144,7 +143,7 @@ extension MeetingDetailView {
                 }
                 .frame(width: 56, height: 23)
                 .padding(.top, data.name.count > 9 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
-                
+
                 Spacer()
             }
             .padding(.bottom, 10)
@@ -196,13 +195,13 @@ extension MeetingDetailView {
                                 imageUrl: member.profileURL,
                                 size: .medium,
                                 hasStroke: member.certified)
-                            
+
                             HStack(spacing: -10) {
-                                if member.isOwner {
+                                if member.isMeetingAuthority {
                                     ProfileBadgeView(tag: .meeting)
                                 }
 
-                                if member.isButtonOwner {
+                                if member.isButtonAuthority {
                                     ProfileBadgeView(tag: .button)
                                 }
                             }
@@ -257,8 +256,8 @@ struct MeetingDetailView_Previews: PreviewProvider {
                         members: [Member(
                             // swiftlint:disable:next multiline_arguments
                             id: 1, name: "콩이", profileURL: "",
-                            // swiftlint:disable:next multiline_arguments
-                            isOwner: true, isButtonOwner: false, certified: false, certImage: "")],
+                            // swiftlint:disable:next multiline_arguments line_length
+                            isMeetingAuthority: true, isButtonAuthority: false, certified: false, certImage: "")],
                         status: .confirmed,
                         // swiftlint:disable:next multiline_arguments
                         emergencyButtonActive: false, emergencyButtonActiveTime: "",

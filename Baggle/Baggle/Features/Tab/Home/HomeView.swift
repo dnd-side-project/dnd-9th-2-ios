@@ -25,7 +25,7 @@ struct HomeView: View {
 
                         Section {
                             VStack(spacing: 12) {
-                                ForEach((viewStore.meetingStatus == .ready)
+                                ForEach((viewStore.meetingStatus == .progress)
                                         ? viewStore.progressList : viewStore.completedList
                                 ) { meeting in
                                     // cell
@@ -69,6 +69,7 @@ struct HomeView: View {
             })
             .onAppear {
                 viewStore.send(.onAppear)
+                print("📌 list: \(viewStore.progressList) , \(viewStore.completedList)")
             }
             .navigationDestination(
                 isPresented: Binding(
@@ -139,11 +140,11 @@ extension HomeView {
                     SegmentedPickerView(
                         segment: [
                             Segment(
-                                id: .ready,
+                                id: .progress,
                                 count: viewStore.progressList.count,
-                                isSelected: viewStore.meetingStatus == .ready,
+                                isSelected: viewStore.meetingStatus == .progress,
                                 action: {
-                                    viewStore.send(.changeMeetingStatus(.ready))
+                                    viewStore.send(.changeMeetingStatus(.progress))
                                 }),
                             Segment(
                                 id: .completed,
@@ -165,7 +166,7 @@ extension HomeView {
         VStack {
             HStack(spacing: 20) {
                 Button {
-                    viewStore.send(.fetchMeetingList(.ready))
+                    viewStore.send(.fetchMeetingList(.progress))
                 } label: {
                     Text("예정된 약속 업데이트")
                 }

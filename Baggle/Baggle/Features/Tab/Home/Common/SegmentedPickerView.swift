@@ -21,7 +21,7 @@ struct SegmentedPickerView: View {
         HStack(spacing: 0) {
             ForEach(segment) { info in
                 SegmentedTagView(
-                    title: info.id.title,
+                    title: info.id.segmentTitle,
                     count: info.count,
                     isSelected: info.isSelected
                 )

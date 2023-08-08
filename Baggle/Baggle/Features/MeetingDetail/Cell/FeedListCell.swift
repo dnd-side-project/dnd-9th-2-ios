@@ -30,16 +30,13 @@ struct FeedListCell: View {
             }
             .foregroundColor(.black)
 
-            // swiftlint:disable:next line_length
-            AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/81167570?v=4")) { image in
+            AsyncImage(url: URL(string: feed.feedImageURL)) { image in
                 image
                     .resizable()
-                    .aspectRatio(1.0, contentMode: .fill)
             } placeholder: {
                 Color.gray
-                    .frame(width: UIScreen.main.bounds.width-40,
-                           height: UIScreen.main.bounds.width-40)
             }
+            .aspectRatio(1.0, contentMode: .fill)
             .cornerRadius(12)
             .clipped()
         }

@@ -40,7 +40,7 @@ struct MockUpMeetingService {
     }
 
     private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
-        let ongoing = [
+        let progress = [
             Meeting(
                 id: Int.random(in: 1...100),
                 name: "진행 중인 모임",
@@ -86,6 +86,6 @@ struct MockUpMeetingService {
                 status: .completed,
                 isConfirmed: true)
         ]
-        return type == .ready ? ongoing : complete
+        return type == .progress ? progress : complete
     }
 }

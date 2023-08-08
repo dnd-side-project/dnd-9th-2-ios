@@ -5,7 +5,7 @@
 //  Created by youtak on 2023/07/29.
 //
 
-import Foundation
+import UIKit
 
 extension String {
 
@@ -18,5 +18,15 @@ extension String {
     // MARK: - 맨 마지막 문자 줄바꿈일 때 제거
     func removeTrailingNewlines() -> String {
         return self.filter { $0 != "\n" }
+    }
+
+    // MARK: - String 그래픽 width 값
+    var width: CGFloat {
+        // swiftlint:disable:next line_length
+        let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.0)])
+        let stringSize = attributedString.size()
+        let widthOfString = stringSize.width
+
+        return widthOfString
     }
 }
