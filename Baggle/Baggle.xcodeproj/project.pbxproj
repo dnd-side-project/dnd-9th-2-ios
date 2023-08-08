@@ -95,6 +95,7 @@
 		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
 		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
+		2B7EC32B2A8228F300D78141 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2B7EC32A2A8228F300D78141 /* Kingfisher */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
@@ -266,6 +267,7 @@
 			files = (
 				2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */,
 				140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */,
+				2B7EC32B2A8228F300D78141 /* Kingfisher in Frameworks */,
 				2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */,
 				140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */,
 				2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */,
@@ -951,6 +953,7 @@
 				2B35E4EC2A70B6DB00915876 /* KakaoSDK */,
 				2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */,
 				2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */,
+				2B7EC32A2A8228F300D78141 /* Kingfisher */,
 			);
 			productName = promiseDemo;
 			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
@@ -1010,6 +1013,7 @@
 				140E88212A64C3C2005119F8 /* XCRemoteSwiftPackageReference "Moya" */,
 				2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 140E880E2A64B626005119F8 /* Products */;
 			projectDirPath = "";
@@ -1488,6 +1492,14 @@
 				kind = branch;
 			};
 		};
+		2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1523,6 +1535,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDK;
+		};
+		2B7EC32A2A8228F300D78141 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
