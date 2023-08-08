@@ -149,14 +149,17 @@ struct SignUpFeature: ReducerProtocol {
 
             case .imageLoading:
                 state.imageState = .loading
+                state.disableButton = true
                 return .none
 
             case let .successImageChange(image):
                 state.imageState = .success(image)
+                state.disableButton = state.nickNameTextFieldState.text.count < 2
                 return .none
 
             case .failImageChange:
                 state.imageState = .failure
+                state.disableButton = true
                 return .none
 
                 // MARK: - Nickname TextField
@@ -166,7 +169,9 @@ struct SignUpFeature: ReducerProtocol {
 
             case .textFieldAction(.textChanged):
                 let textCount = state.nickNameTextFieldState.text.count
-                state.disableButton = textCount < 2
+                state.disableButton = (
+                    textCount < 2 || state.imageState == .loading || state.imageState == .failure
+                )
                 return .none
 
             case .textFieldAction:
