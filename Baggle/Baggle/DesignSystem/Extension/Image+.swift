@@ -69,5 +69,6 @@ extension Image {
     struct Background {
         static let home = Image("Background_home")
         static let homeShort = Image("Background_home_short")
+        static let empty = Image("no_baggle")
     }
 }
