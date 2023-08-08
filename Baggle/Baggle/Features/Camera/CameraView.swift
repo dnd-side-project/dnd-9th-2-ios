@@ -37,27 +37,7 @@ struct CameraView: View {
                 .background(Color.black)
 
                 if viewStore.isTimeOver {
-
-                    ZStack {
-                        ShadeView(
-                            isPresented: viewStore.binding(
-                                get: \.isTimeOver,
-                                send: CameraFeature.Action.isTimeOverChanged
-                            )
-                        )
-
-                        Text("시간이 초과되었습니다.")
-                            .font(.system(size: 22))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 16)
-                            .background(.black)
-                            .cornerRadius(12)
-                    }
-                    .animation(.easeInOut(duration: 0.2), value: viewStore.isTimeOver)
-                    .onTapGesture {
-                        viewStore.send(.isTimeOverChanged)
-                    }
+                    timeOverView(viewStore: viewStore)
                 }
             }
             .onAppear {
@@ -239,5 +219,30 @@ extension CameraView {
         }
         .font(.system(size: 18).bold())
         .padding(.horizontal, 20)
+    }
+
+    // MARK: - 시간 초과
+
+    private func timeOverView(viewStore: CameraFeatureViewStore) -> some View {
+        ZStack {
+            ShadeView(
+                isPresented: viewStore.binding(
+                    get: \.isTimeOver,
+                    send: { CameraFeature.Action.isTimeOverChanged($0) }
+                )
+            )
+
+            Text("시간이 초과되었습니다.")
+                .font(.system(size: 22))
+                .foregroundColor(.white)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 16)
+                .background(.black)
+                .cornerRadius(12)
+        }
+        .animation(.easeInOut(duration: 0.2), value: viewStore.isTimeOver)
+        .onTapGesture {
+            viewStore.send(.isTimeOverChanged(false))
+        }
     }
 }

@@ -46,7 +46,7 @@ struct CameraFeature: ReducerProtocol {
 
         // Timer
         case timer(TimerFeature.Action)
-        case isTimeOverChanged
+        case isTimeOverChanged(Bool)
 
         // Delegate
         case delegate(Delegate)
@@ -142,15 +142,14 @@ struct CameraFeature: ReducerProtocol {
                 // MARK: - Timer
 
             case .timer(.timerOver):
-                state.isTimeOver = true
-                return .none
+                return .run { send in await send(.isTimeOverChanged(true)) }
 
             case .timer:
                 return .none
 
-            case .isTimeOverChanged:
-                state.isTimeOver.toggle()
-                return .run { _ in await self.dismiss() }
+            case let .isTimeOverChanged(isTimeOver):
+                state.isTimeOver = isTimeOver
+                return isTimeOver ? .none : .run { _ in await self.dismiss() }
 
                 // MARK: - Delegate
 
