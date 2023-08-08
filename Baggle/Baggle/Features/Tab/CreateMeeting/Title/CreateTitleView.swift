@@ -55,7 +55,7 @@ struct CreateTitleView: View {
                         }
                     }
                 }
-                .contentShape(Rectangle())
+                .touchSpacer()
                 .onTapGesture {
                     hideKeyboard()
                 }

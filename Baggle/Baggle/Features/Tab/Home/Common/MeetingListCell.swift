@@ -78,6 +78,7 @@ struct MeetingListCell: View {
                     .padding(.trailing, 16)
             }
         }
+        .touchSpacer()
         .overlay {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(data.status.fgColor, lineWidth: 1)
