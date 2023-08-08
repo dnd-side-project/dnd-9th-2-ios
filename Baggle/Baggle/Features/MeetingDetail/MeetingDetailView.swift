@@ -32,15 +32,19 @@ struct MeetingDetailView: View {
                         // 참여자 목록
                         memberListView(viewStore: viewStore)
                             .padding(.horizontal, 20)
-                            .drawUnderline(spacing: 0,
-                                           height: 0.5,
-                                           color: .grayD9)
+                            .drawUnderline(
+                                spacing: 0,
+                                height: 0.5,
+                                color: .grayD9
+                            )
 
                         // 인증 피드
                         if !data.feeds.isEmpty {
-                            feedView(feeds: data.feeds,
-                                     viewStroe: viewStore)
-                                .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
+                            feedView(
+                                feeds: data.feeds,
+                                viewStroe: viewStore
+                            )
+                            .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
                         } else {
                             Text("아직 올라온 사진이 없어요!")
                                 .font(.system(size: 16))
@@ -150,16 +154,22 @@ extension MeetingDetailView {
             .baggleTypoLineSpacing(size: 22, weight: .bold)
 
             // 장소, 시간
-            Text(attributedColorString(str: "장소  |  \(data.place)",
-                                       targetStr: "장소  |",
-                                       color: .gray26,
-                                       targetColor: .gray8C))
+            Text(
+                attributedColorString(
+                    str: "장소  |  \(data.place)",
+                    targetStr: "장소  |",
+                    color: .gray26,
+                    targetColor: .gray8C)
+            )
             .baggleTypoLineSpacing(size: 15, weight: .medium)
 
-            Text(attributedColorString(str: "시간  |  \(data.date) \(data.time)",
-                                       targetStr: "시간  |",
-                                       color: .gray26,
-                                       targetColor: .gray8C))
+            Text(
+                attributedColorString(
+                    str: "시간  |  \(data.date) \(data.time)",
+                    targetStr: "시간  |",
+                    color: .gray26,
+                    targetColor: .gray8C)
+            )
             .baggleTypoLineSpacing(size: 15, weight: .medium)
             .padding(.bottom, 20)
 
@@ -194,7 +204,8 @@ extension MeetingDetailView {
                             CircleProfileView(
                                 imageUrl: member.profileURL,
                                 size: .medium,
-                                hasStroke: member.certified)
+                                hasStroke: member.certified
+                            )
 
                             HStack(spacing: -10) {
                                 if member.isMeetingAuthority {

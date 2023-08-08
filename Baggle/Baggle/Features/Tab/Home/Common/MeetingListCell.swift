@@ -17,7 +17,7 @@ struct MeetingListCell: View {
                 VStack(alignment: .leading, spacing: 8) {
 
                     if data.dDay == 0 {
-                        BaggleTag("D-Day", .pink)
+                        BaggleTag("D-Day", .red)
                     } else if data.dDay > 0 {
                         BaggleTag("D-\(data.dDay)")
                     }
@@ -28,16 +28,23 @@ struct MeetingListCell: View {
                         Text(data.name)
                     }
 
-                    Text(attributedColorString(str: "장소  |  \(data.place)",
-                                               targetStr: "장소  |",
-                                               color: .black,
-                                               targetColor: .gray))
+                    Text(
+                        attributedColorString(
+                            str: "장소  |  \(data.place)",
+                            targetStr: "장소  |",
+                            color: .black,
+                            targetColor: .gray8C
+                        )
+                    )
                     .font(.system(size: 14))
 
-                    Text(attributedColorString(str: "시간  |  \(data.date) \(data.time)",
-                                               targetStr: "시간  |",
-                                               color: .black,
-                                               targetColor: .gray))
+                    Text(
+                        attributedColorString(
+                            str: "시간  |  \(data.date) \(data.time)",
+                            targetStr: "시간  |",
+                            color: .black,
+                            targetColor: .gray8C)
+                    )
                     .font(.system(size: 14))
                 }
 
@@ -48,7 +55,8 @@ struct MeetingListCell: View {
                             // 데이터 넣기
                             CircleProfileView(
                                 imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
-                                size: .extraSmall)
+                                size: .extraSmall
+                            )
                         }
                     }
 

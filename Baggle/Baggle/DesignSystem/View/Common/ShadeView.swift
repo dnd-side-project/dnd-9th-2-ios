@@ -15,8 +15,8 @@ struct ShadeView: View {
     }
 
     var body: some View {
-        Color.black
-            .opacity(isPresented ? 0.2 : 0)
+        Color.gray1F
+            .opacity(isPresented ? 0.7 : 0)
             .edgesIgnoringSafeArea(.all)
             .transition(.opacity.animation(.easeInOut))
             .animation(.easeInOut(duration: 0.2), value: self.isPresented)

@@ -39,6 +39,7 @@ struct BaggleTextEditor: View {
                         .font(.caption)
                         .padding(.horizontal, 4)
                         .padding(.bottom, 6)
+                        .foregroundColor(.gray8C)
                 }
 
                 // MARK: - 본문

@@ -44,8 +44,8 @@ extension Image {
         // Navigation Bar
         static let homeFill = Image("Home_Fill")
         static let HomeGray = Image("Home_gray")
-        static let myPageFill = Image("MyPage_Fill")
-        static let myPageGray = Image("MyPage_gray")
+        static let myPageFill = Image("Mypage_Fill")
+        static let myPageGray = Image("Mypage_gray")
         static let plusFill = Image("Plus_Fill")
         static let plusGray = Image("Plus_gray")
     }

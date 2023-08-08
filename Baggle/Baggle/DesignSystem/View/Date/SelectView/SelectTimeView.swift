@@ -24,8 +24,7 @@ struct SelectTimeView: View {
                     Button {
                         viewStore.send(.cancelButtonTapped)
                     } label: {
-                        Image(systemName: "xmark")
-                            .tint(Color.black)
+                        Image.Icon.close
                     }
                 }
 

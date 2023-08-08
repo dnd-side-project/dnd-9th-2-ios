@@ -28,13 +28,13 @@ struct FeedListCell: View {
                     Image.Icon.more
                 }
             }
-            .foregroundColor(.black)
+            .foregroundColor(.gray14)
 
             AsyncImage(url: URL(string: feed.feedImageURL)) { image in
                 image
                     .resizable()
             } placeholder: {
-                Color.gray
+                Color.grayF5
             }
             .aspectRatio(1.0, contentMode: .fill)
             .cornerRadius(12)

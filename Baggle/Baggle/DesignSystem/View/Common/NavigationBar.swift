@@ -39,12 +39,10 @@ struct NavigationBar: View {
             Button {
                 rightButtonAction()
             } label: {
-//                Image(systemName: naviType.rightButton)
                 naviType.rightButton
                     .frame(width: 44, height: 44)
             }
         }
-        .foregroundColor(.black)
         .padding(.horizontal, 10)
         .frame(height: 56)
     }
