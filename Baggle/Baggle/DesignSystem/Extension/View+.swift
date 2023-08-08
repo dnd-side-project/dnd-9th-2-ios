@@ -8,6 +8,12 @@
 import SwiftUI
 
 extension View {
+    
+    // MARK: - Screen Size
+    
+    var screenSize: CGSize {
+        return UIScreen.main.bounds.size
+    }
 
     // MARK: - Attirbuted String
 

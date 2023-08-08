@@ -100,6 +100,7 @@
 		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
 		2B7EC32B2A8228F300D78141 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2B7EC32A2A8228F300D78141 /* Kingfisher */; };
 		2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */; };
+		2B7EC32F2A8251DC00D78141 /* HomeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */; };
 		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
@@ -237,6 +238,7 @@
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
 		2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
+		2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatus.swift; sourceTree = "<group>"; };
 		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
@@ -812,6 +814,7 @@
 				2B308B902A7CDA1400B9846F /* SegmentedPickerView.swift */,
 				2BE5299D2A7D697800A53779 /* MeetingListCell.swift */,
 				2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */,
+				2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1201,6 +1204,7 @@
 				2BF6EC1B2A7FF5DC006CA492 /* NavigationBar.swift in Sources */,
 				143B27052A761FEE00DFC0EE /* CreateDateFeature.swift in Sources */,
 				146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */,
+				2B7EC32F2A8251DC00D78141 /* HomeStatus.swift in Sources */,
 				14F2D7AE2A7287AD000ED0EE /* ProfileImageModel.swift in Sources */,
 				143410542A7E87460024FC75 /* UIImage+.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */,
