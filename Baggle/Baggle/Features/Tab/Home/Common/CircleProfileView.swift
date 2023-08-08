@@ -24,9 +24,9 @@ enum ProfileSize {
 
     var borderColor: Color {
         switch self {
-        case .large: return .gray
-        case .medium: return .blue
-        case .extraSmall: return .gray
+        case .large: return .grayD9
+        case .medium: return .primaryNormal
+        case .extraSmall: return .grayBF
         case .small: return .clear
         }
     }
@@ -36,7 +36,20 @@ struct CircleProfileView: View {
 
     let imageUrl: String
     let size: ProfileSize
-    var isFailed: Bool = false
+    let isFailed: Bool
+    let hasStroke: Bool
+
+    init(
+        imageUrl: String,
+        size: ProfileSize,
+        isFailed: Bool = false,
+        hasStroke: Bool = true
+    ) {
+        self.imageUrl = imageUrl
+        self.size = size
+        self.isFailed = isFailed
+        self.hasStroke = hasStroke
+    }
 
     var body: some View {
 
@@ -45,14 +58,15 @@ struct CircleProfileView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } placeholder: {
-            Color.grayF5
+            Image.Profile.profilDefault
+                .resizable()
         }
         .frame(width: size.length, height: size.length)
         .clipShape(Circle())
         .overlay {
             Circle()
-                .stroke(size.borderColor, lineWidth: size == .medium ? 3 : 1)
-
+                .stroke(hasStroke ? size.borderColor : .clear,
+                        lineWidth: size == .medium ? 3 : 1)
             if isFailed {
                 Circle()
                     .fill(Color.gray1F.opacity(0.7))

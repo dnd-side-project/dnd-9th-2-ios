@@ -21,7 +21,7 @@ struct SegmentedPickerView: View {
         HStack(spacing: 0) {
             ForEach(segment) { info in
                 SegmentedTagView(
-                    title: info.id.title,
+                    title: info.id.segmentTitle,
                     count: info.count,
                     isSelected: info.isSelected
                 )
@@ -39,12 +39,12 @@ struct SegmentedPickerView_Previews: PreviewProvider {
     static var previews: some View {
         SegmentedPickerView(segment: [
             Segment(
-                id: .ongoing,
+                id: .ready,
                 count: 10,
                 isSelected: true,
                 action: { print("예정된 약속") }),
             Segment(
-                id: .complete,
+                id: .completed,
                 count: 1,
                 isSelected: false,
                 action: { print("지난 약속") })

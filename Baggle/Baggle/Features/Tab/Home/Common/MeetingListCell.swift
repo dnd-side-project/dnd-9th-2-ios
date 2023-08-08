@@ -97,7 +97,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 0,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .dday,
+                    status: .progress,
                     isConfirmed: true))
 
             MeetingListCell(
@@ -109,7 +109,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 20,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .ongoing,
+                    status: .ready,
                     isConfirmed: false))
 
             MeetingListCell(
@@ -121,7 +121,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: -10,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .complete,
+                    status: .completed,
                     isConfirmed: true))
         }
         .padding()

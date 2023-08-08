@@ -14,10 +14,11 @@ struct FeedListCell: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack(spacing: 12) {
-                CircleProfileView(imageUrl: "", size: .small)
+                CircleProfileView(imageUrl: feed.userImageURL, size: .small)
 
                 Text(feed.username)
-                    .font(.system(size: 16, weight: .bold))
+                    .baggleTypoLineSpacing(size: 16, weight: .bold)
+                    .foregroundColor(.gray14)
 
                 Spacer()
 
@@ -29,15 +30,14 @@ struct FeedListCell: View {
             }
             .foregroundColor(.gray14)
 
-            // swiftlint:disable:next line_length
-            AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/81167570?v=4")) { image in
+            AsyncImage(url: URL(string: feed.feedImageURL)) { image in
                 image
                     .resizable()
-                    .aspectRatio(1.0, contentMode: .fill)
-                    .cornerRadius(12)
             } placeholder: {
                 Color.grayF5
             }
+            .aspectRatio(1.0, contentMode: .fill)
+            .cornerRadius(12)
             .clipped()
         }
     }
