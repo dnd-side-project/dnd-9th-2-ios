@@ -19,6 +19,7 @@ struct SignUpFeature: ReducerProtocol {
         var disableDismissAnimation: Bool = false
         var isLoading: Bool = false
         var keyboardAppear: Bool = false
+        var disableButton: Bool = true
 
         // MARK: - 이미지
 
@@ -162,6 +163,11 @@ struct SignUpFeature: ReducerProtocol {
 
             case .textFieldAction(.isFocused):
                 return .run { send in await send(.keyboardAppear) }
+
+            case .textFieldAction(.textChanged):
+                let textCount = state.nickNameTextFieldState.text.count
+                state.disableButton = textCount < 2
+                return .none
 
             case .textFieldAction:
                 return .none

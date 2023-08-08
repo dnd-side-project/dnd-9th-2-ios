@@ -30,7 +30,7 @@ struct ProfileImageView: View {
         .frame(width: 160, height: 160)
         .background {
             Color.grayF5
-            
+
             RoundedRectangle(cornerRadius: 100)
                 .stroke(Color.grayD9, lineWidth: 1)
         }
@@ -60,9 +60,9 @@ struct ProfileImageView_Previews: PreviewProvider {
             ProfileImageView(imageState: .empty)
 
             ProfileImageView(imageState: .success(Image("sampleImage")))
-            
+
             ProfileImageView(imageState: .loading)
-            
+
             ProfileImageView(imageState: .failure)
         }
         .previewLayout(.sizeThatFits)
