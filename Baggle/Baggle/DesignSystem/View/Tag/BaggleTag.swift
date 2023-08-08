@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct BaggleTag: View {
-    private var text: String
-    private var color: BaggleColor
 
-    init(_ text: String, _ color: BaggleColor = .blue) {
+    private var text: String
+    private var color: BaggleTagColor
+
+    init(_ text: String, _ color: BaggleTagColor = .primary) {
         self.text = text
         self.color = color
     }
@@ -33,7 +34,7 @@ struct BaggleTag_Previews: PreviewProvider {
         VStack {
             BaggleTag("D-30")
 
-            BaggleTag("D-Day", .pink)
+            BaggleTag("D-Day", .red)
         }
     }
 }

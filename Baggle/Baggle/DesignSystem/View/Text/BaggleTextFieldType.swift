@@ -22,27 +22,19 @@ enum TextFieldState: Equatable {
 
     var fgColor: Color {
         switch self {
-        case .inactive:
-            return Color.gray
-        case .active:
-            return Color.blue
-        case .valid:
-            return Color.black
-        case .invalid:
-            return Color.red
+        case .inactive: return Color.grayBF
+        case .active: return Color.primaryNormal
+        case .valid: return Color.gray43
+        case .invalid: return Color.baggleRed
         }
     }
 
     var borderColor: Color {
         switch self {
-        case .inactive:
-            return Color.gray.opacity(0.3)
-        case .active:
-            return Color.blue
-        case .valid:
-            return Color.black.opacity(0.8)
-        case .invalid:
-            return Color.red
+        case .inactive: return Color.grayD9
+        case .active: return Color.primaryNormal
+        case .valid: return Color.gray59
+        case .invalid: return Color.baggleRed
         }
     }
 }

@@ -16,12 +16,21 @@ enum DateInputStatus {
 
 extension DateInputStatus {
 
-    var color: Color {
+    var foregroundColor: Color {
         switch self {
-        case .inactive: return .gray.opacity(0.2)
-        case .active: return .blue
-        case .valid: return .black
-        case .invalid: return .red
+        case .inactive: return Color.grayBF
+        case .active: return Color.primaryNormal
+        case .valid: return Color.gray43
+        case .invalid: return Color.baggleRed
+        }
+    }
+
+    var borderColor: Color {
+        switch self {
+        case .inactive: return Color.grayD9
+        case .active: return Color.primaryNormal
+        case .valid: return Color.gray59
+        case .invalid: return Color.baggleRed
         }
     }
 }

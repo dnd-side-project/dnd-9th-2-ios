@@ -95,9 +95,13 @@ struct HomeView: View {
 extension HomeView {
     func gradientTop() -> some View {
         Rectangle()
-            .fill(LinearGradient(gradient: Gradient(colors: [.blue, .clear]),
-                                 startPoint: .top,
-                                 endPoint: .bottom))
+            .fill(
+                LinearGradient(
+                    gradient: Gradient(colors: [.blue, .clear]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
             .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
     }
 
@@ -111,7 +115,7 @@ extension HomeView {
             Spacer()
 
             Circle()
-                .fill(.gray)
+                .fill(Color.grayF5)
                 .frame(width: 72, height: 72)
         }
         .frame(height: 72)
@@ -120,16 +124,16 @@ extension HomeView {
 
     func header(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
         GeometryReader { geo in
-            let yoffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
+            let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
 
             ZStack(alignment: .bottomLeading) {
 
                 Image.Background.homeShort
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: geo.size.width, height: geo.size.height - yoffset)
+                    .frame(width: geo.size.width, height: geo.size.height - yOffset)
                     .clipped()
-                    .offset(y: yoffset)
+                    .offset(y: yOffset)
 
                 VStack(spacing: 64) {
                     // 유저 정보
@@ -154,7 +158,7 @@ extension HomeView {
                                 })
                         ])
                 }
-                .offset(y: yoffset)
+                .offset(y: yOffset)
             }
         }
         .frame(height: 260)

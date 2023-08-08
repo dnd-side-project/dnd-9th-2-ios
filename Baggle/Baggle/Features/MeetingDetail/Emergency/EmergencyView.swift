@@ -71,13 +71,15 @@ extension EmergencyView {
                     attributedColorString(
                         str: "긴급버튼을 눌러\n참여자를 호출하세요",
                         targetStr: "긴급버튼",
-                        color: .black,
-                        targetColor: .baggleRed)
+                        color: .gray14,
+                        targetColor: .baggleRed
+                    )
                 )
                 .font(.system(size: 24).bold())
                 .padding(.vertical, 8)
 
                 Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
+                    .foregroundColor(.gray59)
             }
             .padding(.top, 8)
             .multilineTextAlignment(.center)

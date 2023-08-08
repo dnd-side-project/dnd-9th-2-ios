@@ -30,7 +30,7 @@ struct SmallTimerView: View {
             .padding(.vertical, 10)
             .padding(.horizontal, 14)
             .foregroundColor(Color.white)
-            .background(Color.blue)
+            .background(Color.primaryNormal)
             .cornerRadius(20)
             .onAppear {
                 viewStore.send(.onAppear)

@@ -18,6 +18,7 @@ struct MemberInfoView: View {
 
             Text(memberInfo.name)
         }
+        .foregroundColor(.gray43)
         .padding()
         .overlay(RoundedRectangle(cornerRadius: 8)
             .stroke(selected ? .blue : .gray)

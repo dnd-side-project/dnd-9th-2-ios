@@ -45,17 +45,25 @@ struct CreateSuccessView: View {
 
                         VStack(alignment: .leading, spacing: 8) {
 
-                            HStack {
-                                Text("장소 | ")
-                                    .foregroundColor(Color.gray)
-                                Text("유탁님 없는 잠실")
-                            }
+                            Text(
+                                attributedColorString(
+                                    str: "장소  |  유탁님 없는 잠실",
+                                    targetStr: "장소  |",
+                                    color: .black,
+                                    targetColor: .gray8C
+                                )
+                            )
+                            .font(.system(size: 14))
 
-                            HStack {
-                                Text("시간 | ")
-                                    .foregroundColor(Color.gray)
-                                Text("2023년 10월 25일 15:30")
-                            }
+                            Text(
+                                attributedColorString(
+                                    str: "시간  |  2023년 10월 25일 15:30",
+                                    targetStr: "시간  |",
+                                    color: .black,
+                                    targetColor: .gray8C
+                                )
+                            )
+                            .font(.system(size: 14))
                         }
                     }
                     .padding(.vertical, 28)
@@ -72,10 +80,10 @@ struct CreateSuccessView: View {
 
                 // MARK: - 이미지
 
-                Image(systemName: "envelope")
+                Image.Illustration.invitationCreate
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
+                    .frame(width: 250, height: 237)
 
                 Spacer()
 
