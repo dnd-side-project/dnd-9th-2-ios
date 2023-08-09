@@ -55,12 +55,8 @@ extension MeetingDetailEntity {
         if date.inTheNextHour {
             return .confirmed
         }
+
         // 약속 당일
-        
-        if date.isInToday {
-            return .progress
-        }
-        
-        fatalError("약속 로직 에러")
+        return .progress
     }
 }
