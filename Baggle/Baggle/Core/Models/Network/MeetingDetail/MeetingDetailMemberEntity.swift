@@ -24,3 +24,29 @@ struct MeetingDetailMemberEntity: Codable {
         case nickname, meetingAuthority, buttonAuthority
     }
 }
+
+extension MeetingDetailMemberEntity {
+
+    func memberDomain() -> Member {
+        return Member(
+            id: self.memberID,
+            name: self.nickname,
+            profileURL: self.profileImageURL,
+            isMeetingAuthority: self.meetingAuthority,
+            isButtonAuthority: self.buttonAuthority,
+            certified: self.feedID != nil,
+            certImage: self.feedImageURL
+        )
+    }
+
+    func feedDomain() -> Feed? {
+        guard let feedID = feedID else { return nil }
+        return Feed(
+            id: feedID,
+            userId: self.memberID,
+            username: self.nickname,
+            userImageURL: self.profileImageURL,
+            feedImageURL: self.feedImageURL
+        )
+    }
+}

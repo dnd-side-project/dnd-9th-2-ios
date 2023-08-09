@@ -130,18 +130,6 @@ struct MockUpMeetingDetailService {
     }
 
     private func mockUpMemberList(_ meetingDetailEntity: MeetingDetailEntity) -> MeetingDetail {
-        MeetingDetail(
-            id: meetingDetailEntity.meetingID,
-            name: meetingDetailEntity.title,
-            place: meetingDetailEntity.place,
-            date: meetingDetailEntity.meetingTime.koreanDate(),
-            time: meetingDetailEntity.meetingTime.hourMinute(),
-            memo: meetingDetailEntity.memo,
-            members: [],
-            status: .completed,
-            emergencyButtonActive: false,
-            emergencyButtonActiveTime: "",
-            feeds: []
-        )
+        meetingDetailEntity.toDomain()
     }
 }
