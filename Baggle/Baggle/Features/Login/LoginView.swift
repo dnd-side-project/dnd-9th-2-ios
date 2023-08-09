@@ -61,7 +61,7 @@ extension LoginView {
         } label: {
             HStack(spacing: 6) {
                 Image.Icon.kakao
-                
+
                 Text("카카오로 계속하기")
             }
         }

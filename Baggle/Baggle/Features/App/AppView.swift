@@ -13,24 +13,48 @@ struct AppView: View {
 
     let store: StoreOf<AppFeature>
 
+    @State var splashStarted: Bool = false
+    @State var splashEnded: Bool = false
+
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            if viewStore.isLoggedIn {
-                MainTabView(
-                    store: self.store.scope(
-                        state: \.mainTabFeature,
-                        action: AppFeature.Action.logout
-                    )
-                )
+            if splashEnded {
+                Group {
+                    if viewStore.isLoggedIn {
+                        MainTabView(
+                            store: self.store.scope(
+                                state: \.mainTabFeature,
+                                action: AppFeature.Action.logout
+                            )
+                        )
+                    } else {
+                        LoginView(
+                            store: self.store.scope(
+                                state: \.loginFeature,
+                                action: AppFeature.Action.login
+                            )
+                        )
+                    }
+                }
+                .transition(.move(edge: .trailing).animation(.easeInOut(duration: 0.4)))
             } else {
-                LoginView(
-                    store: self.store.scope(
-                        state: \.loginFeature,
-                        action: AppFeature.Action.login
-                    )
-                )
+                Image.Logo.large
+                    .opacity(splashStarted ? 1 : 0)
+                    .offset(y: splashStarted ? 0 : +10)
+                    .animation(.easeInOut(duration: 0.3).delay(0.5), value: splashStarted)
+            }
+        }
+        .onAppear {
+            withAnimation {
+                splashStarted = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                withAnimation {
+                    splashEnded = true
+                }
             }
         }
     }
