@@ -154,3 +154,27 @@ struct BaggleTertiaryStyle: ButtonStyle {
             .cornerRadius(27)
     }
 }
+
+struct KakaoLoginStyle: ButtonStyle {
+    private let foregroundColor: Color = .kakaoBrown
+    private let backgroundColor: Color = .kakaoYellow
+
+    @Environment(\.isEnabled) private var isEnabled
+
+    private func foregroundColor(_ isPressed: Bool) -> Color {
+        foregroundColor.opacity(isPressed ? 0.5 : 1)
+    }
+
+    private func backgroundColor(_ isPressed: Bool) -> Color {
+        backgroundColor.opacity(isPressed ? 0.5 : 1)
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 16, weight: .bold))
+            .frame(width: UIScreen.main.bounds.width - 40, height: 54)
+            .foregroundColor(foregroundColor(configuration.isPressed))
+            .background(backgroundColor(configuration.isPressed))
+            .cornerRadius(8)
+    }
+}

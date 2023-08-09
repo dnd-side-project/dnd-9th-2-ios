@@ -19,23 +19,26 @@ struct LoginView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            VStack {
+            ZStack {
+                // 로티 추가
+                Image.Background.home
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
 
-                Spacer()
+                VStack(spacing: 8) {
 
-                Circle()
-                    .fill(Color.blue)
-                    .frame(width: 200, height: 200)
-                    .padding()
+                    Image.Logo.medium
+                        .padding(.top, 33)
 
-                Spacer()
+                    Spacer()
 
-                kakaoLoginButton()
-                appleLoginButton()
-                signUp()
+                    // 임시 버튼
+                    signUp()
 
-                Spacer()
-                Spacer()
+                    kakaoLoginButton()
+                    appleLoginButton()
+                        .padding(.bottom, 36)
+                }
             }
             .fullScreenCover(store: self.store.scope(
                 state: \.$signUpNickname,
@@ -56,9 +59,13 @@ extension LoginView {
         Button {
             ViewStore(self.store, observe: { $0 }).send(.kakaoLoginButtonTapped)
         } label: {
-            Text("카카오 로그인")
+            HStack(spacing: 6) {
+                Image.Icon.kakao
+                
+                Text("카카오로 계속하기")
+            }
         }
-        .buttonStyle(BagglePrimaryStyle())
+        .buttonStyle(KakaoLoginStyle())
     }
 
     func appleLoginButton() -> some View {
@@ -85,7 +92,7 @@ extension LoginView {
                 }
             }
         )
-        .frame(width: UIScreen.main.bounds.width * 0.9, height: 50)
+        .frame(width: screenSize.width - 40, height: 54)
         .cornerRadius(5)
     }
 
@@ -93,20 +100,9 @@ extension LoginView {
         Button {
             ViewStore(self.store, observe: { $0 }).send(.signUpButtonTapped)
         } label: {
-            HStack {
-
-                Spacer()
-
-                Text("회원 가입")
-                    .font(.title)
-                    .padding()
-
-                Spacer()
-            }
+            Text("회원 가입")
         }
         .padding()
-        .tint(Color.red)
-        .buttonStyle(.borderedProminent)
     }
 }
 
