@@ -394,7 +394,6 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2BA760B52A81DD3D0089878D /* Enum */,
 				2BABCB202A76CFD100AFECA3 /* Foundation */,
 				14F2D7AF2A728A14000ED0EE /* Extensions */,
 			);
@@ -718,6 +717,7 @@
 		14E083662A8368F00001CB21 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
+				2BA760B62A81DD4A0089878D /* MeetingStatus.swift */,
 				2BF2681F2A77828100F32ADF /* Meeting.swift */,
 				2B5BE6AE2A779C8E00F25474 /* MeetingDetail.swift */,
 			);
@@ -967,14 +967,6 @@
 				2BA345A62A6EB6BF00B7E2BD /* BaggleTagColor.swift */,
 			);
 			path = Tag;
-			sourceTree = "<group>";
-		};
-		2BA760B52A81DD3D0089878D /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-				2BA760B62A81DD4A0089878D /* MeetingStatus.swift */,
-			);
-			path = Enum;
 			sourceTree = "<group>";
 		};
 		2BABCB172A76CDD400AFECA3 /* XCConfig */ = {
