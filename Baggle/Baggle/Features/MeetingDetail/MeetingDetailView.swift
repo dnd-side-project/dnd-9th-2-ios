@@ -75,29 +75,23 @@ struct MeetingDetailView: View {
                 if viewStore.isAlertPresented {
                     baggleAlert(viewStore: viewStore)
                 }
+
+                // 이미지 상세
+                if viewStore.isImageTapped,
+                   let image = viewStore.tappedImageUrl {
+                    imageDetailView(image: image, viewStore: viewStore)
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
             // 임시 액션시트
             .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
-                Button("방 폭파하기") {
-                    viewStore.send(.deleteButtonTapped)
-                }
+                Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
 
-                Button("방장 넘기기") {
-                    viewStore.send(.leaveButtonTapped)
-                }
+                Button("방장 넘기기") { viewStore.send(.leaveButtonTapped) }
 
-                Button {
-                    viewStore.send(.cameraButtonTapped)
-                } label: {
-                    Text("카메라")
-                }
+                Button("카메라") { viewStore.send(.cameraButtonTapped) }
 
-                Button {
-                    viewStore.send(.emergencyButtonTapped)
-                } label: {
-                    Text("긴급 버튼")
-                }
+                Button("긴급 버튼") { viewStore.send(.emergencyButtonTapped) }
             })
             .sheet(
                 store: self.store.scope(
@@ -238,6 +232,11 @@ extension MeetingDetailView {
                                 size: .medium,
                                 hasStroke: member.certified
                             )
+                            .onTapGesture {
+                                if member.certified {
+                                    viewStore.send(.imageTapped(member.certImage))
+                                }
+                            }
 
                             HStack(spacing: -10) {
                                 if member.isMeetingAuthority {
@@ -315,6 +314,17 @@ extension MeetingDetailView {
             rightButtonTitle: viewStore.alertRightButtonTitle) {
                 viewStore.send(.deleteMeeting)
             }
+    }
+
+    func imageDetailView(image: String, viewStore: Viewstore) -> some View {
+        ImageDetailView(
+            isPresented: Binding(
+                get: { viewStore.isImageTapped },
+                set: { _ in viewStore.send(.imageTapped(viewStore.tappedImageUrl)) }),
+            imageURL: image
+        ) {
+            viewStore.send(.imageTapped(nil))
+        }
     }
 }
 

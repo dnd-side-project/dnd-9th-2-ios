@@ -34,6 +34,10 @@ struct MeetingDetailFeature: ReducerProtocol {
         var alertDescription: String?
         var alertRightButtonTitle: String = ""
 
+        // Feed
+        var isImageTapped: Bool = false
+        var tappedImageUrl: String?
+
         // Child
         var timerState = TimerFeature.State(targetDate: Date().later(minutes: 1).later(seconds: 10))
 
@@ -64,6 +68,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         case emergencyButtonTapped
         case inviteButtonTapped
         case eventButtonTapped
+
+        // feed
+        case imageTapped(String?)
 
         // error
         case invitationFailed
@@ -197,6 +204,11 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .invitationFailed:
                 print("초대 실패 alert")
+                return .none
+
+            case .imageTapped(let imageUrl):
+                state.isImageTapped.toggle()
+                state.tappedImageUrl = imageUrl
                 return .none
 
                 // Child - Delete
