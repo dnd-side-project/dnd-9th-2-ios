@@ -45,7 +45,8 @@ struct MockUpMeetingDetailService {
                    isMeetingAuthority: true,
                    isButtonAuthority: true,
                    certified: true,
-                   certImage: ""),
+                   // swiftlint:disable:next line_length
+                   certImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Golde33443.jpg/280px-Golde33443.jpg"),
             Member(id: 2,
                    name: "안녕222",
                    profileURL: "",
@@ -59,7 +60,8 @@ struct MockUpMeetingDetailService {
                    isMeetingAuthority: true,
                    isButtonAuthority: false,
                    certified: true,
-                   certImage: ""),
+                   // swiftlint:disable:next line_length
+                   certImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pupplies_loving.jpg/1920px-Pupplies_loving.jpg"),
             Member(id: 4,
                    name: "감자탕",
                    profileURL: "",
@@ -80,7 +82,9 @@ struct MockUpMeetingDetailService {
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
             feeds: [
+                // swiftlint:disable:next line_length
                 Feed(id: 0, userId: 1, username: "수빈", userImageURL: "https://avatars.githubusercontent.com/u/81167570?v=4", feedImageURL: ""),
+                // swiftlint:disable:next line_length
                 Feed(id: 1, userId: 2, username: "유탁", userImageURL: "", feedImageURL: "https://avatars.githubusercontent.com/u/81167570?v=4")
             ]
         )
