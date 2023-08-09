@@ -35,6 +35,7 @@ struct MockUpMeetingDetailService {
         return try await withCheckedThrowingContinuation({ continuation in
             if let memberEntity = mockUpJSON() {
                 continuation.resume(returning: mockUpMemberList(memberEntity))
+                print(mockUpMemberList(memberEntity))
             }
         })
     }

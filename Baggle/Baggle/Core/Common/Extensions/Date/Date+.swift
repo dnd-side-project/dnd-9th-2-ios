@@ -225,8 +225,16 @@ extension Date {
     /// 지금 : 2023년 8월 9일
     /// result: true
 
+    func isUpcomingDays(_ date: Date) -> Bool {
+        let calendar = Calendar.current
+        let currentDate = calendar.startOfDay(for: date)
+        let comparisonResult = calendar.compare(self, to: currentDate, toGranularity: .day)
+
+        return comparisonResult == .orderedDescending
+    }
+    
     var isUpcomingDays: Bool {
-        return true
+        return isUpcomingDays(Date())
     }
 
 
@@ -239,27 +247,36 @@ extension Date {
     }
     
     
-    // Self가 지금 시간으로부터 1시간 이내에 진입했는지 확인합니다. (Self <= 지금 + 1시간)
+    // Self가 지금 시간으로부터 1시간 이내에 진입했는지 확인합니다. (Self - 1시간 <= 지금 )
     ///
     /// 약속 확정인지 확인하기 위해 사용합니다.
     ///
-    /// Self : 18시 30분
-    /// 지금 : 17시 32분 -> 지금 + 1시간 : 18시 32분
+    /// Self : 18시 30분  -> Self - 1 시간: 17시 30분
+    /// 지금 : 17시 32분 -> 지금
     /// result : true
+    
+    func inTheNextHour(_ date: Date) -> Bool {
+        return self <= date.later(hours: 1)
+    }
+    
     var inTheNextHour: Bool {
-        return self <= Date().later(hours: 1)
+        return inTheNextHour(Date())
     }
 
 
     // Self가 과거 날짜인지
     /// Self가 오늘보다 이전 날짜인지 판별합니다. 지난 약속인지 확인하기 위해 사용합니다.
 
-    var isPreviousDays: Bool {
+    func isPreviousDays(_ date: Date) -> Bool {
         let calendar = Calendar.current
-        let currentDate = calendar.startOfDay(for: Date())
+        let currentDate = calendar.startOfDay(for: date)
         let comparisonResult = calendar.compare(self, to: currentDate, toGranularity: .day)
 
         return comparisonResult == .orderedAscending
+    }
+    
+    var isPreviousDays: Bool {
+        return isPreviousDays(Date())
     }
 }
 

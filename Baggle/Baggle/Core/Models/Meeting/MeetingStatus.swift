@@ -27,30 +27,3 @@ enum MeetingStatus {
         }
     }
 }
-
-extension MeetingStatus {
-    func create(date: Date) -> MeetingStatus {
-
-        // 약속 전날
-        if date.isUpcomingDays {
-            return .ready
-        }
-
-        // 약속 날 지났을 때
-        if date.isPreviousDays {
-            return .completed
-        }
-
-        // 약속 당일 1 시간 전 ~ 약속 당일 (약속 당일보다 무조건 먼저와야 함)
-        if date.inTheNextHour {
-            return .confirmed
-        }
-        // 약속 당일
-        
-        if date.isInToday {
-            return .progress
-        }
-        
-        fatalError("약속 로직 에러")
-    }
-}
