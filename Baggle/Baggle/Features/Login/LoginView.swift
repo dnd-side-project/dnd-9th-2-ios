@@ -29,11 +29,12 @@ struct LoginView: View {
 
                     Image.Logo.medium
                         .padding(.top, 33)
+                        .onTapGesture {
+                            // 임시 회원가입
+                            viewStore.send(.signUpButtonTapped)
+                        }
 
                     Spacer()
-
-                    // 임시 버튼
-                    signUp()
 
                     kakaoLoginButton()
                     appleLoginButton()
@@ -94,15 +95,6 @@ extension LoginView {
         )
         .frame(width: screenSize.width - 40, height: 54)
         .cornerRadius(5)
-    }
-
-    func signUp() -> some View {
-        Button {
-            ViewStore(self.store, observe: { $0 }).send(.signUpButtonTapped)
-        } label: {
-            Text("회원 가입")
-        }
-        .padding()
     }
 }
 
