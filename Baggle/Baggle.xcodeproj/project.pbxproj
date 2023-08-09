@@ -1046,11 +1046,12 @@
 			};
 			buildConfigurationList = 140E88082A64B626005119F8 /* Build configuration list for PBXProject "Baggle" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 140E88042A64B626005119F8;
 			packageReferences = (

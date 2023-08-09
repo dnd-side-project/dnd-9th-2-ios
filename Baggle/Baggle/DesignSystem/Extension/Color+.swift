@@ -28,4 +28,8 @@ extension Color {
 
     // MARK: - System
     static let baggleRed = Color("BaggleRed")
+    
+    // MARK: - Kakao
+    static let kakaoYellow = Color("KakaoYellow")
+    static let kakaoBrown = Color("KakaoBrown")
 }

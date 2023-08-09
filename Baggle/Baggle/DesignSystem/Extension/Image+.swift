@@ -31,6 +31,7 @@ extension Image {
         static let location = Image("location")
         static let share = Image("Share")
         static let siren = Image("Siren")
+        static let kakao = Image("kakaotalk")
 
         // Navigation
         static let back = Image("Back")
@@ -70,5 +71,10 @@ extension Image {
         static let home = Image("Background_home")
         static let homeShort = Image("Background_home_short")
         static let empty = Image("no_baggle")
+    }
+    
+    struct Logo {
+        static let large = Image("logo_large")
+        static let medium = Image("logo_medium")
     }
 }
