@@ -31,7 +31,7 @@ struct ImageDetailView: View {
                     .scaledToFill()
                     .frame(width: screenSize.width - 40, height: screenSize.width - 40)
                     .cornerRadius(12)
-                    .padding(.top, 70) // 이미지 기준 가운데 정렬 맞추기 위해 버튼 크기만큼 상단 패딩 추가
+                    .padding(.top, 70)
 
                 Button("닫기") {
                     closeButtonAction()
