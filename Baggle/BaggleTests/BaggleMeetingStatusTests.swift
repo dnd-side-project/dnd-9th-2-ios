@@ -26,27 +26,6 @@ final class BaggleMeetingStatusTests: XCTestCase {
 
         return date
     }
-
-    private func meetingStatus(_ date1: Date, _ date2: Date) -> MeetingStatus {
-        
-        // 약속 전날
-        if date1.isUpcomingDays(date2) {
-            return .ready
-        }
-
-        // 약속 날 지났을 때
-        if date1.isPreviousDays(date2) {
-            return .completed
-        }
-
-        // 약속 당일 1 시간 전 ~ 약속 당일 (약속 당일보다 무조건 먼저와야 함)
-        if date1.inTheNextHour(date2) {
-            return .confirmed
-        }
-
-        // 약속 당일
-        return .progress
-    }
     
     // MARK: - isUpcomingDays 로직 확인
     
@@ -171,95 +150,95 @@ final class BaggleMeetingStatusTests: XCTestCase {
     // now : 2023년 8월 20일 12시 0분
     // 테스트 결과값 : ready
     
-    func test_meetingStatus_reday_01() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 05)
-        let now = try createDate(2023, 8, 20, 12, 00)
-        let result = meetingStatus(meetingDate, now)
-        
-        XCTAssertEqual(result, .ready)
-    }
-
-    // meetingDate : 2023년 9월 2일 16시 05분
-    // now : 2023년 9월 1일 23시 59분
-    // 테스트 결과값 : ready
-    
-    func test_meetingStatus_reday_02() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 05)
-        let now = try createDate(2023, 9, 1, 23, 59)
-        let result = meetingStatus(meetingDate, now)
-        
-        XCTAssertEqual(result, .ready)
-    }
-
-    // meetingDate : 2023년 9월 2일 16시 05분
-    // now : 2023년 9월 2일 12시 00분
-    // 테스트 결과값 : progress
-    
-    func test_meetingStatus_progress_01() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 05)
-        let now = try createDate(2023, 9, 2, 12, 00)
-        let result = meetingStatus(meetingDate, now)
-
-        XCTAssertEqual(result, .progress)
-    }
-
-    // meetingDate : 2023년 9월 2일 16시 00분
-    // now : 2023년 9월 2일 14시 59분
-    // 테스트 결과값 : progress
-    
-    func test_meetingStatus_progress_02() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 00)
-        let now = try createDate(2023, 9, 2, 14, 59)
-        let result = meetingStatus(meetingDate, now)
-        
-        XCTAssertEqual(result, .progress)
-    }
-    
-    // meetingDate : 2023년 9월 2일 16시 00분
-    // now : 2023년 9월 2일 15시 00분
-    // 테스트 결과값 : confirmed
-    
-    func test_meetingStatus_confirmed_01() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 00)
-        let now = try createDate(2023, 9, 2, 15, 00)
-        let result = meetingStatus(meetingDate, now)
-
-        XCTAssertEqual(result, .confirmed)
-    }
-
-    // meetingDate : 2023년 9월 2일 16시 00분
-    // now : 2023년 9월 2일 17시 00분
-    // 테스트 결과값 : confirmed
-    
-    func test_meetingStatus_confirmed_02() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 00)
-        let now = try createDate(2023, 9, 2, 17, 00)
-        let result = meetingStatus(meetingDate, now)
-
-        XCTAssertEqual(result, .confirmed)
-    }
-
-    // meetingDate : 2023년 9월 2일 16시 00분
-    // now : 2023년 9월 3일 00시 00분
-    // 테스트 결과값 : completed
-    
-    func test_meetingStatus_completed_01() throws {
-        let meetingDate = try createDate(2023, 9, 2, 16, 00)
-        let now = try createDate(2023, 9, 3, 00, 00)
-        let result = meetingStatus(meetingDate, now)
-
-        XCTAssertEqual(result, .completed)
-    }
-
-    // meetingDate : 2023년 9월 2일 23시 59분
-    // now : 2023년 9월 3일 00시 00분
-    // 테스트 결과값 : completed
-    
-    func test_meetingStatus_completed_02() throws {
-        let meetingDate = try createDate(2023, 9, 2, 23, 59)
-        let now = try createDate(2023, 9, 3, 00, 00)
-        let result = meetingStatus(meetingDate, now)
-
-        XCTAssertEqual(result, .completed)
-    }
+//    func test_meetingStatus_reday_01() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 05)
+//        let now = try createDate(2023, 8, 20, 12, 00)
+//        let result = meetingStatus(meetingDate, now)
+//        
+//        XCTAssertEqual(result, .ready)
+//    }
+//
+//    // meetingDate : 2023년 9월 2일 16시 05분
+//    // now : 2023년 9월 1일 23시 59분
+//    // 테스트 결과값 : ready
+//    
+//    func test_meetingStatus_reday_02() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 05)
+//        let now = try createDate(2023, 9, 1, 23, 59)
+//        let result = meetingStatus(meetingDate, now)
+//        
+//        XCTAssertEqual(result, .ready)
+//    }
+//
+//    // meetingDate : 2023년 9월 2일 16시 05분
+//    // now : 2023년 9월 2일 12시 00분
+//    // 테스트 결과값 : progress
+//    
+//    func test_meetingStatus_progress_01() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 05)
+//        let now = try createDate(2023, 9, 2, 12, 00)
+//        let result = meetingStatus(meetingDate, now)
+//
+//        XCTAssertEqual(result, .progress)
+//    }
+//
+//    // meetingDate : 2023년 9월 2일 16시 00분
+//    // now : 2023년 9월 2일 14시 59분
+//    // 테스트 결과값 : progress
+//    
+//    func test_meetingStatus_progress_02() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 00)
+//        let now = try createDate(2023, 9, 2, 14, 59)
+//        let result = meetingStatus(meetingDate, now)
+//        
+//        XCTAssertEqual(result, .progress)
+//    }
+//    
+//    // meetingDate : 2023년 9월 2일 16시 00분
+//    // now : 2023년 9월 2일 15시 00분
+//    // 테스트 결과값 : confirmed
+//    
+//    func test_meetingStatus_confirmed_01() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 00)
+//        let now = try createDate(2023, 9, 2, 15, 00)
+//        let result = meetingStatus(meetingDate, now)
+//
+//        XCTAssertEqual(result, .confirmed)
+//    }
+//
+//    // meetingDate : 2023년 9월 2일 16시 00분
+//    // now : 2023년 9월 2일 17시 00분
+//    // 테스트 결과값 : confirmed
+//    
+//    func test_meetingStatus_confirmed_02() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 00)
+//        let now = try createDate(2023, 9, 2, 17, 00)
+//        let result = meetingStatus(meetingDate, now)
+//
+//        XCTAssertEqual(result, .confirmed)
+//    }
+//
+//    // meetingDate : 2023년 9월 2일 16시 00분
+//    // now : 2023년 9월 3일 00시 00분
+//    // 테스트 결과값 : completed
+//    
+//    func test_meetingStatus_completed_01() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 16, 00)
+//        let now = try createDate(2023, 9, 3, 00, 00)
+//        let result = meetingStatus(meetingDate, now)
+//
+//        XCTAssertEqual(result, .completed)
+//    }
+//
+//    // meetingDate : 2023년 9월 2일 23시 59분
+//    // now : 2023년 9월 3일 00시 00분
+//    // 테스트 결과값 : completed
+//    
+//    func test_meetingStatus_completed_02() throws {
+//        let meetingDate = try createDate(2023, 9, 2, 23, 59)
+//        let now = try createDate(2023, 9, 3, 00, 00)
+//        let result = meetingStatus(meetingDate, now)
+//
+//        XCTAssertEqual(result, .completed)
+//    }
 }

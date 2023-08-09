@@ -51,11 +51,11 @@ extension MeetingDetailEntity {
             return .completed
         }
 
-        // 약속 당일 1 시간 전 ~ 약속 당일 (약속 당일보다 무조건 먼저와야 함)
-        if date.inTheNextHour {
+        // 약속 당일 1 시간 전
+        if date.isInToday && date.inTheNextHour {
             return .confirmed
         }
-
+        
         // 약속 당일
         return .progress
     }
