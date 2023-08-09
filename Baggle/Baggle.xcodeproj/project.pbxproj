@@ -68,6 +68,8 @@
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* NetworkError.swift */; };
 		14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E083692A83690D0001CB21 /* EntityContainer.swift */; };
+		14E0836D2A836A8C0001CB21 /* MeetingDetailEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */; };
+		14E0836F2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */; };
 		14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B52A6E43CA008643D9 /* CreateTitleFeature.swift */; };
 		14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064D2A6B88F7008D5778 /* SignUpView.swift */; };
 		14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E5064F2A6B8913008D5778 /* SignUpFeature.swift */; };
@@ -208,6 +210,8 @@
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		14E083692A83690D0001CB21 /* EntityContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityContainer.swift; sourceTree = "<group>"; };
+		14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailEntity.swift; sourceTree = "<group>"; };
+		14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailMemberEntity.swift; sourceTree = "<group>"; };
 		14E4C4B42A6E43CA008643D9 /* CreateTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTitleView.swift; sourceTree = "<group>"; };
 		14E4C4B52A6E43CA008643D9 /* CreateTitleFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTitleFeature.swift; sourceTree = "<group>"; };
 		14E5064D2A6B88F7008D5778 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -729,8 +733,18 @@
 			isa = PBXGroup;
 			children = (
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
+				14E0836B2A8369E30001CB21 /* MeetingDetail */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		14E0836B2A8369E30001CB21 /* MeetingDetail */ = {
+			isa = PBXGroup;
+			children = (
+				14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */,
+				14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */,
+			);
+			path = MeetingDetail;
 			sourceTree = "<group>";
 		};
 		14E4C4B32A6E43CA008643D9 /* CreateMeeting */ = {
@@ -1237,6 +1251,7 @@
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
 				141392602A78E81D00249C8A /* PageIndicator.swift in Sources */,
 				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
+				14E0836D2A836A8C0001CB21 /* MeetingDetailEntity.swift in Sources */,
 				14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */,
 				2BF8F9152A78DFCA00510EFA /* JoinMeetingFeature.swift in Sources */,
 				1493A9162A7DE7CB00A2D7CC /* LargeTimerView.swift in Sources */,
@@ -1261,6 +1276,7 @@
 				143410542A7E87460024FC75 /* UIImage+.swift in Sources */,
 				2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */,
 				2BF268202A77828100F32ADF /* Meeting.swift in Sources */,
+				14E0836F2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
