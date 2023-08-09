@@ -1,0 +1,23 @@
+{
+    "status": 200,
+    "message": "요청이 성공했습니다.",
+    "data": {
+        "meetingId": 0,
+        "title": "DND 최종 발표 파티",
+        "place": "BBQ 파티룸",
+        "meetingTime": "2019-12-14T07:51:01Z",
+        "memo": "DND 최종 발표 파티입니다. 2조 짱짱",
+        "certificationTime": "2019-12-14T07:31:01Z",
+        "members": [
+            {
+                "memberId": 2,
+                "nickname": "관곤",
+                "profileImageUrl": "",
+                "meetingAuthority": true,
+                "buttonAuthority": true,
+                "feedId": 1,
+                "feedImageUrl": ""
+            }
+        ]
+    }
+}

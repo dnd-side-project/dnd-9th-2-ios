@@ -8,11 +8,19 @@
 import Foundation
 
 struct MeetingDetailMemberEntity: Codable {
-    let memberId: Int
+    let memberID: Int
     let nickname: String
-    let profileImageUrl: String
+    let profileImageURL: String
     let meetingAuthority: Bool
     let buttonAuthority: Bool
-    let feedId: String?
-    let feedImageUrl: String
+    let feedID: Int?
+    let feedImageURL: String
+
+    enum CodingKeys: String, CodingKey {
+        case memberID = "memberId"
+        case profileImageURL = "profileImageUrl"
+        case feedID = "feedId"
+        case feedImageURL = "feedImageUrl"
+        case nickname, meetingAuthority, buttonAuthority
+    }
 }
