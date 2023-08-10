@@ -20,7 +20,11 @@ struct MeetingDetailFeature: ReducerProtocol {
     @Environment(\.openURL) private var openURL
 
     struct State: Equatable {
-        // MARK: - Scope State
+        
+        // User
+        var userID: Int
+        
+        // Meeting
 
         var meetingId: Int
         var meetingData: MeetingDetail?

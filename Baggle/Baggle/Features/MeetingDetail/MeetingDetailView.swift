@@ -333,7 +333,9 @@ struct MeetingDetailView_Previews: PreviewProvider {
         MeetingDetailView(
             store: Store(
                 initialState: MeetingDetailFeature.State(
-                    meetingId: 12345, meetingData: MeetingDetail(
+                    userID: 1,
+                    meetingId: 12345,
+                    meetingData: MeetingDetail(
                         // swiftlint:disable:next multiline_arguments
                         id: 100, name: "모임방1000", place: "강남역",
                         // swiftlint:disable:next multiline_arguments
