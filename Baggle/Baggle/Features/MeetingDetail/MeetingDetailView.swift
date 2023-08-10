@@ -346,6 +346,7 @@ struct MeetingDetailView_Previews: PreviewProvider {
                             // swiftlint:disable:next multiline_arguments line_length
                             isMeetingAuthority: true, isButtonAuthority: false, certified: false, certImage: "")],
                         status: .confirmed,
+                        isEmergencyAuthority: false,
                         // swiftlint:disable:next multiline_arguments
                         emergencyButtonActive: false, emergencyButtonActiveTime: nil,
                         feeds: [])),

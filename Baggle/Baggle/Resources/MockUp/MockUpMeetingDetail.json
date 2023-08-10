@@ -10,12 +10,30 @@
         "certificationTime": "2023-08-10T19:30:00Z",
         "members": [
             {
+                "memberId": 0,
+                "nickname": "유탁",
+                "profileImageUrl": "https://avatars.githubusercontent.com/u/71776532?v=4",
+                "meetingAuthority": false,
+                "buttonAuthority": true,
+                "feedId": 0,
+                "feedImageUrl": ""
+            },
+            {
+                "memberId": 1,
+                "nickname": "수빈",
+                "profileImageUrl": "https://avatars.githubusercontent.com/u/81167570?v=4",
+                "meetingAuthority": true,
+                "buttonAuthority": false,
+                "feedId": 1,
+                "feedImageUrl": ""
+            },
+            {
                 "memberId": 2,
                 "nickname": "관곤",
                 "profileImageUrl": "",
-                "meetingAuthority": true,
-                "buttonAuthority": true,
-                "feedId": 1,
+                "meetingAuthority": false,
+                "buttonAuthority": false,
+                "feedId": 2,
                 "feedImageUrl": ""
             }
         ]

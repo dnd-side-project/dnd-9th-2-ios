@@ -111,16 +111,22 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                let id = state.meetingId
+                let meetingID = state.meetingId
+                let userID = state.userID
                 return .run { send in
-                    if let data = await meetingService.fetchMeetingDetail(id) {
+                    if let data = await meetingService.fetchMeetingDetail(meetingID, userID) {
                         await send(.updateData(data))
                     }
                 }
 
             case .updateData(let data):
                 state.meetingData = data
-
+                
+                // Temp : 버튼 뜨나 확인용
+                if data.isEmergencyAuthority {
+                    state.buttonState = .emergency
+                }
+                
                 // 약속 상태가 ready 또는 progress이면 invite
                 // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
                 // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 !certified이면
