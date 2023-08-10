@@ -53,7 +53,7 @@ extension MeetingDetailEntity {
         }
 
         // 약속 당일 1 시간 전
-        if date.isInToday && date.inTheNextHour {
+        if date.inTheNextHour {
             return .confirmed
         }
         
