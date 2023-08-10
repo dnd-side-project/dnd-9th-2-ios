@@ -122,24 +122,19 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .updateData(let data):
                 state.meetingData = data
                 
-                // Temp : 버튼 뜨나 확인용
-                if data.isEmergencyAuthority {
-                    state.buttonState = .emergency
-                }
-                
                 // 약속 상태가 ready 또는 progress이면 invite
                 // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
                 // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 !certified이면
-//                if data.status == .ready || data.status == .progress {
-//                    state.buttonState = .invite
-//                } else if data.status == .confirmed {
-//                    // 본인이 button 관리자일때 조건 추가
-//                    if !data.emergencyButtonActive {
-//                        state.buttonState = .emergency
-//                    } else if data.emergencyButtonActive && !data.certified {
-//                        state.buttonState = .authorize
-//                    }
-//                }
+                if data.status == .ready || data.status == .progress {
+                    state.buttonState = .invite
+                } else if data.status == .confirmed {
+                    // 본인이 button 관리자일때 조건 추가
+                    if !data.emergencyButtonActive && data.isEmergencyAuthority {
+                        state.buttonState = .emergency
+                    } else if data.emergencyButtonActive && !data.isCertified {
+                        state.buttonState = .authorize
+                    }
+                }
 
                 return .none
 
