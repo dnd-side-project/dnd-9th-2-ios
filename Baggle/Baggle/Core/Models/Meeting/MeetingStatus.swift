@@ -10,7 +10,7 @@ import SwiftUI
 enum MeetingStatus {
     case ready // 약속 전날까지
     case progress // 약속 당일
-    case confirmed // 약속 당일 + 약속 1시간 전
+    case confirmed // 약속 당일 && 약속 1시간 전
     case completed // 지난 약속
 
     var segmentTitle: String {
