@@ -67,6 +67,8 @@
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* NetworkError.swift */; };
+		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
+		14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */; };
 		14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E083692A83690D0001CB21 /* EntityContainer.swift */; };
 		14E0836D2A836A8C0001CB21 /* MeetingDetailEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */; };
 		14E0836F2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */; };
@@ -211,6 +213,8 @@
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPlatform.swift; sourceTree = "<group>"; };
 		14E083692A83690D0001CB21 /* EntityContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityContainer.swift; sourceTree = "<group>"; };
 		14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailEntity.swift; sourceTree = "<group>"; };
 		14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailMemberEntity.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 		14134D3E2A64C54F004A6AC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14CF68EA2A847BEB00E457DF /* User */,
 				14E083682A8369010001CB21 /* Network */,
 				14E083672A8368F70001CB21 /* SignUp */,
 				14E083662A8368F00001CB21 /* Meeting */,
@@ -715,6 +720,15 @@
 				14B7A0442A75409E00B8E202 /* NetworkError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		14CF68EA2A847BEB00E457DF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				14CF68EB2A847BEF00E457DF /* User.swift */,
+				14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		14E083662A8368F00001CB21 /* Meeting */ = {
@@ -1233,6 +1247,7 @@
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
+				14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */,
 				2BA760B72A81DD4A0089878D /* MeetingStatus.swift in Sources */,
 				2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
@@ -1273,6 +1288,7 @@
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
 				14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
+				14CF68EC2A847BEF00E457DF /* User.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,
 				146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */,
