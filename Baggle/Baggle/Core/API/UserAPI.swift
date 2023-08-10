@@ -20,6 +20,8 @@ extension UserAPI: BaseAPI {
     
     static var apiType: APIType = .user
     
+    // MARK: - Path
+    
     var path: String {
         switch self {
         case .signIn: return "signin"
@@ -27,6 +29,8 @@ extension UserAPI: BaseAPI {
         case .reissue: return "reissue"
         }
     }
+    
+    // MARK: - Headers
     
     var headers: [String: String]? {
         switch self {
@@ -39,6 +43,8 @@ extension UserAPI: BaseAPI {
         }
     }
     
+    // MARK: - Method
+    
     var method: Moya.Method {
         switch self {
         case .signIn, .signUp:
@@ -47,6 +53,8 @@ extension UserAPI: BaseAPI {
             return .get
         }
     }
+    
+    // MARK: - Parameters
     
     private var bodyParameters: Parameters? {
         var params: Parameters = [:]
@@ -68,6 +76,8 @@ extension UserAPI: BaseAPI {
         default: return JSONEncoding.default
         }
     }
+    
+    // MARK: - Task
     
     var task: Moya.Task {
         switch self {
