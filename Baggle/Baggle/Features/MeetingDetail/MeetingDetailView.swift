@@ -70,6 +70,8 @@ struct MeetingDetailView: View {
                             .padding(.bottom, 16)
                     }
                 }
+                .animation(.easeOut(duration: 0.3), value: viewStore.buttonState)
+                .transition(.move(edge: .bottom))
 
                 // alert
                 if viewStore.isAlertPresented {

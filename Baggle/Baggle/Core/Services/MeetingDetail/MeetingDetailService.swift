@@ -215,8 +215,8 @@ extension MockUpMeetingDetailService {
                     id: 0,
                     name: "테스트 유저1",
                     profileURL: "https://avatars.githubusercontent.com/u/71776532?v=4",
-                    isMeetingAuthority: true,
-                    isButtonAuthority: false,
+                    isMeetingAuthority: false,
+                    isButtonAuthority: true,
                     certified: false,
                     certImage: ""
                 ),
@@ -224,8 +224,8 @@ extension MockUpMeetingDetailService {
                     id: 1,
                     name: "유저2",
                     profileURL: "https://avatars.githubusercontent.com/u/81167570?v=4",
-                    isMeetingAuthority: false,
-                    isButtonAuthority: true,
+                    isMeetingAuthority: true,
+                    isButtonAuthority: false,
                     certified: false,
                     certImage: ""
                 )

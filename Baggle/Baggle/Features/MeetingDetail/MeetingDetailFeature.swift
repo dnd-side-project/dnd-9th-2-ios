@@ -43,7 +43,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         var tappedImageUrl: String?
 
         // Child
-        var timerState = TimerFeature.State(targetDate: Date().later(minutes: 1).later(seconds: 10))
+        var timerState = TimerFeature.State(targetDate: Date().later(seconds: 4))
 
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
@@ -240,6 +240,12 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .emergencyAction:
                 return .none
 
+                // Timer
+                
+            case .timerAction(.timerOver):
+                state.buttonState = .none
+                return .none
+                
             case .timerAction:
                 return .none
 
