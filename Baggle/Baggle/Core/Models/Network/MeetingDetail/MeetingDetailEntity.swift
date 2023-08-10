@@ -36,6 +36,7 @@ extension MeetingDetailEntity {
             isEmergencyAuthority: isEmergencyAuthority(userID: userID, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
             emergencyButtonActiveTime: self.certificationTime,
+            isCertified: isCertified(userID: userID, members: self.members),
             feeds: self.members.compactMap { $0.feedDomain() }
         )
     }
@@ -63,5 +64,9 @@ extension MeetingDetailEntity {
 
     private func isEmergencyAuthority(userID: Int, members: [MeetingDetailMemberEntity]) -> Bool {
         return members.contains { $0.memberID == userID && $0.buttonAuthority }
+    }
+    
+    private func isCertified(userID: Int, members: [MeetingDetailMemberEntity]) -> Bool {
+        return members.contains { $0.memberID == userID && $0.feedID != nil }
     }
 }
