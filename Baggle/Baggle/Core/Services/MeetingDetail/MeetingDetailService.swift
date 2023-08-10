@@ -33,7 +33,10 @@ extension DependencyValues {
 struct MockUpMeetingDetailService {
     func fetchMeetingDetail(_ id: Int) async throws -> MeetingDetail {
         return try await withCheckedThrowingContinuation({ continuation in
-            continuation.resume(returning: makeMockMeetingDetail(id))
+            if let memberEntity = mockUpJSON() {
+                continuation.resume(returning: mockUpMemberList(memberEntity))
+                print(mockUpMemberList(memberEntity))
+            }
         })
     }
 
@@ -88,5 +91,46 @@ struct MockUpMeetingDetailService {
                 Feed(id: 1, userId: 2, username: "유탁", userImageURL: "", feedImageURL: "https://avatars.githubusercontent.com/u/81167570?v=4")
             ]
         )
+    }
+
+    // MARK: - 로컬 Mock Up JSON
+
+    private func mockUpJSON() -> MeetingDetailEntity? {
+
+        let resource = "MockUpMeetingDetail"
+
+        guard let path = Bundle.main.path(forResource: resource, ofType: "json") else {
+            print("데이터 없음1")
+            return nil
+        }
+
+        guard let jsonString = try? String(contentsOfFile: path) else {
+            print("데이터 없음2")
+            return nil
+        }
+
+        guard let data = jsonString.data(using: .utf8) else {
+            print("데이터 없음3")
+            return nil
+        }
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        guard let entityContainer = try? decoder.decode(
+            EntityContainer<MeetingDetailEntity>.self,
+            from: data
+        ) else {
+            print("디코딩 실패")
+            return nil
+        }
+
+        print(entityContainer.status, entityContainer.message)
+
+        return entityContainer.data
+    }
+
+    private func mockUpMemberList(_ meetingDetailEntity: MeetingDetailEntity) -> MeetingDetail {
+        meetingDetailEntity.toDomain()
     }
 }
