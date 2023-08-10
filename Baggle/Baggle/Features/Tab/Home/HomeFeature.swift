@@ -16,10 +16,10 @@ import KakaoSDKTemplate
 struct HomeFeature: ReducerProtocol {
 
     struct State: Equatable {
-        // MARK: - Scope State
 
+        var user: User = UserDefaultList.user ?? User.mockUp()
         var homeStatus: HomeStatus = .empty
-
+        
         // 예정된 약속(progress), 지난 약속(completed)
         var meetingStatus: MeetingStatus = .progress
         var meetingDetailId: Int?
