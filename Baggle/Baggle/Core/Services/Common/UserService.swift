@@ -1,5 +1,5 @@
 //
-//  AuthService.swift
+//  UserService.swift
 //  Baggle
 //
 //  Created by 양수빈 on 2023/08/10.
