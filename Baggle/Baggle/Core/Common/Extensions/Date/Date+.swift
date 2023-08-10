@@ -163,6 +163,31 @@ extension Date {
         return secondsFromNow
     }
 
+    // n 시간 이전 생성
+
+    func before(hours: Int) -> Date {
+        // swiftlint:disable:next force_unwrapping
+        let hoursFromNow = Calendar.current.date(byAdding: .hour, value: -hours, to: self)!
+        return hoursFromNow
+    }
+
+    // n 분 이전 생성
+
+    func before(minutes: Int) -> Date {
+        // swiftlint:disable:next force_unwrapping
+        let minutesFromNow = Calendar.current.date(byAdding: .minute, value: -minutes, to: self)!
+        return minutesFromNow
+    }
+
+    // n 초 이전 생성
+
+    func before(seconds: Int) -> Date {
+        // swiftlint:disable:next force_unwrapping
+        let secondsFromNow = Calendar.current.date(byAdding: .second, value: -seconds, to: self)!
+        return secondsFromNow
+    }
+    
+
     /// 약속 생성 가능 시간 리턴
     /// ex
     /// 2시 03분 -> 2시 05분

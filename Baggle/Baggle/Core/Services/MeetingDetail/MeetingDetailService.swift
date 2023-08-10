@@ -33,9 +33,8 @@ extension DependencyValues {
 struct MockUpMeetingDetailService {
     func fetchMeetingDetail(_ id: Int) async throws -> MeetingDetail {
         return try await withCheckedThrowingContinuation({ continuation in
-            if let memberEntity = mockUpJSON() {
-                continuation.resume(returning: mockUpMemberList(memberEntity))
-                print(mockUpMemberList(memberEntity))
+            if let meetingEntity = mockUpJSON() {
+                continuation.resume(returning: meetingEntity.toDomain())
             }
         })
     }
@@ -128,9 +127,5 @@ struct MockUpMeetingDetailService {
         print(entityContainer.status, entityContainer.message)
 
         return entityContainer.data
-    }
-
-    private func mockUpMemberList(_ meetingDetailEntity: MeetingDetailEntity) -> MeetingDetail {
-        meetingDetailEntity.toDomain()
     }
 }
