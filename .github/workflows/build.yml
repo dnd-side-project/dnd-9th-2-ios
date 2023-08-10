@@ -13,6 +13,7 @@ jobs:
     
     env:
         xcodeproj: Baggle.xcodeproj
+        project: Baggle
         scheme: Baggle
         platform: iOS Simulator
         simulator: iPhone 14
@@ -32,6 +33,22 @@ jobs:
         run: |
             echo "${GOOGLESERVICE_INFO}" >> ./Baggle/Baggle/GoogleService-Info.plist
         
+      - name: Cache SwiftPM
+        uses: actions/cache@v3
+        with:
+            path: ~/Library/Developer/Xcode/DerivedData/${{ env.PROJECT }}*/SourcePackages/
+            key: ${{ runner.os }}-spm-${{ hashFiles('${{ env.PROJECT }}.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+            restore-keys: |
+              ${{ runner.os }}-spm-
+
+      - name: Cache DerivedData
+        uses: actions/cache@v3
+        with:
+            path: ~/Library/Developer/Xcode/DerivedData
+            key: ${{ runner.os }}-iOS_derived_data-xcode_${{ matrix.xcode }}
+            restore-keys: |
+              ${{ runner.os }}-iOS_derived_data-
+
       - name: Start xcode build
         run: |
           xcodebuild clean build-for-testing \
@@ -40,3 +57,10 @@ jobs:
           -scheme "$scheme" \
           -destination "platform=$platform,name=$simulator"
         working-directory: "./baggle"
+
+      - name: Test
+        run: |
+          xcodebuild test \
+          -project "$project/$xcodeproj" \
+          -scheme "$scheme" \
+          -destination "platform=$platform,name=$simulator"

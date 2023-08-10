@@ -333,7 +333,9 @@ struct MeetingDetailView_Previews: PreviewProvider {
         MeetingDetailView(
             store: Store(
                 initialState: MeetingDetailFeature.State(
-                    meetingId: 12345, meetingData: MeetingDetail(
+                    userID: 1,
+                    meetingId: 12345,
+                    meetingData: MeetingDetail(
                         // swiftlint:disable:next multiline_arguments
                         id: 100, name: "모임방1000", place: "강남역",
                         // swiftlint:disable:next multiline_arguments
@@ -344,6 +346,7 @@ struct MeetingDetailView_Previews: PreviewProvider {
                             // swiftlint:disable:next multiline_arguments line_length
                             isMeetingAuthority: true, isButtonAuthority: false, certified: false, certImage: "")],
                         status: .confirmed,
+                        isEmergencyAuthority: false,
                         // swiftlint:disable:next multiline_arguments
                         emergencyButtonActive: false, emergencyButtonActiveTime: nil,
                         feeds: [])),

@@ -10,12 +10,29 @@
         "certificationTime": "2023-08-10T19:30:00Z",
         "members": [
             {
+                "memberId": 0,
+                "nickname": "유탁",
+                "profileImageUrl": "https://avatars.githubusercontent.com/u/71776532?v=4",
+                "meetingAuthority": false,
+                "buttonAuthority": true,
+                "feedId": 0,
+                "feedImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1920px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg"
+            },
+            {
+                "memberId": 1,
+                "nickname": "수빈",
+                "profileImageUrl": "https://avatars.githubusercontent.com/u/81167570?v=4",
+                "meetingAuthority": true,
+                "buttonAuthority": false,
+                "feedId": 1,
+                "feedImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/London_Skyline_%28125508655%29.jpeg/1280px-London_Skyline_%28125508655%29.jpeg"
+            },
+            {
                 "memberId": 2,
                 "nickname": "관곤",
                 "profileImageUrl": "",
-                "meetingAuthority": true,
-                "buttonAuthority": true,
-                "feedId": 1,
+                "meetingAuthority": false,
+                "buttonAuthority": false,
                 "feedImageUrl": ""
             }
         ]

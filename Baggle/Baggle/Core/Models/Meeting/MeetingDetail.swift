@@ -41,6 +41,7 @@ struct MeetingDetail: Equatable {
     let memo: String? // 메모
     let members: [Member] // 참여자 정보
     let status: MeetingStatus // 약속 상태
+    let isEmergencyAuthority: Bool
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: Date? // 긴급 버튼 활성화 시간
     let feeds: [Feed]

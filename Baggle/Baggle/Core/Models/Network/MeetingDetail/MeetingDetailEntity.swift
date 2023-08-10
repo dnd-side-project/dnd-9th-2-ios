@@ -23,7 +23,7 @@ struct MeetingDetailEntity: Codable {
 }
 
 extension MeetingDetailEntity {
-    func toDomain() -> MeetingDetail {
+    func toDomain(userID: Int) -> MeetingDetail {
         MeetingDetail(
             id: self.meetingID,
             name: self.title,
@@ -33,6 +33,7 @@ extension MeetingDetailEntity {
             memo: self.memo,
             members: self.members.map { $0.memberDomain() },
             status: meetingStatus(date: self.meetingTime),
+            isEmergencyAuthority: isEmergencyAuthority(userID: userID, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
             emergencyButtonActiveTime: self.certificationTime,
             feeds: self.members.compactMap { $0.feedDomain() }
@@ -58,5 +59,9 @@ extension MeetingDetailEntity {
         
         // 약속 당일
         return .progress
+    }
+
+    private func isEmergencyAuthority(userID: Int, members: [MeetingDetailMemberEntity]) -> Bool {
+        return members.contains { $0.memberID == userID && $0.buttonAuthority }
     }
 }

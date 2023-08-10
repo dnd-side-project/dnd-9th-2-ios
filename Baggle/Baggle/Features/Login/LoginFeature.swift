@@ -7,11 +7,6 @@
 
 import ComposableArchitecture
 
-enum LoginPlatform {
-    case kakao
-    case apple
-}
-
 struct LoginFeature: ReducerProtocol {
 
     struct State: Equatable {
