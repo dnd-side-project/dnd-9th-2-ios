@@ -128,7 +128,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if data.status == .ready || data.status == .progress {
                     state.buttonState = .invite
                 } else if data.status == .confirmed {
-                    // 본인이 button 관리자일때 조건 추가
                     if !data.emergencyButtonActive && data.isEmergencyAuthority {
                         state.buttonState = .emergency
                     } else if data.emergencyButtonActive && !data.isCertified {
