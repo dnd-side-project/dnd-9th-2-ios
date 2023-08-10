@@ -8,6 +8,7 @@
 import Foundation
 
 import ComposableArchitecture
+import Moya
 
 enum SignUpServiceState {
     case success
@@ -16,14 +17,14 @@ enum SignUpServiceState {
 }
 
 struct SignUpService {
-    var signUp: (String) async -> SignUpServiceState
+    var signUp: (SignUpRequestModel) async -> SignUpServiceState
 }
 
 extension SignUpService: DependencyKey {
 
-    static var liveValue = Self { nickname in
+    static var liveValue = Self { requestModel in
         do {
-            return try await MockUpSignUpService().signUp(nickname: nickname)
+            return try await SignUpRepository().signUp(requestModel: requestModel)
         } catch {
             return SignUpServiceState.fail
         }
@@ -37,19 +38,26 @@ extension DependencyValues {
     }
 }
 
-struct MockUpSignUpService {
-
-    func signUp(nickname: String) async throws -> SignUpServiceState {
+struct SignUpRepository {
+    private let networkService = DefaultUserService()
+    
+    func signUp(requestModel: SignUpRequestModel) async throws -> SignUpServiceState {
         return try await withCheckedThrowingContinuation({ continuation in
+            print("requestModel - \(requestModel)")
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                if nickname == "중복" || nickname == "Baggle" {
+                if requestModel.nickname == "중복" || requestModel.nickname == "Baggle" {
                     continuation.resume(returning: .nicknameDuplicated)
-                } else if nickname == "에러" || nickname == "Error" {
+                } else if requestModel.nickname == "에러" || requestModel.nickname == "Error" {
                     continuation.resume(throwing: NetworkError.badRequest)
                 } else {
                     continuation.resume(returning: .success)
                 }
             }
+            
+//            networkService.postSignUp(requestModel: requestModel) { result in
+//                print("result: \(result)")
+//            }
         })
     }
 }
