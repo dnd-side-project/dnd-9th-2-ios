@@ -56,7 +56,7 @@ jobs:
           -project "$xcodeproj" \
           -scheme "$scheme" \
           -destination "platform=$platform,name=$simulator"
-        working-directory: "  ./baggle"
+        working-directory: "./baggle"
 
       - name: Test
         run: >
