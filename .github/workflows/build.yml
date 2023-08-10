@@ -50,7 +50,7 @@ jobs:
               ${{ runner.os }}-iOS_derived_data-
 
       - name: Test
-        run: >
+        run: |
           xcodebuild test \
           -project "$xcodeproj" \
           -scheme "$scheme" \
