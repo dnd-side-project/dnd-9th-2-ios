@@ -32,10 +32,8 @@ enum UserDefaultKey {
 
     var rawValue: String {
         switch self {
-        case .platform:
-            return "platform"
-        case .fcmToken:
-            return "fcmToken"
+        case .platform: return "platform"
+        case .fcmToken: return "fcmToken"
         }
     }
 }
