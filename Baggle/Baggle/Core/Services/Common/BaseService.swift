@@ -53,6 +53,7 @@ extension BaseService {
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
                         continuation.resume(returning: body.data)
                     } catch let error {
+                        // error 분기처리 필요
                         print("❌ error - \(error)")
                         continuation.resume(throwing: NetworkError.decodingError)
                     }
