@@ -49,18 +49,9 @@ jobs:
             restore-keys: |
               ${{ runner.os }}-iOS_derived_data-
 
-      - name: Start xcode build
-        run: |
-          xcodebuild clean build-for-testing \
-          -onlyUsePackageVersionsFromResolvedFile \
-          -project "$xcodeproj" \
-          -scheme "$scheme" \
-          -destination "platform=$platform,name=$simulator"
-        working-directory: "./baggle"
-
       - name: Test
         run: >
-          xcodebuild test
+          xcodebuild test \
           -project "$xcodeproj" \
           -scheme "$scheme" \
           -destination "platform=$platform,name=$simulator"
