@@ -11,12 +11,12 @@ struct SignUpEntity: Codable {
     let accessToken: String
     let refreshToken: String
     let platform: String
-    let userId: Int?
+    let userID: Int
     let profileImageUrl: String?
     let nickname: String
     
     enum CodingKeys: String, CodingKey {
-        case userId = "UserID"
+        case userID = "userId"
         case profileImageUrl = "profileImageURL"
         case accessToken, refreshToken, platform, nickname
     }

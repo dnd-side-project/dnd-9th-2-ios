@@ -24,7 +24,7 @@ extension SignUpService: DependencyKey {
 
     static var liveValue = Self { requestModel in
         do {
-            return try await SignUpRepository().signUp(requestModel: requestModel)
+            return try await SignUpRepository().fetchSignUp(requestModel: requestModel)
         } catch {
             return SignUpServiceState.fail
         }
@@ -39,25 +39,21 @@ extension DependencyValues {
 }
 
 struct SignUpRepository {
-    private let networkService = DefaultUserService()
+    private let networkService = BaseService<UserAPI>()
     
-    func signUp(requestModel: SignUpRequestModel) async throws -> SignUpServiceState {
-        return try await withCheckedThrowingContinuation({ continuation in
-            print("requestModel - \(requestModel)")
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                if requestModel.nickname == "중복" || requestModel.nickname == "Baggle" {
-                    continuation.resume(returning: .nicknameDuplicated)
-                } else if requestModel.nickname == "에러" || requestModel.nickname == "Error" {
-                    continuation.resume(throwing: NetworkError.badRequest)
-                } else {
-                    continuation.resume(returning: .success)
-                }
-            }
-            
-//            networkService.postSignUp(requestModel: requestModel) { result in
-//                print("result: \(result)")
-//            }
-        })
+    func fetchSignUp(requestModel: SignUpRequestModel) async throws -> SignUpServiceState {
+        print("📍requestModel: \(requestModel)")
+        
+        do {
+            let data: SignUpEntity = try await networkService.request(.signUp(requestModel: requestModel))
+            print("data: \(data)")
+            // userDefault 저장
+            return .success
+        } catch let error {
+            print("SignUpRepository - error: \(error)")
+            // error에 따라 분기처리
+//            return .fail
+            return .success
+        }
     }
 }

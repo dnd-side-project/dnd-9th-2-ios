@@ -57,7 +57,7 @@ struct SignUpFeature: ReducerProtocol {
 
         case imageChanged(PhotosPickerItem?)
         case imageLoading
-        case successImageChange(Image, Data)
+        case successImageChange(UIImage)
         case failImageChange
 
         // MARK: - Nickname
@@ -159,12 +159,10 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { send in
                     await send(.imageLoading)
                     
-                    if let profileImage = try? await photoPickerItem?.loadTransferable(
+                    if let profileUIImage = try? await photoPickerItem?.loadTransferable(
                         type: ProfileImageModel.self
-                    ), let imageData = try? await photoPickerItem?.loadTransferable(
-                        type: Data.self
                     ) {
-                        await send(.successImageChange(profileImage.image, imageData))
+                        await send(.successImageChange(profileUIImage.image))
                     } else {
                         await send(.failImageChange)
                     }
@@ -174,9 +172,9 @@ struct SignUpFeature: ReducerProtocol {
                 state.imageState = .loading
                 return .run { send in await send(.disableButtonChanged) }
 
-            case let .successImageChange(image, data):
-                state.imageState = .success(image)
-                state.selectedImage = data
+            case let .successImageChange(image):
+                state.imageState = .success(Image(uiImage: image).resizable())
+                state.selectedImage = image.jpegData(compressionQuality: 0.5)
                 return .run { send in await send(.disableButtonChanged) }
 
             case .failImageChange:

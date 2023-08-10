@@ -43,26 +43,24 @@ extension BaseService {
         return self
     }
     
-    func requestObjectInCombine<T: Decodable>(_ target: API) -> AnyPublisher<T, Error> {
-        return Future { promise in
-            self.provider.request(target) { result in
+    func request<T: Decodable>(_ target: API) async throws -> T {
+        return try await withCheckedThrowingContinuation({ continuation in
+            provider.request(target) { result in
                 switch result {
-                case .success(let value):
+                case .success(let response):
                     do {
                         let decoder = JSONDecoder()
-                        let body = try decoder.decode(EntityContainer<T>.self, from: value.data)
-                        promise(.success(body.data))
+                        let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
+                        continuation.resume(returning: body.data)
                     } catch let error {
                         print("❌ error - \(error)")
-                        promise(.failure(error))
+                        continuation.resume(throwing: NetworkError.decodingError)
                     }
                 case .failure(let error):
-                    print("❌ error - \(error)")
-                    promise(.failure(error))
+                    continuation.resume(throwing: error)
                 }
             }
-        }
-        .eraseToAnyPublisher()
+        })
     }
     
     func requestObject<T: Decodable>(
