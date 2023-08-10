@@ -334,24 +334,8 @@ struct MeetingDetailView_Previews: PreviewProvider {
             store: Store(
                 initialState: MeetingDetailFeature.State(
                     userID: 1,
-                    meetingId: 12345,
-                    meetingData: MeetingDetail(
-                        // swiftlint:disable:next multiline_arguments
-                        id: 100, name: "모임방1000", place: "강남역",
-                        // swiftlint:disable:next multiline_arguments
-                        date: "2023년 4월 9일", time: "16:40", memo: "ㅇㅇ",
-                        members: [Member(
-                            // swiftlint:disable:next multiline_arguments
-                            id: 1, name: "콩이", profileURL: "",
-                            // swiftlint:disable:next multiline_arguments line_length
-                            isMeetingAuthority: true, isButtonAuthority: false, certified: false, certImage: "")],
-                        status: .confirmed,
-                        isEmergencyAuthority: false,
-                        // swiftlint:disable:next multiline_arguments
-                        emergencyButtonActive: false,
-                        emergencyButtonActiveTime: nil,
-                        isCertified: false,
-                        feeds: [])),
+                    meetingId: 12345
+                ),
                 reducer: MeetingDetailFeature()
             )
         )
