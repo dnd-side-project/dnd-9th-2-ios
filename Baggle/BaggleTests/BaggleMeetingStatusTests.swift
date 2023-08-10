@@ -171,7 +171,7 @@ final class BaggleMeetingStatusTests: XCTestCase {
 
     // now : 테스트 시간
     // meetingDate : now - 2시간
-    // 테스트 결과값 : confirmed
+    // 테스트 결과값 : confirmed, completed
     
     func test_meetingStatus_03() throws {
         let now = Date()
@@ -192,14 +192,26 @@ final class BaggleMeetingStatusTests: XCTestCase {
     }
 
     // now : 테스트 시간
-    // meetingDate : now - 24시간
+    // meetingDate : now + 24시간
     // 테스트 결과값 : ready
     
     func test_meetingStatus_04() throws {
         let now = Date()
-        let meetingTime = now.before(hours: 24)
+        let meetingTime = now.later(hours: 24)
         let result = testDateService.meetingDetailStatus(meetingTime: meetingTime)
 
         XCTAssertEqual(result, .ready)
+    }
+
+    // now : 테스트 시간
+    // meetingDate : now - 24시간
+    // 테스트 결과값 : ready
+    
+    func test_meetingStatus_05() throws {
+        let now = Date()
+        let meetingTime = now.before(hours: 24)
+        let result = testDateService.meetingDetailStatus(meetingTime: meetingTime)
+
+        XCTAssertEqual(result, .completed)
     }
 }
