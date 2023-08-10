@@ -37,7 +37,7 @@ struct TestDateService {
             members: []
         )
         
-        let meetingDetail = entity.toDomain()
+        let meetingDetail = entity.toDomain(userID: User.mockUp().id)
         
         return meetingDetail.status
     }

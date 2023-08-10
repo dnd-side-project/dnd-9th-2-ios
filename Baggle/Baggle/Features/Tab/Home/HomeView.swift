@@ -8,6 +8,7 @@
 import SwiftUI
 
 import ComposableArchitecture
+import Kingfisher
 
 struct HomeView: View {
 
@@ -126,17 +127,23 @@ extension HomeView {
         }
     }
 
-    func userInfo() -> some View {
+    func userInfo(user: User) -> some View {
         HStack {
-            Text("2조최강킹짱왕님의 \nBaggle!")
+            Text(user.name)
                 .font(.system(size: 24))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
 
             Spacer()
 
-            Circle()
-                .fill(Color.grayF5)
+            KFImage(URL(string: user.profileImageURL))
+                .placeholder({ _ in
+                    Color.grayF5
+                })
+                .resizable()
+                .aspectRatio(1.0, contentMode: .fill)
+                .cornerRadius(36)
+                .clipped()
                 .frame(width: 72, height: 72)
         }
         .frame(height: 72)
@@ -158,7 +165,7 @@ extension HomeView {
 
                 VStack(spacing: 64) {
                     // 유저 정보
-                    userInfo()
+                    userInfo(user: viewStore.user)
 
                     // segmentedPicker
                     SegmentedPickerView(
