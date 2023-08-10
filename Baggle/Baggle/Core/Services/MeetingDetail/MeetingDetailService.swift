@@ -17,8 +17,8 @@ extension MeetingDetailService: DependencyKey {
     static var liveValue = Self { meetingID, userID  in
         do {
             return try await MockUpMeetingDetailService()
-                .meetingDetail(status: .confirmedEmergency)
-//                .fetchMeetingDetail(meetingID: meetingID, userID: userID)
+//                .meetingDetail(status: .ready)
+                .fetchMeetingDetail(meetingID: meetingID, userID: userID)
         } catch {
             return nil
         }
@@ -188,15 +188,15 @@ extension MockUpMeetingDetailService {
                     name: "유저2",
                     profileURL: "https://avatars.githubusercontent.com/u/81167570?v=4",
                     isMeetingAuthority: false,
-                    isButtonAuthority: true,
+                    isButtonAuthority: false,
                     certified: false,
                     certImage: ""
                 )
             ],
             status: .ready,
-            isEmergencyAuthority: true,
+            isEmergencyAuthority: false,
             emergencyButtonActive: false,
-            emergencyButtonActiveTime: Date(timeIntervalSince1970: 1735641000),
+            emergencyButtonActiveTime: nil,
             isCertified: false,
             feeds: []
         )
