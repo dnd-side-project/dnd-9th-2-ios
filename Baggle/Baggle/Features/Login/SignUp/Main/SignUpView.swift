@@ -48,7 +48,7 @@ struct SignUpView: View {
                                 .padding()
                             }
                             .onChange(of: viewStore.keyboardAppear) { _ in
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                     withAnimation {
                                         scrollProxy.scrollTo(scrollBottomID)
                                     }
