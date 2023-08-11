@@ -33,23 +33,17 @@ class KeychainManager {
           kSecAttrAccount: account]
     }()
     
-    func createUserToken(_ user: UserToken) -> Bool {
+    func createUserToken(_ user: UserToken) throws {
         guard let data = try? JSONEncoder().encode(user),
-              let service = self.service else { return false }
+              let service = self.service else { return }
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                 kSecAttrService: service,
                                 kSecAttrAccount: account,
                                 kSecAttrGeneric: data]
         let status = SecItemAdd(query as CFDictionary, nil)
-        
-        if status != errSecSuccess {
-            if let error = SecCopyErrorMessageString(status, nil) {
-                print("❌ Keychain error: \(error)")
-            } else {
-                print("❌ Unknown keychain error with status: \(status)")
-            }
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            throw APIError.keychain(status: status)
         }
-        return status == errSecSuccess
     }
     
     func readUserToken() -> UserToken? {
@@ -70,18 +64,22 @@ class KeychainManager {
         return user
     }
     
-    func updateUserToken(_ user: UserToken) -> Bool {
+    func updateUserToken(_ user: UserToken) throws {
         guard let query = self.query,
-              let data = try? JSONEncoder().encode(user) else { return false }
-        
+              let data = try? JSONEncoder().encode(user) else { return }
         let attributes: [CFString: Any] = [kSecAttrAccount: account,
                                            kSecAttrGeneric: data]
-        
-        return SecItemUpdate(query as CFDictionary, attributes as CFDictionary) == errSecSuccess
+        let status =  SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            throw APIError.keychain(status: status)
+        }
     }
     
-    func deleteUserToken() {
+    func deleteUserToken() throws {
         guard let query = self.query else { return }
-        SecItemDelete(query as CFDictionary)
+        let status = SecItemDelete(query as CFDictionary)
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            throw APIError.keychain(status: status)
+        }
     }
 }

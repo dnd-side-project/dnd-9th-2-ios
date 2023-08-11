@@ -78,12 +78,12 @@ extension UserAPI: BaseAPI {
         switch self {
         case .signUp(let requestModel, _):
             var multiPartData: [Moya.MultipartFormData] = []
-            let imageData = MultipartFormData(
+            let profileImageData = MultipartFormData(
                 provider: .data(requestModel.profilImageUrl ?? Data()),
                 name: "file",
                 fileName: ".jpg",
                 mimeType: "image/jpeg")
-            multiPartData.append(imageData)
+            multiPartData.append(profileImageData)
             
             let parameters: [String: String] = [
                 "nickname": requestModel.nickname,

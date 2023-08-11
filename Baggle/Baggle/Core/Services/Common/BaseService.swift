@@ -54,27 +54,27 @@ extension BaseService {
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
                         print("✅ message", body.message)
                         switch body.status {
-                        case 201:
+                        case 200, 201:
                             if let data = body.data {
                                 print("✅ data -", data)
                                 continuation.resume(returning: data)
                             } else {
-                                continuation.resume(throwing: APIError.decodingErr)
+                                continuation.resume(throwing: APIError.decoding)
                             }
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 409:
                             if body.message == "이미 존재하는 닉네임입니다." {
-                                continuation.resume(throwing: APIError.duplicatedNicknameErr)
+                                continuation.resume(throwing: APIError.duplicatedNickname)
                             } else {
-                                continuation.resume(throwing: APIError.duplicatedUserErr)
+                                continuation.resume(throwing: APIError.duplicatedUser)
                             }
                         default:
-                            continuation.resume(throwing: APIError.networkErr)
+                            continuation.resume(throwing: APIError.network)
                         }
                     } catch let error {
                         print("❌ error - \(error)")
-                        continuation.resume(throwing: APIError.decodingErr)
+                        continuation.resume(throwing: APIError.decoding)
                     }
                 case .failure(let error):
                     print("❌ error - \(error)")

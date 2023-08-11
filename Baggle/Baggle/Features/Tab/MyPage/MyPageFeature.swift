@@ -22,7 +22,11 @@ struct MyPageFeature: ReducerProtocol {
             switch action {
 
             case .logoutMyPage:
-                KeychainManager.shared.deleteUserToken()
+                do {
+                    try KeychainManager.shared.deleteUserToken()
+                } catch let error {
+                    print("Keychain error - \(error)")
+                }
                 UserDefaultList.user = nil
                 return .none
             }
