@@ -12,15 +12,14 @@ import ComposableArchitecture
 struct TimerFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var targetDate: Date = Date().later(seconds: 3)
-
-        var timerCount: Int = 0
+        var timerCount: Int
         var isTimerOver: Bool = false
     }
 
     enum Action: Equatable {
-        case onAppear
-
+        case start
+        case cancel
+        
         // MARK: - Timer
 
         case timerTick
@@ -37,9 +36,8 @@ struct TimerFeature: ReducerProtocol {
         Reduce { state, action in
 
             switch action {
-            case .onAppear:
-                state.timerCount = state.targetDate.remainingTime()
-
+            case .start:
+                
                 if state.timerCount <= 0 {
                     return .run { send in await send(.timerOver)}
                 }
@@ -50,6 +48,9 @@ struct TimerFeature: ReducerProtocol {
                     }
                 }
                 .cancellable(id: CancelID.timer)
+                
+            case .cancel:
+                return .cancel(id: CancelID.timer)
                 // MARK: - Timer
 
             case .timerTick:

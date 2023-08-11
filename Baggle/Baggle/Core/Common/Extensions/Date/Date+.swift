@@ -307,6 +307,12 @@ extension Date {
 
 // MARK: - 타이머
 extension Date {
+
+    func authenticationTimeout() -> Int {
+        self.later(minutes: 5).remainingTime()
+    }
+    
+    
     func remainingTime() -> Int {
         let components = calendar.dateComponents([.second], from: Date(), to: self)
         if let result = components.second, result > 0 {
@@ -316,3 +322,14 @@ extension Date {
         }
     }
 }
+
+
+#if DEBUG
+extension Date {
+    static func createDate(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int) -> Date {
+        let targetDateComponents = DateComponents(year: year, month: month, day: day, hour: hour, minute: minute)
+        let targetDate = Calendar.current.date(from: targetDateComponents)
+        return targetDate!
+    }
+}
+#endif

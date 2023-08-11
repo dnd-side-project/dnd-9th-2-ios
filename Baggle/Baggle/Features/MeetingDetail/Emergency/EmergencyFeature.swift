@@ -15,7 +15,7 @@ struct EmergencyFeature: ReducerProtocol {
         var isEmergency: Bool = false
 
         // Child
-        var timerState = TimerFeature.State(targetDate: Date().later(minutes: 1).later(seconds: 10))
+        var timerState = TimerFeature.State(timerCount: 30)
     }
 
     enum Action: Equatable {
