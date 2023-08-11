@@ -22,10 +22,9 @@ struct LoginFeature: ReducerProtocol {
 
         // MARK: - Button Tapped
 
-        case loginButtonTapped(LoginPlatform, String)
+        case appleLoginButtonTapped(String)
         case kakaoLoginButtonTapped
-        case appleLoginButtonTapped
-        case signUpButtonTapped
+        case moveToSignUp(LoginPlatform, String)
 
         // MARK: - Dependency
 
@@ -46,30 +45,35 @@ struct LoginFeature: ReducerProtocol {
 
                 // MARK: - Button Tapped
 
-            case .loginButtonTapped(let platform, let token):
-                print("확인용 - token: \(token), platform: \(platform)")
+            case .appleLoginButtonTapped(let token):
+                print("확인용 - token: \(token), platform: apple")
                 return .run { send in
-                    await send(.loginSuccess)
+                    // 로그인 통신
+                    // 성공이면 loginSuccess, 새로운 유저면 moveToSignUp, 실패면 loginFail
+//                    await send(.loginSuccess)
+                    await send(.moveToSignUp(.apple, token))
                 }
 
             case .kakaoLoginButtonTapped:
-                return .run { _ in
+                return .run { send in
                     do {
                         let token = try await kakaoLoginService.login()
-                        print("카카오 토큰 \(token)")
+                        print("확인용 - token: \(token), platform: kakao")
+                        // 로그인 통신
+                        // 성공이면 loginSuccess, 새로운 유저면 moveToSignUp, 실패면 loginFail
+                        await send(.moveToSignUp(.kakao, token))
                     } catch {
                         print("카카오 로그인 에러")
                         print(error)
                     }
                 }
 
-            case .appleLoginButtonTapped:
-                return .none
-
-            case .signUpButtonTapped:
+            case .moveToSignUp(let platform, let token):
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
 
-                state.signUpNickname = SignUpFeature.State()
+                state.signUpNickname = SignUpFeature.State(
+                    loginPlatform: platform,
+                    socialLoginToken: token)
                 return .none
 
                 // MARK: - Dependency

@@ -51,14 +51,33 @@ extension BaseService {
                     do {
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        continuation.resume(returning: body.data)
+                        print("✅ response -", body)
+                        switch body.status {
+                        case 201:
+                            if let data = body.data {
+                                print("✅ data -", data)
+                                continuation.resume(returning: data)
+                            } else {
+                                continuation.resume(throwing: APIError.decoding)
+                            }
+                        case 400:
+                            continuation.resume(throwing: APIError.badRequest)
+                        case 409:
+                            if body.message == "이미 존재하는 닉네임입니다." {
+                                continuation.resume(throwing: APIError.duplicatedNickname)
+                            } else {
+                                continuation.resume(throwing: APIError.duplicatedUser)
+                            }
+                        default:
+                            continuation.resume(throwing: APIError.network)
+                        }
                     } catch let error {
-                        // error 분기처리 필요
                         print("❌ error - \(error)")
-                        continuation.resume(throwing: NetworkError.decodingError)
+                        continuation.resume(throwing: APIError.decoding)
                     }
                 case .failure(let error):
-                    continuation.resume(throwing: error)
+                    print("❌ error - \(error)")
+                    continuation.resume(throwing: APIError.badRequest)
                 }
             }
         })
