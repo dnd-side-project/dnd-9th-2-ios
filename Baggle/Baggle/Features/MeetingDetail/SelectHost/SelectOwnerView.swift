@@ -18,7 +18,7 @@ struct SelectOwnerView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 20) {
                 Text("방장을 넘길 친구를 선택해주세요")
-                    .foregroundColor(.gray43)
+                    .foregroundColor(.gray8)
                     .padding(.top, 30)
 
                 Spacer()

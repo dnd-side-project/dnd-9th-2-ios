@@ -119,7 +119,7 @@ struct BaggleSecondaryStyle: ButtonStyle {
 }
 
 struct BaggleTertiaryStyle: ButtonStyle {
-    private let foregroundColor: Color = .gray14
+    private let foregroundColor: Color = .gray11
     private let backgroundColor: Color = .white
 
     @Environment(\.isEnabled) private var isEnabled

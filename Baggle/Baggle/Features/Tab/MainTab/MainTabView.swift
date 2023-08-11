@@ -15,7 +15,7 @@ struct MainTabView: View {
 
     init(store: StoreOf<MainTabFeature>) {
         self.store = store
-        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.grayD9)
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray4)
     }
 
     var body: some View {

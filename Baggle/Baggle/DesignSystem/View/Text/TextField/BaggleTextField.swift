@@ -90,7 +90,7 @@ struct BaggleTextField: View {
                         .font(.caption)
                         .padding(.horizontal, 2)
                         .padding(.bottom, 6)
-                        .foregroundColor(.gray8C)
+                        .foregroundColor(.gray6)
                 }
 
                 HStack(alignment: .center, spacing: 8) {

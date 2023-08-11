@@ -117,10 +117,10 @@ extension HomeView {
 
             VStack(spacing: 4) {
                 Text(status.title ?? "")
-                    .foregroundColor(.gray8C)
+                    .foregroundColor(.gray6)
 
                 Text(status.description ?? "")
-                    .foregroundColor(.grayBF)
+                    .foregroundColor(.gray5)
             }
         }
     }
@@ -136,7 +136,7 @@ extension HomeView {
 
             KFImage(URL(string: user.profileImageURL))
                 .placeholder({ _ in
-                    Color.grayF5
+                    Color.gray2
                 })
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fill)

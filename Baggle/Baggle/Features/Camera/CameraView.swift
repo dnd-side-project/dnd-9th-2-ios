@@ -84,7 +84,7 @@ extension CameraView {
         }
         .frame(width: viewFinderWidth, height: viewFinderHeight)
         .clipped()
-        .background(Color.grayF5)
+        .background(Color.gray2)
         .padding(.top, 32)
     }
 
@@ -187,7 +187,7 @@ extension CameraView {
                         .frame(width: 24, height: 24)
                 }
                 .padding(8)
-                .background(Color.gray26)
+                .background(Color.gray9)
                 .cornerRadius(50)
             }
             .frame(width: 60)

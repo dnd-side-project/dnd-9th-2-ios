@@ -33,7 +33,7 @@ struct MeetingListCell: View {
                             str: "장소  |  \(data.place)",
                             targetStr: "장소  |",
                             color: .black,
-                            targetColor: .gray8C
+                            targetColor: .gray6
                         )
                     )
                     .font(.system(size: 14))
@@ -43,7 +43,7 @@ struct MeetingListCell: View {
                             str: "시간  |  \(data.date) \(data.time)",
                             targetStr: "시간  |",
                             color: .black,
-                            targetColor: .gray8C)
+                            targetColor: .gray6)
                     )
                     .font(.system(size: 14))
                 }

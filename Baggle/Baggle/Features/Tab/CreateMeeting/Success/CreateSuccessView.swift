@@ -50,7 +50,7 @@ struct CreateSuccessView: View {
                                     str: "장소  |  유탁님 없는 잠실",
                                     targetStr: "장소  |",
                                     color: .black,
-                                    targetColor: .gray8C
+                                    targetColor: .gray6
                                 )
                             )
                             .font(.system(size: 14))
@@ -60,7 +60,7 @@ struct CreateSuccessView: View {
                                     str: "시간  |  2023년 10월 25일 15:30",
                                     targetStr: "시간  |",
                                     color: .black,
-                                    targetColor: .gray8C
+                                    targetColor: .gray6
                                 )
                             )
                             .font(.system(size: 14))

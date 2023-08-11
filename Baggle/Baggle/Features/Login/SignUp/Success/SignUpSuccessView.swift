@@ -57,12 +57,13 @@ extension SignUpSuccessView {
     private var description: some View {
         VStack(spacing: 0) {
             Text("Baggle에 오신 걸\n환영합니다!")
+                .fontWithLineSpacing(fontType: .subTitle)
                 .foregroundColor(.primaryNormal)
                 .padding(.vertical, 8)
 
             Text("Baggle에서 특별한 추억을 만들어 보세요.")
-                .font(.system(size: 16))
-                .foregroundColor(.gray8C)
+                .font(.Baggle.body2)
+                .foregroundColor(.gray6)
         }
         .multilineTextAlignment(.center)
     }

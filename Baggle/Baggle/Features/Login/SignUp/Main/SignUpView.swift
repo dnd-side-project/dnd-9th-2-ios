@@ -97,11 +97,9 @@ extension SignUpView {
     private var description: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Baggle에서 쓸 프로필을")
-
-                Text("설정해주세요.")
+                Text("Baggle에서 쓸 프로필을\n설정해주세요.")
             }
-            .font(.title)
+            .fontWithLineSpacing(fontType: .subTitle)
 
             Spacer()
         }
