@@ -56,10 +56,20 @@ extension SignUpSuccessView {
     @ViewBuilder
     private var description: some View {
         VStack(spacing: 0) {
-            Text("Baggle에 오신 걸\n환영합니다!")
-                .fontWithLineSpacing(fontType: .subTitle)
-                .foregroundColor(.primaryNormal)
-                .padding(.vertical, 8)
+            
+            VStack(spacing: 4) {
+                HStack(spacing: 0) {
+                    Image.BaggleText.profile
+                        .renderingMode(.template)
+                    
+                    Text("에 오신 걸")
+                }
+                
+                Text("환영합니다!")
+            }
+            .fontWithLineSpacing(fontType: .subTitle)
+            .foregroundColor(.primaryNormal)
+            .padding(.vertical, 8)
 
             Text("Baggle에서 특별한 추억을 만들어 보세요.")
                 .font(.Baggle.body2)

@@ -127,9 +127,13 @@ extension HomeView {
 
     func userInfo(user: User) -> some View {
         HStack {
-            Text("\(user.name)님의")
-                .font(.Baggle.title)
-                .foregroundColor(.white)
+            VStack(alignment: .leading, spacing: 10) {
+                Text("\(user.name)님의")
+                    .font(.Baggle.title)
+                    .foregroundColor(.white)
+                
+                Image.BaggleText.mainHome
+            }
 
             Spacer()
 

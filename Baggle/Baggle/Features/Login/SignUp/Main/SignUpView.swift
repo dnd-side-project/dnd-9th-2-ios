@@ -95,14 +95,18 @@ extension SignUpView {
 
     @ViewBuilder
     private var description: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Baggle에서 쓸 프로필을\n설정해주세요.")
-            }
-            .fontWithLineSpacing(fontType: .subTitle)
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .center, spacing: 0) {
+                Image.BaggleText.profile
+                
+                Text("에서 쓸 프로필을")
 
-            Spacer()
+                Spacer()
+            }
+            
+            Text("설정해주세요.")
         }
+        .font(.Baggle.subTitle)
         .padding(.vertical, 12)
     }
 
