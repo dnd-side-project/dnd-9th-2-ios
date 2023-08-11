@@ -35,7 +35,7 @@ struct MeetingDetailView: View {
                             .drawUnderline(
                                 spacing: 0,
                                 height: 0.5,
-                                color: .grayD9
+                                color: .gray4
                             )
 
                         // 인증 피드
@@ -47,8 +47,8 @@ struct MeetingDetailView: View {
                             .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
                         } else {
                             Text("아직 올라온 사진이 없어요!")
-                                .font(.system(size: 16))
-                                .foregroundColor(.gray8C)
+                                .font(.Baggle.body2)
+                                .foregroundColor(.gray6)
                         }
                     }
                 }
@@ -137,10 +137,10 @@ extension MeetingDetailView {
             Text("📌")
 
             Text("\(name)")
-                .baggleTypoLineSpacing(size: 22, weight: .bold)
+                .fontWithLineSpacing(fontType: .subTitle)
                 .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
-                .foregroundColor(.gray26)
+                .foregroundColor(.gray9)
 
             Group {
                 if status == .completed {
@@ -157,7 +157,6 @@ extension MeetingDetailView {
             Spacer()
         }
         .padding(.bottom, 10)
-        .baggleTypoLineSpacing(size: 22, weight: .bold)
     }
 
     func meetingDateView(place: String, date: String, time: String) -> some View {
@@ -166,33 +165,32 @@ extension MeetingDetailView {
                 attributedColorString(
                     str: "장소  |  \(place)",
                     targetStr: "장소  |",
-                    color: .gray26,
-                    targetColor: .gray8C)
+                    color: .gray9,
+                    targetColor: .gray6)
             )
 
             Text(
                 attributedColorString(
                     str: "시간  |  \(date) \(time)",
                     targetStr: "시간  |",
-                    color: .gray26,
-                    targetColor: .gray8C)
+                    color: .gray9,
+                    targetColor: .gray6)
             )
         }
-        .baggleTypoLineSpacing(size: 15, weight: .medium)
+        .fontWithLineSpacing(fontType: .body3)
     }
 
     func meetingMemoView(memo: String?) -> some View {
         Group {
             if let memo {
                 Text(memo)
-                    .foregroundColor(.gray59)
+                    .foregroundColor(.gray7)
             } else {
                 Text("작성된 메모가 없어요!")
-                    .baggleTypoLineSpacing(size: 15, weight: .medium)
-                    .foregroundColor(.grayBF)
+                    .foregroundColor(.gray5)
             }
         }
-        .baggleTypoLineSpacing(size: 15, weight: .medium)
+        .fontWithLineSpacing(fontType: .body3)
         .padding(.vertical, 14)
         .padding(.horizontal, 20)
         .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
@@ -253,7 +251,7 @@ extension MeetingDetailView {
 
                         Text(member.name)
                             .padding(.vertical, 2)
-                            .baggleTypoLineSpacing(size: 13, weight: .medium)
+                            .fontWithLineSpacing(fontType: .caption1)
                             .frame(maxWidth: 64)
                     }
                     .padding(.all, 2)

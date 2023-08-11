@@ -95,16 +95,18 @@ extension SignUpView {
 
     @ViewBuilder
     private var description: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Baggle에서 쓸 프로필을")
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .center, spacing: 0) {
+                Image.BaggleText.profile
+                
+                Text("에서 쓸 프로필을")
 
-                Text("설정해주세요.")
+                Spacer()
             }
-            .font(.title)
-
-            Spacer()
+            
+            Text("설정해주세요.")
         }
+        .font(.Baggle.subTitle)
         .padding(.vertical, 12)
     }
 
@@ -156,7 +158,7 @@ struct SignUpNicknameView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView(
             store: Store(
-                initialState: SignUpFeature.State(),
+                initialState: SignUpFeature.State(loginPlatform: .apple, socialLoginToken: "-"),
                 reducer: SignUpFeature()
             )
         )

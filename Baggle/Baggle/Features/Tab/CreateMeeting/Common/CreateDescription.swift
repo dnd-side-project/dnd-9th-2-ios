@@ -20,7 +20,8 @@ struct CreateDescription: View {
 
             HStack {
                 Text(title)
-                    .font(.title2)
+                    .font(.Baggle.subTitle)
+                    .foregroundColor(.gray11)
                 Spacer()
             }
             .padding(.vertical, 12)

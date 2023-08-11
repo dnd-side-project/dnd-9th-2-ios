@@ -117,28 +117,30 @@ extension HomeView {
 
             VStack(spacing: 4) {
                 Text(status.title ?? "")
-                    .foregroundColor(.gray8C)
-                    .baggleTypoLineSpacing(size: 16, weight: .medium)
+                    .foregroundColor(.gray6)
 
                 Text(status.description ?? "")
-                    .foregroundColor(.grayBF)
-                    .baggleTypoLineSpacing(size: 15, weight: .medium)
+                    .foregroundColor(.gray5)
             }
         }
     }
 
     func userInfo(user: User) -> some View {
         HStack {
-            Text("\(user.name)님의\nBaggle!") // 폰트 수정
-                .font(.system(size: 24))
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+            VStack(alignment: .leading, spacing: 10) {
+                Text("\(user.name)님의")
+                    .font(.Baggle.title)
+                    .foregroundColor(.white)
+                
+                Image.BaggleText.mainHome
+            }
 
             Spacer()
 
-            KFImage(URL(string: user.profileImageURL))
+            KFImage(URL(string: user.profileImageURL ?? ""))
                 .placeholder({ _ in
-                    Color.grayF5
+                    Image.Profile.profilDefault
+                        .resizable()
                 })
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fill)

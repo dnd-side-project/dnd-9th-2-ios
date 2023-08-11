@@ -13,6 +13,9 @@ import ComposableArchitecture
 struct SignUpFeature: ReducerProtocol {
 
     struct State: Equatable {
+        
+        var loginPlatform: LoginPlatform
+        var socialLoginToken: String
 
         // MARK: - View
 
@@ -108,8 +111,8 @@ struct SignUpFeature: ReducerProtocol {
                 let requestModel = SignUpRequestModel(
                     nickname: nickname,
                     profilImageUrl: state.selectedImage,
-                    platform: .apple,
-                    fcmToken: ""
+                    platform: state.loginPlatform,
+                    fcmToken: UserDefaultList.fcmToken ?? ""
                 )
 
                 if nicknameValidator.isValidate(nickname) {
@@ -201,8 +204,9 @@ struct SignUpFeature: ReducerProtocol {
                 // MARK: - Network
 
             case let .requestSignUp(requestModel):
+                let token = state.socialLoginToken
                 return .run { send in
-                    let result = await signUpService.signUp(requestModel)
+                    let result = await signUpService.signUp(requestModel, token)
                     await send(.networkLoading(false))
 
                     switch result {

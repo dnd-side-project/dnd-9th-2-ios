@@ -26,9 +26,9 @@ enum ProfileSize {
 
     var borderColor: Color {
         switch self {
-        case .large: return .grayD9
+        case .large: return .gray4
         case .medium: return .primaryNormal
-        case .extraSmall: return .grayBF
+        case .extraSmall: return .gray5
         case .small: return .clear
         }
     }
@@ -70,7 +70,7 @@ struct CircleProfileView: View {
                             lineWidth: size == .medium ? 3 : 1)
                 if isFailed {
                     Circle()
-                        .fill(Color.gray1F.opacity(0.7))
+                        .fill(Color.gray10.opacity(0.7))
 
                     BaggleStamp(status: .fail)
                 }

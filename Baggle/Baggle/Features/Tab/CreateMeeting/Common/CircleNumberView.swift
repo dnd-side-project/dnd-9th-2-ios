@@ -15,12 +15,12 @@ struct CircleNumberView: View {
     var body: some View {
         ZStack(alignment: .center) {
             Circle()
-                .fill(isSelected ? Color.primaryNormal : Color.grayD9)
+                .fill(isSelected ? Color.primaryNormal : Color.gray4)
                 .frame(width: 22, height: 22)
 
             Text(number)
+                .font(.Baggle.caption2)
                 .foregroundColor(.white)
-                .font(.caption)
         }
     }
 }

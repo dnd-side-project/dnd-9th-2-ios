@@ -18,7 +18,7 @@ struct ProfileBadgeView: View {
     var body: some View {
         ZStack {
             Circle()
-                .fill(Color.gray14)
+                .fill(Color.gray11)
                 .frame(width: 24, height: 24)
 
             switch tag {

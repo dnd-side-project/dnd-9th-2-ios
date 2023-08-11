@@ -68,7 +68,7 @@
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
-		14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* NetworkError.swift */; };
+		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
 		14CF68E92A846EB700E457DF /* TestDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68E82A846EB700E457DF /* TestDateService.swift */; };
 		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
 		14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */; };
@@ -148,6 +148,7 @@
 		2BC5AD312A84983C00B73241 /* SignUpRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5AD302A84983C00B73241 /* SignUpRequestModel.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* View+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */; };
+		2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEAC752A86024E00D698E6 /* KeychainManager.swift */; };
 		2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5299D2A7D697800A53779 /* MeetingListCell.swift */; };
 		2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BE74F612A7771B600402068 /* GoogleService-Info.plist */; };
 		2BF268232A77861300F32ADF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF268222A77861300F32ADF /* HomeService.swift */; };
@@ -226,7 +227,7 @@
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
-		14B7A0442A75409E00B8E202 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		14CF68E82A846EB700E457DF /* TestDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateService.swift; sourceTree = "<group>"; };
 		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPlatform.swift; sourceTree = "<group>"; };
@@ -304,6 +305,7 @@
 		2BC5AD302A84983C00B73241 /* SignUpRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestModel.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifier.swift"; sourceTree = "<group>"; };
+		2BDEAC752A86024E00D698E6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		2BE5299D2A7D697800A53779 /* MeetingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
 		2BE74F612A7771B600402068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BF268222A77861300F32ADF /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -755,7 +757,7 @@
 		14B7A0432A75409400B8E202 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				14B7A0442A75409E00B8E202 /* NetworkError.swift */,
+				14B7A0442A75409E00B8E202 /* APIError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1078,6 +1080,7 @@
 				2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */,
 				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
 				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
+				2BDEAC752A86024E00D698E6 /* KeychainManager.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1300,6 +1303,7 @@
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
 				2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
+				2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */,
 				143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */,
@@ -1352,7 +1356,7 @@
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
-				14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */,
+				14B7A0452A75409E00B8E202 /* APIError.swift in Sources */,
 				2BA760BB2A81EB610089878D /* String+.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
 				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,
