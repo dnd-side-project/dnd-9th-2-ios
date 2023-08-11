@@ -68,7 +68,7 @@
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
-		14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* NetworkError.swift */; };
+		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
 		14CF68E92A846EB700E457DF /* TestDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68E82A846EB700E457DF /* TestDateService.swift */; };
 		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
 		14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */; };
@@ -226,7 +226,7 @@
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
-		14B7A0442A75409E00B8E202 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		14CF68E82A846EB700E457DF /* TestDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateService.swift; sourceTree = "<group>"; };
 		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPlatform.swift; sourceTree = "<group>"; };
@@ -755,7 +755,7 @@
 		14B7A0432A75409400B8E202 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				14B7A0442A75409E00B8E202 /* NetworkError.swift */,
+				14B7A0442A75409E00B8E202 /* APIError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1352,7 +1352,7 @@
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
-				14B7A0452A75409E00B8E202 /* NetworkError.swift in Sources */,
+				14B7A0452A75409E00B8E202 /* APIError.swift in Sources */,
 				2BA760BB2A81EB610089878D /* String+.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
 				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,

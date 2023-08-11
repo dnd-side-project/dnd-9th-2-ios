@@ -48,17 +48,36 @@ extension BaseService {
             provider.request(target) { result in
                 switch result {
                 case .success(let response):
+                    print("✅ response - \(response)")
                     do {
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        continuation.resume(returning: body.data)
-                    } catch let error {
-                        // error 분기처리 필요
-                        print("❌ error - \(error)")
-                        continuation.resume(throwing: NetworkError.decodingError)
+                        print("✅ message", body.message)
+                        switch body.status {
+                        case 201:
+                            if let data = body.data {
+                                print("✅ data -", data)
+                                continuation.resume(returning: data)
+                            } else {
+                                continuation.resume(throwing: APIError.decodingErr)
+                            }
+                        case 400:
+                            continuation.resume(throwing: APIError.badRequest)
+                        case 409:
+                            if body.message == "이미 존재하는 닉네임입니다." {
+                                continuation.resume(throwing: APIError.duplicatedNicknameErr)
+                            } else {
+                                continuation.resume(throwing: APIError.duplicatedUserErr)
+                            }
+                        default:
+                            continuation.resume(throwing: APIError.networkErr)
+                        }
+                    } catch {
+                        continuation.resume(throwing: APIError.decodingErr)
                     }
                 case .failure(let error):
-                    continuation.resume(throwing: error)
+                    print("❌ error - \(error)")
+                    continuation.resume(throwing: APIError.badRequest)
                 }
             }
         })
