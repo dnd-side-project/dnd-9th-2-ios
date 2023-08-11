@@ -49,7 +49,10 @@ struct LargeTimerView: View {
             .cornerRadius(12)
             .animation(.easeInOut(duration: 0.3), value: viewStore.isTimerOver)
             .onAppear {
-                viewStore.send(.onAppear)
+                viewStore.send(.start)
+            }
+            .onDisappear {
+                viewStore.send(.cancel)
             }
         }
     }
@@ -59,7 +62,7 @@ struct LargeTimerView_Previews: PreviewProvider {
     static var previews: some View {
         LargeTimerView(
             store: Store(
-                initialState: TimerFeature.State(),
+                initialState: TimerFeature.State(timerCount: 30),
                 reducer: TimerFeature()
             )
         )
