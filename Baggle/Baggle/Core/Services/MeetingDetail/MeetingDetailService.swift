@@ -270,7 +270,7 @@ extension MockUpMeetingDetailService {
             status: .confirmed,
             isEmergencyAuthority: true,
             emergencyButtonActive: true,
-            emergencyButtonActiveTime: Date.createDate(2023, 8, 11, 13, 48),
+            emergencyButtonActiveTime: Date.createDate(2023, 8, 11, 13, 30),
             isCertified: false,
             feeds: []
         )

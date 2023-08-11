@@ -22,7 +22,7 @@ struct CameraFeature: ReducerProtocol {
         var isCompleted: Bool = false
 
         // Timer
-        var timer = TimerFeature.State(timerCount: 30)
+        var timer: TimerFeature.State
         var isTimeOver: Bool = false
     }
 

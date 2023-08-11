@@ -172,7 +172,14 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .cameraButtonTapped:
-                state.usingCamera = CameraFeature.State()
+                if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
+                    let timerCount = emergencyButtonActiveTime.authenticationTimeout()
+                    state.usingCamera = CameraFeature.State(
+                        timer: TimerFeature.State(timerCount: timerCount)
+                    )
+                } else {
+                    print("언래핑 에러")
+                }
                 return .none
 
             case .emergencyButtonTapped:
