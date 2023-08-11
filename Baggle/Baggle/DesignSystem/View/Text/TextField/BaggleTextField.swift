@@ -87,10 +87,10 @@ struct BaggleTextField: View {
 
                 if case let .title(title) = title {
                     Text(title)
-                        .font(.caption)
+                        .font(.Baggle.description)
                         .padding(.horizontal, 2)
                         .padding(.bottom, 6)
-                        .foregroundColor(.gray8C)
+                        .foregroundColor(.gray6)
                 }
 
                 HStack(alignment: .center, spacing: 8) {
@@ -102,12 +102,12 @@ struct BaggleTextField: View {
                         )
                     )
                     .focused($isFocused)
-                    .font(.body)
+                    .font(.Baggle.body2)
                     .foregroundColor(viewStore.textFieldState.fgColor)
 
                     Text("\(viewStore.text.count)/\(viewStore.maxCount)")
+                        .font(.Baggle.description)
                         .foregroundColor(viewStore.textFieldState.fgColor)
-                        .font(.callout)
 
                     if viewStore.state.textFieldState == .active {
                         switch buttonType {
@@ -134,7 +134,7 @@ struct BaggleTextField: View {
 
                 if case let .invalid(error) = viewStore.textFieldState {
                     Text(error)
-                        .font(.caption)
+                        .font(.Baggle.caption2)
                         .padding(.horizontal, 8)
                         .padding(.top, 8)
                         .foregroundColor(viewStore.textFieldState.fgColor)

@@ -16,7 +16,7 @@ struct CreatePlaceFeature: ReducerProtocol {
 
         // Child State
         var textFieldState = BaggleTextFeature.State(
-            maxCount: 20,
+            maxCount: 15,
             textFieldState: .inactive,
             isFocused: true
         )

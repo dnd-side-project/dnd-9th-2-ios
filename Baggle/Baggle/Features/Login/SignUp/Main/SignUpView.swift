@@ -48,7 +48,7 @@ struct SignUpView: View {
                                 .padding()
                             }
                             .onChange(of: viewStore.keyboardAppear) { _ in
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                     withAnimation {
                                         scrollProxy.scrollTo(scrollBottomID)
                                     }
@@ -95,16 +95,18 @@ extension SignUpView {
 
     @ViewBuilder
     private var description: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Baggle에서 쓸 프로필을")
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .center, spacing: 0) {
+                Image.BaggleText.profile
+                
+                Text("에서 쓸 프로필을")
 
-                Text("설정해주세요.")
+                Spacer()
             }
-            .font(.title)
-
-            Spacer()
+            
+            Text("설정해주세요.")
         }
+        .font(.Baggle.subTitle)
         .padding(.vertical, 12)
     }
 

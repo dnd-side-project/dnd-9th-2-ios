@@ -36,10 +36,10 @@ struct BaggleTextEditor: View {
                 // MARK: - 제목
                 if case let .title(title) = title {
                     Text(title)
-                        .font(.caption)
+                        .font(.Baggle.body3)
                         .padding(.horizontal, 4)
                         .padding(.bottom, 6)
-                        .foregroundColor(.gray8C)
+                        .foregroundColor(.gray6)
                 }
 
                 // MARK: - 본문
@@ -53,6 +53,7 @@ struct BaggleTextEditor: View {
                                 send: BaggleTextFeature.Action.textChanged
                             )
                         )
+                        .font(.Baggle.body2)
                         .foregroundColor(viewStore.textFieldState.fgColor)
                         .background(.clear)
                         .lineSpacing(5)
@@ -64,6 +65,7 @@ struct BaggleTextEditor: View {
 
                         if viewStore.text.isEmpty && !isFocused {
                             TextEditor(text: $placeholder)
+                                .font(.Baggle.body2)
                                 .font(.body)
                                 .foregroundColor(.gray)
                                 .disabled(true)
@@ -73,6 +75,7 @@ struct BaggleTextEditor: View {
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 140)
 
                     Text("\(viewStore.text.count) / 50")
+                        .font(.Baggle.body2)
                         .foregroundColor(viewStore.textFieldState.fgColor)
                         .padding()
                 }
@@ -86,7 +89,7 @@ struct BaggleTextEditor: View {
 
                 if case let .invalid(error) = viewStore.textFieldState {
                     Text(error)
-                        .font(.caption)
+                        .font(.Baggle.caption2)
                         .padding(.horizontal, 8)
                         .padding(.top, 8)
                         .foregroundColor(viewStore.textFieldState.fgColor)

@@ -18,18 +18,18 @@ extension DateInputStatus {
 
     var foregroundColor: Color {
         switch self {
-        case .inactive: return Color.grayBF
+        case .inactive: return Color.gray5
         case .active: return Color.primaryNormal
-        case .valid: return Color.gray43
+        case .valid: return Color.gray8
         case .invalid: return Color.baggleRed
         }
     }
 
     var borderColor: Color {
         switch self {
-        case .inactive: return Color.grayD9
+        case .inactive: return Color.gray4
         case .active: return Color.primaryNormal
-        case .valid: return Color.gray59
+        case .valid: return Color.gray7
         case .invalid: return Color.baggleRed
         }
     }

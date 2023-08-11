@@ -19,8 +19,8 @@ struct FeedListCell: View {
                 CircleProfileView(imageUrl: feed.userImageURL, size: .small)
 
                 Text(feed.username)
-                    .baggleTypoLineSpacing(size: 16, weight: .bold)
-                    .foregroundColor(.gray14)
+                    .font(.Baggle.body2)
+                    .foregroundColor(.gray11)
 
                 Spacer()
 
@@ -30,11 +30,10 @@ struct FeedListCell: View {
                     Image.Icon.more
                 }
             }
-            .foregroundColor(.gray14)
 
             KFImage(URL(string: feed.feedImageURL))
                 .placeholder({ _ in
-                    Color.grayF5
+                    Color.gray2
                 })
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fill)

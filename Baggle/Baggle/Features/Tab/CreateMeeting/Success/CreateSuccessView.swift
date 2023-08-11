@@ -22,7 +22,8 @@ struct CreateSuccessView: View {
 
                 VStack {
                     Text("약속이 만들어졌어요!")
-                        .font(.title)
+                        .font(.Baggle.subTitle)
+                        .foregroundColor(.primaryNormal)
                         .padding(.vertical, 8)
 
                     VStack(spacing: 6) {
@@ -30,6 +31,7 @@ struct CreateSuccessView: View {
 
                         Text("특별한 추억을 만들어보세요")
                     }
+                    .font(.Baggle.body2)
                     .foregroundColor(Color.gray)
                 }
                 .padding(.top, 44) // 툴바 높이
@@ -40,8 +42,13 @@ struct CreateSuccessView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 12) {
 
-                        Text("수빈님네 집들이")
-                            .font(.title3)
+                        HStack(spacing: 4) {
+                            Text("📌")
+                            
+                            Text("수빈님네 집들이")
+                        }
+                        .font(.Baggle.body1)
+                        .foregroundColor(.gray11)
 
                         VStack(alignment: .leading, spacing: 8) {
 
@@ -49,21 +56,21 @@ struct CreateSuccessView: View {
                                 attributedColorString(
                                     str: "장소  |  유탁님 없는 잠실",
                                     targetStr: "장소  |",
-                                    color: .black,
-                                    targetColor: .gray8C
+                                    color: .gray9,
+                                    targetColor: .gray6
                                 )
                             )
-                            .font(.system(size: 14))
+                            .font(.Baggle.description)
 
                             Text(
                                 attributedColorString(
                                     str: "시간  |  2023년 10월 25일 15:30",
                                     targetStr: "시간  |",
-                                    color: .black,
-                                    targetColor: .gray8C
+                                    color: .gray9,
+                                    targetColor: .gray6
                                 )
                             )
-                            .font(.system(size: 14))
+                            .font(.Baggle.description)
                         }
                     }
                     .padding(.vertical, 28)
@@ -100,7 +107,8 @@ struct CreateSuccessView: View {
                     viewStore.send(.sendLaterButtonTapped)
                 } label: {
                     Text("나중에 보내기")
-                        .foregroundColor(Color.gray)
+                        .font(.Baggle.body3)
+                        .foregroundColor(.gray5)
                 }
                 .padding()
             }

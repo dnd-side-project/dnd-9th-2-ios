@@ -54,7 +54,8 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
                 status: .progress,
-                isConfirmed: true),
+                isConfirmed: true
+            ),
             Meeting(
                 id: Int.random(in: 101...200),
                 name: "진행 중인 모임2",

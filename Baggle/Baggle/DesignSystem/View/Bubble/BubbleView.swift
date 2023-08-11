@@ -16,6 +16,7 @@ struct BubbleView: View {
     var body: some View {
         VStack(spacing: -3) {
             Text(text)
+                .font(.Baggle.caption1)
                 .foregroundColor(color.foregroundColor)
                 .padding(.vertical, size.paddingVertical)
                 .padding(.horizontal, size.paddingHorizontal)
