@@ -23,3 +23,18 @@ extension Font {
         }
     }
 }
+
+extension Font {
+    
+    struct Baggle {
+        static let title = Font.baggleFont(size: 24, weight: .bold)
+        static let subTitle = Font.baggleFont(size: 22, weight: .bold)
+        static let button = Font.baggleFont(size: 16, weight: .semibold)
+        static let body1 = Font.baggleFont(size: 18, weight: .bold)
+        static let body2 = Font.baggleFont(size: 16, weight: .medium)
+        static let body3 = Font.baggleFont(size: 15, weight: .medium)
+        static let description = Font.baggleFont(size: 14, weight: .medium)
+        static let caption1 = Font.baggleFont(size: 13, weight: .medium)
+        static let caption2 = Font.baggleFont(size: 12, weight: .semibold)
+    }
+}
