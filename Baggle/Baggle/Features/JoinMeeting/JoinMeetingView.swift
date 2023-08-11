@@ -64,13 +64,13 @@ extension JoinMeetingView {
         VStack {
             Text("약속 초대장이 도착했어요!\n참여하시겠어요?")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 22, weight: .bold))
+                .font(.Baggle.subTitle)
                 .foregroundColor(.primaryNormal)
                 .padding(.vertical, 8)
             
             Text("초대장을 확인하고 약속에 참여해보세요.")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.gray8C)
+                .font(.Baggle.body2)
+                .foregroundColor(.gray6)
         }
         .padding(.top, 8)
     }
@@ -83,27 +83,27 @@ extension JoinMeetingView {
                     
                     Text(data.title)
                 }
+                .font(.Baggle.body1)
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(
                         attributedColorString(
                             str: "장소  |  \(data.place)",
                             targetStr: "장소  |",
-                            color: .black,
-                            targetColor: .gray8C
+                            color: .gray9,
+                            targetColor: .gray6
                         )
                     )
-                    .font(.system(size: 14))
                     
                     Text(
                         attributedColorString(
                             str: "시간  |  \(data.date) \(data.time)",
                             targetStr: "시간  |",
-                            color: .black,
-                            targetColor: .gray8C)
+                            color: .gray9,
+                            targetColor: .gray6)
                     )
-                    .font(.system(size: 14))
                 }
+                .font(.Baggle.description)
             }
             
             Spacer()
@@ -127,8 +127,8 @@ extension JoinMeetingView {
                 viewStore.send(.exitButtonTapped)
             } label: {
                 Text("닫기")
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundColor(.grayBF)
+                    .font(.Baggle.body3)
+                    .foregroundColor(.gray5)
                     .frame(width: screenSize.width-40, height: 54)
             }
         }
