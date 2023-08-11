@@ -158,7 +158,7 @@ struct SignUpNicknameView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView(
             store: Store(
-                initialState: SignUpFeature.State(),
+                initialState: SignUpFeature.State(loginPlatform: .apple, socialLoginToken: "-"),
                 reducer: SignUpFeature()
             )
         )

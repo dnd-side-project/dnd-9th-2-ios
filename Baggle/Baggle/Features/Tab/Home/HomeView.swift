@@ -137,9 +137,10 @@ extension HomeView {
 
             Spacer()
 
-            KFImage(URL(string: user.profileImageURL))
+            KFImage(URL(string: user.profileImageURL ?? ""))
                 .placeholder({ _ in
-                    Color.gray2
+                    Image.Profile.profilDefault
+                        .resizable()
                 })
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fill)

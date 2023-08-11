@@ -158,7 +158,9 @@ struct HomeFeature: ReducerProtocol {
                 return .none
 
             case .cameraButtonTapped:
-                state.usingCamera = CameraFeature.State()
+                state.usingCamera = CameraFeature.State(
+                    timer: TimerFeature.State(timerCount: 30)
+                )
                 return .none
 
             case .usingCamera:

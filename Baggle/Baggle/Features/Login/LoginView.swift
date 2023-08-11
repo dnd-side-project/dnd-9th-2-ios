@@ -31,11 +31,14 @@ struct LoginView: View {
                         .padding(.top, 33)
                         .onTapGesture {
                             // 임시 회원가입
-                            viewStore.send(.signUpButtonTapped)
+                            viewStore.send(.moveToSignUp(.apple, "token"))
                         }
 
                     Spacer()
 
+                    Button("홈으로 이동") {
+                        viewStore.send(.loginSuccess)
+                    }
                     kakaoLoginButton()
                     appleLoginButton()
                         .padding(.bottom, 36)
@@ -83,7 +86,7 @@ extension LoginView {
                               let token = String(data: identityToken, encoding: .utf8)
                         else { return }
                         ViewStore(self.store, observe: { $0 })
-                            .send(.loginButtonTapped(.apple, token))
+                            .send(.appleLoginButtonTapped(token))
                     default:
                         break
                     }
