@@ -268,6 +268,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     print("언래핑 에러")
                 }
                 
+                // button의 onAppear 때 타이머 시작이 되기 때문에, 타이머 시간을 설정하고 버튼이 나타나야함
+                // 아니면 버튼이 바로 사라짐
                 state.buttonState = .authorize
 
                 return .none
