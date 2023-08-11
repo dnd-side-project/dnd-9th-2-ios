@@ -12,15 +12,15 @@ import SwiftUI
 /// Transferable를 채택해줘야 함, 앨범 앱 -> Baggle 앱을 거쳐오기 위해 필요한 프로토콜
 ///
 struct ProfileImageModel: Transferable {
-    let image: Image
+    let image: UIImage
 
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { data in
             guard let uiImage = UIImage(data: data) else {
                 throw TransferError.importFailed
             }
-            let image = Image(uiImage: uiImage)
-            return ProfileImageModel(image: image)
+
+            return ProfileImageModel(image: uiImage)
         }
     }
 }

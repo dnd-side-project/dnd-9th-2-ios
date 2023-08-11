@@ -9,4 +9,6 @@ import Foundation
 
 enum NetworkError: Error {
     case badRequest
+    case decodingError
+    case nicknameDuplicated
 }

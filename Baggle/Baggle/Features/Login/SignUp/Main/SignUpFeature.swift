@@ -25,6 +25,7 @@ struct SignUpFeature: ReducerProtocol {
 
         var imageState: AlbumImageState = .empty
         var imageSelection: PhotosPickerItem?
+        var selectedImage: Data?
 
         // MARK: - 닉네임 TextField
 
@@ -56,7 +57,7 @@ struct SignUpFeature: ReducerProtocol {
 
         case imageChanged(PhotosPickerItem?)
         case imageLoading
-        case successImageChange(Image)
+        case successImageChange(UIImage)
         case failImageChange
 
         // MARK: - Nickname
@@ -66,7 +67,7 @@ struct SignUpFeature: ReducerProtocol {
 
         // MARK: - Network
 
-        case requestSignUp(String)
+        case requestSignUp(SignUpRequestModel)
         case networkLoading(Bool)
 
         // MARK: - Child Action
@@ -103,11 +104,18 @@ struct SignUpFeature: ReducerProtocol {
             case .nextButtonTapped:
                 state.disableDismissAnimation = false // 화면 전환 애니메이션 활성화
                 let nickname = state.nickNameTextFieldState.text
+                // platform, fcmToken 값 넣어주기
+                let requestModel = SignUpRequestModel(
+                    nickname: nickname,
+                    profilImageUrl: state.selectedImage,
+                    platform: .apple,
+                    fcmToken: ""
+                )
 
                 if nicknameValidator.isValidate(nickname) {
                     return .run { send in
                         await send(.networkLoading(true))
-                        await send(.requestSignUp(nickname))
+                        await send(.requestSignUp(requestModel))
                     }
                 } else {
                     return .run { send in
@@ -150,11 +158,11 @@ struct SignUpFeature: ReducerProtocol {
             case let .imageChanged(photoPickerItem):
                 return .run { send in
                     await send(.imageLoading)
-
-                    if let profileImage = try? await photoPickerItem?.loadTransferable(
+                    
+                    if let profileUIImage = try? await photoPickerItem?.loadTransferable(
                         type: ProfileImageModel.self
                     ) {
-                        await send(.successImageChange(profileImage.image))
+                        await send(.successImageChange(profileUIImage.image))
                     } else {
                         await send(.failImageChange)
                     }
@@ -165,7 +173,8 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { send in await send(.disableButtonChanged) }
 
             case let .successImageChange(image):
-                state.imageState = .success(image)
+                state.imageState = .success(Image(uiImage: image).resizable())
+                state.selectedImage = image.jpegData(compressionQuality: 0.5)
                 return .run { send in await send(.disableButtonChanged) }
 
             case .failImageChange:
@@ -189,9 +198,9 @@ struct SignUpFeature: ReducerProtocol {
 
                 // MARK: - Network
 
-            case let .requestSignUp(nickname):
+            case let .requestSignUp(requestModel):
                 return .run { send in
-                    let result = await signUpService.signUp(nickname)
+                    let result = await signUpService.signUp(requestModel)
                     await send(.networkLoading(false))
 
                     switch result {
