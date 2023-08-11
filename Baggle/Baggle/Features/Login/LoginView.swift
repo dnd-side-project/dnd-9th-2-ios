@@ -31,7 +31,7 @@ struct LoginView: View {
                         .padding(.top, 33)
                         .onTapGesture {
                             // 임시 회원가입
-                            viewStore.send(.signUpButtonTapped)
+                            viewStore.send(.moveToSignUp(.apple, "token"))
                         }
 
                     Spacer()
@@ -83,7 +83,7 @@ extension LoginView {
                               let token = String(data: identityToken, encoding: .utf8)
                         else { return }
                         ViewStore(self.store, observe: { $0 })
-                            .send(.loginButtonTapped(.apple, token))
+                            .send(.appleLoginButtonTapped(token))
                     default:
                         break
                     }

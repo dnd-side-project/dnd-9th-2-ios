@@ -12,7 +12,7 @@ import Moya
 
 enum UserAPI {
     case signIn
-    case signUp(requestModel: SignUpRequestModel)
+    case signUp(requestModel: SignUpRequestModel, token: String)
     case reissue
 }
 
@@ -36,8 +36,8 @@ extension UserAPI: BaseAPI {
         switch self {
         case .signIn:
             return HeaderType.jsonWithAuthorization(token: "").value // 카카오 또는 애플 토큰
-        case .signUp:
-            return HeaderType.multipart(token: "").value // 카카오 또는 애플 토큰
+        case .signUp(_, let token):
+            return HeaderType.multipart(token: token).value // 카카오 또는 애플 토큰
         case .reissue:
             return HeaderType.jsonWithAuthorization(token: "").value // refreshToken
         }
@@ -60,11 +60,6 @@ extension UserAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        case .signUp(let requestModel):
-            params["profileImageUrl"] = requestModel.profilImageUrl
-            params["nickname"] = requestModel.nickname
-            params["platform"] = requestModel.platform
-            params["fcmToken"] = requestModel.platform
         default:
             break
         }
@@ -81,11 +76,30 @@ extension UserAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
-        case .signIn, .signUp:
-            return .requestParameters(
-                parameters: bodyParameters ?? [:],
-                encoding: parameterEncoding)
-        case .reissue:
+        case .signUp(let requestModel, _):
+            var multiPartData: [Moya.MultipartFormData] = []
+            let imageData = MultipartFormData(
+                provider: .data(requestModel.profilImageUrl ?? Data()),
+                name: "file",
+                fileName: "file.jpeg",
+                mimeType: "image/jpeg")
+            multiPartData.append(imageData)
+            
+            let parameters: [String: String] = [
+                "nickname": requestModel.nickname,
+                "platform": requestModel.platform.rawValue,
+                "fcmToken": requestModel.fcmToken
+            ]
+            
+            for (key, value) in parameters {
+                multiPartData.append(MultipartFormData(
+                    provider: .data(value.data(using: .utf8) ?? Data()),
+                    name: key))
+            }
+            
+            return .uploadMultipart(multiPartData)
+            
+        case .signIn, .reissue:
             return .requestPlain
         }
     }
