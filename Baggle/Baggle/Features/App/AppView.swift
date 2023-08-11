@@ -51,7 +51,7 @@ struct AppView: View {
                 splashStarted = true
             }
 
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                 withAnimation {
                     splashEnded = true
                 }

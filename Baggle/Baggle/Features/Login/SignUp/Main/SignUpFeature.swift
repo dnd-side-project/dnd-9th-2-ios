@@ -169,6 +169,8 @@ struct SignUpFeature: ReducerProtocol {
                     } else {
                         await send(.failImageChange)
                     }
+                    
+                    await(send(.keyboardAppear))
                 }
 
             case .imageLoading:
