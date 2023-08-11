@@ -33,7 +33,10 @@ struct SmallTimerView: View {
             .background(Color.primaryNormal)
             .cornerRadius(20)
             .onAppear {
-                viewStore.send(.onAppear)
+                viewStore.send(.start)
+            }
+            .onDisappear {
+                viewStore.send(.cancel)
             }
         }
     }
@@ -43,7 +46,7 @@ struct SmallTimerView_Previews: PreviewProvider {
     static var previews: some View {
         SmallTimerView(
             store: Store(
-                initialState: TimerFeature.State(),
+                initialState: TimerFeature.State(timerCount: 30),
                 reducer: TimerFeature()
             )
         )
