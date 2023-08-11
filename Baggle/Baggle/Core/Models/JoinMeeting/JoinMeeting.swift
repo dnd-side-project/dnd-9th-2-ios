@@ -7,11 +7,10 @@
 
 import Foundation
 
-enum JoinMeetingState: Equatable {
+enum JoinMeetingStatus: Equatable {
     case enable(JoinMeeting)
     case expired
     case joined
-    case loading
 }
 
 struct JoinMeeting: Equatable {

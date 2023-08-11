@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 struct JoinMeetingService {
-    var fetchMeetingInfo: (_ meetingID: Int) async -> JoinMeetingState
+    var fetchMeetingInfo: (_ meetingID: Int) async -> JoinMeetingStatus
 }
 
 extension JoinMeetingService: DependencyKey {
@@ -19,7 +19,7 @@ extension JoinMeetingService: DependencyKey {
         do {
             return try await JoinMeetingRepository().mockJoinMeetingState()
         } catch {
-            return JoinMeetingState.joined
+            return JoinMeetingStatus.joined
         }
     }
 }
@@ -32,7 +32,7 @@ extension DependencyValues {
 }
 
 struct JoinMeetingRepository {
-    func mockJoinMeetingState() async throws -> JoinMeetingState {
+    func mockJoinMeetingState() async throws -> JoinMeetingStatus {
         return try await withCheckedThrowingContinuation({ continuation in
             let info = JoinMeeting(meetingId: 0,
                                    title: "수빈님네 집들이",

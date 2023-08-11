@@ -17,8 +17,7 @@ struct JoinMeetingView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
-                switch viewStore.joinMeeingState {
-                case .enable(let joinMeeting):
+                if case let .enable(joinMeeting) = viewStore.joinMeeingStatus {
                     VStack(alignment: .center, spacing: 0) {
                         createDescription()
                             .padding(.top, 46)
@@ -39,20 +38,11 @@ struct JoinMeetingView: View {
                         createButton(viewStore: viewStore)
                             .padding(.bottom, 16)
                     }
-                case .expired:
+                } else {
                     baggleAlert(viewStore: viewStore)
-                case .joined:
-                    Text("이미 참여 중인 방입니다")
-                case .loading:
-                    Image.Logo.medium
-                        .resizable()
-                        .padding(60)
-                        .scaledToFit()
                 }
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
+            .onAppear { viewStore.send(.onAppear) }
         }
     }
 }
@@ -152,7 +142,7 @@ struct JoinMeetingView_Previews: PreviewProvider {
     static var previews: some View {
         JoinMeetingView(
             store: Store(
-                initialState: JoinMeetingFeature.State(meetingId: 100),
+                initialState: JoinMeetingFeature.State(meetingId: 100, joinMeeingStatus: .expired),
                 reducer: JoinMeetingFeature()
             )
         )
