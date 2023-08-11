@@ -64,10 +64,6 @@ struct SignUpRepository {
                                         name: data.nickname,
                                         profileImageURL: data.profileImageUrl,
                                         platform: data.platform == "apple" ? .apple : .kakao)
-            // TODO: - 확인 후 삭제
-            print("🔔 keychain: \(KeychainManager.shared.readUserToken())")
-            print("🔔 userdefault: \(UserDefaultList.user)")
-            
             return .success
         } catch let error {
             print("SignUpRepository - error: \(error)")

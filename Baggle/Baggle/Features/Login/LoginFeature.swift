@@ -61,8 +61,7 @@ struct LoginFeature: ReducerProtocol {
                         print("확인용 - token: \(token), platform: kakao")
                         // 로그인 통신
                         // 성공이면 loginSuccess, 새로운 유저면 moveToSignUp, 실패면 loginFail
-//                        await send(.moveToSignUp(.kakao, token))
-                        await send(.loginSuccess)
+                        await send(.moveToSignUp(.kakao, token))
                     } catch {
                         print("카카오 로그인 에러")
                         print(error)

@@ -36,6 +36,9 @@ struct LoginView: View {
 
                     Spacer()
 
+                    Button("홈으로 이동") {
+                        viewStore.send(.loginSuccess)
+                    }
                     kakaoLoginButton()
                     appleLoginButton()
                         .padding(.bottom, 36)
