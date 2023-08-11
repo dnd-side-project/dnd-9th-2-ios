@@ -139,6 +139,7 @@ extension HomeView {
             KFImage(URL(string: user.profileImageURL ?? ""))
                 .placeholder({ _ in
                     Image.Profile.profilDefault
+                        .resizable()
                 })
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fill)

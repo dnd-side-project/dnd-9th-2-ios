@@ -27,7 +27,7 @@ extension SignUpService: DependencyKey {
             return try await SignUpRepository().fetchSignUp(requestModel: requestModel,
                                                             token: token)
         } catch let error {
-            return SignUpServiceState.fail(.networkErr)
+            return SignUpServiceState.fail(.network)
         }
     }
 }
@@ -56,29 +56,21 @@ struct SignUpRepository {
             
             let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
             if KeychainManager.shared.readUserToken() == nil {
-                KeychainManager.shared.deleteUserToken()
+                try KeychainManager.shared.deleteUserToken()
             }
-
-            if KeychainManager.shared.createUserToken(token) {
-                // 키체인 등록 실패한 경우, 업데이트 시도
-                print("Keychain - create failed")
-            }
+            try KeychainManager.shared.createUserToken(token)
 
             UserDefaultList.user = User(id: data.userID,
                                         name: data.nickname,
                                         profileImageURL: data.profileImageUrl,
                                         platform: data.platform == "apple" ? .apple : .kakao)
-            // TODO: - 확인 후 삭제
-            print("🔔 keychain: \(KeychainManager.shared.readUserToken())")
-            print("🔔 userdefault: \(UserDefaultList.user)")
-            
             return .success
         } catch let error {
             print("SignUpRepository - error: \(error)")
-            if (error as? APIError) == APIError.duplicatedNicknameErr {
+            if (error as? APIError) == APIError.duplicatedNickname {
                 return .nicknameDuplicated
             } else {
-                return .fail(.networkErr)
+                return .fail(.network)
             }
         }
     }
