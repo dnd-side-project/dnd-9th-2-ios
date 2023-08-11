@@ -307,6 +307,12 @@ extension Date {
 
 // MARK: - 타이머
 extension Date {
+
+    func authenticationTimeout() -> Int {
+        self.later(minutes: 5).remainingTime()
+    }
+    
+    
     func remainingTime() -> Int {
         let components = calendar.dateComponents([.second], from: Date(), to: self)
         if let result = components.second, result > 0 {

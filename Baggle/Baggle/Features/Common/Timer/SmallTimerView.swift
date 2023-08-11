@@ -43,7 +43,7 @@ struct SmallTimerView_Previews: PreviewProvider {
     static var previews: some View {
         SmallTimerView(
             store: Store(
-                initialState: TimerFeature.State(),
+                initialState: TimerFeature.State(timerCount: 30),
                 reducer: TimerFeature()
             )
         )

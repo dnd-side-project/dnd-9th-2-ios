@@ -59,7 +59,7 @@ struct LargeTimerView_Previews: PreviewProvider {
     static var previews: some View {
         LargeTimerView(
             store: Store(
-                initialState: TimerFeature.State(),
+                initialState: TimerFeature.State(timerCount: 30),
                 reducer: TimerFeature()
             )
         )
