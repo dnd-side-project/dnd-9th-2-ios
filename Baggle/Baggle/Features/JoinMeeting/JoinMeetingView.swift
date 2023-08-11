@@ -16,31 +16,47 @@ struct JoinMeetingView: View {
     var body: some View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack(alignment: .center, spacing: 0) {
-                createDescription()
-                    .padding(.top, 46)
-                
-                createMeetingInfo()
-                    .padding(.top, 26)
-                
-                Spacer()
-                
-                Image.Illustration.invitationReceive
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.leading, 79)
-                    .padding(.trailing, 56)
-                
-                Spacer()
-                
-                createButton(viewStore: viewStore)
-                    .padding(.bottom, 16)
+            ZStack {
+                switch viewStore.joinMeeingState {
+                case .enable(let joinMeeting):
+                    VStack(alignment: .center, spacing: 0) {
+                        createDescription()
+                            .padding(.top, 46)
+                        
+                        createMeetingInfo(data: joinMeeting)
+                            .padding(.top, 26)
+                        
+                        Spacer()
+                        
+                        Image.Illustration.invitationReceive
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.leading, 79)
+                            .padding(.trailing, 56)
+                        
+                        Spacer()
+                        
+                        createButton(viewStore: viewStore)
+                            .padding(.bottom, 16)
+                    }
+                case .expired:
+                    baggleAlert(viewStore: viewStore)
+                case .joined:
+                    Text("이미 참여 중인 방입니다")
+                case .loading:
+                    Text("참여할 약속 정보를 불러오고 있습니다.")
+                }
+            }
+            .onAppear {
+                viewStore.send(.onAppear)
             }
         }
     }
 }
 
 extension JoinMeetingView {
+    typealias Viewstore = ViewStore<JoinMeetingFeature.State, JoinMeetingFeature.Action>
+    
     func createDescription() -> some View {
         VStack {
             Text("약속 초대장이 도착했어요!\n참여하시겠어요?")
@@ -56,19 +72,19 @@ extension JoinMeetingView {
         .padding(.top, 8)
     }
     
-    func createMeetingInfo() -> some View {
+    func createMeetingInfo(data: JoinMeeting) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(spacing: 6) {
                     Text("📌")
                     
-                    Text("수빈님네 집들이")
+                    Text(data.title)
                 }
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(
                         attributedColorString(
-                            str: "장소  |  유탁님 없는 잠실",
+                            str: "장소  |  \(data.place)",
                             targetStr: "장소  |",
                             color: .black,
                             targetColor: .gray8C
@@ -78,7 +94,7 @@ extension JoinMeetingView {
                     
                     Text(
                         attributedColorString(
-                            str: "시간  |  2023년 10월 23일 15:30",
+                            str: "시간  |  \(data.date) \(data.time)",
                             targetStr: "시간  |",
                             color: .black,
                             targetColor: .gray8C)
@@ -97,9 +113,7 @@ extension JoinMeetingView {
         }
     }
     
-    func createButton(
-        viewStore: ViewStore<JoinMeetingFeature.State, JoinMeetingFeature.Action>
-    ) -> some View {
+    func createButton(viewStore: Viewstore) -> some View {
         VStack(spacing: 0) {
             Button("약속 참여하기") {
                 viewStore.send(.joinButtonTapped)
@@ -115,6 +129,19 @@ extension JoinMeetingView {
                     .frame(width: screenSize.width-40, height: 54)
             }
         }
+    }
+    
+    func baggleAlert(viewStore: Viewstore) -> some View {
+        BaggleAlert(
+            isPresented: Binding(
+                get: { viewStore.isAlertPresented },
+                set: { _ in viewStore.send(.presentAlert) }),
+            title: "이미 만료된 방이에요!",
+            description: "약속 1시간 전까지만 입장이 가능해요.",
+            alertType: .onebutton,
+            rightButtonTitle: "확인") {
+                viewStore.send(.exitButtonTapped)
+            }
     }
 }
 
