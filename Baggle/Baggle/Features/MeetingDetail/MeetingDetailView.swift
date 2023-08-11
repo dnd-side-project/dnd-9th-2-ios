@@ -137,7 +137,7 @@ extension MeetingDetailView {
             Text("📌")
 
             Text("\(name)")
-//                .baggleTypoLineSpacing(size: 22, weight: .bold)
+                .fontWithLineSpacing(fontType: .subTitle)
                 .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
                 .foregroundColor(.gray9)
@@ -157,7 +157,6 @@ extension MeetingDetailView {
             Spacer()
         }
         .padding(.bottom, 10)
-//        .baggleTypoLineSpacing(size: 22, weight: .bold)
     }
 
     func meetingDateView(place: String, date: String, time: String) -> some View {
@@ -178,7 +177,7 @@ extension MeetingDetailView {
                     targetColor: .gray6)
             )
         }
-//        .baggleTypoLineSpacing(size: 15, weight: .medium)
+        .fontWithLineSpacing(fontType: .body3)
     }
 
     func meetingMemoView(memo: String?) -> some View {
@@ -188,11 +187,10 @@ extension MeetingDetailView {
                     .foregroundColor(.gray7)
             } else {
                 Text("작성된 메모가 없어요!")
-//                    .baggleTypoLineSpacing(size: 15, weight: .medium)
                     .foregroundColor(.gray5)
             }
         }
-//        .baggleTypoLineSpacing(size: 15, weight: .medium)
+        .fontWithLineSpacing(fontType: .body3)
         .padding(.vertical, 14)
         .padding(.horizontal, 20)
         .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
@@ -253,7 +251,7 @@ extension MeetingDetailView {
 
                         Text(member.name)
                             .padding(.vertical, 2)
-//                            .baggleTypoLineSpacing(size: 13, weight: .medium)
+                            .fontWithLineSpacing(fontType: .caption1)
                             .frame(maxWidth: 64)
                     }
                     .padding(.all, 2)
