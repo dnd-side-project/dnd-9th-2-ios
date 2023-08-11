@@ -9,13 +9,6 @@ import SwiftUI
 
 import ComposableArchitecture
 
-enum JoinMeetingState: Equatable {
-    case enable(JoinMeeting)
-    case expired
-    case joined
-    case loading
-}
-
 struct JoinMeetingFeature: ReducerProtocol {
 
     struct State: Equatable {

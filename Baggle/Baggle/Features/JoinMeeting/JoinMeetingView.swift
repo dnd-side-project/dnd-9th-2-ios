@@ -44,7 +44,10 @@ struct JoinMeetingView: View {
                 case .joined:
                     Text("이미 참여 중인 방입니다")
                 case .loading:
-                    Text("참여할 약속 정보를 불러오고 있습니다.")
+                    Image.Logo.medium
+                        .resizable()
+                        .padding(60)
+                        .scaledToFit()
                 }
             }
             .onAppear {
