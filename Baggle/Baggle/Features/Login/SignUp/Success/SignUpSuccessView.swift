@@ -27,9 +27,13 @@ struct SignUpSuccessView: View {
                     .padding(.horizontal, 56)
                     .padding(.top, 90)
                     .overlay {
-                        BadgeView(text: "가입축하", foregroundColor: .white, backgroundColor: .baggleRed)
-                            .rotationEffect(.degrees(10))
-                            .offset(x: 80, y: -95)
+                        BadgeView(
+                            text: "가입축하",
+                            foregroundColor: .white,
+                            backgroundColor: .baggleRed
+                        )
+                        .rotationEffect(.degrees(10))
+                        .offset(x: 80, y: -95)
                     }
 
                 Spacer()
@@ -53,7 +57,6 @@ extension SignUpSuccessView {
     private var description: some View {
         VStack(spacing: 0) {
             Text("Baggle에 오신 걸\n환영합니다!")
-                .baggleTypoLineSpacing(size: 22, weight: .medium)
                 .foregroundColor(.primaryNormal)
                 .padding(.vertical, 8)
 

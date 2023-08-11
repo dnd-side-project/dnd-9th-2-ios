@@ -118,11 +118,9 @@ extension HomeView {
             VStack(spacing: 4) {
                 Text(status.title ?? "")
                     .foregroundColor(.gray8C)
-                    .baggleTypoLineSpacing(size: 16, weight: .medium)
 
                 Text(status.description ?? "")
                     .foregroundColor(.grayBF)
-                    .baggleTypoLineSpacing(size: 15, weight: .medium)
             }
         }
     }

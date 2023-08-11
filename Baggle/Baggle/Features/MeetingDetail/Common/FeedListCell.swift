@@ -19,7 +19,6 @@ struct FeedListCell: View {
                 CircleProfileView(imageUrl: feed.userImageURL, size: .small)
 
                 Text(feed.username)
-                    .baggleTypoLineSpacing(size: 16, weight: .bold)
                     .foregroundColor(.gray14)
 
                 Spacer()
