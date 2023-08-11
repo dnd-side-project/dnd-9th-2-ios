@@ -94,6 +94,8 @@ struct MeetingDetailView: View {
                 Button("카메라") { viewStore.send(.cameraButtonTapped) }
 
                 Button("긴급 버튼") { viewStore.send(.emergencyButtonTapped) }
+                
+                Button("초대장 보내기") { viewStore.send(.inviteButtonTapped) }
             })
             .sheet(
                 store: self.store.scope(

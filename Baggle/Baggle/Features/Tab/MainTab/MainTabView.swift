@@ -82,18 +82,7 @@ struct MainTabView: View {
                     if let id = url.params()?["id"] as? String,
                        let id = Int(id) {
                         print("MainTabView - id: \(id)")
-
-                        let delay = (viewStore.selectedTab == .createMeeting) ? 0.2 : 0
-                        let dispatchTime: DispatchTime = DispatchTime.now() + delay
-
-                        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                            // 모임 참여 여부 확인 후 분기처리
-                            // 모임 참여 중 > 모임 상세로 이동
-//                            postObserverAction(.moveMeetingDetail, object: id)
-
-                            // 모임 참여 전 > 모임 정보 확인
-                            viewStore.send(.moveToJoinMeeting(id))
-                        }
+                        viewStore.send(.enterJoinMeeting(id))
                     }
                 }
             }

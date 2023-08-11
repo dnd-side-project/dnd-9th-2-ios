@@ -5,6 +5,8 @@
 //  Created by youtak on 2023/07/19.
 //
 
+import Foundation
+
 import ComposableArchitecture
 
 struct MainTabFeature: ReducerProtocol {
@@ -31,9 +33,13 @@ struct MainTabFeature: ReducerProtocol {
 
         case createMeeting(PresentationAction<CreateTitleFeature.Action>)
         case logoutMainTab(MyPageFeature.Action)
+        case enterJoinMeeting(Int)
+        case changeJoinMeetingStatus(Int, JoinMeetingStatus)
         case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
-        case moveToJoinMeeting(Int)
+        case moveToJoinMeeting(Int, JoinMeetingStatus)
     }
+    
+    @Dependency(\.joinMeetingService) var joinMeetingService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -76,6 +82,26 @@ struct MainTabFeature: ReducerProtocol {
 
             case .logoutMainTab:
                 return.none
+                
+            case .enterJoinMeeting(let id):
+                return .run { send in
+                    let status = await joinMeetingService.fetchMeetingInfo(id)
+                    await send(.changeJoinMeetingStatus(id, status))
+                }
+                
+            case .changeJoinMeetingStatus(let id, let status):
+                if status == .joined {
+                    let delay = (state.selectedTab == .createMeeting) ? 0.2 : 0
+                    let dispatchTime: DispatchTime = DispatchTime.now() + delay
+                    DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                        postObserverAction(.moveMeetingDetail, object: id)
+                    }
+                } else {
+                    return .run { send in
+                        await send(.moveToJoinMeeting(id, status))
+                    }
+                }
+                return .none
 
             case .joinMeeting(PresentationAction.dismiss):
                 state.selectedTab = .myPage
@@ -86,8 +112,9 @@ struct MainTabFeature: ReducerProtocol {
             case .joinMeeting:
                 return .none
 
-            case .moveToJoinMeeting(let id):
-                state.joinMeeting = JoinMeetingFeature.State(meetingId: id)
+            case .moveToJoinMeeting(let id, let status):
+                state.joinMeeting = JoinMeetingFeature.State(meetingId: id,
+                                                             joinMeeingStatus: status)
                 return .none
             }
         }
