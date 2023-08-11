@@ -48,13 +48,12 @@ extension BaseService {
             provider.request(target) { result in
                 switch result {
                 case .success(let response):
-                    print("✅ response - \(response)")
                     do {
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        print("✅ message", body.message)
+                        print("✅ response -", body)
                         switch body.status {
-                        case 200, 201:
+                        case 201:
                             if let data = body.data {
                                 print("✅ data -", data)
                                 continuation.resume(returning: data)
