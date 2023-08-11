@@ -53,7 +53,25 @@ struct SignUpRepository {
                 requestModel: requestModel,
                 token: token))
             print("data: \(data)")
-            // userDefault 저장
+            
+            let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
+            if KeychainManager.shared.readUserToken() == nil {
+                KeychainManager.shared.deleteUserToken()
+            }
+
+            if KeychainManager.shared.createUserToken(token) {
+                // 키체인 등록 실패한 경우, 업데이트 시도
+                print("Keychain - create failed")
+            }
+
+            UserDefaultList.user = User(id: data.userID,
+                                        name: data.nickname,
+                                        profileImageURL: data.profileImageUrl,
+                                        platform: data.platform == "apple" ? .apple : .kakao)
+            // TODO: - 확인 후 삭제
+            print("🔔 keychain: \(KeychainManager.shared.readUserToken())")
+            print("🔔 userdefault: \(UserDefaultList.user)")
+            
             return .success
         } catch let error {
             print("SignUpRepository - error: \(error)")

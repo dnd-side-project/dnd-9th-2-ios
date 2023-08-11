@@ -148,6 +148,7 @@
 		2BC5AD312A84983C00B73241 /* SignUpRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5AD302A84983C00B73241 /* SignUpRequestModel.swift */; };
 		2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */; };
 		2BD5D5572A6C4EBE0070C196 /* View+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */; };
+		2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEAC752A86024E00D698E6 /* KeychainManager.swift */; };
 		2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5299D2A7D697800A53779 /* MeetingListCell.swift */; };
 		2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BE74F612A7771B600402068 /* GoogleService-Info.plist */; };
 		2BF268232A77861300F32ADF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF268222A77861300F32ADF /* HomeService.swift */; };
@@ -304,6 +305,7 @@
 		2BC5AD302A84983C00B73241 /* SignUpRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestModel.swift; sourceTree = "<group>"; };
 		2BCACB7E2A742C9000892D45 /* BaggleTextFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextFeature.swift; sourceTree = "<group>"; };
 		2BD5D5562A6C4EBE0070C196 /* View+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifier.swift"; sourceTree = "<group>"; };
+		2BDEAC752A86024E00D698E6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		2BE5299D2A7D697800A53779 /* MeetingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
 		2BE74F612A7771B600402068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BF268222A77861300F32ADF /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -1078,6 +1080,7 @@
 				2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */,
 				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
 				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
+				2BDEAC752A86024E00D698E6 /* KeychainManager.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1300,6 +1303,7 @@
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
 				2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
+				2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */,
 				143B270A2A76214500DFC0EE /* CreatePlaceView.swift in Sources */,

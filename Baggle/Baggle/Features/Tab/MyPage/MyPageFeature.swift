@@ -22,6 +22,8 @@ struct MyPageFeature: ReducerProtocol {
             switch action {
 
             case .logoutMyPage:
+                KeychainManager.shared.deleteUserToken()
+                UserDefaultList.user = nil
                 return .none
             }
         }

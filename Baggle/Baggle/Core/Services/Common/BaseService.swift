@@ -72,7 +72,8 @@ extension BaseService {
                         default:
                             continuation.resume(throwing: APIError.networkErr)
                         }
-                    } catch {
+                    } catch let error {
+                        print("❌ error - \(error)")
                         continuation.resume(throwing: APIError.decodingErr)
                     }
                 case .failure(let error):

@@ -10,7 +10,7 @@ import Foundation
 public struct User: Codable, Equatable {
     let id: Int
     let name: String
-    let profileImageURL: String
+    let profileImageURL: String?
     let platform: LoginPlatform
 }
 

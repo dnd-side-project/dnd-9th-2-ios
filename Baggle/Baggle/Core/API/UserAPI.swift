@@ -81,7 +81,7 @@ extension UserAPI: BaseAPI {
             let imageData = MultipartFormData(
                 provider: .data(requestModel.profilImageUrl ?? Data()),
                 name: "file",
-                fileName: "file.jpeg",
+                fileName: ".jpg",
                 mimeType: "image/jpeg")
             multiPartData.append(imageData)
             
