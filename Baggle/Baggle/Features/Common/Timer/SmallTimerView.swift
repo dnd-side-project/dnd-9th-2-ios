@@ -33,7 +33,10 @@ struct SmallTimerView: View {
             .background(Color.primaryNormal)
             .cornerRadius(20)
             .onAppear {
-                viewStore.send(.onAppear)
+                viewStore.send(.start)
+            }
+            .onDisappear {
+                viewStore.send(.cancel)
             }
         }
     }

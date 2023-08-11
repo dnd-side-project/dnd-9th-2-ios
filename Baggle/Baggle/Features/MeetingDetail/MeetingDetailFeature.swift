@@ -43,7 +43,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         var tappedImageUrl: String?
 
         // Child
-        var timerState = TimerFeature.State(timerCount: 30)
+        var timerState = TimerFeature.State(timerCount: 0)
 
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
@@ -85,6 +85,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         case emergencyAction(PresentationAction<EmergencyFeature.Action>)
         case timerAction(TimerFeature.Action)
 
+        // Timer - State
+        case timerCountChanged
+        
         // delegate
         case delegate(Delegate)
 
@@ -131,7 +134,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                     if !data.emergencyButtonActive && data.isEmergencyAuthority {
                         state.buttonState = .emergency
                     } else if data.emergencyButtonActive && !data.isCertified {
-                        state.buttonState = .authorize
+                        return .run { send in await send(.timerCountChanged) }
                     }
                 }
 
@@ -240,7 +243,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .emergencyAction:
                 return .none
 
-                // Timer
+                // Child - Timer
                 
             case .timerAction(.timerOver):
                 state.buttonState = .none
@@ -249,6 +252,19 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .timerAction:
                 return .none
 
+                // Timer - State
+                
+            case .timerCountChanged:
+                if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
+                    state.timerState.timerCount = emergencyButtonActiveTime.authenticationTimeout()
+                } else {
+                    print("언래핑 에러")
+                }
+                
+                state.buttonState = .authorize
+
+                return .none
+                
                 // Delegate
 
             case .delegate(.deleteSuccess):

@@ -17,8 +17,8 @@ extension MeetingDetailService: DependencyKey {
     static var liveValue = Self { meetingID, userID  in
         do {
             return try await MockUpMeetingDetailService()
-//                .meetingDetail(status: .ready)
-                .fetchMeetingDetail(meetingID: meetingID, userID: userID)
+                .meetingDetail(status: .confirmedEmergency)
+//                .fetchMeetingDetail(meetingID: meetingID, userID: userID)
         } catch {
             return nil
         }
@@ -244,8 +244,8 @@ extension MockUpMeetingDetailService {
             id: 0,
             name: "DND 최종 발표",
             place: "영등포",
-            date: "2023년 08월 27일",
-            time: "14:00",
+            date: "2023년 08월 11일",
+            time: "13:45",
             memo: "2조 짱",
             members: [
                 Member(
@@ -270,7 +270,7 @@ extension MockUpMeetingDetailService {
             status: .confirmed,
             isEmergencyAuthority: true,
             emergencyButtonActive: true,
-            emergencyButtonActiveTime: Date(timeIntervalSince1970: 1693109700),
+            emergencyButtonActiveTime: Date.createDate(2023, 8, 11, 13, 48),
             isCertified: false,
             feeds: []
         )

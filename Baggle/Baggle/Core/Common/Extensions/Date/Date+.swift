@@ -322,3 +322,14 @@ extension Date {
         }
     }
 }
+
+
+#if DEBUG
+extension Date {
+    static func createDate(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int) -> Date {
+        let targetDateComponents = DateComponents(year: year, month: month, day: day, hour: hour, minute: minute)
+        let targetDate = Calendar.current.date(from: targetDateComponents)
+        return targetDate!
+    }
+}
+#endif
