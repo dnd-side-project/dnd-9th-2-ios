@@ -41,10 +41,10 @@ extension View {
     }
 
     /// baggleFont + lineSpacing 설정하는 함수
-    func baggleTypoLineSpacing(size: CGFloat, weight: Font.Weight) -> some View {
+    func fontWithLineSpacing(fontType: FontType) -> some View {
         return self
-            .font(.baggleFont(size: size, weight: weight))
-            .lineSpacing(size*0.3)
+            .font(.Baggle.font(fontType))
+            .lineSpacing(fontType.size * 0.3)
     }
 
     // MARK: Spacer() 영역 터치

@@ -29,19 +29,22 @@ struct CreateDateView: View {
                     VStack(alignment: .leading) {
 
                         Text("날짜와 시간을 입력하세요.")
+                            .font(.Baggle.description)
+                            .foregroundColor(.gray6)
                             .padding(.horizontal, 2)
-
+                        
                         HStack(spacing: dateButtonSpace) {
+                            
+                            // MARK: - Date Button
 
                             HStack {
                                 Text(viewStore.meetingDate.koreanDate())
+                                    .font(.Baggle.body2)
                                 Spacer()
                             }
                             .foregroundColor(viewStore.dateButtonStatus.foregroundColor)
                             .padding()
-                            .frame(
-                                width: abs(proxy.size.width - dateButtonSpace) * dateWidthRatio
-                            )
+                            .frame(width: dateWidth(proxy.size.width))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(viewStore.dateButtonStatus.borderColor, lineWidth: 1)
@@ -51,15 +54,16 @@ struct CreateDateView: View {
                                 viewStore.send(.selectDateButtonTapped)
                             }
 
+                            // MARK: - Time Button
+                            
                             HStack {
                                 Text(viewStore.meetingDate.hourMinute())
+                                    .font(.Baggle.body2)
                                 Spacer()
                             }
                             .foregroundColor(viewStore.timeButtonStatus.foregroundColor)
                             .padding()
-                            .frame(
-                                width: abs(proxy.size.width - dateButtonSpace) * (1 - dateWidthRatio)
-                            )
+                            .frame(width: timerWidth(proxy.size.width))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(viewStore.timeButtonStatus.borderColor, lineWidth: 1)
@@ -72,6 +76,7 @@ struct CreateDateView: View {
 
                         if let errorMessage = viewStore.errorMessage {
                             Text(errorMessage)
+                                .font(.Baggle.caption2)
                                 .foregroundColor(.baggleRed)
                                 .padding(.horizontal, 2)
                         }
@@ -109,7 +114,17 @@ struct CreateDateView: View {
     }
 }
 
-struct CreateMeetingDateView_Previews: PreviewProvider {
+extension CreateDateView {
+    private func dateWidth(_ containerWidth: CGFloat) -> CGFloat {
+        abs(containerWidth - dateButtonSpace) * dateWidthRatio
+    }
+    
+    private func timerWidth(_ containerWidth: CGFloat) -> CGFloat {
+        abs(containerWidth - dateButtonSpace) * (1 - dateWidthRatio)
+    }
+}
+
+struct CreateDateView_Previews: PreviewProvider {
     static var previews: some View {
         CreateDateView(
             store: Store(

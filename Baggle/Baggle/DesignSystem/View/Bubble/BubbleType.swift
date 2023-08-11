@@ -43,7 +43,7 @@ extension BubbleColor {
     var backgroundColor: Color {
         switch self {
         case .primary: return Color.primaryNormal
-        case .secondary: return Color.gray14
+        case .secondary: return Color.gray11
         }
     }
 

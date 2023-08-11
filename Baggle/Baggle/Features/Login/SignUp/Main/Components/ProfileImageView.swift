@@ -31,8 +31,8 @@ struct ProfileImageView: View {
         .frame(width: 160, height: 160)
         .background {
             Circle()
-                .stroke(Color.grayD9, lineWidth: 1)
-                .background(Color.grayF5)
+                .stroke(Color.gray4, lineWidth: 1)
+                .background(Color.gray2)
         }
         .clipShape(Circle())
         .overlay(alignment: .bottomTrailing) {

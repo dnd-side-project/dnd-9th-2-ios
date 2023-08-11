@@ -25,7 +25,7 @@ struct ImageDetailView: View {
             VStack(spacing: 16) {
                 KFImage(URL(string: imageURL))
                     .placeholder { _ in
-                        Color.grayF5
+                        Color.gray2
                     }
                     .resizable()
                     .scaledToFill()

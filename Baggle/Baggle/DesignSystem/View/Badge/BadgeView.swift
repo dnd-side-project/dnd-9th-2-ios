@@ -15,7 +15,7 @@ struct BadgeView: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 16).bold())
+            .font(.Baggle.body2)
             .padding(.vertical, 8)
             .padding(.horizontal)
             .foregroundColor(foregroundColor)
