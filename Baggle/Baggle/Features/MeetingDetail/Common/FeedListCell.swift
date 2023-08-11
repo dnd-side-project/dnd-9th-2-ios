@@ -19,6 +19,7 @@ struct FeedListCell: View {
                 CircleProfileView(imageUrl: feed.userImageURL, size: .small)
 
                 Text(feed.username)
+                    .font(.Baggle.body2)
                     .foregroundColor(.gray11)
 
                 Spacer()
@@ -29,7 +30,6 @@ struct FeedListCell: View {
                     Image.Icon.more
                 }
             }
-            .foregroundColor(.gray11)
 
             KFImage(URL(string: feed.feedImageURL))
                 .placeholder({ _ in

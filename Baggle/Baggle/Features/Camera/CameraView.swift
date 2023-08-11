@@ -54,8 +54,7 @@ extension CameraView {
     private func description(viewStore: CameraFeatureViewStore) -> some View {
         Text("실시간 상황을\n친구들에게 공유하세요!")
             .multilineTextAlignment(.center)
-            .lineSpacing(1.4)
-            .font(.system(size: 22))
+            .fontWithLineSpacing(fontType: .subTitle)
             .fontWeight(.medium)
             .foregroundColor(.white)
     }
@@ -143,6 +142,7 @@ extension CameraView {
                 viewStore.send(.cancelButtonTapped)
             } label: {
                 Text("취소")
+                    .font(.Baggle.body1)
                     .foregroundColor(Color.white)
                     .padding(.vertical, 12)
             }
@@ -201,6 +201,7 @@ extension CameraView {
                 viewStore.send(.reTakeButtonTapped)
             } label: {
                 Text("다시 찍기")
+                    .font(.Baggle.body1)
                     .foregroundColor(.white)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 12)
@@ -212,6 +213,7 @@ extension CameraView {
                 viewStore.send(.uploadButtonTapped)
             } label: {
                 Text("사진 업로드")
+                    .font(.Baggle.body1)
                     .foregroundColor(.primaryNormal)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 12)
@@ -233,7 +235,7 @@ extension CameraView {
             )
 
             Text("시간이 초과되었습니다.")
-                .font(.system(size: 22))
+                .font(.Baggle.subTitle)
                 .foregroundColor(.white)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)

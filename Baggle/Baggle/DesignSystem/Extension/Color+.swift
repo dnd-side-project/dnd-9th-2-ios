@@ -15,7 +15,7 @@ extension Color {
 
     // MARK: - GrayScale
     static let gray1 = Color("GrayFA")
-    static let gray2 = Color("GrayF5")
+    static let gray2 = Color("GrayF5")	
     static let gray3 = Color("GrayF0")
     static let gray4 = Color("GrayD9")
     static let gray5 = Color("GrayBF")

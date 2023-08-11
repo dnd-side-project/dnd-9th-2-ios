@@ -72,6 +72,7 @@ struct BagglePrimaryStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .font(.Baggle.body2)
             .frame(width: UIScreen.main.bounds.width * size.ratio, height: 54)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))
@@ -109,6 +110,7 @@ struct BaggleSecondaryStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .font(.Baggle.body2)
             .frame(height: 54)
             .padding(.leading, buttonType == .authorize ? 24 : 34)
             .padding(.trailing, buttonType == .authorize ? 16 : 36)
@@ -146,7 +148,7 @@ struct BaggleTertiaryStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 16, weight: .semibold))
+            .font(.Baggle.body2)
             .frame(height: 54)
             .padding(.horizontal, 32)
             .foregroundColor(foregroundColor(configuration.isPressed))
@@ -171,7 +173,7 @@ struct KakaoLoginStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 16, weight: .bold))
+            .font(.Baggle.body2) // bold
             .frame(width: UIScreen.main.bounds.width - 40, height: 54)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))

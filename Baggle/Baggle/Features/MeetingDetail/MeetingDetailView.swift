@@ -47,7 +47,7 @@ struct MeetingDetailView: View {
                             .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
                         } else {
                             Text("아직 올라온 사진이 없어요!")
-                                .font(.system(size: 16))
+                                .font(.Baggle.body2)
                                 .foregroundColor(.gray6)
                         }
                     }

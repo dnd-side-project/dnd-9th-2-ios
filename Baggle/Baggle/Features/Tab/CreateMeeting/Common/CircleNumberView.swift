@@ -19,8 +19,8 @@ struct CircleNumberView: View {
                 .frame(width: 22, height: 22)
 
             Text(number)
+                .font(.Baggle.caption2)
                 .foregroundColor(.white)
-                .font(.caption)
         }
     }
 }

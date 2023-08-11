@@ -16,6 +16,7 @@ struct SegmentedTagView: View {
         HStack(spacing: 6) {
             Text(title)
                 .font(.Baggle.body1)
+                .foregroundColor(.gray11)
 
             CircleNumberView(number: "\(count)", isSelected: true)
         }

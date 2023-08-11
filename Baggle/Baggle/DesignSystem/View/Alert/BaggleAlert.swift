@@ -91,7 +91,7 @@ struct BaggleAlert: View {
 
                     if let description {
                         Text(description)
-                            .font(.system(size: 16))
+                            .font(.Baggle.body2)
                             .foregroundColor(.gray8)
                             .padding(.vertical, 4)
                     }

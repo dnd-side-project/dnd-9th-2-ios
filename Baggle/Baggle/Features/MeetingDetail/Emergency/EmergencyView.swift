@@ -75,10 +75,11 @@ extension EmergencyView {
                         targetColor: .baggleRed
                     )
                 )
-                .font(.system(size: 24).bold())
+                .font(.Baggle.title)
                 .padding(.vertical, 8)
 
                 Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
+                    .font(.Baggle.body2)
                     .foregroundColor(.gray7)
             }
             .padding(.top, 8)

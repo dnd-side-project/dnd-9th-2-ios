@@ -127,9 +127,8 @@ extension HomeView {
 
     func userInfo(user: User) -> some View {
         HStack {
-            Text("\(user.name)님의\nBaggle!") // 폰트 수정
-                .font(.system(size: 24))
-                .fontWeight(.bold)
+            Text("\(user.name)님의")
+                .font(.Baggle.title)
                 .foregroundColor(.white)
 
             Spacer()

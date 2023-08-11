@@ -27,25 +27,27 @@ struct MeetingListCell: View {
 
                         Text(data.name)
                     }
+                    .font(.Baggle.body1)
+                    .foregroundColor(.gray11)
 
                     Text(
                         attributedColorString(
                             str: "장소  |  \(data.place)",
                             targetStr: "장소  |",
-                            color: .black,
+                            color: .gray9,
                             targetColor: .gray6
                         )
                     )
-                    .font(.system(size: 14))
+                    .font(.Baggle.description)
 
                     Text(
                         attributedColorString(
                             str: "시간  |  \(data.date) \(data.time)",
                             targetStr: "시간  |",
-                            color: .black,
+                            color: .gray9,
                             targetColor: .gray6)
                     )
-                    .font(.system(size: 14))
+                    .font(.Baggle.description)
                 }
 
                 HStack {
@@ -63,7 +65,8 @@ struct MeetingListCell: View {
                     Spacer()
 
                     Text("참여자 \(data.profileImages.count)명")
-                        .font(.system(size: 14))
+                        .font(.Baggle.description)
+                        .foregroundColor(.gray11)
                 }
             }
             .padding(.horizontal, 20)
