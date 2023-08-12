@@ -26,7 +26,7 @@ struct MyPageView: View {
                         Spacer()
                         
                         VStack(spacing: 16) {
-                            KFImage(URL(string: ""))
+                            KFImage(URL(string: viewStore.user.profileImageURL ?? ""))
                                 .placeholder({ _ in
                                     Image.Profile.profilDefault
                                         .resizable()
@@ -38,10 +38,11 @@ struct MyPageView: View {
                                 .clipped()
                             
                             HStack(alignment: .top, spacing: 6) {
-                                Text("바글이")
+                                Text(viewStore.user.name)
                                     .font(.Baggle.subTitle)
                                     .foregroundColor(.gray11)
-                                
+   
+                                PlatformLogoView(platform: viewStore.user.platform)
                             }
                         }
                         .padding(.top, 32)

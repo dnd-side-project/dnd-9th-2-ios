@@ -10,6 +10,7 @@ import ComposableArchitecture
 struct MyPageFeature: ReducerProtocol {
 
     struct State: Equatable {
+        var user = UserDefaultList.user ?? User(id: -1, name: "에러", profileImageURL: "", platform: .apple)
     }
 
     enum Action: Equatable {
