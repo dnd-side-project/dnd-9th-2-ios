@@ -47,6 +47,7 @@
 		1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */; };
 		1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1462373D2A87760E00FBE121 /* SettingListRow.swift */; };
 		146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237422A877C1600FBE121 /* SettingListHeader.swift */; };
+		146237462A877CFB00FBE121 /* PlatformLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237452A877CFB00FBE121 /* PlatformLogoView.swift */; };
 		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
 		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
 		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
@@ -210,6 +211,7 @@
 		1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTriangle.swift; sourceTree = "<group>"; };
 		1462373D2A87760E00FBE121 /* SettingListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListRow.swift; sourceTree = "<group>"; };
 		146237422A877C1600FBE121 /* SettingListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListHeader.swift; sourceTree = "<group>"; };
+		146237452A877CFB00FBE121 /* PlatformLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformLogoView.swift; sourceTree = "<group>"; };
 		146C51D22A79139900FF3142 /* BaggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146C51D42A79139900FF3142 /* BaggleDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDateTests.swift; sourceTree = "<group>"; };
 		146C51DF2A79143A00FF3142 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 		1432BE6E2A682FCE0098AAA9 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				146237442A877CEA00FBE121 /* Profile */,
 				1462373F2A8776EF00FBE121 /* Setting */,
 				1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */,
 				14E506572A6BC576008D5778 /* MyPageFeature.swift */,
@@ -663,6 +666,14 @@
 				146237422A877C1600FBE121 /* SettingListHeader.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		146237442A877CEA00FBE121 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				146237452A877CFB00FBE121 /* PlatformLogoView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		146C51D32A79139900FF3142 /* BaggleTests */ = {
@@ -1313,6 +1324,7 @@
 				2B7B4D772A84B41000283248 /* SignUpEntity.swift in Sources */,
 				2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */,
 				1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */,
+				146237462A877CFB00FBE121 /* PlatformLogoView.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,

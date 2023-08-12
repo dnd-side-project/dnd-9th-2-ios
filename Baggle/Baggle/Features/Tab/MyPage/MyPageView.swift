@@ -42,13 +42,6 @@ struct MyPageView: View {
                                     .font(.Baggle.subTitle)
                                     .foregroundColor(.gray11)
                                 
-                                Image.Icon.kakao
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 14)
-                                    .padding(4)
-                                    .background(.yellow)
-                                    .cornerRadius(30)
                             }
                         }
                         .padding(.top, 32)
