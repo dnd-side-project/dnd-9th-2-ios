@@ -28,9 +28,10 @@ struct SignUpView: View {
 
                 ZStack {
 
-                    loadingView(viewStore: viewStore)
-                        .background(.gray.opacity(0.4))
-                        .zIndex(10)
+                    if viewStore.isLoading {
+                        LoadingView()
+                            .zIndex(10)
+                    }
 
                     VStack {
 

@@ -19,26 +19,33 @@ struct MyPageView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            VStack {
-                Text("마이페이지입니다.")
-
-                Button {
-                    viewStore.send(.withdrawButtonTapped)
-                } label: {
-                    HStack {
-
-                        Spacer()
-
-                        Text("회원탈퇴")
-                            .font(.title)
-                            .padding()
-
-                        Spacer()
-                    }
+            ZStack {
+                if viewStore.isLoading {
+                    LoadingView()
+                        .zIndex(10)
                 }
-                .buttonStyle(BagglePrimaryStyle())
+                
+                VStack {
+                    Text("마이페이지입니다.")
+
+                    Button {
+                        viewStore.send(.withdrawButtonTapped)
+                    } label: {
+                        HStack {
+
+                            Spacer()
+
+                            Text("회원탈퇴")
+                                .font(.title)
+                                .padding()
+
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(BagglePrimaryStyle())
+                }
+                .padding()
             }
-            .padding()
         }
     }
 }

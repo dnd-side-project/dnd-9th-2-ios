@@ -43,6 +43,7 @@
 		143C7BFC2A875421004D83FD /* WithdrawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7BFB2A875421004D83FD /* WithdrawService.swift */; };
 		143C7BFE2A875508004D83FD /* WithdrawStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7BFD2A875508004D83FD /* WithdrawStatus.swift */; };
 		143C7C002A87557F004D83FD /* WithdrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7BFF2A87557F004D83FD /* WithdrawRepository.swift */; };
+		143C7C042A87645E004D83FD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7C032A87645E004D83FD /* LoadingView.swift */; };
 		14458B442A81E6D000C810FA /* BaggleStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14458B432A81E6D000C810FA /* BaggleStamp.swift */; };
 		14458B482A81E92200C810FA /* BaggleStampStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14458B472A81E92200C810FA /* BaggleStampStatus.swift */; };
 		144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144733432A78C8D00090D15E /* BaggleTextEditor.swift */; };
@@ -207,6 +208,7 @@
 		143C7BFB2A875421004D83FD /* WithdrawService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawService.swift; sourceTree = "<group>"; };
 		143C7BFD2A875508004D83FD /* WithdrawStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawStatus.swift; sourceTree = "<group>"; };
 		143C7BFF2A87557F004D83FD /* WithdrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRepository.swift; sourceTree = "<group>"; };
+		143C7C032A87645E004D83FD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		14458B432A81E6D000C810FA /* BaggleStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleStamp.swift; sourceTree = "<group>"; };
 		14458B472A81E92200C810FA /* BaggleStampStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleStampStatus.swift; sourceTree = "<group>"; };
 		144733432A78C8D00090D15E /* BaggleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextEditor.swift; sourceTree = "<group>"; };
@@ -1047,6 +1049,7 @@
 				2B8469642A6E7AE200D75D32 /* ShadeView.swift */,
 				2B8469652A6E7AE200D75D32 /* UnderlineView.swift */,
 				2BF6EC1A2A7FF5DC006CA492 /* NavigationBar.swift */,
+				143C7C032A87645E004D83FD /* LoadingView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1315,6 +1318,7 @@
 				2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
+				143C7C042A87645E004D83FD /* LoadingView.swift in Sources */,
 				1421C0512A7A84A200C20497 /* KakaoLoginService.swift in Sources */,
 				2B2E7E482A848EC60033C65A /* BaseAPI.swift in Sources */,
 				14458B442A81E6D000C810FA /* BaggleStamp.swift in Sources */,

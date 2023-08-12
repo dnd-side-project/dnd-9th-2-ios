@@ -10,6 +10,7 @@ import ComposableArchitecture
 struct MyPageFeature: ReducerProtocol {
 
     struct State: Equatable {
+        var isLoading: Bool = false
     }
 
     enum Action: Equatable {
@@ -27,17 +28,19 @@ struct MyPageFeature: ReducerProtocol {
     
     var body: some ReducerProtocolOf<Self> {
 
-        Reduce { _, action in
+        Reduce { state, action in
 
             switch action {
 
             case .withdrawButtonTapped:
+                state.isLoading = true
                 return .run { send in
                     let withdrawStatus = await withdrawService.withdraw()
-                    await send(.withdrawResult(withdrawStatus))
+                    await send(.withdrawResult(.keyChainError))
                 }
                 
             case let .withdrawResult(status):
+                state.isLoading = false
                 switch status {
                 case .success:
                     print("성공")
