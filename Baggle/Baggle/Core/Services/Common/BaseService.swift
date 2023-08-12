@@ -54,18 +54,11 @@ extension BaseService {
                         print("✅ response -", body)
                         switch body.status {
                         case 200:
-                            if let data = body.data {
-                                
-                            } else {
-//                                continuation.resume(returning: nil)
-                            }
+                            print("✅ 200 data -", body.data)
+                            continuation.resume(returning: body.data)
                         case 201:
-                            if let data = body.data {
-                                print("✅ data -", data)
-                                continuation.resume(returning: data)
-                            } else {
-                                continuation.resume(throwing: APIError.decoding)
-                            }
+                            print("✅ 201 data -", body.data)
+                            continuation.resume(returning: body.data)
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 409:

@@ -42,8 +42,8 @@
 		143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4C4B42A6E43CA008643D9 /* CreateTitleView.swift */; };
 		143C7BFC2A875421004D83FD /* WithdrawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7BFB2A875421004D83FD /* WithdrawService.swift */; };
 		143C7BFE2A875508004D83FD /* WithdrawStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7BFD2A875508004D83FD /* WithdrawStatus.swift */; };
-		143C7C002A87557F004D83FD /* WithdrawRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7BFF2A87557F004D83FD /* WithdrawRepository.swift */; };
 		143C7C042A87645E004D83FD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7C032A87645E004D83FD /* LoadingView.swift */; };
+		143C7C062A876A20004D83FD /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C7C052A876A20004D83FD /* KeyChainError.swift */; };
 		14458B442A81E6D000C810FA /* BaggleStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14458B432A81E6D000C810FA /* BaggleStamp.swift */; };
 		14458B482A81E92200C810FA /* BaggleStampStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14458B472A81E92200C810FA /* BaggleStampStatus.swift */; };
 		144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144733432A78C8D00090D15E /* BaggleTextEditor.swift */; };
@@ -207,8 +207,8 @@
 		143B270B2A76245F00DFC0EE /* CreateDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDateView.swift; sourceTree = "<group>"; };
 		143C7BFB2A875421004D83FD /* WithdrawService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawService.swift; sourceTree = "<group>"; };
 		143C7BFD2A875508004D83FD /* WithdrawStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawStatus.swift; sourceTree = "<group>"; };
-		143C7BFF2A87557F004D83FD /* WithdrawRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRepository.swift; sourceTree = "<group>"; };
 		143C7C032A87645E004D83FD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		143C7C052A876A20004D83FD /* KeyChainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
 		14458B432A81E6D000C810FA /* BaggleStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleStamp.swift; sourceTree = "<group>"; };
 		14458B472A81E92200C810FA /* BaggleStampStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleStampStatus.swift; sourceTree = "<group>"; };
 		144733432A78C8D00090D15E /* BaggleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextEditor.swift; sourceTree = "<group>"; };
@@ -625,7 +625,6 @@
 			children = (
 				143C7BFB2A875421004D83FD /* WithdrawService.swift */,
 				143C7BFD2A875508004D83FD /* WithdrawStatus.swift */,
-				143C7BFF2A87557F004D83FD /* WithdrawRepository.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -781,6 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				14B7A0442A75409E00B8E202 /* APIError.swift */,
+				143C7C052A876A20004D83FD /* KeyChainError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1298,6 +1298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
+				143C7C062A876A20004D83FD /* KeyChainError.swift in Sources */,
 				142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */,
 				143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */,
 				2BC5AD2F2A84938600B73241 /* UserAPI.swift in Sources */,
@@ -1392,7 +1393,6 @@
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
-				143C7C002A87557F004D83FD /* WithdrawRepository.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				14B7A0452A75409E00B8E202 /* APIError.swift in Sources */,
 				2BA760BB2A81EB610089878D /* String+.swift in Sources */,
