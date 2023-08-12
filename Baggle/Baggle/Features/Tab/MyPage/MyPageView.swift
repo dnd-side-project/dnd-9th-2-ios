@@ -52,65 +52,66 @@ struct MyPageView: View {
                         
                         Spacer()
                     }
-                    .listRowSeparator(.hidden)
-                    
-                    // MARK: - 일반 설정
-                    
-                    Section {
-                        SettingListRow(text: "알림 설정") {
-                            viewStore.send(.notificationSettingButtonTapped)
-                        }
-                        
-                        SettingListRow(text: "개인정보 처리방침") {
-                            viewStore.send(.privacyPolicyButtonTapped)
-                        }
-                        
-                        SettingListRow(text: "서비스 이용약관") {
-                            viewStore.send(.termsOfServiceButtonTapped)
-                        }
-                    } header: {
-                        SettingListHeader(text: "일반 설정")
-                    }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    
-                    // MARK: - 계정
-                    
-                    Section {
-                        SettingListRow(text: "계정 탈퇴", isArrow: false) {
-                            print("서비스 이용약솬")
-                        }
-                    } header: {
-                        SettingListHeader(text: "계정")
-                    }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
                 }
-                .listRowInsets(EdgeInsets())
-                .listStyle(.plain)
-                .fullScreenCover(
-                    isPresented: viewStore.binding(
-                        get: \.presentSafariView,
-                        send: { _ in MyPageFeature.Action.presentSafariView }
-                    )
-                ) {
-                    if let url = URL(string: viewStore.state.safariURL) {
-                        SafariWebView(url: url)
+                .listRowSeparator(.hidden)
+                
+                // MARK: - 일반 설정
+                
+                Section {
+                    SettingListRow(text: "알림 설정") {
+                        viewStore.send(.notificationSettingButtonTapped)
                     }
+                    
+                    SettingListRow(text: "개인정보 처리방침") {
+                        viewStore.send(.privacyPolicyButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "서비스 이용약관") {
+                        viewStore.send(.termsOfServiceButtonTapped)
+                    }
+                } header: {
+                    SettingListHeader(text: "일반 설정")
+                }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
+                
+                // MARK: - 계정
+                
+                Section {
+                    SettingListRow(text: "계정 탈퇴", isArrow: false) {
+                        print("서비스 이용약솬")
+                    }
+                } header: {
+                    SettingListHeader(text: "계정")
+                }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
+            }
+            .listRowInsets(EdgeInsets())
+            .listStyle(.plain)
+            .fullScreenCover(
+                isPresented: viewStore.binding(
+                    get: \.presentSafariView,
+                    send: { _ in MyPageFeature.Action.presentSafariView }
+                )
+            ) {
+                if let url = URL(string: viewStore.state.safariURL) {
+                    SafariWebView(url: url)
                 }
             }
         }
     }
-    
-    struct MyPageView_Previews: PreviewProvider {
-        static var previews: some View {
-            MyPageView(
-                store: Store(
-                    initialState: MyPageFeature.State(),
-                    reducer: MyPageFeature()
-                )
+}
+
+struct MyPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        MyPageView(
+            store: Store(
+                initialState: MyPageFeature.State(),
+                reducer: MyPageFeature()
             )
-        }
+        )
     }
+}
