@@ -22,7 +22,6 @@ struct MyPageView: View {
             ZStack {
                 if viewStore.isLoading {
                     LoadingView()
-                        .zIndex(10)
                 }
                 
                 VStack {

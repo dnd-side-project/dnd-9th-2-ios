@@ -30,7 +30,6 @@ struct SignUpView: View {
 
                     if viewStore.isLoading {
                         LoadingView()
-                            .zIndex(10)
                     }
 
                     VStack {

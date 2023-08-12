@@ -35,12 +35,12 @@ struct MyPageFeature: ReducerProtocol {
             case .withdrawButtonTapped:
                 state.isLoading = true
                 return .run { send in
-                    let withdrawStatus = await withdrawService.withdraw()
+//                    let withdrawStatus = await withdrawService.withdraw()
                     await send(.withdrawResult(.keyChainError))
                 }
                 
             case let .withdrawResult(status):
-                state.isLoading = false
+//                state.isLoading = false
                 switch status {
                 case .success:
                     print("성공")
