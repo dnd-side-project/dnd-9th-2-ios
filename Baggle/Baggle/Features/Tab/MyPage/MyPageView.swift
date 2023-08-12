@@ -20,25 +20,25 @@ struct MyPageView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
             VStack {
-                Text("마이페이지입니다. 마이페이지입니다. 마이페이지입니다.")
+                Text("마이페이지입니다.")
 
                 Button {
-                    viewStore.send(.logoutMyPage)
+                    viewStore.send(.withdrawButtonTapped)
                 } label: {
                     HStack {
 
                         Spacer()
 
-                        Text("로그아웃")
+                        Text("회원탈퇴")
                             .font(.title)
                             .padding()
 
                         Spacer()
                     }
                 }
-                .buttonStyle(.borderedProminent)
-                .padding()
+                .buttonStyle(BagglePrimaryStyle())
             }
+            .padding()
         }
     }
 }

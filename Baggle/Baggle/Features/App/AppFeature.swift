@@ -54,7 +54,7 @@ struct AppFeature: ReducerProtocol {
 
             // MainTab Feature
 
-            case .logout(.logoutMainTab(.logoutMyPage)):
+            case .logout(.logoutMainTab(.withdrawButtonTapped)):
                 state.isLoggedIn = false
                 return .none
 

@@ -13,7 +13,7 @@ struct MyPageFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
-        case logoutMyPage
+        case withdrawButtonTapped
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -21,13 +21,17 @@ struct MyPageFeature: ReducerProtocol {
         Reduce { _, action in
             switch action {
 
-            case .logoutMyPage:
+            case .withdrawButtonTapped:
                 do {
-                    try KeychainManager.shared.deleteUserToken()
+                    // 키체인에서 토큰 불러옴
+                    // 네트워크로 회원 탈퇴 요청
+                    // 키체인 토큰 삭제
+                    // 로컬 유저 정보 삭제
+                    //UserDefaultList.user = nil
+//                    try KeychainManager.shared.deleteUserToken()
                 } catch let error {
                     print("Keychain error - \(error)")
                 }
-                UserDefaultList.user = nil
                 return .none
             }
         }
