@@ -45,6 +45,8 @@
 		144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144733432A78C8D00090D15E /* BaggleTextEditor.swift */; };
 		1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B5FF2A7BA3F000A15706 /* BubbleView.swift */; };
 		1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */; };
+		1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1462373D2A87760E00FBE121 /* SettingListRow.swift */; };
+		146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237422A877C1600FBE121 /* SettingListHeader.swift */; };
 		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
 		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
 		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
@@ -206,6 +208,8 @@
 		144733432A78C8D00090D15E /* BaggleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextEditor.swift; sourceTree = "<group>"; };
 		1461B5FF2A7BA3F000A15706 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTriangle.swift; sourceTree = "<group>"; };
+		1462373D2A87760E00FBE121 /* SettingListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListRow.swift; sourceTree = "<group>"; };
+		146237422A877C1600FBE121 /* SettingListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListHeader.swift; sourceTree = "<group>"; };
 		146C51D22A79139900FF3142 /* BaggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146C51D42A79139900FF3142 /* BaggleDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDateTests.swift; sourceTree = "<group>"; };
 		146C51DF2A79143A00FF3142 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -561,6 +565,7 @@
 		1432BE6E2A682FCE0098AAA9 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				1462373F2A8776EF00FBE121 /* Setting */,
 				1432BE6F2A682FDB0098AAA9 /* MyPageView.swift */,
 				14E506572A6BC576008D5778 /* MyPageFeature.swift */,
 			);
@@ -649,6 +654,15 @@
 				1461B5FF2A7BA3F000A15706 /* BubbleView.swift */,
 			);
 			path = Bubble;
+			sourceTree = "<group>";
+		};
+		1462373F2A8776EF00FBE121 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1462373D2A87760E00FBE121 /* SettingListRow.swift */,
+				146237422A877C1600FBE121 /* SettingListHeader.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		146C51D32A79139900FF3142 /* BaggleTests */ = {
@@ -1341,6 +1355,7 @@
 				1410AD262A84BEB6008793FB /* Memeber.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
+				146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */,
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
 				2BDEAC7C2A863DCB00D698E6 /* JoinMeeting.swift in Sources */,
@@ -1377,6 +1392,7 @@
 				2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */,
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
+				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
