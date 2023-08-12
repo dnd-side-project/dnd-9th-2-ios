@@ -46,9 +46,8 @@ struct MeetingDetailView: View {
                             )
                             .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
                         } else {
-                            Text("아직 올라온 사진이 없어요!")
-                                .font(.Baggle.body2)
-                                .foregroundColor(.gray6)
+                            // 엠티뷰
+                            emptyView()
                         }
                     }
                 }
@@ -326,6 +325,17 @@ extension MeetingDetailView {
             imageURL: image
         ) {
             viewStore.send(.imageTapped(nil))
+        }
+    }
+    
+    func emptyView() -> some View {
+        VStack(spacing: 12) {
+            Image.Background.empty
+                .padding(.top, screenSize.height*0.1)
+                
+            Text("아직 올라온 사진이 없어요!")
+                .font(.Baggle.body2)
+                .foregroundColor(.gray6)
         }
     }
 }
