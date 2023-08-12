@@ -14,7 +14,7 @@ enum UserAPI {
     case signIn
     case signUp(requestModel: SignUpRequestModel, token: String)
     case reissue
-    case withdraw
+    case withdraw(token: String)
 }
 
 extension UserAPI: BaseAPI {
@@ -42,8 +42,8 @@ extension UserAPI: BaseAPI {
             return HeaderType.multipart(token: token).value // 카카오 또는 애플 토큰
         case .reissue:
             return HeaderType.jsonWithAuthorization(token: "").value // refreshToken
-        case .withdraw:
-            return HeaderType.jsonWithAuthorization(token: "").value
+        case .withdraw(let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     

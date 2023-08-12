@@ -60,10 +60,13 @@ struct SignUpRepository {
             }
             try KeychainManager.shared.createUserToken(token)
 
-            UserDefaultList.user = User(id: data.userID,
-                                        name: data.nickname,
-                                        profileImageURL: data.profileImageUrl,
-                                        platform: data.platform == "apple" ? .apple : .kakao)
+            UserDefaultList.user = User(
+                id: data.userID,
+                name: data.nickname,
+                profileImageURL: data.profileImageUrl,
+                platform: data.platform == "apple" ? .apple : .kakao
+            )
+
             return .success
         } catch let error {
             print("SignUpRepository - error: \(error)")
