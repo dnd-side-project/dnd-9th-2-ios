@@ -10,6 +10,7 @@ import Foundation
 enum APIError: Error, Equatable {
     case badRequest // 400
     case unauthorized // 401, 소셜로그인 에러
+    case notFound // 404, 리소스 또는 유저 정보 없음
     case duplicatedUser // 409, 이미 존재하는 회원
     case duplicatedNickname // 409, 닉네임 중복
     case server // 500

@@ -53,7 +53,7 @@ extension BaseService {
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
                         print("✅ response -", body)
                         switch body.status {
-                        case 201:
+                        case 200, 201:
                             if let data = body.data {
                                 print("✅ data -", data)
                                 continuation.resume(returning: data)
@@ -62,6 +62,8 @@ extension BaseService {
                             }
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
+                        case 404:
+                            continuation.resume(throwing: APIError.notFound)
                         case 409:
                             if body.message == "이미 존재하는 닉네임입니다." {
                                 continuation.resume(throwing: APIError.duplicatedNickname)
