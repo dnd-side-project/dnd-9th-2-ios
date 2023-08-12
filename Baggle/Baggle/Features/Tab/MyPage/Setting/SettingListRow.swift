@@ -20,22 +20,24 @@ struct SettingListRow: View {
     }
     
     var body: some View {
-        HStack {
-            Text(text)
-            
-            Spacer()
-            
-            if isArrow {
-                Image.Icon.next
-                    .padding(10)
-            }
-        }
-        .padding(.vertical, 10)
-        .padding(.leading, 20)
-        .padding(.trailing, 10)
-        .touchSpacer()
-        .onTapGesture {
+        Button {
             action()
+        } label: {
+            HStack {
+                Text(text)
+                    .foregroundColor(.gray11)
+                    .font(.Baggle.button)
+                
+                Spacer()
+                
+                if isArrow {
+                    Image.Icon.next
+                        .padding(10)
+                }
+            }
+            .padding(.vertical, 10)
+            .padding(.leading, 20)
+            .padding(.trailing, 10)
         }
     }
 }

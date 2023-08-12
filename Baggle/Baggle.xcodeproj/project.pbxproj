@@ -48,6 +48,7 @@
 		1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1462373D2A87760E00FBE121 /* SettingListRow.swift */; };
 		146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237422A877C1600FBE121 /* SettingListHeader.swift */; };
 		146237462A877CFB00FBE121 /* PlatformLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237452A877CFB00FBE121 /* PlatformLogoView.swift */; };
+		146237482A87803F00FBE121 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237472A87803F00FBE121 /* SafariWebView.swift */; };
 		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
 		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
 		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
@@ -212,6 +213,7 @@
 		1462373D2A87760E00FBE121 /* SettingListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListRow.swift; sourceTree = "<group>"; };
 		146237422A877C1600FBE121 /* SettingListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListHeader.swift; sourceTree = "<group>"; };
 		146237452A877CFB00FBE121 /* PlatformLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformLogoView.swift; sourceTree = "<group>"; };
+		146237472A87803F00FBE121 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		146C51D22A79139900FF3142 /* BaggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146C51D42A79139900FF3142 /* BaggleDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleDateTests.swift; sourceTree = "<group>"; };
 		146C51DF2A79143A00FF3142 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
 				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
 				2BDEAC752A86024E00D698E6 /* KeychainManager.swift */,
+				146237472A87803F00FBE121 /* SafariWebView.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1436,6 +1439,7 @@
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				14CF68EC2A847BEF00E457DF /* User.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
+				146237482A87803F00FBE121 /* SafariWebView.swift in Sources */,
 				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,
 				146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */,
 				2BF6EC1B2A7FF5DC006CA492 /* NavigationBar.swift in Sources */,

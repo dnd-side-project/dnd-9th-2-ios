@@ -14,13 +14,14 @@ struct MyPageView: View {
     
     let store: StoreOf<MyPageFeature>
     
-    @State var textfield: String = ""
-    
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             
             List {
+                
+                // MARK: - 프로필
+                
                 Section {
                     HStack {
                         Spacer()
@@ -41,7 +42,7 @@ struct MyPageView: View {
                                 Text(viewStore.user.name)
                                     .font(.Baggle.subTitle)
                                     .foregroundColor(.gray11)
-   
+                                
                                 PlatformLogoView(platform: viewStore.user.platform)
                             }
                         }
@@ -51,51 +52,65 @@ struct MyPageView: View {
                         
                         Spacer()
                     }
-                }
-                .listRowSeparator(.hidden)
-                
-                
-                
-                Section {
-                    SettingListRow(text: "알림 설정") {
-                        print("알림 설정")
-                    }
+                    .listRowSeparator(.hidden)
                     
-                    SettingListRow(text: "개인정보 처리방침") {
-                        print("개인정보 처리방침")
-                    }
+                    // MARK: - 일반 설정
                     
-                    SettingListRow(text: "서비스 이용약관") {
-                        print("서비스 이용약솬")
+                    Section {
+                        SettingListRow(text: "알림 설정") {
+                            viewStore.send(.notificationSettingButtonTapped)
+                        }
+                        
+                        SettingListRow(text: "개인정보 처리방침") {
+                            viewStore.send(.privacyPolicyButtonTapped)
+                        }
+                        
+                        SettingListRow(text: "서비스 이용약관") {
+                            viewStore.send(.termsOfServiceButtonTapped)
+                        }
+                    } header: {
+                        SettingListHeader(text: "일반 설정")
                     }
-                } header: {
-                    SettingListHeader(text: "일반 설정")
-                }
-                .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets())
-                
-                Section {
-                    SettingListRow(text: "계정 탈퇴", isArrow: false) {
-                        print("서비스 이용약솬")
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
+                    .listRowInsets(EdgeInsets())
+                    
+                    // MARK: - 계정
+                    
+                    Section {
+                        SettingListRow(text: "계정 탈퇴", isArrow: false) {
+                            print("서비스 이용약솬")
+                        }
+                    } header: {
+                        SettingListHeader(text: "계정")
                     }
-                } header: {
-                    SettingListHeader(text: "계정")
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
+                    .listRowInsets(EdgeInsets())
                 }
-                .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
+                .listStyle(.plain)
+                .fullScreenCover(
+                    isPresented: viewStore.binding(
+                        get: \.presentSafariView,
+                        send: { _ in MyPageFeature.Action.presentSafariView }
+                    )
+                ) {
+                    if let url = URL(string: viewStore.state.safariURL) {
+                        SafariWebView(url: url)
+                    }
+                }
             }
-            .listStyle(.plain)
         }
     }
-}
-
-struct MyPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyPageView(
-            store: Store(
-                initialState: MyPageFeature.State(),
-                reducer: MyPageFeature()
+    
+    struct MyPageView_Previews: PreviewProvider {
+        static var previews: some View {
+            MyPageView(
+                store: Store(
+                    initialState: MyPageFeature.State(),
+                    reducer: MyPageFeature()
+                )
             )
-        )
+        }
     }
-}
