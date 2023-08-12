@@ -30,10 +30,9 @@ struct SettingListRow: View {
                 
                 Spacer()
                 
-                if isArrow {
-                    Image.Icon.next
-                        .padding(10)
-                }
+                Image.Icon.next
+                    .padding(10)
+                    .opacity(isArrow ? 1 : 0)
             }
             .padding(.vertical, 10)
             .padding(.leading, 20)
@@ -44,7 +43,7 @@ struct SettingListRow: View {
 
 struct SettingListRow_Previews: PreviewProvider {
     static var previews: some View {
-        SettingListRow(text: "알림 설정", isArrow: true) {
+        SettingListRow(text: "알림 설정", isArrow: false) {
             print("hello")
         }
     }

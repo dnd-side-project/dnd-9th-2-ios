@@ -79,8 +79,11 @@ struct MyPageView: View {
                 // MARK: - 계정
                 
                 Section {
+                    SettingListRow(text: "로그아웃", isArrow: false) {
+                        viewStore.send(.logoutButtonTapped)
+                    }
                     SettingListRow(text: "계정 탈퇴", isArrow: false) {
-                        print("서비스 이용약솬")
+                        viewStore.send(.withdrawButtonTapped)
                     }
                 } header: {
                     SettingListHeader(text: "계정")

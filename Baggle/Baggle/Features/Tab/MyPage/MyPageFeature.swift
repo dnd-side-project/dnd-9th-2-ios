@@ -24,6 +24,9 @@ struct MyPageFeature: ReducerProtocol {
         case notificationSettingButtonTapped
         case privacyPolicyButtonTapped
         case termsOfServiceButtonTapped
+        case logoutButtonTapped
+        case withdrawButtonTapped
+        
         case presentSafariView
     }
 
@@ -55,6 +58,12 @@ struct MyPageFeature: ReducerProtocol {
             case .termsOfServiceButtonTapped:
                 state.safariURL = "https://www.naver.com/"
                 state.presentSafariView = true
+                return .none
+                
+            case .logoutButtonTapped:
+                return .none
+
+            case .withdrawButtonTapped:
                 return .none
                 
             case .presentSafariView:
