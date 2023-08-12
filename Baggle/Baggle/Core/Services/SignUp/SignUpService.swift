@@ -49,7 +49,7 @@ struct SignUpRepository {
         print("📍requestModel: \(requestModel)")
         
         do {
-            let data: SignUpEntity = try await networkService.request(.signUp(
+            let data: SignEntity = try await networkService.request(.signUp(
                 requestModel: requestModel,
                 token: token))
             print("data: \(data)")
@@ -60,10 +60,7 @@ struct SignUpRepository {
             }
             try KeychainManager.shared.createUserToken(token)
 
-            UserDefaultList.user = User(id: data.userID,
-                                        name: data.nickname,
-                                        profileImageURL: data.profileImageUrl,
-                                        platform: data.platform == "apple" ? .apple : .kakao)
+            UserDefaultList.user = data.toDomain()
             return .success
         } catch let error {
             print("SignUpRepository - error: \(error)")

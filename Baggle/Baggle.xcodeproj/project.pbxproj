@@ -25,7 +25,7 @@
 		141392622A78EBD300249C8A /* CreateStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141392612A78EBD300249C8A /* CreateStatus.swift */; };
 		141D376F2A681552001067E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D376E2A681552001067E3 /* MainTabView.swift */; };
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
-		1421C0512A7A84A200C20497 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* KakaoLoginService.swift */; };
+		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
 		142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BF96C2A81F50C0042737E /* TimerColor.swift */; };
 		14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14315D852A76B1CB008F8064 /* CreateMemoView.swift */; };
 		1432BE642A68168A0098AAA9 /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432BE632A68168A0098AAA9 /* TabType.swift */; };
@@ -108,11 +108,12 @@
 		2B5BE6B22A77A40900F25474 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
 		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
+		2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */; };
 		2B7B4D6B2A849E9D00283248 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6A2A849E9D00283248 /* BaseService.swift */; };
 		2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */; };
 		2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D702A84A5C800283248 /* Meeting.swift */; };
 		2B7B4D742A84A5EC00283248 /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D732A84A5EC00283248 /* ProfileImageModel.swift */; };
-		2B7B4D772A84B41000283248 /* SignUpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D762A84B41000283248 /* SignUpEntity.swift */; };
+		2B7B4D772A84B41000283248 /* SignEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D762A84B41000283248 /* SignEntity.swift */; };
 		2B7B4D7B2A85342600283248 /* MeetingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */; };
 		2B7B4D7D2A853BED00283248 /* MeetingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D7C2A853BED00283248 /* MeetingAPI.swift */; };
 		2B7B4D7F2A853E8800283248 /* MemberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D7E2A853E8800283248 /* MemberAPI.swift */; };
@@ -187,7 +188,7 @@
 		141392612A78EBD300249C8A /* CreateStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStatus.swift; sourceTree = "<group>"; };
 		141D376E2A681552001067E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
-		1421C0502A7A84A200C20497 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
+		1421C0502A7A84A200C20497 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		142BF96C2A81F50C0042737E /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
 		14315D852A76B1CB008F8064 /* CreateMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemoView.swift; sourceTree = "<group>"; };
 		1432BE632A68168A0098AAA9 /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
@@ -271,12 +272,13 @@
 		2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
+		2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
 		2B7B4D6A2A849E9D00283248 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlamofireManager.swift; sourceTree = "<group>"; };
 		2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingDetail.swift; path = Baggle/Core/Models/Meeting/MeetingDetail/MeetingDetail.swift; sourceTree = SOURCE_ROOT; };
 		2B7B4D702A84A5C800283248 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = Baggle/Core/Models/Meeting/Meeting.swift; sourceTree = SOURCE_ROOT; };
 		2B7B4D732A84A5EC00283248 /* ProfileImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
-		2B7B4D762A84B41000283248 /* SignUpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpEntity.swift; path = Baggle/Core/Models/Network/SignUp/SignUpEntity.swift; sourceTree = SOURCE_ROOT; };
+		2B7B4D762A84B41000283248 /* SignEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignEntity.swift; path = Baggle/Core/Models/Network/SignUp/SignEntity.swift; sourceTree = SOURCE_ROOT; };
 		2B7B4D7C2A853BED00283248 /* MeetingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAPI.swift; sourceTree = "<group>"; };
 		2B7B4D7E2A853E8800283248 /* MemberAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberAPI.swift; sourceTree = "<group>"; };
 		2B7B4D802A853ED300283248 /* FeedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAPI.swift; sourceTree = "<group>"; };
@@ -526,7 +528,7 @@
 		1421C04F2A7A848E00C20497 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1421C0502A7A84A200C20497 /* KakaoLoginService.swift */,
+				1421C0502A7A84A200C20497 /* LoginService.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -792,7 +794,7 @@
 			children = (
 				2BC5AD302A84983C00B73241 /* SignUpRequestModel.swift */,
 				2B7B4D732A84A5EC00283248 /* ProfileImageModel.swift */,
-				2B7B4D762A84B41000283248 /* SignUpEntity.swift */,
+				2B7B4D762A84B41000283248 /* SignEntity.swift */,
 			);
 			name = SignUp;
 			path = ../SignUp;
@@ -804,6 +806,7 @@
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
 				14E0836B2A8369E30001CB21 /* MeetingDetail */,
 				14E083672A8368F70001CB21 /* SignUp */,
+				2B65B8112A8758DB00E3BF11 /* Login */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -968,6 +971,14 @@
 				2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */,
 			);
 			path = MeetingDetail;
+			sourceTree = "<group>";
+		};
+		2B65B8112A8758DB00E3BF11 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		2B7B4D6C2A84A1F200283248 /* Network */ = {
@@ -1292,11 +1303,12 @@
 				2BC5AD2F2A84938600B73241 /* UserAPI.swift in Sources */,
 				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
 				141D376F2A681552001067E3 /* MainTabView.swift in Sources */,
+				2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */,
 				2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */,
 				14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */,
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
-				2B7B4D772A84B41000283248 /* SignUpEntity.swift in Sources */,
+				2B7B4D772A84B41000283248 /* SignEntity.swift in Sources */,
 				2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */,
 				1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
@@ -1307,7 +1319,7 @@
 				2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
-				1421C0512A7A84A200C20497 /* KakaoLoginService.swift in Sources */,
+				1421C0512A7A84A200C20497 /* LoginService.swift in Sources */,
 				2B2E7E482A848EC60033C65A /* BaseAPI.swift in Sources */,
 				14458B442A81E6D000C810FA /* BaggleStamp.swift in Sources */,
 				2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */,
