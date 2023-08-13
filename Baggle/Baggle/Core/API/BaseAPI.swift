@@ -50,6 +50,7 @@ extension BaseAPI {
 enum HeaderType {
     case json
     case jsonWithAuthorization(token: String)
+    case jsonWithBearer(token: String)
     case multipart(token: String)
     
     var value: [String: String] {
@@ -60,6 +61,10 @@ enum HeaderType {
         case .jsonWithAuthorization(let token):
             return ["Content-Type": "application/json",
                     "Authorization": token]
+            
+        case .jsonWithBearer(let token):
+            return ["Content-Type": "application/json",
+                    "Authorization": "Bearer \(token)"]
             
         case .multipart(let token):
             return ["Content-Type": "multipart/form-data",

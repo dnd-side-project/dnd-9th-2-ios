@@ -76,7 +76,7 @@ struct MainTabFeature: ReducerProtocol {
             case .createMeeting:
                 return .none
 
-            case .logoutMainTab(.logoutMyPage):
+            case .logoutMainTab(.delegate(.moveToLogin)):
                 state.selectedTab = .home // 로그아웃 후 재 진입시 기본 화면 홈 화면으로 설정
                 return .none
 
