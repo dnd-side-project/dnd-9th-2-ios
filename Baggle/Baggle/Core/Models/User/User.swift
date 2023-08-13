@@ -14,6 +14,17 @@ public struct User: Codable, Equatable {
     let platform: LoginPlatform
 }
 
+extension User {
+    public static func error() -> User {
+        User(
+            id: -1,
+            name: "에러",
+            profileImageURL: "",
+            platform: .apple
+        )
+    }
+}
+
 #if DEBUG
 extension User {
     static func mockUp() -> User {

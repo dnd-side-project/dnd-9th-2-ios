@@ -215,8 +215,10 @@ struct SignUpFeature: ReducerProtocol {
                     case .nicknameDuplicated:
                         await send(.textFieldAction(.changeState(.invalid("중복되는 닉네임이 있습니다."))))
                     case .fail:
-                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다."))))
                         // Alert으로 변경 필요
+                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다."))))
+                    case .keyChainError:
+                        print("key 체인 에러") // Alert으로 변경 필요
                     }
                 }
 
