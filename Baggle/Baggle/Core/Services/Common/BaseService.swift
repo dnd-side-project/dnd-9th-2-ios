@@ -53,13 +53,12 @@ extension BaseService {
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
                         print("✅ response -", body)
                         switch body.status {
-                        case 200, 201:
-                            if let data = body.data {
-                                print("✅ data -", data)
-                                continuation.resume(returning: data)
-                            } else {
-                                continuation.resume(throwing: APIError.decoding)
-                            }
+                        case 200:
+                            print("✅ 200 data -", body.data)
+                            continuation.resume(returning: body.data)
+                        case 201:
+                            print("✅ 201 data -", body.data)
+                            continuation.resume(returning: body.data)
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 401:
