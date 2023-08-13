@@ -111,7 +111,7 @@ extension UserAPI: BaseAPI {
             
             return .uploadMultipart(multiPartData)
             
-        case .reissue:
+        case .reissue, .withdraw:
             return .requestPlain
         }
     }

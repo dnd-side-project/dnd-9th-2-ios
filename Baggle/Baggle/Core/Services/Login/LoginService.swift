@@ -28,16 +28,20 @@ extension LoginService: DependencyKey {
 
     static var liveValue = Self { requestModel, token in
         do {
-            let data: SignEntity = try await networkService.request(.signIn(
-                requestModel: requestModel,
-                token: token))
+            let data: SignEntity = try await networkService.request(
+                .signIn(
+                    requestModel: requestModel,
+                    token: token
+                )
+            )
+            // 키체인 저장, 저장 전에 이미 있는 데이터  삭제
+            checkKeyChain()
             let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
-            if KeychainManager.shared.readUserToken() == nil {
-                try KeychainManager.shared.deleteUserToken()
-            }
             try KeychainManager.shared.createUserToken(token)
             
-            UserDefaultList.user = data.toDomain()
+            // 유저 Default 저장
+            saveUser(data: data.toDomain())
+            
             return .success
         } catch let error {
             print("LoginService - error: \(error)")
@@ -80,6 +84,19 @@ extension LoginService: DependencyKey {
                 }
             }
         })
+    }
+    
+    static func checkKeyChain() {
+        do {
+            _ = try KeychainManager.shared.readUserToken()
+            try KeychainManager.shared.deleteUserToken()
+        } catch {
+            return
+        }
+    }
+    
+    static func saveUser(data: User) {
+        UserDefaultList.user = data
     }
 }
 
