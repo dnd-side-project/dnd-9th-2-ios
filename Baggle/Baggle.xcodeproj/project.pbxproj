@@ -117,6 +117,7 @@
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
 		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
 		2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */; };
+		2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */; };
 		2B7B4D6B2A849E9D00283248 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6A2A849E9D00283248 /* BaseService.swift */; };
 		2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */; };
 		2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D702A84A5C800283248 /* Meeting.swift */; };
@@ -289,6 +290,7 @@
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
 		2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
+		2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingInfoEntity.swift; sourceTree = "<group>"; };
 		2B7B4D6A2A849E9D00283248 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlamofireManager.swift; sourceTree = "<group>"; };
 		2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingDetail.swift; path = Baggle/Core/Models/Meeting/MeetingDetail/MeetingDetail.swift; sourceTree = SOURCE_ROOT; };
@@ -469,9 +471,10 @@
 		14134D3E2A64C54F004A6AC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14E083682A8369010001CB21 /* Network */,
 				2BDEAC7A2A863DB500D698E6 /* JoinMeeting */,
 				14CF68EA2A847BEB00E457DF /* User */,
-				14E083682A8369010001CB21 /* Network */,
+				2B7B4D752A84B3E500283248 /* SignUp */,
 				14E083662A8368F00001CB21 /* Meeting */,
 			);
 			path = Models;
@@ -848,6 +851,7 @@
 			isa = PBXGroup;
 			children = (
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
+				2B65B8142A88A7BE00E3BF11 /* JoinMeeting */,
 				14E0836B2A8369E30001CB21 /* MeetingDetail */,
 				14E083672A8368F70001CB21 /* SignUp */,
 				2B65B8112A8758DB00E3BF11 /* Login */,
@@ -1015,6 +1019,14 @@
 				2B5BE6B12A77A40900F25474 /* MeetingDetailService.swift */,
 			);
 			path = MeetingDetail;
+			sourceTree = "<group>";
+		};
+		2B65B8142A88A7BE00E3BF11 /* JoinMeeting */ = {
+			isa = PBXGroup;
+			children = (
+				2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */,
+			);
+			path = JoinMeeting;
 			sourceTree = "<group>";
 		};
 		2B65B8112A8758DB00E3BF11 /* Login */ = {
@@ -1393,6 +1405,7 @@
 				2BA345A72A6EB6BF00B7E2BD /* BaggleTagColor.swift in Sources */,
 				14E577AA2A80973300119FB3 /* EmergencyFeature.swift in Sources */,
 				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
+				2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */,
 				1410AD262A84BEB6008793FB /* Memeber.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,

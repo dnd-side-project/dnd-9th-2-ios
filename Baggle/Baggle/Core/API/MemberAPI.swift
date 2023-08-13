@@ -23,7 +23,7 @@ extension MemberAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case .fetchMeetingInfo: return "member"
+        case .fetchMeetingInfo: return ""
         }
     }
     
@@ -32,7 +32,7 @@ extension MemberAPI: BaseAPI {
     var headers: [String: String]? {
         switch self {
         case .fetchMeetingInfo(_, let token):
-            return HeaderType.jsonWithAuthorization(token: token).value
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -69,7 +69,7 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo:
             return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: parameterEncoding)
+                                      encoding: URLEncoding.queryString)
         }
     }
 }

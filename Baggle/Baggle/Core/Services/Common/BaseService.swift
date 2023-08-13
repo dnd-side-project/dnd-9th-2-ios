@@ -49,16 +49,21 @@ extension BaseService {
                 switch result {
                 case .success(let response):
                     do {
+                        print("response: \(response)")
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        print("✅ response -", body)
+                        print("✅ response -", response)
                         switch body.status {
                         case 200:
-                            print("✅ 200 data -", body.data)
-                            continuation.resume(returning: body.data)
+                            if let data = body.data {
+                                print("✅ 200 data -", data)
+                                continuation.resume(returning: data)
+                            }
                         case 201:
-                            print("✅ 201 data -", body.data)
-                            continuation.resume(returning: body.data)
+                            if let data = body.data {
+                                print("✅ 201 data -", data)
+                                continuation.resume(returning: data)
+                            }
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 401:
@@ -68,6 +73,9 @@ extension BaseService {
                         case 409:
                             if body.message == "이미 존재하는 닉네임입니다." {
                                 continuation.resume(throwing: APIError.duplicatedNickname)
+                            } else if body.message == "이미 참여 중인 약속입니다." {
+                                // TODO: - 메세지 확인 후 수정
+                                continuation.resume(throwing: APIError.duplicatedJoinMeeting)
                             } else {
                                 continuation.resume(throwing: APIError.duplicatedUser)
                             }

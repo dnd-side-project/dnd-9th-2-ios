@@ -11,6 +11,7 @@ enum JoinMeetingStatus: Equatable {
     case enable(JoinMeeting)
     case expired
     case joined
+    case fail(APIError)
 }
 
 struct JoinMeeting: Equatable {
