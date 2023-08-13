@@ -67,7 +67,7 @@ class Camera: NSObject {
     private var captureDevice: AVCaptureDevice? {
         didSet {
             guard let captureDevice = captureDevice else { return }
-            logger.debug("Using capture device: \(captureDevice.localizedName)")
+            debugPrint("Using capture device: \(captureDevice.localizedName)")
             sessionQueue.async {
                 self.updateSessionForCaptureDevice(captureDevice)
             }
@@ -118,7 +118,7 @@ class Camera: NSObject {
     }()
 
     // 비동기로 리턴하는 `사진 결과`를 위한 async 프로퍼티
-    var resultImageContinuation: CheckedContinuation<UIImage, Never>?
+    var resultImageContinuation: CheckedContinuation<UIImage, Error>?
     var completeSwitchDevice: CheckedContinuation<Void, Never>?
 
     var dropFrame: Int = 0
@@ -151,7 +151,6 @@ class Camera: NSObject {
             let captureDevice = captureDevice,
             let deviceInput = try? AVCaptureDeviceInput(device: captureDevice)
         else {
-            logger.error("Failed to obtain video input.")
             return
         }
 
@@ -163,15 +162,12 @@ class Camera: NSObject {
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoDataOutputQueue"))
 
         guard captureSession.canAddInput(deviceInput) else {
-            logger.error("Unable to add device input to capture session.")
             return
         }
         guard captureSession.canAddOutput(photoOutput) else {
-            logger.error("Unable to add photo output to capture session.")
             return
         }
         guard captureSession.canAddOutput(videoOutput) else {
-            logger.error("Unable to add video output to capture session.")
             return
         }
 
@@ -202,19 +198,13 @@ class Camera: NSObject {
     private func checkAuthorization() async -> Bool {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            logger.debug("Camera access authorized.")
             return true
         case .notDetermined:
-            logger.debug("Camera access not determined.")
             sessionQueue.suspend()
             let status = await AVCaptureDevice.requestAccess(for: .video)
             sessionQueue.resume()
             return status
-        case .denied:
-            logger.debug("Camera access denied.")
-            return false
-        case .restricted:
-            logger.debug("Camera library access restricted.")
+        case .denied, .restricted:
             return false
         @unknown default:
             return false
@@ -226,7 +216,7 @@ class Camera: NSObject {
         do {
             return try AVCaptureDeviceInput(device: validDevice)
         } catch let error {
-            logger.error("Error getting capture device input: \(error.localizedDescription)")
+            debugPrint("Error getting capture device input: \(error.localizedDescription)")
             return nil
         }
     }
@@ -265,13 +255,12 @@ class Camera: NSObject {
         }
     }
 
-    func start() async {
+    func start() async throws {
         let authorized = await checkAuthorization()
 
         // 에러 throw 하기 -> catch해서 설정창 보내기
         guard authorized else {
-            logger.error("Camera access was not authorized.")
-            return
+            throw CameraError.authorized
         }
 
         if isCaptureSessionConfigured {
@@ -344,8 +333,8 @@ class Camera: NSObject {
     }
 
     // 사진 촬영
-    func takePhoto() async -> UIImage {
-        return await withCheckedContinuation { continuation in
+    func takePhoto() async throws -> UIImage {
+        return try await withCheckedThrowingContinuation { continuation in
             guard let photoOutput = self.photoOutput else { return }
 
             self.resultImageContinuation = continuation
@@ -379,7 +368,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
 
         if let error = error {
-            logger.error("Error capturing photo: \(error.localizedDescription)")
+            resultImageContinuation?.resume(throwing: CameraError.capture)
             return
         }
 
@@ -439,5 +428,3 @@ fileprivate extension UIScreen {
         }
     }
 }
-
-private let logger = Logger(subsystem: "com.apple.swiftplaygroundscontent.capturingphotos", category: "Camera")

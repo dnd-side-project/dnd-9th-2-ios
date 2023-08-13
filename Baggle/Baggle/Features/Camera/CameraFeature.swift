@@ -21,6 +21,9 @@ struct CameraFeature: ReducerProtocol {
 
         var isCompleted: Bool = false
 
+        // Alert
+        var isAlertPresented: Bool = false
+        
         // Timer
         var timer: TimerFeature.State
         var isTimeOver: Bool = false
@@ -48,6 +51,13 @@ struct CameraFeature: ReducerProtocol {
         case timer(TimerFeature.Action)
         case isTimeOverChanged(Bool)
 
+        // Alert
+        case presentAlert(Bool)
+        case alertCancelButtonTapped
+        
+        // Move
+        case moveToSetting
+        
         // Delegate
         case delegate(Delegate)
 
@@ -77,15 +87,22 @@ struct CameraFeature: ReducerProtocol {
 
             case .onAppear:
                 return .run { send in
-                    await cameraService.start()
+                    let cameraStartStatus = await cameraService.start()
 
-                    let imageStream = cameraService.previewStream()
-                        .map { $0.image }
+                    switch cameraStartStatus {
+                    case .success:
+                        let imageStream = cameraService.previewStream()
+                            .map { $0.image }
 
-                    for await image in imageStream {
-                        Task { @MainActor in
-                            send(.viewFinderUpdate(image))
+                        for await image in imageStream {
+                            Task { @MainActor in
+                                send(.viewFinderUpdate(image))
+                            }
                         }
+                    case .deniedAuthorization:
+                        await send(.presentAlert(true))
+                    case .error:
+                        print("error")
                     }
                 }
 
@@ -112,8 +129,14 @@ struct CameraFeature: ReducerProtocol {
 
             case .shutterTapped:
                 return .run { send in
-                    let resultImage = await cameraService.takePhoto()
-                    await send(.completeTakePhoto(resultImage))
+                    let cameraTakePhotoStatus = await cameraService.takePhoto()
+                    
+                    switch cameraTakePhotoStatus {
+                    case .success(let resultImage):
+                        await send(.completeTakePhoto(resultImage))
+                    case .error:
+                        print("사진 촬영 error")
+                    }
                 }
 
             case .switchButtonTapped:
@@ -139,6 +162,14 @@ struct CameraFeature: ReducerProtocol {
                 // 이미지 업로드
                 return .run { _ in await self.dismiss() }
 
+                // MARK: - Alert
+            case .presentAlert(let newValue):
+                state.isAlertPresented = newValue
+                return .none
+                
+            case .alertCancelButtonTapped:
+                return .none
+                
                 // MARK: - Timer
 
             case .timer(.timerOver):
@@ -151,6 +182,13 @@ struct CameraFeature: ReducerProtocol {
                 state.isTimeOver = isTimeOver
                 return isTimeOver ? .none : .run { _ in await self.dismiss() }
 
+                // MARK: Move
+            case .moveToSetting:
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+                return .none
+                
                 // MARK: - Delegate
 
             case .delegate:
