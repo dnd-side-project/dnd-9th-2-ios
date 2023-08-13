@@ -61,6 +61,10 @@ extension BaseService {
                             continuation.resume(returning: body.data)
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
+                        case 401:
+                            continuation.resume(throwing: APIError.unauthorized)
+                        case 404:
+                            continuation.resume(throwing: APIError.notFound)
                         case 409:
                             if body.message == "이미 존재하는 닉네임입니다." {
                                 continuation.resume(throwing: APIError.duplicatedNickname)

@@ -28,7 +28,7 @@ extension SignUpService: DependencyKey {
     static var liveValue = Self { requestModel, token  in
         do {
             // 네트워크 요청
-            let data: SignUpEntity = try await baseService.request(
+            let data: SignEntity = try await baseService.request(
                 .signUp(
                     requestModel: requestModel,
                     token: token
@@ -42,7 +42,7 @@ extension SignUpService: DependencyKey {
             try KeychainManager.shared.createUserToken(token)
             
             // 유저 Default 저장
-            saveUser(data: data)
+            saveUser(data: data.toDomain())
             
             return .success
         } catch {
@@ -65,13 +65,8 @@ extension SignUpService: DependencyKey {
         }
     }
     
-    static func saveUser(data: SignUpEntity) {
-        UserDefaultList.user = User(
-            id: data.userID,
-            name: data.nickname,
-            profileImageURL: data.profileImageUrl,
-            platform: data.platform == "apple" ? .apple : .kakao
-        )
+    static func saveUser(data: User) {
+        UserDefaultList.user = data
     }
 }
 
