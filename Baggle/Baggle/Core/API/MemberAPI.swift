@@ -58,10 +58,7 @@ extension MemberAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchMeetingInfo:
-            return URLEncoding.init(destination: .queryString,
-                                    arrayEncoding: .noBrackets,
-                                    boolEncoding: .literal)
+        default: return JSONEncoding.default
         }
     }
     
