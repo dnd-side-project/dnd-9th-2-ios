@@ -39,25 +39,16 @@ struct CameraView: View {
                 if viewStore.isTimeOver {
                     timeOverView(viewStore: viewStore)
                 }
-                
-                if viewStore.isAlertPresented {
-                    BaggleAlert(
-                        isPresented: Binding(
-                            get: { viewStore.isAlertPresented },
-                            set: { viewStore.send(.presentAlert($0)) }
-                        ),
-                        title: "카메라 권한을 설정해주세요.",
-                        description: "카메라가 없으면 컨텐츠 이용이 어려워요",
-                        alertType: .twobutton,
-                        rightButtonTitle: "설정"
-                    ) {
-                        viewStore.send(.moveToSetting)
-                    }
-                }
             }
             .onAppear {
                 viewStore.send(.onAppear)
             }
+            .alert(
+                  store: self.store.scope(
+                    state: \.$alert,
+                    action: { .alert($0) }
+                  )
+                )
         }
     }
 }

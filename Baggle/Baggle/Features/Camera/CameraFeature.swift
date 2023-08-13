@@ -22,7 +22,7 @@ struct CameraFeature: ReducerProtocol {
         var isCompleted: Bool = false
 
         // Alert
-        var isAlertPresented: Bool = false
+        @PresentationState var alert: AlertState<Action.Alert>?
         
         // Timer
         var timer: TimerFeature.State
@@ -52,11 +52,12 @@ struct CameraFeature: ReducerProtocol {
         case isTimeOverChanged(Bool)
 
         // Alert
-        case presentAlert(Bool)
-        case alertCancelButtonTapped
-        
-        // Move
-        case moveToSetting
+        case presentAlert
+        case alert(PresentationAction<Alert>)
+        enum Alert: Equatable {
+            case primaryButtonTapped
+            case alertCancelTapped
+        }
         
         // Delegate
         case delegate(Delegate)
@@ -100,7 +101,7 @@ struct CameraFeature: ReducerProtocol {
                             }
                         }
                     case .deniedAuthorization:
-                        await send(.presentAlert(true))
+                        await send(.presentAlert)
                     case .error:
                         print("error")
                     }
@@ -161,15 +162,36 @@ struct CameraFeature: ReducerProtocol {
             case .uploadButtonTapped:
                 // 이미지 업로드
                 return .run { _ in await self.dismiss() }
-
+                
                 // MARK: - Alert
-            case .presentAlert(let newValue):
-                state.isAlertPresented = newValue
+            case .presentAlert:
+                state.alert = AlertState(title: {
+                    TextState("카메라 권한이 필요해요")
+                }, actions: {
+                    ButtonState(role: .cancel, action: .alertCancelTapped) {
+                        TextState("취소")
+                    }
+                    
+                    ButtonState(role: .none, action: .primaryButtonTapped) {
+                        TextState("설정")
+                    }
+                }, message: {
+                    TextState("컨텐츠를 이용하려면 카메라를 허용 해주세요")
+                })
                 return .none
                 
-            case .alertCancelButtonTapped:
+            case .alert(.presented(.primaryButtonTapped)):
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
                 return .none
                 
+            case .alert(.presented(.alertCancelTapped)):
+                return .run { _ in await self.dismiss() }
+                
+            case .alert:
+                return .none
+
                 // MARK: - Timer
 
             case .timer(.timerOver):
@@ -181,13 +203,6 @@ struct CameraFeature: ReducerProtocol {
             case let .isTimeOverChanged(isTimeOver):
                 state.isTimeOver = isTimeOver
                 return isTimeOver ? .none : .run { _ in await self.dismiss() }
-
-                // MARK: Move
-            case .moveToSetting:
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url)
-                }
-                return .none
                 
                 // MARK: - Delegate
 
@@ -195,5 +210,6 @@ struct CameraFeature: ReducerProtocol {
                 return .none
             }
         }
+        .ifLet(\.$alert, action: /Action.alert)
     }
 }

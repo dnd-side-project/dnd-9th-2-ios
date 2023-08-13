@@ -17,7 +17,7 @@ struct SignUpEntity: Codable {
     
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
-        case profileImageUrl = "profileImageURL"
+        case profileImageUrl = "profileImageUrl"
         case accessToken, refreshToken, platform, nickname
     }
 }
