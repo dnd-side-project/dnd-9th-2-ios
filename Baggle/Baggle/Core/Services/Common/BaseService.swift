@@ -62,6 +62,8 @@ extension BaseService {
                             }
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
+                        case 401:
+                            continuation.resume(throwing: APIError.unauthorized)
                         case 404:
                             continuation.resume(throwing: APIError.notFound)
                         case 409:

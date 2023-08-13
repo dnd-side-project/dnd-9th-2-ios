@@ -41,8 +41,13 @@ extension LoginService: DependencyKey {
             return .success
         } catch let error {
             print("LoginService - error: \(error)")
-            if (error as? APIError) == APIError.notFound {
+            guard let error = error as? APIError else { return .fail(.network) }
+            
+            if error == .notFound {
                 return .requireSignUp
+            } else if error == .unauthorized {
+                // 리프레시 토큰으로 재로그인 요청
+                return .fail(.network)
             } else {
                 return .fail(.network)
             }
