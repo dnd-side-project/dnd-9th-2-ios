@@ -14,7 +14,6 @@ enum MemberAPI {
     case fetchMeetingInfo(meetingID: Int, token: String)
 }
 
-
 extension MemberAPI: BaseAPI {
     
     static var apiType: APIType = .member
@@ -59,7 +58,10 @@ extension MemberAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        default: return JSONEncoding.default
+        case .fetchMeetingInfo:
+            return URLEncoding.init(destination: .queryString,
+                                    arrayEncoding: .noBrackets,
+                                    boolEncoding: .literal)
         }
     }
     
@@ -69,7 +71,7 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo:
             return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: URLEncoding.queryString)
+                                      encoding: ParameterEncodingWithNoSlash.init())
         }
     }
 }

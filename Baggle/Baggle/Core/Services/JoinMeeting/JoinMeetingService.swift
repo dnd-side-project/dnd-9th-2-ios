@@ -22,14 +22,12 @@ extension JoinMeetingService: DependencyKey {
             let accessToken = try KeychainManager.shared.readUserToken().accessToken
             let data: JoinMeetingInfoEntity = try await networkService.request(
                 .fetchMeetingInfo(
-//                    meetingID: meetingID,
-                    meetingID: 100,
+                    meetingID: meetingID,
                     token: accessToken
                 )
             )
             return JoinMeetingStatus.enable(data.toDomain())
         } catch let error {
-            print("📍 ", error)
             guard let error = error as? APIError else { return .fail(.network) }
             if error == .duplicatedJoinMeeting {
                 return JoinMeetingStatus.joined

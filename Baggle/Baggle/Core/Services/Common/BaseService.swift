@@ -73,8 +73,7 @@ extension BaseService {
                         case 409:
                             if body.message == "이미 존재하는 닉네임입니다." {
                                 continuation.resume(throwing: APIError.duplicatedNickname)
-                            } else if body.message == "이미 참여 중인 약속입니다." {
-                                // TODO: - 메세지 확인 후 수정
+                            } else if body.message == "이미 존재하는 참가자입니다." {
                                 continuation.resume(throwing: APIError.duplicatedJoinMeeting)
                             } else {
                                 continuation.resume(throwing: APIError.duplicatedUser)
