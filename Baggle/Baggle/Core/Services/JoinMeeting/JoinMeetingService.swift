@@ -39,7 +39,7 @@ extension JoinMeetingService: DependencyKey {
     } postJoinMeeting: { meetingID in
         do {
             let accessToken = try KeychainManager.shared.readUserToken().accessToken
-            let _: JoinMeetingEntity = try await networkService.request(
+            let _: Int = try await networkService.requestWithNoResult(
                 .postJoinMeeting(
                     meetingID: meetingID,
                     token: accessToken

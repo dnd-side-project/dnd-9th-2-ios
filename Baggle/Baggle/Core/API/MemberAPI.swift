@@ -54,7 +54,9 @@ extension MemberAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        case .fetchMeetingInfo(let meetingID, _), .postJoinMeeting(let meetingID, _):
+        case .fetchMeetingInfo(let meetingID, _):
+            params["meetingId"] = meetingID
+        case .postJoinMeeting(let meetingID, _):
             params["meetingId"] = meetingID
         }
         
