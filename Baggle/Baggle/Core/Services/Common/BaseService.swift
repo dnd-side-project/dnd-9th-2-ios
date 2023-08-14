@@ -106,10 +106,9 @@ extension BaseService {
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<Bool>.self,
                                                       from: response.data)
-                        let status = response.statusCode
-                        switch status {
+                        switch body.status {
                         case 200, 201:
-                            continuation.resume(returning: status)
+                            continuation.resume(returning: body.status)
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 401:
