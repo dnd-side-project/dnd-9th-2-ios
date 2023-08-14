@@ -12,6 +12,7 @@ import Moya
 
 enum MemberAPI {
     case fetchMeetingInfo(meetingID: Int, token: String)
+    case postJoinMeeting(meetingID: Int, token: String)
 }
 
 extension MemberAPI: BaseAPI {
@@ -23,6 +24,7 @@ extension MemberAPI: BaseAPI {
     var path: String {
         switch self {
         case .fetchMeetingInfo: return ""
+        case .postJoinMeeting: return ""
         }
     }
     
@@ -32,6 +34,8 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
+        case .postJoinMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -39,6 +43,7 @@ extension MemberAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
+        case .postJoinMeeting: return .post
         default: return .get
         }
     }
@@ -49,7 +54,7 @@ extension MemberAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        case .fetchMeetingInfo(let meetingID, _):
+        case .fetchMeetingInfo(let meetingID, _), .postJoinMeeting(let meetingID, _):
             params["meetingId"] = meetingID
         }
         
@@ -58,6 +63,8 @@ extension MemberAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
+        case .fetchMeetingInfo, .postJoinMeeting:
+            return ParameterEncodingWithNoSlash.init()
         default: return JSONEncoding.default
         }
     }
@@ -68,7 +75,10 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo:
             return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: ParameterEncodingWithNoSlash.init())
+                                      encoding: parameterEncoding)
+        case .postJoinMeeting:
+            return .requestParameters(parameters: bodyParameters ?? [:],
+                                      encoding: parameterEncoding)
         }
     }
 }
