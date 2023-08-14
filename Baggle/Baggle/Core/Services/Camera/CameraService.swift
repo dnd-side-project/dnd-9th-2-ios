@@ -10,10 +10,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CameraService {
-    public let start: () async -> Void
+    public let start: () async -> CameraStartStatus
     public let stop: () -> Void
     public let switchCaptureDevice: () async -> Void
-    public let takePhoto: () async -> UIImage
+    public let takePhoto: () async -> CameraTakePhotoStatus
     public let previewStream: () -> AsyncStream<CIImage>
 }
 
@@ -25,13 +25,27 @@ extension CameraService: DependencyKey {
 
         return Self { // start
             camera = Camera()
-            await camera.start()
+            do {
+                try await camera.start()
+            } catch {
+                if let cameraError = error as? CameraError, cameraError == .authorized {
+                    return .deniedAuthorization
+                } else {
+                    return .error
+                }
+            }
+            return .success
         } stop: {
             camera.stop()
         } switchCaptureDevice: {
             await camera.switchCaptureDevice()
         } takePhoto: {
-            await camera.takePhoto()
+            do {
+                let resultImage = try await camera.takePhoto()
+                return .success(resultImage)
+            } catch {
+                return .error
+            }
         } previewStream: {
             camera.previewStream
         }

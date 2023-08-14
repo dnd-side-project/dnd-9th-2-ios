@@ -49,16 +49,24 @@ extension BaseService {
                 switch result {
                 case .success(let response):
                     do {
+                        print("response: \(response)")
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        print("✅ response -", body)
                         switch body.status {
                         case 200:
-                            print("✅ 200 data -", body.data)
-                            continuation.resume(returning: body.data)
+                            if let data = body.data {
+                                print("✅ 200 data -", data)
+                                continuation.resume(returning: data)
+                            } else {
+                                continuation.resume(throwing: APIError.decoding)
+                            }
                         case 201:
-                            print("✅ 201 data -", body.data)
-                            continuation.resume(returning: body.data)
+                            if let data = body.data {
+                                print("✅ 201 data -", data)
+                                continuation.resume(returning: data)
+                            } else {
+                                continuation.resume(throwing: APIError.decoding)
+                            }
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 401:
@@ -68,6 +76,8 @@ extension BaseService {
                         case 409:
                             if body.message == "이미 존재하는 닉네임입니다." {
                                 continuation.resume(throwing: APIError.duplicatedNickname)
+                            } else if body.message == "이미 존재하는 참가자입니다." {
+                                continuation.resume(throwing: APIError.duplicatedJoinMeeting)
                             } else {
                                 continuation.resume(throwing: APIError.duplicatedUser)
                             }
@@ -86,24 +96,39 @@ extension BaseService {
         })
     }
     
-    func requestObject<T: Decodable>(
-        _ target: API,
-        completion: @escaping(Result<T?, Error>) -> Void
-    ) {
-        provider.request(target) { result in
-            switch result {
-            case .success(let value):
-                do {
-                    let decoder = JSONDecoder()
-                    let body = try decoder.decode(EntityContainer<T>.self, from: value.data)
-                    completion(.success(body.data))
-                } catch let error {
-                    completion(.failure(error))
+    func requestWithNoResult(_ target: API) async throws -> Int {
+        return try await withCheckedThrowingContinuation({ continuation in
+            provider.request(target) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        print("response: \(response)")
+                        let decoder = JSONDecoder()
+                        let body = try decoder.decode(EntityContainer<Bool>.self,
+                                                      from: response.data)
+                        switch body.status {
+                        case 200, 201:
+                            continuation.resume(returning: body.status)
+                        case 400:
+                            continuation.resume(throwing: APIError.badRequest)
+                        case 401:
+                            continuation.resume(throwing: APIError.unauthorized)
+                        case 404:
+                            continuation.resume(throwing: APIError.notFound)
+                        case 409:
+                            continuation.resume(throwing: APIError.duplicatedUser)
+                        default:
+                            continuation.resume(throwing: APIError.network)
+                        }
+                    } catch let error {
+                        print("❌ error - \(error)")
+                        continuation.resume(throwing: APIError.decoding)
+                    }
+                case .failure(let error):
+                    print("❌ error - \(error)")
+                    continuation.resume(throwing: APIError.badRequest)
                 }
-            case .failure(let error):
-                print("❌ fail - \(error)")
-                completion(.failure(error))
             }
-        }
+        })
     }
 }

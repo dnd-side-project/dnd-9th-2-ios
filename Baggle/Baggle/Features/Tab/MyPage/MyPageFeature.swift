@@ -54,12 +54,12 @@ struct MyPageFeature: ReducerProtocol {
                 return .none
                 
             case .privacyPolicyButtonTapped: 
-                state.safariURL = "https://www.dnd.ac/"
+                state.safariURL = Const.URL.privacyPolicy
                 state.presentSafariView = true
                 return .none
                 
             case .termsOfServiceButtonTapped:
-                state.safariURL = "https://www.naver.com/"
+                state.safariURL = Const.URL.termsOfService
                 state.presentSafariView = true
                 return .none
                 
