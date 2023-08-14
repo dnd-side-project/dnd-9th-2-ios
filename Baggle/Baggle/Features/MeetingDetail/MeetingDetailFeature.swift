@@ -187,9 +187,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .inviteButtonTapped:
+                guard let meetingData = state.meetingData else { return .none }
                 return .run { send in
                     if ShareApi.isKakaoTalkSharingAvailable() {
-                        if let url = await sendInvitation(name: "집들이집들", id: 1000) {
+                        if let url = await sendInvitation(
+                            name: meetingData.name,
+                            id: 1) { // TODO: - meetingData.id로 수정 (임시 id)
                             openURL(url)
                         } else {
                             await send(.invitationFailed)

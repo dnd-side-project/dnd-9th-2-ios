@@ -11,9 +11,8 @@ import Alamofire
 import Moya
 
 enum MemberAPI {
-    case fetchMeetingInfo
+    case fetchMeetingInfo(meetingID: Int, token: String)
 }
-
 
 extension MemberAPI: BaseAPI {
     
@@ -23,7 +22,7 @@ extension MemberAPI: BaseAPI {
     
     var path: String {
         switch self {
-        default: return ""
+        case .fetchMeetingInfo: return ""
         }
     }
     
@@ -31,7 +30,8 @@ extension MemberAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
-        default: return HeaderType.json.value
+        case .fetchMeetingInfo(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -49,7 +49,8 @@ extension MemberAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        default: break
+        case .fetchMeetingInfo(let meetingID, _):
+            params["meetingId"] = meetingID
         }
         
         return params
@@ -65,7 +66,9 @@ extension MemberAPI: BaseAPI {
     
     var task: Task {
         switch self {
-        default: return .requestPlain
+        case .fetchMeetingInfo:
+            return .requestParameters(parameters: bodyParameters ?? [:],
+                                      encoding: ParameterEncodingWithNoSlash.init())
         }
     }
 }
