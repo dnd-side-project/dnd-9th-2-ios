@@ -96,6 +96,18 @@ struct MockUpMeetingService {
                 ],
                 status: .ready,
                 isConfirmed: false
+            ),
+            Meeting(
+                id: -999,
+                name: "id 전달 에러 케이스.",
+                place: "남의 집",
+                date: "2023년 08년 23일",
+                time: "15:30",
+                dDay: 30,
+                profileImages: [
+                ],
+                status: .ready,
+                isConfirmed: false
             )
         ]
 

@@ -27,12 +27,12 @@ struct MeetingDetailFeature: ReducerProtocol {
         var buttonState: MeetingDetailButtonType = .none
 
         // Alert
-        var alertType: MeetingDeleteType = .delete
-        var isAlertPresented: Bool = false
-        var alertTitle: String = ""
-        var alertDescription: String?
-        var alertRightButtonTitle: String = ""
-
+        var isErrorAlertPresented: Bool = false
+        var errorDescription: String = ""
+        var isDeleteAlertPresented: Bool = false
+        var isLeaveAlertPresented: Bool = false
+        var isInvitationAlertPresented: Bool = false
+        
         // Feed
         var isImageTapped: Bool = false
         var tappedImageUrl: String?
@@ -56,7 +56,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         case onAppear
         case updateData(MeetingDetail)
-        case presentAlert
         case deleteMeeting
 
         // button
@@ -71,9 +70,15 @@ struct MeetingDetailFeature: ReducerProtocol {
         // feed
         case imageTapped(String?)
 
-        // error
-        case invitationFailed
-
+        // Alert
+        case presentErrorAlert(String)
+        case presentDeleteAlert
+        case presentLeaveAlert
+        case presentInvitationAlert
+        
+        // Alert - Tapped
+        case errorAlertButtonTapped
+        
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
@@ -110,6 +115,13 @@ struct MeetingDetailFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 let meetingID = state.meetingId
+                
+                if meetingID == Const.ErrorID.meeting {
+                    return .run { send in
+                        await send(.presentErrorAlert("홈에서 모임 정보를 전달하는데 에러가 발생했어요"))
+                    }
+                }
+                
                 return .run { send in
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
                     
@@ -117,9 +129,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                     case let .success(meetingDetail):
                         await send(.updateData(meetingDetail))
                     case let .fail(apiError):
-                        print("네트워크 에러 \(apiError)")
+                        await send(.presentErrorAlert("네트워크 에러 \(apiError)"))
                     case .userError:
-                        print("유저 에러")
+                        await send(.presentErrorAlert("로컬에 저장된 유저 정보를 가져오는데 에러가 발생했어요."))
                     }
                     // 성공 - 업데이트 데이터
                 }
@@ -142,13 +154,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
                 return .none
 
-            case .presentAlert:
-                state.alertTitle = (state.meetingData?.name ?? "-") + state.alertType.title
-                state.alertDescription = state.alertType.description
-                state.alertRightButtonTitle = state.alertType.rightButtonTitle
-                state.isAlertPresented.toggle()
-                return .none
-
             case .deleteMeeting:
                 return .run { send in
                     // 삭제 서버 통신에 따라 분기처리
@@ -158,16 +163,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Tap
 
             case .deleteButtonTapped:
-                state.alertType = .delete
-                return .run { send in
-                    await send(.presentAlert)
-                }
+                return .run { send in await send(.presentDeleteAlert) }
 
             case .leaveButtonTapped:
-                state.alertType = .leave
                 state.selectOwner = SelectOwnerFeature.State(
-                    memberList: state.meetingData?.members ?? [])
-                return .none
+                    memberList: state.meetingData?.members ?? []
+                )
+                return .run { send in await send(.presentLeaveAlert) }
 
             case .backButtonTapped:
                 state.dismiss = true
@@ -197,7 +199,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                             id: 1) { // TODO: - meetingData.id로 수정 (임시 id)
                             openURL(url)
                         } else {
-                            await send(.invitationFailed)
+                            await send(.presentInvitationAlert)
                         }
                     } else {
                         let url = "itms-apps://itunes.apple.com/app/362057947"
@@ -221,10 +223,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .none
 
-            case .invitationFailed:
-                print("초대 실패 alert")
-                return .none
-
             case .imageTapped(let imageUrl):
                 state.isImageTapped.toggle()
                 state.tappedImageUrl = imageUrl
@@ -236,12 +234,28 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let nextOwnerId = state.selectOwner?.selectedMemberId {
                     state.nextOwnerId = nextOwnerId
                 }
-                return .run { send in
-                    await send(.presentAlert)
-                }
+                return .run { send in await send(.presentLeaveAlert) }
 
             case .selectOwner:
                 return .none
+
+            case .presentErrorAlert(let description):
+                state.errorDescription = description
+                state.isErrorAlertPresented.toggle()
+                return .none
+
+            case .presentDeleteAlert:
+                return .none
+
+            case .presentLeaveAlert:
+                return .none
+
+            case .presentInvitationAlert:
+                state.isInvitationAlertPresented.toggle()
+                return .none
+                
+            case .errorAlertButtonTapped:
+                return .run { send in await send(.delegate(.onDisappear)) }
 
                 // Child - Camera
 
@@ -282,7 +296,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Delegate
 
             case .delegate(.deleteSuccess):
-                state.isAlertPresented = false
+                state.isDeleteAlertPresented = false
                 state.dismiss = true
                 return .none
 

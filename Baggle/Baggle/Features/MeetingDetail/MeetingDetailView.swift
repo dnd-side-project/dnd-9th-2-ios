@@ -73,8 +73,8 @@ struct MeetingDetailView: View {
                 .transition(.move(edge: .bottom))
 
                 // alert
-                if viewStore.isAlertPresented {
-                    baggleAlert(viewStore: viewStore)
+                if viewStore.isErrorAlertPresented {
+                    errorAlert(viewStore: viewStore)
                 }
 
                 // 이미지 상세
@@ -131,7 +131,7 @@ struct MeetingDetailView: View {
 }
 
 extension MeetingDetailView {
-    typealias Viewstore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
+    typealias MeetingDetailViewStore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
 
     func meetingTitleView(name: String, status: MeetingStatus) -> some View {
         HStack(alignment: .top) {
@@ -222,7 +222,7 @@ extension MeetingDetailView {
         .background(Color.PrimaryLight)
     }
 
-    func memberListView(viewStore: Viewstore) -> some View {
+    func memberListView(viewStore: MeetingDetailViewStore) -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
                 ForEach(viewStore.meetingData?.members ?? [], id: \.self) { member in
@@ -263,7 +263,7 @@ extension MeetingDetailView {
         .padding(.bottom, 16)
     }
 
-    func feedView(feeds: [Feed], viewStroe: Viewstore) -> some View {
+    func feedView(feeds: [Feed], viewStroe: MeetingDetailViewStore) -> some View {
         VStack(spacing: 16) {
             ForEach(feeds, id: \.id) { feed in
                 FeedListCell(feed: feed) {
@@ -273,7 +273,7 @@ extension MeetingDetailView {
         }
     }
 
-    func buttonView(viewStore: Viewstore) -> some View {
+    func buttonView(viewStore: MeetingDetailViewStore) -> some View {
         VStack(spacing: 4) {
             if viewStore.buttonState == .invite {
                 BubbleView(
@@ -304,20 +304,21 @@ extension MeetingDetailView {
             .buttonStyle(BaggleSecondaryStyle(buttonType: viewStore.buttonState))
         }
     }
-
-    func baggleAlert(viewStore: Viewstore) -> some View {
-        BaggleAlert(
+    
+    private func errorAlert(viewStore: MeetingDetailViewStore) -> some View {
+        BaggleAlertOneButton(
             isPresented: Binding(
-                get: { viewStore.isAlertPresented },
-                set: { _ in viewStore.send(.presentAlert) }),
-            title: viewStore.alertTitle,
-            description: viewStore.alertDescription,
-            rightButtonTitle: viewStore.alertRightButtonTitle) {
-                viewStore.send(.deleteMeeting)
+            get: { viewStore.isErrorAlertPresented },
+            set: { _ in viewStore.send(.presentErrorAlert("")) }
+            ),
+            title: "에러가 발생했어요",
+            description: viewStore.errorDescription,
+            buttonTitle: "돌아가기") {
+                viewStore.send(.errorAlertButtonTapped)
             }
     }
 
-    func imageDetailView(image: String, viewStore: Viewstore) -> some View {
+    func imageDetailView(image: String, viewStore: MeetingDetailViewStore) -> some View {
         ImageDetailView(
             isPresented: Binding(
                 get: { viewStore.isImageTapped },

@@ -22,8 +22,6 @@ extension MeetingDetailService: DependencyKey {
             let userToken = try KeychainManager.shared.readUserToken()
             let token = userToken.accessToken
             
-            print(token)
-            
             let meetingDetailEntity: MeetingDetailEntity = try await baseService.request(
                 .meetingDetail(meetingID: meetingID, token: token)
             )
