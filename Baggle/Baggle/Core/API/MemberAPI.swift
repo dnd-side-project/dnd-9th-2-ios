@@ -43,8 +43,8 @@ extension MemberAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
+        case .fetchMeetingInfo: return .get
         case .postJoinMeeting: return .post
-        default: return .get
         }
     }
     
@@ -63,9 +63,10 @@ extension MemberAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchMeetingInfo, .postJoinMeeting:
+        case .fetchMeetingInfo:
             return ParameterEncodingWithNoSlash.init()
-        default: return JSONEncoding.default
+        default:
+            return JSONEncoding.default
         }
     }
     
