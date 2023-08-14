@@ -11,7 +11,7 @@ import Alamofire
 import Moya
 
 enum UserAPI {
-    case signIn
+    case signIn(requestModel: LoginRequestModel, token: String)
     case signUp(requestModel: SignUpRequestModel, token: String)
     case reissue
     case withdraw(token: String)
@@ -36,8 +36,8 @@ extension UserAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
-        case .signIn:
-            return HeaderType.jsonWithAuthorization(token: "").value // 카카오 또는 애플 토큰
+        case .signIn(_, let token):
+            return HeaderType.jsonWithAuthorization(token: token).value // 카카오 또는 애플 토큰
         case .signUp(_, let token):
             return HeaderType.multipart(token: token).value // 카카오 또는 애플 토큰
         case .reissue:
@@ -66,6 +66,9 @@ extension UserAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
+        case .signIn(let requestModel, _):
+            params["platform"] = requestModel.platform.rawValue
+            params["fcmToken"] = requestModel.fcmToken
         default:
             break
         }
@@ -82,6 +85,9 @@ extension UserAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
+        case .signIn:
+            return .requestParameters(parameters: bodyParameters ?? [:],
+                                      encoding: parameterEncoding)
         case .signUp(let requestModel, _):
             var multiPartData: [Moya.MultipartFormData] = []
             let profileImageData = MultipartFormData(
@@ -105,7 +111,7 @@ extension UserAPI: BaseAPI {
             
             return .uploadMultipart(multiPartData)
             
-        case .signIn, .reissue, .withdraw:
+        case .reissue, .withdraw:
             return .requestPlain
         }
     }

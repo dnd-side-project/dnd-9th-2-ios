@@ -24,6 +24,7 @@ struct LoginFeature: ReducerProtocol {
 
         case appleLoginButtonTapped(String)
         case kakaoLoginButtonTapped
+        case requestLogin(LoginPlatform, String)
         case moveToSignUp(LoginPlatform, String)
 
         // MARK: - Dependency
@@ -36,7 +37,7 @@ struct LoginFeature: ReducerProtocol {
         case signUpNickname(PresentationAction<SignUpFeature.Action>)
     }
 
-    @Dependency(\.kakaoLoginService) private var kakaoLoginService
+    @Dependency(\.loginService) private var loginService
 
     var body: some ReducerProtocolOf<Self> {
         Reduce { state, action in
@@ -46,25 +47,43 @@ struct LoginFeature: ReducerProtocol {
                 // MARK: - Button Tapped
 
             case .appleLoginButtonTapped(let token):
-                print("확인용 - token: \(token), platform: apple")
+                print("🍎 확인용 - token: \(token)")
+                let requestModel = LoginRequestModel(platform: .apple,
+                                                     fcmToken: UserDefaultList.fcmToken ?? "")
                 return .run { send in
                     // 로그인 통신
-                    // 성공이면 loginSuccess, 새로운 유저면 moveToSignUp, 실패면 loginFail
-//                    await send(.loginSuccess)
-                    await send(.moveToSignUp(.apple, token))
+                    await send(.requestLogin(.apple, token))
                 }
 
             case .kakaoLoginButtonTapped:
+                let requestModel = LoginRequestModel(platform: .kakao,
+                                                     fcmToken: UserDefaultList.fcmToken ?? "")
                 return .run { send in
                     do {
-                        let token = try await kakaoLoginService.login()
-                        print("확인용 - token: \(token), platform: kakao")
+                        let token = try await loginService.kakaoLogin()
+                        print("🍫 확인용 - token: \(token)")
                         // 로그인 통신
-                        // 성공이면 loginSuccess, 새로운 유저면 moveToSignUp, 실패면 loginFail
-                        await send(.moveToSignUp(.kakao, token))
+                        await send(.requestLogin(.kakao, token))
                     } catch {
                         print("카카오 로그인 에러")
                         print(error)
+                    }
+                }
+                
+            case .requestLogin(let platform, let token):
+                let requestModel = LoginRequestModel(platform: platform,
+                                                     fcmToken: UserDefaultList.fcmToken ?? "")
+                return .run { send in
+                    let result = await loginService.login(requestModel, token)
+                    // 성공이면 loginSuccess, 새로운 유저면 moveToSignUp, 실패면 loginFail
+                    switch result {
+                    case .success:
+                        await send(.loginSuccess)
+                    case .requireSignUp:
+                        await send(.moveToSignUp(platform, token))
+                    case .fail(let error):
+                        print("login fail - \(error)")
+                        await send(.loginFail)
                     }
                 }
 

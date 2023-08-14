@@ -48,8 +48,7 @@ public struct SendInvitationEffect: Sendable {
         let appLink = Link(iosExecutionParams: ["name": name, "id": "\(id)"])
         let button = Button(title: "약속 참여하기", link: appLink)
         
-        // swiftlint:disable:next line_length
-        guard let thumbnailUrl = URL(string: "https://bagglebucket.s3.ap-northeast-2.amazonaws.com/link_participation.png") else { return nil }
+        guard let thumbnailUrl = URL(string: Const.URL.invitationThumbnail) else { return nil }
 
         let content = Content(
             title: name,

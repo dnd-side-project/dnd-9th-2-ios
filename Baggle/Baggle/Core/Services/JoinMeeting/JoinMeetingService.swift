@@ -15,11 +15,26 @@ struct JoinMeetingService {
 
 extension JoinMeetingService: DependencyKey {
     
-    static var liveValue = Self { _ in
+    static let networkService = BaseService<MemberAPI>()
+    
+    static var liveValue = Self { meetingID in
         do {
-            return try await JoinMeetingRepository().mockJoinMeetingState()
-        } catch {
-            return JoinMeetingStatus.joined
+            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            let data: JoinMeetingInfoEntity = try await networkService.request(
+                .fetchMeetingInfo(
+                    meetingID: meetingID,
+                    token: accessToken
+                )
+            )
+            return JoinMeetingStatus.enable(data.toDomain())
+        } catch let error {
+            guard let error = error as? APIError else { return .fail(.network) }
+            if error == .duplicatedJoinMeeting {
+                return JoinMeetingStatus.joined
+            } else {
+                // TODO: - 만료인 경우 분기처리
+                return JoinMeetingStatus.expired
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SignUpEntity.swift
+//  LoginEntity.swift
 //  Baggle
 //
 //  Created by 양수빈 on 2023/08/10.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct SignUpEntity: Codable {
+/// SignUp, SignIn에서 공통으로 사용되는 Entity입니다.
+struct SignEntity: Codable {
     let accessToken: String
     let refreshToken: String
     let platform: String
@@ -22,6 +23,11 @@ struct SignUpEntity: Codable {
     }
 }
 
-extension SignUpEntity {
-    // User 모델로
+extension SignEntity {
+    func toDomain() -> User {
+        return User(id: userID,
+                    name: nickname,
+                    profileImageURL: profileImageUrl,
+                    platform: platform == "kakao" ? .kakao : .apple)
+    }
 }

@@ -54,17 +54,24 @@ struct MyPageFeature: ReducerProtocol {
                 return .none
                 
             case .privacyPolicyButtonTapped: 
-                state.safariURL = "https://www.dnd.ac/"
+                state.safariURL = Const.URL.privacyPolicy
                 state.presentSafariView = true
                 return .none
                 
             case .termsOfServiceButtonTapped:
-                state.safariURL = "https://www.naver.com/"
+                state.safariURL = Const.URL.termsOfService
                 state.presentSafariView = true
                 return .none
                 
             case .logoutButtonTapped:
-                return .none
+                // 임시 로그아웃 연결
+                do {
+                    try KeychainManager.shared.deleteUserToken()
+                } catch let error {
+                    print("Keychain error - \(error)")
+                }
+                UserDefaultList.user = nil
+                return .run { send in await send(.delegate(.moveToLogin)) }
                 
             case .withdrawButtonTapped:
                 state.isLoading = true
