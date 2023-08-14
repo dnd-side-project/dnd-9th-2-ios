@@ -67,8 +67,8 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo:
             return ParameterEncodingWithNoSlash.init()
-        default:
-            return JSONEncoding.default
+        case .postJoinMeeting:
+            return JsonEncodingWithNoSlash.init()
         }
     }
     
