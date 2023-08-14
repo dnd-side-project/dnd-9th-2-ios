@@ -61,7 +61,6 @@ extension CameraView {
         Text("실시간 상황을\n친구들에게 공유하세요!")
             .multilineTextAlignment(.center)
             .fontWithLineSpacing(fontType: .subTitle)
-            .fontWeight(.medium)
             .foregroundColor(.white)
     }
     

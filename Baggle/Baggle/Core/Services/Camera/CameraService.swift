@@ -58,14 +58,3 @@ extension DependencyValues {
         set { self[CameraService.self] = newValue }
     }
 }
-
-enum CameraStartStatus {
-    case success
-    case deniedAuthorization
-    case error
-}
-
-enum CameraTakePhotoStatus {
-    case success(UIImage)
-    case error
-}
