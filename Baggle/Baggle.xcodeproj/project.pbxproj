@@ -72,6 +72,7 @@
 		14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE72A7E340E00EF58D5 /* CIImage+.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
 		147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81372A8A3790008B9B06 /* MeetingDetailService.swift */; };
+		147E813A2A8A3924008B9B06 /* MeetingDetailStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */; };
 		1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */; };
 		1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */; };
 		1493A9162A7DE7CB00A2D7CC /* LargeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */; };
@@ -249,6 +250,7 @@
 		14783EE72A7E340E00EF58D5 /* CIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+.swift"; sourceTree = "<group>"; };
 		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
 		147E81372A8A3790008B9B06 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
+		147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailStatus.swift; sourceTree = "<group>"; };
 		1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeature.swift; sourceTree = "<group>"; };
 		1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTimerView.swift; sourceTree = "<group>"; };
 		1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTimerView.swift; sourceTree = "<group>"; };
@@ -1032,6 +1034,7 @@
 			children = (
 				2B5BE6B12A77A40900F25474 /* MockUpMeetingDetailService.swift */,
 				147E81372A8A3790008B9B06 /* MeetingDetailService.swift */,
+				147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */,
 			);
 			path = MeetingDetail;
 			sourceTree = "<group>";
@@ -1447,6 +1450,7 @@
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
 				14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */,
 				14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */,
+				147E813A2A8A3924008B9B06 /* MeetingDetailStatus.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,

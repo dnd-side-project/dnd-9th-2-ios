@@ -10,11 +10,6 @@ import SwiftUI
 import ComposableArchitecture
 import KakaoSDKShare
 
-enum MeetingDetailState {
-    case empty
-    case updatedData(MeetingDetail)
-}
-
 struct MeetingDetailFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
@@ -97,7 +92,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         }
     }
 
-    @Dependency(\.meetingDetailService) var meetingService
+    @Dependency(\.meetingDetailService) var meetingDetailService
     @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
@@ -115,11 +110,18 @@ struct MeetingDetailFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 let meetingID = state.meetingId
-                let userID = state.userID
                 return .run { send in
-                    if let data = await meetingService.fetchMeetingDetail(meetingID, userID) {
-                        await send(.updateData(data))
+                    let result = await meetingDetailService.fetchMeetingDetail(meetingID)
+                    
+                    switch result {
+                    case let .success(meetingDetail):
+                        await send(.updateData(meetingDetail))
+                    case let .fail(apiError):
+                        print("네트워크 에러 \(apiError)")
+                    case .userError:
+                        print("유저 에러")
                     }
+                    // 성공 - 업데이트 데이터
                 }
 
             case .updateData(let data):

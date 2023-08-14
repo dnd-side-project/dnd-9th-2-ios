@@ -27,7 +27,7 @@ struct HomeFeature: ReducerProtocol {
 
         var progressList: [Meeting] = []
         var completedList: [Meeting] = []
-        var meetingDetailState: MeetingDetailFeature.State = MeetingDetailFeature.State(userID: 0, meetingId: 0)
+        var meetingDetailState: MeetingDetailFeature.State = MeetingDetailFeature.State(userID: -1, meetingId: -1)
         var isRefreshing: Bool = false
 
         @PresentationState var usingCamera: CameraFeature.State?

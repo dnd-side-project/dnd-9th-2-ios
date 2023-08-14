@@ -9,6 +9,8 @@ import Foundation
 
 import ComposableArchitecture
 
+#if DEBUG
+
 struct MockUpMeetingDetailService {
     var fetchMeetingDetail: (_ meetingID: Int, _ userID: Int) async -> MeetingDetail?
 }
@@ -16,7 +18,7 @@ struct MockUpMeetingDetailService {
 extension MockUpMeetingDetailService: DependencyKey {
     static var liveValue = Self { meetingID, userID  in
         do {
-            return try await MockUpMeetingDetailService()
+            return try await MockUpMeetingAPI()
                 .meetingDetail(status: .confirmedEmergency)
 //                .fetchMeetingDetail(meetingID: meetingID, userID: userID)
         } catch {
@@ -26,14 +28,13 @@ extension MockUpMeetingDetailService: DependencyKey {
 }
 
 extension DependencyValues {
-    var meetingDetailService: MockUpMeetingDetailService {
+    var mockUpMeetingDetailService: MockUpMeetingDetailService {
         get { self[MockUpMeetingDetailService.self] }
         set { self[MockUpMeetingDetailService.self] = newValue }
     }
 }
 
-#if DEBUG
-struct MockUpMeetingDetailService {
+struct MockUpMeetingAPI {
 
     func fetchMeetingDetail(meetingID: Int, userID: Int) async throws -> MeetingDetail {
         return try await withCheckedThrowingContinuation({ continuation in
@@ -85,7 +86,7 @@ struct MockUpMeetingDetailService {
 // MARK: - Mock Up Data
 
 
-extension MockUpMeetingDetailService {
+extension MockUpMeetingAPI {
     
     enum MockUpStatus {
         case completed

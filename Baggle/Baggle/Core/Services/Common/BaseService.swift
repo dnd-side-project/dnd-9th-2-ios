@@ -52,6 +52,7 @@ extension BaseService {
                         print("response: \(response)")
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
+                        print(body.message)
                         switch body.status {
                         case 200:
                             if let data = body.data {

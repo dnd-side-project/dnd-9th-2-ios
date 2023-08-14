@@ -11,8 +11,8 @@ import Alamofire
 import Moya
 
 enum MeetingAPI {
-    case fetchMeetingList
-    case fetchMeetingDetail
+    case meetingList
+    case meetingDetail(meetingID: Int, token: String)
     case createMeeting
 }
 
@@ -25,7 +25,9 @@ extension MeetingAPI: BaseAPI {
     
     var path: String {
         switch self {
-        default: return ""
+        case .meetingList: return "list"
+        case .meetingDetail: return "detail"
+        case .createMeeting: return ""
         }
     }
     
@@ -33,6 +35,8 @@ extension MeetingAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
+        case .meetingDetail(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         default: return HeaderType.json.value
         }
     }
@@ -41,7 +45,8 @@ extension MeetingAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        default: return .get
+        case .meetingDetail, .meetingList: return .get
+        case .createMeeting: return .post
         }
     }
     
@@ -65,7 +70,7 @@ extension MeetingAPI: BaseAPI {
     
     // MARK: - Task
     
-    var task: Task {
+    var task: Moya.Task {
         switch self {
         default: return .requestPlain
         }
