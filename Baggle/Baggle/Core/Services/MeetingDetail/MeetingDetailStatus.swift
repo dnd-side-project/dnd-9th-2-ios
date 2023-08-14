@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MeetingDetailStatus {
+enum MeetingDetailStatus: Equatable {
     case success(MeetingDetail)
     case fail(APIError)
     case userError

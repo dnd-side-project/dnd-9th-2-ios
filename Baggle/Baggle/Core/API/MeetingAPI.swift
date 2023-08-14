@@ -56,6 +56,8 @@ extension MeetingAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
+        case .meetingDetail(let meetingID, _):
+            params["meetingId"] = meetingID
         default: break
         }
         
@@ -72,7 +74,13 @@ extension MeetingAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
-        default: return .requestPlain
+        case .meetingDetail:
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: ParameterEncodingWithNoSlash()
+            )
+        default:
+            return .requestPlain
         }
     }
 }

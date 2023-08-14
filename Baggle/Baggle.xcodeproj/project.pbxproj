@@ -137,7 +137,7 @@
 		2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */; };
 		2B7EC32F2A8251DC00D78141 /* HomeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */; };
 		2B7EC3322A826F4D00D78141 /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */; };
-		2B84696A2A6E7AE200D75D32 /* BaggleAlertTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlertTwoButton.swift */; };
+		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
 		2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469642A6E7AE200D75D32 /* ShadeView.swift */; };
@@ -317,7 +317,7 @@
 		2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatus.swift; sourceTree = "<group>"; };
 		2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
-		2B84695F2A6E7AE200D75D32 /* BaggleAlertTwoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlertTwoButton.swift; sourceTree = "<group>"; };
+		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
 		2B8469642A6E7AE200D75D32 /* ShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
@@ -1101,7 +1101,7 @@
 		2B84695E2A6E7AE200D75D32 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				2B84695F2A6E7AE200D75D32 /* BaggleAlertTwoButton.swift */,
+				2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1484,7 +1484,7 @@
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
-				2B84696A2A6E7AE200D75D32 /* BaggleAlertTwoButton.swift in Sources */,
+				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				14B7A0452A75409E00B8E202 /* APIError.swift in Sources */,

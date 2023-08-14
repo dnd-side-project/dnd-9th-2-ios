@@ -28,7 +28,6 @@ struct HomeFeature: ReducerProtocol {
         var progressList: [Meeting] = []
         var completedList: [Meeting] = []
         var meetingDetailState = MeetingDetailFeature.State(
-            userID: Const.ErrorID.user,
             meetingId: Const.ErrorID.meeting
         )
         var isRefreshing: Bool = false
@@ -136,7 +135,6 @@ struct HomeFeature: ReducerProtocol {
             case .pushToMeetingDetail(let id):
                 state.meetingDetailId = id
                 state.meetingDetailState = MeetingDetailFeature.State(
-                    userID: state.user.id,
                     meetingId: id
                 )
                 return .run { send in

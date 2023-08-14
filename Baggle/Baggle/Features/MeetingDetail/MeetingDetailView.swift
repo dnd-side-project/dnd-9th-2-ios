@@ -23,6 +23,11 @@ struct MeetingDetailView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             // zstack 순서: alert > navigationBar > scrollView
             ZStack(alignment: .top) {
+                
+                if viewStore.isLoading {
+                    LoadingView()
+                }
+                
                 ScrollView {
 
                     if let data = viewStore.meetingData {
@@ -346,7 +351,6 @@ struct MeetingDetailView_Previews: PreviewProvider {
         MeetingDetailView(
             store: Store(
                 initialState: MeetingDetailFeature.State(
-                    userID: 1,
                     meetingId: 12345
                 ),
                 reducer: MeetingDetailFeature()

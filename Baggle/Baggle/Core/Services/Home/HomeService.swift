@@ -42,8 +42,8 @@ struct MockUpMeetingService {
     private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
         let progress = [
             Meeting(
-                id: 1,
-                name: "id가 1입니다.",
+                id: 9,
+                name: "id가 9입니다.",
                 place: "우리집",
                 date: "2023년 04월 22일",
                 time: "15:30",
@@ -57,8 +57,8 @@ struct MockUpMeetingService {
                 isConfirmed: true
             ),
             Meeting(
-                id: 2,
-                name: "id가 2입니다.",
+                id: 10,
+                name: "id가 10입니다.",
                 place: "남의 집",
                 date: "2023년 08년 23일",
                 time: "15:30",
@@ -71,8 +71,8 @@ struct MockUpMeetingService {
                 isConfirmed: false
             ),
             Meeting(
-                id: 3,
-                name: "id가 3입니다.",
+                id: 11,
+                name: "id가 11입니다.",
                 place: "우리집",
                 date: "2023년 04월 22일",
                 time: "15:30",

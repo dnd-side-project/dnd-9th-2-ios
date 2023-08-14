@@ -16,8 +16,8 @@ struct MeetingDetailFeature: ReducerProtocol {
 
     struct State: Equatable {
         
-        // User
-        var userID: Int
+        // View
+        var isLoading: Bool = false
         
         // Meeting
 
@@ -55,6 +55,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case onAppear
+        case handleResult(MeetingDetailStatus)
         case updateData(MeetingDetail)
         case deleteMeeting
 
@@ -121,11 +122,18 @@ struct MeetingDetailFeature: ReducerProtocol {
                         await send(.presentErrorAlert("홈에서 모임 정보를 전달하는데 에러가 발생했어요"))
                     }
                 }
+                state.isLoading = true
                 
                 return .run { send in
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
-                    
-                    switch result {
+                    await send(.handleResult(result))
+                }
+
+            case .handleResult(let meetingDetailStatus):
+                state.isLoading = false
+                
+                return .run { send in
+                    switch meetingDetailStatus {
                     case let .success(meetingDetail):
                         await send(.updateData(meetingDetail))
                     case let .fail(apiError):
@@ -133,9 +141,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     case .userError:
                         await send(.presentErrorAlert("로컬에 저장된 유저 정보를 가져오는데 에러가 발생했어요."))
                     }
-                    // 성공 - 업데이트 데이터
                 }
-
+                
             case .updateData(let data):
                 state.meetingData = data
                 
