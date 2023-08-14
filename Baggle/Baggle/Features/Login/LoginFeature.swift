@@ -48,16 +48,12 @@ struct LoginFeature: ReducerProtocol {
 
             case .appleLoginButtonTapped(let token):
                 print("🍎 확인용 - token: \(token)")
-                let requestModel = LoginRequestModel(platform: .apple,
-                                                     fcmToken: UserDefaultList.fcmToken ?? "")
                 return .run { send in
                     // 로그인 통신
                     await send(.requestLogin(.apple, token))
                 }
 
             case .kakaoLoginButtonTapped:
-                let requestModel = LoginRequestModel(platform: .kakao,
-                                                     fcmToken: UserDefaultList.fcmToken ?? "")
                 return .run { send in
                     do {
                         let token = try await loginService.kakaoLogin()
