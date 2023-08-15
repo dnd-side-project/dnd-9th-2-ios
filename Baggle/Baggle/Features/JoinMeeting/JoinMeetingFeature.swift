@@ -31,6 +31,7 @@ struct JoinMeetingFeature: ReducerProtocol {
     }
 
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.joinMeetingService) var joinMeetingService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -51,9 +52,13 @@ struct JoinMeetingFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
             case .joinButtonTapped:
+                let id = state.meetingId
                 return .run { send in
-                    // id 값으로 참여 통신
-                    await send(.joinSuccess)
+                    if await joinMeetingService.postJoinMeeting(id) == .success {
+                        await send(.joinSuccess)
+                    } else {
+                        await send(.joinFailed)
+                    }
                 }
 
             case .joinSuccess:

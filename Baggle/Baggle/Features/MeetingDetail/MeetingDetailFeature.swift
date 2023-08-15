@@ -192,14 +192,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                     if ShareApi.isKakaoTalkSharingAvailable() {
                         if let url = await sendInvitation(
                             name: meetingData.name,
-                            id: 1) { // TODO: - meetingData.id로 수정 (임시 id)
+                            id: 12) { // TODO: - meetingData.id로 수정 (임시 id)
                             openURL(url)
                         } else {
                             await send(.invitationFailed)
                         }
                     } else {
-                        let url = "itms-apps://itunes.apple.com/app/362057947"
-                        if let url = URL(string: url) {
+                        if let url = URL(string: Const.URL.kakaoAppStore) {
                             openURL(url)
                         }
                     }

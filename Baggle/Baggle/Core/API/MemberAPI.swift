@@ -12,6 +12,7 @@ import Moya
 
 enum MemberAPI {
     case fetchMeetingInfo(meetingID: Int, token: String)
+    case postJoinMeeting(meetingID: Int, token: String)
 }
 
 extension MemberAPI: BaseAPI {
@@ -23,6 +24,7 @@ extension MemberAPI: BaseAPI {
     var path: String {
         switch self {
         case .fetchMeetingInfo: return ""
+        case .postJoinMeeting: return "participation"
         }
     }
     
@@ -32,6 +34,8 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
+        case .postJoinMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -39,7 +43,8 @@ extension MemberAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        default: return .get
+        case .fetchMeetingInfo: return .get
+        case .postJoinMeeting: return .post
         }
     }
     
@@ -51,6 +56,8 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo(let meetingID, _):
             params["meetingId"] = meetingID
+        case .postJoinMeeting(let meetingID, _):
+            params["meetingId"] = meetingID
         }
         
         return params
@@ -58,7 +65,10 @@ extension MemberAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        default: return JSONEncoding.default
+        case .fetchMeetingInfo:
+            return ParameterEncodingWithNoSlash.init()
+        case .postJoinMeeting:
+            return JSONEncoding.default
         }
     }
     
@@ -68,7 +78,10 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo:
             return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: ParameterEncodingWithNoSlash.init())
+                                      encoding: parameterEncoding)
+        case .postJoinMeeting:
+            return .requestParameters(parameters: bodyParameters ?? [:],
+                                      encoding: parameterEncoding)
         }
     }
 }

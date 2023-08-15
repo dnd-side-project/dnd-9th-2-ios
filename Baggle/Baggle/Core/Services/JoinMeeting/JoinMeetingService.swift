@@ -11,6 +11,7 @@ import ComposableArchitecture
 
 struct JoinMeetingService {
     var fetchMeetingInfo: (_ meetingID: Int) async -> JoinMeetingStatus
+    var postJoinMeeting: (_ meetingID: Int) async -> JoinMeetingResultStatus
 }
 
 extension JoinMeetingService: DependencyKey {
@@ -32,9 +33,22 @@ extension JoinMeetingService: DependencyKey {
             if error == .duplicatedJoinMeeting {
                 return JoinMeetingStatus.joined
             } else {
-                // TODO: - 만료인 경우 분기처리
                 return JoinMeetingStatus.expired
             }
+        }
+    } postJoinMeeting: { meetingID in
+        do {
+            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            let _: Int = try await networkService.requestWithNoResult(
+                .postJoinMeeting(
+                    meetingID: meetingID,
+                    token: accessToken
+                )
+            )
+            return JoinMeetingResultStatus.success
+        } catch let error {
+            guard let error = error as? APIError else { return .fail(.network) }
+            return JoinMeetingResultStatus.fail(error)
         }
     }
 }

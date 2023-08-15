@@ -18,5 +18,5 @@ enum APIError: Error, Equatable {
     case server // 500
     case network // 네트워크 에러
     case decoding // 디코딩 에러
-    case keychain(status: OSStatus)
+    case jsonEncodingError
 }
