@@ -11,7 +11,7 @@ import Alamofire
 import Moya
 
 enum FeedAPI {
-    case upload
+    case uploadPhoto(requestModel: FeedPhotoRequestModel, token: String)
 }
 
 
@@ -31,7 +31,8 @@ extension FeedAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
-        default: return HeaderType.json.value
+        case .uploadPhoto(_ , let token):
+            return HeaderType.multipartWithBearer(token: token).value
         }
     }
     
@@ -39,7 +40,7 @@ extension FeedAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        default: return .get
+        case .uploadPhoto: return .post
         }
     }
     
@@ -49,7 +50,8 @@ extension FeedAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        default: break
+        case .uploadPhoto(let requestModel, _):
+            params["participation"] = requestModel.participation
         }
         
         return params
@@ -65,7 +67,16 @@ extension FeedAPI: BaseAPI {
     
     var task: Task {
         switch self {
-        default: return .requestPlain
+        case .uploadPhoto(let requestModel, _):
+            let feedImageData = MultipartFormData(
+                provider: .data(requestModel.feedImage),
+                name: "file",
+                fileName: ".jpg",
+                mimeType: "image/jpeg")
+            
+            let multiPartData: [Moya.MultipartFormData] = [feedImageData]
+
+            return .uploadMultipart(multiPartData)
         }
     }
 }

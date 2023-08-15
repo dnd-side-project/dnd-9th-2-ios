@@ -27,3 +27,23 @@ struct MeetingDetail: Equatable {
         return lhs.id == rhs.id
     }
 }
+
+extension MeetingDetail {
+    func updateFeed(_ feed: Feed) -> MeetingDetail {
+        MeetingDetail(
+            id: self.id,
+            name: self.name,
+            place: self.place,
+            date: self.date,
+            time: self.time,
+            memo: self.memo,
+            members: self.members,
+            status: self.status,
+            isEmergencyAuthority: self.isEmergencyAuthority,
+            emergencyButtonActive: self.emergencyButtonActive,
+            emergencyButtonActiveTime: self.emergencyButtonActiveTime,
+            isCertified: true,
+            feeds: self.feeds + [feed]
+        )
+    }
+}

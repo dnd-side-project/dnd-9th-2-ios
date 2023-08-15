@@ -52,6 +52,7 @@ enum HeaderType {
     case jsonWithAuthorization(token: String)
     case jsonWithBearer(token: String)
     case multipart(token: String)
+    case multipartWithBearer(token: String)
     
     var value: [String: String] {
         switch self {
@@ -59,16 +60,28 @@ enum HeaderType {
             return ["Content-Type": "application/json"]
             
         case .jsonWithAuthorization(let token):
-            return ["Content-Type": "application/json",
-                    "Authorization": token]
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
             
         case .jsonWithBearer(let token):
-            return ["Content-Type": "application/json",
-                    "Authorization": "Bearer \(token)"]
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
             
         case .multipart(let token):
-            return ["Content-Type": "multipart/form-data",
-                    "Authorization": token]
+            return [
+                "Content-Type": "multipart/form-data",
+                "Authorization": token
+            ]
+            
+        case .multipartWithBearer(let token):
+            return [
+                "Content-Type": "multipart/form-data",
+                "Authorization": "Bearer \(token)"
+            ]
         }
     }
 }
