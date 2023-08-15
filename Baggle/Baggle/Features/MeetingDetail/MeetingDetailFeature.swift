@@ -137,7 +137,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                     case let .success(meetingDetail):
                         await send(.updateData(meetingDetail))
                     case let .fail(apiError):
-                        await send(.presentErrorAlert("네트워크 에러 \(apiError)"))
+                        await send(
+                            .presentErrorAlert(
+                                """
+                                네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요. [\(apiError.description)]
+                                """
+                            )
+                        )
                     case .userError:
                         await send(.presentErrorAlert("로컬에 저장된 유저 정보를 가져오는데 에러가 발생했어요."))
                     }

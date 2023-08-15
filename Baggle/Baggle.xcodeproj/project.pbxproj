@@ -126,7 +126,7 @@
 		2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */; };
 		2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */; };
 		2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8172A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift */; };
-		2B7B4D6B2A849E9D00283248 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6A2A849E9D00283248 /* BaseService.swift */; };
+		2B7B4D6B2A849E9D00283248 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6A2A849E9D00283248 /* NetworkService.swift */; };
 		2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */; };
 		2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D702A84A5C800283248 /* Meeting.swift */; };
 		2B7B4D742A84A5EC00283248 /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D732A84A5EC00283248 /* ProfileImageModel.swift */; };
@@ -309,7 +309,7 @@
 		2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
 		2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingInfoEntity.swift; sourceTree = "<group>"; };
 		2B65B8172A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodingWithNoSlash.swift; sourceTree = "<group>"; };
-		2B7B4D6A2A849E9D00283248 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		2B7B4D6A2A849E9D00283248 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlamofireManager.swift; sourceTree = "<group>"; };
 		2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingDetail.swift; path = Baggle/Core/Models/Meeting/MeetingDetail/MeetingDetail.swift; sourceTree = SOURCE_ROOT; };
 		2B7B4D702A84A5C800283248 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = Baggle/Core/Models/Meeting/Meeting.swift; sourceTree = SOURCE_ROOT; };
@@ -692,6 +692,14 @@
 			path = Text;
 			sourceTree = "<group>";
 		};
+		14486D2F2A8B102800831DDD /* MockUp */ = {
+			isa = PBXGroup;
+			children = (
+				2B5BE6B12A77A40900F25474 /* MockUpMeetingDetailService.swift */,
+			);
+			path = MockUp;
+			sourceTree = "<group>";
+		};
 		1461B5FE2A7BA3EA00A15706 /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
@@ -1040,7 +1048,7 @@
 		2B5BE6B02A77A3F600F25474 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
-				2B5BE6B12A77A40900F25474 /* MockUpMeetingDetailService.swift */,
+				14486D2F2A8B102800831DDD /* MockUp */,
 				147E81372A8A3790008B9B06 /* MeetingDetailService.swift */,
 				147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */,
 			);
@@ -1075,7 +1083,7 @@
 		2B7B4D7A2A84D1E100283248 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2B7B4D6A2A849E9D00283248 /* BaseService.swift */,
+				2B7B4D6A2A849E9D00283248 /* NetworkService.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1512,7 +1520,7 @@
 				2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */,
 				2B5CF2682A6EC889004D3033 /* View+.swift in Sources */,
 				2B308B8F2A7CCE5A00B9846F /* SegmentedTagView.swift in Sources */,
-				2B7B4D6B2A849E9D00283248 /* BaseService.swift in Sources */,
+				2B7B4D6B2A849E9D00283248 /* NetworkService.swift in Sources */,
 				2B9F27172A813AEA009ED284 /* ProfileBadgeView.swift in Sources */,
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,

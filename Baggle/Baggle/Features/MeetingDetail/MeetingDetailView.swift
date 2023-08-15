@@ -10,16 +10,16 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MeetingDetailView: View {
-
+    
     let store: StoreOf<MeetingDetailFeature>
-
+    
     @Environment(\.dismiss) private var dismiss
-
+    
     // 임시 액션시트
     @State var isActionSheetShow: Bool = false
-
+    
     var body: some View {
-
+        
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             // zstack 순서: alert > navigationBar > scrollView
             ZStack(alignment: .top) {
@@ -29,11 +29,11 @@ struct MeetingDetailView: View {
                 }
                 
                 ScrollView {
-
+                    
                     if let data = viewStore.meetingData {
                         // header
                         headerView(data: data)
-
+                        
                         // 참여자 목록
                         memberListView(viewStore: viewStore)
                             .padding(.horizontal, 20)
@@ -42,7 +42,7 @@ struct MeetingDetailView: View {
                                 height: 0.5,
                                 color: .gray4
                             )
-
+                        
                         // 인증 피드
                         if !data.feeds.isEmpty {
                             feedView(
@@ -57,7 +57,7 @@ struct MeetingDetailView: View {
                     }
                 }
                 .refreshable { viewStore.send(.onAppear) }
-
+                
                 VStack {
                     // navibar
                     NavigationBar(naviType: .more) {
@@ -66,9 +66,9 @@ struct MeetingDetailView: View {
                         isActionSheetShow = true
                     }
                     .background(Color.PrimaryLight)
-
+                    
                     Spacer()
-
+                    
                     if !(viewStore.buttonState == .none) {
                         buttonView(viewStore: viewStore)
                             .padding(.bottom, 16)
@@ -76,12 +76,21 @@ struct MeetingDetailView: View {
                 }
                 .animation(.easeOut(duration: 0.3), value: viewStore.buttonState)
                 .transition(.move(edge: .bottom))
-
-                // alert
+                
+                // Error - alert
+                
                 if viewStore.isErrorAlertPresented {
-                    errorAlert(viewStore: viewStore)
+                    errorAlert(
+                        isPresented: Binding(
+                            get: { viewStore.isErrorAlertPresented },
+                            set: { _ in viewStore.send(.presentErrorAlert("")) }
+                        ),
+                        description: viewStore.errorDescription
+                    ) {
+                        viewStore.send(.errorAlertButtonTapped)
+                    }
                 }
-
+                
                 // 이미지 상세
                 if viewStore.isImageTapped,
                    let image = viewStore.tappedImageUrl {
@@ -92,11 +101,11 @@ struct MeetingDetailView: View {
             // 임시 액션시트
             .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
                 Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
-
+                
                 Button("방장 넘기기") { viewStore.send(.leaveButtonTapped) }
-
+                
                 Button("카메라") { viewStore.send(.cameraButtonTapped) }
-
+                
                 Button("긴급 버튼") { viewStore.send(.emergencyButtonTapped) }
                 
                 Button("초대장 보내기") { viewStore.send(.inviteButtonTapped) }
@@ -116,7 +125,7 @@ struct MeetingDetailView: View {
                     action: { .usingCamera($0)}
                 )
             ) { cameraStore in
-                    CameraView(store: cameraStore)
+                CameraView(store: cameraStore)
             }
             .fullScreenCover(
                 store: self.store.scope(
@@ -124,7 +133,7 @@ struct MeetingDetailView: View {
                     action: { .emergencyAction($0) }
                 )
             ) { emergencyStore in
-                    EmergencyView(store: emergencyStore)
+                EmergencyView(store: emergencyStore)
             }
             .onAppear { viewStore.send(.onAppear) }
             .onDisappear { viewStore.send(.delegate(.onDisappear)) }
@@ -137,17 +146,17 @@ struct MeetingDetailView: View {
 
 extension MeetingDetailView {
     typealias MeetingDetailViewStore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
-
+    
     func meetingTitleView(name: String, status: MeetingStatus) -> some View {
         HStack(alignment: .top) {
             Text("📌")
-
+            
             Text("\(name)")
                 .fontWithLineSpacing(fontType: .subTitle)
                 .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
                 .foregroundColor(.gray9)
-
+            
             Group {
                 if status == .completed {
                     Image.Stamp.complete
@@ -159,12 +168,12 @@ extension MeetingDetailView {
             }
             .frame(width: 56, height: 23)
             .padding(.top, name.width > 200 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
-
+            
             Spacer()
         }
         .padding(.bottom, 10)
     }
-
+    
     func meetingDateView(place: String, date: String, time: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(
@@ -174,7 +183,7 @@ extension MeetingDetailView {
                     color: .gray9,
                     targetColor: .gray6)
             )
-
+            
             Text(
                 attributedColorString(
                     str: "시간  |  \(date) \(time)",
@@ -185,7 +194,7 @@ extension MeetingDetailView {
         }
         .fontWithLineSpacing(fontType: .body3)
     }
-
+    
     func meetingMemoView(memo: String?) -> some View {
         Group {
             if let memo {
@@ -203,7 +212,7 @@ extension MeetingDetailView {
         .background(.white)
         .cornerRadius(8)
     }
-
+    
     func headerView(data: MeetingDetail) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             // 모임방 이름, 스탬프
@@ -211,14 +220,14 @@ extension MeetingDetailView {
                 name: data.name,
                 status: data.status
             )
-
+            
             // 장소, 시간
             meetingDateView(
                 place: data.place,
                 date: data.date,
                 time: data.time
             )
-
+            
             // 메모
             meetingMemoView(memo: data.memo)
                 .padding(.top, 10)
@@ -226,7 +235,7 @@ extension MeetingDetailView {
         .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
         .background(Color.PrimaryLight)
     }
-
+    
     func memberListView(viewStore: MeetingDetailViewStore) -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
@@ -243,18 +252,18 @@ extension MeetingDetailView {
                                     viewStore.send(.imageTapped(member.certImage))
                                 }
                             }
-
+                            
                             HStack(spacing: -10) {
                                 if member.isMeetingAuthority {
                                     ProfileBadgeView(tag: .meeting)
                                 }
-
+                                
                                 if member.isButtonAuthority {
                                     ProfileBadgeView(tag: .button)
                                 }
                             }
                         }
-
+                        
                         Text(member.name)
                             .padding(.vertical, 2)
                             .fontWithLineSpacing(fontType: .caption1)
@@ -267,7 +276,7 @@ extension MeetingDetailView {
         .padding(.top, 20)
         .padding(.bottom, 16)
     }
-
+    
     func feedView(feeds: [Feed], viewStroe: MeetingDetailViewStore) -> some View {
         VStack(spacing: 16) {
             ForEach(feeds, id: \.id) { feed in
@@ -277,7 +286,7 @@ extension MeetingDetailView {
             }
         }
     }
-
+    
     func buttonView(viewStore: MeetingDetailViewStore) -> some View {
         VStack(spacing: 4) {
             if viewStore.buttonState == .invite {
@@ -287,15 +296,15 @@ extension MeetingDetailView {
                     text: "최대 6명"
                 )
             }
-
+            
             Button {
                 viewStore.send(.eventButtonTapped)
             } label: {
                 HStack(spacing: 8) {
                     viewStore.buttonState.buttonIcon
-
+                    
                     Text(viewStore.buttonState.buttonTitle)
-
+                    
                     if viewStore.buttonState == .authorize {
                         SmallTimerView(
                             store: self.store.scope(
@@ -310,19 +319,6 @@ extension MeetingDetailView {
         }
     }
     
-    private func errorAlert(viewStore: MeetingDetailViewStore) -> some View {
-        BaggleAlertOneButton(
-            isPresented: Binding(
-            get: { viewStore.isErrorAlertPresented },
-            set: { _ in viewStore.send(.presentErrorAlert("")) }
-            ),
-            title: "에러가 발생했어요",
-            description: viewStore.errorDescription,
-            buttonTitle: "돌아가기") {
-                viewStore.send(.errorAlertButtonTapped)
-            }
-    }
-
     func imageDetailView(image: String, viewStore: MeetingDetailViewStore) -> some View {
         ImageDetailView(
             isPresented: Binding(
@@ -338,7 +334,7 @@ extension MeetingDetailView {
         VStack(spacing: 12) {
             Image.Background.empty
                 .padding(.top, screenSize.height*0.1)
-                
+            
             Text("아직 올라온 사진이 없어요!")
                 .font(.Baggle.body2)
                 .foregroundColor(.gray6)

@@ -15,14 +15,14 @@ struct  MeetingDetailService {
 
 extension MeetingDetailService: DependencyKey {
     
-    static let baseService = BaseService<MeetingAPI>()
+    static let networkService = NetworkService<MeetingAPI>()
     
     static var liveValue = Self { meetingID in
         do {
             let userToken = try KeychainManager.shared.readUserToken()
             let token = userToken.accessToken
             
-            let meetingDetailEntity: MeetingDetailEntity = try await baseService.request(
+            let meetingDetailEntity: MeetingDetailEntity = try await networkService.request(
                 .meetingDetail(meetingID: meetingID, token: token)
             )
             

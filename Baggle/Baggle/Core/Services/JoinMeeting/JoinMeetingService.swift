@@ -15,7 +15,7 @@ struct JoinMeetingService {
 
 extension JoinMeetingService: DependencyKey {
     
-    static let networkService = BaseService<MemberAPI>()
+    static let networkService = NetworkService<MemberAPI>()
     
     static var liveValue = Self { meetingID in
         do {

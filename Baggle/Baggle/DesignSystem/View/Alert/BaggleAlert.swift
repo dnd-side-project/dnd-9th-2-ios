@@ -40,7 +40,6 @@ import ComposableArchitecture
 
 struct BaggleAlertOneButton: View {
     
-    private let screenSize: CGRect = UIScreen.main.bounds
     private var alertWidth: CGFloat {
         screenSize.width - 40
     }
@@ -115,8 +114,7 @@ struct BaggleAlertOneButton: View {
 }
 
 struct BaggleAlertTwoButton: View {
-    
-    private let screenSize: CGRect = UIScreen.main.bounds
+
     private var alertWidth: CGFloat {
         screenSize.width - 40
     }

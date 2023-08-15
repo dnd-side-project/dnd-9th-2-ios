@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 import Moya
 
-class BaseService<Target: TargetType> {
+class NetworkService<Target: TargetType> {
     typealias API = Target
     
     private lazy var provider = self.defaultProvider
@@ -37,8 +37,8 @@ class BaseService<Target: TargetType> {
     public init() {}
 }
 
-extension BaseService {
-    var `default`: BaseService {
+extension NetworkService {
+    var `default`: NetworkService {
         self.provider = self.defaultProvider
         return self
     }
