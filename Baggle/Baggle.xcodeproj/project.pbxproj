@@ -84,6 +84,8 @@
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
+		14C8F9CC2A8B2905001690C5 /* FeedPhotoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */; };
+		14C8F9CE2A8B2979001690C5 /* FeedParticipationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CD2A8B2979001690C5 /* FeedParticipationModel.swift */; };
 		14CF68E92A846EB700E457DF /* TestDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68E82A846EB700E457DF /* TestDateService.swift */; };
 		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
 		14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */; };
@@ -267,6 +269,8 @@
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPhotoRequestModel.swift; sourceTree = "<group>"; };
+		14C8F9CD2A8B2979001690C5 /* FeedParticipationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParticipationModel.swift; sourceTree = "<group>"; };
 		14CF68E82A846EB700E457DF /* TestDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateService.swift; sourceTree = "<group>"; };
 		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPlatform.swift; sourceTree = "<group>"; };
@@ -852,6 +856,15 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		14C8F9CA2A8B28F6001690C5 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */,
+				14C8F9CD2A8B2979001690C5 /* FeedParticipationModel.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 		14CF68EA2A847BEB00E457DF /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +899,7 @@
 			isa = PBXGroup;
 			children = (
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
+				14C8F9CA2A8B28F6001690C5 /* Feed */,
 				2B65B8142A88A7BE00E3BF11 /* JoinMeeting */,
 				14E0836B2A8369E30001CB21 /* MeetingDetail */,
 				14E083672A8368F70001CB21 /* SignUp */,
@@ -1427,6 +1441,7 @@
 				1421C0512A7A84A200C20497 /* LoginService.swift in Sources */,
 				143C7C042A87645E004D83FD /* LoadingView.swift in Sources */,
 				2B2E7E482A848EC60033C65A /* BaseAPI.swift in Sources */,
+				14C8F9CC2A8B2905001690C5 /* FeedPhotoRequestModel.swift in Sources */,
 				14458B442A81E6D000C810FA /* BaggleStamp.swift in Sources */,
 				2B30E33E2A6F9DF000949151 /* UserDefaultKeyList.swift in Sources */,
 				2BD5D5572A6C4EBE0070C196 /* View+Modifier.swift in Sources */,
@@ -1453,6 +1468,7 @@
 				2B7B4D7D2A853BED00283248 /* MeetingAPI.swift in Sources */,
 				143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */,
 				143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */,
+				14C8F9CE2A8B2979001690C5 /* FeedParticipationModel.swift in Sources */,
 				1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */,
 				2B7B4D7B2A85342600283248 /* MeetingDetail.swift in Sources */,
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
