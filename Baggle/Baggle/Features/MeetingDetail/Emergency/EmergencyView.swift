@@ -156,7 +156,7 @@ struct EmergencyView_Previews: PreviewProvider {
     static var previews: some View {
         EmergencyView(
             store: Store(
-                initialState: EmergencyFeature.State(),
+                initialState: EmergencyFeature.State(meetingID: 100),
                 reducer: EmergencyFeature()
             )
         )
