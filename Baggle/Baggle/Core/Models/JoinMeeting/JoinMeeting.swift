@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum JoinMeetingStatus: Equatable {
-    case enable(JoinMeeting)
-    case expired
-    case joined
-    case fail(APIError)
-}
-
 struct JoinMeeting: Equatable {
     let meetingId: Int
     let title: String

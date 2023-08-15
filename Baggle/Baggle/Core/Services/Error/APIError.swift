@@ -18,6 +18,7 @@ enum APIError: Error, Equatable {
     case server // 500
     case network // 네트워크 에러
     case decoding // 디코딩 에러
+    case jsonEncodingError // Encoding 에러
 }
 
 extension APIError {
@@ -33,6 +34,7 @@ extension APIError {
         case .server: return "500 서버 에러"
         case .network: return "네트워크 에러"
         case .decoding: return "디코딩 에러"
+        case .jsonEncodingError: return "인코딩 에러"
         }
     }
 }
