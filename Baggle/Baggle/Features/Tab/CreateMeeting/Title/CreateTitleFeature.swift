@@ -13,6 +13,9 @@ struct CreateTitleFeature: ReducerProtocol {
 
     struct State: Equatable {
 
+        // Create Model
+        var meetingCreate = MeetingCreateModel(title: nil, place: nil, meetingTime: nil, memo: nil)
+        
         // Button
         var nextButtonDisabled: Bool = true
 
@@ -100,6 +103,7 @@ struct CreateTitleFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
             case .nextButtonTapped:
+                state.meetingCreate = state.meetingCreate.update(title: state.textFieldState.text)
                 return .run { send in await send(.moveToNextScreen)}
 
             case .submitButtonTapped:
@@ -130,21 +134,31 @@ struct CreateTitleFeature: ReducerProtocol {
                 return .none
 
                 // 모임 장소
-            case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext)))):
+            case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext(place))))):
                 _ = id
+                state.meetingCreate = state.meetingCreate.update(place: place)
                 state.path.append(.meetingDate(CreateDateFeature.State()))
                 return .none
 
                 // 모임 날짜
-            case let .path(.element(id: id, action: .meetingDate(.delegate(.moveToNext)))):
+            case let .path(
+                .element(id: id, action: .meetingDate(.delegate(.moveToNext(meetingTime))))
+            ):
                 _ = id
-                state.path.append(.meetingMemo(CreateMemoFeature.State()))
+                state.meetingCreate = state.meetingCreate.update(meetingTime: meetingTime)
+                state.path.append(.meetingMemo(
+                    CreateMemoFeature.State(meetingCreate: state.meetingCreate))
+                )
                 return .none
 
                 // 모임 메모
             case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToNext)))):
                 _ = id
                 state.path.append(.createSuccess(CreateSuccessFeature.State()))
+                return .none
+                
+            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBefore)))):
+                state.path.pop(from: id)
                 return .none
 
                 // 성공
