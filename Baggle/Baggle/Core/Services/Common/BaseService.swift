@@ -50,8 +50,10 @@ extension BaseService {
                 case .success(let response):
                     do {
                         print("response: \(response)")
-                        let decoder = JSONDecoder()
                         print(String(data: response.data, encoding: .utf8))
+                        let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
                         print(body.message)
                         switch body.status {

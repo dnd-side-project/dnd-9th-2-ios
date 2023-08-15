@@ -49,6 +49,8 @@
 		14458B442A81E6D000C810FA /* BaggleStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14458B432A81E6D000C810FA /* BaggleStamp.swift */; };
 		14458B482A81E92200C810FA /* BaggleStampStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14458B472A81E92200C810FA /* BaggleStampStatus.swift */; };
 		144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144733432A78C8D00090D15E /* BaggleTextEditor.swift */; };
+		14486D2C2A8B0C7400831DDD /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14486D2B2A8B0C7400831DDD /* DateFormatter+.swift */; };
+		14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14486D2D2A8B0D2900831DDD /* Print+.swift */; };
 		1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B5FF2A7BA3F000A15706 /* BubbleView.swift */; };
 		1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */; };
 		1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1462373D2A87760E00FBE121 /* SettingListRow.swift */; };
@@ -228,6 +230,8 @@
 		14458B432A81E6D000C810FA /* BaggleStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleStamp.swift; sourceTree = "<group>"; };
 		14458B472A81E92200C810FA /* BaggleStampStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleStampStatus.swift; sourceTree = "<group>"; };
 		144733432A78C8D00090D15E /* BaggleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTextEditor.swift; sourceTree = "<group>"; };
+		14486D2B2A8B0C7400831DDD /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
+		14486D2D2A8B0D2900831DDD /* Print+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Print+.swift"; sourceTree = "<group>"; };
 		1461B5FF2A7BA3F000A15706 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTriangle.swift; sourceTree = "<group>"; };
 		1462373D2A87760E00FBE121 /* SettingListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListRow.swift; sourceTree = "<group>"; };
@@ -736,6 +740,7 @@
 			isa = PBXGroup;
 			children = (
 				146C51DF2A79143A00FF3142 /* Date+.swift */,
+				14486D2B2A8B0C7400831DDD /* DateFormatter+.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -985,6 +990,7 @@
 				143410532A7E87460024FC75 /* UIImage+.swift */,
 				1493A9172A7E01D800A2D7CC /* Int+.swift */,
 				2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */,
+				14486D2D2A8B0D2900831DDD /* Print+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1443,6 +1449,7 @@
 				143F5FC02A88A08F004351F9 /* CameraError.swift in Sources */,
 				1410AD262A84BEB6008793FB /* Memeber.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
+				14486D2C2A8B0C7400831DDD /* DateFormatter+.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
 				146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */,
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,
@@ -1513,6 +1520,7 @@
 				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
 				14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */,
+				14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
 				14CF68EC2A847BEF00E457DF /* User.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
