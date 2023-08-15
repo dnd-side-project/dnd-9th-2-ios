@@ -21,6 +21,9 @@ struct CameraFeature: ReducerProtocol {
 
         var isCompleted: Bool = false
 
+        // Alert
+        @PresentationState var alert: AlertState<Action.Alert>?
+        
         // Timer
         var timer: TimerFeature.State
         var isTimeOver: Bool = false
@@ -48,6 +51,14 @@ struct CameraFeature: ReducerProtocol {
         case timer(TimerFeature.Action)
         case isTimeOverChanged(Bool)
 
+        // Alert
+        case presentAlert
+        case alert(PresentationAction<Alert>)
+        enum Alert: Equatable {
+            case primaryButtonTapped
+            case alertCancelTapped
+        }
+        
         // Delegate
         case delegate(Delegate)
 
@@ -77,15 +88,22 @@ struct CameraFeature: ReducerProtocol {
 
             case .onAppear:
                 return .run { send in
-                    await cameraService.start()
+                    let cameraStartStatus = await cameraService.start()
 
-                    let imageStream = cameraService.previewStream()
-                        .map { $0.image }
+                    switch cameraStartStatus {
+                    case .success:
+                        let imageStream = cameraService.previewStream()
+                            .map { $0.image }
 
-                    for await image in imageStream {
-                        Task { @MainActor in
-                            send(.viewFinderUpdate(image))
+                        for await image in imageStream {
+                            Task { @MainActor in
+                                send(.viewFinderUpdate(image))
+                            }
                         }
+                    case .deniedAuthorization:
+                        await send(.presentAlert)
+                    case .error:
+                        print("error")
                     }
                 }
 
@@ -112,8 +130,14 @@ struct CameraFeature: ReducerProtocol {
 
             case .shutterTapped:
                 return .run { send in
-                    let resultImage = await cameraService.takePhoto()
-                    await send(.completeTakePhoto(resultImage))
+                    let cameraTakePhotoStatus = await cameraService.takePhoto()
+                    
+                    switch cameraTakePhotoStatus {
+                    case .success(let resultImage):
+                        await send(.completeTakePhoto(resultImage))
+                    case .error:
+                        print("사진 촬영 error")
+                    }
                 }
 
             case .switchButtonTapped:
@@ -138,6 +162,35 @@ struct CameraFeature: ReducerProtocol {
             case .uploadButtonTapped:
                 // 이미지 업로드
                 return .run { _ in await self.dismiss() }
+                
+                // MARK: - Alert
+            case .presentAlert:
+                state.alert = AlertState(title: {
+                    TextState("카메라 권한이 필요해요")
+                }, actions: {
+                    ButtonState(role: .cancel, action: .alertCancelTapped) {
+                        TextState("취소")
+                    }
+                    
+                    ButtonState(role: .none, action: .primaryButtonTapped) {
+                        TextState("설정")
+                    }
+                }, message: {
+                    TextState("컨텐츠를 이용하려면 카메라를 허용 해주세요")
+                })
+                return .none
+                
+            case .alert(.presented(.primaryButtonTapped)):
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+                return .none
+                
+            case .alert(.presented(.alertCancelTapped)):
+                return .run { _ in await self.dismiss() }
+                
+            case .alert:
+                return .none
 
                 // MARK: - Timer
 
@@ -150,12 +203,13 @@ struct CameraFeature: ReducerProtocol {
             case let .isTimeOverChanged(isTimeOver):
                 state.isTimeOver = isTimeOver
                 return isTimeOver ? .none : .run { _ in await self.dismiss() }
-
+                
                 // MARK: - Delegate
 
             case .delegate:
                 return .none
             }
         }
+        .ifLet(\.$alert, action: /Action.alert)
     }
 }
