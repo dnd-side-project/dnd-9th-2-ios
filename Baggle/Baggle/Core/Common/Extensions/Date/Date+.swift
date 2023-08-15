@@ -121,6 +121,18 @@ extension Date {
         let format = "HH:mm"
         return toString(format: format)
     }
+    
+    func toIsoDate() -> String {
+        guard let timeZone = TimeZone(abbreviation: "KST") else { return "" }
+        let convertDate = ISO8601DateFormatter.string(
+            from: self,
+            timeZone: timeZone,
+            formatOptions: [
+                .withFullDate, .withTime, .withColonSeparatorInTime
+            ]
+        )
+        return convertDate
+    }
 }
 
 // MARK: - Methods
