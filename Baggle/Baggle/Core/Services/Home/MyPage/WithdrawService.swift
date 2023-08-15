@@ -18,7 +18,7 @@ struct WithdrawService {
 
 extension WithdrawService: DependencyKey {
     
-    static let baseService = BaseService<UserAPI>()
+    static let networkService = NetworkService<UserAPI>()
     
     static var liveValue = Self {
         do {
@@ -27,7 +27,7 @@ extension WithdrawService: DependencyKey {
 
             let token = userToken.accessToken
             // 네트워크로 회원 탈퇴 요청
-            let _: ResponseEmptyData = try await baseService.request(.withdraw(token: token))
+            let _: ResponseEmptyData = try await networkService.request(.withdraw(token: token))
             
             // 로컬 유저 정보 삭제
             UserDefaultList.user = nil

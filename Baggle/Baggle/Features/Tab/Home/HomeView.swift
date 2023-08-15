@@ -83,7 +83,9 @@ struct HomeView: View {
                 MeetingDetailView(
                     store: self.store.scope(
                         state: \.meetingDetailState,
-                        action: HomeFeature.Action.meetingDetailAction))
+                        action: HomeFeature.Action.meetingDetailAction
+                    )
+                )
             }
             .fullScreenCover(
                 store: self.store.scope(

@@ -23,12 +23,12 @@ struct SignUpService {
 
 extension SignUpService: DependencyKey {
 
-    static let baseService = BaseService<UserAPI>()
+    static let networkService = NetworkService<UserAPI>()
     
     static var liveValue = Self { requestModel, token  in
         do {
             // 네트워크 요청
-            let data: SignEntity = try await baseService.request(
+            let data: SignEntity = try await networkService.request(
                 .signUp(
                     requestModel: requestModel,
                     token: token

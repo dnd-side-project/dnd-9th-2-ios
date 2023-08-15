@@ -102,3 +102,21 @@ extension View {
         )
     }
 }
+
+// MARK: - Error Alert
+
+extension View {
+    func errorAlert(
+        isPresented: Binding<Bool>,
+        description: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        BaggleAlertOneButton(
+            isPresented: isPresented,
+            title: "에러가 발생했어요",
+            description: description,
+            buttonTitle: "돌아가기") {
+                action()
+            }
+    }
+}

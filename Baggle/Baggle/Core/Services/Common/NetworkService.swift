@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 import Moya
 
-class BaseService<Target: TargetType> {
+class NetworkService<Target: TargetType> {
     typealias API = Target
     
     private lazy var provider = self.defaultProvider
@@ -37,8 +37,8 @@ class BaseService<Target: TargetType> {
     public init() {}
 }
 
-extension BaseService {
-    var `default`: BaseService {
+extension NetworkService {
+    var `default`: NetworkService {
         self.provider = self.defaultProvider
         return self
     }
@@ -50,9 +50,12 @@ extension BaseService {
                 case .success(let response):
                     do {
                         print("response: \(response)")
+                        print(String(data: response.data, encoding: .utf8))
                         let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        print("after decoding: \(body)")
+                        print(body.message)
                         switch body.status {
                         case 200:
                             if let data = body.data {

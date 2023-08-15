@@ -23,7 +23,7 @@ struct LoginService {
 
 extension LoginService: DependencyKey {
     
-    static let networkService = BaseService<UserAPI>()
+    static let networkService = NetworkService<UserAPI>()
     typealias TokenContinuation = CheckedContinuation<String, Error>
 
     static var liveValue = Self { requestModel, token in

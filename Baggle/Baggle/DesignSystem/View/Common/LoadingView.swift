@@ -19,7 +19,7 @@ struct LoadingView: View {
             Spacer()
         }
         .background(.gray.opacity(0.2))
-        .zIndex(10)
+        .zIndex(100)
     }
 }
 

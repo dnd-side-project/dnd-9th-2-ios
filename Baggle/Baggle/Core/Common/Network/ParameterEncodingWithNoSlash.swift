@@ -59,7 +59,9 @@ struct ParameterEncodingWithNoSlash: ParameterEncoding {
         var newString = ""
         if var urlString = urlRequest.url?.absoluteString,
            let query = parameters?.queryParameters {
-            urlString.removeLast()
+            if let last = urlString.last, last == "/" {
+                urlString.removeLast()
+            }
             newString = urlString
             newString += "?"
             newString += query
