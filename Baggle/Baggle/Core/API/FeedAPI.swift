@@ -12,6 +12,7 @@ import Moya
 
 enum FeedAPI {
     case upload
+    case emergency(meetingID: Int, token: String)
 }
 
 
@@ -23,6 +24,7 @@ extension FeedAPI: BaseAPI {
     
     var path: String {
         switch self {
+        case .emergency: return ""
         default: return ""
         }
     }
@@ -31,6 +33,8 @@ extension FeedAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
+        case .emergency(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         default: return HeaderType.json.value
         }
     }
@@ -39,6 +43,7 @@ extension FeedAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
+        case .emergency: return .get
         default: return .get
         }
     }
@@ -49,6 +54,9 @@ extension FeedAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
+        case .emergency(let meetingID, _):
+            params["meetingId"] = meetingID
+            params["authorizationTime"] = Date().toIsoDate()
         default: break
         }
         
@@ -57,6 +65,8 @@ extension FeedAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
+        case .emergency:
+            return ParameterEncodingWithNoSlash.init()
         default: return JSONEncoding.default
         }
     }
@@ -65,6 +75,9 @@ extension FeedAPI: BaseAPI {
     
     var task: Task {
         switch self {
+        case .emergency:
+            return .requestParameters(parameters: bodyParameters ?? [:],
+                                      encoding: parameterEncoding)
         default: return .requestPlain
         }
     }
