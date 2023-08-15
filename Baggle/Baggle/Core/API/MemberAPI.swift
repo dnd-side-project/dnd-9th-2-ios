@@ -24,7 +24,7 @@ extension MemberAPI: BaseAPI {
     var path: String {
         switch self {
         case .fetchMeetingInfo: return ""
-        case .postJoinMeeting: return ""
+        case .postJoinMeeting: return "participation"
         }
     }
     
@@ -68,7 +68,7 @@ extension MemberAPI: BaseAPI {
         case .fetchMeetingInfo:
             return ParameterEncodingWithNoSlash.init()
         case .postJoinMeeting:
-            return JsonEncodingWithNoSlash.init()
+            return JSONEncoding.default
         }
     }
     
