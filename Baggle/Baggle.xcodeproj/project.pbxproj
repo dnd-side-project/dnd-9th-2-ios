@@ -107,6 +107,8 @@
 		14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6D9FB2A80748600C8C19C /* Image+.swift */; };
 		14F6D9FE2A807E5B00C8C19C /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6D9FD2A807E5B00C8C19C /* Color+.swift */; };
 		14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7B0952A7BABC30068B1E4 /* BubbleType.swift */; };
+		2B2AFF832A8BD3920028C96F /* EmergencyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */; };
+		2B2AFF852A8BD4C90028C96F /* EmergencyRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2AFF842A8BD4C90028C96F /* EmergencyRequestModel.swift */; };
 		2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */; };
 		2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */; };
 		2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */; };
@@ -292,6 +294,8 @@
 		14F6D9FD2A807E5B00C8C19C /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		14F7B0952A7BABC30068B1E4 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
+		2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyEntity.swift; sourceTree = "<group>"; };
+		2B2AFF842A8BD4C90028C96F /* EmergencyRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyRequestModel.swift; sourceTree = "<group>"; };
 		2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerView.swift; sourceTree = "<group>"; };
 		2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerFeature.swift; sourceTree = "<group>"; };
 		2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
@@ -886,6 +890,7 @@
 			isa = PBXGroup;
 			children = (
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
+				2B2AFF812A8BD3820028C96F /* Emergency */,
 				2B65B8142A88A7BE00E3BF11 /* JoinMeeting */,
 				14E0836B2A8369E30001CB21 /* MeetingDetail */,
 				14E083672A8368F70001CB21 /* SignUp */,
@@ -1013,6 +1018,15 @@
 				14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2B2AFF812A8BD3820028C96F /* Emergency */ = {
+			isa = PBXGroup;
+			children = (
+				2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */,
+				2B2AFF842A8BD4C90028C96F /* EmergencyRequestModel.swift */,
+			);
+			path = Emergency;
 			sourceTree = "<group>";
 		};
 		2B2BA5272A7AB45300A90AE7 /* SelectHost */ = {
@@ -1458,6 +1472,7 @@
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleTagColor.swift in Sources */,
 				14E577AA2A80973300119FB3 /* EmergencyFeature.swift in Sources */,
+				2B2AFF852A8BD4C90028C96F /* EmergencyRequestModel.swift in Sources */,
 				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
 				2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */,
 				143F5FC02A88A08F004351F9 /* CameraError.swift in Sources */,
@@ -1533,6 +1548,7 @@
 				2BB7FBC52A89289E0003B75C /* URL.swift in Sources */,
 				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
+				2B2AFF832A8BD3920028C96F /* EmergencyEntity.swift in Sources */,
 				14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */,
 				2BEFFBF52A8A0B1D00C6A008 /* JoinMeetingEntity.swift in Sources */,
 				14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */,
