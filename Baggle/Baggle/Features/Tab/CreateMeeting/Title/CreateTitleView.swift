@@ -48,17 +48,20 @@ struct CreateTitleView: View {
                     .disabled(viewStore.state.nextButtonDisabled)
                 }
                 .padding()
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("취소") {
-                            viewStore.send(.cancelButtonTapped)
-                        }
-                    }
-                }
                 .touchSpacer()
                 .onTapGesture {
                     hideKeyboard()
                 }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            viewStore.send(.backButtonTapped)
+                        } label: {
+                            Image.Icon.backTail
+                        }
+                    }
+                }
+
                 .onOpenURL { url in
                     if let id = url.params()?["id"] as? String {
                         viewStore.send(.cancelButtonTapped)

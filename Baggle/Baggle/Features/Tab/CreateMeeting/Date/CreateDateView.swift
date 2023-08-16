@@ -94,8 +94,26 @@ struct CreateDateView: View {
                 .disabled(viewStore.buttonDisabled)
             }
             .padding()
+            .navigationBarBackButtonHidden(true)
             .onAppear {
                 viewStore.send(.onAppear)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        viewStore.send(.backButtonTapped)
+                    } label: {
+                        Image.Icon.backTail
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        viewStore.send(.closeButtonTapped)
+                    } label: {
+                        Image.Icon.close
+                    }
+                }
             }
             .sheet(
                 store: self.store.scope(

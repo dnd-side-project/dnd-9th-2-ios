@@ -24,6 +24,10 @@ struct CreatePlaceFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Navigation Bar
+        case backButtonTapped
+        case closeButtonTapped
+        
         // Tap
         case nextButtonTapped
         case submitButtonTapped
@@ -39,6 +43,8 @@ struct CreatePlaceFeature: ReducerProtocol {
 
         enum Delegate: Equatable {
             case moveToNext(String)
+            case moveToBack
+            case moveToHome
         }
     }
 
@@ -55,6 +61,14 @@ struct CreatePlaceFeature: ReducerProtocol {
         Reduce { state, action in
 
             switch action {
+                
+                // Navigation Bar
+            case .backButtonTapped:
+                return .run { send in await send(.delegate(.moveToBack))}
+                
+            case .closeButtonTapped:
+                return .run { send in await send(.delegate(.moveToHome))}
+                
                 // Tap
             case .nextButtonTapped:
                 return .run { send in await send(.moveToNextScreen)}
@@ -84,7 +98,15 @@ struct CreatePlaceFeature: ReducerProtocol {
             case .textFieldAction:
                 return .none
 
+                // Delegate
+                
             case .delegate(.moveToNext):
+                return .none
+                
+            case .delegate(.moveToBack):
+                return .none
+                
+            case .delegate(.moveToHome):
                 return .none
             }
         }

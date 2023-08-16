@@ -15,6 +15,7 @@ import KakaoSDKTemplate
 struct CreateSuccessFeature: ReducerProtocol {
 
     struct State: Equatable {
+        var meetingSuccessModel: MeetingSuccessModel
         // MARK: - Scope State
     }
 
