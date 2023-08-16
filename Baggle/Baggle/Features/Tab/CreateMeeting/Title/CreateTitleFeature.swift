@@ -139,6 +139,14 @@ struct CreateTitleFeature: ReducerProtocol {
                 state.meetingCreate = state.meetingCreate.update(place: place)
                 state.path.append(.meetingDate(CreateDateFeature.State()))
                 return .none
+                
+            case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToBack)))):
+                state.path.pop(from: id)
+                return .none
+                
+            case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToHome)))):
+                _ = id
+                return .run { _ in await self.dismiss() }
 
                 // 모임 날짜
             case let .path(
@@ -151,6 +159,14 @@ struct CreateTitleFeature: ReducerProtocol {
                 )
                 return .none
 
+            case let .path(.element(id: id, action: .meetingDate(.delegate(.moveToBack)))):
+                state.path.pop(from: id)
+                return .none
+                
+            case let .path(.element(id: id, action: .meetingDate(.delegate(.moveToHome)))):
+                _ = id
+                return .run { _ in await self.dismiss() }
+                
                 // 모임 메모
             case let .path(
                 .element(id: id, action: .meetingMemo(.delegate(.moveToNext(meetingSuccessModel))))
@@ -161,9 +177,13 @@ struct CreateTitleFeature: ReducerProtocol {
                 )
                 return .none
                 
-            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBefore)))):
+            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBack)))):
                 state.path.pop(from: id)
                 return .none
+                
+            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToHome)))):
+                _ = id
+                return .run { _ in await self.dismiss() }
 
                 // 성공
             case let .path(.element(id: id, action: .createSuccess(.delegate(.moveToHome)))):

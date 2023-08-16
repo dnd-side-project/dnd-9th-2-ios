@@ -33,6 +33,10 @@ struct CreateDateFeature: ReducerProtocol {
 
         case onAppear
         
+        // Navigation Bar
+        case backButtonTapped
+        case closeButtonTapped
+        
         // Tap
         case nextButtonTapped
         case selectDateButtonTapped
@@ -48,6 +52,8 @@ struct CreateDateFeature: ReducerProtocol {
 
         enum Delegate: Equatable {
             case moveToNext(Date)
+            case moveToBack
+            case moveToHome
         }
     }
 
@@ -67,6 +73,13 @@ struct CreateDateFeature: ReducerProtocol {
                     return .run { send in await send(.selectDateButtonTapped) }
                 }
                 return .none
+                
+                // Navigation Bar
+            case .backButtonTapped:
+                return .run { send in await send(.delegate(.moveToBack))}
+                
+            case .closeButtonTapped:
+                return .run { send in await send(.delegate(.moveToHome))}
                 
                 // MARK: - Tap
 
@@ -156,6 +169,12 @@ struct CreateDateFeature: ReducerProtocol {
                 // MARK: - Delegate
 
             case .delegate(.moveToNext):
+                return .none
+                
+            case .delegate(.moveToBack):
+                return .none
+                
+            case .delegate(.moveToHome):
                 return .none
             }
         }

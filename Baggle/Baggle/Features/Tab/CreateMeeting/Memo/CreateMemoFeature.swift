@@ -28,6 +28,10 @@ struct CreateMemoFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Navigation Bar
+        case backButtonTapped
+        case closeButtonTapped
+        
         // Button
         case nextButtonTapped
 
@@ -46,7 +50,8 @@ struct CreateMemoFeature: ReducerProtocol {
 
         enum Delegate: Equatable {
             case moveToNext(MeetingSuccessModel)
-            case moveToBefore
+            case moveToBack
+            case moveToHome
         }
     }
     
@@ -66,6 +71,14 @@ struct CreateMemoFeature: ReducerProtocol {
 
             switch action {
 
+                // Navigation Bar
+                
+            case .backButtonTapped:
+                return .run { send in await send(.delegate(.moveToBack))}
+                
+            case .closeButtonTapped:
+                return .run { send in await send(.delegate(.moveToHome))}
+                
                 // Button
 
             case .nextButtonTapped:
@@ -106,7 +119,7 @@ struct CreateMemoFeature: ReducerProtocol {
                 return .none
                 
             case .alertButtonTapped:
-                return .run { send in await send(.delegate(.moveToBefore))}
+                return .run { send in await send(.delegate(.moveToBack))}
                 
                 // TextField
 
@@ -118,7 +131,10 @@ struct CreateMemoFeature: ReducerProtocol {
             case .delegate(.moveToNext):
                 return .none
                 
-            case .delegate(.moveToBefore):
+            case .delegate(.moveToBack):
+                return .none
+                
+            case .delegate(.moveToHome):
                 return .none
             }
         }
