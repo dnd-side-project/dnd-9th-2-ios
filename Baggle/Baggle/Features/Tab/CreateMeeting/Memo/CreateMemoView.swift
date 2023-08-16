@@ -70,7 +70,7 @@ struct CreateMeetingMemoView_Previews: PreviewProvider {
                     meetingCreate: MeetingCreateModel(
                         title: nil,
                         place: nil,
-                        meetingTime: nil,
+                        time: nil,
                         memo: nil
                     )
                 ),

@@ -10,7 +10,7 @@ import Foundation
 struct MeetingCreateModel: Equatable {
     let title: String?
     let place: String?
-    let meetingTime: Date?
+    let time: Date?
     let memo: String?
 }
 
@@ -19,7 +19,7 @@ extension MeetingCreateModel {
         MeetingCreateModel(
             title: title,
             place: self.place,
-            meetingTime: self.meetingTime,
+            time: self.time,
             memo: self.memo
         )
     }
@@ -28,25 +28,25 @@ extension MeetingCreateModel {
         MeetingCreateModel(
             title: self.title,
             place: place,
-            meetingTime: self.meetingTime,
+            time: self.time,
             memo: self.memo
         )
     }
     
-    func update(meetingTime: Date) -> MeetingCreateModel {
+    func update(time: Date) -> MeetingCreateModel {
         MeetingCreateModel(
             title: self.title,
             place: self.place,
-            meetingTime: meetingTime,
+            time: time,
             memo: self.memo
         )
     }
     
-    func update(memo: String) -> MeetingCreateModel {
+    func update(memo: String?) -> MeetingCreateModel {
         MeetingCreateModel(
             title: self.title,
             place: self.place,
-            meetingTime: self.meetingTime,
+            time: self.time,
             memo: memo
         )
     }

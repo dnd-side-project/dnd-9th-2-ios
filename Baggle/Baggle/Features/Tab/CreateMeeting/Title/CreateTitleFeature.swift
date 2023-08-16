@@ -14,7 +14,7 @@ struct CreateTitleFeature: ReducerProtocol {
     struct State: Equatable {
 
         // Create Model
-        var meetingCreate = MeetingCreateModel(title: nil, place: nil, meetingTime: nil, memo: nil)
+        var meetingCreate = MeetingCreateModel(title: nil, place: nil, time: nil, memo: nil)
         
         // Button
         var nextButtonDisabled: Bool = true
@@ -145,7 +145,7 @@ struct CreateTitleFeature: ReducerProtocol {
                 .element(id: id, action: .meetingDate(.delegate(.moveToNext(meetingTime))))
             ):
                 _ = id
-                state.meetingCreate = state.meetingCreate.update(meetingTime: meetingTime)
+                state.meetingCreate = state.meetingCreate.update(time: meetingTime)
                 state.path.append(.meetingMemo(
                     CreateMemoFeature.State(meetingCreate: state.meetingCreate))
                 )

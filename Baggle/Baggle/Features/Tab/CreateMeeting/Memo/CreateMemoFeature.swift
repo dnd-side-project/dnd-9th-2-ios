@@ -64,10 +64,13 @@ struct CreateMemoFeature: ReducerProtocol {
                 // Button
 
             case .nextButtonTapped:
-                if let meetingTime = state.meetingCreate.meetingTime, !meetingTime.canMeeting {
+                if let meetingTime = state.meetingCreate.time, !meetingTime.canMeeting {
                     state.isAlertPresented = true
                     return .none
                 }
+                
+                let memo = state.textEditorState.text
+                state.meetingCreate.update(memo: memo)
                 
                 return .run { send in await send(.moveToNextScreen) }
 
