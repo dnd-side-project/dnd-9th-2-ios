@@ -46,7 +46,7 @@ struct FeedListCell: View {
 struct FeedListCell_Previews: PreviewProvider {
     static var previews: some View {
         // swiftlint:disable:next line_length
-        FeedListCell(feed: Feed(id: 0, userId: 1, username: "수빈", userImageURL: "", feedImageURL: ""),
+        FeedListCell(feed: Feed(id: 0, userID: 1, username: "수빈", userImageURL: "", feedImageURL: ""),
                      moreButtonAction: { print("더보기" )})
             .padding(20)
             .previewLayout(.sizeThatFits)
