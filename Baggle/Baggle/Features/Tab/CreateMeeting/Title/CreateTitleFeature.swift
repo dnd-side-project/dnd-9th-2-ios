@@ -30,6 +30,9 @@ struct CreateTitleFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Navigation Bar
+        case backButtonTapped
+        
         // View
         case onAppear
 
@@ -94,6 +97,11 @@ struct CreateTitleFeature: ReducerProtocol {
 
             switch action {
 
+                // Navigation Bar
+                
+            case .backButtonTapped:
+                return .run { _ in await self.dismiss() }
+                
                 // View
             case .onAppear:
                 return .run { send in await send(.textFieldAction(.isFocused(true)))}
