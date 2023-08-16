@@ -32,6 +32,7 @@ extension MeetingDetailEntity {
             time: self.meetingTime.hourMinute(),
             memo: self.memo,
             members: self.members.map { $0.memberDomain() },
+            memberId: memberId(members: members),
             status: meetingStatus(date: self.meetingTime),
             isEmergencyAuthority: isEmergencyAuthority(userID: userID, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
@@ -60,6 +61,11 @@ extension MeetingDetailEntity {
         
         // 약속 당일
         return .progress
+    }
+    
+    private func memberId(members: [MeetingDetailMemberEntity]) -> Int {
+        guard let username = UserDefaultList.user?.name else { return -1 }
+        return members.filter({ $0.nickname == username }).first?.memberID ?? -1
     }
 
     private func isEmergencyAuthority(userID: Int, members: [MeetingDetailMemberEntity]) -> Bool {

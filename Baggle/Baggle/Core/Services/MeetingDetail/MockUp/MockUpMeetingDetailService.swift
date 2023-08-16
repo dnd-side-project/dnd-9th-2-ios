@@ -140,6 +140,7 @@ extension MockUpMeetingAPI {
                     // swiftlint:disable:previous line_length
                 )
             ],
+            memberId: 1,
             status: .completed,
             isEmergencyAuthority: true,
             emergencyButtonActive: false,
@@ -194,6 +195,7 @@ extension MockUpMeetingAPI {
                     certImage: ""
                 )
             ],
+            memberId: 1,
             status: .ready,
             isEmergencyAuthority: false,
             emergencyButtonActive: false,
@@ -231,6 +233,7 @@ extension MockUpMeetingAPI {
                     certImage: ""
                 )
             ],
+            memberId: 1,
             status: .confirmed,
             isEmergencyAuthority: true,
             emergencyButtonActive: false,
@@ -268,6 +271,7 @@ extension MockUpMeetingAPI {
                     certImage: ""
                 )
             ],
+            memberId: 1,
             status: .confirmed,
             isEmergencyAuthority: true,
             emergencyButtonActive: true,
