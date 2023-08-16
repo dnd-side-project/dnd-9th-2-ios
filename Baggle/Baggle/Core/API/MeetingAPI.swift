@@ -13,9 +13,8 @@ import Moya
 enum MeetingAPI {
     case meetingList
     case meetingDetail(meetingID: Int, token: String)
-    case createMeeting
+    case createMeeting(requestModel: MeetingCreateRequestModel, token: String)
 }
-
 
 extension MeetingAPI: BaseAPI {
     
@@ -37,7 +36,9 @@ extension MeetingAPI: BaseAPI {
         switch self {
         case .meetingDetail(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
-        default: return HeaderType.json.value
+        case .createMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
+        case .meetingList: return HeaderType.json.value
         }
     }
     
@@ -58,7 +59,15 @@ extension MeetingAPI: BaseAPI {
         switch self {
         case .meetingDetail(let meetingID, _):
             params["meetingId"] = meetingID
-        default: break
+        case .createMeeting(let requestModel, _):
+            params["title"] = requestModel.title
+            params["place"] = requestModel.place
+            params["meetingTime"] = requestModel.meetingTime
+            if let memo = requestModel.memo {
+                params["memo"] = memo
+            }
+        case .meetingList:
+            break
         }
         
         return params
@@ -66,6 +75,7 @@ extension MeetingAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
+        case .createMeeting: return JsonEncodingWithNoSlash()
         default: return JSONEncoding.default
         }
     }
@@ -78,6 +88,11 @@ extension MeetingAPI: BaseAPI {
             return .requestParameters(
                 parameters: bodyParameters ?? [:],
                 encoding: ParameterEncodingWithNoSlash()
+            )
+        case .createMeeting:
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: parameterEncoding
             )
         default:
             return .requestPlain
