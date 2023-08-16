@@ -24,9 +24,13 @@ class NetworkService<Target: TargetType> {
     }()
     
     private let endpointclosure = { (target: API) -> Endpoint in
-        let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+        var urlString = target.baseURL.appendingPathComponent(target.path).absoluteString
+        if urlString.hasSuffix("/") {
+            urlString = String(urlString.dropLast())
+        }
+        
         var endpoint: Endpoint = Endpoint(
-            url: url,
+            url: urlString,
             sampleResponseClosure: {.networkResponse(200, target.sampleData)},
             method: target.method,
             task: target.task,
@@ -45,7 +49,7 @@ extension NetworkService {
     
     func request<T: Decodable>(_ target: API) async throws -> T {
         return try await withCheckedThrowingContinuation({ continuation in
-            print(target)
+            print("\(target.baseURL) - \(target.path)")
             provider.request(target) { result in
                 switch result {
                 case .success(let response):

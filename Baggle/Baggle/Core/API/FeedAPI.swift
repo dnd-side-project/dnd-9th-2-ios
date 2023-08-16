@@ -58,8 +58,8 @@ extension FeedAPI: BaseAPI {
         case .emergency(let memberID, _):
             params["memberId"] = memberID
             params["authorizationTime"] = Date().toIsoDate()
-        case .uploadPhoto(let requestModel, _):
-            params["participation"] = requestModel.memberInfo
+        case .uploadPhoto:
+            break
         }
         
         return params
@@ -68,7 +68,7 @@ extension FeedAPI: BaseAPI {
     private var parameterEncoding: ParameterEncoding {
         switch self {
         case .emergency: return ParameterEncodingWithNoSlash.init()
-        case .uploadPhoto: return JsonEncodingWithNoSlash()
+        case .uploadPhoto: return JSONEncoding.default
         }
     }
     
@@ -82,12 +82,27 @@ extension FeedAPI: BaseAPI {
                 encoding: parameterEncoding
             )
         case .uploadPhoto(let requestModel, _):
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.baggleFormat)
+            
+            guard let memberInfoData = try? encoder.encode(requestModel.memberInfo) else {
+                fatalError("유저 정보 인코딩 에러")
+            }
+
+            let memberInfoFormData = MultipartFormData(
+                provider: .data(memberInfoData),
+                name: "memberInfo",
+                mimeType: "application/json"
+            )
+
             let feedImageData = MultipartFormData(
                 provider: .data(requestModel.feedImage),
-                name: "file",
+                name: "feedImage",
                 fileName: ".jpg",
-                mimeType: "image/jpeg")
-            let multiPartData: [Moya.MultipartFormData] = [feedImageData]
+                mimeType: "image/jpeg"
+            )
+
+            let multiPartData: [Moya.MultipartFormData] = [memberInfoFormData, feedImageData]
             
             return .uploadMultipart(multiPartData)
         }
