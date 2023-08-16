@@ -37,8 +37,8 @@ struct CreatePlaceFeature: ReducerProtocol {
         // Delegate
         case delegate(Delegate)
 
-        enum Delegate {
-            case moveToNext
+        enum Delegate: Equatable {
+            case moveToNext(String)
         }
     }
 
@@ -69,7 +69,8 @@ struct CreatePlaceFeature: ReducerProtocol {
                 }
 
             case .moveToNextScreen:
-                return .run { send in await send(.delegate(.moveToNext)) }
+                let place = state.textFieldState.text
+                return .run { send in await send(.delegate(.moveToNext(place))) }
 
                 // TextField
             case let .textFieldAction(.textChanged(text)):

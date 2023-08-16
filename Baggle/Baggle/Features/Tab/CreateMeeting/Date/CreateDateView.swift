@@ -94,6 +94,9 @@ struct CreateDateView: View {
                 .disabled(viewStore.buttonDisabled)
             }
             .padding()
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             .sheet(
                 store: self.store.scope(
                     state: \.$selectDateState,

@@ -31,6 +31,8 @@ struct CreateDateFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        case onAppear
+        
         // Tap
         case nextButtonTapped
         case selectDateButtonTapped
@@ -44,8 +46,8 @@ struct CreateDateFeature: ReducerProtocol {
         // Delegate
         case delegate(Delegate)
 
-        enum Delegate {
-            case moveToNext
+        enum Delegate: Equatable {
+            case moveToNext(Date)
         }
     }
 
@@ -59,11 +61,19 @@ struct CreateDateFeature: ReducerProtocol {
 
             switch action {
 
+            case .onAppear:
+                // 조건문 없으면 메모 화면에서 되돌아 왔을 때, Date가 선택되어 있어도 선택 창이 뜸
+                if state.dateButtonStatus == .inactive {
+                    return .run { send in await send(.selectDateButtonTapped) }
+                }
+                return .none
+                
                 // MARK: - Tap
 
             case .nextButtonTapped:
                 if state.meetingDate.canMeeting {
-                    return .run { send in await send(.delegate(.moveToNext)) }
+                    let meetingTime = state.meetingDate
+                    return .run { send in await send(.delegate(.moveToNext(meetingTime))) }
                 } else {
                     state.errorMessage = "모임은 2시간 이후부터 가능해요."
                     state.dateButtonStatus = .invalid
@@ -111,10 +121,15 @@ struct CreateDateFeature: ReducerProtocol {
                     state.meetingDate = newYearMonthDate
                 }
                 state.dateButtonBeforeStatus = .valid
-                return .run { send in await send(.statusChanged) }
+                return .run { send in
+                    await send(.statusChanged)
+                }
 
             case .selectDateAction(.dismiss):
                 state.dateButtonStatus = state.dateButtonBeforeStatus
+                if state.timeButtonStatus == .inactive {
+                    return .run { send in await send(.selectTimeButtonTapped) }
+                }
                 return .none
 
             case .selectDateAction:
