@@ -12,7 +12,7 @@ import Moya
 
 enum FeedAPI {
     case upload
-    case emergency(meetingID: Int, token: String)
+    case emergency(memberID: Int, token: String)
 }
 
 
@@ -54,8 +54,8 @@ extension FeedAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        case .emergency(let meetingID, _):
-            params["meetingId"] = meetingID
+        case .emergency(let memberID, _):
+            params["memberId"] = memberID
             params["authorizationTime"] = Date().toIsoDate()
         default: break
         }

@@ -11,19 +11,19 @@ import ComposableArchitecture
 import Moya
 
 struct EmergencyService {
-    var emergency: (_ meetingID: Int) async -> Bool
+    var emergency: (_ memberID: Int) async -> Bool
 }
 
 extension EmergencyService: DependencyKey {
     
     static let networkService = NetworkService<FeedAPI>()
     
-    static var liveValue = Self { meetingID in
+    static var liveValue = Self { memberID in
         do {
             let accessToken = try KeychainManager.shared.readUserToken().accessToken
             let data: EmergencyEntity = try await networkService.request(
                 .emergency(
-                    meetingID: meetingID,
+                    memberID: memberID,
                     token: accessToken
                 )
             )

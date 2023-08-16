@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct EmergencyFeature: ReducerProtocol {
 
     struct State: Equatable {
-        let meetingID: Int
+        let memberID: Int
         var isEmergency: Bool = false
 
         // Child
@@ -58,7 +58,7 @@ struct EmergencyFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
             case .emergencyButtonTapped:
-                let id = state.meetingID
+                let id = state.memberID
                 return .run { send in
                     if await emergencyService.emergency(id) {
                         await send(.emergencySuccess)
