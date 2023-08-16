@@ -60,7 +60,7 @@ extension CameraView {
     private func description(viewStore: CameraFeatureViewStore) -> some View {
         Text("실시간 상황을\n친구들에게 공유하세요!")
             .multilineTextAlignment(.center)
-            .fontWithLineSpacing(fontType: .subTitle)
+            .fontWithLineSpacing(fontType: .subTitle1)
             .foregroundColor(.white)
     }
     
@@ -240,7 +240,7 @@ extension CameraView {
             )
             
             Text("시간이 초과되었습니다.")
-                .font(.Baggle.subTitle)
+                .font(.Baggle.subTitle1)
                 .foregroundColor(.white)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)

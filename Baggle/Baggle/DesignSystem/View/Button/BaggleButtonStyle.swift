@@ -173,7 +173,7 @@ struct KakaoLoginStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.Baggle.body2) // bold
+            .font(.baggleFont(size: 20, weight: .semibold))
             .frame(width: UIScreen.main.bounds.width - 40, height: 54)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))

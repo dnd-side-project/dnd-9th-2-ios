@@ -38,7 +38,7 @@ struct MeetingListCell: View {
                             targetColor: .gray6
                         )
                     )
-                    .font(.Baggle.description)
+                    .font(.Baggle.description2)
 
                     Text(
                         attributedColorString(
@@ -47,7 +47,7 @@ struct MeetingListCell: View {
                             color: .gray9,
                             targetColor: .gray6)
                     )
-                    .font(.Baggle.description)
+                    .font(.Baggle.description2)
                 }
 
                 HStack {
@@ -65,7 +65,7 @@ struct MeetingListCell: View {
                     Spacer()
 
                     Text("참여자 \(data.profileImages.count)명")
-                        .font(.Baggle.description)
+                        .font(.Baggle.description2)
                         .foregroundColor(.gray11)
                 }
             }
