@@ -14,7 +14,10 @@ struct CreateMemoFeature: ReducerProtocol {
     struct State: Equatable {
         
         var meetingCreate: MeetingCreateModel
+        
+        // View
         var isAlertPresented: Bool = false
+        var isLoading: Bool = false
         
         // Child
         var textEditorState = BaggleTextFeature.State(
@@ -25,12 +28,16 @@ struct CreateMemoFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Navigation Bar
+        case backButtonTapped
+        case closeButtonTapped
+        
         // Button
         case nextButtonTapped
 
-        // View
-        case moveToNextScreen
-
+        // Network
+        case handleStatus(MeetingCreateStatus)
+        
         // Alert
         case presentAlert
         case alertButtonTapped
@@ -41,11 +48,14 @@ struct CreateMemoFeature: ReducerProtocol {
         // Delegate
         case delegate(Delegate)
 
-        enum Delegate {
-            case moveToNext
-            case moveToBefore
+        enum Delegate: Equatable {
+            case moveToNext(MeetingSuccessModel)
+            case moveToBack
+            case moveToHome
         }
     }
+    
+    @Dependency(\.meetingCreateService) private var meetingCreateService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -61,6 +71,14 @@ struct CreateMemoFeature: ReducerProtocol {
 
             switch action {
 
+                // Navigation Bar
+                
+            case .backButtonTapped:
+                return .run { send in await send(.delegate(.moveToBack))}
+                
+            case .closeButtonTapped:
+                return .run { send in await send(.delegate(.moveToHome))}
+                
                 // Button
 
             case .nextButtonTapped:
@@ -70,19 +88,39 @@ struct CreateMemoFeature: ReducerProtocol {
                 }
                 
                 let memo = state.textEditorState.text
-                state.meetingCreate.update(memo: memo)
+                state.meetingCreate =  state.meetingCreate.update(memo: memo)
+                let requestModel = state.meetingCreate
+                state.isLoading = true
                 
-                return .run { send in await send(.moveToNextScreen) }
+                return .run { send in
+                    let meetingCreateStatus = await meetingCreateService.create(requestModel)
+                    await send(.handleStatus(meetingCreateStatus))
+                }
 
-            case .moveToNextScreen:
-                return .run { send in await send(.delegate(.moveToNext)) }
-
+                // Network
+            case .handleStatus(let status):
+                state.isLoading = false
+                
+                switch status {
+                case .success(let meetingSuccessModel):
+                    return .run { send in
+                        await send(.delegate(.moveToNext(meetingSuccessModel)))
+                    }
+                case .error:
+                    return .none
+                case .userError:
+                    return .none
+                case .requestModelError:
+                    return .none
+                }
+                
                 // Alert
             case .presentAlert:
                 return .none
                 
             case .alertButtonTapped:
-                return .run { send in await send(.delegate(.moveToBefore))}
+                return .run { send in await send(.delegate(.moveToBack))}
+                
                 // TextField
 
             case .textEditorAction:
@@ -93,7 +131,10 @@ struct CreateMemoFeature: ReducerProtocol {
             case .delegate(.moveToNext):
                 return .none
                 
-            case .delegate(.moveToBefore):
+            case .delegate(.moveToBack):
+                return .none
+                
+            case .delegate(.moveToHome):
                 return .none
             }
         }

@@ -48,6 +48,24 @@ struct CreatePlaceView: View {
             .onTapGesture {
                 hideKeyboard()
             }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        viewStore.send(.backButtonTapped)
+                    } label: {
+                        Image.Icon.backTail
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        viewStore.send(.closeButtonTapped)
+                    } label: {
+                        Image.Icon.close
+                    }
+                }
+            }
         }
     }
 }
