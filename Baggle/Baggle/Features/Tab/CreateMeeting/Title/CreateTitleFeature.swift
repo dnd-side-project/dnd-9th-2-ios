@@ -112,6 +112,7 @@ struct CreateTitleFeature: ReducerProtocol {
                         await send(.textFieldAction(.changeState(.invalid("제목을 입력해주세요."))))
                     }
                 } else {
+                    state.meetingCreate = state.meetingCreate.update(title: state.textFieldState.text)
                     return .run { send in await send(.moveToNextScreen)}
                 }
 
