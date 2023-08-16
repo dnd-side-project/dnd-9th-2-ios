@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct FeedParticipationModel: Encodable {
-    let participationID: Int
+struct FeedMemberInfoModel: Encodable {
+    let memberID: Int
     let authorizationTime: Date
     
     enum CodingKeys: String, CodingKey {
-        case participationID = "participationId"
+        case memberID = "memberId"
         case authorizationTime
     }
 }

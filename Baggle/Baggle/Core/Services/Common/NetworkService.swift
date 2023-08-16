@@ -45,7 +45,7 @@ extension NetworkService {
     
     func request<T: Decodable>(_ target: API) async throws -> T {
         return try await withCheckedThrowingContinuation({ continuation in
-            print(target.headers)
+            print(target)
             provider.request(target) { result in
                 switch result {
                 case .success(let response):

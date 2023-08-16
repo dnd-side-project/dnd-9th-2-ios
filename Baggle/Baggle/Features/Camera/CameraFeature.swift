@@ -72,12 +72,13 @@ struct CameraFeature: ReducerProtocol {
 
         enum Delegate: Equatable {
             case savePhoto(UIImage)
-            case didUploadPhoto(feedID: Int, feedImageURL: String)
+            case didUploadPhoto(feed: Feed)
         }
     }
 
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.cameraService) var cameraService
+    @Dependency(\.feedPhotoService) var feedPhotoService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -176,15 +177,39 @@ struct CameraFeature: ReducerProtocol {
 
             case .uploadButtonTapped:
                 state.isUploading = true
-                return .run { _ in await self.dismiss() }
+                
+                guard let resultImage = state.resultImage,
+                      let imageData = resultImage.jpegData(compressionQuality: 0.9)
+                else {
+                    return .none
+                }
+                
+                let feedPhotoRequestModel = FeedPhotoRequestModel(
+                    memberInfo: FeedMemberInfoModel(
+                        memberID: 22,
+                        authorizationTime: Date()
+                    ),
+                    feedImage: imageData
+                )
+                
+                return .run { send in
+                    let feedPhotoStatus = await feedPhotoService.upload(feedPhotoRequestModel)
+                    await send(.handleFeedPhotoStatus(feedPhotoStatus))
+                }
                 
                 // MARK: - Network
                 
             case .handleFeedPhotoStatus(let status):
                 state.isUploading = false
                 switch status {
-                case .success:
-                    return .run { _ in await self.dismiss() }
+                case .success(let feed):
+                    return .run { send in
+                        await send(.delegate(.didUploadPhoto(feed: feed)))
+                        await self.dismiss()
+                    }
+                    
+                case .userError:
+                    return .none
                 case .error:
                     // Error Alert
                     // 시간 초과시 if state.timer.isTimeOver

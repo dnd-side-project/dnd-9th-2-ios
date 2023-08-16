@@ -8,6 +8,6 @@
 import Foundation
 
 struct FeedPhotoRequestModel: Encodable {
-    let participation: FeedParticipationModel
+    let memberInfo: FeedMemberInfoModel
     let feedImage: Data
 }

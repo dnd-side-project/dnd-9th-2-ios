@@ -31,7 +31,7 @@ extension FeedAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
-        case .uploadPhoto(_ , let token):
+        case .uploadPhoto(_, let token):
             return HeaderType.multipartWithBearer(token: token).value
         }
     }
@@ -51,7 +51,7 @@ extension FeedAPI: BaseAPI {
         
         switch self {
         case .uploadPhoto(let requestModel, _):
-            params["participation"] = requestModel.participation
+            params["participation"] = requestModel.memberInfo
         }
         
         return params
@@ -59,7 +59,7 @@ extension FeedAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        default: return JSONEncoding.default
+        default: return JsonEncodingWithNoSlash()
         }
     }
     

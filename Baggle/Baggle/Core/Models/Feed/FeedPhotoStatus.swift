@@ -8,6 +8,7 @@
 import Foundation
 
 enum FeedPhotoStatus: Equatable {
-    case success
+    case success(Feed)
     case error
+    case userError
 }

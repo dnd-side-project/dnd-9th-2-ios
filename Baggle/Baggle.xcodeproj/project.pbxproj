@@ -85,7 +85,7 @@
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
 		14C8F9CC2A8B2905001690C5 /* FeedPhotoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */; };
-		14C8F9CE2A8B2979001690C5 /* FeedParticipationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CD2A8B2979001690C5 /* FeedParticipationModel.swift */; };
+		14C8F9CE2A8B2979001690C5 /* FeedMemberInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CD2A8B2979001690C5 /* FeedMemberInfoModel.swift */; };
 		14C8F9D12A8B3323001690C5 /* FeedPhotoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9D02A8B3323001690C5 /* FeedPhotoStatus.swift */; };
 		14CF68E92A846EB700E457DF /* TestDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68E82A846EB700E457DF /* TestDateService.swift */; };
 		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
@@ -104,6 +104,9 @@
 		14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E577AB2A80973B00119FB3 /* EmergencyView.swift */; };
 		14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBE4BD2A68130F007537C8 /* LoginView.swift */; };
 		14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E506552A6B8F67008D5778 /* SignUpSuccessFeature.swift */; };
+		14EF8C1D2A8CAA5500B0FA40 /* FeedPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8C1C2A8CAA5500B0FA40 /* FeedPhotoService.swift */; };
+		14EF8C1F2A8CAB5600B0FA40 /* FeedPhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8C1E2A8CAB5600B0FA40 /* FeedPhotoEntity.swift */; };
+		14EF8C242A8CAC5B00B0FA40 /* FeedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8C232A8CAC5B00B0FA40 /* FeedUser.swift */; };
 		14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F055AB2A8220C50041B004 /* BadgeView.swift */; };
 		14F2D7B12A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */; };
 		14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */; };
@@ -271,7 +274,7 @@
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPhotoRequestModel.swift; sourceTree = "<group>"; };
-		14C8F9CD2A8B2979001690C5 /* FeedParticipationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParticipationModel.swift; sourceTree = "<group>"; };
+		14C8F9CD2A8B2979001690C5 /* FeedMemberInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMemberInfoModel.swift; sourceTree = "<group>"; };
 		14C8F9D02A8B3323001690C5 /* FeedPhotoStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPhotoStatus.swift; sourceTree = "<group>"; };
 		14CF68E82A846EB700E457DF /* TestDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateService.swift; sourceTree = "<group>"; };
 		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -291,6 +294,9 @@
 		14E577A92A80973300119FB3 /* EmergencyFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyFeature.swift; sourceTree = "<group>"; };
 		14E577AB2A80973B00119FB3 /* EmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
 		14EBE4BD2A68130F007537C8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		14EF8C1C2A8CAA5500B0FA40 /* FeedPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPhotoService.swift; sourceTree = "<group>"; };
+		14EF8C1E2A8CAB5600B0FA40 /* FeedPhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPhotoEntity.swift; sourceTree = "<group>"; };
+		14EF8C232A8CAC5B00B0FA40 /* FeedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUser.swift; sourceTree = "<group>"; };
 		14F055AB2A8220C50041B004 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+loadTransferable.swift"; sourceTree = "<group>"; };
 		14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
@@ -451,7 +457,6 @@
 			isa = PBXGroup;
 			children = (
 				2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */,
-				1410AD232A84BEA8008793FB /* Feed.swift */,
 				1410AD252A84BEB6008793FB /* Memeber.swift */,
 			);
 			path = MeetingDetail;
@@ -503,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				14E083682A8369010001CB21 /* Network */,
+				14EF8C202A8CABBA00B0FA40 /* Feed */,
 				2BDEAC7A2A863DB500D698E6 /* JoinMeeting */,
 				14CF68EA2A847BEB00E457DF /* User */,
 				14E083662A8368F00001CB21 /* Meeting */,
@@ -513,10 +519,10 @@
 		14134D412A64C561004A6AC4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				14C8F9CF2A8B331B001690C5 /* Feed */,
 				2B7B4D7A2A84D1E100283248 /* Common */,
-				14783EDB2A7E2EE700EF58D5 /* Camera */,
 				14B7A0432A75409400B8E202 /* Error */,
+				14783EDB2A7E2EE700EF58D5 /* Camera */,
+				14C8F9CF2A8B331B001690C5 /* Feed */,
 				1421C04F2A7A848E00C20497 /* Login */,
 				14B7A0422A753DA500B8E202 /* SignUp */,
 				2BF268212A7785FE00F32ADF /* Home */,
@@ -863,7 +869,8 @@
 			isa = PBXGroup;
 			children = (
 				14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */,
-				14C8F9CD2A8B2979001690C5 /* FeedParticipationModel.swift */,
+				14C8F9CD2A8B2979001690C5 /* FeedMemberInfoModel.swift */,
+				14EF8C1E2A8CAB5600B0FA40 /* FeedPhotoEntity.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -871,7 +878,7 @@
 		14C8F9CF2A8B331B001690C5 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				14C8F9D02A8B3323001690C5 /* FeedPhotoStatus.swift */,
+				14EF8C1C2A8CAA5500B0FA40 /* FeedPhotoService.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1006,6 +1013,16 @@
 				1432BE6E2A682FCE0098AAA9 /* MyPage */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		14EF8C202A8CABBA00B0FA40 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				1410AD232A84BEA8008793FB /* Feed.swift */,
+				14EF8C232A8CAC5B00B0FA40 /* FeedUser.swift */,
+				14C8F9D02A8B3323001690C5 /* FeedPhotoStatus.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		14F055AA2A8220AB0041B004 /* Badge */ = {
@@ -1480,7 +1497,7 @@
 				2B7B4D7D2A853BED00283248 /* MeetingAPI.swift in Sources */,
 				143B27022A761FCF00DFC0EE /* CreatePlaceFeature.swift in Sources */,
 				143B270C2A76245F00DFC0EE /* CreateDateView.swift in Sources */,
-				14C8F9CE2A8B2979001690C5 /* FeedParticipationModel.swift in Sources */,
+				14C8F9CE2A8B2979001690C5 /* FeedMemberInfoModel.swift in Sources */,
 				1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */,
 				2B7B4D7B2A85342600283248 /* MeetingDetail.swift in Sources */,
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
@@ -1516,6 +1533,7 @@
 				1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */,
 				2BC5AD312A84983C00B73241 /* SignUpRequestModel.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
+				14EF8C242A8CAC5B00B0FA40 /* FeedUser.swift in Sources */,
 				2B7B4D812A853ED300283248 /* FeedAPI.swift in Sources */,
 				14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
@@ -1530,6 +1548,7 @@
 				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
 				14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */,
 				2B5BE6B22A77A40900F25474 /* MockUpMeetingDetailService.swift in Sources */,
+				14EF8C1D2A8CAA5500B0FA40 /* FeedPhotoService.swift in Sources */,
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
@@ -1545,6 +1564,7 @@
 				14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
+				14EF8C1F2A8CAB5600B0FA40 /* FeedPhotoEntity.swift in Sources */,
 				141392602A78E81D00249C8A /* PageIndicator.swift in Sources */,
 				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
 				14E0836D2A836A8C0001CB21 /* MeetingDetailEntity.swift in Sources */,

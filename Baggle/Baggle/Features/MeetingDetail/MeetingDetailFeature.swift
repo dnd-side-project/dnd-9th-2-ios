@@ -271,8 +271,10 @@ struct MeetingDetailFeature: ReducerProtocol {
 
                 // Child - Camera
 
-            case let .usingCamera(.presented(.delegate(.didUploadPhoto(feedID, feedImageURL)))):
-                
+            case let .usingCamera(.presented(.delegate(.didUploadPhoto(feed)))):
+                if let meetingData = state.meetingData {
+                    state.meetingData = meetingData.updateFeed(feed)
+                }
                 return .none
                 
             case .usingCamera:

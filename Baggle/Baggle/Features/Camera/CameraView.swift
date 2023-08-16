@@ -23,9 +23,14 @@ struct CameraView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             
             ZStack {
+                
+                if viewStore.isUploading {
+                    LoadingView()
+                }
+                
                 VStack(spacing: 0) {
                     Spacer()
-                    
+
                     description(viewStore: viewStore)
                     
                     timer(viewStore: viewStore)
