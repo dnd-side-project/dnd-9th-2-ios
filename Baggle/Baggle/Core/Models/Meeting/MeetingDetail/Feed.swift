@@ -10,6 +10,6 @@ struct Feed {
     let id: Int
     let userId: Int
     let username: String
-    let userImageURL: String
+    let userImageURL: String?
     let feedImageURL: String
 }

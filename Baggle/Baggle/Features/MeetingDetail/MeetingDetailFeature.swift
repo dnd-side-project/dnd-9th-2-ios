@@ -23,6 +23,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         var meetingId: Int
         var meetingData: MeetingDetail?
+        var memberId: Int = -1
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
 
@@ -151,6 +152,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .updateData(let data):
                 state.meetingData = data
+                state.memberId = data.memberId
                 
                 // 약속 상태가 ready 또는 progress이면 invite
                 // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
@@ -200,7 +202,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .emergencyButtonTapped:
-                state.emergencyState = EmergencyFeature.State()
+                state.emergencyState = EmergencyFeature.State(memberID: state.meetingId)
                 return .none
 
             case .inviteButtonTapped:

@@ -108,6 +108,8 @@
 		14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6D9FB2A80748600C8C19C /* Image+.swift */; };
 		14F6D9FE2A807E5B00C8C19C /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6D9FD2A807E5B00C8C19C /* Color+.swift */; };
 		14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7B0952A7BABC30068B1E4 /* BubbleType.swift */; };
+		2B2AFF832A8BD3920028C96F /* EmergencyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */; };
+		2B2AFF882A8BE05D0028C96F /* EmergencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2AFF872A8BE05D0028C96F /* EmergencyService.swift */; };
 		2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */; };
 		2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */; };
 		2B2BA52D2A7ABBA000A90AE7 /* MemberInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */; };
@@ -162,6 +164,9 @@
 		2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */; };
 		2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */; };
 		2BABCB2D2A76D1AF00AFECA3 /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */; };
+		2BB0EF392A8CA160003F9215 /* SignUpServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF382A8CA160003F9215 /* SignUpServiceStatus.swift */; };
+		2BB0EF3B2A8CA17A003F9215 /* LoginServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF3A2A8CA17A003F9215 /* LoginServiceStatus.swift */; };
+		2BB0EF3D2A8CA1A7003F9215 /* EmergencyServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF3C2A8CA1A7003F9215 /* EmergencyServiceStatus.swift */; };
 		2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */; };
 		2BB7FBC52A89289E0003B75C /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB7FBC42A89289E0003B75C /* URL.swift */; };
 		2BB7FBC72A892A520003B75C /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB7FBC62A892A520003B75C /* Const.swift */; };
@@ -294,6 +299,8 @@
 		14F6D9FD2A807E5B00C8C19C /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		14F7B0952A7BABC30068B1E4 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
+		2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyEntity.swift; sourceTree = "<group>"; };
+		2B2AFF872A8BE05D0028C96F /* EmergencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyService.swift; sourceTree = "<group>"; };
 		2B2BA5282A7AB67800A90AE7 /* SelectOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerView.swift; sourceTree = "<group>"; };
 		2B2BA52A2A7AB6A900A90AE7 /* SelectOwnerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOwnerFeature.swift; sourceTree = "<group>"; };
 		2B2BA52C2A7ABBA000A90AE7 /* MemberInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoView.swift; sourceTree = "<group>"; };
@@ -344,6 +351,9 @@
 		2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostObserverAction.swift; sourceTree = "<group>"; };
 		2BABCB2A2A76D1AF00AFECA3 /* MeetingDetailFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailFeature.swift; sourceTree = "<group>"; };
 		2BABCB2B2A76D1AF00AFECA3 /* MeetingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
+		2BB0EF382A8CA160003F9215 /* SignUpServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpServiceStatus.swift; sourceTree = "<group>"; };
+		2BB0EF3A2A8CA17A003F9215 /* LoginServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceStatus.swift; sourceTree = "<group>"; };
+		2BB0EF3C2A8CA1A7003F9215 /* EmergencyServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyServiceStatus.swift; sourceTree = "<group>"; };
 		2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailButtonType.swift; sourceTree = "<group>"; };
 		2BB7FBC42A89289E0003B75C /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		2BB7FBC62A892A520003B75C /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
@@ -512,6 +522,7 @@
 				14C8F9D22A8B3B7A001690C5 /* MeetingCreate */,
 				2B7B4D7A2A84D1E100283248 /* Common */,
 				14783EDB2A7E2EE700EF58D5 /* Camera */,
+				2B2AFF862A8BE04A0028C96F /* Emergency */,
 				14B7A0432A75409400B8E202 /* Error */,
 				1421C04F2A7A848E00C20497 /* Login */,
 				14B7A0422A753DA500B8E202 /* SignUp */,
@@ -574,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				1421C0502A7A84A200C20497 /* LoginService.swift */,
+				2BB0EF3A2A8CA17A003F9215 /* LoginServiceStatus.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -842,6 +854,7 @@
 			isa = PBXGroup;
 			children = (
 				14B7A0402A753D4800B8E202 /* SignUpService.swift */,
+				2BB0EF382A8CA160003F9215 /* SignUpServiceStatus.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -897,6 +910,7 @@
 			isa = PBXGroup;
 			children = (
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
+				2B2AFF812A8BD3820028C96F /* Emergency */,
 				2B65B8142A88A7BE00E3BF11 /* JoinMeeting */,
 				14E0836B2A8369E30001CB21 /* MeetingDetail */,
 				14E083672A8368F70001CB21 /* SignUp */,
@@ -1024,6 +1038,23 @@
 				14F2D7B32A728B39000ED0EE /* ProfileImageView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2B2AFF812A8BD3820028C96F /* Emergency */ = {
+			isa = PBXGroup;
+			children = (
+				2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */,
+			);
+			path = Emergency;
+			sourceTree = "<group>";
+		};
+		2B2AFF862A8BE04A0028C96F /* Emergency */ = {
+			isa = PBXGroup;
+			children = (
+				2B2AFF872A8BE05D0028C96F /* EmergencyService.swift */,
+				2BB0EF3C2A8CA1A7003F9215 /* EmergencyServiceStatus.swift */,
+			);
+			path = Emergency;
 			sourceTree = "<group>";
 		};
 		2B2BA5272A7AB45300A90AE7 /* SelectHost */ = {
@@ -1435,6 +1466,7 @@
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
 				143FC1102A8A1ADE0085E22B /* CameraStatus.swift in Sources */,
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
+				2BB0EF3B2A8CA17A003F9215 /* LoginServiceStatus.swift in Sources */,
 				1421C0512A7A84A200C20497 /* LoginService.swift in Sources */,
 				143C7C042A87645E004D83FD /* LoadingView.swift in Sources */,
 				2B2E7E482A848EC60033C65A /* BaseAPI.swift in Sources */,
@@ -1480,9 +1512,11 @@
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
 				2BDEAC7C2A863DCB00D698E6 /* JoinMeeting.swift in Sources */,
+				2BB0EF392A8CA160003F9215 /* SignUpServiceStatus.swift in Sources */,
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
+				2B2AFF882A8BE05D0028C96F /* EmergencyService.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
 				14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */,
 				14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */,
@@ -1528,6 +1562,7 @@
 				146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */,
 				14F2D7B42A728B39000ED0EE /* ProfileImageView.swift in Sources */,
 				1432BE682A681B630098AAA9 /* AppFeature.swift in Sources */,
+				2BB0EF3D2A8CA1A7003F9215 /* EmergencyServiceStatus.swift in Sources */,
 				2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */,
 				141392602A78E81D00249C8A /* PageIndicator.swift in Sources */,
 				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
@@ -1545,6 +1580,7 @@
 				2BB7FBC52A89289E0003B75C /* URL.swift in Sources */,
 				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
+				2B2AFF832A8BD3920028C96F /* EmergencyEntity.swift in Sources */,
 				14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */,
 				2BEFFBF52A8A0B1D00C6A008 /* JoinMeetingEntity.swift in Sources */,
 				14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */,

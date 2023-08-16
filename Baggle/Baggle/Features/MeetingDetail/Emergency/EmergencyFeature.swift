@@ -12,6 +12,7 @@ import ComposableArchitecture
 struct EmergencyFeature: ReducerProtocol {
 
     struct State: Equatable {
+        let memberID: Int
         var isEmergency: Bool = false
 
         // Child
@@ -23,6 +24,9 @@ struct EmergencyFeature: ReducerProtocol {
         case closeButtonTapped
         case emergencyButtonTapped
         case cameraButtonTapped
+        
+        case emergencySuccess
+        case emergencyFail
 
         // Child
         case timerAction(TimerFeature.Action)
@@ -36,6 +40,7 @@ struct EmergencyFeature: ReducerProtocol {
     }
 
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.emergencyService) var emergencyService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -53,7 +58,21 @@ struct EmergencyFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
             case .emergencyButtonTapped:
+                let id = state.memberID
+                return .run { send in
+                    if await emergencyService.emergency(id) == EmergencyServiceStatus.success {
+                        await send(.emergencySuccess)
+                    } else {
+                        await send(.emergencyFail)
+                    }
+                }
+                
+            case .emergencySuccess:
                 state.isEmergency = true
+                return .none
+                
+            case .emergencyFail:
+                print("emergencyFail")
                 return .none
 
             case .cameraButtonTapped:
