@@ -26,11 +26,11 @@ extension MeetingDetailService: DependencyKey {
                 .meetingDetail(meetingID: meetingID, token: token)
             )
             
-            guard let userID = UserDefaultList.user?.id else {
+            guard let username = UserDefaultList.user?.name else {
                 return .userError // fatalError?
             }
             
-            let meetingDetail = meetingDetailEntity.toDomain(userID: userID)
+            let meetingDetail = meetingDetailEntity.toDomain(username: username)
             
             return .success(meetingDetail)
         } catch {

@@ -36,10 +36,11 @@ extension DependencyValues {
 
 struct MockUpMeetingAPI {
 
-    func fetchMeetingDetail(meetingID: Int, userID: Int) async throws -> MeetingDetail {
+    func fetchMeetingDetail(meetingID: Int) async throws -> MeetingDetail {
         return try await withCheckedThrowingContinuation({ continuation in
-            if let meetingEntity = mockUpJSON() {
-                continuation.resume(returning: meetingEntity.toDomain(userID: userID))
+            if let meetingEntity = mockUpJSON(),
+               let username = UserDefaultList.user?.name {
+                continuation.resume(returning: meetingEntity.toDomain(username: username))
             }
         })
     }
