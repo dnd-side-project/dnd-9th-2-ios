@@ -8,7 +8,7 @@
 import Foundation
 
 enum MeetingCreateStatus: Equatable {
-    case success
+    case success(MeetingSuccessModel)
     case error
     case userError
     case requestModelError

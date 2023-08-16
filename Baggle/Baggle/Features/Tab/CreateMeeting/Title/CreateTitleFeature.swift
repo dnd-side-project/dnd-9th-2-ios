@@ -152,9 +152,13 @@ struct CreateTitleFeature: ReducerProtocol {
                 return .none
 
                 // 모임 메모
-            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToNext)))):
+            case let .path(
+                .element(id: id, action: .meetingMemo(.delegate(.moveToNext(meetingSuccessModel))))
+            ):
                 _ = id
-                state.path.append(.createSuccess(CreateSuccessFeature.State()))
+                state.path.append(.createSuccess(
+                    CreateSuccessFeature.State(meetingSuccessModel: meetingSuccessModel))
+                )
                 return .none
                 
             case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBefore)))):

@@ -10,7 +10,7 @@ import Foundation
 struct MeetingCreateRequestModel: Encodable {
     let title: String
     let place: String
-    let meetingTime: String
+    let meetingTime: Date
     let memo: String?
 }
 
@@ -18,7 +18,7 @@ extension MeetingCreateRequestModel {
     init?(meetingCreateModel: MeetingCreateModel) {
         guard let title = meetingCreateModel.title,
               let place = meetingCreateModel.place,
-              let meetingTime = meetingCreateModel.time?.toIsoDate()
+              let meetingTime = meetingCreateModel.time
         else {
             return nil
         }

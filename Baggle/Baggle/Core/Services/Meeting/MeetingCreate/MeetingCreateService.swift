@@ -28,11 +28,16 @@ extension MeetingCreateService: DependencyKey {
                 return .requestModelError
             }
             
-            try await networkService.requestWithNoResult(
-                .createMeeting(requestModel: requestModel, token: token)
+//            try await networkService.requestWithNoResult(
+//                .createMeeting(requestModel: requestModel, token: token)
+//            )
+//
+            let meetingSuccessModel = MeetingSuccessModel(
+                id: 22,
+                meetingCreateRequestModel: requestModel
             )
             
-            return .success
+            return .success(meetingSuccessModel)
         } catch {
             if let error = error as? KeyChainError {
                 return .userError

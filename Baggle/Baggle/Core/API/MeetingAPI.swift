@@ -62,7 +62,7 @@ extension MeetingAPI: BaseAPI {
         case .createMeeting(let requestModel, _):
             params["title"] = requestModel.title
             params["place"] = requestModel.place
-            params["meetingTime"] = requestModel.meetingTime
+            params["meetingTime"] = requestModel.meetingTime.toIsoDate()
             if let memo = requestModel.memo {
                 params["memo"] = memo
             }

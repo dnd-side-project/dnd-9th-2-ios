@@ -18,6 +18,11 @@ struct CreateMemoView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             
             ZStack {
+                
+                if viewStore.isLoading {
+                    LoadingView()
+                }
+                
                 VStack(spacing: 0) {
 
                     CreateDescription(createStatus: .memo, title: "약속 메모를 남겨보세요.")
