@@ -22,7 +22,7 @@ struct CreateSuccessView: View {
 
                 VStack {
                     Text("약속이 만들어졌어요!")
-                        .font(.Baggle.subTitle)
+                        .font(.Baggle.subTitle1)
                         .foregroundColor(.primaryNormal)
                         .padding(.vertical, 8)
 
@@ -60,7 +60,7 @@ struct CreateSuccessView: View {
                                     targetColor: .gray6
                                 )
                             )
-                            .font(.Baggle.description)
+                            .font(.Baggle.description2)
 
                             Text(
                                 attributedColorString(
@@ -70,7 +70,7 @@ struct CreateSuccessView: View {
                                     targetColor: .gray6
                                 )
                             )
-                            .font(.Baggle.description)
+                            .font(.Baggle.description2)
                         }
                     }
                     .padding(.vertical, 28)

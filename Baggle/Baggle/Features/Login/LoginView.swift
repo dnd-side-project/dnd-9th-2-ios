@@ -66,7 +66,7 @@ extension LoginView {
             HStack(spacing: 6) {
                 Image.Icon.kakao
 
-                Text("카카오로 계속하기")
+                Text("카카오로 로그인")
             }
         }
         .buttonStyle(KakaoLoginStyle())

@@ -87,7 +87,7 @@ struct BaggleTextField: View {
 
                 if case let .title(title) = title {
                     Text(title)
-                        .font(.Baggle.description)
+                        .font(.Baggle.description2)
                         .padding(.horizontal, 2)
                         .padding(.bottom, 6)
                         .foregroundColor(.gray6)
@@ -106,7 +106,7 @@ struct BaggleTextField: View {
                     .foregroundColor(viewStore.textFieldState.fgColor)
 
                     Text("\(viewStore.text.count)/\(viewStore.maxCount)")
-                        .font(.Baggle.description)
+                        .font(.Baggle.description2)
                         .foregroundColor(viewStore.textFieldState.fgColor)
 
                     if viewStore.state.textFieldState == .active {
@@ -134,7 +134,7 @@ struct BaggleTextField: View {
 
                 if case let .invalid(error) = viewStore.textFieldState {
                     Text(error)
-                        .font(.Baggle.caption2)
+                        .font(.Baggle.caption3)
                         .padding(.horizontal, 8)
                         .padding(.top, 8)
                         .foregroundColor(viewStore.textFieldState.fgColor)

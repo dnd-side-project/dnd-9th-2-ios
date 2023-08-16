@@ -84,6 +84,7 @@
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
+		14C8F9D42A8B3B82001690C5 /* MeetingCreateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9D32A8B3B82001690C5 /* MeetingCreateModel.swift */; };
 		14CF68E92A846EB700E457DF /* TestDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68E82A846EB700E457DF /* TestDateService.swift */; };
 		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
 		14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */; };
@@ -272,6 +273,7 @@
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		14C8F9D32A8B3B82001690C5 /* MeetingCreateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCreateModel.swift; sourceTree = "<group>"; };
 		14CF68E82A846EB700E457DF /* TestDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateService.swift; sourceTree = "<group>"; };
 		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPlatform.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 		14134D412A64C561004A6AC4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				14C8F9D22A8B3B7A001690C5 /* MeetingCreate */,
 				2B7B4D7A2A84D1E100283248 /* Common */,
 				14783EDB2A7E2EE700EF58D5 /* Camera */,
 				2B2AFF862A8BE04A0028C96F /* Emergency */,
@@ -863,6 +866,14 @@
 				143C7C052A876A20004D83FD /* KeyChainError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		14C8F9D22A8B3B7A001690C5 /* MeetingCreate */ = {
+			isa = PBXGroup;
+			children = (
+				14C8F9D32A8B3B82001690C5 /* MeetingCreateModel.swift */,
+			);
+			path = MeetingCreate;
 			sourceTree = "<group>";
 		};
 		14CF68EA2A847BEB00E457DF /* User */ = {
@@ -1536,6 +1547,7 @@
 				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
 				14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */,
 				2B5BE6B22A77A40900F25474 /* MockUpMeetingDetailService.swift in Sources */,
+				14C8F9D42A8B3B82001690C5 /* MeetingCreateModel.swift in Sources */,
 				2BABCB2C2A76D1AF00AFECA3 /* MeetingDetailFeature.swift in Sources */,
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,

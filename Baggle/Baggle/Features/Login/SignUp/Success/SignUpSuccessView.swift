@@ -67,7 +67,7 @@ extension SignUpSuccessView {
                 
                 Text("환영합니다!")
             }
-            .fontWithLineSpacing(fontType: .subTitle)
+            .fontWithLineSpacing(fontType: .subTitle1)
             .foregroundColor(.primaryNormal)
             .padding(.vertical, 8)
 

@@ -54,7 +54,7 @@ extension JoinMeetingView {
         VStack {
             Text("약속 초대장이 도착했어요!\n참여하시겠어요?")
                 .multilineTextAlignment(.center)
-                .font(.Baggle.subTitle)
+                .font(.Baggle.subTitle1)
                 .foregroundColor(.primaryNormal)
                 .padding(.vertical, 8)
             
@@ -93,7 +93,7 @@ extension JoinMeetingView {
                             targetColor: .gray6)
                     )
                 }
-                .font(.Baggle.description)
+                .font(.Baggle.description2)
             }
             
             Spacer()
