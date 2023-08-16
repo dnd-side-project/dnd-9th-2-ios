@@ -297,7 +297,10 @@ extension Date {
     }
     
     var inTheNextHour: Bool {
-        return inTheNextHour(Date())
+        let timezone = TimeZone.autoupdatingCurrent
+        let secondsFromGMT = timezone.secondsFromGMT(for: Date())
+        let localizedDate = Date().addingTimeInterval(TimeInterval(secondsFromGMT))
+        return inTheNextHour(localizedDate)
     }
 
 
