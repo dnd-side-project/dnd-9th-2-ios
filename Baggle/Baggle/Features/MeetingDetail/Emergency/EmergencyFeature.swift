@@ -60,7 +60,7 @@ struct EmergencyFeature: ReducerProtocol {
             case .emergencyButtonTapped:
                 let id = state.memberID
                 return .run { send in
-                    if await emergencyService.emergency(id) {
+                    if await emergencyService.emergency(id) == EmergencyServiceStatus.success {
                         await send(.emergencySuccess)
                     } else {
                         await send(.emergencyFail)

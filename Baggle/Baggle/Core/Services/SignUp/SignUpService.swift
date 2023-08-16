@@ -10,15 +10,8 @@ import Foundation
 import ComposableArchitecture
 import Moya
 
-enum SignUpServiceState {
-    case success
-    case fail(APIError)
-    case nicknameDuplicated
-    case keyChainError
-}
-
 struct SignUpService {
-    var signUp: (SignUpRequestModel, String) async -> SignUpServiceState
+    var signUp: (SignUpRequestModel, String) async -> SignUpServiceStatus
 }
 
 extension SignUpService: DependencyKey {

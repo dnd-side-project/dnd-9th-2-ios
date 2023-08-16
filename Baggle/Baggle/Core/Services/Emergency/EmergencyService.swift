@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Moya
 
 struct EmergencyService {
-    var emergency: (_ memberID: Int) async -> Bool
+    var emergency: (_ memberID: Int) async -> EmergencyServiceStatus
 }
 
 extension EmergencyService: DependencyKey {
@@ -27,10 +27,10 @@ extension EmergencyService: DependencyKey {
                     token: accessToken
                 )
             )
-            return true
+            return .success
         } catch let error {
             print("EmergencyService error - \(error)")
-            return false
+            return .fail(.network)
         }
     }
 }
