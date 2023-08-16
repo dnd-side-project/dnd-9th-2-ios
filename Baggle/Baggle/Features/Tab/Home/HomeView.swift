@@ -176,14 +176,14 @@ extension HomeView {
                         segment: [
                             Segment(
                                 id: .progress,
-                                count: viewStore.progressList.count,
+                                count: viewStore.progressCount,
                                 isSelected: viewStore.meetingStatus == .progress,
                                 action: {
                                     viewStore.send(.changeMeetingStatus(.progress))
                                 }),
                             Segment(
                                 id: .completed,
-                                count: viewStore.completedList.count,
+                                count: viewStore.completedCount,
                                 isSelected: viewStore.meetingStatus == .completed,
                                 action: {
                                     viewStore.send(.changeMeetingStatus(.completed))

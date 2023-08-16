@@ -25,6 +25,8 @@ struct HomeFeature: ReducerProtocol {
         var meetingDetailId: Int?
         var pushMeetingDetail: Bool = false
 
+        var progressCount: Int = 0
+        var completedCount: Int = 0
         var progressList: [Meeting] = []
         var completedList: [Meeting] = []
         var meetingDetailState = MeetingDetailFeature.State(
@@ -41,7 +43,7 @@ struct HomeFeature: ReducerProtocol {
         case onAppear
         case changeHomeStatus(HomeStatus)
         case fetchMeetingList(MeetingStatus)
-        case updateMeetingList(MeetingStatus, [Meeting]?)
+        case updateMeetingList(MeetingStatus, Home)
         case refreshMeetingList
         case changeMeetingStatus(MeetingStatus)
 
@@ -79,17 +81,26 @@ struct HomeFeature: ReducerProtocol {
                     return .none
                 }
 
+                // 데이터 요청 후 뷰 상태 변경
             case .changeHomeStatus(let status):
                 state.homeStatus = status
                 return .none
 
+                // 데이터 요청
             case .fetchMeetingList(let status):
                 state.meetingStatus = status
                 return .run { send in
-                    let list = await meetingService.fetchMeetingList(status)
-                    await send(.updateMeetingList(status, list))
+                    // TODO: - page
+                    let result = await meetingService.fetchMeetingList(status, 0)
+                    switch result {
+                    case .success(let data):
+                        await send(.updateMeetingList(status, data))
+                    case .fail:
+                        await send(.changeHomeStatus(.error))
+                    }
                 }
 
+                // 초기화
             case .refreshMeetingList:
                 state.isRefreshing = true
                 state.homeStatus = .loading
@@ -99,13 +110,20 @@ struct HomeFeature: ReducerProtocol {
                 return .run { send in
                     do {
                         try await Task.sleep(nanoseconds: 1_000_000_000)
-                        let list = await meetingService.fetchMeetingList(.progress)
-                        await send(.updateMeetingList(.progress, list))
+                        let result = await meetingService.fetchMeetingList(.progress, 0)
+                        switch result {
+                        case .success(let data):
+                            await send(.updateMeetingList(.progress, data))
+                        case .fail:
+                            await send(.changeHomeStatus(.error))
+                        }
                     } catch {
                         await send(.changeHomeStatus(.error))
                     }
                 }
 
+                // segmentControl 변경
+                // 기존 데이터 없는 경우에 데이터 요청, 아니면 요청 X
             case .changeMeetingStatus(let status):
                 state.meetingStatus = status
                 if status == .completed && state.completedList.isEmpty {
@@ -119,13 +137,16 @@ struct HomeFeature: ReducerProtocol {
                 }
                 return .none
 
+                // 데이터 업데이트
             case .updateMeetingList(let type, let model):
-                if let model {
+                state.progressCount = model.progressCount
+                state.completedCount = model.completedCount
+                if let meetings = model.meetings {
                     if type == .progress {
-                        state.progressList.append(contentsOf: model)
+                        state.progressList.append(contentsOf: meetings)
                         state.homeStatus = state.progressList.isEmpty ? .empty : .normal
                     } else {
-                        state.completedList.append(contentsOf: model)
+                        state.completedList.append(contentsOf: meetings)
                         state.homeStatus = state.completedList.isEmpty ? .empty : .normal
                     }
                 }
