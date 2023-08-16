@@ -170,6 +170,7 @@
 		2BB0EF402A8D1034003F9215 /* HomeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF3F2A8D1034003F9215 /* HomeEntity.swift */; };
 		2BB0EF422A8D18D1003F9215 /* HomeMeetingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF412A8D18D1003F9215 /* HomeMeetingEntity.swift */; };
 		2BB0EF442A8D1A60003F9215 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF432A8D1A60003F9215 /* Home.swift */; };
+		2BB0EF462A8D2357003F9215 /* HomeServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF452A8D2357003F9215 /* HomeServiceStatus.swift */; };
 		2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */; };
 		2BB7FBC52A89289E0003B75C /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB7FBC42A89289E0003B75C /* URL.swift */; };
 		2BB7FBC72A892A520003B75C /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB7FBC62A892A520003B75C /* Const.swift */; };
@@ -360,6 +361,7 @@
 		2BB0EF3F2A8D1034003F9215 /* HomeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEntity.swift; sourceTree = "<group>"; };
 		2BB0EF412A8D18D1003F9215 /* HomeMeetingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMeetingEntity.swift; sourceTree = "<group>"; };
 		2BB0EF432A8D1A60003F9215 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		2BB0EF452A8D2357003F9215 /* HomeServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceStatus.swift; sourceTree = "<group>"; };
 		2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailButtonType.swift; sourceTree = "<group>"; };
 		2BB7FBC42A89289E0003B75C /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		2BB7FBC62A892A520003B75C /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
@@ -1297,6 +1299,7 @@
 			children = (
 				143C7BFA2A875416004D83FD /* MyPage */,
 				2BF268222A77861300F32ADF /* HomeService.swift */,
+				2BB0EF452A8D2357003F9215 /* HomeServiceStatus.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1498,6 +1501,7 @@
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				14458B482A81E92200C810FA /* BaggleStampStatus.swift in Sources */,
 				1471ECFB2A8A465C00D9FC93 /* ErrorID.swift in Sources */,
+				2BB0EF462A8D2357003F9215 /* HomeServiceStatus.swift in Sources */,
 				2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */,
 				14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */,
 				2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */,

@@ -10,16 +10,29 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingListService {
-    var fetchMeetingList: (MeetingStatus) async -> [Meeting]?
+    var fetchMeetingList: (MeetingStatus, Int) async -> HomeServiceStatus
 }
 
 extension MeetingListService: DependencyKey {
+    
+    static let networkService = NetworkService<MeetingAPI>()
 
-    static var liveValue = Self { type in
+    static var liveValue = Self { status, page in
         do {
-            return try await MockUpMeetingService().fetchMeetingList(type)
+//            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+//            let data: HomeEntity = try await networkService.request(
+//                .meetingList(period: status.period, page: page, size: 10, token: accessToken)
+//            )
+            // TODO: - entity에서 model 변환
+            let mockMeeting = try await MockUpMeetingService().fetchMeetingList(status)
+            let mockData: Home = Home(
+                progressCount: 3,
+                completedCount: 1,
+                meetings: mockMeeting
+            )
+            return .success(mockData)
         } catch {
-            return nil
+            return .fail(.network)
         }
     }
 }

@@ -11,7 +11,7 @@ import Alamofire
 import Moya
 
 enum MeetingAPI {
-    case meetingList(period: MeetingPeriodStatus, page: Int, size: Int, token: String)
+    case meetingList(period: String, page: Int, size: Int, token: String)
     case meetingDetail(meetingID: Int, token: String)
     case createMeeting
 }
@@ -58,7 +58,7 @@ extension MeetingAPI: BaseAPI {
         
         switch self {
         case .meetingList(let period, let page, let size, _):
-            params["period"] = period.rawValue
+            params["period"] = period
             params["page"] = page
             params["size"] = size
         case .meetingDetail(let meetingID, _):

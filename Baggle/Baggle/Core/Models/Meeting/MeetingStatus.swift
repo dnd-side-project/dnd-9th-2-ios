@@ -26,4 +26,11 @@ enum MeetingStatus {
         case .progress: return .baggleRed
         }
     }
+    
+    var period: String {
+        switch self {
+        case .ready, .progress, .confirmed: return "scheduled"
+        case .completed: return "past"
+        }
+    }
 }
