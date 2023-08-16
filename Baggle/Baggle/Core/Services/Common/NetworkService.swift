@@ -109,7 +109,7 @@ extension NetworkService {
         })
     }
     
-    func requestWithNoResult(_ target: API) async throws -> Int {
+    func requestWithNoResult(_ target: API) async throws {
         return try await withCheckedThrowingContinuation({ continuation in
             provider.request(target) { result in
                 switch result {
@@ -117,12 +117,12 @@ extension NetworkService {
                     do {
                         print("response: \(response)")
                         let decoder = JSONDecoder()
-                        let body = try decoder.decode(EntityContainer<Bool>.self,
+                        let body = try decoder.decode(EntityContainer<JSONNull>.self,
                                                       from: response.data)
                         print("✅ decoding: \(body)")
                         switch body.status {
                         case 200, 201:
-                            continuation.resume(returning: body.status)
+                            continuation.resume(returning: Void())
                         case 400:
                             continuation.resume(throwing: APIError.badRequest)
                         case 401:
