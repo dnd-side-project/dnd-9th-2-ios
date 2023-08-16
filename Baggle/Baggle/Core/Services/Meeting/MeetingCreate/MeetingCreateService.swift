@@ -28,7 +28,7 @@ extension MeetingCreateService: DependencyKey {
                 return .requestModelError
             }
             
-            let meetingCreateEntity: MeetingCreateEntity = try await networkService
+            let entity: MeetingCreateEntity = try await networkService
                 .request(
                     .createMeeting(
                         requestModel: requestModel,
@@ -36,12 +36,12 @@ extension MeetingCreateService: DependencyKey {
                     )
                 )
 
-            let meetingSuccessModel = MeetingSuccessModel(
-                id: meetingCreateEntity.meetingID,
-                meetingCreateRequestModel: requestModel
+            let model = MeetingSuccessModel(
+                id: entity.meetingID,
+                requestModel: requestModel
             )
             
-            return .success(meetingSuccessModel)
+            return .success(model)
         } catch {
             if let error = error as? KeyChainError {
                 return .userError

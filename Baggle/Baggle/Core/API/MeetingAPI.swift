@@ -75,7 +75,7 @@ extension MeetingAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .createMeeting: return JsonEncodingWithNoSlash()
+        case .createMeeting: return JSONEncoding.default
         default: return JSONEncoding.default
         }
     }
