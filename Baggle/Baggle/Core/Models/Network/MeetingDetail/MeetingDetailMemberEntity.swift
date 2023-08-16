@@ -43,7 +43,7 @@ extension MeetingDetailMemberEntity {
         guard let feedID = feedID else { return nil }
         return Feed(
             id: feedID,
-            userId: self.memberID,
+            userID: self.memberID,
             username: self.nickname,
             userImageURL: self.profileImageURL,
             feedImageURL: self.feedImageURL

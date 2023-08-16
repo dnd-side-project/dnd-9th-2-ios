@@ -11,8 +11,8 @@ import Alamofire
 import Moya
 
 enum FeedAPI {
-    case upload
     case emergency(memberID: Int, token: String)
+    case uploadPhoto(requestModel: FeedPhotoRequestModel, token: String)
 }
 
 
@@ -25,7 +25,7 @@ extension FeedAPI: BaseAPI {
     var path: String {
         switch self {
         case .emergency: return ""
-        default: return ""
+        case .uploadPhoto: return ""
         }
     }
     
@@ -35,7 +35,8 @@ extension FeedAPI: BaseAPI {
         switch self {
         case .emergency(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
-        default: return HeaderType.json.value
+        case .uploadPhoto(_, let token):
+            return HeaderType.multipartWithBearer(token: token).value
         }
     }
     
@@ -44,7 +45,7 @@ extension FeedAPI: BaseAPI {
     var method: Moya.Method {
         switch self {
         case .emergency: return .get
-        default: return .get
+        case .uploadPhoto: return .post
         }
     }
     
@@ -57,7 +58,8 @@ extension FeedAPI: BaseAPI {
         case .emergency(let memberID, _):
             params["memberId"] = memberID
             params["authorizationTime"] = Date().toIsoDate()
-        default: break
+        case .uploadPhoto:
+            break
         }
         
         return params
@@ -65,9 +67,8 @@ extension FeedAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .emergency:
-            return ParameterEncodingWithNoSlash.init()
-        default: return JSONEncoding.default
+        case .emergency: return ParameterEncodingWithNoSlash.init()
+        case .uploadPhoto: return JSONEncoding.default
         }
     }
     
@@ -76,9 +77,34 @@ extension FeedAPI: BaseAPI {
     var task: Task {
         switch self {
         case .emergency:
-            return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: parameterEncoding)
-        default: return .requestPlain
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: parameterEncoding
+            )
+        case .uploadPhoto(let requestModel, _):
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.baggleFormat)
+            
+            guard let memberInfoData = try? encoder.encode(requestModel.memberInfo) else {
+                fatalError("유저 정보 인코딩 에러")
+            }
+
+            let memberInfoFormData = MultipartFormData(
+                provider: .data(memberInfoData),
+                name: "memberInfo",
+                mimeType: "application/json"
+            )
+
+            let feedImageData = MultipartFormData(
+                provider: .data(requestModel.feedImage),
+                name: "feedImage",
+                fileName: ".jpg",
+                mimeType: "image/jpeg"
+            )
+
+            let multiPartData: [Moya.MultipartFormData] = [memberInfoFormData, feedImageData]
+            
+            return .uploadMultipart(multiPartData)
         }
     }
 }
