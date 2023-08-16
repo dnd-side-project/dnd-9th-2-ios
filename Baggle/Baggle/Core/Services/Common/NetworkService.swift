@@ -50,8 +50,10 @@ extension NetworkService {
                 switch result {
                 case .success(let response):
                     do {
-                        print("response: \(response)")
+                        print("=============")
+                        dump(response)
                         print(String(data: response.data, encoding: .utf8))
+                        print("=============")
                         let decoder = JSONDecoder()
                         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
 
@@ -95,6 +97,8 @@ extension NetworkService {
                     }
                 case .failure(let error):
                     print("❌ error - \(error)")
+                    dump(error)
+                    print("=========")
                     continuation.resume(throwing: APIError.badRequest)
                 }
             }

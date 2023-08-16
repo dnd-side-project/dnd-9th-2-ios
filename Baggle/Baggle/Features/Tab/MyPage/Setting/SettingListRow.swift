@@ -26,7 +26,7 @@ struct SettingListRow: View {
             HStack {
                 Text(text)
                     .foregroundColor(.gray11)
-                    .font(.Baggle.button)
+                    .font(.Baggle.button1)
                 
                 Spacer()
                 

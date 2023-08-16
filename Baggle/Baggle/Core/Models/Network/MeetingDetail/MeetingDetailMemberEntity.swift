@@ -10,7 +10,7 @@ import Foundation
 struct MeetingDetailMemberEntity: Codable {
     let memberID: Int
     let nickname: String
-    let profileImageURL: String
+    let profileImageURL: String?
     let meetingAuthority: Bool
     let buttonAuthority: Bool
     let feedID: Int?

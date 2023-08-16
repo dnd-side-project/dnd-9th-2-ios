@@ -10,6 +10,6 @@ struct Feed: Equatable {
     let id: Int
     let userID: Int
     let username: String
-    let userImageURL: String
+    let userImageURL: String?
     let feedImageURL: String
 }

@@ -23,7 +23,7 @@ struct MeetingDetailEntity: Codable {
 }
 
 extension MeetingDetailEntity {
-    func toDomain(userID: Int) -> MeetingDetail {
+    func toDomain(username: String) -> MeetingDetail {
         MeetingDetail(
             id: self.meetingID,
             name: self.title,
@@ -32,11 +32,12 @@ extension MeetingDetailEntity {
             time: self.meetingTime.hourMinute(),
             memo: self.memo,
             members: self.members.map { $0.memberDomain() },
+            memberId: memberId(username: username, members: members),
             status: meetingStatus(date: self.meetingTime),
-            isEmergencyAuthority: isEmergencyAuthority(userID: userID, members: self.members),
+            isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
             emergencyButtonActiveTime: self.certificationTime,
-            isCertified: isCertified(userID: userID, members: self.members),
+            isCertified: isCertified(username: username, members: self.members),
             feeds: self.members.compactMap { $0.feedDomain() }
         )
     }
@@ -61,12 +62,16 @@ extension MeetingDetailEntity {
         // 약속 당일
         return .progress
     }
+    
+    private func memberId(username: String, members: [MeetingDetailMemberEntity]) -> Int {
+        return members.filter({ $0.nickname == username }).first?.memberID ?? -1
+    }
 
-    private func isEmergencyAuthority(userID: Int, members: [MeetingDetailMemberEntity]) -> Bool {
-        return members.contains { $0.memberID == userID && $0.buttonAuthority }
+    private func isEmergencyAuthority(username: String, members: [MeetingDetailMemberEntity]) -> Bool {
+        return members.contains { $0.nickname == username && $0.buttonAuthority }
     }
     
-    private func isCertified(userID: Int, members: [MeetingDetailMemberEntity]) -> Bool {
-        return members.contains { $0.memberID == userID && $0.feedID != nil }
+    private func isCertified(username: String, members: [MeetingDetailMemberEntity]) -> Bool {
+        return members.contains { $0.nickname == username && $0.feedID != nil }
     }
 }

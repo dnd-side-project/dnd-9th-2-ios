@@ -10,14 +10,8 @@ import Foundation
 import ComposableArchitecture
 import KakaoSDKUser
 
-enum LoginServiceState {
-    case success
-    case requireSignUp
-    case fail(APIError)
-}
-
 struct LoginService {
-    var login: (LoginRequestModel, String) async -> LoginServiceState
+    var login: (LoginRequestModel, String) async -> LoginServiceStatus
     var kakaoLogin: () async throws -> String
 }
 

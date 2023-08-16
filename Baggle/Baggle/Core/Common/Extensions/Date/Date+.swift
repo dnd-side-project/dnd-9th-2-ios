@@ -121,6 +121,18 @@ extension Date {
         let format = "HH:mm"
         return toString(format: format)
     }
+    
+    func toIsoDate() -> String {
+        guard let timeZone = TimeZone(abbreviation: "KST") else { return "" }
+        let convertDate = ISO8601DateFormatter.string(
+            from: self,
+            timeZone: timeZone,
+            formatOptions: [
+                .withFullDate, .withTime, .withColonSeparatorInTime
+            ]
+        )
+        return convertDate
+    }
 }
 
 // MARK: - Methods
@@ -190,8 +202,8 @@ extension Date {
 
     /// 약속 생성 가능 시간 리턴
     /// ex
-    /// 2시 03분 -> 2시 05분
-    /// 2시 05분 -> 2시 10분
+    /// 2시 03분 -> 2시 10분
+    /// 2시 05분 -> 2시 15분
 
     func meetingStartTime() -> Date {
 
@@ -199,7 +211,7 @@ extension Date {
         let twoHoursLater = self.later(hours: 2)
 
         // 5분 이후
-        var twoHoursFiveMinutesLater = twoHoursLater.later(minutes: 5)
+        var twoHoursFiveMinutesLater = twoHoursLater.later(minutes: 10)
 
         // 5분 단위로 만들기
         while twoHoursFiveMinutesLater.minute % 5 != 0 {
@@ -285,7 +297,10 @@ extension Date {
     }
     
     var inTheNextHour: Bool {
-        return inTheNextHour(Date())
+        let timezone = TimeZone.autoupdatingCurrent
+        let secondsFromGMT = timezone.secondsFromGMT(for: Date())
+        let localizedDate = Date().addingTimeInterval(TimeInterval(secondsFromGMT))
+        return inTheNextHour(localizedDate)
     }
 
 

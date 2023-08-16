@@ -19,7 +19,7 @@ struct BaggleTag: View {
 
     var body: some View {
         Text(text)
-            .font(.Baggle.caption2)
+            .font(.Baggle.caption3)
             .kerning(-0.5)
             .padding(.horizontal, 10)
             .padding(.vertical, 6)

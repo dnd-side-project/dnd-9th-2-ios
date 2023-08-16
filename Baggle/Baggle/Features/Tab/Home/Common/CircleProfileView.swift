@@ -36,13 +36,13 @@ enum ProfileSize {
 
 struct CircleProfileView: View {
     
-    let imageUrl: String
+    let imageUrl: String?
     let size: ProfileSize
     let isFailed: Bool
     let hasStroke: Bool
     
     init(
-        imageUrl: String,
+        imageUrl: String?,
         size: ProfileSize,
         isFailed: Bool = false,
         hasStroke: Bool = true
@@ -55,7 +55,7 @@ struct CircleProfileView: View {
 
     var body: some View {
 
-        KFImage(URL(string: imageUrl))
+        KFImage(URL(string: imageUrl ?? ""))
             .placeholder { _ in
                 Image.Profile.profilDefault
                     .resizable()

@@ -41,7 +41,7 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2023년 8월 5일 18시 51분
-    // 약속 생성 가능 시각 : 2023년 8월 5일 20시 55분
+    // 약속 생성 가능 시각 : 2023년 8월 5일 21시 00분
     // 테스트 결과값 : "2023년 8월 5일"
     func test_약속가능시간_생성_날짜_01() throws {
         let date = try testDateService.createDate(2023, 8, 5, 18, 51)
@@ -52,18 +52,18 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2023년 8월 5일 18시 51분
-    // 약속 생성 가능 시각 : 2023년 8월 5일 20시 55분
-    // 테스트 결과값 : "20:55"
+    // 약속 생성 가능 시각 : 2023년 8월 5일 21시 00분
+    // 테스트 결과값 : "21:00"
     func test_약속가능시간_생성_시간_01() throws {
         let date = try testDateService.createDate(2023, 8, 5, 18, 51)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.hourMinute()
 
-        XCTAssertEqual(result, "20:55")
+        XCTAssertEqual(result, "21:00")
     }
 
     // 시각 : 2023년 8월 20일 22시 33분
-    // 약속 생성 가능 시각 : 2023년 8월 21일 00시 35분
+    // 약속 생성 가능 시각 : 2023년 8월 21일 00시 40분
     // 테스트 결과값 : "2023년 8월 21일"
     func test_약속가능시간_생성_날짜_02() throws {
         let date = try testDateService.createDate(2023, 8, 20, 22, 33)
@@ -74,18 +74,18 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2023년 8월 20일 22시 33분
-    // 약속 생성 가능 시각 : 2023년 8월 21일 00시 35분
-    // 테스트 결과값 : "00:35"
+    // 약속 생성 가능 시각 : 2023년 8월 21일 00시 40분
+    // 테스트 결과값 : "00:40"
     func test_약속가능시간_생성_시간_02() throws {
         let date = try testDateService.createDate(2023, 8, 20, 22, 33)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.hourMinute()
 
-        XCTAssertEqual(result, "00:35")
+        XCTAssertEqual(result, "00:40")
     }
 
     // 시각 : 2023년 9월 2일 16시 05분
-    // 약속 생성 가능 시각 : 2023년 9월 2일 18시 10분
+    // 약속 생성 가능 시각 : 2023년 9월 2일 18시 15분
     // 테스트 결과값 : "2023년 9월 2일"
     func test_약속가능시간_생성_날짜_03() throws {
         let date = try testDateService.createDate(2023, 9, 2, 16, 05)
@@ -96,18 +96,18 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2023년 9월 2일 16시 05분
-    // 약속 생성 가능 시각 : 2023년 9월 2일 18시 10분
-    // 테스트 결과값 : "18:10"
+    // 약속 생성 가능 시각 : 2023년 9월 2일 18시 15분
+    // 테스트 결과값 : "18:15"
     func test_약속가능시간_생성_시간_03() throws {
         let date = try testDateService.createDate(2023, 9, 2, 16, 05)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.hourMinute()
 
-        XCTAssertEqual(result, "18:10")
+        XCTAssertEqual(result, "18:15")
     }
 
     // 시각 : 2023년 8월 31일 21시 57분
-    // 약속 생성 가능 시각 : 2023년 9월 1일 0시 0분
+    // 약속 생성 가능 시각 : 2023년 9월 1일 0시 5분
     // 테스트 결과값 : "2023년 9월 2일"
     func test_약속가능시간_생성_날짜_04() throws {
         let date = try testDateService.createDate(2023, 8, 31, 21, 57)
@@ -118,32 +118,32 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2023년 8월 31일 21시 57분
-    // 약속 생성 가능 시각 : 2023년 9월 1일 0시 0분
-    // 테스트 결과값 : "0:00"
+    // 약속 생성 가능 시각 : 2023년 9월 1일 0시 5분
+    // 테스트 결과값 : "00:05"
     func test_약속가능시간_생성_시간_04() throws {
         let date = try testDateService.createDate(2023, 8, 31, 21, 57)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.hourMinute()
 
-        XCTAssertEqual(result, "00:00")
+        XCTAssertEqual(result, "00:05")
     }
 
-    // 시각 : 2023년 12월 31일 21시 57분
+    // 시각 : 2023년 12월 31일 21시 52분
     // 약속 생성 가능 시각 : 2024년 1월 1일 0시 0분
     // 테스트 결과값 : "2024년 1월 1일"
     func test_약속가능시간_생성_날짜_05() throws {
-        let date = try testDateService.createDate(2023, 12, 31, 21, 57)
+        let date = try testDateService.createDate(2023, 12, 31, 21, 52)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.koreanDate()
 
         XCTAssertEqual(result, "2024년 1월 1일")
     }
 
-    // 시각 : 2023년 12월 31일 21시 57분
+    // 시각 : 2023년 12월 31일 21시 52분
     // 약속 생성 가능 시각 : 2024년 1월 1일 0시 0분
     // 테스트 결과값 : "0:00"
     func test_약속가능시간_생성_시간_05() throws {
-        let date = try testDateService.createDate(2024, 12, 31, 21, 57)
+        let date = try testDateService.createDate(2024, 12, 31, 21, 52)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.hourMinute()
 
@@ -151,7 +151,7 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2024년 2월 28일 23시 00분
-    // 약속 생성 가능 시각 : 2024년 2월 29일 1시 5분
+    // 약속 생성 가능 시각 : 2024년 2월 29일 1시 10분
     // 테스트 결과값 : "2024년 2월 29일"
     func test_약속가능시간_생성_날짜_06() throws {
         let date = try testDateService.createDate(2024, 2, 28, 23, 00)
@@ -162,13 +162,13 @@ final class BaggleDateTests: XCTestCase {
     }
 
     // 시각 : 2024년 2월 28일 23시 00분
-    // 약속 생성 가능 시각 : 2024년 2월 29일 1시 5분
-    // 테스트 결과값 : "01:05"
+    // 약속 생성 가능 시각 : 2024년 2월 29일 1시 10분
+    // 테스트 결과값 : "01:10"
     func test_약속가능시간_생성_시간_06() throws {
         let date = try testDateService.createDate(2024, 2, 28, 23, 00)
         let meetingDate = date.meetingStartTime()
         let result = meetingDate.hourMinute()
 
-        XCTAssertEqual(result, "01:05")
+        XCTAssertEqual(result, "01:10")
     }
 }

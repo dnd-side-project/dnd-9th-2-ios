@@ -46,7 +46,7 @@ struct MyPageView: View {
                                 
                                 HStack(alignment: .top, spacing: 6) {
                                     Text(viewStore.user.name)
-                                        .font(.Baggle.subTitle)
+                                        .font(.Baggle.subTitle1)
                                         .foregroundColor(.gray11)
                                     
                                     PlatformLogoView(platform: viewStore.user.platform)
