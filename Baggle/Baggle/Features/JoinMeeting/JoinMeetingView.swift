@@ -125,14 +125,13 @@ extension JoinMeetingView {
     }
     
     func baggleAlert(viewStore: Viewstore) -> some View {
-        BaggleAlert(
+        BaggleAlertOneButton(
             isPresented: Binding(
                 get: { viewStore.isAlertPresented },
-                set: { _ in viewStore.send(.presentAlert) }),
+                set: { _ in viewStore.send(.presentAlert) }
+            ),
             title: "이미 만료된 방이에요!",
-            description: "약속 1시간 전까지만 입장이 가능해요.",
-            alertType: .onebutton,
-            rightButtonTitle: "확인") {
+            buttonTitle: "약속 1시간 전까지만 입장이 가능해요.") {
                 viewStore.send(.exitButtonTapped)
             }
     }

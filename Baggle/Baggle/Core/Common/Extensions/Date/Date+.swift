@@ -190,8 +190,8 @@ extension Date {
 
     /// 약속 생성 가능 시간 리턴
     /// ex
-    /// 2시 03분 -> 2시 05분
-    /// 2시 05분 -> 2시 10분
+    /// 2시 03분 -> 2시 10분
+    /// 2시 05분 -> 2시 15분
 
     func meetingStartTime() -> Date {
 
@@ -199,7 +199,7 @@ extension Date {
         let twoHoursLater = self.later(hours: 2)
 
         // 5분 이후
-        var twoHoursFiveMinutesLater = twoHoursLater.later(minutes: 5)
+        var twoHoursFiveMinutesLater = twoHoursLater.later(minutes: 10)
 
         // 5분 단위로 만들기
         while twoHoursFiveMinutesLater.minute % 5 != 0 {

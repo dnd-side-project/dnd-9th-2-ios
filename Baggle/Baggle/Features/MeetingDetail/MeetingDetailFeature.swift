@@ -10,19 +10,14 @@ import SwiftUI
 import ComposableArchitecture
 import KakaoSDKShare
 
-enum MeetingDetailState {
-    case empty
-    case updatedData(MeetingDetail)
-}
-
 struct MeetingDetailFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
 
     struct State: Equatable {
         
-        // User
-        var userID: Int
+        // View
+        var isLoading: Bool = false
         
         // Meeting
 
@@ -32,12 +27,12 @@ struct MeetingDetailFeature: ReducerProtocol {
         var buttonState: MeetingDetailButtonType = .none
 
         // Alert
-        var alertType: MeetingDeleteType = .delete
-        var isAlertPresented: Bool = false
-        var alertTitle: String = ""
-        var alertDescription: String?
-        var alertRightButtonTitle: String = ""
-
+        var isErrorAlertPresented: Bool = false
+        var errorDescription: String = ""
+        var isDeleteAlertPresented: Bool = false
+        var isLeaveAlertPresented: Bool = false
+        var isInvitationAlertPresented: Bool = false
+        
         // Feed
         var isImageTapped: Bool = false
         var tappedImageUrl: String?
@@ -60,8 +55,8 @@ struct MeetingDetailFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case onAppear
+        case handleResult(MeetingDetailStatus)
         case updateData(MeetingDetail)
-        case presentAlert
         case deleteMeeting
 
         // button
@@ -76,9 +71,15 @@ struct MeetingDetailFeature: ReducerProtocol {
         // feed
         case imageTapped(String?)
 
-        // error
-        case invitationFailed
-
+        // Alert
+        case presentErrorAlert(String)
+        case presentDeleteAlert
+        case presentLeaveAlert
+        case presentInvitationAlert
+        
+        // Alert - Tapped
+        case errorAlertButtonTapped
+        
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
@@ -97,7 +98,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         }
     }
 
-    @Dependency(\.meetingDetailService) var meetingService
+    @Dependency(\.meetingDetailService) var meetingDetailService
     @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
@@ -115,13 +116,39 @@ struct MeetingDetailFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 let meetingID = state.meetingId
-                let userID = state.userID
-                return .run { send in
-                    if let data = await meetingService.fetchMeetingDetail(meetingID, userID) {
-                        await send(.updateData(data))
+                
+                if meetingID == Const.ErrorID.meeting {
+                    return .run { send in
+                        await send(.presentErrorAlert("홈에서 모임 정보를 전달하는데 에러가 발생했어요"))
                     }
                 }
+                state.isLoading = true
+                
+                return .run { send in
+                    let result = await meetingDetailService.fetchMeetingDetail(meetingID)
+                    await send(.handleResult(result))
+                }
 
+            case .handleResult(let meetingDetailStatus):
+                state.isLoading = false
+                
+                return .run { send in
+                    switch meetingDetailStatus {
+                    case let .success(meetingDetail):
+                        await send(.updateData(meetingDetail))
+                    case let .fail(apiError):
+                        await send(
+                            .presentErrorAlert(
+                                """
+                                네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요. [\(apiError.description)]
+                                """
+                            )
+                        )
+                    case .userError:
+                        await send(.presentErrorAlert("로컬에 저장된 유저 정보를 가져오는데 에러가 발생했어요."))
+                    }
+                }
+                
             case .updateData(let data):
                 state.meetingData = data
                 
@@ -140,13 +167,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
                 return .none
 
-            case .presentAlert:
-                state.alertTitle = (state.meetingData?.name ?? "-") + state.alertType.title
-                state.alertDescription = state.alertType.description
-                state.alertRightButtonTitle = state.alertType.rightButtonTitle
-                state.isAlertPresented.toggle()
-                return .none
-
             case .deleteMeeting:
                 return .run { send in
                     // 삭제 서버 통신에 따라 분기처리
@@ -156,16 +176,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Tap
 
             case .deleteButtonTapped:
-                state.alertType = .delete
-                return .run { send in
-                    await send(.presentAlert)
-                }
+                return .run { send in await send(.presentDeleteAlert) }
 
             case .leaveButtonTapped:
-                state.alertType = .leave
                 state.selectOwner = SelectOwnerFeature.State(
-                    memberList: state.meetingData?.members ?? [])
-                return .none
+                    memberList: state.meetingData?.members ?? []
+                )
+                return .run { send in await send(.presentLeaveAlert) }
 
             case .backButtonTapped:
                 state.dismiss = true
@@ -192,14 +209,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                     if ShareApi.isKakaoTalkSharingAvailable() {
                         if let url = await sendInvitation(
                             name: meetingData.name,
-                            id: 1) { // TODO: - meetingData.id로 수정 (임시 id)
+                            id: 12) { // TODO: - meetingData.id로 수정 (임시 id)
                             openURL(url)
                         } else {
-                            await send(.invitationFailed)
+                            await send(.presentInvitationAlert)
                         }
                     } else {
-                        let url = "itms-apps://itunes.apple.com/app/362057947"
-                        if let url = URL(string: url) {
+                        if let url = URL(string: Const.URL.kakaoAppStore) {
                             openURL(url)
                         }
                     }
@@ -219,10 +235,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .none
 
-            case .invitationFailed:
-                print("초대 실패 alert")
-                return .none
-
             case .imageTapped(let imageUrl):
                 state.isImageTapped.toggle()
                 state.tappedImageUrl = imageUrl
@@ -234,12 +246,28 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let nextOwnerId = state.selectOwner?.selectedMemberId {
                     state.nextOwnerId = nextOwnerId
                 }
-                return .run { send in
-                    await send(.presentAlert)
-                }
+                return .run { send in await send(.presentLeaveAlert) }
 
             case .selectOwner:
                 return .none
+
+            case .presentErrorAlert(let description):
+                state.errorDescription = description
+                state.isErrorAlertPresented.toggle()
+                return .none
+
+            case .presentDeleteAlert:
+                return .none
+
+            case .presentLeaveAlert:
+                return .none
+
+            case .presentInvitationAlert:
+                state.isInvitationAlertPresented.toggle()
+                return .none
+                
+            case .errorAlertButtonTapped:
+                return .run { send in await send(.delegate(.onDisappear)) }
 
                 // Child - Camera
 
@@ -280,7 +308,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Delegate
 
             case .delegate(.deleteSuccess):
-                state.isAlertPresented = false
+                state.isDeleteAlertPresented = false
                 state.dismiss = true
                 return .none
 

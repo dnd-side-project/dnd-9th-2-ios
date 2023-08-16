@@ -73,13 +73,13 @@ extension Image {
         static let empty = Image("no_baggle")
     }
     
-    //MARK: - Logo
+    // MARK: - Logo
     struct Logo {
         static let large = Image("logo_large")
         static let medium = Image("logo_medium")
     }
     
-    //MARK: - BaggleText
+    // MARK: - BaggleText
     struct BaggleText {
         static let mainHome = Image("MainHome")
         static let profile = Image("Profile")

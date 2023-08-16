@@ -9,11 +9,11 @@ import Foundation
 
 import ComposableArchitecture
 
-struct HomeService {
+struct MeetingListService {
     var fetchMeetingList: (MeetingStatus) async -> [Meeting]?
 }
 
-extension HomeService: DependencyKey {
+extension MeetingListService: DependencyKey {
 
     static var liveValue = Self { type in
         do {
@@ -25,9 +25,9 @@ extension HomeService: DependencyKey {
 }
 
 extension DependencyValues {
-    var meetingService: HomeService {
-        get { self[HomeService.self] }
-        set { self[HomeService.self] = newValue }
+    var meetingService: MeetingListService {
+        get { self[MeetingListService.self] }
+        set { self[MeetingListService.self] = newValue }
     }
 }
 
@@ -42,8 +42,8 @@ struct MockUpMeetingService {
     private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
         let progress = [
             Meeting(
-                id: Int.random(in: 1...100),
-                name: "진행 중인 모임",
+                id: 9,
+                name: "id가 9입니다.",
                 place: "우리집",
                 date: "2023년 04월 22일",
                 time: "15:30",
@@ -57,8 +57,8 @@ struct MockUpMeetingService {
                 isConfirmed: true
             ),
             Meeting(
-                id: Int.random(in: 101...200),
-                name: "진행 중인 모임2",
+                id: 10,
+                name: "id가 10입니다.",
                 place: "남의 집",
                 date: "2023년 08년 23일",
                 time: "15:30",
@@ -68,7 +68,47 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
                 status: .ready,
-                isConfirmed: false)
+                isConfirmed: false
+            ),
+            Meeting(
+                id: 11,
+                name: "id가 11입니다.",
+                place: "우리집",
+                date: "2023년 04월 22일",
+                time: "15:30",
+                dDay: 0,
+                profileImages: [
+                    "https://avatars.githubusercontent.com/u/71167956?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
+                    "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
+                ],
+                status: .progress,
+                isConfirmed: true
+            ),
+            Meeting(
+                id: 4,
+                name: "id가 4입니다.",
+                place: "남의 집",
+                date: "2023년 08년 23일",
+                time: "15:30",
+                dDay: 30,
+                profileImages: [
+                ],
+                status: .ready,
+                isConfirmed: false
+            ),
+            Meeting(
+                id: -999,
+                name: "id 전달 에러 케이스.",
+                place: "남의 집",
+                date: "2023년 08년 23일",
+                time: "15:30",
+                dDay: 30,
+                profileImages: [
+                ],
+                status: .ready,
+                isConfirmed: false
+            )
         ]
 
         let complete = [

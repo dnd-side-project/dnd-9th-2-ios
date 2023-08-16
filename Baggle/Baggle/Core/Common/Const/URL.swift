@@ -13,6 +13,7 @@ extension Const {
         static let privacyPolicy = "https://www.dnd.ac/"
         static let termsOfService = "https://www.naver.com/"
         static let invitationThumbnail = "https://bagglebucket.s3.ap-northeast-2.amazonaws.com/link_participation.png"
+        static let kakaoAppStore = "itms-apps://itunes.apple.com/app/362057947"
     }
 }
 // swiftlint:enable all

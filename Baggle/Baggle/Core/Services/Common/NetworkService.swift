@@ -11,7 +11,7 @@ import Foundation
 import Alamofire
 import Moya
 
-class BaseService<Target: TargetType> {
+class NetworkService<Target: TargetType> {
     typealias API = Target
     
     private lazy var provider = self.defaultProvider
@@ -37,8 +37,8 @@ class BaseService<Target: TargetType> {
     public init() {}
 }
 
-extension BaseService {
-    var `default`: BaseService {
+extension NetworkService {
+    var `default`: NetworkService {
         self.provider = self.defaultProvider
         return self
     }
@@ -50,8 +50,12 @@ extension BaseService {
                 case .success(let response):
                     do {
                         print("response: \(response)")
+                        print(String(data: response.data, encoding: .utf8))
                         let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+
                         let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
+                        print(body.message)
                         switch body.status {
                         case 200:
                             if let data = body.data {
@@ -106,6 +110,7 @@ extension BaseService {
                         let decoder = JSONDecoder()
                         let body = try decoder.decode(EntityContainer<Bool>.self,
                                                       from: response.data)
+                        print("✅ decoding: \(body)")
                         switch body.status {
                         case 200, 201:
                             continuation.resume(returning: body.status)
@@ -116,7 +121,14 @@ extension BaseService {
                         case 404:
                             continuation.resume(throwing: APIError.notFound)
                         case 409:
-                            continuation.resume(throwing: APIError.duplicatedUser)
+                            if body.message == "이미 존재하는 닉네임입니다." {
+                                continuation.resume(throwing: APIError.duplicatedNickname)
+                            } else if body.message == "이미 존재하는 참가자입니다." {
+                                print("이미 존재하는 참가자")
+                                continuation.resume(throwing: APIError.duplicatedJoinMeeting)
+                            } else {
+                                continuation.resume(throwing: APIError.duplicatedUser)
+                            }
                         default:
                             continuation.resume(throwing: APIError.network)
                         }
