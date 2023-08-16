@@ -138,7 +138,7 @@ extension MeetingDetailView {
             Text("📌")
 
             Text("\(name)")
-                .fontWithLineSpacing(fontType: .subTitle)
+                .fontWithLineSpacing(fontType: .subTitle1)
                 .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
                 .foregroundColor(.gray9)
@@ -252,7 +252,7 @@ extension MeetingDetailView {
 
                         Text(member.name)
                             .padding(.vertical, 2)
-                            .fontWithLineSpacing(fontType: .caption1)
+                            .fontWithLineSpacing(fontType: .caption2)
                             .frame(maxWidth: 64)
                     }
                     .padding(.all, 2)

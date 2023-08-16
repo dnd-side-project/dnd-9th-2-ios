@@ -15,7 +15,7 @@ struct SettingListHeader: View {
         
         HStack {
             Text(text)
-                .font(.Baggle.description)
+                .font(.Baggle.description2)
                 .foregroundColor(.gray6)
             
             Spacer()

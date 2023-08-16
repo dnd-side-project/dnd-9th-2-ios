@@ -89,7 +89,7 @@ struct BaggleTextEditor: View {
 
                 if case let .invalid(error) = viewStore.textFieldState {
                     Text(error)
-                        .font(.Baggle.caption2)
+                        .font(.Baggle.caption3)
                         .padding(.horizontal, 8)
                         .padding(.top, 8)
                         .foregroundColor(viewStore.textFieldState.fgColor)

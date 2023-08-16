@@ -106,7 +106,7 @@ extension SignUpView {
             
             Text("설정해주세요.")
         }
-        .font(.Baggle.subTitle)
+        .font(.Baggle.subTitle1)
         .padding(.vertical, 12)
     }
 

@@ -29,7 +29,7 @@ struct CreateDateView: View {
                     VStack(alignment: .leading) {
 
                         Text("날짜와 시간을 입력하세요.")
-                            .font(.Baggle.description)
+                            .font(.Baggle.description2)
                             .foregroundColor(.gray6)
                             .padding(.horizontal, 2)
                         
@@ -76,7 +76,7 @@ struct CreateDateView: View {
 
                         if let errorMessage = viewStore.errorMessage {
                             Text(errorMessage)
-                                .font(.Baggle.caption2)
+                                .font(.Baggle.caption3)
                                 .foregroundColor(.baggleRed)
                                 .padding(.horizontal, 2)
                         }

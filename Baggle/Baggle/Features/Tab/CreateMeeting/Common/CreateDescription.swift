@@ -20,7 +20,7 @@ struct CreateDescription: View {
 
             HStack {
                 Text(title)
-                    .font(.Baggle.subTitle)
+                    .font(.Baggle.subTitle1)
                     .foregroundColor(.gray11)
                 Spacer()
             }
