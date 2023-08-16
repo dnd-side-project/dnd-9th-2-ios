@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedMemberInfoModel: Encodable {
+struct FeedMemberInfoRequestModel: Encodable {
     let memberID: Int
     let authorizationTime: Date
     

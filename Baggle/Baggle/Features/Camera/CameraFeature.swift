@@ -72,7 +72,7 @@ struct CameraFeature: ReducerProtocol {
 
         enum Delegate: Equatable {
             case savePhoto(UIImage)
-            case didUploadPhoto(feed: Feed)
+            case uploadSuccess(feed: Feed)
         }
     }
 
@@ -185,7 +185,7 @@ struct CameraFeature: ReducerProtocol {
                 }
                 
                 let feedPhotoRequestModel = FeedPhotoRequestModel(
-                    memberInfo: FeedMemberInfoModel(
+                    memberInfo: FeedMemberInfoRequestModel(
                         memberID: 22,
                         authorizationTime: Date()
                     ),
@@ -204,7 +204,7 @@ struct CameraFeature: ReducerProtocol {
                 switch status {
                 case .success(let feed):
                     return .run { send in
-                        await send(.delegate(.didUploadPhoto(feed: feed)))
+                        await send(.delegate(.uploadSuccess(feed: feed)))
                         await self.dismiss()
                     }
                     
