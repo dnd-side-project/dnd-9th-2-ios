@@ -21,7 +21,7 @@ struct MeetingDetailView: View {
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            // zstack 순서: alert > navigationBar > scrollView
+            // zstack 순서: alert > navigationBar > scrollView > background
             ZStack(alignment: .top) {
                 Color.PrimaryLight // background
                 

@@ -43,7 +43,7 @@ extension View {
     /// baggleFont + lineSpacing 설정하는 함수
     func fontWithLineSpacing(fontType: FontType) -> some View {
         return self
-            .font(.Baggle.body2)
+            .font(.baggleFont(fontType: fontType))
             .lineSpacing(fontType.size * 0.3)
     }
 
