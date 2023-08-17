@@ -36,7 +36,7 @@ extension AlertCameraType {
         case .notFound: return "서버에서 유저 정보를 찾을 수 없어요."
         case .alreadyUpload: return "이미 인증을 완료했어요"
         case .networkError(let error): return "네트워크 에러 \(error)"
-        case .userError: return "유저 정보를 불러오는데 에러가 발생했어요. 앱 종료 후 다시 시작해주세요."
+        case .userError: return "유저 정보를 불러오는데 에러가 발생했어요. 재로그인 해주세요."
         }
     }
 
@@ -47,7 +47,7 @@ extension AlertCameraType {
         case .notFound: return "확인"
         case .alreadyUpload: return "돌아가기"
         case .networkError: return "네트워크 에러"
-        case .userError: return "앱 종료"
+        case .userError: return "재로그인"
         }
     }
 }

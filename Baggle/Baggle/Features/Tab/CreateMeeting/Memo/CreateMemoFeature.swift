@@ -53,6 +53,7 @@ struct CreateMemoFeature: ReducerProtocol {
             case moveToNext(MeetingSuccessModel)
             case moveToBack
             case moveToHome
+            case moveToLogin
         }
     }
     
@@ -82,7 +83,7 @@ struct CreateMemoFeature: ReducerProtocol {
                 
                 // Button
 
-            case .nextButtonTapped:
+            case .nextButtonTapped:                
                 if let meetingTime = state.meetingCreate.time, !meetingTime.canMeeting {
                     state.isAlertPresented = true
                     return .none
@@ -139,7 +140,7 @@ struct CreateMemoFeature: ReducerProtocol {
                 case .networkError:
                     return .none
                 case .userError:
-                    fatalError("유저 정보 불러오기 실패")
+                    return .run { send in await send(.delegate(.moveToLogin))}
                 case .requestModelError:
                     return .run { send in await send(.delegate(.moveToHome))}
                 }
@@ -158,6 +159,9 @@ struct CreateMemoFeature: ReducerProtocol {
                 return .none
                 
             case .delegate(.moveToHome):
+                return .none
+                
+            case .delegate(.moveToLogin):
                 return .none
             }
         }

@@ -81,6 +81,7 @@ struct CameraFeature: ReducerProtocol {
         enum Delegate: Equatable {
             case savePhoto(UIImage)
             case uploadSuccess(feed: Feed)
+            case moveToLogin
         }
     }
 
@@ -104,7 +105,7 @@ struct CameraFeature: ReducerProtocol {
 
             // MARK: View Life Cycle
 
-            case .onAppear:
+            case .onAppear:                
                 return .run { send in
                     let cameraStartStatus = await cameraService.start()
 
@@ -280,7 +281,7 @@ struct CameraFeature: ReducerProtocol {
                 case .notFound, .networkError:
                     return .none
                 case .userError:
-                    fatalError("유저 로직 에러")
+                    return .run { send in await send(.delegate(.moveToLogin)) }
                 }
                 
             case .presentBaggleAlert(let isPresented):

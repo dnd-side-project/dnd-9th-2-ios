@@ -29,9 +29,9 @@ struct MainTabView: View {
                     )
                 ) {
                     HomeView(
-                        store: Store(
-                            initialState: HomeFeature.State(),
-                            reducer: HomeFeature()
+                        store: self.store.scope(
+                            state: \.homeFeature,
+                            action: MainTabFeature.Action.homeAction
                         )
                     )
                     .tabItem {
@@ -53,7 +53,7 @@ struct MainTabView: View {
                     MyPageView(
                         store: self.store.scope(
                             state: \.myPageFeature,
-                            action: MainTabFeature.Action.logoutMainTab
+                            action: MainTabFeature.Action.myPageAction
                         )
                     )
                     .tabItem {
@@ -95,6 +95,7 @@ struct TabView_Previews: PreviewProvider {
         MainTabView(
             store: Store(
                 initialState: MainTabFeature.State(
+                    homeFeature: HomeFeature.State(),
                     myPageFeature: MyPageFeature.State()
                 ),
                 reducer: MainTabFeature()

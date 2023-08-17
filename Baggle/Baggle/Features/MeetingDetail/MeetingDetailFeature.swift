@@ -88,6 +88,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         enum Delegate: Equatable {
             case deleteSuccess
             case onDisappear
+            case moveToLogin
         }
     }
 
@@ -119,7 +120,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .run { send in
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
                     await send(.handleResult(result))
-                    await send(.handleResult(.userError))
                 }
 
             case .handleResult(let status):
@@ -268,7 +268,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .networkError:
                     return .none
                 case .userError:
-                    fatalError("유저 로직 에러")
+                    return .run { send in await send(.delegate(.moveToLogin))}
                 case .invitation:
                     return .none
                 case .delete:
@@ -283,6 +283,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                     state.meetingData = meetingData.updateFeed(feed)
                 }
                 return .none
+                
+            case .usingCamera(.presented(.delegate(.moveToLogin))):
+                return .run { send in await send(.delegate(.moveToLogin))}
                 
             case .usingCamera:
                 return .none
@@ -327,6 +330,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .delegate(.onDisappear):
+                return .none
+                
+            case .delegate(.moveToLogin):
                 return .none
 
             case .delegate:

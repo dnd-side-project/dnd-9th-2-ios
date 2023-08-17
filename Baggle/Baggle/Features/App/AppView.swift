@@ -26,7 +26,7 @@ struct AppView: View {
                         MainTabView(
                             store: self.store.scope(
                                 state: \.mainTabFeature,
-                                action: AppFeature.Action.logout
+                                action: AppFeature.Action.mainTab
                             )
                         )
                     } else {
@@ -68,6 +68,7 @@ struct ContentView_Previews: PreviewProvider {
                             isLoggedIn: true,
                             loginFeature: LoginFeature.State(),
                             mainTabFeature: MainTabFeature.State(
+                                homeFeature: HomeFeature.State(),
                                 myPageFeature: MyPageFeature.State()
                             )
                         ),
