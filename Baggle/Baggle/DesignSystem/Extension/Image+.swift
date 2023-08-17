@@ -83,5 +83,6 @@ extension Image {
     struct BaggleText {
         static let mainHome = Image("MainHome")
         static let profile = Image("Profile")
+        static let timeout = Image("TIMEOUT")
     }
 }
