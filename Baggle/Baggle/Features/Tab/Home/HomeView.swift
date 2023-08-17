@@ -26,7 +26,7 @@ struct HomeView: View {
 
                         if viewStore.homeStatus == .normal {
                             Section {
-                                VStack(spacing: 12) {
+                                LazyVStack(spacing: 12) {
                                     ForEach((viewStore.meetingStatus == .progress)
                                             ? viewStore.progressList : viewStore.completedList
                                     ) { meeting in
@@ -34,6 +34,18 @@ struct HomeView: View {
                                         MeetingListCell(data: meeting)
                                             .onTapGesture {
                                                 viewStore.send(.pushToMeetingDetail(meeting.id))
+                                            }
+                                            .onAppear {
+                                                let list = (viewStore.meetingStatus == .progress)
+                                                ? viewStore.progressList : viewStore.completedList
+                                                // TODO: - index 확인
+                                                guard let index = list.firstIndex(where: {
+                                                    $0.id == meeting.id
+                                                }) else { return }
+
+                                                if index % viewStore.size == viewStore.size-1 {
+                                                    viewStore.send(.scrollReachEnd)
+                                                }
                                             }
                                     }
                                 }
