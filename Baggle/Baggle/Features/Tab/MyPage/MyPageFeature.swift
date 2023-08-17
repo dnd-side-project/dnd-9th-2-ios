@@ -20,6 +20,8 @@ struct MyPageFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
+        case onAppear
+        
         case logoutMyPage
 
         case notificationSettingButtonTapped
@@ -43,6 +45,9 @@ struct MyPageFeature: ReducerProtocol {
 
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                state.user = UserDefaultList.user ?? User.error()
+                return .none
 
             case .logoutMyPage:
                 return .none
