@@ -9,6 +9,10 @@ import Foundation
 
 enum FeedPhotoStatus: Equatable {
     case success(Feed)
-    case error
+    
+    case invalidAuthorizationTime
+    case notFound
+    case alreadyUpload
+    case networkError(String)
     case userError
 }

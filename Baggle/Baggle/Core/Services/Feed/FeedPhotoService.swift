@@ -36,10 +36,21 @@ extension FeedPhotoService: DependencyKey {
             
             return .success(feed)
         } catch {
-            if let error = error as? KeyChainError {
+            if let apiError = error as? APIError {
+                switch apiError {
+                case .badRequest:
+                    return .invalidAuthorizationTime
+                case .notFound:
+                    return .notFound
+                case .duplicatedUser:
+                    return .alreadyUpload
+                default:
+                    return .networkError(apiError.localizedDescription)
+                }
+            } else if let keyChainError = error as? KeyChainError {
                 return .userError
             }
-            return .error
+            return .networkError(error.localizedDescription)
         }
     }
 }
