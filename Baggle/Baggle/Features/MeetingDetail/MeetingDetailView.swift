@@ -23,55 +23,50 @@ struct MeetingDetailView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             // zstack 순서: alert > navigationBar > scrollView > background
             ZStack(alignment: .top) {
-                Color.PrimaryLight // background
                 
                 if viewStore.isLoading {
                     LoadingView()
                 }
                 
-                GeometryReader { geo in
-                    ScrollView {
-                        VStack(spacing: 0) {
-                            if let data = viewStore.meetingData {
-                                // header
-                                headerView(data: data)
-                                
-                                // 참여자 목록
-                                memberListView(viewStore: viewStore)
-                                    .padding(.horizontal, 20)
-                                    .drawUnderline(
-                                        spacing: 0,
-                                        height: 0.5,
-                                        color: .gray4
-                                    )
-                                    .background(.white)
-                                
-                                // 인증 피드
-                                if !data.feeds.isEmpty {
-                                    feedView(
-                                        feeds: data.feeds,
-                                        viewStroe: viewStore
-                                    )
-                                    .padding(
-                                        EdgeInsets(top: 14,
-                                                   leading: 20,
-                                                   bottom: 20,
-                                                   trailing: 20)
-                                    )
-                                    .background(.white)
-                                } else {
-                                    // 엠티뷰
-                                    emptyView()
-                                        .background(.white)
-                                }
-                            }
+                ScrollView {
+                    VStack(spacing: 0) {
+                        if let data = viewStore.meetingData {
+                            // header
+                            headerView(data: data)
                             
-                            Spacer()
+                            // 참여자 목록
+                            memberListView(viewStore: viewStore)
+                                .padding(.horizontal, 20)
+                                .drawUnderline(
+                                    spacing: 0,
+                                    height: 0.5,
+                                    color: .gray4
+                                )
+                                .background(.white)
+                            
+                            // 인증 피드
+                            if !data.feeds.isEmpty {
+                                feedView(
+                                    feeds: data.feeds,
+                                    viewStroe: viewStore
+                                )
+                                .padding(
+                                    EdgeInsets(top: 14,
+                                               leading: 20,
+                                               bottom: 20,
+                                               trailing: 20)
+                                )
+                                .background(.white)
+                            } else {
+                                // 엠티뷰
+                                emptyView()
+                                    .background(.white)
+                            }
                         }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .background(.white)
                     }
-                    .refreshable { viewStore.send(.onAppear) }
+                }
+                .refreshable {
+                    viewStore.send(.onAppear)
                 }
                 
                 VStack {
@@ -231,26 +226,40 @@ extension MeetingDetailView {
     }
     
     func headerView(data: MeetingDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // 모임방 이름, 스탬프
-            meetingTitleView(
-                name: data.name,
-                status: data.status
-            )
+        GeometryReader { geo in
+            let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
             
-            // 장소, 시간
-            meetingDateView(
-                place: data.place,
-                date: data.date,
-                time: data.time
-            )
-            
-            // 메모
-            meetingMemoView(memo: data.memo)
-                .padding(.top, 10)
+            ZStack(alignment: .bottomLeading) {
+                Color.PrimaryLight
+                    .frame(width: geo.size.width, height: geo.size.height - yOffset)
+                    .offset(y: yOffset)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    // 모임방 이름, 스탬프
+                    meetingTitleView(
+                        name: data.name,
+                        status: data.status
+                    )
+                    
+                    // 장소, 시간
+                    meetingDateView(
+                        place: data.place,
+                        date: data.date,
+                        time: data.time
+                    )
+                    
+                    // 메모
+                    meetingMemoView(memo: data.memo)
+                        .padding(.top, 10)
+                }
+                .padding(EdgeInsets(top: 8, leading: 20, bottom: 24, trailing: 20))
+                .offset(y: yOffset)
+            }
         }
-        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
-        .background(Color.PrimaryLight)
+        .frame(
+            height: (data.memo?.width(15) ?? 0) >= screenSize.width - 40 ? 240 : 188
+        )
+        .padding(.top, 56)
     }
     
     func memberListView(viewStore: MeetingDetailViewStore) -> some View {
