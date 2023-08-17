@@ -48,108 +48,80 @@ extension NetworkService {
     }
     
     func request<T: Decodable>(_ target: API) async throws -> T {
-        return try await withCheckedThrowingContinuation({ continuation in
-            print("\(target.baseURL) - \(target.path)")
-            provider.request(target) { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        print("=============")
-                        dump(response)
-                        print(String(data: response.data, encoding: .utf8))
-                        print("=============")
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
-
-                        let body = try decoder.decode(EntityContainer<T>.self, from: response.data)
-                        print(body.message)
-                        switch body.status {
-                        case 200:
-                            if let data = body.data {
-                                print("✅ 200 data -", data)
-                                continuation.resume(returning: data)
-                            } else {
-                                continuation.resume(throwing: APIError.decoding)
-                            }
-                        case 201:
-                            if let data = body.data {
-                                print("✅ 201 data -", data)
-                                continuation.resume(returning: data)
-                            } else {
-                                continuation.resume(throwing: APIError.decoding)
-                            }
-                        case 400:
-                            continuation.resume(throwing: APIError.badRequest)
-                        case 401:
-                            continuation.resume(throwing: APIError.unauthorized)
-                        case 404:
-                            continuation.resume(throwing: APIError.notFound)
-                        case 409:
-                            if body.message == "이미 존재하는 닉네임입니다." {
-                                continuation.resume(throwing: APIError.duplicatedNickname)
-                            } else if body.message == "이미 존재하는 참가자입니다." {
-                                continuation.resume(throwing: APIError.duplicatedJoinMeeting)
-                            } else {
-                                continuation.resume(throwing: APIError.duplicatedUser)
-                            }
-                        default:
-                            continuation.resume(throwing: APIError.network)
-                        }
-                    } catch let error {
-                        print("❌ error - \(error)")
-                        continuation.resume(throwing: APIError.decoding)
-                    }
-                case .failure(let error):
-                    print("❌ error - \(error)")
-                    dump(error)
-                    print("=========")
-                    continuation.resume(throwing: APIError.badRequest)
-                }
+        let data = try await provider.request(target)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+        guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
+            throw APIError.decoding
+        }
+        
+        let statusCode = body.status
+        let message = body.message
+        
+        switch statusCode {
+        case 200, 201:
+            guard let data = body.data else {
+                throw APIError.unwrapping
             }
-        })
+            return data
+        case 400..<500:
+            throw handleError400(statusCode: statusCode, message: message)
+        case 500:
+            throw APIError.server
+        default:
+            throw APIError.network
+        }
     }
     
     func requestWithNoResult(_ target: API) async throws {
-        return try await withCheckedThrowingContinuation({ continuation in
-            provider.request(target) { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        print("response: \(response)")
-                        let decoder = JSONDecoder()
-                        let body = try decoder.decode(EntityContainer<JSONNull>.self,
-                                                      from: response.data)
-                        print("✅ decoding: \(body)")
-                        switch body.status {
-                        case 200, 201:
-                            continuation.resume(returning: Void())
-                        case 400:
-                            continuation.resume(throwing: APIError.badRequest)
-                        case 401:
-                            continuation.resume(throwing: APIError.unauthorized)
-                        case 404:
-                            continuation.resume(throwing: APIError.notFound)
-                        case 409:
-                            if body.message == "이미 존재하는 닉네임입니다." {
-                                continuation.resume(throwing: APIError.duplicatedNickname)
-                            } else if body.message == "이미 존재하는 참가자입니다." {
-                                print("이미 존재하는 참가자")
-                                continuation.resume(throwing: APIError.duplicatedJoinMeeting)
-                            } else {
-                                continuation.resume(throwing: APIError.duplicatedUser)
-                            }
-                        default:
-                            continuation.resume(throwing: APIError.network)
-                        }
-                    } catch let error {
-                        print("❌ error - \(error)")
-                        continuation.resume(throwing: APIError.decoding)
-                    }
-                case .failure(let error):
-                    print("❌ error - \(error)")
-                    continuation.resume(throwing: APIError.badRequest)
-                }
+        let data = try await provider.request(target)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+        guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
+            throw APIError.decoding
+        }
+        
+        let statusCode = body.status
+        let message = body.message
+
+        switch statusCode {
+        case 200, 201:
+            return
+        case 400..<500:
+            throw handleError400(statusCode: statusCode, message: message)
+        case 500:
+            throw APIError.server
+        default:
+            throw APIError.network
+        }
+    }
+
+    private func handleError400(statusCode: Int, message: String) -> APIError {
+        switch statusCode {
+        case 400:
+            return APIError.badRequest
+        case 401:
+            return APIError.unauthorized
+        case 403:
+            if message == "모임은 하루에 2개까지만 생성 가능합니다." {
+                return APIError.duplicatedMeeting
+            } else {
+                return APIError.forbidden
             }
-        })
+        case 404:
+            return APIError.notFound
+        case 409:
+            if message == "이미 존재하는 닉네임입니다." {
+                return APIError.duplicatedNickname
+            } else if message == "이미 존재하는 참가자입니다." {
+                return APIError.duplicatedJoinMeeting
+            } else {
+                return APIError.duplicatedUser
+            }
+        default:
+            return APIError.network
+        }
     }
 }
