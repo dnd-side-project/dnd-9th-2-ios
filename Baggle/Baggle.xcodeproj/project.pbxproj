@@ -78,6 +78,7 @@
 		14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE52A7E33B600EF58D5 /* CameraService.swift */; };
 		14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE72A7E340E00EF58D5 /* CIImage+.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
+		147DFC812A8D191D00D176D1 /* JSONNULL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DFC802A8D191D00D176D1 /* JSONNULL.swift */; };
 		147DFC7E2A8D124400D176D1 /* MeetingCreateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DFC7D2A8D124400D176D1 /* MeetingCreateEntity.swift */; };
 		147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81372A8A3790008B9B06 /* MeetingDetailService.swift */; };
 		147E813A2A8A3924008B9B06 /* MeetingDetailStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */; };
@@ -279,6 +280,7 @@
 		14783EE72A7E340E00EF58D5 /* CIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+.swift"; sourceTree = "<group>"; };
 		147899992A7A0BC20071DAE3 /* DateInputStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputStatus.swift; sourceTree = "<group>"; };
 		147DFC7D2A8D124400D176D1 /* MeetingCreateEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCreateEntity.swift; sourceTree = "<group>"; };
+		147DFC802A8D191D00D176D1 /* JSONNULL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNULL.swift; sourceTree = "<group>"; };
 		147E81372A8A3790008B9B06 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailStatus.swift; sourceTree = "<group>"; };
 		1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeature.swift; sourceTree = "<group>"; };
@@ -871,6 +873,14 @@
 			path = SelectView;
 			sourceTree = "<group>";
 		};
+		147DFC7F2A8D191400D176D1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				147DFC802A8D191D00D176D1 /* JSONNULL.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		1493A90D2A7DE49000A2D7CC /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -979,6 +989,7 @@
 			isa = PBXGroup;
 			children = (
 				14E083692A83690D0001CB21 /* EntityContainer.swift */,
+				147DFC7F2A8D191400D176D1 /* Common */,
 				2B2AFF812A8BD3820028C96F /* Emergency */,
 				14C8F9CA2A8B28F6001690C5 /* Feed */,
 				2B65B8142A88A7BE00E3BF11 /* JoinMeeting */,
@@ -1548,6 +1559,7 @@
 				2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */,
 				142C33682A8CEC90006D7D8B /* MeetingCreateRequestModel.swift in Sources */,
 				142C336C2A8CEEE9006D7D8B /* MeetingCreateStatus.swift in Sources */,
+				147DFC812A8D191D00D176D1 /* JSONNULL.swift in Sources */,
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
 				143FC1102A8A1ADE0085E22B /* CameraStatus.swift in Sources */,
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,

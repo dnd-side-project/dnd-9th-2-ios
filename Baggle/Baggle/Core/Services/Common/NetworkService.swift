@@ -117,7 +117,7 @@ extension NetworkService {
                     do {
                         print("response: \(response)")
                         let decoder = JSONDecoder()
-                        let body = try decoder.decode(EntityContainer<Bool>.self,
+                        let body = try decoder.decode(EntityContainer<JSONNull>.self,
                                                       from: response.data)
                         print("✅ decoding: \(body)")
                         switch body.status {
