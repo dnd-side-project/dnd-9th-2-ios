@@ -9,7 +9,9 @@ import Foundation
 
 enum APIError: Error, Equatable {
     case badRequest // 400
+    case duplicatedMeeting
     case unauthorized // 401, 토큰 에러
+    case forbidden // 403 리소스 접근 제한
     case notFound // 404, 리소스 또는 유저 정보 없음
     case duplicatedUser // 409, 이미 존재하는 회원
     case duplicatedNickname // 409, 닉네임 중복
@@ -19,13 +21,17 @@ enum APIError: Error, Equatable {
     case network // 네트워크 에러
     case decoding // 디코딩 에러
     case jsonEncodingError // Encoding 에러
+    case unwrapping // 데이터가 있어야 할 곳에 nil이 옴
+    case providerRequest // Moya Provider Request시 에러
 }
 
 extension APIError {
     var description: String {
         switch self {
         case .badRequest: return "400 에러"
+        case .duplicatedMeeting: return "모임 2시간 전후 생성 불가"
         case .unauthorized: return "401 에러"
+        case .forbidden: return "403 에러"
         case .notFound: return "404 에러"
         case .duplicatedUser: return "409 에러"
         case .duplicatedNickname: return "409 에러"
@@ -35,6 +41,8 @@ extension APIError {
         case .network: return "네트워크 에러"
         case .decoding: return "디코딩 에러"
         case .jsonEncodingError: return "인코딩 에러"
+        case .unwrapping: return "데이터 빈 값"
+        case .providerRequest: return "네트워크 요청 생성 에러"
         }
     }
 }
