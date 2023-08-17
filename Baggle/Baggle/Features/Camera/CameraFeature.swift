@@ -189,6 +189,7 @@ struct CameraFeature: ReducerProtocol {
                 
                 guard let resultImage = state.resultImage else {
                     // 이미지 없음
+                    state.alertType = .noResultImage
                     return .none
                 }
                 
@@ -197,7 +198,7 @@ struct CameraFeature: ReducerProtocol {
                     time: Date(),
                     feedImage: resultImage
                 ) else {
-                    // 압축 실패
+                    state.alertType = .compressionError
                     return .none
                 }
                 
@@ -278,10 +279,14 @@ struct CameraFeature: ReducerProtocol {
                 switch alertType {
                 case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload:
                     return .run { _ in await self.dismiss() }
-                case .notFound, .networkError:
-                    return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin)) }
+                case .noResultImage:
+                    state.resultImage = nil
+                    state.isCompleted = false
+                    return .none
+                case .notFound, .networkError, .compressionError:
+                    return .none
                 }
                 
             case .presentBaggleAlert(let isPresented):
