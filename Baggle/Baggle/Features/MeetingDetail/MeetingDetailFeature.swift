@@ -28,11 +28,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         var buttonState: MeetingDetailButtonType = .none
 
         // Alert
-        var isErrorAlertPresented: Bool = false
-        var errorDescription: String = ""
-        var isDeleteAlertPresented: Bool = false
-        var isLeaveAlertPresented: Bool = false
-        var isInvitationAlertPresented: Bool = false
+        var alertType: AlertMeetingDetailType?
         
         // Feed
         var isImageTapped: Bool = false
@@ -73,13 +69,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         case imageTapped(String?)
 
         // Alert
-        case presentErrorAlert(String)
-        case presentDeleteAlert
-        case presentLeaveAlert
+        case presentAlert(Bool)
         case presentInvitationAlert
-        
-        // Alert - Tapped
-        case errorAlertButtonTapped
+        case alertButtonTapped
         
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
@@ -119,35 +111,32 @@ struct MeetingDetailFeature: ReducerProtocol {
                 let meetingID = state.meetingId
                 
                 if meetingID == Const.ErrorID.meeting {
-                    return .run { send in
-                        await send(.presentErrorAlert("홈에서 모임 정보를 전달하는데 에러가 발생했어요"))
-                    }
+                    state.alertType = .meetingIDError
+                    return .none
                 }
                 state.isLoading = true
                 
                 return .run { send in
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
                     await send(.handleResult(result))
+                    await send(.handleResult(.userError))
                 }
 
-            case .handleResult(let meetingDetailStatus):
+            case .handleResult(let status):
                 state.isLoading = false
                 
-                return .run { send in
-                    switch meetingDetailStatus {
-                    case let .success(meetingDetail):
-                        await send(.updateData(meetingDetail))
-                    case let .fail(apiError):
-                        await send(
-                            .presentErrorAlert(
-                                """
-                                네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요. [\(apiError.errorDescription)]
-                                """
-                            )
-                        )
-                    case .userError:
-                        await send(.presentErrorAlert("로컬에 저장된 유저 정보를 가져오는데 에러가 발생했어요."))
-                    }
+                switch status {
+                case let .success(meetingDetail):
+                    return .run { send in await send(.updateData(meetingDetail)) }
+                case .notFound:
+                    state.alertType = .meetingNotFound
+                    return .none
+                case .userError:
+                    state.alertType = .userError
+                    return .none
+                case .networkError(let description):
+                    state.alertType = .networkError(description)
+                    return .none
                 }
                 
             case .updateData(let data):
@@ -178,13 +167,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Tap
 
             case .deleteButtonTapped:
-                return .run { send in await send(.presentDeleteAlert) }
+                return .none
 
             case .leaveButtonTapped:
                 state.selectOwner = SelectOwnerFeature.State(
                     memberList: state.meetingData?.members ?? []
                 )
-                return .run { send in await send(.presentLeaveAlert) }
+                return .none
 
             case .backButtonTapped:
                 state.dismiss = true
@@ -211,7 +200,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     if ShareApi.isKakaoTalkSharingAvailable() {
                         if let url = await sendInvitation(
                             name: meetingData.name,
-                            id: 12) { // TODO: - meetingData.id로 수정 (임시 id)
+                            id: 12
+                        ) { // TODO: - meetingData.id로 수정 (임시 id)
                             openURL(url)
                         } else {
                             await send(.presentInvitationAlert)
@@ -248,28 +238,44 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let nextOwnerId = state.selectOwner?.selectedMemberId {
                     state.nextOwnerId = nextOwnerId
                 }
-                return .run { send in await send(.presentLeaveAlert) }
+                return .none
 
             case .selectOwner:
                 return .none
 
-            case .presentErrorAlert(let description):
-                state.errorDescription = description
-                state.isErrorAlertPresented.toggle()
-                return .none
-
-            case .presentDeleteAlert:
-                return .none
-
-            case .presentLeaveAlert:
-                return .none
-
-            case .presentInvitationAlert:
-                state.isInvitationAlertPresented.toggle()
+                
+                // Alert
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
                 return .none
                 
-            case .errorAlertButtonTapped:
-                return .run { send in await send(.delegate(.onDisappear)) }
+            case .presentInvitationAlert:
+                state.alertType = .invitation
+                return .none
+
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .meetingNotFound, .meetingIDError:
+                    return .run { send in await send(.delegate(.onDisappear))}
+                case .networkError:
+                    return .none
+                case .userError:
+                    fatalError("유저 로직 에러")
+                case .invitation:
+                    return .none
+                case .delete:
+                    // 삭제 요청
+                    return .none
+                }
+                return .none
 
                 // Child - Camera
 
@@ -318,7 +324,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Delegate
 
             case .delegate(.deleteSuccess):
-                state.isDeleteAlertPresented = false
                 state.dismiss = true
                 return .none
 

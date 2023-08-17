@@ -126,8 +126,11 @@ struct CreateMemoFeature: ReducerProtocol {
                 return .none
                 
             case .alertButtonTapped:
-                let alertType = state.alertType
+                guard let alertType = state.alertType else {
+                    return .none
+                }
                 state.alertType = nil
+                
                 switch alertType {
                 case .forbiddenMeetingTime:
                     return .run { send in await send(.delegate(.moveToBack))}
@@ -139,8 +142,6 @@ struct CreateMemoFeature: ReducerProtocol {
                     fatalError("유저 정보 불러오기 실패")
                 case .requestModelError:
                     return .run { send in await send(.delegate(.moveToHome))}
-                case .none: // nil일 경우
-                    return .none
                 }
                 
                 // TextField
