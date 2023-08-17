@@ -90,15 +90,33 @@ struct MeetingDetailView: View {
                 
                 // Error - alert
                 
-                if viewStore.isErrorAlertPresented {
-                    errorAlert(
-                        isPresented: Binding(
-                            get: { viewStore.isErrorAlertPresented },
-                            set: { _ in viewStore.send(.presentErrorAlert("")) }
-                        ),
-                        description: viewStore.errorDescription
-                    ) {
-                        viewStore.send(.errorAlertButtonTapped)
+                if let alertType = viewStore.alertType {
+                    if alertType.buttonType == .one {
+                        BaggleAlertOneButton(
+                            isPresented: Binding(
+                                get: { viewStore.alertType != nil },
+                                set: { viewStore.send(.presentAlert($0)) }
+                            ),
+                            title: alertType.title,
+                            description: alertType.description,
+                            buttonTitle: alertType.buttonTitle
+                        ) {
+                            viewStore.send(.alertButtonTapped)
+                        }
+                    } else if alertType.buttonType == .two {
+                        BaggleAlertTwoButton(
+                            isPresented: Binding(
+                                get: { viewStore.alertType != nil },
+                                set: { viewStore.send(.presentAlert($0)) }
+                            ),
+                            title: alertType.title,
+                            description: alertType.description,
+                            alertType: .destructive,
+                            rightButtonTitle: alertType.buttonTitle,
+                            leftButtonAction: nil
+                        ) {
+                            viewStore.send(.alertButtonTapped)
+                        }
                     }
                 }
                 

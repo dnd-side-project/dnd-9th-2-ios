@@ -30,6 +30,7 @@ struct BaggleApp: App {
                         loginFeature: LoginFeature.State(),
                         mainTabFeature: MainTabFeature.State(
                             selectedTab: .home,
+                            homeFeature: HomeFeature.State(),
                             myPageFeature: MyPageFeature.State()
                         )
                     ),

@@ -15,10 +15,10 @@ struct MainTabFeature: ReducerProtocol {
         var selectedTab: TapType = .home
         var previousTab: TapType = .home
 
-        var myPageFeature: MyPageFeature.State
-
         // MARK: - Child State
-
+        var homeFeature: HomeFeature.State
+        var myPageFeature: MyPageFeature.State
+        
         @PresentationState var createMeeting: CreateTitleFeature.State?
         @PresentationState var joinMeeting: JoinMeetingFeature.State?
     }
@@ -30,13 +30,21 @@ struct MainTabFeature: ReducerProtocol {
         case selectTab(TapType)
 
         // MARK: - Child Action
-
+        case homeAction(HomeFeature.Action)
+        case myPageAction(MyPageFeature.Action)
+        
         case createMeeting(PresentationAction<CreateTitleFeature.Action>)
-        case logoutMainTab(MyPageFeature.Action)
         case enterJoinMeeting(Int)
         case changeJoinMeetingStatus(Int, JoinMeetingStatus)
         case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
         case moveToJoinMeeting(Int, JoinMeetingStatus)
+        
+        // MARK: - Delegate
+        case delegate(Delegate)
+        
+        enum Delegate: Equatable {
+            case moveToLogin
+        }
     }
     
     @Dependency(\.joinMeetingService) var joinMeetingService
@@ -44,8 +52,11 @@ struct MainTabFeature: ReducerProtocol {
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Scope
+        Scope(state: \.homeFeature, action: /Action.homeAction) {
+            HomeFeature()
+        }
 
-        Scope(state: \.myPageFeature, action: /Action.logoutMainTab) {
+        Scope(state: \.myPageFeature, action: /Action.myPageAction) {
             MyPageFeature()
         }
 
@@ -67,20 +78,33 @@ struct MainTabFeature: ReducerProtocol {
 
                 // MARK: - Child Action
 
+                // 홈
+            case .homeAction(.delegate(.moveToLogin)):
+                return .run { send in await send(.delegate(.moveToLogin))}
+                
+            case .homeAction:
+                return .none
+                
+                
+                // 모임 생성
             case .createMeeting(PresentationAction.dismiss):
                 let previousTab = state.previousTab
                 return .run { send in
                     await send(.selectTab(previousTab))
                 }
+                
+            case .createMeeting(PresentationAction.presented(.delegate(.moveToLogin))):
+                return .run { send in await send(.delegate(.moveToLogin))}
 
             case .createMeeting:
                 return .none
 
-            case .logoutMainTab(.delegate(.moveToLogin)):
-                state.selectedTab = .home // 로그아웃 후 재 진입시 기본 화면 홈 화면으로 설정
-                return .none
+                // 마이페이지
+                
+            case .myPageAction(.delegate(.moveToLogin)):
+                return .run { send in await send(.delegate(.moveToLogin))}
 
-            case .logoutMainTab:
+            case .myPageAction:
                 return.none
                 
             case .enterJoinMeeting(let id):
@@ -115,6 +139,15 @@ struct MainTabFeature: ReducerProtocol {
             case .moveToJoinMeeting(let id, let status):
                 state.joinMeeting = JoinMeetingFeature.State(meetingId: id,
                                                              joinMeeingStatus: status)
+                return .none
+                
+                // MARK: - Delegate
+                
+            case .delegate(.moveToLogin):
+                state.selectedTab = .home // 로그아웃 후 재 진입시 기본 화면 홈 화면으로 설정
+                return .none
+                
+            case .delegate:
                 return .none
             }
         }
