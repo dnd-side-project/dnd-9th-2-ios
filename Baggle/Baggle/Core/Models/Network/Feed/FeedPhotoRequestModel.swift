@@ -15,7 +15,7 @@ struct FeedPhotoRequestModel: Encodable {
 extension FeedPhotoRequestModel {
     init?(memberID: Int, time: Date, feedImage: UIImage) {
         guard let compressedImage = feedImage
-            .compress(width: 1080)
+            .compress(imageSize: .large)
             .jpegData(compressionQuality: Const.Image.jpegCompression)
         else {
             return nil

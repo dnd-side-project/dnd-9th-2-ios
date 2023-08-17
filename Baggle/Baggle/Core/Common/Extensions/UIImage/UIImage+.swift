@@ -64,8 +64,10 @@ extension UIImage {
     
     func compress(width: CGFloat) -> UIImage {
         let resizedImage = scaleTo(newWidth: width)
-        resizedImage.jpegData(compressionQuality: 0.9)
-
         return resizedImage
+    }
+    
+    func compress(imageSize: ImageSizeType) -> UIImage {
+        return compress(width: imageSize.size)
     }
 }
