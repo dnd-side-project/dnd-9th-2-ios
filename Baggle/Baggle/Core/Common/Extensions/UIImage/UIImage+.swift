@@ -47,3 +47,27 @@ extension UIImage {
         return flippedImage
     }
 }
+
+
+// MARK: - 이미지 다운 스케일링 & 압축
+extension UIImage {
+    func scaleTo(newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+
+        return renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+    
+    func compress(width: CGFloat) -> UIImage {
+        let resizedImage = scaleTo(newWidth: width)
+        return resizedImage
+    }
+    
+    func compress(imageSize: ImageSizeType) -> UIImage {
+        return compress(width: imageSize.size)
+    }
+}

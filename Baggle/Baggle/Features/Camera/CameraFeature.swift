@@ -187,19 +187,20 @@ struct CameraFeature: ReducerProtocol {
             case .uploadButtonTapped:
                 state.isUploading = true
                 
-                guard let resultImage = state.resultImage,
-                      let imageData = resultImage.jpegData(compressionQuality: 0.9)
-                else {
+                guard let resultImage = state.resultImage else {
+                    // 이미지 없음
+                    state.alertType = .noResultImage
                     return .none
                 }
                 
-                let feedPhotoRequestModel = FeedPhotoRequestModel(
-                    memberInfo: FeedMemberInfoRequestModel(
-                        memberID: 22,
-                        authorizationTime: Date()
-                    ),
-                    feedImage: imageData
-                )
+                guard let feedPhotoRequestModel = FeedPhotoRequestModel(
+                    memberID: 22,
+                    time: Date(),
+                    feedImage: resultImage
+                ) else {
+                    state.alertType = .compressionError
+                    return .none
+                }
                 
                 return .run { send in
                     let feedPhotoStatus = await feedPhotoService.upload(feedPhotoRequestModel)
@@ -278,10 +279,14 @@ struct CameraFeature: ReducerProtocol {
                 switch alertType {
                 case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload:
                     return .run { _ in await self.dismiss() }
-                case .notFound, .networkError:
-                    return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin)) }
+                case .noResultImage:
+                    state.resultImage = nil
+                    state.isCompleted = false
+                    return .none
+                case .notFound, .networkError, .compressionError:
+                    return .none
                 }
                 
             case .presentBaggleAlert(let isPresented):
