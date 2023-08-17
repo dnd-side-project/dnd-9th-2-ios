@@ -19,8 +19,8 @@ struct ProfileImageModel: Transferable {
             guard let uiImage = UIImage(data: data) else {
                 throw TransferError.importFailed
             }
-
-            return ProfileImageModel(image: uiImage)
+            let compressedImage = uiImage.compress(width: Const.Image.feedWidth)
+            return ProfileImageModel(image: compressedImage)
         }
     }
 }

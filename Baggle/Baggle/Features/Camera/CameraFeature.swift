@@ -178,19 +178,19 @@ struct CameraFeature: ReducerProtocol {
             case .uploadButtonTapped:
                 state.isUploading = true
                 
-                guard let resultImage = state.resultImage,
-                      let imageData = resultImage.jpegData(compressionQuality: 0.9)
-                else {
+                guard let resultImage = state.resultImage else {
+                    // 이미지 없음
                     return .none
                 }
                 
-                let feedPhotoRequestModel = FeedPhotoRequestModel(
-                    memberInfo: FeedMemberInfoRequestModel(
-                        memberID: 22,
-                        authorizationTime: Date()
-                    ),
-                    feedImage: imageData
-                )
+                guard let feedPhotoRequestModel = FeedPhotoRequestModel(
+                    memberID: 22,
+                    time: Date(),
+                    feedImage: resultImage
+                ) else {
+                    // 압축 실패
+                    return .none
+                }
                 
                 return .run { send in
                     let feedPhotoStatus = await feedPhotoService.upload(feedPhotoRequestModel)

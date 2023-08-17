@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14038B572A8DF6F200A7C964 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14038B562A8DF6F200A7C964 /* Image.swift */; };
 		1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406858A2A7B676D00824A93 /* CreateDescription.swift */; };
 		140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C54372A74F42900CF1CB4 /* NicknameValidator.swift */; };
 		140E88112A64B626005119F8 /* BaggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E88102A64B626005119F8 /* BaggleApp.swift */; };
@@ -78,8 +79,8 @@
 		14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE52A7E33B600EF58D5 /* CameraService.swift */; };
 		14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EE72A7E340E00EF58D5 /* CIImage+.swift */; };
 		1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147899992A7A0BC20071DAE3 /* DateInputStatus.swift */; };
-		147DFC812A8D191D00D176D1 /* JSONNULL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DFC802A8D191D00D176D1 /* JSONNULL.swift */; };
 		147DFC7E2A8D124400D176D1 /* MeetingCreateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DFC7D2A8D124400D176D1 /* MeetingCreateEntity.swift */; };
+		147DFC812A8D191D00D176D1 /* JSONNULL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DFC802A8D191D00D176D1 /* JSONNULL.swift */; };
 		147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81372A8A3790008B9B06 /* MeetingDetailService.swift */; };
 		147E813A2A8A3924008B9B06 /* MeetingDetailStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81392A8A3924008B9B06 /* MeetingDetailStatus.swift */; };
 		1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */; };
@@ -210,6 +211,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14038B562A8DF6F200A7C964 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		1406858A2A7B676D00824A93 /* CreateDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDescription.swift; sourceTree = "<group>"; };
 		140C54372A74F42900CF1CB4 /* NicknameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameValidator.swift; sourceTree = "<group>"; };
 		140C543D2A74F54B00CF1CB4 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -1344,6 +1346,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB7FBC42A89289E0003B75C /* URL.swift */,
+				14038B562A8DF6F200A7C964 /* Image.swift */,
 				1471ECFA2A8A465C00D9FC93 /* ErrorID.swift */,
 				2BB7FBC62A892A520003B75C /* Const.swift */,
 			);
@@ -1615,6 +1618,7 @@
 				140E88132A64B626005119F8 /* AppView.swift in Sources */,
 				2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */,
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
+				14038B572A8DF6F200A7C964 /* Image.swift in Sources */,
 				2B2AFF882A8BE05D0028C96F /* EmergencyService.swift in Sources */,
 				2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */,
 				14783EE42A7E330D00EF58D5 /* CameraView.swift in Sources */,

@@ -178,8 +178,11 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { send in await send(.disableButtonChanged) }
 
             case let .successImageChange(image):
-                state.imageState = .success(Image(uiImage: image).resizable())
-                state.selectedImage = image.jpegData(compressionQuality: 0.5)
+                let compressedImage = image.compress(width: Const.Image.profileWidth)
+                state.imageState = .success(Image(uiImage: compressedImage))
+                state.selectedImage = compressedImage.jpegData(
+                    compressionQuality: Const.Image.jpegCompression
+                )
                 return .run { send in await send(.disableButtonChanged) }
 
             case .failImageChange:
