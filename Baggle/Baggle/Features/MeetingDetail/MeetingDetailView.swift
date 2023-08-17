@@ -23,40 +23,56 @@ struct MeetingDetailView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             // zstack 순서: alert > navigationBar > scrollView
             ZStack(alignment: .top) {
+                Color.PrimaryLight // background
                 
                 if viewStore.isLoading {
                     LoadingView()
                 }
                 
-                ScrollView {
-                    
-                    if let data = viewStore.meetingData {
-                        // header
-                        headerView(data: data)
-                        
-                        // 참여자 목록
-                        memberListView(viewStore: viewStore)
-                            .padding(.horizontal, 20)
-                            .drawUnderline(
-                                spacing: 0,
-                                height: 0.5,
-                                color: .gray4
-                            )
-                        
-                        // 인증 피드
-                        if !data.feeds.isEmpty {
-                            feedView(
-                                feeds: data.feeds,
-                                viewStroe: viewStore
-                            )
-                            .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
-                        } else {
-                            // 엠티뷰
-                            emptyView()
+                GeometryReader { geo in
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            if let data = viewStore.meetingData {
+                                // header
+                                headerView(data: data)
+                                
+                                // 참여자 목록
+                                memberListView(viewStore: viewStore)
+                                    .padding(.horizontal, 20)
+                                    .drawUnderline(
+                                        spacing: 0,
+                                        height: 0.5,
+                                        color: .gray4
+                                    )
+                                    .background(.white)
+                                
+                                // 인증 피드
+                                if !data.feeds.isEmpty {
+                                    feedView(
+                                        feeds: data.feeds,
+                                        viewStroe: viewStore
+                                    )
+                                    .padding(
+                                        EdgeInsets(top: 14,
+                                                   leading: 20,
+                                                   bottom: 20,
+                                                   trailing: 20)
+                                    )
+                                    .background(.white)
+                                } else {
+                                    // 엠티뷰
+                                    emptyView()
+                                        .background(.white)
+                                }
+                            }
+                            
+                            Spacer()
                         }
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .background(.white)
                     }
+                    .refreshable { viewStore.send(.onAppear) }
                 }
-                .refreshable { viewStore.send(.onAppear) }
                 
                 VStack {
                     // navibar
@@ -145,6 +161,7 @@ struct MeetingDetailView: View {
 }
 
 extension MeetingDetailView {
+    // swiftlint:disable:next line_length
     typealias MeetingDetailViewStore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
     
     func meetingTitleView(name: String, status: MeetingStatus) -> some View {
@@ -339,6 +356,7 @@ extension MeetingDetailView {
                 .font(.Baggle.body2)
                 .foregroundColor(.gray6)
         }
+        .frame(width: screenSize.width)
     }
 }
 
