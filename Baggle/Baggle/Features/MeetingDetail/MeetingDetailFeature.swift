@@ -141,7 +141,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                         await send(
                             .presentErrorAlert(
                                 """
-                                네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요. [\(apiError.description)]
+                                네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요. [\(apiError.errorDescription)]
                                 """
                             )
                         )

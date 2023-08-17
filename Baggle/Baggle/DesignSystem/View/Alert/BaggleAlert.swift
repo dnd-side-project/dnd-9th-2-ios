@@ -85,6 +85,7 @@ struct BaggleAlertOneButton: View {
                     }
                 }
                 .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
                 
                 HStack {
                     

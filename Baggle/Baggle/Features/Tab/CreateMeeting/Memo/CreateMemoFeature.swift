@@ -14,6 +14,7 @@ struct CreateMemoFeature: ReducerProtocol {
     struct State: Equatable {
         
         var meetingCreate: MeetingCreateModel
+        var alertType: AlertCreateMeetingType?
         
         // View
         var isAlertPresented: Bool = false
@@ -91,7 +92,7 @@ struct CreateMemoFeature: ReducerProtocol {
                 state.meetingCreate =  state.meetingCreate.update(memo: memo)
                 let requestModel = state.meetingCreate
                 state.isLoading = true
-                
+
                 return .run { send in
                     let meetingCreateStatus = await meetingCreateService.create(requestModel)
                     await send(.handleStatus(meetingCreateStatus))
@@ -106,11 +107,17 @@ struct CreateMemoFeature: ReducerProtocol {
                     return .run { send in
                         await send(.delegate(.moveToNext(meetingSuccessModel)))
                     }
-                case .error:
+                case .duplicatedMeeting:
+                    state.alertType = .duplicatedMeeting
+                    return .none
+                case .networkError(let description):
+                    state.alertType = .networkError(description)
                     return .none
                 case .userError:
+                    state.alertType = .userError
                     return .none
                 case .requestModelError:
+                    state.alertType = .requestModelError
                     return .none
                 }
                 
@@ -119,7 +126,22 @@ struct CreateMemoFeature: ReducerProtocol {
                 return .none
                 
             case .alertButtonTapped:
-                return .run { send in await send(.delegate(.moveToBack))}
+                let alertType = state.alertType
+                state.alertType = nil
+                switch alertType {
+                case .forbiddenMeetingTime:
+                    return .run { send in await send(.delegate(.moveToBack))}
+                case .duplicatedMeeting:
+                    return .run { send in await send(.delegate(.moveToBack))}
+                case .networkError:
+                    return .none
+                case .userError:
+                    fatalError("유저 정보 불러오기 실패")
+                case .requestModelError:
+                    return .run { send in await send(.delegate(.moveToHome))}
+                case .none: // nil일 경우
+                    return .none
+                }
                 
                 // TextField
 

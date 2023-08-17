@@ -25,8 +25,8 @@ enum APIError: Error, Equatable {
     case providerRequest // Moya Provider Request시 에러
 }
 
-extension APIError {
-    var description: String {
+extension APIError: LocalizedError {
+    public var errorDescription: String? {
         switch self {
         case .badRequest: return "400 에러"
         case .duplicatedMeeting: return "모임 2시간 전후 생성 불가"
