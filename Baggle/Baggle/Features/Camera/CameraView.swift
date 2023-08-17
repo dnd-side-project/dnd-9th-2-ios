@@ -30,7 +30,7 @@ struct CameraView: View {
                 
                 VStack(spacing: 0) {
                     Spacer()
-
+                    
                     description(viewStore: viewStore)
                     
                     timer(viewStore: viewStore)
@@ -44,16 +44,29 @@ struct CameraView: View {
                 if viewStore.isTimeOver {
                     timeOverView(viewStore: viewStore)
                 }
+                
+                if let alertType = viewStore.alertType {
+                    BaggleAlertOneButton(
+                        isPresented: Binding(
+                            get: { viewStore.alertType != nil },
+                            set: { viewStore.send(.presentBaggleAlert($0))}
+                        ),
+                        title: alertType.title,
+                        description: alertType.description,
+                        buttonTitle: alertType.buttonTitle) {
+                            viewStore.send(.alertButtonTapped)
+                        }
+                }
             }
             .onAppear {
                 viewStore.send(.onAppear)
             }
             .alert(
-                  store: self.store.scope(
+                store: self.store.scope(
                     state: \.$alert,
-                    action: { .alert($0) }
-                  )
+                    action: { .systemAlert($0) }
                 )
+            )
         }
     }
 }
