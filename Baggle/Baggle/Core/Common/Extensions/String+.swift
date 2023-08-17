@@ -22,11 +22,23 @@ extension String {
 
     // MARK: - String 그래픽 width 값
     var width: CGFloat {
-        // swiftlint:disable:next line_length
-        let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.0)])
+        let attributedString = NSAttributedString(
+            string: self,
+            attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.0)]
+        )
         let stringSize = attributedString.size()
         let widthOfString = stringSize.width
 
+        return widthOfString
+    }
+    
+    func width(_ size: CGFloat) -> CGFloat {
+        let attributedString = NSAttributedString(
+            string: self,
+            attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: size)]
+        )
+        let stringSize = attributedString.size()
+        let widthOfString = stringSize.width
         return widthOfString
     }
 }
