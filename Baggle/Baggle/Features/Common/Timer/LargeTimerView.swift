@@ -28,7 +28,7 @@ struct LargeTimerView: View {
             HStack(alignment: .bottom, spacing: 0) {
 
                 if viewStore.isTimerOver {
-                    Text("TIMEOUT")
+                    Image.BaggleText.timeout
                 } else {
                     Text("\(viewStore.timerCount.minutes.tenDigit)")
                         .frame(width: numberWidth)
@@ -41,8 +41,8 @@ struct LargeTimerView: View {
                         .frame(width: numberWidth)
                 }
             }
-            .font(.system(size: 28).bold())
-            .padding(.vertical, 12)
+            .font(.system(size: 28, weight: .heavy))
+            .frame(height: 59)
             .padding(.horizontal, 24)
             .foregroundColor(color.foregroundColor)
             .background(viewStore.timerCount <= 10 ? Color.red : color.backgroundColor)
@@ -62,7 +62,7 @@ struct LargeTimerView_Previews: PreviewProvider {
     static var previews: some View {
         LargeTimerView(
             store: Store(
-                initialState: TimerFeature.State(timerCount: 30),
+                initialState: TimerFeature.State(timerCount: 12),
                 reducer: TimerFeature()
             )
         )
