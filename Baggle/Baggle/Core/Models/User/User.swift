@@ -25,7 +25,6 @@ extension User {
     }
 }
 
-#if DEBUG
 extension User {
     static func mockUp() -> User {
         User(
@@ -36,5 +35,3 @@ extension User {
         )
     }
 }
-
-#endif
