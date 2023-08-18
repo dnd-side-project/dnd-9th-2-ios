@@ -19,9 +19,8 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
         if let notification = connectionOptions.notificationResponse {
             let userInfo = notification.notification.request.content.userInfo
             if let meetingId: Int = Int(userInfo["meetingId"] as? String ?? "") {
-                // 최초 진입시 스플래시 애니메이션 시간 + 0.4
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.4) {
-                    self.postObserverAction(.moveMeetingDetail, object: meetingId)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                    self.postObserverAction(.skipSplash, object: meetingId)
                 }
             }
         }

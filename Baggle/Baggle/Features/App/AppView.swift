@@ -13,6 +13,7 @@ struct AppView: View {
 
     let store: StoreOf<AppFeature>
 
+    @State var skipSplash: Bool = false
     @State var splashStarted: Bool = false
     @State var splashEnded: Bool = false
 
@@ -50,11 +51,20 @@ struct AppView: View {
             withAnimation {
                 splashStarted = true
             }
-
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (skipSplash ? 0 : 1)) {
                 withAnimation {
                     splashEnded = true
                 }
+            }
+        }
+        .onReceive(
+            NotificationCenter.default.publisher(for: .skipSplash)
+        ) { noti in
+            skipSplash = true
+            splashEnded = true
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                postObserverAction(.moveMeetingDetail, object: noti.object)
             }
         }
     }
