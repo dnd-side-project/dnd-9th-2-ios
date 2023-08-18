@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ShadeView: View {
-    @Binding private var isPresented: Bool
 
-    init(isPresented: Binding<Bool>) {
+    @Binding private var isPresented: Bool
+    let enableTouch: Bool
+    
+    init(isPresented: Binding<Bool>, enableTouch: Bool = true) {
         self._isPresented = isPresented
+        self.enableTouch = enableTouch
     }
 
     var body: some View {
@@ -21,7 +24,9 @@ struct ShadeView: View {
             .transition(.opacity.animation(.easeInOut))
             .animation(.easeInOut(duration: 0.2), value: self.isPresented)
             .onTapGesture {
-                isPresented.toggle()
+                if enableTouch {
+                    isPresented.toggle()
+                }
             }
     }
 }
