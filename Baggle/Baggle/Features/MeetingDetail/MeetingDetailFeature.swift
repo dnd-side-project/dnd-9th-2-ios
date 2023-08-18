@@ -191,9 +191,16 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .emergencyButtonTapped:
+                guard let remainTimeUntilExpired = state.meetingData?
+                    .emergencyButtonExpiredTime
+                    .remainingTime()
+                else {
+                    return .none
+                }
+                        
                 state.emergencyState = EmergencyFeature.State(
                     memberID: state.meetingId,
-                    remainTimeUntilExpired: 12
+                    remainTimeUntilExpired: remainTimeUntilExpired
                 )
                 return .none
 
