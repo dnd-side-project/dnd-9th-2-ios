@@ -21,13 +21,14 @@ extension FeedPhotoService: DependencyKey {
     
     static var liveValue = Self { requestModel in
         do {
-            let userToken = try KeychainManager.shared.readUserToken()
-            let token = userToken.accessToken
+            guard let token = UserManager.shared.accessToken else {
+                return .userError
+            }
             
             let feedPhotoEntity: FeedPhotoEntity = try await networkService
                 .request(.uploadPhoto(requestModel: requestModel, token: token))
             
-            guard let user = UserDefaultList.user else {
+            guard let user = UserManager.shared.user else {
                 return .userError
             }
             let feedUser = FeedUser(user: user)
