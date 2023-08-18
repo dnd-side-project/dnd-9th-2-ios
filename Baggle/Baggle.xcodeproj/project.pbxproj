@@ -29,9 +29,9 @@
 		141FD7632A8CF609003DBFD7 /* MeetingSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */; };
 		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
 		14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283FCE2A8DA32B00FE56F1 /* Moya+.swift */; };
-		142BEEDC2A8F2DCC00B91426 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */; };
 		142BEED72A8F19A100B91426 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED62A8F19A100B91426 /* UserManager.swift */; };
 		142BEED92A8F213B00B91426 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED82A8F213B00B91426 /* UserToken.swift */; };
+		142BEEDC2A8F2DCC00B91426 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */; };
 		142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BF96C2A81F50C0042737E /* TimerColor.swift */; };
 		142C33682A8CEC90006D7D8B /* MeetingCreateRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C33672A8CEC90006D7D8B /* MeetingCreateRequestModel.swift */; };
 		142C336A2A8CEE96006D7D8B /* MeetingCreateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C33692A8CEE96006D7D8B /* MeetingCreateService.swift */; };
@@ -96,6 +96,7 @@
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
+		14C8DAC72A8F542800371374 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 14C8DAC62A8F542800371374 /* Lottie */; };
 		14C8F9CC2A8B2905001690C5 /* FeedPhotoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */; };
 		14C8F9CE2A8B2979001690C5 /* FeedMemberInfoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9CD2A8B2979001690C5 /* FeedMemberInfoRequestModel.swift */; };
 		14C8F9D12A8B3323001690C5 /* FeedPhotoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8F9D02A8B3323001690C5 /* FeedPhotoStatus.swift */; };
@@ -242,9 +243,9 @@
 		141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSuccessModel.swift; sourceTree = "<group>"; };
 		1421C0502A7A84A200C20497 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		14283FCE2A8DA32B00FE56F1 /* Moya+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+.swift"; sourceTree = "<group>"; };
-		142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		142BEED62A8F19A100B91426 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		142BEED82A8F213B00B91426 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
+		142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		142BF96C2A81F50C0042737E /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
 		142C33672A8CEC90006D7D8B /* MeetingCreateRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCreateRequestModel.swift; sourceTree = "<group>"; };
 		142C33692A8CEE96006D7D8B /* MeetingCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCreateService.swift; sourceTree = "<group>"; };
@@ -432,6 +433,7 @@
 				140E88202A64C3A8005119F8 /* ComposableArchitecture in Frameworks */,
 				2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */,
 				140E88252A64C3C2005119F8 /* Moya in Frameworks */,
+				14C8DAC72A8F542800371374 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,14 +657,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		142BEEDA2A8F2DAE00B91426 /* Description */ = {
-			isa = PBXGroup;
-			children = (
-				142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */,
-			);
-			path = Description;
-            sourceTree = "<group>";
-        };
 		142BEED42A8F196700B91426 /* SendInvitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +671,14 @@
 				142BEED62A8F19A100B91426 /* UserManager.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		142BEEDA2A8F2DAE00B91426 /* Description */ = {
+			isa = PBXGroup;
+			children = (
+				142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */,
+			);
+			path = Description;
 			sourceTree = "<group>";
 		};
 		142C33662A8CEC80006D7D8B /* MeetingCreate */ = {
@@ -1515,6 +1517,7 @@
 				2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */,
 				2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */,
 				2B7EC32A2A8228F300D78141 /* Kingfisher */,
+				14C8DAC62A8F542800371374 /* Lottie */,
 			);
 			productName = promiseDemo;
 			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
@@ -1576,6 +1579,7 @@
 				2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2B7EC3292A8228F200D78141 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				14C8DAC52A8F542700371374 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 140E880E2A64B626005119F8 /* Products */;
 			projectDirPath = "";
@@ -2130,6 +2134,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		14C8DAC52A8F542700371374 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		2B35E4EB2A70B6DB00915876 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
@@ -2176,6 +2188,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2BABCB122A76CDA400AFECA3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		14C8DAC62A8F542800371374 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14C8DAC52A8F542700371374 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		2B35E4EC2A70B6DB00915876 /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
