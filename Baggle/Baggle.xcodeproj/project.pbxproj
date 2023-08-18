@@ -29,6 +29,7 @@
 		141FD7632A8CF609003DBFD7 /* MeetingSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */; };
 		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
 		14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283FCE2A8DA32B00FE56F1 /* Moya+.swift */; };
+		142BEEDC2A8F2DCC00B91426 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */; };
 		142BEED72A8F19A100B91426 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED62A8F19A100B91426 /* UserManager.swift */; };
 		142BEED92A8F213B00B91426 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED82A8F213B00B91426 /* UserToken.swift */; };
 		142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BF96C2A81F50C0042737E /* TimerColor.swift */; };
@@ -241,6 +242,7 @@
 		141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSuccessModel.swift; sourceTree = "<group>"; };
 		1421C0502A7A84A200C20497 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		14283FCE2A8DA32B00FE56F1 /* Moya+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+.swift"; sourceTree = "<group>"; };
+		142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		142BEED62A8F19A100B91426 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		142BEED82A8F213B00B91426 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		142BF96C2A81F50C0042737E /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
@@ -653,6 +655,12 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		142BEEDA2A8F2DAE00B91426 /* Description */ = {
+			isa = PBXGroup;
+			children = (
+				142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */,
+			);
+			path = Description;
 		142BEED42A8F196700B91426 /* SendInvitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1338,7 @@
 		2B84695D2A6E7AE200D75D32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				142BEEDA2A8F2DAE00B91426 /* Description */,
 				14F055AA2A8220AB0041B004 /* Badge */,
 				14458B422A81E6B900C810FA /* Stamp */,
 				1461B5FE2A7BA3EA00A15706 /* Bubble */,
@@ -1730,6 +1739,7 @@
 				146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */,
 				1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */,
 				2BC5AD312A84983C00B73241 /* SignUpRequestModel.swift in Sources */,
+				142BEEDC2A8F2DCC00B91426 /* DescriptionView.swift in Sources */,
 				2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */,
 				14EF8C242A8CAC5B00B0FA40 /* FeedUser.swift in Sources */,
 				2B7B4D812A853ED300283248 /* FeedAPI.swift in Sources */,

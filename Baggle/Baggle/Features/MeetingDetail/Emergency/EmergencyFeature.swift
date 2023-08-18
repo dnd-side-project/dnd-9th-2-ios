@@ -12,14 +12,26 @@ import ComposableArchitecture
 struct EmergencyFeature: ReducerProtocol {
 
     struct State: Equatable {
+        
         let memberID: Int
+        var remainTimeUntilExpired: Int
         var isEmergency: Bool = false
+        var isTimeExpired: Bool = false
 
         // Child
         var timerState = TimerFeature.State(timerCount: 30)
     }
 
     enum Action: Equatable {
+        
+        // Life Cycle
+        case onAppear
+        case onDisappear
+        
+        case cancelTimer
+        case timeExpired
+        case timeExpiredChanged(Bool)
+        
         // Tap
         case closeButtonTapped
         case emergencyButtonTapped
@@ -39,8 +51,11 @@ struct EmergencyFeature: ReducerProtocol {
         }
     }
 
+    enum CancelID { case emergencyExpiredTimer }
+    
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.emergencyService) var emergencyService
+    @Dependency(\.continuousClock) var clock
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -54,6 +69,35 @@ struct EmergencyFeature: ReducerProtocol {
         Reduce { state, action in
 
             switch action {
+                
+            case .onAppear:
+                let remainTime = state.remainTimeUntilExpired
+                
+                if remainTime <= 0 {
+                    return .run { send in await send(.timeExpired)}
+                }
+                
+                return .run { send in
+                    for await _ in self.clock.timer(interval: .seconds(remainTime)) {
+                        await send(.timeExpired)
+                        await send(.cancelTimer)
+                    }
+                }
+                .cancellable(id: CancelID.emergencyExpiredTimer)
+
+            case .onDisappear:
+                return .cancel(id: CancelID.emergencyExpiredTimer)
+                
+            case .cancelTimer:
+                return .cancel(id: CancelID.emergencyExpiredTimer)
+                
+            case .timeExpired:
+                state.isTimeExpired = true
+                return .none
+                
+            case .timeExpiredChanged(let isPresent):
+                return isPresent ? .none : .run { _ in await self.dismiss() }
+                
             case .closeButtonTapped:
                 return .run { _ in await self.dismiss() }
 

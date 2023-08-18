@@ -146,6 +146,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: true,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: Date(timeIntervalSince1970: 1659261600),
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: true,
             feeds: [
                 Feed(
@@ -201,6 +202,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: false,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: false,
             feeds: []
         )
@@ -239,6 +241,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: true,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: false,
             feeds: []
         )
@@ -277,6 +280,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: true,
             emergencyButtonActive: true,
             emergencyButtonActiveTime: Date.createDate(2023, 8, 11, 13, 30),
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: false,
             feeds: []
         )
