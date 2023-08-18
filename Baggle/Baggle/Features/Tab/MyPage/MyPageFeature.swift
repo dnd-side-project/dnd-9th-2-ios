@@ -70,12 +70,7 @@ struct MyPageFeature: ReducerProtocol {
                 
             case .logoutButtonTapped:
                 // 임시 로그아웃 연결
-                do {
-                    try KeychainManager.shared.deleteUserToken()
-                } catch let error {
-                    print("Keychain error - \(error)")
-                }
-                UserDefaultList.user = nil
+                UserManager.shared.delete()
                 return .run { send in await send(.delegate(.moveToLogin)) }
                 
             case .withdrawButtonTapped:
