@@ -661,6 +661,8 @@
 				142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */,
 			);
 			path = Description;
+            sourceTree = "<group>";
+        };
 		142BEED42A8F196700B91426 /* SendInvitation */ = {
 			isa = PBXGroup;
 			children = (
