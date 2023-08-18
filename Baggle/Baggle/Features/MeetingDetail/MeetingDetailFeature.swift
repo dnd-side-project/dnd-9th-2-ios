@@ -191,7 +191,10 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .emergencyButtonTapped:
-                state.emergencyState = EmergencyFeature.State(memberID: state.meetingId)
+                state.emergencyState = EmergencyFeature.State(
+                    memberID: state.meetingId,
+                    remainTimeUntilExpired: 12
+                )
                 return .none
 
             case .inviteButtonTapped:

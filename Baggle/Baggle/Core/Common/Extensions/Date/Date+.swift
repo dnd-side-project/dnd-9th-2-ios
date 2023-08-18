@@ -323,6 +323,8 @@ extension Date {
 // MARK: - 타이머
 extension Date {
 
+    // MARK: 긴급버튼
+    
     func authenticationTimeout() -> Int {
         self.later(minutes: 5).remainingTime()
     }
@@ -335,6 +337,12 @@ extension Date {
         } else {
             return 0
         }
+    }
+
+    // 자동 호출 시간
+    // 약속 시간 10분 전
+    func emergencyTimeOut() -> Int {
+        self.before(minutes: 10).remainingTime()
     }
 }
 

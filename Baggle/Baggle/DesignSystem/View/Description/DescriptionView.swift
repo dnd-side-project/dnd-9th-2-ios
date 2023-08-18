@@ -30,7 +30,7 @@ struct DescriptionView: View {
                 .background(.black)
                 .cornerRadius(12)
         }
-        .animation(.easeInOut(duration: 0.2), value: isPresented)
+        .transition(.opacity.animation(.easeIn(duration: 0.3)))
         .onTapGesture {
             isPresented.toggle()
         }
