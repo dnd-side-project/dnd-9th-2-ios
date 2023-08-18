@@ -342,7 +342,7 @@ extension Date {
     // 자동 호출 시간
     // 약속 시간 10분 전
     func emergencyTimeOut() -> Date {
-        self.before(minutes: 10)
+        self.before(minutes: 15)
     }
 }
 
