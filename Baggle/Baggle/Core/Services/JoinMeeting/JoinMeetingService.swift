@@ -20,7 +20,10 @@ extension JoinMeetingService: DependencyKey {
     
     static var liveValue = Self { meetingID in
         do {
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .fail(.network)
+            }
+            
             let data: JoinMeetingInfoEntity = try await networkService.request(
                 .fetchMeetingInfo(
                     meetingID: meetingID,
@@ -38,7 +41,10 @@ extension JoinMeetingService: DependencyKey {
         }
     } postJoinMeeting: { meetingID in
         do {
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .fail(.network)
+            }
+
             try await networkService.requestWithNoResult(
                 .postJoinMeeting(
                     meetingID: meetingID,

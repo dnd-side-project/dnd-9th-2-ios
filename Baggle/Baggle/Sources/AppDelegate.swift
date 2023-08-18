@@ -71,7 +71,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     ) {
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        self.postObserverAction(.moveMeetingDetail, object: 1)
+        
+        if let meetingId: Int = Int(userInfo["meetingId"] as? String ?? "") {
+            postObserverAction(.moveMeetingDetail, object: meetingId)
+        }
 
         let applicationState = UIApplication.shared.applicationState
         print("didReceive - applicationState: \(applicationState)")

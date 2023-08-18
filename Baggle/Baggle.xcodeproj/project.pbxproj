@@ -30,6 +30,8 @@
 		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
 		14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283FCE2A8DA32B00FE56F1 /* Moya+.swift */; };
 		142BEEDC2A8F2DCC00B91426 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */; };
+		142BEED72A8F19A100B91426 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED62A8F19A100B91426 /* UserManager.swift */; };
+		142BEED92A8F213B00B91426 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED82A8F213B00B91426 /* UserToken.swift */; };
 		142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BF96C2A81F50C0042737E /* TimerColor.swift */; };
 		142C33682A8CEC90006D7D8B /* MeetingCreateRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C33672A8CEC90006D7D8B /* MeetingCreateRequestModel.swift */; };
 		142C336A2A8CEE96006D7D8B /* MeetingCreateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C33692A8CEE96006D7D8B /* MeetingCreateService.swift */; };
@@ -241,6 +243,8 @@
 		1421C0502A7A84A200C20497 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		14283FCE2A8DA32B00FE56F1 /* Moya+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+.swift"; sourceTree = "<group>"; };
 		142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		142BEED62A8F19A100B91426 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		142BEED82A8F213B00B91426 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		142BF96C2A81F50C0042737E /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
 		142C33672A8CEC90006D7D8B /* MeetingCreateRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCreateRequestModel.swift; sourceTree = "<group>"; };
 		142C33692A8CEE96006D7D8B /* MeetingCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCreateService.swift; sourceTree = "<group>"; };
@@ -538,6 +542,7 @@
 		14134D3B2A64C532004A6AC4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				142BEED52A8F199900B91426 /* User */,
 				2BB7FBC32A8928490003B75C /* Const */,
 				2B7B4D6C2A84A1F200283248 /* Network */,
 				2BABCB202A76CFD100AFECA3 /* Foundation */,
@@ -573,7 +578,7 @@
 				141FD7602A8CF5BC003DBFD7 /* Meeting */,
 				140C54362A74F40E00CF1CB4 /* Nickname */,
 				2BDEAC772A863D1500D698E6 /* JoinMeeting */,
-				2B39F21B2A738BB100E034A3 /* SendInvitation.swift */,
+				142BEED42A8F196700B91426 /* SendInvitation */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -656,6 +661,20 @@
 				142BEEDB2A8F2DCC00B91426 /* DescriptionView.swift */,
 			);
 			path = Description;
+		142BEED42A8F196700B91426 /* SendInvitation */ = {
+			isa = PBXGroup;
+			children = (
+				2B39F21B2A738BB100E034A3 /* SendInvitation.swift */,
+			);
+			path = SendInvitation;
+			sourceTree = "<group>";
+		};
+		142BEED52A8F199900B91426 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				142BEED62A8F19A100B91426 /* UserManager.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		142C33662A8CEC80006D7D8B /* MeetingCreate */ = {
@@ -993,6 +1012,7 @@
 		14CF68EA2A847BEB00E457DF /* User */ = {
 			isa = PBXGroup;
 			children = (
+				142BEED82A8F213B00B91426 /* UserToken.swift */,
 				14CF68EB2A847BEF00E457DF /* User.swift */,
 				14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */,
 			);
@@ -1619,6 +1639,7 @@
 				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
 				143C7C062A876A20004D83FD /* KeyChainError.swift in Sources */,
 				142BF96D2A81F50C0042737E /* TimerColor.swift in Sources */,
+				142BEED72A8F19A100B91426 /* UserManager.swift in Sources */,
 				143B9CF22A77A39A003CC5E5 /* CreateTitleView.swift in Sources */,
 				2BC5AD2F2A84938600B73241 /* UserAPI.swift in Sources */,
 				14EDE63E2A77A2AD0004F72B /* SignUpSuccessFeature.swift in Sources */,
@@ -1732,6 +1753,7 @@
 				2B7EC3322A826F4D00D78141 /* ImageDetailView.swift in Sources */,
 				1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
+				142BEED92A8F213B00B91426 /* UserToken.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
 				14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */,

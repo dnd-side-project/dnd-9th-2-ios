@@ -67,7 +67,7 @@ struct BaggleAlertOneButton: View {
     
     var body: some View {
         ZStack {
-            ShadeView(isPresented: $isPresented)
+            ShadeView(isPresented: $isPresented, enableTouch: false)
             
             VStack(spacing: 40) {
                 

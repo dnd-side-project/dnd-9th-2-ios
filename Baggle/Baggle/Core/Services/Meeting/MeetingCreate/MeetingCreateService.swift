@@ -19,8 +19,9 @@ extension MeetingCreateService: DependencyKey {
     
     static var liveValue = Self { meetingCreateModel in
         do {
-            let userToken = try KeychainManager.shared.readUserToken()
-            let token = userToken.accessToken
+            guard let token = UserManager.shared.accessToken else {
+                return .userError
+            }
             
             guard let requestModel = MeetingCreateRequestModel(
                 meetingCreateModel: meetingCreateModel
