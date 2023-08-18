@@ -29,13 +29,10 @@ extension SignUpService: DependencyKey {
             )
             print("data: \(data)")
             
-            // 키체인 저장, 저장 전에 이미 있는 데이터  삭제
-            checkKeyChain()
+
+            let user = data.toDomain()
             let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
-            try KeychainManager.shared.createUserToken(token)
-            
-            // 유저 Default 저장
-            saveUser(data: data.toDomain())
+            try UserManager.shared.save(user: user, userToken: token)
             
             return .success
         } catch {
@@ -47,19 +44,6 @@ extension SignUpService: DependencyKey {
                 return .fail(.network)
             }
         }
-    }
-
-    static func checkKeyChain() {
-        do {
-            _ = try KeychainManager.shared.readUserToken()
-            try KeychainManager.shared.deleteUserToken()
-        } catch {
-            return
-        }
-    }
-    
-    static func saveUser(data: User) {
-        UserDefaultList.user = data
     }
 }
 

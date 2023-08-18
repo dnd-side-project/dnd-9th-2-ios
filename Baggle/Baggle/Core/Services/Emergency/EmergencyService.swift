@@ -20,7 +20,9 @@ extension EmergencyService: DependencyKey {
     
     static var liveValue = Self { memberID in
         do {
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .fail(.network)
+            }
             let data: EmergencyEntity = try await networkService.request(
                 .emergency(
                     memberID: memberID,
