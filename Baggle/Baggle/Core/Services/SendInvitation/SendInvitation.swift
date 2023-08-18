@@ -17,12 +17,13 @@ public struct SendInvitationEffect: Sendable {
     var send: (@MainActor @Sendable (URL?) -> Void)?
 
     @MainActor
-    public func callAsFunction(name: String, id: Int) async -> URL? {
-        if let templateJsonObject = createKakaoObject(name: name, id: id) {
-            do {
-                typealias ShareContinuation = CheckedContinuation<URL, Error>
-                let linkResult =
-                    try await withCheckedThrowingContinuation({(cont: ShareContinuation) in
+    public func callAsFunction(name: String, id: Int) async throws -> URL? {
+        if ShareApi.isKakaoTalkSharingAvailable() {
+            if let templateJsonObject = createKakaoObject(name: name, id: id) {
+                do {
+                    typealias ShareContinuation = CheckedContinuation<URL, Error>
+                    // swiftlint:disable:next line_length
+                    let linkResult = try await withCheckedThrowingContinuation({(cont: ShareContinuation) in
                         ShareApi.shared
                             .shareDefault(templateObject: templateJsonObject) { linkresult, error in
                                 if let error {
@@ -34,11 +35,11 @@ public struct SendInvitationEffect: Sendable {
                                 }
                             }
                     })
-                send?(linkResult)
-                return linkResult
-            } catch {
-                print(error)
-                return nil
+                    send?(linkResult)
+                    return linkResult
+                } catch {
+                    throw error
+                }
             }
         }
         return nil

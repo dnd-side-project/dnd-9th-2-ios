@@ -208,20 +208,19 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .inviteButtonTapped:
                 guard let meetingData = state.meetingData else { return .none }
-                return .run { send in
-                    if ShareApi.isKakaoTalkSharingAvailable() {
-                        if let url = await sendInvitation(
+                return .run { _ in
+                    do {
+                        if let url = try await sendInvitation(
                             name: meetingData.name,
-                            id: 12
-                        ) { // TODO: - meetingData.id로 수정 (임시 id)
+                            id: meetingData.id
+                        ) {
                             openURL(url)
                         } else {
-                            await send(.presentInvitationAlert)
-                        }
-                    } else {
-                        if let url = URL(string: Const.URL.kakaoAppStore) {
+                            guard let url = URL(string: Const.URL.kakaoAppStore) else { return }
                             openURL(url)
                         }
+                    } catch {
+                        print("카카오 링크 공유 실패")
                     }
                 }
 
@@ -230,7 +229,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .emergency:
                     return .run { send in await send(.emergencyButtonTapped) }
                 case .invite:
-                    print("초대장 보내기")
                     return .run { send in await send(.inviteButtonTapped) }
                 case .authorize:
                     return .run { send in await send(.cameraButtonTapped) }

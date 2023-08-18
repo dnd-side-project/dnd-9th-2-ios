@@ -131,7 +131,8 @@ extension JoinMeetingView {
                 set: { _ in viewStore.send(.presentAlert) }
             ),
             title: "이미 만료된 방이에요!",
-            buttonTitle: "약속 1시간 전까지만 입장이 가능해요.") {
+            description: "약속 1시간 전까지만 입장이 가능해요.",
+            buttonTitle: "확인") {
                 viewStore.send(.exitButtonTapped)
             }
     }
