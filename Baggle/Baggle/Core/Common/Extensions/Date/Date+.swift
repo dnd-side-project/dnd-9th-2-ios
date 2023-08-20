@@ -103,7 +103,7 @@ extension Date {
 
     // format에 해당하는 문자열 리턴
     func toString(format: String) -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter.baggleFormat
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
