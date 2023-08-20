@@ -49,6 +49,7 @@ extension NetworkService {
     
     func request<T: Decodable>(_ target: API) async throws -> T {
         let data = try await provider.request(target)
+        print("✅ raw data: \(String(data: data, encoding: .utf8))")
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
@@ -64,6 +65,7 @@ extension NetworkService {
             guard let data = body.data else {
                 throw APIError.unwrapping
             }
+            print("✅ data: \(data)")
             return data
         case 400..<500:
             throw handleError400(statusCode: statusCode, message: message)
