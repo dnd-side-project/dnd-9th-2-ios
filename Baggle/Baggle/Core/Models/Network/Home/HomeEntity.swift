@@ -16,7 +16,12 @@ struct HomeEntity: Codable {
         case scheduledCount, pastCount, meetings
     }
 }
-
-// TODO: - toDomain
-
-
+extension HomeEntity {
+    func toDomain() -> Home {
+        let meeting: [Meeting] = meetings.map({ $0.toDomain() })
+        return Home(
+            progressCount: scheduledCount,
+            completedCount: pastCount,
+            meetings: meeting)
+    }
+}

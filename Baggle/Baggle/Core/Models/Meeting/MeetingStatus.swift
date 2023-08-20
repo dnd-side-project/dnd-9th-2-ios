@@ -22,8 +22,8 @@ enum MeetingStatus {
 
     var fgColor: Color {
         switch self {
-        case .ready, .completed, .confirmed: return .gray5
-        case .progress: return .baggleRed
+        case .ready, .completed: return .gray5
+        case .progress, .confirmed: return .baggleRed
         }
     }
     

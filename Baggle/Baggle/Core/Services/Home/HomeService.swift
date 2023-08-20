@@ -10,28 +10,27 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingListService {
-    var fetchMeetingList: (MeetingStatus, Int) async -> HomeServiceStatus
+    var fetchMeetingList: (
+        _ status: MeetingStatus,
+        _ page: Int,
+        _ size: Int
+    ) async -> HomeServiceStatus
 }
 
 extension MeetingListService: DependencyKey {
     
     static let networkService = NetworkService<MeetingAPI>()
 
-    static var liveValue = Self { status, page in
+    static var liveValue = Self { status, page, size in
         do {
-//            let accessToken = try KeychainManager.shared.readUserToken().accessToken
-//            let data: HomeEntity = try await networkService.request(
-//                .meetingList(period: status.period, page: page, size: 10, token: accessToken)
-//            )
-            // TODO: - entity에서 model 변환
-            let mockMeeting = try await MockUpMeetingService().fetchMeetingList(status)
-            let mockData: Home = Home(
-                progressCount: 3,
-                completedCount: 1,
-                meetings: mockMeeting
+            print("🔔 MeetingListService - fetchMeetingList")
+            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            let data: HomeEntity = try await networkService.request(
+                .meetingList(period: status.period, page: page, size: size, token: accessToken)
             )
-            return .success(mockData)
-        } catch {
+            return .success(data.toDomain())
+        } catch let error {
+            print("🔔 MeetingListService - error: \(error)")
             return .fail(.network)
         }
     }
@@ -66,8 +65,7 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .progress,
-                isConfirmed: true
+                status: .progress
             ),
             Meeting(
                 id: 10,
@@ -80,8 +78,7 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .ready,
-                isConfirmed: false
+                status: .ready
             ),
             Meeting(
                 id: 11,
@@ -95,8 +92,7 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .progress,
-                isConfirmed: true
+                status: .progress
             ),
             Meeting(
                 id: 4,
@@ -107,8 +103,7 @@ struct MockUpMeetingService {
                 dDay: 30,
                 profileImages: [
                 ],
-                status: .ready,
-                isConfirmed: false
+                status: .ready
             ),
             Meeting(
                 id: -999,
@@ -119,8 +114,7 @@ struct MockUpMeetingService {
                 dDay: 30,
                 profileImages: [
                 ],
-                status: .ready,
-                isConfirmed: false
+                status: .ready
             )
         ]
 
@@ -137,8 +131,8 @@ struct MockUpMeetingService {
                     "https://avatars.githubusercontent.com/u/81167570?s=64&v=4",
                     "https://avatars.githubusercontent.com/u/71776532?s=64&v=4"
                 ],
-                status: .completed,
-                isConfirmed: true)
+                status: .completed
+            )
         ]
         return type == .progress ? progress : complete
     }
