@@ -38,7 +38,6 @@ struct HomeView: View {
                                             .onAppear {
                                                 let list = (viewStore.meetingStatus == .progress)
                                                 ? viewStore.progressList : viewStore.completedList
-                                                // TODO: - index 확인
                                                 guard let index = list.firstIndex(where: {
                                                     $0.id == meeting.id
                                                 }) else { return }
