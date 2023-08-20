@@ -114,9 +114,9 @@ struct HomeFeature: ReducerProtocol {
             case .fetchMeetingList(let status):
                 state.meetingStatus = status
                 let page = (status == .progress) ? state.progressIndex : state.completedIndex
-                let size = state.size
+                let requestModel = HomeRequestModel(status: status, page: page, size: state.size)
                 return .run { send in
-                    let result = await meetingService.fetchMeetingList(status, page, size)
+                    let result = await meetingService.fetchMeetingList(requestModel)
                     switch result {
                     case .success(let data):
                         await send(.updateMeetingList(status, data))
@@ -134,18 +134,13 @@ struct HomeFeature: ReducerProtocol {
                 state.completedList.removeAll()
                 state.progressIndex = 0
                 state.completedIndex = 0
-                let size = state.size
+                let requestModel = HomeRequestModel(status: .progress, page: 0, size: state.size)
                 return .run { send in
-                    do {
-                        try await Task.sleep(nanoseconds: 1_000_000_000)
-                        let result = await meetingService.fetchMeetingList(.progress, 0, size)
-                        switch result {
-                        case .success(let data):
-                            await send(.updateMeetingList(.progress, data))
-                        case .fail:
-                            await send(.changeHomeStatus(.error))
-                        }
-                    } catch {
+                    let result = await meetingService.fetchMeetingList(requestModel)
+                    switch result {
+                    case .success(let data):
+                        await send(.updateMeetingList(.progress, data))
+                    case .fail:
                         await send(.changeHomeStatus(.error))
                     }
                 }

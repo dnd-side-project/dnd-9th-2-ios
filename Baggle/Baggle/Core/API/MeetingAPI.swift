@@ -11,7 +11,7 @@ import Alamofire
 import Moya
 
 enum MeetingAPI {
-    case meetingList(period: String, page: Int, size: Int, token: String)
+    case meetingList(requestModel: HomeRequestModel, token: String)
     case meetingDetail(meetingID: Int, token: String)
     case createMeeting(requestModel: MeetingCreateRequestModel, token: String)
 }
@@ -34,7 +34,7 @@ extension MeetingAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
-        case .meetingList(_, _, _, let token):
+        case .meetingList(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
         case .meetingDetail(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
@@ -58,10 +58,10 @@ extension MeetingAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
-        case .meetingList(let period, let page, let size, _):
-            params["period"] = period
-            params["page"] = page
-            params["size"] = size
+        case .meetingList(let requestModel, _):
+            params["period"] = requestModel.status.period
+            params["page"] = requestModel.page
+            params["size"] = requestModel.size
         case .meetingDetail(let meetingID, _):
             params["meetingId"] = meetingID
         case .createMeeting(let requestModel, _):

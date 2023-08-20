@@ -10,27 +10,24 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingListService {
-    var fetchMeetingList: (
-        _ status: MeetingStatus,
-        _ page: Int,
-        _ size: Int
-    ) async -> HomeServiceStatus
+    var fetchMeetingList: (_ requestModel: HomeRequestModel) async -> HomeServiceStatus
 }
 
 extension MeetingListService: DependencyKey {
     
     static let networkService = NetworkService<MeetingAPI>()
 
-    static var liveValue = Self { status, page, size in
+    static var liveValue = Self { requestModel in
         do {
-            print("🔔 MeetingListService - fetchMeetingList")
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .fail(.network)
+            }
             let data: HomeEntity = try await networkService.request(
-                .meetingList(period: status.period, page: page, size: size, token: accessToken)
+                .meetingList(requestModel: requestModel, token: accessToken)
             )
             return .success(data.toDomain())
         } catch let error {
-            print("🔔 MeetingListService - error: \(error)")
+            print("❌ MeetingListService - error: \(error)")
             return .fail(.network)
         }
     }
