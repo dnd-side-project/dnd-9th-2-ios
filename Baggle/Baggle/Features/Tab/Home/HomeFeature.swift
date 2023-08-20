@@ -17,7 +17,7 @@ struct HomeFeature: ReducerProtocol {
 
     struct State: Equatable {
 
-        var user: User = UserDefaultList.user ?? User.mockUp()
+        var user: User = UserManager.shared.user ?? User.error()
         var homeStatus: HomeStatus = .empty
         
         // 예정된 약속(progress), 지난 약속(completed)
@@ -89,6 +89,7 @@ struct HomeFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
+                state.user = UserManager.shared.user ?? User.error()
                 if state.progressList.isEmpty && state.completedList.isEmpty {
                     return .run { send in
                         await send(.fetchMeetingList(.progress))
