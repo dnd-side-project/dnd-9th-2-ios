@@ -107,6 +107,7 @@ struct HomeFeature: ReducerProtocol {
                 // 데이터 요청 후 뷰 상태 변경
             case .changeHomeStatus(let status):
                 state.homeStatus = status
+                state.isRefreshing = false
                 return .none
 
                 // 데이터 요청
@@ -176,13 +177,18 @@ struct HomeFeature: ReducerProtocol {
                 if let meetings = model.meetings {
                     if status == .progress {
                         state.progressList.append(contentsOf: meetings)
-                        state.homeStatus = state.progressList.isEmpty ? .empty : .normal
+                        let isEmpty = state.progressList.isEmpty
+                        return .run { send in
+                            await send(.changeHomeStatus(isEmpty ? .empty : .normal))
+                        }
                     } else {
                         state.completedList.append(contentsOf: meetings)
-                        state.homeStatus = state.completedList.isEmpty ? .empty : .normal
+                        let isEmpty = state.completedList.isEmpty
+                        return .run { send in
+                            await send(.changeHomeStatus(isEmpty ? .empty : .normal))
+                        }
                     }
                 }
-                state.isRefreshing = false
                 return .none
 
             case .pushToMeetingDetail(let id):
