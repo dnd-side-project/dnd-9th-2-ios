@@ -154,14 +154,20 @@ struct HomeFeature: ReducerProtocol {
                 // 기존 데이터 없는 경우에 데이터 요청, 아니면 요청 X
             case .changeMeetingStatus(let status):
                 state.meetingStatus = status
-                if status == .completed && state.completedList.isEmpty {
-                    return .run { send in
-                        await send(.fetchMeetingList(.completed))
+                if status == .completed {
+                    if state.completedList.isEmpty {
+                        return .run { send in await send(.fetchMeetingList(.completed)) }
+                    } else {
+                        state.homeStatus = .normal
                     }
                 }
 
-                if status == .progress && state.progressList.isEmpty {
-                    return .run { send in await send(.fetchMeetingList(.progress))}
+                if status == .progress {
+                    if state.progressList.isEmpty {
+                        return .run { send in await send(.fetchMeetingList(.progress))}
+                    } else {
+                        state.homeStatus = .normal
+                    }
                 }
                 return .none
 
