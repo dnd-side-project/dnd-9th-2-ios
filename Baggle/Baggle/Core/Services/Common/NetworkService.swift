@@ -49,7 +49,6 @@ extension NetworkService {
     
     func request<T: Decodable>(_ target: API) async throws -> T {
         let data = try await provider.request(target)
-        print("✅ raw data: \(String(data: data, encoding: .utf8))")
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
