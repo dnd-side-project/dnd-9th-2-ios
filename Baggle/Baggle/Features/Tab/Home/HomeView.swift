@@ -17,58 +17,51 @@ struct HomeView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack(alignment: .top) {
-
-                VStack { // 임시 버튼용 Vstack
-
-                    ScrollView {
-                        // userInfo + segmentedPicker
-                        header(viewStore: viewStore)
-
-                        if viewStore.homeStatus == .normal {
-                            Section {
-                                LazyVStack(spacing: 12) {
-                                    ForEach((viewStore.meetingStatus == .progress)
+                
+                ScrollView {
+                    // userInfo + segmentedPicker
+                    header(viewStore: viewStore)
+                    
+                    if viewStore.homeStatus == .normal {
+                        Section {
+                            LazyVStack(spacing: 12) {
+                                ForEach((viewStore.meetingStatus == .progress)
+                                        ? viewStore.progressList : viewStore.completedList
+                                ) { meeting in
+                                    MeetingListCell(data: meeting)
+                                        .onTapGesture {
+                                            viewStore.send(.pushToMeetingDetail(meeting.id))
+                                        }
+                                        .onAppear {
+                                            let list = (viewStore.meetingStatus == .progress)
                                             ? viewStore.progressList : viewStore.completedList
-                                    ) { meeting in
-                                        // cell
-                                        MeetingListCell(data: meeting)
-                                            .onTapGesture {
-                                                viewStore.send(.pushToMeetingDetail(meeting.id))
+                                            guard let index = list.firstIndex(where: {
+                                                $0.id == meeting.id
+                                            }) else { return }
+                                            
+                                            if index % viewStore.size == viewStore.size-1 {
+                                                viewStore.send(.scrollReachEnd)
                                             }
-                                            .onAppear {
-                                                let list = (viewStore.meetingStatus == .progress)
-                                                ? viewStore.progressList : viewStore.completedList
-                                                guard let index = list.firstIndex(where: {
-                                                    $0.id == meeting.id
-                                                }) else { return }
-
-                                                if index % viewStore.size == viewStore.size-1 {
-                                                    viewStore.send(.scrollReachEnd)
-                                                }
-                                            }
-                                    }
+                                        }
                                 }
-                                .padding(.horizontal, 20)
-                                .padding(.top, 23)
                             }
-                        } else {
-                            emptyView(viewStore.homeStatus)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 23)
                         }
+                    } else {
+                        emptyView(viewStore.homeStatus)
                     }
-                    .refreshable {
-                        viewStore.send(.refreshMeetingList)
-                    }
-
-                    // 임시 버튼
-                    tempButton(viewStore: viewStore)
                 }
-
+                .refreshable {
+                    viewStore.send(.refreshMeetingList)
+                }
+                
                 if viewStore.isRefreshing {
                     ProgressView()
                         .padding(.top, 60)
                         .tint(.white)
                 }
-
+                
                 gradientTop()
             }
             .edgesIgnoringSafeArea(.top)
