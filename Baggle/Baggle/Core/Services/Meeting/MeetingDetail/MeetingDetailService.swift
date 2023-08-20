@@ -19,25 +19,28 @@ extension MeetingDetailService: DependencyKey {
     
     static var liveValue = Self { meetingID in
         do {
-            let userToken = try KeychainManager.shared.readUserToken()
-            let token = userToken.accessToken
+            guard let token = UserManager.shared.accessToken else {
+                return .userError
+            }
             
             let meetingDetailEntity: MeetingDetailEntity = try await networkService.request(
                 .meetingDetail(meetingID: meetingID, token: token)
             )
             
             guard let username = UserDefaultList.user?.name else {
-                return .userError // fatalError?
+                return .userError
             }
             
             let meetingDetail = meetingDetailEntity.toDomain(username: username)
             
             return .success(meetingDetail)
         } catch {
-            if let apiError = error as? APIError {
-                return .fail(apiError)
-            } else {
+            if let apiError = error as? APIError, apiError == .notFound {
+                return .notFound
+            } else if let keyChainError = error as? KeyChainError {
                 return .userError
+            } else {
+                return .networkError(error.localizedDescription)
             }
         }
     }

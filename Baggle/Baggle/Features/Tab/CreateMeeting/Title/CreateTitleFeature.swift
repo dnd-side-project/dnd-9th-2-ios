@@ -30,6 +30,9 @@ struct CreateTitleFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Navigation Bar
+        case backButtonTapped
+        
         // View
         case onAppear
 
@@ -44,6 +47,12 @@ struct CreateTitleFeature: ReducerProtocol {
         // Child Action
         case textFieldAction(BaggleTextFeature.Action)
         case path(StackAction<Child.State, Child.Action>)
+        
+        case delegate(Delegate)
+        
+        enum Delegate: Equatable {
+            case moveToLogin
+        }
     }
 
     struct Child: ReducerProtocol {
@@ -94,6 +103,11 @@ struct CreateTitleFeature: ReducerProtocol {
 
             switch action {
 
+                // Navigation Bar
+                
+            case .backButtonTapped:
+                return .run { _ in await self.dismiss() }
+                
                 // View
             case .onAppear:
                 return .run { send in await send(.textFieldAction(.isFocused(true)))}
@@ -112,6 +126,9 @@ struct CreateTitleFeature: ReducerProtocol {
                         await send(.textFieldAction(.changeState(.invalid("제목을 입력해주세요."))))
                     }
                 } else {
+                    state.meetingCreate = state.meetingCreate.update(
+                        title: state.textFieldState.text
+                    )
                     return .run { send in await send(.moveToNextScreen)}
                 }
 
@@ -133,14 +150,23 @@ struct CreateTitleFeature: ReducerProtocol {
             case .textFieldAction:
                 return .none
 
-                // 모임 장소
+                // MARK: - 모임 장소
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext(place))))):
                 _ = id
                 state.meetingCreate = state.meetingCreate.update(place: place)
                 state.path.append(.meetingDate(CreateDateFeature.State()))
                 return .none
+                
+            case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToBack)))):
+                state.path.pop(from: id)
+                return .none
+                
+            case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToHome)))):
+                _ = id
+                return .run { _ in await self.dismiss() }
 
-                // 모임 날짜
+                // MARK: - 모임 날짜
+                
             case let .path(
                 .element(id: id, action: .meetingDate(.delegate(.moveToNext(meetingTime))))
             ):
@@ -151,22 +177,48 @@ struct CreateTitleFeature: ReducerProtocol {
                 )
                 return .none
 
-                // 모임 메모
-            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToNext)))):
-                _ = id
-                state.path.append(.createSuccess(CreateSuccessFeature.State()))
-                return .none
-                
-            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBefore)))):
+            case let .path(.element(id: id, action: .meetingDate(.delegate(.moveToBack)))):
                 state.path.pop(from: id)
                 return .none
+                
+            case let .path(.element(id: id, action: .meetingDate(.delegate(.moveToHome)))):
+                _ = id
+                return .run { _ in await self.dismiss() }
+                
+                // MARK: - 모임 메모
+            case let .path(
+                .element(id: id, action: .meetingMemo(.delegate(.moveToNext(meetingSuccessModel))))
+            ):
+                _ = id
+                state.path.append(.createSuccess(
+                    CreateSuccessFeature.State(meetingSuccessModel: meetingSuccessModel))
+                )
+                return .none
+                
+            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBack)))):
+                state.path.pop(from: id)
+                return .none
+                
+            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToHome)))):
+                _ = id
+                return .run { _ in await self.dismiss() }
+                
+            case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToLogin)))):
+                _ = id
+                return .run { send in await send(.delegate(.moveToLogin)) }
 
-                // 성공
+                // MARK: - 성공
+                
             case let .path(.element(id: id, action: .createSuccess(.delegate(.moveToHome)))):
                 _ = id
                 return .run { _ in await dismiss() }
 
             case .path:
+                return .none
+                
+                // MARK: - Delegate
+                
+            case .delegate:
                 return .none
             }
         }

@@ -21,10 +21,33 @@ struct MeetingDetail: Equatable {
     let isEmergencyAuthority: Bool // 긴급 버튼 권한자
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: Date? // 긴급 버튼 활성화 시간
+    let emergencyButtonExpiredTime: Date // 긴급 버튼 만료 시간 - 모임 10분 전
     let isCertified: Bool
     let feeds: [Feed]
 
     static func == (lhs: MeetingDetail, rhs: MeetingDetail) -> Bool {
         return lhs.id == rhs.id
+    }
+}
+
+extension MeetingDetail {
+    func updateFeed(_ feed: Feed) -> MeetingDetail {
+        MeetingDetail(
+            id: self.id,
+            name: self.name,
+            place: self.place,
+            date: self.date,
+            time: self.time,
+            memo: self.memo,
+            members: self.members,
+            memberId: self.memberId,
+            status: self.status,
+            isEmergencyAuthority: self.isEmergencyAuthority,
+            emergencyButtonActive: self.emergencyButtonActive,
+            emergencyButtonActiveTime: self.emergencyButtonActiveTime,
+            emergencyButtonExpiredTime: self.emergencyButtonExpiredTime,
+            isCertified: true,
+            feeds: self.feeds + [feed]
+        )
     }
 }

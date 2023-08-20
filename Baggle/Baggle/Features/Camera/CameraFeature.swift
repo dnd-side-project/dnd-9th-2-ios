@@ -12,17 +12,25 @@ import ComposableArchitecture
 struct CameraFeature: ReducerProtocol {
 
     struct State: Equatable {
+        
+        // Image
         var viewFinderImage: Image?
         var resultImage: UIImage?
 
+        // View - Image
         var flipImage: Image?
         var isFlipped: Bool = false
         var flipDegree: Double = 0.0
 
+        // Status
         var isCompleted: Bool = false
+        var isUploading: Bool = false
 
-        // Alert
-        @PresentationState var alert: AlertState<Action.Alert>?
+        // System - Alert
+        @PresentationState var alert: AlertState<Action.SystemAlert>?
+        
+        // Baggle - Alert
+        var alertType: AlertCameraType?
         
         // Timer
         var timer: TimerFeature.State
@@ -47,28 +55,39 @@ struct CameraFeature: ReducerProtocol {
         case reTakeButtonTapped
         case uploadButtonTapped
 
+        // Network
+        case handleFeedPhotoStatus(FeedPhotoStatus)
+        
         // Timer
         case timer(TimerFeature.Action)
         case isTimeOverChanged(Bool)
 
-        // Alert
-        case presentAlert
-        case alert(PresentationAction<Alert>)
-        enum Alert: Equatable {
+        // Alert - System
+        case presentSystemAlert
+        case systemAlert(PresentationAction<SystemAlert>)
+        enum SystemAlert: Equatable {
             case primaryButtonTapped
             case alertCancelTapped
         }
+        
+        // Alert - Baggle
+        case alertType(AlertCameraType)
+        case alertButtonTapped
+        case presentBaggleAlert(Bool)
         
         // Delegate
         case delegate(Delegate)
 
         enum Delegate: Equatable {
             case savePhoto(UIImage)
+            case uploadSuccess(feed: Feed)
+            case moveToLogin
         }
     }
 
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.cameraService) var cameraService
+    @Dependency(\.feedPhotoService) var feedPhotoService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -86,7 +105,7 @@ struct CameraFeature: ReducerProtocol {
 
             // MARK: View Life Cycle
 
-            case .onAppear:
+            case .onAppear:                
                 return .run { send in
                     let cameraStartStatus = await cameraService.start()
 
@@ -101,9 +120,9 @@ struct CameraFeature: ReducerProtocol {
                             }
                         }
                     case .deniedAuthorization:
-                        await send(.presentAlert)
+                        await send(.presentSystemAlert)
                     case .error:
-                        print("error")
+                        await send(.alertType(.cameraConfigureError))
                     }
                 }
 
@@ -129,6 +148,11 @@ struct CameraFeature: ReducerProtocol {
             // MARK: - Camera Tap
 
             case .shutterTapped:
+                #if targetEnvironment(simulator)
+                return .run { send in
+                    await send(.completeTakePhoto(UIImage(systemName: "star.fill")))
+                }
+                #else
                 return .run { send in
                     let cameraTakePhotoStatus = await cameraService.takePhoto()
                     
@@ -139,6 +163,7 @@ struct CameraFeature: ReducerProtocol {
                         print("사진 촬영 error")
                     }
                 }
+                #endif
 
             case .switchButtonTapped:
                 state.flipImage = state.viewFinderImage
@@ -160,11 +185,58 @@ struct CameraFeature: ReducerProtocol {
                 return .none
 
             case .uploadButtonTapped:
-                // 이미지 업로드
-                return .run { _ in await self.dismiss() }
+                state.isUploading = true
+                
+                guard let resultImage = state.resultImage else {
+                    // 이미지 없음
+                    state.alertType = .noResultImage
+                    return .none
+                }
+                
+                guard let feedPhotoRequestModel = FeedPhotoRequestModel(
+                    memberID: 22,
+                    time: Date(),
+                    feedImage: resultImage
+                ) else {
+                    state.alertType = .compressionError
+                    return .none
+                }
+                
+                return .run { send in
+                    let feedPhotoStatus = await feedPhotoService.upload(feedPhotoRequestModel)
+                    await send(.handleFeedPhotoStatus(feedPhotoStatus))
+                }
+                
+                // MARK: - Network
+                
+            case .handleFeedPhotoStatus(let status):
+                state.isUploading = false
+                switch status {
+                case .success(let feed):
+                    return .run { send in
+                        await send(.delegate(.uploadSuccess(feed: feed)))
+                        await self.dismiss()
+                    }
+                case .invalidAuthorizationTime:
+                    state.alertType = .invalidAuthorizationTime
+                    return .none
+                case .notFound:
+                    state.alertType = .notFound
+                    return .none
+                case .alreadyUpload:
+                    state.alertType = .alreadyUpload
+                    return .none
+                case .networkError(let description):
+                    state.alertType = .networkError(description)
+                    return .none
+                case .userError:
+                    state.alertType = .userError
+                    return .none
+                }
                 
                 // MARK: - Alert
-            case .presentAlert:
+
+            case .presentSystemAlert:
                 state.alert = AlertState(title: {
                     TextState("카메라 권한이 필요해요")
                 }, actions: {
@@ -180,16 +252,47 @@ struct CameraFeature: ReducerProtocol {
                 })
                 return .none
                 
-            case .alert(.presented(.primaryButtonTapped)):
+            case .systemAlert(.presented(.primaryButtonTapped)):
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }
                 return .none
                 
-            case .alert(.presented(.alertCancelTapped)):
+            case .systemAlert(.presented(.alertCancelTapped)):
                 return .run { _ in await self.dismiss() }
                 
-            case .alert:
+            case .systemAlert:
+                return .none
+                
+                // MARK: - Baggle Alert
+                
+            case .alertType(let alertType):
+                state.alertType = alertType
+                return .none
+                
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload:
+                    return .run { _ in await self.dismiss() }
+                case .userError:
+                    return .run { send in await send(.delegate(.moveToLogin)) }
+                case .noResultImage:
+                    state.resultImage = nil
+                    state.isCompleted = false
+                    return .none
+                case .notFound, .networkError, .compressionError:
+                    return .none
+                }
+                
+            case .presentBaggleAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
                 return .none
 
                 // MARK: - Timer
@@ -201,7 +304,9 @@ struct CameraFeature: ReducerProtocol {
                 return .none
 
             case let .isTimeOverChanged(isTimeOver):
-                state.isTimeOver = isTimeOver
+                if !state.isUploading {
+                    state.isTimeOver = isTimeOver
+                }
                 return isTimeOver ? .none : .run { _ in await self.dismiss() }
                 
                 // MARK: - Delegate
@@ -210,6 +315,6 @@ struct CameraFeature: ReducerProtocol {
                 return .none
             }
         }
-        .ifLet(\.$alert, action: /Action.alert)
+        .ifLet(\.$alert, action: /Action.systemAlert)
     }
 }

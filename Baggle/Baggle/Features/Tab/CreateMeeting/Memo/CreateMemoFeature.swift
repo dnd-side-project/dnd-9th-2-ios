@@ -14,7 +14,11 @@ struct CreateMemoFeature: ReducerProtocol {
     struct State: Equatable {
         
         var meetingCreate: MeetingCreateModel
+        var alertType: AlertCreateMeetingType?
+        
+        // View
         var isAlertPresented: Bool = false
+        var isLoading: Bool = false
         
         // Child
         var textEditorState = BaggleTextFeature.State(
@@ -25,12 +29,16 @@ struct CreateMemoFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        // Navigation Bar
+        case backButtonTapped
+        case closeButtonTapped
+        
         // Button
         case nextButtonTapped
 
-        // View
-        case moveToNextScreen
-
+        // Network
+        case handleStatus(MeetingCreateStatus)
+        
         // Alert
         case presentAlert
         case alertButtonTapped
@@ -41,11 +49,15 @@ struct CreateMemoFeature: ReducerProtocol {
         // Delegate
         case delegate(Delegate)
 
-        enum Delegate {
-            case moveToNext
-            case moveToBefore
+        enum Delegate: Equatable {
+            case moveToNext(MeetingSuccessModel)
+            case moveToBack
+            case moveToHome
+            case moveToLogin
         }
     }
+    
+    @Dependency(\.meetingCreateService) private var meetingCreateService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -61,28 +73,78 @@ struct CreateMemoFeature: ReducerProtocol {
 
             switch action {
 
+                // Navigation Bar
+                
+            case .backButtonTapped:
+                return .run { send in await send(.delegate(.moveToBack))}
+                
+            case .closeButtonTapped:
+                return .run { send in await send(.delegate(.moveToHome))}
+                
                 // Button
 
-            case .nextButtonTapped:
+            case .nextButtonTapped:                
                 if let meetingTime = state.meetingCreate.time, !meetingTime.canMeeting {
                     state.isAlertPresented = true
                     return .none
                 }
                 
                 let memo = state.textEditorState.text
-                state.meetingCreate.update(memo: memo)
+                state.meetingCreate =  state.meetingCreate.update(memo: memo)
+                let requestModel = state.meetingCreate
+                state.isLoading = true
+
+                return .run { send in
+                    let meetingCreateStatus = await meetingCreateService.create(requestModel)
+                    await send(.handleStatus(meetingCreateStatus))
+                }
+
+                // Network
+            case .handleStatus(let status):
+                state.isLoading = false
                 
-                return .run { send in await send(.moveToNextScreen) }
-
-            case .moveToNextScreen:
-                return .run { send in await send(.delegate(.moveToNext)) }
-
+                switch status {
+                case .success(let meetingSuccessModel):
+                    return .run { send in
+                        await send(.delegate(.moveToNext(meetingSuccessModel)))
+                    }
+                case .duplicatedMeeting:
+                    state.alertType = .duplicatedMeeting
+                    return .none
+                case .networkError(let description):
+                    state.alertType = .networkError(description)
+                    return .none
+                case .userError:
+                    state.alertType = .userError
+                    return .none
+                case .requestModelError:
+                    state.alertType = .requestModelError
+                    return .none
+                }
+                
                 // Alert
             case .presentAlert:
                 return .none
                 
             case .alertButtonTapped:
-                return .run { send in await send(.delegate(.moveToBefore))}
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .forbiddenMeetingTime:
+                    return .run { send in await send(.delegate(.moveToBack))}
+                case .duplicatedMeeting:
+                    return .run { send in await send(.delegate(.moveToBack))}
+                case .networkError:
+                    return .none
+                case .userError:
+                    return .run { send in await send(.delegate(.moveToLogin))}
+                case .requestModelError:
+                    return .run { send in await send(.delegate(.moveToHome))}
+                }
+                
                 // TextField
 
             case .textEditorAction:
@@ -93,7 +155,13 @@ struct CreateMemoFeature: ReducerProtocol {
             case .delegate(.moveToNext):
                 return .none
                 
-            case .delegate(.moveToBefore):
+            case .delegate(.moveToBack):
+                return .none
+                
+            case .delegate(.moveToHome):
+                return .none
+                
+            case .delegate(.moveToLogin):
                 return .none
             }
         }

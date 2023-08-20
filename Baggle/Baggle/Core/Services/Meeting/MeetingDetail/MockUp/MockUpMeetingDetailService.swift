@@ -146,11 +146,12 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: true,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: Date(timeIntervalSince1970: 1659261600),
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: true,
             feeds: [
                 Feed(
                     id: 0,
-                    userId: 0,
+                    userID: 0,
                     username: "테스트 유저1",
                     userImageURL: "https://avatars.githubusercontent.com/u/71776532?v=4",
                     feedImageURL: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230327_112%2F16799270480919mNeo_JPEG%2F1679927034445.jpg"
@@ -158,7 +159,7 @@ extension MockUpMeetingAPI {
                 ),
                 Feed(
                     id: 1,
-                    userId: 1,
+                    userID: 1,
                     username: "유저2",
                     userImageURL: "https://avatars.githubusercontent.com/u/81167570?v=4",
                     feedImageURL: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230712_205%2F1689152621857ctqiJ_JPEG%2F%25C8%25A3%25C4%25BF%25BC%25BE%25C5%25CD%25BB%25E7%25C1%25F8_1.jpg"
@@ -201,6 +202,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: false,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: false,
             feeds: []
         )
@@ -239,6 +241,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: true,
             emergencyButtonActive: false,
             emergencyButtonActiveTime: nil,
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: false,
             feeds: []
         )
@@ -277,6 +280,7 @@ extension MockUpMeetingAPI {
             isEmergencyAuthority: true,
             emergencyButtonActive: true,
             emergencyButtonActiveTime: Date.createDate(2023, 8, 11, 13, 30),
+            emergencyButtonExpiredTime: Date(timeIntervalSince1970: 1659262200),
             isCertified: false,
             feeds: []
         )

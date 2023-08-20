@@ -21,7 +21,7 @@ struct MeetingDetailView: View {
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            // zstack 순서: alert > navigationBar > scrollView
+            // zstack 순서: alert > navigationBar > scrollView > background
             ZStack(alignment: .top) {
                 
                 if viewStore.isLoading {
@@ -29,34 +29,45 @@ struct MeetingDetailView: View {
                 }
                 
                 ScrollView {
-                    
-                    if let data = viewStore.meetingData {
-                        // header
-                        headerView(data: data)
-                        
-                        // 참여자 목록
-                        memberListView(viewStore: viewStore)
-                            .padding(.horizontal, 20)
-                            .drawUnderline(
-                                spacing: 0,
-                                height: 0.5,
-                                color: .gray4
-                            )
-                        
-                        // 인증 피드
-                        if !data.feeds.isEmpty {
-                            feedView(
-                                feeds: data.feeds,
-                                viewStroe: viewStore
-                            )
-                            .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
-                        } else {
-                            // 엠티뷰
-                            emptyView()
+                    VStack(spacing: 0) {
+                        if let data = viewStore.meetingData {
+                            // header
+                            headerView(data: data)
+                            
+                            // 참여자 목록
+                            memberListView(viewStore: viewStore)
+                                .padding(.horizontal, 20)
+                                .drawUnderline(
+                                    spacing: 0,
+                                    height: 0.5,
+                                    color: .gray4
+                                )
+                                .background(.white)
+                            
+                            // 인증 피드
+                            if !data.feeds.isEmpty {
+                                feedView(
+                                    feeds: data.feeds,
+                                    viewStroe: viewStore
+                                )
+                                .padding(
+                                    EdgeInsets(top: 14,
+                                               leading: 20,
+                                               bottom: 20,
+                                               trailing: 20)
+                                )
+                                .background(.white)
+                            } else {
+                                // 엠티뷰
+                                emptyView()
+                                    .background(.white)
+                            }
                         }
                     }
                 }
-                .refreshable { viewStore.send(.onAppear) }
+                .refreshable {
+                    viewStore.send(.onAppear)
+                }
                 
                 VStack {
                     // navibar
@@ -79,15 +90,33 @@ struct MeetingDetailView: View {
                 
                 // Error - alert
                 
-                if viewStore.isErrorAlertPresented {
-                    errorAlert(
-                        isPresented: Binding(
-                            get: { viewStore.isErrorAlertPresented },
-                            set: { _ in viewStore.send(.presentErrorAlert("")) }
-                        ),
-                        description: viewStore.errorDescription
-                    ) {
-                        viewStore.send(.errorAlertButtonTapped)
+                if let alertType = viewStore.alertType {
+                    if alertType.buttonType == .one {
+                        BaggleAlertOneButton(
+                            isPresented: Binding(
+                                get: { viewStore.alertType != nil },
+                                set: { viewStore.send(.presentAlert($0)) }
+                            ),
+                            title: alertType.title,
+                            description: alertType.description,
+                            buttonTitle: alertType.buttonTitle
+                        ) {
+                            viewStore.send(.alertButtonTapped)
+                        }
+                    } else if alertType.buttonType == .two {
+                        BaggleAlertTwoButton(
+                            isPresented: Binding(
+                                get: { viewStore.alertType != nil },
+                                set: { viewStore.send(.presentAlert($0)) }
+                            ),
+                            title: alertType.title,
+                            description: alertType.description,
+                            alertType: .destructive,
+                            rightButtonTitle: alertType.buttonTitle,
+                            leftButtonAction: nil
+                        ) {
+                            viewStore.send(.alertButtonTapped)
+                        }
                     }
                 }
                 
@@ -145,6 +174,7 @@ struct MeetingDetailView: View {
 }
 
 extension MeetingDetailView {
+    // swiftlint:disable:next line_length
     typealias MeetingDetailViewStore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
     
     func meetingTitleView(name: String, status: MeetingStatus) -> some View {
@@ -214,26 +244,40 @@ extension MeetingDetailView {
     }
     
     func headerView(data: MeetingDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // 모임방 이름, 스탬프
-            meetingTitleView(
-                name: data.name,
-                status: data.status
-            )
+        GeometryReader { geo in
+            let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
             
-            // 장소, 시간
-            meetingDateView(
-                place: data.place,
-                date: data.date,
-                time: data.time
-            )
-            
-            // 메모
-            meetingMemoView(memo: data.memo)
-                .padding(.top, 10)
+            ZStack(alignment: .bottomLeading) {
+                Color.PrimaryLight
+                    .frame(width: geo.size.width, height: geo.size.height - yOffset)
+                    .offset(y: yOffset)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    // 모임방 이름, 스탬프
+                    meetingTitleView(
+                        name: data.name,
+                        status: data.status
+                    )
+                    
+                    // 장소, 시간
+                    meetingDateView(
+                        place: data.place,
+                        date: data.date,
+                        time: data.time
+                    )
+                    
+                    // 메모
+                    meetingMemoView(memo: data.memo)
+                        .padding(.top, 10)
+                }
+                .padding(EdgeInsets(top: 8, leading: 20, bottom: 24, trailing: 20))
+                .offset(y: yOffset)
+            }
         }
-        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
-        .background(Color.PrimaryLight)
+        .frame(
+            height: (data.memo?.width(15) ?? 0) >= screenSize.width - 40 ? 240 : 188
+        )
+        .padding(.top, 56)
     }
     
     func memberListView(viewStore: MeetingDetailViewStore) -> some View {
@@ -339,6 +383,7 @@ extension MeetingDetailView {
                 .font(.Baggle.body2)
                 .foregroundColor(.gray6)
         }
+        .frame(width: screenSize.width)
     }
 }
 

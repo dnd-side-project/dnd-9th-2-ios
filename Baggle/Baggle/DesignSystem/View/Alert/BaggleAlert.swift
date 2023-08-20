@@ -67,7 +67,7 @@ struct BaggleAlertOneButton: View {
     
     var body: some View {
         ZStack {
-            ShadeView(isPresented: $isPresented)
+            ShadeView(isPresented: $isPresented, enableTouch: false)
             
             VStack(spacing: 40) {
                 
@@ -85,6 +85,7 @@ struct BaggleAlertOneButton: View {
                     }
                 }
                 .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
                 
                 HStack {
                     
@@ -119,10 +120,16 @@ struct BaggleAlertTwoButton: View {
         screenSize.width - 40
     }
     
+    private var buttonWidth: CGFloat {
+        (alertWidth - 48) / 2
+    }
+    
     @Binding var isPresented: Bool
     
     private var title: String
     private var description: String?
+    private let alertType: BaggleAlertType
+    
     private var leftButtonTitle: String
     private var rightButtonTitle: String
     private let leftButtonAction: (() -> Void)?
@@ -132,6 +139,7 @@ struct BaggleAlertTwoButton: View {
         isPresented: Binding<Bool>,
         title: String,
         description: String? = nil,
+        alertType: BaggleAlertType = .none,
         leftButtonTitle: String = "취소",
         rightButtonTitle: String = "네",
         leftButtonAction: (() -> Void)? = nil,
@@ -140,6 +148,7 @@ struct BaggleAlertTwoButton: View {
         self._isPresented = isPresented
         self.title = title
         self.description = description
+        self.alertType = alertType
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
         self.leftButtonAction = leftButtonAction
@@ -174,20 +183,21 @@ struct BaggleAlertTwoButton: View {
                     } label: {
                         Text(leftButtonTitle)
                             .foregroundColor(.gray7)
-                            .frame(width: alertWidth/2, height: 52)
+                            .frame(width: buttonWidth, height: 52)
+                            .background(Color.gray4)
+                            .cornerRadius(8)
                     }
-                    .buttonStyle(BagglePrimaryStyle(size: .small))
                     
                     Button {
                         rightButtonAction()
                         isPresented.toggle()
                     } label: {
                         Text(rightButtonTitle)
-                            .frame(width: alertWidth/2, height: 52)
+                            .foregroundColor(.white)
+                            .frame(width: buttonWidth, height: 52)
+                            .background(alertType.backgroundColor)
+                            .cornerRadius(8)
                     }
-                    .buttonStyle(
-                        BagglePrimaryStyle(size: .small)
-                    )
                 }
                 .frame(width: alertWidth, height: 54)
             }

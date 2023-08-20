@@ -23,7 +23,7 @@ struct AppFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case login(LoginFeature.Action)
-        case logout(MainTabFeature.Action)
+        case mainTab(MainTabFeature.Action)
     }
 
     var body: some ReducerProtocolOf<Self> {
@@ -34,7 +34,7 @@ struct AppFeature: ReducerProtocol {
             LoginFeature()
         }
 
-        Scope(state: \.mainTabFeature, action: /Action.logout) {
+        Scope(state: \.mainTabFeature, action: /Action.mainTab) {
             MainTabFeature()
         }
 
@@ -54,11 +54,11 @@ struct AppFeature: ReducerProtocol {
 
             // MainTab Feature
 
-            case .logout(.logoutMainTab(.delegate(.moveToLogin))):
+            case .mainTab(.delegate(.moveToLogin)):
                 state.isLoggedIn = false
                 return .none
 
-            case .logout:
+            case .mainTab:
                 return .none
             }
         }

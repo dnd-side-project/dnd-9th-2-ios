@@ -9,6 +9,7 @@ import Foundation
 
 enum MeetingDetailStatus: Equatable {
     case success(MeetingDetail)
-    case fail(APIError)
     case userError
+    case notFound
+    case networkError(String)
 }

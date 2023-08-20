@@ -64,6 +64,13 @@ struct HomeFeature: ReducerProtocol {
 
         case cameraButtonTapped
         case usingCamera(PresentationAction<CameraFeature.Action>)
+        
+        // Delegate
+        case delegate(Delegate)
+        
+        enum Delegate: Equatable {
+            case moveToLogin
+        }
     }
 
     @Dependency(\.meetingService) var meetingService
@@ -188,6 +195,9 @@ struct HomeFeature: ReducerProtocol {
                 state.pushMeetingDetail = true
                 return .none
 
+                // MARK: - Child
+                
+                // Meeting Detail
             case .meetingDetailAction(.delegate(.onDisappear)):
                 state.pushMeetingDetail = false
                 state.meetingDetailId = nil
@@ -198,16 +208,22 @@ struct HomeFeature: ReducerProtocol {
                     await send(.refreshMeetingList)
                 }
 
+            case .meetingDetailAction(.delegate(.moveToLogin)):
+                return .run { send in await send(.delegate(.moveToLogin)) }
+                
             case .meetingDetailAction:
                 return .none
 
             case .cameraButtonTapped:
                 state.usingCamera = CameraFeature.State(
-                    timer: TimerFeature.State(timerCount: 30)
+                    timer: TimerFeature.State(timerCount: 1)
                 )
                 return .none
 
             case .usingCamera:
+                return .none
+                
+            case .delegate:
                 return .none
             }
         }

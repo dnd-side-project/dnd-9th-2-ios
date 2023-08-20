@@ -13,6 +13,7 @@ struct AppView: View {
 
     let store: StoreOf<AppFeature>
 
+    @State var skipSplash: Bool = false
     @State var splashStarted: Bool = false
     @State var splashEnded: Bool = false
 
@@ -26,7 +27,7 @@ struct AppView: View {
                         MainTabView(
                             store: self.store.scope(
                                 state: \.mainTabFeature,
-                                action: AppFeature.Action.logout
+                                action: AppFeature.Action.mainTab
                             )
                         )
                     } else {
@@ -50,11 +51,20 @@ struct AppView: View {
             withAnimation {
                 splashStarted = true
             }
-
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (skipSplash ? 0 : 1)) {
                 withAnimation {
                     splashEnded = true
                 }
+            }
+        }
+        .onReceive(
+            NotificationCenter.default.publisher(for: .skipSplash)
+        ) { noti in
+            skipSplash = true
+            splashEnded = true
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                postObserverAction(.moveMeetingDetail, object: noti.object)
             }
         }
     }
@@ -68,6 +78,7 @@ struct ContentView_Previews: PreviewProvider {
                             isLoggedIn: true,
                             loginFeature: LoginFeature.State(),
                             mainTabFeature: MainTabFeature.State(
+                                homeFeature: HomeFeature.State(),
                                 myPageFeature: MyPageFeature.State()
                             )
                         ),

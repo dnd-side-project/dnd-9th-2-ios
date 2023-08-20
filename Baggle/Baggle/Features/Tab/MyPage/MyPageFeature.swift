@@ -20,6 +20,8 @@ struct MyPageFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
+        case onAppear
+        
         case logoutMyPage
 
         case notificationSettingButtonTapped
@@ -43,6 +45,9 @@ struct MyPageFeature: ReducerProtocol {
 
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                state.user = UserDefaultList.user ?? User.error()
+                return .none
 
             case .logoutMyPage:
                 return .none
@@ -65,12 +70,7 @@ struct MyPageFeature: ReducerProtocol {
                 
             case .logoutButtonTapped:
                 // 임시 로그아웃 연결
-                do {
-                    try KeychainManager.shared.deleteUserToken()
-                } catch let error {
-                    print("Keychain error - \(error)")
-                }
-                UserDefaultList.user = nil
+                UserManager.shared.delete()
                 return .run { send in await send(.delegate(.moveToLogin)) }
                 
             case .withdrawButtonTapped:

@@ -19,44 +19,62 @@ struct EmergencyView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            GeometryReader { _ in
+            ZStack {
+                GeometryReader { _ in
 
-                // MARK: - Background
-
-                if viewStore.isEmergency {
-                    Image.Background.home
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                }
-
-                VStack(spacing: 0) {
-
-                    // MARK: - Status Bar
-
-                    HStack {
-                        Spacer()
-
-                        Button {
-                            viewStore.send(.closeButtonTapped)
-                        } label: {
-                            Image.Icon.close
-                                .frame(width: 24, height: 24)
-                                .padding(10)
-                        }
-                    }
-                    .padding(.horizontal, 10)
-
-                    // MARK: - Content
+                    // MARK: - Background
 
                     if viewStore.isEmergency {
-                        afterEmergency(viewStore: viewStore)
-                    } else {
-                        beforeEmergency(viewStore: viewStore)
+                        Image.Background.home
+                            .resizable()
+                            .scaledToFill()
+                            .ignoresSafeArea()
                     }
+
+                    VStack(spacing: 0) {
+
+                        // MARK: - Status Bar
+
+                        HStack {
+                            Spacer()
+
+                            Button {
+                                viewStore.send(.closeButtonTapped)
+                            } label: {
+                                Image.Icon.close
+                                    .frame(width: 24, height: 24)
+                                    .padding(10)
+                            }
+                        }
+                        .padding(.horizontal, 10)
+
+                        // MARK: - Content
+
+                        if viewStore.isEmergency {
+                            afterEmergency(viewStore: viewStore)
+                        } else {
+                            beforeEmergency(viewStore: viewStore)
+                        }
+                    }
+                }
+                
+                if viewStore.isTimeExpired {
+                    DescriptionView(
+                        isPresented: Binding(
+                            get: { viewStore.isTimeExpired },
+                            set: { viewStore.send(.timeExpiredChanged($0))}
+                        ),
+                        text: "시간 경과로 긴급 버튼이 자동으로 호출됐습니다"
+                    )
                 }
             }
             .animation(.easeIn(duration: 0.3), value: viewStore.isEmergency)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
+            .onDisappear {
+                viewStore.send(.onDisappear)
+            }
         }
     }
 }
@@ -156,7 +174,10 @@ struct EmergencyView_Previews: PreviewProvider {
     static var previews: some View {
         EmergencyView(
             store: Store(
-                initialState: EmergencyFeature.State(memberID: 100),
+                initialState: EmergencyFeature.State(
+                    memberID: 100,
+                    remainTimeUntilExpired: 30
+                ),
                 reducer: EmergencyFeature()
             )
         )

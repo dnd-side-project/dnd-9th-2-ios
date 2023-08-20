@@ -103,6 +103,9 @@ struct MyPageView: View {
                 .listRowInsets(EdgeInsets())
                 .listStyle(.plain)
             }
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             .fullScreenCover(
                 isPresented: viewStore.binding(
                     get: \.presentSafariView,
