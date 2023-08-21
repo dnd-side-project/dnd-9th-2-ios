@@ -8,6 +8,11 @@
 import Foundation
 
 enum EmergencyServiceStatus: Equatable {
-    case success
-    case fail(APIError)
+    case success(Date)
+    
+    case invalidAuthorizationTime
+    case unAuthorized
+    case notFound
+    case userError
+    case networkError(String)
 }

@@ -90,14 +90,6 @@ struct HomeView: View {
                     )
                 )
             }
-            .fullScreenCover(
-                store: self.store.scope(
-                    state: \.$usingCamera,
-                    action: { .usingCamera($0)}
-                )
-            ) { cameraStore in
-                    CameraView(store: cameraStore)
-            }
         }
     }
 }
@@ -197,30 +189,6 @@ extension HomeView {
             }
         }
         .frame(height: 260)
-    }
-
-    // 임시 버튼
-    func tempButton(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
-        HStack(spacing: 20) {
-            Button {
-                viewStore.send(.fetchMeetingList(.progress))
-            } label: {
-                Text("예정된 약속 업데이트")
-            }
-
-            Button {
-                viewStore.send(.fetchMeetingList(.completed))
-            } label: {
-                Text("지난 약속 업데이트")
-            }
-
-            Button {
-                viewStore.send(.cameraButtonTapped)
-            } label: {
-                Text("카메라")
-            }
-        }
-        .padding()
     }
 }
 

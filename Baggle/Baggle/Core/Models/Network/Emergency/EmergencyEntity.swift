@@ -9,7 +9,7 @@ import Foundation
 
 struct EmergencyEntity: Codable {
     let meetingID: Int
-    let certificationTime: Date?
+    let certificationTime: Date
 
     enum CodingKeys: String, CodingKey {
         case meetingID = "meetingId"
