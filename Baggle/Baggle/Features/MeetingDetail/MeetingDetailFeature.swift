@@ -109,8 +109,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                state.alertType = .meetingNotFound
-                return .none
                 let meetingID = state.meetingId
                 
                 if meetingID == Const.ErrorID.meeting {
