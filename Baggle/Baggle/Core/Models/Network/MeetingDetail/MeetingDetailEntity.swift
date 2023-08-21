@@ -13,12 +13,13 @@ struct MeetingDetailEntity: Codable {
     let place: String
     let meetingTime: Date
     let memo: String?
+    let status: String
     let certificationTime: Date?
     let members: [MeetingDetailMemberEntity]
 
     enum CodingKeys: String, CodingKey {
         case meetingID = "meetingId"
-        case title, place, meetingTime, memo, certificationTime, members
+        case title, place, meetingTime, memo, status, certificationTime, members
     }
 }
 
@@ -33,7 +34,7 @@ extension MeetingDetailEntity {
             memo: self.memo,
             members: self.members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
             memberId: memberId(username: username, members: members),
-            status: meetingStatus(date: self.meetingTime),
+            status: meetingStatus(),
             isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
             emergencyButtonActiveTime: self.certificationTime,
@@ -43,6 +44,16 @@ extension MeetingDetailEntity {
         )
     }
 
+    private func meetingStatus() -> MeetingStatus {
+        switch status {
+        case "SCHEDULED": return .ready
+        case "ONGOING": return .progress
+        case "CONFIRMATION": return .confirmed
+        case "TERMINATION": return .completed
+        default: return meetingStatus(date: self.meetingTime)
+        }
+    }
+    
     private func meetingStatus(date: Date) -> MeetingStatus {
         
         // 약속 전날
