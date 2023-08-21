@@ -20,7 +20,7 @@ struct LoginView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
             ZStack {
-                // 로티 추가
+
                 LottieView(lottieType: .splash, completion: {
                     viewStore.send(.completeSplashAnimation)
                 })
