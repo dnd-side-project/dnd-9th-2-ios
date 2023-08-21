@@ -46,7 +46,7 @@ struct MyPageFeature: ReducerProtocol {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                state.user = UserDefaultList.user ?? User.error()
+                state.user = UserManager.shared.user ?? User.error()
                 return .none
 
             case .logoutMyPage:

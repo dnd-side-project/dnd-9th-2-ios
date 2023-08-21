@@ -8,9 +8,6 @@
 import SwiftUI
 
 import ComposableArchitecture
-import KakaoSDKCommon
-import KakaoSDKShare
-import KakaoSDKTemplate
 
 struct CreateSuccessFeature: ReducerProtocol {
 
@@ -42,20 +39,26 @@ struct CreateSuccessFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { _, action in
+        Reduce { state, action in
 
             switch action {
 
             case .kakaoInviteButtonTapped:
+                let meetingTitle = state.meetingSuccessModel.title
+                let meetingId = state.meetingSuccessModel.id
                 return .run { _ in
-                    if ShareApi.isKakaoTalkSharingAvailable() {
-                        if let url = await sendInvitation(name: "집들이집들", id: 1000) {
+                    do {
+                        if let url = try await sendInvitation(
+                            name: meetingTitle,
+                            id: meetingId
+                        ) {
                             openURL(url)
                         } else {
-                            // 실패
+                            guard let url = URL(string: Const.URL.kakaoAppStore) else { return }
+                            openURL(url)
                         }
-                    } else {
-                        moveToAppStore()
+                    } catch {
+                        print("카카오 링크 공유 실패")
                     }
                 }
 
@@ -65,13 +68,6 @@ struct CreateSuccessFeature: ReducerProtocol {
             case .delegate(.moveToHome):
                 return .none
             }
-        }
-    }
-
-    @Sendable func moveToAppStore() {
-        let url = "itms-apps://itunes.apple.com/app/362057947"
-        if let url = URL(string: url) {
-            openURL(url)
         }
     }
 }
