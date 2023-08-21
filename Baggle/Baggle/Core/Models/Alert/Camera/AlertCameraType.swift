@@ -20,7 +20,9 @@ enum AlertCameraType: Equatable {
     case userError // 유저 에러
 }
 
-extension AlertCameraType {
+extension AlertCameraType: AlertType {
+    
+    var buttonType: AlertButtonType { return .one }
     
     var title: String {
         switch self {

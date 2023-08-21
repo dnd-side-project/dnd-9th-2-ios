@@ -15,7 +15,9 @@ enum AlertCreateMeetingType: Equatable {
     case requestModelError // 모델 생성 에러
 }
 
-extension AlertCreateMeetingType {
+extension AlertCreateMeetingType: AlertType {
+    
+    var buttonType: AlertButtonType { return .one }
 
     var title: String {
         switch self {

@@ -15,7 +15,9 @@ enum AlertEmergencyType: Equatable {
     case userError // 유저 에러
 }
 
-extension AlertEmergencyType {
+extension AlertEmergencyType: AlertType {
+    
+    var buttonType: AlertButtonType { return .one }
     
     var title: String {
         switch self {
