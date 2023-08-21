@@ -78,7 +78,7 @@ extension MeetingDetailEntity {
     // 서버에서 멤버가 새로 들어올 때마다 랜덤으로 권한자가 설정됨
     // 모임 확정 시간 전까지 버튼 권한자를 보여주면 안 됨
     private func isMeetingConfirmed() -> Bool {
-        return meetingStatus(date: self.meetingTime) == .confirmed
+        return meetingStatus() == .confirmed
     }
     
     private func memberId(username: String, members: [MeetingDetailMemberEntity]) -> Int {
