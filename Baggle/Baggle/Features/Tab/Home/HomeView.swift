@@ -34,13 +34,13 @@ struct HomeView: View {
                                         }
                                         .onAppear {
                                             let list = (viewStore.meetingStatus == .progress)
-                                            ? viewStore.progressList : viewStore.completedList
+                                                ? viewStore.progressList : viewStore.completedList
                                             guard let index = list.firstIndex(where: {
                                                 $0.id == meeting.id
                                             }) else { return }
                                             
                                             if index % viewStore.size == viewStore.size-1 {
-                                                viewStore.send(.scrollReachEnd)
+                                                viewStore.send(.scrollReachEnd((index)))
                                             }
                                         }
                                 }

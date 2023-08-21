@@ -31,6 +31,8 @@ struct HomeFeature: ReducerProtocol {
         var size: Int = 5
         var progressIndex: Int = 0
         var completedIndex: Int = 0
+        var requestedProgressIndex: Set<Int> = []
+        var requestedCompletedIndex: Set<Int> = []
         
         // 모임 상세
         var meetingDetailId: Int?
@@ -49,7 +51,7 @@ struct HomeFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case onAppear
-        case scrollReachEnd
+        case scrollReachEnd(Int)
         case changeHomeStatus(HomeStatus)
         case fetchMeetingList(MeetingStatus)
         case updateMeetingList(MeetingStatus, Home)
@@ -99,9 +101,22 @@ struct HomeFeature: ReducerProtocol {
                 }
                 
                 // 스크롤 끝에 닿은 경우 데이터 요청
-            case .scrollReachEnd:
+            case .scrollReachEnd(let index):
                 // meetingStatus에 따라 fetchMeetingList 요청
                 let status = state.meetingStatus
+                if status == .progress {
+                    if state.requestedProgressIndex.contains(index) {
+                        return .none
+                    } else {
+                        state.requestedProgressIndex.insert(index)
+                    }
+                } else {
+                    if state.requestedCompletedIndex.contains(index) {
+                        return .none
+                    } else {
+                        state.requestedCompletedIndex.insert(index)
+                    }
+                }
                 return .run { send in await send(.fetchMeetingList(status))}
 
                 // 데이터 요청 후 뷰 상태 변경
@@ -130,10 +145,12 @@ struct HomeFeature: ReducerProtocol {
                 state.isRefreshing = true
                 state.homeStatus = .loading
                 state.meetingStatus = .progress
-                state.progressList.removeAll()
-                state.completedList.removeAll()
                 state.progressIndex = 0
                 state.completedIndex = 0
+                state.progressList.removeAll()
+                state.completedList.removeAll()
+                state.requestedProgressIndex.removeAll()
+                state.requestedCompletedIndex.removeAll()
                 let requestModel = HomeRequestModel(status: .progress, page: 0, size: state.size)
                 return .run { send in
                     let result = await meetingService.fetchMeetingList(requestModel)
