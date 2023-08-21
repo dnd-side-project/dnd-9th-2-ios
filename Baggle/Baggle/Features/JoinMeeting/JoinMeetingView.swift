@@ -39,7 +39,9 @@ struct JoinMeetingView: View {
                             .padding(.bottom, 16)
                     }
                 } else {
-                    baggleAlert(viewStore: viewStore)
+                    if let alertType = viewStore.alertType {
+                        baggleAlert(viewStore: viewStore, alertType: alertType)
+                    }
                 }
             }
             .onAppear { viewStore.send(.onAppear) }
@@ -124,15 +126,15 @@ extension JoinMeetingView {
         }
     }
     
-    func baggleAlert(viewStore: Viewstore) -> some View {
+    func baggleAlert(viewStore: Viewstore, alertType: AlertType) -> some View {
         BaggleAlertOneButton(
             isPresented: Binding(
-                get: { viewStore.isAlertPresented },
-                set: { _ in viewStore.send(.presentAlert) }
+                get: { viewStore.alertType != nil },
+                set: { viewStore.send(.presentAlert($0)) }
             ),
-            title: "이미 만료된 방이에요!",
-            description: "약속 1시간 전까지만 입장이 가능해요.",
-            buttonTitle: "확인") {
+            title: alertType.title,
+            description: alertType.description,
+            buttonTitle: alertType.buttonTitle) {
                 viewStore.send(.exitButtonTapped)
             }
     }
@@ -142,7 +144,9 @@ struct JoinMeetingView_Previews: PreviewProvider {
     static var previews: some View {
         JoinMeetingView(
             store: Store(
-                initialState: JoinMeetingFeature.State(meetingId: 100, joinMeeingStatus: .expired),
+                initialState: JoinMeetingFeature.State(
+                    meetingId: 100,
+                    joinMeeingStatus: .expired(.overlapMeetingTime)),
                 reducer: JoinMeetingFeature()
             )
         )

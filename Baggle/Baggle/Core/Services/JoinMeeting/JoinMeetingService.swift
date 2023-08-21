@@ -36,7 +36,7 @@ extension JoinMeetingService: DependencyKey {
             if error == .duplicatedJoinMeeting {
                 return JoinMeetingStatus.joined
             } else {
-                return JoinMeetingStatus.expired
+                return JoinMeetingStatus.expired(error)
             }
         }
     } postJoinMeeting: { meetingID in
