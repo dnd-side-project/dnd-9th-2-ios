@@ -56,6 +56,5 @@ extension LottieView {
             fileName: lottieType.filename,
             loopMode: .playOnce,
             completion: completion)
-        
     }
 }
