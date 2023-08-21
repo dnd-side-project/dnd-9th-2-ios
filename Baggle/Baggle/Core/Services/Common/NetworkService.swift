@@ -77,7 +77,7 @@ extension NetworkService {
     
     func requestWithNoResult(_ target: API) async throws {
         let data = try await provider.request(target)
-        
+
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
         guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
