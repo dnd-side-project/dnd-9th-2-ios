@@ -267,7 +267,7 @@ extension Date {
     /// result: true
 
     func isUpcomingDays(_ date: Date) -> Bool {
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         let currentDate = calendar.startOfDay(for: date)
         let comparisonResult = calendar.compare(self, to: currentDate, toGranularity: .day)
 
@@ -353,9 +353,12 @@ extension Date {
 
 #if DEBUG
 extension Date {
+    // swiftlint:disable:next line_length
     static func createDate(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int) -> Date {
+        // swiftlint:disable:next line_length
         let targetDateComponents = DateComponents(year: year, month: month, day: day, hour: hour, minute: minute)
         let targetDate = Calendar.current.date(from: targetDateComponents)
+        // swiftlint:disable:next force_unwrapping
         return targetDate!
     }
 }

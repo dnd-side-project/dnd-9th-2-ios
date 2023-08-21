@@ -103,9 +103,7 @@ struct JoinMeetingFeature: ReducerProtocol {
                 return .none
                 
             case .alertButtonTapped:
-                if let alertType = state.alertType {
-                    state.alertType = nil
-                }
+                if state.alertType != nil { state.alertType = nil }
                 return .none
             }
         }
