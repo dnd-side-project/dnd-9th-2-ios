@@ -13,18 +13,18 @@ struct BaggleDatePickerView: View {
 
     @Binding var date: Date
 
-    let tenYearsFromNow = Date().addingTimeInterval(10 * 365 * 24 * 60 * 60)
+    let tenYearsFromNow = Date.now().addingTimeInterval(10 * 365 * 24 * 60 * 60)
 
     var body: some View {
         DatePicker(
             "",
             selection: $date,
-            in: Date()...tenYearsFromNow,
+            in: Date.now()...tenYearsFromNow,
             displayedComponents: .date
         )
         .labelsHidden()
         .datePickerStyle(.wheel)
-        .environment(\.locale, Locale.init(identifier: "KO"))
+        .environment(\.locale, Locale.init(identifier: "ko_kr"))
     }
 }
 
