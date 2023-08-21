@@ -31,7 +31,7 @@ extension MeetingDetailEntity {
             date: self.meetingTime.koreanDate(),
             time: self.meetingTime.hourMinute(),
             memo: self.memo,
-            members: self.members.map { $0.memberDomain() },
+            members: self.members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
             memberId: memberId(username: username, members: members),
             status: meetingStatus(date: self.meetingTime),
             isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
@@ -42,7 +42,7 @@ extension MeetingDetailEntity {
             feeds: self.members.compactMap { $0.feedDomain() }
         )
     }
-    
+
     private func meetingStatus(date: Date) -> MeetingStatus {
         
         // 약속 전날
@@ -64,11 +64,20 @@ extension MeetingDetailEntity {
         return .progress
     }
     
+    // 서버에서 멤버가 새로 들어올 때마다 랜덤으로 권한자가 설정됨
+    // 모임 확정 시간 전까지 버튼 권한자를 보여주면 안 됨
+    private func isMeetingConfirmed() -> Bool {
+        return meetingStatus(date: self.meetingTime) == .confirmed
+    }
+    
     private func memberId(username: String, members: [MeetingDetailMemberEntity]) -> Int {
         return members.filter({ $0.nickname == username }).first?.memberID ?? -1
     }
 
-    private func isEmergencyAuthority(username: String, members: [MeetingDetailMemberEntity]) -> Bool {
+    private func isEmergencyAuthority(
+        username: String,
+        members: [MeetingDetailMemberEntity]
+    ) -> Bool {
         return members.contains { $0.nickname == username && $0.buttonAuthority }
     }
     
