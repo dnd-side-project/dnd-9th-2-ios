@@ -97,6 +97,7 @@
 		1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9172A7E01D800A2D7CC /* Int+.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
+		14B55AE72A9346C100EE2461 /* Task+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55AE62A9346C100EE2461 /* Task+.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
 		14C8DAC72A8F542800371374 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 14C8DAC62A8F542800371374 /* Lottie */; };
@@ -320,6 +321,7 @@
 		1493A9172A7E01D800A2D7CC /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
+		14B55AE62A9346C100EE2461 /* Task+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+.swift"; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		14C8DACD2A8F645D00371374 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -1274,6 +1276,7 @@
 				2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */,
 				14486D2D2A8B0D2900831DDD /* Print+.swift */,
 				14283FCE2A8DA32B00FE56F1 /* Moya+.swift */,
+				14B55AE62A9346C100EE2461 /* Task+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1742,6 +1745,7 @@
 				141D37712A681569001067E3 /* MainTabFeature.swift in Sources */,
 				143FC1102A8A1ADE0085E22B /* CameraStatus.swift in Sources */,
 				2B8469702A6E7AE200D75D32 /* BaggleButtonType.swift in Sources */,
+				14B55AE72A9346C100EE2461 /* Task+.swift in Sources */,
 				2BB0EF3B2A8CA17A003F9215 /* LoginServiceStatus.swift in Sources */,
 				1421C0512A7A84A200C20497 /* LoginService.swift in Sources */,
 				143C7C042A87645E004D83FD /* LoadingView.swift in Sources */,

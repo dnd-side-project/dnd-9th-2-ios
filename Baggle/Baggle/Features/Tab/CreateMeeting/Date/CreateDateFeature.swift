@@ -141,7 +141,10 @@ struct CreateDateFeature: ReducerProtocol {
             case .selectDateAction(.dismiss):
                 state.dateButtonStatus = state.dateButtonBeforeStatus
                 if state.timeButtonStatus == .inactive {
-                    return .run { send in await send(.selectTimeButtonTapped) }
+                    return .run { send in
+                        try await Task.sleep(seconds: 0.3)
+                        await send(.selectTimeButtonTapped)
+                    }
                 }
                 return .none
                 
