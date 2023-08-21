@@ -53,10 +53,9 @@ struct MeetingListCell: View {
                 HStack {
                     HStack(spacing: -4) {
 
-                        ForEach(data.profileImages, id: \.self) { _ in
-                            // 데이터 넣기
+                        ForEach(data.profileImages, id: \.self) { imageUrl in
                             CircleProfileView(
-                                imageUrl: "https://avatars.githubusercontent.com/u/81167570?v=4",
+                                imageUrl: imageUrl,
                                 size: .extraSmall
                             )
                         }
@@ -74,7 +73,7 @@ struct MeetingListCell: View {
             .padding(.bottom, 20)
 
             // 디데이 + 한시간 전인 경우와 이미 지나서 확정된 경우
-            if data.isConfirmed {
+            if data.status == .confirmed {
                 BaggleStamp(status: .confirm)
                     .padding(.bottom, 34)
                     .padding(.leading, 230)
@@ -101,8 +100,18 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 0,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .progress,
-                    isConfirmed: true))
+                    status: .progress))
+            
+            MeetingListCell(
+                data: Meeting(
+                    id: 1,
+                    name: "유탁님 없는 파티🔔",
+                    place: "유탁님 없는 잠실",
+                    date: "2023년 10월 23일",
+                    time: "15:30",
+                    dDay: 0,
+                    profileImages: ["1", "2", "3", "4", "5", "6"],
+                    status: .confirmed))
 
             MeetingListCell(
                 data: Meeting(
@@ -113,8 +122,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 20,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .ready,
-                    isConfirmed: false))
+                    status: .ready))
 
             MeetingListCell(
                 data: Meeting(
@@ -125,8 +133,7 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: -10,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .completed,
-                    isConfirmed: true))
+                    status: .completed))
         }
         .padding()
         .previewLayout(.sizeThatFits)

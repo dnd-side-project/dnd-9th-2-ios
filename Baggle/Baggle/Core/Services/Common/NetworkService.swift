@@ -64,6 +64,7 @@ extension NetworkService {
             guard let data = body.data else {
                 throw APIError.unwrapping
             }
+            print("✅ data: \(data)")
             return data
         case 400..<500:
             throw handleError400(statusCode: statusCode, message: message)

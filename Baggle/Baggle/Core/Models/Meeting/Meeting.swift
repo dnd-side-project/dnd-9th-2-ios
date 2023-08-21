@@ -15,9 +15,8 @@ struct Meeting: Equatable, Identifiable {
     let date: String // 날짜
     let time: String // 시간
     let dDay: Int
-    let profileImages: [String] // 프로필 이미지
-    let status: MeetingStatus
-    let isConfirmed: Bool // 약속 확정 여부
+    let profileImages: [String?] // 프로필 이미지
+    let status: MeetingStatus // 약속 상태
 
     static func == (lhs: Meeting, rhs: Meeting) -> Bool {
         return lhs.id == rhs.id

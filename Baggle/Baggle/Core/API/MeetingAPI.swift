@@ -11,7 +11,7 @@ import Alamofire
 import Moya
 
 enum MeetingAPI {
-    case meetingList
+    case meetingList(requestModel: HomeRequestModel, token: String)
     case meetingDetail(meetingID: Int, token: String)
     case createMeeting(requestModel: MeetingCreateRequestModel, token: String)
 }
@@ -24,7 +24,7 @@ extension MeetingAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case .meetingList: return "list"
+        case .meetingList: return ""
         case .meetingDetail: return "detail"
         case .createMeeting: return ""
         }
@@ -34,11 +34,12 @@ extension MeetingAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
+        case .meetingList(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         case .meetingDetail(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
         case .createMeeting(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
-        case .meetingList: return HeaderType.json.value
         }
     }
     
@@ -57,6 +58,10 @@ extension MeetingAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
+        case .meetingList(let requestModel, _):
+            params["period"] = requestModel.status.period
+            params["page"] = requestModel.page
+            params["size"] = requestModel.size
         case .meetingDetail(let meetingID, _):
             params["meetingId"] = meetingID
         case .createMeeting(let requestModel, _):
@@ -66,8 +71,6 @@ extension MeetingAPI: BaseAPI {
             if let memo = requestModel.memo {
                 params["memo"] = memo
             }
-        case .meetingList:
-            break
         }
         
         return params
@@ -84,6 +87,11 @@ extension MeetingAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
+        case .meetingList:
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: ParameterEncodingWithNoSlash()
+            )
         case .meetingDetail:
             return .requestParameters(
                 parameters: bodyParameters ?? [:],
@@ -94,8 +102,6 @@ extension MeetingAPI: BaseAPI {
                 parameters: bodyParameters ?? [:],
                 encoding: parameterEncoding
             )
-        default:
-            return .requestPlain
         }
     }
 }
