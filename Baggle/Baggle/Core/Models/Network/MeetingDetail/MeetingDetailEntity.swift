@@ -13,12 +13,13 @@ struct MeetingDetailEntity: Codable {
     let place: String
     let meetingTime: Date
     let memo: String?
+    let status: String
     let certificationTime: Date?
     let members: [MeetingDetailMemberEntity]
 
     enum CodingKeys: String, CodingKey {
         case meetingID = "meetingId"
-        case title, place, meetingTime, memo, certificationTime, members
+        case title, place, meetingTime, memo, status, certificationTime, members
     }
 }
 
@@ -31,9 +32,9 @@ extension MeetingDetailEntity {
             date: self.meetingTime.koreanDate(),
             time: self.meetingTime.hourMinute(),
             memo: self.memo,
-            members: self.members.map { $0.memberDomain() },
+            members: self.members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
             memberId: memberId(username: username, members: members),
-            status: meetingStatus(date: self.meetingTime),
+            status: meetingStatus(),
             isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
             emergencyButtonActiveTime: self.certificationTime,
@@ -41,6 +42,16 @@ extension MeetingDetailEntity {
             isCertified: isCertified(username: username, members: self.members),
             feeds: self.members.compactMap { $0.feedDomain() }
         )
+    }
+
+    private func meetingStatus() -> MeetingStatus {
+        switch status {
+        case "SCHEDULED": return .ready
+        case "ONGOING": return .progress
+        case "CONFIRMATION": return .confirmed
+        case "TERMINATION": return .completed
+        default: return meetingStatus(date: self.meetingTime)
+        }
     }
     
     private func meetingStatus(date: Date) -> MeetingStatus {
@@ -64,11 +75,20 @@ extension MeetingDetailEntity {
         return .progress
     }
     
+    // 서버에서 멤버가 새로 들어올 때마다 랜덤으로 권한자가 설정됨
+    // 모임 확정 시간 전까지 버튼 권한자를 보여주면 안 됨
+    private func isMeetingConfirmed() -> Bool {
+        return meetingStatus() == .confirmed
+    }
+    
     private func memberId(username: String, members: [MeetingDetailMemberEntity]) -> Int {
         return members.filter({ $0.nickname == username }).first?.memberID ?? -1
     }
 
-    private func isEmergencyAuthority(username: String, members: [MeetingDetailMemberEntity]) -> Bool {
+    private func isEmergencyAuthority(
+        username: String,
+        members: [MeetingDetailMemberEntity]
+    ) -> Bool {
         return members.contains { $0.nickname == username && $0.buttonAuthority }
     }
     

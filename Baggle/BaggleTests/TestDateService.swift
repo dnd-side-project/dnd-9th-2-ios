@@ -33,6 +33,7 @@ struct TestDateService {
             place: "강남역 456번 출구",
             meetingTime: meetingTime,
             memo: "메모메모",
+            status: "SCHEDULED",
             certificationTime: nil,
             members: []
         )

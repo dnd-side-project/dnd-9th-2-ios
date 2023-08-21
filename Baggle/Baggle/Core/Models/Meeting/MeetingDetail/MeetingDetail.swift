@@ -18,7 +18,7 @@ struct MeetingDetail: Equatable {
     let members: [Member] // 참여자 정보
     let memberId: Int // 모임 내 본인의 멤버id
     let status: MeetingStatus // 약속 상태
-    let isEmergencyAuthority: Bool // 긴급 버튼 권한자
+    let isEmergencyAuthority: Bool // 내가 긴급 버튼 권한자
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: Date? // 긴급 버튼 활성화 시간
     let emergencyButtonExpiredTime: Date // 긴급 버튼 만료 시간 - 모임 10분 전

@@ -266,7 +266,7 @@ extension Date {
     /// result: true
 
     func isUpcomingDays(_ date: Date) -> Bool {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
         let currentDate = calendar.startOfDay(for: date)
         let comparisonResult = calendar.compare(self, to: currentDate, toGranularity: .day)
 
