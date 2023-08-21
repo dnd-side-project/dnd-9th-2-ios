@@ -85,4 +85,10 @@ extension Image {
         static let profile = Image("Profile")
         static let timeout = Image("TIMEOUT")
     }
+    
+    // MARK: - 긴급 버튼
+    struct Emergency {
+        static let buttonOff = Image("Button_Off")
+        static let buttonOn = Image("Button_On")
+    }
 }

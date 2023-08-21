@@ -12,7 +12,7 @@ struct LoginFeature: ReducerProtocol {
     struct State: Equatable {
 
         var disableDismissAnimation: Bool = false
-
+        var completeSplashAnimation: Bool = false
         // MARK: - Child State
 
         @PresentationState var signUpNickname: SignUpFeature.State?
@@ -20,6 +20,9 @@ struct LoginFeature: ReducerProtocol {
 
     enum Action: Equatable {
 
+        
+        case completeSplashAnimation
+        
         // MARK: - Button Tapped
 
         case appleLoginButtonTapped(String)
@@ -44,6 +47,11 @@ struct LoginFeature: ReducerProtocol {
 
             switch action {
 
+            case .completeSplashAnimation:
+                state.completeSplashAnimation = true
+                return .none
+                
+                
                 // MARK: - Button Tapped
 
             case .appleLoginButtonTapped(let token):

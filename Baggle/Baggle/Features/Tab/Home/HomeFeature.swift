@@ -33,6 +33,7 @@ struct HomeFeature: ReducerProtocol {
         var isRefreshing: Bool = false
 
         @PresentationState var usingCamera: CameraFeature.State?
+        @PresentationState var usingEmergency: EmergencyFeature.State?
     }
 
     enum Action: Equatable {
@@ -53,6 +54,9 @@ struct HomeFeature: ReducerProtocol {
 
         case cameraButtonTapped
         case usingCamera(PresentationAction<CameraFeature.Action>)
+        
+        case emergencyButtonTapped
+        case usingEmergency(PresentationAction<EmergencyFeature.Action>)
         
         // Delegate
         case delegate(Delegate)
@@ -176,6 +180,16 @@ struct HomeFeature: ReducerProtocol {
                     timer: TimerFeature.State(timerCount: 1)
                 )
                 return .none
+                
+            case .emergencyButtonTapped:
+                state.usingEmergency = EmergencyFeature.State(
+                    memberID: 0,
+                    remainTimeUntilExpired: 1000
+                )
+                return .none
+                
+            case .usingEmergency:
+                return .none
 
             case .usingCamera:
                 return .none
@@ -186,6 +200,9 @@ struct HomeFeature: ReducerProtocol {
         }
         .ifLet(\.$usingCamera, action: /Action.usingCamera) {
             CameraFeature()
+        }
+        .ifLet(\.$usingEmergency, action: /Action.usingEmergency) {
+            EmergencyFeature()
         }
     }
 }

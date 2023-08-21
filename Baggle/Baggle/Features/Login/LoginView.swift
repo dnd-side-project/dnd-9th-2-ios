@@ -21,27 +21,20 @@ struct LoginView: View {
 
             ZStack {
                 // 로티 추가
-                Image.Background.home
-                    .resizable()
-                    .edgesIgnoringSafeArea(.all)
+                LottieView(lottieType: .splash, completion: {
+                    viewStore.send(.completeSplashAnimation)
+                })
+                .edgesIgnoringSafeArea(.all)
 
-                VStack(spacing: 8) {
+                if viewStore.completeSplashAnimation {
+                    VStack(spacing: 8) {
 
-                    Image.Logo.medium
-                        .padding(.top, 33)
-                        .onTapGesture {
-                            // 임시 회원가입
-                            viewStore.send(.moveToSignUp(.apple, "token"))
-                        }
-
-                    Spacer()
-
-                    Button("홈으로 이동") {
-                        viewStore.send(.loginSuccess)
+                        Spacer()
+                        kakaoLoginButton()
+                        appleLoginButton()
+                            .padding(.bottom, 36)
                     }
-                    kakaoLoginButton()
-                    appleLoginButton()
-                        .padding(.bottom, 36)
+                    .transition(.opacity.animation(.easeIn(duration: 0.3)))
                 }
             }
             .fullScreenCover(store: self.store.scope(

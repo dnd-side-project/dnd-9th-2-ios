@@ -94,6 +94,14 @@ struct HomeView: View {
             ) { cameraStore in
                     CameraView(store: cameraStore)
             }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$usingEmergency,
+                    action: { .usingEmergency($0)}
+                )
+            ) { store in
+                    EmergencyView(store: store)
+            }
         }
     }
 }
@@ -214,6 +222,12 @@ extension HomeView {
                 viewStore.send(.cameraButtonTapped)
             } label: {
                 Text("카메라")
+            }
+            
+            Button {
+                viewStore.send(.emergencyButtonTapped)
+            } label: {
+                Text("긴급")
             }
         }
         .padding()

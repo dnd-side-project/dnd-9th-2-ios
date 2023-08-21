@@ -21,7 +21,7 @@ extension EmergencyService: DependencyKey {
     static var liveValue = Self { memberID in
         do {
             guard let accessToken = UserManager.shared.accessToken else {
-                return .fail(.network)
+                return .userError
             }
             let data: EmergencyEntity = try await networkService.request(
                 .emergency(
@@ -29,10 +29,21 @@ extension EmergencyService: DependencyKey {
                     token: accessToken
                 )
             )
-            return .success
-        } catch let error {
-            print("EmergencyService error - \(error)")
-            return .fail(.network)
+            
+            let certificationTime = data.certificationTime
+            
+            return .success(certificationTime)
+        } catch {
+            if let apiError = error as? APIError {
+                if apiError == .badRequest {
+                    return .invalidAuthorizationTime
+                } else if apiError == .unauthorized {
+                    return .unAuthorized
+                } else if apiError == .notFound {
+                    return .notFound
+                }
+            }
+            return .networkError(error.localizedDescription)
         }
     }
 }
