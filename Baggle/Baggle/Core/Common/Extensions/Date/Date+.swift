@@ -105,9 +105,9 @@ extension Date {
     func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "ko_kr")
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         return dateFormatter.string(from: self)
     }
 
@@ -151,7 +151,8 @@ extension Date {
         let calendar = Calendar.current
         let component = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
         // swiftlint:disable:next force_unwrapping
-        return calendar.date(from: component)!
+        let now = calendar.date(from: component)!
+        return now
     }
     
     // n 시간 이후 생성
