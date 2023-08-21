@@ -72,6 +72,7 @@ struct HomeView: View {
             .onReceive(NotificationCenter.default.publisher(for: .moveMeetingDetail),
                        perform: { noti in
                 if let id = noti.object as? Int {
+                    viewStore.send(.refreshMeetingList)
                     viewStore.send(.pushToMeetingDetail(id))
                 }
             })
