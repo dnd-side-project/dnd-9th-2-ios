@@ -41,7 +41,7 @@ extension MeetingDetailEntity {
             emergencyButtonActiveTime: self.certificationTime,
             emergencyButtonExpiredTime: emergencyButtonExpiredTime(meetingTime: self.meetingTime),
             isCertified: isCertified(username: username, members: self.members),
-            feeds: self.members.compactMap { $0.feedDomain() }
+            feeds: feeds()
         )
     }
 
@@ -69,5 +69,9 @@ extension MeetingDetailEntity {
 
     private func emergencyButtonExpiredTime(meetingTime: Date) -> Date {
         return self.meetingTime.emergencyTimeOut()
+    }
+
+    private func feeds() -> [Feed] {
+        self.members.compactMap { $0.feedDomain() }.sorted { $0.id > $1.id }
     }
 }
