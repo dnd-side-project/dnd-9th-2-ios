@@ -104,10 +104,13 @@ extension CameraView {
     
     private func viewFinderView(viewStore: CameraFeatureViewStore) -> some View {
         ZStack {
-            if viewStore.isCompleted {
-                resultPhotoView(viewStore: viewStore)
-            } else {
+            switch viewStore.cameraViewStatus {
+            case .loading:
+                ProgressView()
+            case .camera:
                 cameraPreview(viewStore: viewStore)
+            case .result:
+                resultPhotoView(viewStore: viewStore)
             }
         }
         .frame(width: viewFinderWidth, height: viewFinderHeight)
@@ -151,7 +154,7 @@ extension CameraView {
     
     private func buttonsView(viewStore: CameraFeatureViewStore) -> some View {
         VStack {
-            if viewStore.isCompleted {
+            if viewStore.cameraViewStatus == .result {
                 photoButtons(viewStore: viewStore)
             } else {
                 cameraButtons(viewStore: viewStore)

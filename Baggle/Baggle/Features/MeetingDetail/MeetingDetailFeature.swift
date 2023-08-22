@@ -23,7 +23,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         var meetingId: Int
         var meetingData: MeetingDetail?
-        var memberId: Int = -1
+        var memberID: Int = -1
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
 
@@ -141,7 +141,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .updateData(let data):
                 state.meetingData = data
-                state.memberId = data.memberId
+                state.memberID = data.memberId
                 
                 let emergencyStatus = data.emergencyStatus
 
@@ -150,9 +150,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 } else if emergencyStatus == .confirmation {
                     if !data.emergencyButtonActive && data.isEmergencyAuthority {
                         state.buttonState = .emergency
-                    } else if data.emergencyButtonActive && !data.isCertified {
-                        return .run { send in await send(.timerCountChanged) }
                     }
+                } else if emergencyStatus == .onGoing && !data.isCertified {
+                    return .run { send in await send(.timerCountChanged) }
                 }
                 return .none
 
@@ -181,10 +181,11 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     let timerCount = emergencyButtonActiveTime.authenticationTimeout()
                     state.usingCamera = CameraFeature.State(
+                        memberID: state.memberID,
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {
-                    print("언래핑 에러")
+                    state.alertType = .invalidAuthentication
                 }
                 return .none
 
@@ -197,7 +198,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                         
                 state.emergencyState = EmergencyFeature.State(
-                    memberID: state.meetingId,
+                    memberID: state.memberID,
                     remainTimeUntilExpired: remainTimeUntilExpired
                 )
                 return .none
@@ -271,7 +272,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError:
+                case .networkError, .invalidAuthentication:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
