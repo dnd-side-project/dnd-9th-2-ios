@@ -26,21 +26,21 @@ struct MeetingDetailEntity: Codable {
 extension MeetingDetailEntity {
     func toDomain(username: String) -> MeetingDetail {
         MeetingDetail(
-            id: self.meetingID,
-            name: self.title,
-            place: self.place,
-            date: self.meetingTime.koreanDate(),
-            time: self.meetingTime.hourMinute(),
-            memo: self.memo,
-            members: self.members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
+            id: meetingID,
+            name: title,
+            place: place,
+            date: meetingTime.koreanDate(),
+            time: meetingTime.hourMinute(),
+            memo: (memo ?? "").isEmpty ? nil : memo,
+            members: members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
             memberId: memberId(username: username, members: members),
             status: meetingStatus(),
-            isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
-            emergencyButtonActive: self.certificationTime != nil,
-            emergencyButtonActiveTime: self.certificationTime,
-            emergencyButtonExpiredTime: emergencyButtonExpiredTime(meetingTime: self.meetingTime),
-            isCertified: isCertified(username: username, members: self.members),
-            feeds: self.members.compactMap { $0.feedDomain() }
+            isEmergencyAuthority: isEmergencyAuthority(username: username, members: members),
+            emergencyButtonActive: certificationTime != nil,
+            emergencyButtonActiveTime: certificationTime,
+            emergencyButtonExpiredTime: emergencyButtonExpiredTime(meetingTime: meetingTime),
+            isCertified: isCertified(username: username, members: members),
+            feeds: members.compactMap { $0.feedDomain() }
         )
     }
 
