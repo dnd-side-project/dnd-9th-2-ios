@@ -153,6 +153,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     }
                 } else if emergencyStatus == .onGoing && !data.isCertified {
                     return .run { send in await send(.timerCountChanged) }
+                } else {
+                    state.buttonState = .none
                 }
                 return .none
 
