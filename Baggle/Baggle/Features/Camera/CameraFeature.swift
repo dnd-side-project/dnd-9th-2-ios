@@ -26,7 +26,7 @@ struct CameraFeature: ReducerProtocol {
         var flipDegree: Double = 0.0
 
         // Status
-        var isCompleted: Bool = false
+        var cameraViewStatus: CameraViewStatus = .loading
         var isUploading: Bool = false
 
         // System - Alert
@@ -140,7 +140,7 @@ struct CameraFeature: ReducerProtocol {
                 return .none
 
             case let .completeTakePhoto(image):
-                state.isCompleted = true
+                state.cameraViewStatus = .result
                 state.resultImage = image
                 return .none
 
@@ -184,7 +184,7 @@ struct CameraFeature: ReducerProtocol {
                 // MARK: Tap - Photo Tap
 
             case .reTakeButtonTapped:
-                state.isCompleted = false
+                state.cameraViewStatus = .camera
                 return .none
 
             case .uploadButtonTapped:
@@ -280,13 +280,13 @@ struct CameraFeature: ReducerProtocol {
                 state.alertType = nil
                 
                 switch alertType {
-                case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload,:
+                case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload:
                     return .run { _ in await self.dismiss() }
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin)) }
                 case .noResultImage:
                     state.resultImage = nil
-                    state.isCompleted = false
+                    state.cameraViewStatus = .camera
                     return .none
                 case .notFound, .networkError, .compressionError:
                     return .run { _ in await self.dismiss() }

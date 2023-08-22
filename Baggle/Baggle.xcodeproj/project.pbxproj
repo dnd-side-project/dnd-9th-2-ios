@@ -104,6 +104,7 @@
 		14C44B322A948765009E5379 /* MeetingHomeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C44B312A948765009E5379 /* MeetingHomeStatus.swift */; };
 		14C44B342A948782009E5379 /* MeetingStampStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C44B332A948782009E5379 /* MeetingStampStatus.swift */; };
 		14C44B362A9487C1009E5379 /* MeetingEmergencyStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C44B352A9487C1009E5379 /* MeetingEmergencyStatus.swift */; };
+		14C44B382A94A9B8009E5379 /* CameraViewStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C44B372A94A9B8009E5379 /* CameraViewStatus.swift */; };
 		14C8DAC72A8F542800371374 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 14C8DAC62A8F542800371374 /* Lottie */; };
 		14C8DACE2A8F645D00371374 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8DACD2A8F645D00371374 /* LottieView.swift */; };
 		14C8DAD92A8F656400371374 /* LottieType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C8DAD82A8F656400371374 /* LottieType.swift */; };
@@ -332,6 +333,7 @@
 		14C44B312A948765009E5379 /* MeetingHomeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingHomeStatus.swift; sourceTree = "<group>"; };
 		14C44B332A948782009E5379 /* MeetingStampStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStampStatus.swift; sourceTree = "<group>"; };
 		14C44B352A9487C1009E5379 /* MeetingEmergencyStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingEmergencyStatus.swift; sourceTree = "<group>"; };
+		14C44B372A94A9B8009E5379 /* CameraViewStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewStatus.swift; sourceTree = "<group>"; };
 		14C8DACD2A8F645D00371374 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		14C8DAD82A8F656400371374 /* LottieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieType.swift; sourceTree = "<group>"; };
 		14C8F9CB2A8B2905001690C5 /* FeedPhotoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPhotoRequestModel.swift; sourceTree = "<group>"; };
@@ -939,6 +941,7 @@
 			children = (
 				14783EE12A7E330700EF58D5 /* CameraFeature.swift */,
 				14783EE32A7E330D00EF58D5 /* CameraView.swift */,
+				14C44B372A94A9B8009E5379 /* CameraViewStatus.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -1907,6 +1910,7 @@
 				14E4C4B72A6E43CA008643D9 /* CreateTitleFeature.swift in Sources */,
 				2B86CBC02A70F00900800B02 /* HomeFeature.swift in Sources */,
 				2BB7FBC52A89289E0003B75C /* URL.swift in Sources */,
+				14C44B382A94A9B8009E5379 /* CameraViewStatus.swift in Sources */,
 				2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */,
 				1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */,
 				14EA20B12A8DAB22005C1289 /* AlertCreateMeetingType.swift in Sources */,

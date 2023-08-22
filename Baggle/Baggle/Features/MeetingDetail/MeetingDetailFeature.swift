@@ -185,7 +185,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {
-                    print("언래핑 에러")
+                    state.alertType = .invalidAuthentication
                 }
                 return .none
 
@@ -272,7 +272,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError:
+                case .networkError, .invalidAuthentication:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
