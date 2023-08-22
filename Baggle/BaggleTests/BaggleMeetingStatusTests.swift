@@ -149,11 +149,11 @@ final class BaggleMeetingStatusTests: XCTestCase {
 
         if testDateService.isSameDay(now, meetingTime) {
             // 1시간 30분이 지났어도 같은 날
-            XCTAssertEqual(result, .progress)
+            XCTAssertEqual(result, .termination)
         } else {
             // 1시간 30분이 지났는데 다른 날
             // now : 23시, meetingTime : 0시 30분
-            XCTAssertEqual(result, .ready)
+            XCTAssertEqual(result, .past)
         }
     }
 
@@ -166,7 +166,7 @@ final class BaggleMeetingStatusTests: XCTestCase {
         let meetingTime = now.later(minutes: 60)
         let result = testDateService.meetingDetailStatus(meetingTime: meetingTime)
 
-        XCTAssertEqual(result, .confirmed)
+        XCTAssertEqual(result, .confirmation)
     }
 
     // now : 테스트 시간
@@ -182,12 +182,12 @@ final class BaggleMeetingStatusTests: XCTestCase {
             // 날이 안 지남
             // now : 22시
             // meetingDate: 20시
-            XCTAssertEqual(result, .confirmed)
+            XCTAssertEqual(result, .confirmation)
         } else {
             // 약속 다음 날로 넘어감
             // now : 01시
             // meetingDate: 23시
-            XCTAssertEqual(result, .completed)
+            XCTAssertEqual(result, .termination)
         }
     }
 
@@ -200,7 +200,7 @@ final class BaggleMeetingStatusTests: XCTestCase {
         let meetingTime = now.later(hours: 24)
         let result = testDateService.meetingDetailStatus(meetingTime: meetingTime)
 
-        XCTAssertEqual(result, .ready)
+        XCTAssertEqual(result, .scheduled)
     }
 
     // now : 테스트 시간
@@ -212,6 +212,6 @@ final class BaggleMeetingStatusTests: XCTestCase {
         let meetingTime = now.before(hours: 24)
         let result = testDateService.meetingDetailStatus(meetingTime: meetingTime)
 
-        XCTAssertEqual(result, .completed)
+        XCTAssertEqual(result, .termination)
     }
 }

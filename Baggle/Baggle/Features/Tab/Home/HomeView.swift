@@ -25,7 +25,7 @@ struct HomeView: View {
                     if viewStore.homeStatus == .normal {
                         Section {
                             LazyVStack(spacing: 12) {
-                                ForEach((viewStore.meetingStatus == .progress)
+                                ForEach((viewStore.meetingStatus == .scheduled)
                                         ? viewStore.progressList : viewStore.completedList
                                 ) { meeting in
                                     MeetingListCell(data: meeting)
@@ -33,7 +33,7 @@ struct HomeView: View {
                                             viewStore.send(.pushToMeetingDetail(meeting.id))
                                         }
                                         .onAppear {
-                                            let list = (viewStore.meetingStatus == .progress)
+                                            let list = (viewStore.meetingStatus == .scheduled)
                                                 ? viewStore.progressList : viewStore.completedList
                                             guard let index = list.firstIndex(where: {
                                                 $0.id == meeting.id
@@ -162,18 +162,18 @@ extension HomeView {
                     SegmentedPickerView(
                         segment: [
                             Segment(
-                                id: .progress,
+                                id: .scheduled,
                                 count: viewStore.progressCount,
-                                isSelected: viewStore.meetingStatus == .progress,
+                                isSelected: viewStore.meetingStatus == .scheduled,
                                 action: {
-                                    viewStore.send(.changeMeetingStatus(.progress))
+                                    viewStore.send(.changeMeetingStatus(.scheduled))
                                 }),
                             Segment(
-                                id: .completed,
+                                id: .past,
                                 count: viewStore.completedCount,
-                                isSelected: viewStore.meetingStatus == .completed,
+                                isSelected: viewStore.meetingStatus == .past,
                                 action: {
-                                    viewStore.send(.changeMeetingStatus(.completed))
+                                    viewStore.send(.changeMeetingStatus(.past))
                                 })
                         ])
                 }

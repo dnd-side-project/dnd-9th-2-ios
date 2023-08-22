@@ -73,7 +73,7 @@ struct MeetingListCell: View {
             .padding(.bottom, 20)
 
             // 디데이 + 한시간 전인 경우와 이미 지나서 확정된 경우
-            if data.status == .confirmed {
+            if data.stampStatus == .confirmation {
                 BaggleStamp(status: .confirm)
                     .padding(.bottom, 34)
                     .padding(.leading, 230)
@@ -83,7 +83,7 @@ struct MeetingListCell: View {
         .touchSpacer()
         .overlay {
             RoundedRectangle(cornerRadius: 12)
-                .stroke(data.status.fgColor, lineWidth: 1)
+                .stroke(data.stampStatus.foregroundColor, lineWidth: 1)
         }
     }
 }
@@ -100,8 +100,11 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 0,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .progress))
-            
+                    homeStatus: .scheduled,
+                    stampStatus: .scheduled
+                )
+            )
+        
             MeetingListCell(
                 data: Meeting(
                     id: 1,
@@ -111,7 +114,10 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 0,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .confirmed))
+                    homeStatus: .scheduled,
+                    stampStatus: .confirmation
+                )
+            )
 
             MeetingListCell(
                 data: Meeting(
@@ -122,18 +128,10 @@ struct MeetingCellView_Previews: PreviewProvider {
                     time: "15:30",
                     dDay: 20,
                     profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .ready))
-
-            MeetingListCell(
-                data: Meeting(
-                    id: 1,
-                    name: "유탁님 없는 파티🔔",
-                    place: "유탁님 없는 잠실",
-                    date: "2023년 10월 23일",
-                    time: "15:30",
-                    dDay: -10,
-                    profileImages: ["1", "2", "3", "4", "5", "6"],
-                    status: .completed))
+                    homeStatus: .past,
+                    stampStatus: .termination
+                )
+            )
         }
         .padding()
         .previewLayout(.sizeThatFits)
