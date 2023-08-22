@@ -28,13 +28,13 @@ struct MeetingDetailMemberEntity: Codable {
 extension MeetingDetailMemberEntity {
 
     // 모임 확정 전까지 버튼 권한자를 안 보여줌
-    func memberDomain(meetingConfirmed: Bool) -> Member {
+    func memberDomain(afterMeetingConfirmed: Bool) -> Member {
         return Member(
             id: self.memberID,
             name: self.nickname,
             profileURL: self.profileImageURL,
             isMeetingAuthority: self.meetingAuthority,
-            isButtonAuthority: meetingConfirmed ? self.buttonAuthority : false,
+            isButtonAuthority: afterMeetingConfirmed ? self.buttonAuthority : false,
             certified: self.feedID != nil,
             certImage: self.feedImageURL
         )
