@@ -34,7 +34,7 @@ extension HomeMeetingEntity {
             dDay: remainingDate,
             profileImages: participants,
             homeStatus: status.meetingHomeStatus(),
-            stampStatus: status.meetingStampStatus()
+            stampStatus: status.meetingStampStatus(remainingDay: remainingDate)
         )
     }
 }

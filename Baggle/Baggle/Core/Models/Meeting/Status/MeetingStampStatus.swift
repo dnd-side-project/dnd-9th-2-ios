@@ -9,6 +9,7 @@ import SwiftUI
 
 enum MeetingStampStatus: Equatable {
     case scheduled
+    case dDay
     case confirmation
     case termination
 }
@@ -18,7 +19,7 @@ extension MeetingStampStatus {
     var foregroundColor: Color {
         switch self {
         case .scheduled, .termination: return .gray5
-        case .confirmation: return .baggleRed
+        case .dDay, .confirmation: return .baggleRed
         }
     }
 }

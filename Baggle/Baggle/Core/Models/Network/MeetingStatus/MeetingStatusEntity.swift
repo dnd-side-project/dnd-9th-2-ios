@@ -32,6 +32,17 @@ extension MeetingStatusEntity {
         }
     }
     
+    func meetingStampStatus(remainingDay: Int) ->  MeetingStampStatus {
+        if self == .scheduled && remainingDay == 0 {
+            return .dDay
+        }
+        switch self {
+        case .scheduled: return .scheduled
+        case .confirmation, .onGoing, .termination: return .confirmation
+        case .past: return .termination
+        }
+    }
+    
     func meetingEmergencyStatus() -> MeetingEmergencyStatus {
         switch self {
         case .scheduled: return .scheduled

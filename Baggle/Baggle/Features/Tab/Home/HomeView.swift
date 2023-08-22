@@ -33,7 +33,7 @@ struct HomeView: View {
                                             viewStore.send(.pushToMeetingDetail(meeting.id))
                                         }
                                         .onAppear {
-                                            let list = (viewStore.meetingStatus == .past)
+                                            let list = (viewStore.meetingStatus == .scheduled)
                                                 ? viewStore.progressList : viewStore.completedList
                                             guard let index = list.firstIndex(where: {
                                                 $0.id == meeting.id

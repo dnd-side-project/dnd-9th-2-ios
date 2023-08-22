@@ -144,9 +144,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.memberId = data.memberId
                 
                 let emergencyStatus = data.emergencyStatus
-                // 약속 상태가 ready 또는 progress이면 invite
-                // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
-                // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 !certified이면
+
                 if emergencyStatus == .scheduled {
                     state.buttonState = .invite
                 } else if emergencyStatus == .confirmation {
