@@ -41,8 +41,12 @@ struct CameraFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
+
         case onAppear
 
+        // Status
+        case cameraStartSuccess
+        
         // Image
         case viewFinderUpdate(Image?)
         case flipImageRemove
@@ -114,6 +118,8 @@ struct CameraFeature: ReducerProtocol {
 
                     switch cameraStartStatus {
                     case .success:
+                        await send(.cameraStartSuccess)
+
                         let imageStream = cameraService.previewStream()
                             .map { $0.image }
 
@@ -128,6 +134,11 @@ struct CameraFeature: ReducerProtocol {
                         await send(.alertType(.cameraConfigureError))
                     }
                 }
+                
+                // MARK: - Status
+            case .cameraStartSuccess:
+                state.cameraViewStatus = .camera
+                return .none
 
             // MARK: - Image
 
