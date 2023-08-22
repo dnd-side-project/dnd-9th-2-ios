@@ -23,7 +23,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         var meetingId: Int
         var meetingData: MeetingDetail?
-        var memberId: Int = -1
+        var memberID: Int = -1
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
 
@@ -141,7 +141,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .updateData(let data):
                 state.meetingData = data
-                state.memberId = data.memberId
+                state.memberID = data.memberId
                 
                 let emergencyStatus = data.emergencyStatus
 
@@ -197,7 +197,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                         
                 state.emergencyState = EmergencyFeature.State(
-                    memberID: state.meetingId,
+                    memberID: state.memberID,
                     remainTimeUntilExpired: remainTimeUntilExpired
                 )
                 return .none
