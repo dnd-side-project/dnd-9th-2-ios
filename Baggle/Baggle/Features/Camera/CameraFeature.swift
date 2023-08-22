@@ -13,6 +13,9 @@ struct CameraFeature: ReducerProtocol {
 
     struct State: Equatable {
         
+        // User
+        var memberID: Int
+        
         // Image
         var viewFinderImage: Image?
         var resultImage: UIImage?
@@ -194,7 +197,7 @@ struct CameraFeature: ReducerProtocol {
                 }
                 
                 guard let feedPhotoRequestModel = FeedPhotoRequestModel(
-                    memberID: 22,
+                    memberID: state.memberID,
                     time: Date(),
                     feedImage: resultImage
                 ) else {
@@ -277,7 +280,7 @@ struct CameraFeature: ReducerProtocol {
                 state.alertType = nil
                 
                 switch alertType {
-                case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload:
+                case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload,:
                     return .run { _ in await self.dismiss() }
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin)) }
@@ -286,7 +289,7 @@ struct CameraFeature: ReducerProtocol {
                     state.isCompleted = false
                     return .none
                 case .notFound, .networkError, .compressionError:
-                    return .none
+                    return .run { _ in await self.dismiss() }
                 }
                 
             case .presentBaggleAlert(let isPresented):

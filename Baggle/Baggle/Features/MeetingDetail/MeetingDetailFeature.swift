@@ -150,9 +150,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 } else if emergencyStatus == .confirmation {
                     if !data.emergencyButtonActive && data.isEmergencyAuthority {
                         state.buttonState = .emergency
-                    } else if data.emergencyButtonActive && !data.isCertified {
-                        return .run { send in await send(.timerCountChanged) }
                     }
+                } else if emergencyStatus == .onGoing && !data.isCertified {
+                    return .run { send in await send(.timerCountChanged) }
                 }
                 return .none
 
@@ -181,6 +181,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     let timerCount = emergencyButtonActiveTime.authenticationTimeout()
                     state.usingCamera = CameraFeature.State(
+                        memberID: state.memberID,
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {

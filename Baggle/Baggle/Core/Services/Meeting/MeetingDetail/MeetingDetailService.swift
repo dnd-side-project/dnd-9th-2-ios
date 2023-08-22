@@ -32,7 +32,7 @@ extension MeetingDetailService: DependencyKey {
             }
             
             let meetingDetail = meetingDetailEntity.toDomain(username: username)
-            
+            print(meetingDetail)
             return .success(meetingDetail)
         } catch {
             if let apiError = error as? APIError, apiError == .notFound {

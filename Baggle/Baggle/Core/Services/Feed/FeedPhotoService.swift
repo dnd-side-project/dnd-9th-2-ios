@@ -24,7 +24,7 @@ extension FeedPhotoService: DependencyKey {
             guard let token = UserManager.shared.accessToken else {
                 return .userError
             }
-            
+
             let feedPhotoEntity: FeedPhotoEntity = try await networkService
                 .request(.uploadPhoto(requestModel: requestModel, token: token))
             
