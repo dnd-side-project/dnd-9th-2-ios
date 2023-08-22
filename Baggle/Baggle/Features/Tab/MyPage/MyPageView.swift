@@ -33,16 +33,10 @@ struct MyPageView: View {
                             Spacer()
                             
                             VStack(spacing: 16) {
-                                KFImage(URL(string: viewStore.user.profileImageURL ?? ""))
-                                    .placeholder({ _ in
-                                        Image.Profile.profilDefault
-                                            .resizable()
-                                    })
-                                    .resizable()
-                                    .aspectRatio(1.0, contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(50)
-                                    .clipped()
+                                CircleProfileView(
+                                    imageUrl: viewStore.user.profileImageURL,
+                                    size: .extraLarge
+                                )
                                 
                                 HStack(alignment: .top, spacing: 6) {
                                     Text(viewStore.user.name)
