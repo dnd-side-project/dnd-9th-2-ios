@@ -17,7 +17,8 @@ struct MeetingDetail: Equatable {
     let memo: String? // 메모
     let members: [Member] // 참여자 정보
     let memberId: Int // 모임 내 본인의 멤버id
-    let status: MeetingStatus // 약속 상태
+    let stampStatus: MeetingStampStatus // 제목 옆에 들어가는 약속 도장
+    let emergencyStatus: MeetingEmergencyStatus // 긴급 버튼 상태
     let isEmergencyAuthority: Bool // 내가 긴급 버튼 권한자
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: Date? // 긴급 버튼 활성화 시간
@@ -31,6 +32,10 @@ struct MeetingDetail: Equatable {
 }
 
 extension MeetingDetail {
+
+    // 긴급 종료 이후 피드 업데이트
+    // emergencyStatus -> .terminattion으로 변경
+    
     func updateFeed(_ feed: Feed) -> MeetingDetail {
         MeetingDetail(
             id: self.id,
@@ -41,7 +46,8 @@ extension MeetingDetail {
             memo: self.memo,
             members: self.members,
             memberId: self.memberId,
-            status: self.status,
+            stampStatus: self.stampStatus,
+            emergencyStatus: .termination,
             isEmergencyAuthority: self.isEmergencyAuthority,
             emergencyButtonActive: self.emergencyButtonActive,
             emergencyButtonActiveTime: self.emergencyButtonActiveTime,

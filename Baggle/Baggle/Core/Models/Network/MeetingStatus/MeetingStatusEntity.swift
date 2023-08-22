@@ -26,7 +26,7 @@ extension MeetingStatusEntity {
     
     func meetingStampStatus() -> MeetingStampStatus {
         switch self {
-        case .scheduled: return .confirmation
+        case .scheduled: return .scheduled
         case .confirmation, .onGoing, .termination: return .confirmation
         case .past: return .termination
         }

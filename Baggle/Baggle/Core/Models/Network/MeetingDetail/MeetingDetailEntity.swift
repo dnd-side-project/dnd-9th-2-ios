@@ -34,7 +34,8 @@ extension MeetingDetailEntity {
             memo: self.memo,
             members: self.members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
             memberId: memberId(username: username, members: members),
-            status: .ready,
+            stampStatus: status.meetingStampStatus(),
+            emergencyStatus: status.meetingEmergencyStatus(),
             isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
             emergencyButtonActive: self.certificationTime != nil,
             emergencyButtonActiveTime: self.certificationTime,
@@ -44,26 +45,6 @@ extension MeetingDetailEntity {
         )
     }
 
-    private func meetingStatus(date: Date) -> MeetingStatus {
-        
-        // 약속 전날
-        if date.isUpcomingDays {
-            return .ready
-        }
-
-        // 약속 날 지났을 때
-        if date.isPreviousDays {
-            return .completed
-        }
-
-        // 약속 당일 1 시간 전
-        if date.inTheNextHour {
-            return .confirmed
-        }
-        
-        // 약속 당일
-        return .progress
-    }
     
     // 서버에서 멤버가 새로 들어올 때마다 랜덤으로 권한자가 설정됨
     // 모임 확정 시간 전까지 버튼 권한자를 보여주면 안 됨

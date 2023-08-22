@@ -171,14 +171,14 @@ extension HomeView {
                     SegmentedPickerView(
                         segment: [
                             Segment(
-                                id: .progress,
+                                id: .scheduled,
                                 count: viewStore.progressCount,
                                 isSelected: viewStore.meetingStatus == .scheduled,
                                 action: {
                                     viewStore.send(.changeMeetingStatus(.scheduled))
                                 }),
                             Segment(
-                                id: .completed,
+                                id: .past,
                                 count: viewStore.completedCount,
                                 isSelected: viewStore.meetingStatus == .past,
                                 action: {

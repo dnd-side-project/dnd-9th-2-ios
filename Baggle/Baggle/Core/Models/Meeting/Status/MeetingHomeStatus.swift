@@ -13,6 +13,14 @@ enum MeetingHomeStatus: Equatable {
 }
 
 extension MeetingHomeStatus {
+    
+    var segmentTitle: String {
+        switch self {
+        case .scheduled: return "예정된 약속"
+        case .past: return "지난 약속"
+        }
+    }
+    
     var period: String {
         switch self {
         case .scheduled: return "scheduled"

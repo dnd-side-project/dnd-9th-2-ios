@@ -177,7 +177,7 @@ extension MeetingDetailView {
     // swiftlint:disable:next line_length
     typealias MeetingDetailViewStore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
     
-    func meetingTitleView(name: String, status: MeetingStatus) -> some View {
+    func meetingTitleView(name: String, status: MeetingStampStatus) -> some View {
         HStack(alignment: .top) {
             Text("📌")
             
@@ -188,10 +188,10 @@ extension MeetingDetailView {
                 .foregroundColor(.gray9)
             
             Group {
-                if status == .completed {
+                if status == .termination {
                     Image.Stamp.complete
                         .resizable()
-                } else if status == .confirmed {
+                } else if status == .confirmation {
                     Image.Stamp.confirm
                         .resizable()
                 }
@@ -256,7 +256,7 @@ extension MeetingDetailView {
                     // 모임방 이름, 스탬프
                     meetingTitleView(
                         name: data.name,
-                        status: data.status
+                        status: data.stampStatus
                     )
                     
                     // 장소, 시간
