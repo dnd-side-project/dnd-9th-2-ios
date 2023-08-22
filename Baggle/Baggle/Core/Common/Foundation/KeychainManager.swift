@@ -45,11 +45,15 @@ class KeychainManager {
                            kSecReturnAttributes: true,
                                  kSecReturnData: true]
         var item: CFTypeRef?
+        // swiftlint:disable:next line_length
         if SecItemCopyMatching(query as CFDictionary, &item) != errSecSuccess { throw KeyChainError.read }
         
         guard let existingItem = item as? [String: Any],
               let data = existingItem[kSecAttrGeneric as String] as? Data,
-              let user = try? JSONDecoder().decode(UserToken.self, from: data) else { throw KeyChainError.read }
+              let user = try? JSONDecoder().decode(UserToken.self, from: data)
+        else {
+            throw KeyChainError.read
+        }
         
         return user
     }

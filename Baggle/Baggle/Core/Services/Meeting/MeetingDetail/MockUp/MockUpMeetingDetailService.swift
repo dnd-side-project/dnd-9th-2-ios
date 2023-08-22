@@ -111,6 +111,7 @@ extension MockUpMeetingAPI {
         })
     }
     
+    // swiftlint:disable:next function_body_length
     private func meetingDetailCompleted() -> MeetingDetail {
         MeetingDetail(
             id: 0,

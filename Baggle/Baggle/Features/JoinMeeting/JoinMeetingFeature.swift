@@ -12,21 +12,33 @@ import ComposableArchitecture
 struct JoinMeetingFeature: ReducerProtocol {
 
     struct State: Equatable {
-        // MARK: - Scope State
+        
+        // joinMeeting
         var meetingId: Int
         var joinMeeingStatus: JoinMeetingStatus
-        var isAlertPresented: Bool = false
+        
+        // alert
+        var alertType: AlertJoinMeetingType?
     }
 
     enum Action: Equatable {
-        // MARK: - Scope Action
         
+        // view
         case onAppear
+        
+        // button
         case exitButtonTapped
         case joinButtonTapped
+        
+        // response
         case joinSuccess
         case joinFailed
-        case presentAlert
+        
+        // alert
+        case presentAlert(Bool)
+        case alertButtonTapped
+        
+        // meetingDetail
         case moveToMeetingDetail
     }
 
@@ -43,8 +55,16 @@ struct JoinMeetingFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                if state.joinMeeingStatus == .expired {
-                    return .run { send in await send(.presentAlert) }
+                if case let .expired(error) = state.joinMeeingStatus {
+                    switch error {
+                    case .overlapMeetingTime:
+                        state.alertType = .overlap
+                    case .exceedMemberCount:
+                        state.alertType = .exceedMemberCount
+                    default:
+                        state.alertType = .expired
+                    }
+                    return .run { send in await send(.presentAlert(true)) }
                 }
                 return .none
                 
@@ -76,8 +96,14 @@ struct JoinMeetingFeature: ReducerProtocol {
                     }
                 }
                 
-            case .presentAlert:
-                state.isAlertPresented.toggle()
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                return .none
+                
+            case .alertButtonTapped:
+                if state.alertType != nil { state.alertType = nil }
                 return .none
             }
         }

@@ -48,6 +48,7 @@ struct MockUpMeetingService {
         })
     }
 
+    // swiftlint:disable:next function_body_length
     private func makeMockMeetingList(_ type: MeetingStatus) -> [Meeting] {
         let progress = [
             Meeting(

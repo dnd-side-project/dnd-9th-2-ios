@@ -102,15 +102,19 @@ extension NetworkService {
     private func handleError400(statusCode: Int, message: String) -> APIError {
         switch statusCode {
         case 400:
+            if message == "모임 2시간 전후 일정이 존재합니다." {
+                return APIError.overlapMeetingTime
+            }
             return APIError.badRequest
         case 401:
             return APIError.unauthorized
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
                 return APIError.duplicatedMeeting
-            } else {
-                return APIError.forbidden
+            } else if message == "모임 인원이 초과됐습니다." {
+                return APIError.exceedMemberCount
             }
+            return APIError.forbidden
         case 404:
             return APIError.notFound
         case 409:
@@ -118,9 +122,8 @@ extension NetworkService {
                 return APIError.duplicatedNickname
             } else if message == "이미 존재하는 참가자입니다." {
                 return APIError.duplicatedJoinMeeting
-            } else {
-                return APIError.duplicatedUser
             }
+            return APIError.duplicatedUser
         default:
             return APIError.network
         }

@@ -17,7 +17,7 @@ enum AlertMeetingDetailType: Equatable {
     case delete
 }
 
-extension AlertMeetingDetailType {
+extension AlertMeetingDetailType: AlertType {
 
     var buttonType: AlertButtonType {
         switch self {

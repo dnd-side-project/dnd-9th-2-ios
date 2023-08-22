@@ -153,6 +153,8 @@
 		2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39F21B2A738BB100E034A3 /* SendInvitation.swift */; };
 		2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3B64942A8014540082A05F /* FeedListCell.swift */; };
 		2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B409D7B2A80BE840051A3BC /* Font+.swift */; };
+		2B437FBA2A93B64C004DC68E /* AlertJoinMeetingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */; };
+		2B437FBD2A93BE37004DC68E /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437FBC2A93BE37004DC68E /* AlertType.swift */; };
 		2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45F2202A7B634400874783 /* MeetingDeleteType.swift */; };
 		2B5BE6B22A77A40900F25474 /* MockUpMeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BE6B12A77A40900F25474 /* MockUpMeetingDetailService.swift */; };
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
@@ -378,6 +380,8 @@
 		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
 		2B3B64942A8014540082A05F /* FeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListCell.swift; sourceTree = "<group>"; };
 		2B409D7B2A80BE840051A3BC /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertJoinMeetingType.swift; sourceTree = "<group>"; };
+		2B437FBC2A93BE37004DC68E /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		2B45F2202A7B634400874783 /* MeetingDeleteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteType.swift; sourceTree = "<group>"; };
 		2B5BE6B12A77A40900F25474 /* MockUpMeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUpMeetingDetailService.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -1183,6 +1187,7 @@
 			isa = PBXGroup;
 			children = (
 				14EA20B52A8DBC4C005C1289 /* Common */,
+				2B437FBB2A93B693004DC68E /* JoinMeeting */,
 				14EA20AF2A8DAB13005C1289 /* CreateMeeting */,
 				14EA20B42A8DB65F005C1289 /* MeetingDetail */,
 				14EA20BA2A8DCBB9005C1289 /* Camera */,
@@ -1211,6 +1216,7 @@
 			isa = PBXGroup;
 			children = (
 				14EA20B62A8DBC52005C1289 /* AlertButtonType.swift */,
+				2B437FBC2A93BE37004DC68E /* AlertType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1338,6 +1344,14 @@
 				2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2B437FBB2A93B693004DC68E /* JoinMeeting */ = {
+			isa = PBXGroup;
+			children = (
+				2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */,
+			);
+			path = JoinMeeting;
 			sourceTree = "<group>";
 		};
 		2B5BE6B02A77A3F600F25474 /* MeetingDetail */ = {
@@ -1734,6 +1748,7 @@
 				145210892A8E2D7800150C57 /* ImageSizeType.swift in Sources */,
 				146237462A877CFB00FBE121 /* PlatformLogoView.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
+				2B437FBA2A93B64C004DC68E /* AlertJoinMeetingType.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
 				2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */,
@@ -1828,6 +1843,7 @@
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
 				14EA20BC2A8DCBCD005C1289 /* AlertCameraType.swift in Sources */,
 				14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */,
+				2B437FBD2A93BE37004DC68E /* AlertType.swift in Sources */,
 				2BA760B72A81DD4A0089878D /* MeetingStatus.swift in Sources */,
 				2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
