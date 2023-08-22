@@ -33,7 +33,8 @@ extension HomeMeetingEntity {
             time: time.hourMinute(),
             dDay: remainingDate,
             profileImages: participants,
-            status: .completed // 수정
+            homeStatus: status.meetingHomeStatus(),
+            stampStatus: status.meetingStampStatus()
         )
     }
 }

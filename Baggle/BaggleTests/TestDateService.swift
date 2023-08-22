@@ -27,20 +27,9 @@ struct TestDateService {
     // 특정 시간(meetingTime)을 인자로 받아 Meeting Status 생성
     
     func meetingDetailStatus(meetingTime: Date) -> MeetingStatus {
-        let entity = MeetingDetailEntity(
-            meetingID: 0,
-            title: "Test용",
-            place: "강남역 456번 출구",
-            meetingTime: meetingTime,
-            memo: "메모메모",
-            status: "SCHEDULED",
-            certificationTime: nil,
-            members: []
-        )
         
-        let meetingDetail = entity.toDomain(username: User.mockUp().name)
-        
-        return meetingDetail.status
+        // 추후 추가
+        return .confirmed
     }
 
     func isSameDay(_ date1 : Date, _ date2: Date) -> Bool {

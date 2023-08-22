@@ -8,7 +8,7 @@
 import Foundation
 
 struct HomeRequestModel {
-    let status: MeetingStatus
+    let status: MeetingHomeStatus
     let page: Int
     let size: Int
 }
