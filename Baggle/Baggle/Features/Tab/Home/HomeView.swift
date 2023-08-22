@@ -134,17 +134,8 @@ extension HomeView {
             }
 
             Spacer()
-
-            KFImage(URL(string: user.profileImageURL ?? ""))
-                .placeholder({ _ in
-                    Image.Profile.profilDefault
-                        .resizable()
-                })
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fill)
-                .cornerRadius(36)
-                .clipped()
-                .frame(width: 72, height: 72)
+            
+            CircleProfileView(imageUrl: user.profileImageURL, size: .large)
         }
         .frame(height: 72)
         .padding(.horizontal, 20)

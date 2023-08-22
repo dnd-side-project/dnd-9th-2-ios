@@ -10,6 +10,7 @@ import SwiftUI
 import Kingfisher
 
 enum ProfileSize {
+    case extraLarge
     case large // 홈, 본인 프로필 이미지
     case medium // 모임 상세, 멤버 프로필 이미지 -> 추가 수정 필요
     case small // 모임 상세, 피드 게시물 위 프로필 이미지
@@ -17,6 +18,7 @@ enum ProfileSize {
 
     var length: CGFloat {
         switch self {
+        case .extraLarge: return 100
         case .large: return 72
         case .medium: return 64
         case .extraSmall: return 24
@@ -26,7 +28,7 @@ enum ProfileSize {
 
     var borderColor: Color {
         switch self {
-        case .large: return .gray4
+        case .extraLarge, .large: return .gray4
         case .medium: return .primaryNormal
         case .extraSmall: return .gray5
         case .small: return .clear
