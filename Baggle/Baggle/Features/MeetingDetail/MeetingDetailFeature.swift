@@ -178,6 +178,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .cameraButtonTapped:
+                print("---- cameraButtonTapped")
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     let timerCount = emergencyButtonActiveTime.authenticationTimeout()
                     state.usingCamera = CameraFeature.State(
@@ -301,18 +302,20 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .emergencyAction(.presented(.delegate(.usingCamera))):
                 state.emergencyState = nil
-                return .run { send in
-                    await send(.onAppear)
-                    try await Task.sleep(seconds: 0.4)
-                    await send(.cameraButtonTapped)
-                }
+                return .run { send in await send(.cameraButtonTapped) }
 
             case .emergencyAction(.presented(.delegate(.moveToBack))):
                 state.emergencyState = nil
-                return .run { send in await send(.onAppear) }
+                return .none
                 
             case .emergencyAction(.presented(.delegate(.moveToLogin))):
-                return .run { send in await send(.delegate(.moveToLogin))}
+                return .run { send in await send(.delegate(.moveToLogin)) }
+                
+            case .emergencyAction(.presented(.emergencyButtonTapped)):
+                return .run { send in
+                    try await Task.sleep(seconds: 0.4)
+                    await send(.onAppear)
+                }
             
             case .emergencyAction:
                 return .none
