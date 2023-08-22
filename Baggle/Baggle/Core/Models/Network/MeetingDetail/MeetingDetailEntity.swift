@@ -32,7 +32,7 @@ extension MeetingDetailEntity {
             date: meetingTime.koreanDate(),
             time: meetingTime.hourMinute(),
             memo: (memo ?? "").isEmpty ? nil : memo,
-            members: members.map { $0.memberDomain(meetingConfirmed: isMeetingConfirmed()) },
+            members: members.map { $0.memberDomain(afterMeetingConfirmed: isMeetingConfirmed()) },
             memberId: memberId(username: username, members: members),
             stampStatus: status.meetingStampStatus(),
             emergencyStatus: status.meetingEmergencyStatus(),
@@ -49,7 +49,7 @@ extension MeetingDetailEntity {
     // 서버에서 멤버가 새로 들어올 때마다 랜덤으로 권한자가 설정됨
     // 모임 확정 시간 전까지 버튼 권한자를 보여주면 안 됨
     private func isMeetingConfirmed() -> Bool {
-        return status == .confirmation
+        return status != .scheduled
     }
     
     private func memberId(username: String, members: [MeetingDetailMemberEntity]) -> Int {
