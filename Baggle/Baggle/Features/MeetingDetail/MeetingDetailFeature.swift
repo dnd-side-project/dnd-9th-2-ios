@@ -301,15 +301,19 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .emergencyAction(.presented(.delegate(.usingCamera))):
                 state.emergencyState = nil
-                return .run { send in await send(.cameraButtonTapped)}
+                return .run { send in
+                    await send(.onAppear)
+                    try await Task.sleep(seconds: 0.4)
+                    await send(.cameraButtonTapped)
+                }
 
             case .emergencyAction(.presented(.delegate(.moveToBack))):
                 state.emergencyState = nil
-                return .none
+                return .run { send in await send(.onAppear) }
                 
             case .emergencyAction(.presented(.delegate(.moveToLogin))):
                 return .run { send in await send(.delegate(.moveToLogin))}
-                
+            
             case .emergencyAction:
                 return .none
 
