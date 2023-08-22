@@ -19,3 +19,17 @@ struct Member: Identifiable, Hashable {
         return lhs.id == rhs.id
     }
 }
+
+extension Member {
+    func updateFeed(certImage: String) -> Member {
+        return Member(
+            id: self.id,
+            name: self.name,
+            profileURL: self.profileURL,
+            isMeetingAuthority: self.isMeetingAuthority,
+            isButtonAuthority: self.isButtonAuthority,
+            certified: true,
+            certImage: certImage
+        )
+    }
+}

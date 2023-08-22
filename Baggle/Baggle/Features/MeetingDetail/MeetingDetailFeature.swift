@@ -286,10 +286,16 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Child - Camera
 
             case let .usingCamera(.presented(.delegate(.uploadSuccess(feed)))):
-                if let meetingData = state.meetingData {
-                    state.meetingData = meetingData.updateFeed(feed)
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingNotFound
+                    return .none
                 }
-                return .none
+                
+                // 피드 & 멤버 데이터 업데이트
+                let newMeeting = meetingData.updateFeed(feed)
+                
+                // 긴급 버튼 업데이트
+                return .run { send in await send(.updateData(newMeeting))}
                 
             case .usingCamera(.presented(.delegate(.moveToLogin))):
                 return .run { send in await send(.delegate(.moveToLogin))}
