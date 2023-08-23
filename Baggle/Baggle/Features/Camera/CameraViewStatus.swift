@@ -8,7 +8,6 @@
 import Foundation
 
 enum CameraViewStatus: Equatable {
-    case loading
     case camera
     case result
 }
