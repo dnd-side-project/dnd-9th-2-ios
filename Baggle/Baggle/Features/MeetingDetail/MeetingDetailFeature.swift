@@ -53,6 +53,8 @@ struct MeetingDetailFeature: ReducerProtocol {
         // MARK: - Scope Action
 
         case onAppear
+        case notificationAppear(Int)
+        
         case handleResult(MeetingDetailStatus)
         case updateData(MeetingDetail)
         case deleteMeeting
@@ -122,6 +124,10 @@ struct MeetingDetailFeature: ReducerProtocol {
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
                     await send(.handleResult(result))
                 }
+                
+            case .notificationAppear(let id):
+                state.meetingId = id
+                return .run { send in await send(.onAppear) }
 
             case .handleResult(let status):
                 state.isLoading = false

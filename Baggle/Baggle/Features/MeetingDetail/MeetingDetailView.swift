@@ -170,8 +170,10 @@ struct MeetingDetailView: View {
             })
             .onReceive(
                 NotificationCenter.default.publisher(for: .moveMeetingDetail),
-                perform: { _ in
-                    viewStore.send(.onAppear)
+                perform: { notification in
+                    if let id = notification.object as? Int {
+                        viewStore.send(.notificationAppear(id))
+                    }
                 }
             )
         }
