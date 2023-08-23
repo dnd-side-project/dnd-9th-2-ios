@@ -22,7 +22,7 @@ struct MeetingDetail: Equatable {
     let isEmergencyAuthority: Bool // 내가 긴급 버튼 권한자
     let emergencyButtonActive: Bool // 긴급 버튼 활성화 여부
     let emergencyButtonActiveTime: Date? // 긴급 버튼 활성화 시간
-    let emergencyButtonExpiredTime: Date // 긴급 버튼 만료 시간 - 모임 10분 전
+    let emergencyButtonExpiredTime: Date // 긴급 버튼 만료 시간 - 모임 15분 전
     let isCertified: Bool
     let feeds: [Feed]
 
@@ -32,6 +32,30 @@ struct MeetingDetail: Equatable {
 }
 
 extension MeetingDetail {
+    
+    // 긴급 버튼 활성화
+    // emergencyStatus -> .ongoing으로 변경
+    
+    func updateEmergemcy(_ emergencyActiveTime: Date) -> MeetingDetail {
+        MeetingDetail(
+            id: id,
+            name: name,
+            place: place,
+            date: date,
+            time: date,
+            memo: memo,
+            members: members,
+            memberId: memberId,
+            stampStatus: stampStatus,
+            emergencyStatus: .onGoing,
+            isEmergencyAuthority: isEmergencyAuthority,
+            emergencyButtonActive: true,
+            emergencyButtonActiveTime: emergencyActiveTime,
+            emergencyButtonExpiredTime: emergencyButtonExpiredTime,
+            isCertified: isCertified,
+            feeds: feeds)
+    }
+    
 
     // 긴급 종료 이후 피드 업데이트
     // emergencyStatus -> .terminattion으로 변경
