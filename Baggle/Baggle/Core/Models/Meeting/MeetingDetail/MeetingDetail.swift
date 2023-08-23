@@ -61,14 +61,19 @@ extension MeetingDetail {
     // emergencyStatus -> .terminattion으로 변경
     
     func updateFeed(_ feed: Feed) -> MeetingDetail {
-        MeetingDetail(
+        
+        let updatedMembers = self.members.map {
+            return $0.id == self.memberId ? $0.updateFeed(certImage: feed.feedImageURL) : $0
+        }
+        
+        return MeetingDetail(
             id: self.id,
             name: self.name,
             place: self.place,
             date: self.date,
             time: self.time,
             memo: self.memo,
-            members: self.members,
+            members: updatedMembers,
             memberId: self.memberId,
             stampStatus: self.stampStatus,
             emergencyStatus: .termination,

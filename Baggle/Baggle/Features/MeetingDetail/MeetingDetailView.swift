@@ -36,7 +36,6 @@ struct MeetingDetailView: View {
                             
                             // 참여자 목록
                             memberListView(viewStore: viewStore)
-                                .padding(.horizontal, 20)
                                 .drawUnderline(
                                     spacing: 0,
                                     height: 0.5,
@@ -314,9 +313,11 @@ extension MeetingDetailView {
                     .padding(.all, 2)
                 }
             }
+            .padding(.horizontal, 20)
         }
         .padding(.top, 20)
         .padding(.bottom, 16)
+        .scrollIndicators(.hidden)
     }
     
     func feedView(feeds: [Feed], viewStroe: MeetingDetailViewStore) -> some View {
