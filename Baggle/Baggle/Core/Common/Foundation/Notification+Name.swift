@@ -8,7 +8,9 @@
 import Foundation
 
 extension Notification.Name {
-    static let skipSplash = Notification.Name(rawValue: "skipSplash")
     static let moveMeetingDetail = Notification.Name(rawValue: "moveMeetingDetail")
     static let refreshMeetingList = Notification.Name("refreshMeetingList")
+    static let joinMeeting = Notification.Name("joinMeeting")
+    static let skipSplashMeetingDetail = Notification.Name(rawValue: "skipSplashMeetingDetail")
+    static let skipSplashJoinMeeting = Notification.Name("skipSplashJoinMeeting")
 }

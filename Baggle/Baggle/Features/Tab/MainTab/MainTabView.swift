@@ -78,13 +78,14 @@ struct MainTabView: View {
                 ) { store in
                     JoinMeetingView(store: store)
                 }
-                .onOpenURL { url in
-                    if let id = url.params()?["id"] as? String,
-                       let id = Int(id) {
-                        print("MainTabView - id: \(id)")
-                        viewStore.send(.enterJoinMeeting(id))
+                .onReceive(
+                    NotificationCenter.default.publisher(for: .joinMeeting),
+                    perform: { noti in
+                        if let id = noti.object as? Int {
+                            viewStore.send(.enterJoinMeeting(id))
+                        }
                     }
-                }
+                )
             }
         }
     }
