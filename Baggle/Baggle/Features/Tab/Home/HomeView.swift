@@ -46,7 +46,7 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.horizontal, 20)
-                            .padding(.top, 23)
+                            .padding(.vertical, 23)
                         }
                     } else {
                         emptyView(viewStore.homeStatus)
