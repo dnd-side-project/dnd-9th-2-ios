@@ -93,8 +93,7 @@ struct MainTabFeature: ReducerProtocol {
                     await send(.selectTab(previousTab))
                 }
                 
-            case .createMeeting(.presented(.createSuccess)):
-                print("🚨 모임 생성 성공")
+            case .createMeeting(.presented(.delegate(.createSuccess))):
                 return .run { send in
                     await send(.homeAction(.refreshMeetingList))
                 }
