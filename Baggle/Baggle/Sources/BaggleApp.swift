@@ -41,6 +41,14 @@ struct BaggleApp: App {
                 if AuthApi.isKakaoTalkLoginUrl(url) {
                     _ = AuthController.handleOpenUrl(url: url)
                 }
+                
+                if let id = url.params()?["id"] as? String,
+                   let id = Int(id) {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                        self.postObserverAction(.skipSplashJoinMeeting, object: id)
+                    }
+                    print("카카오톡 타고 들어온 Meeting ID : \(id)")
+                }
             }
         }
     }
