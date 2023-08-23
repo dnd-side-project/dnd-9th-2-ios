@@ -49,6 +49,7 @@ class UserManager {
     }
     
     func save(user: User, userToken: UserToken) throws {
+        checkKeyChain()
         try KeychainManager.shared.createUserToken(userToken)
         UserDefaultList.user = user
     }
