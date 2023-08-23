@@ -53,10 +53,11 @@ struct EmergencyFeature: ReducerProtocol {
         // Delegate
         case delegate(Delegate)
 
-        enum Delegate {
+        enum Delegate: Equatable {
             case usingCamera
             case moveToBack
             case moveToLogin
+            case updateEmergencyState(Date)
         }
     }
 
@@ -149,9 +150,12 @@ struct EmergencyFeature: ReducerProtocol {
                 
                 switch status {
                 case .success(let certificationTime):
-                    let timerCount = certificationTime.remainingTime()
+                    let timerCount = certificationTime.authenticationTimeout()
                     state.timer = TimerFeature.State(timerCount: timerCount)
                     state.isEmergency = true
+                    return .run { send in
+                        await send(.delegate(.updateEmergencyState(certificationTime)))
+                    }
                 case .invalidAuthorizationTime:
                     state.alertType = .invalidAuthorizationTime
                     return .none
@@ -168,7 +172,6 @@ struct EmergencyFeature: ReducerProtocol {
                     state.alertType = .networkError(description)
                     return .none
                 }
-                return .none
                 
                 // Timer
             case .timerAction:
