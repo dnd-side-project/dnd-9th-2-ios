@@ -302,6 +302,14 @@ extension MeetingDetailView {
                                 }
                             }
                             
+                            if failEmergencyAuthorization(
+                                meetingData: viewStore.meetingData,
+                                certified: member.certified
+                            ) {
+                                Circle()
+                                    .fill(Color.gray10.opacity(0.7))
+                            }
+                            
                             HStack(spacing: -10) {
                                 if member.isMeetingAuthority {
                                     ProfileBadgeView(tag: .meeting)
@@ -310,6 +318,15 @@ extension MeetingDetailView {
                                 if member.isButtonAuthority {
                                     ProfileBadgeView(tag: .button)
                                 }
+                            }
+                            
+                            if failEmergencyAuthorization(
+                                meetingData: viewStore.meetingData,
+                                certified: member.certified
+                            ) {
+                                BaggleStamp(status: .fail)
+                                    .frame(width: 60, height: 40)
+                                    .offset(x: -2, y: -12)
                             }
                         }
                         
@@ -405,6 +422,16 @@ extension MeetingDetailView {
             height += 21
         }
         return height
+    }
+}
+
+extension MeetingDetailView {
+    
+    func failEmergencyAuthorization(meetingData: MeetingDetail?, certified: Bool) -> Bool {
+        guard let meetingData = meetingData else {
+            return false
+        }
+        return meetingData.afterEmergencyAuthority() && !certified
     }
 }
 

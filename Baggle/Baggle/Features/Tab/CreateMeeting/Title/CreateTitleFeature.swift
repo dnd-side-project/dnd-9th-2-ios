@@ -51,6 +51,7 @@ struct CreateTitleFeature: ReducerProtocol {
         case delegate(Delegate)
         
         enum Delegate: Equatable {
+            case createSuccess
             case moveToLogin
         }
     }
@@ -193,7 +194,9 @@ struct CreateTitleFeature: ReducerProtocol {
                 state.path.append(.createSuccess(
                     CreateSuccessFeature.State(meetingSuccessModel: meetingSuccessModel))
                 )
-                return .none
+                return .run { send in
+                    await send(.delegate(.createSuccess))
+                }
                 
             case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBack)))):
                 state.path.pop(from: id)
