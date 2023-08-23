@@ -59,12 +59,21 @@ struct AppView: View {
             }
         }
         .onReceive(
-            NotificationCenter.default.publisher(for: .skipSplash)
+            NotificationCenter.default.publisher(for: .skipSplashMeetingDetail)
         ) { noti in
             skipSplash = true
             splashEnded = true
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                 postObserverAction(.moveMeetingDetail, object: noti.object)
+            }
+        }
+        .onReceive(
+            NotificationCenter.default.publisher(for: .skipSplashJoinMeeting)
+        ) { noti in
+            skipSplash = true
+            splashEnded = true
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                postObserverAction(.joinMeeting, object: noti.object)
             }
         }
     }

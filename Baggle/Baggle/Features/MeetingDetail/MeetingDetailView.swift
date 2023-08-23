@@ -126,6 +126,19 @@ struct MeetingDetailView: View {
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
+            .onAppear { viewStore.send(.onAppear) }
+            .onDisappear { viewStore.send(.delegate(.onDisappear)) }
+            .onChange(of: viewStore.dismiss, perform: { _ in
+                dismiss()
+            })
+            .onReceive(
+                NotificationCenter.default.publisher(for: .moveMeetingDetail),
+                perform: { notification in
+                    if let id = notification.object as? Int {
+                        viewStore.send(.notificationAppear(id))
+                    }
+                }
+            )
             // 임시 액션시트
             .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
                 Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
@@ -163,11 +176,6 @@ struct MeetingDetailView: View {
             ) { emergencyStore in
                 EmergencyView(store: emergencyStore)
             }
-            .onAppear { viewStore.send(.onAppear) }
-            .onDisappear { viewStore.send(.delegate(.onDisappear)) }
-            .onChange(of: viewStore.dismiss, perform: { _ in
-                dismiss()
-            })
         }
     }
 }
