@@ -26,7 +26,7 @@ struct CameraFeature: ReducerProtocol {
         var flipDegree: Double = 0.0
 
         // Status
-        var cameraViewStatus: CameraViewStatus = .loading
+        var cameraViewStatus: CameraViewStatus = .camera
         var isUploading: Bool = false
 
         // System - Alert
@@ -44,9 +44,6 @@ struct CameraFeature: ReducerProtocol {
 
         case onAppear
 
-        // Status
-        case cameraStartSuccess
-        
         // Image
         case viewFinderUpdate(Image?)
         case flipImageRemove
@@ -118,7 +115,6 @@ struct CameraFeature: ReducerProtocol {
 
                     switch cameraStartStatus {
                     case .success:
-                        await send(.cameraStartSuccess)
 
                         let imageStream = cameraService.previewStream()
                             .map { $0.image }
@@ -135,10 +131,6 @@ struct CameraFeature: ReducerProtocol {
                     }
                 }
                 
-                // MARK: - Status
-            case .cameraStartSuccess:
-                state.cameraViewStatus = .camera
-                return .none
 
             // MARK: - Image
 

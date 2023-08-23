@@ -153,7 +153,7 @@ extension EmergencyView {
         VStack {
             
             Spacer()
-                .frame(maxHeight: proxy.size.height * 0.23)
+                .frame(maxHeight: proxy.size.height * 0.24)
             
             LargeTimerView(
                 store: self.store.scope(
