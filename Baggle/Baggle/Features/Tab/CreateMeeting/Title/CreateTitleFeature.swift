@@ -48,10 +48,13 @@ struct CreateTitleFeature: ReducerProtocol {
         case textFieldAction(BaggleTextFeature.Action)
         case path(StackAction<Child.State, Child.Action>)
         
+        case createSuccess
+        
         case delegate(Delegate)
         
         enum Delegate: Equatable {
             case moveToLogin
+//            case createSuccess
         }
     }
 
@@ -133,6 +136,7 @@ struct CreateTitleFeature: ReducerProtocol {
                 }
 
             case .moveToNextScreen:
+                print("🚨 moveToNextScreen")
                 state.path.append(.meetingPlace(CreatePlaceFeature.State()))
                 return .none
 
@@ -193,6 +197,13 @@ struct CreateTitleFeature: ReducerProtocol {
                 state.path.append(.createSuccess(
                     CreateSuccessFeature.State(meetingSuccessModel: meetingSuccessModel))
                 )
+                return .run { send in await send(.createSuccess) }
+//                return .run { send in
+//                    await send(.delegate(.createSuccess))
+//                }
+//                return .none
+                
+            case .createSuccess:
                 return .none
                 
             case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBack)))):

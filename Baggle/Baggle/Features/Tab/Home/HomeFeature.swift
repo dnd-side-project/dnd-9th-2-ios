@@ -137,6 +137,7 @@ struct HomeFeature: ReducerProtocol {
 
                 // 초기화
             case .refreshMeetingList:
+                print("🚨 다시 불러옴")
                 state.isRefreshing = true
                 state.homeStatus = .loading
                 state.meetingStatus = .scheduled
@@ -231,6 +232,7 @@ struct HomeFeature: ReducerProtocol {
                 }
 
             case .meetingDetailAction(.delegate(.moveToLogin)):
+                print("🚨 homeFeature - moveToLogin")
                 return .run { send in await send(.delegate(.moveToLogin)) }
                 
             case .meetingDetailAction:
