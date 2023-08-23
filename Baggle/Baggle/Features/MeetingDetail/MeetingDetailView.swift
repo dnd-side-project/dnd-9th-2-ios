@@ -296,6 +296,11 @@ extension MeetingDetailView {
                                 }
                             }
                             
+                            if !member.certified {
+                                Circle()
+                                    .fill(Color.gray10.opacity(0.7))
+                            }
+                            
                             HStack(spacing: -10) {
                                 if member.isMeetingAuthority {
                                     ProfileBadgeView(tag: .meeting)
@@ -304,6 +309,12 @@ extension MeetingDetailView {
                                 if member.isButtonAuthority {
                                     ProfileBadgeView(tag: .button)
                                 }
+                            }
+                            
+                            if !member.certified {
+                                BaggleStamp(status: .fail)
+                                    .frame(width: 60, height: 40)
+                                    .offset(x: -2, y: -12)
                             }
                         }
                         
