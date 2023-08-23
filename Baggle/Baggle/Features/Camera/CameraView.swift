@@ -105,8 +105,6 @@ extension CameraView {
     private func viewFinderView(viewStore: CameraFeatureViewStore) -> some View {
         ZStack {
             switch viewStore.cameraViewStatus {
-            case .loading:
-                ProgressView()
             case .camera:
                 cameraPreview(viewStore: viewStore)
             case .result:
@@ -124,6 +122,8 @@ extension CameraView {
             if let image = viewStore.state.viewFinderImage {
                 image
                     .resizable()
+            } else {
+                ProgressView()
             }
             
             if let flipImage = viewStore.state.flipImage {

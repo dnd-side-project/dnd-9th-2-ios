@@ -29,6 +29,7 @@ struct MeetingListCell: View {
                     }
                     .font(.Baggle.body1)
                     .foregroundColor(.gray11)
+                    .padding(.top, 4)
 
                     Text(
                         attributedColorString(
@@ -75,6 +76,11 @@ struct MeetingListCell: View {
             // 디데이 + 한시간 전인 경우와 이미 지나서 확정된 경우
             if data.stampStatus == .confirmation {
                 BaggleStamp(status: .confirm)
+                    .padding(.bottom, 34)
+                    .padding(.leading, 230)
+                    .padding(.trailing, 16)
+            } else if data.stampStatus == .termination {
+                BaggleStamp(status: .completed)
                     .padding(.bottom, 34)
                     .padding(.leading, 230)
                     .padding(.trailing, 16)
