@@ -61,4 +61,8 @@ extension MeetingDetail {
             feeds: self.feeds + [feed]
         )
     }
+
+    func afterEmergencyAuthority() -> Bool {
+        return emergencyStatus == .past || emergencyStatus == .termination
+    }
 }
