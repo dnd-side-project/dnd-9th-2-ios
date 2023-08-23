@@ -10,6 +10,7 @@ import SwiftUI
 import ComposableArchitecture
 import KakaoSDKShare
 
+// swiftlint:disable:next type_body_length
 struct MeetingDetailFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
@@ -309,15 +310,22 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .emergencyAction(.presented(.delegate(.usingCamera))):
                 state.emergencyState = nil
-                return .run { send in await send(.cameraButtonTapped)}
+                return .run { send in await send(.cameraButtonTapped) }
 
             case .emergencyAction(.presented(.delegate(.moveToBack))):
                 state.emergencyState = nil
                 return .none
                 
             case .emergencyAction(.presented(.delegate(.moveToLogin))):
-                return .run { send in await send(.delegate(.moveToLogin))}
+                return .run { send in await send(.delegate(.moveToLogin)) }
                 
+            case .emergencyAction(.presented(.delegate(.updateEmergencyState(let date)))):
+                if let meetingData = state.meetingData {
+                    let newData = meetingData.updateEmergemcy(date)
+                    return .run { send in await send(.updateData(newData)) }
+                }
+                return .none
+            
             case .emergencyAction:
                 return .none
 

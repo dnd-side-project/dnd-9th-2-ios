@@ -273,9 +273,7 @@ extension MeetingDetailView {
                 .offset(y: yOffset)
             }
         }
-        .frame(
-            height: (data.memo?.width(15) ?? 0) >= screenSize.width - 40 ? 240 : 188
-        )
+        .frame(height: headerHeight(name: data.name, memo: data.memo))
         .padding(.top, 56)
     }
     
@@ -385,6 +383,20 @@ extension MeetingDetailView {
                 .foregroundColor(.gray6)
         }
         .frame(width: screenSize.width)
+    }
+}
+
+extension MeetingDetailView {
+    func headerHeight(name: String, memo: String?) -> CGFloat {
+        var height: CGFloat = 188
+        if name.width > 200 {
+            height += 31
+        }
+        if let width = memo?.width(15),
+            width >= screenSize.width - 40 {
+            height += 21
+        }
+        return height
     }
 }
 
