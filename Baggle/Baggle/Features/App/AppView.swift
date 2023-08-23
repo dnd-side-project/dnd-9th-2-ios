@@ -75,7 +75,7 @@ struct AppView: View {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                 postObserverAction(.joinMeeting, object: noti.object)
             }
-        }{
+        }
     }
 }
 
