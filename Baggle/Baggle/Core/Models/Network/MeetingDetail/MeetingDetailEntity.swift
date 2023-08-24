@@ -27,7 +27,7 @@ extension MeetingDetailEntity {
     func toDomain(username: String) -> MeetingDetail {
         MeetingDetail(
             id: meetingID,
-            name: title,
+            name: title.lineChanged(),
             place: place,
             date: meetingTime.koreanDate(),
             time: meetingTime.hourMinute(),
