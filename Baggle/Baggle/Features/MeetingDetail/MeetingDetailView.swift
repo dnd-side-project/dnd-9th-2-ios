@@ -180,9 +180,8 @@ extension MeetingDetailView {
         HStack(alignment: .top) {
             Text("📌")
             
-            Text("\(name)")
+            Text("\(name.lineChanged())")
                 .fontWithLineSpacing(fontType: .subTitle1)
-                .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
                 .foregroundColor(.gray9)
             
