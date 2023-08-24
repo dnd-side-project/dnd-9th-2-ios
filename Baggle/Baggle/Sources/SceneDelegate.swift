@@ -20,7 +20,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
             let userInfo = notification.notification.request.content.userInfo
             if let meetingId: Int = Int(userInfo["meetingId"] as? String ?? "") {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-                    self.postObserverAction(.skipSplash, object: meetingId)
+                    self.postObserverAction(.skipSplashMeetingDetail, object: meetingId)
                 }
             }
         }

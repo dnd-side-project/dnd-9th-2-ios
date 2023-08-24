@@ -25,14 +25,14 @@ struct TestDateService {
 
     // MARK: - 목업 Meeting Status 생성
     // 특정 시간(meetingTime)을 인자로 받아 Meeting Status 생성
-    
-    func meetingDetailStatus(meetingTime: Date) -> MeetingEmergencyStatus {
-        
-        // 추후 추가
-        return .confirmation
-    }
-
-    func isSameDay(_ date1 : Date, _ date2: Date) -> Bool {
-        return calendar.isDate(date1, inSameDayAs: date2)
-    }
+//    
+//    func meetingDetailStatus(meetingTime: Date) -> MeetingEmergencyStatus {
+//        
+//        // 추후 추가
+//        return .confirmation
+//    }
+//
+//    func isSameDay(_ date1 : Date, _ date2: Date) -> Bool {
+//        return calendar.isDate(date1, inSameDayAs: date2)
+//    }
 }
