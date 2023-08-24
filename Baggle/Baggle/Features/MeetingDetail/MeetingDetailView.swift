@@ -187,6 +187,7 @@ extension MeetingDetailView {
     func meetingTitleView(name: String, status: MeetingStampStatus) -> some View {
         HStack(alignment: .top) {
             Text("📌")
+                .fontWithLineSpacing(fontType: .subTitle1)
             
             Text("\(name)")
                 .fontWithLineSpacing(fontType: .subTitle1)
