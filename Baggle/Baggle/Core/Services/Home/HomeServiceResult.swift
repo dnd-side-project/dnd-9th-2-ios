@@ -8,6 +8,6 @@
 import Foundation
 
 enum HomeServiceResult {
-    case success(Home)
+    case success(HomeMeetingList)
     case fail(APIError)
 }
