@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingCreateService {
-    var create: (_ meetingCreateModel: MeetingCreateModel) async -> MeetingCreateStatus
+    var create: (_ meetingCreateModel: MeetingCreateModel) async -> MeetingCreateResult
 }
 
 extension MeetingCreateService: DependencyKey {

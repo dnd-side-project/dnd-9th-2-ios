@@ -37,7 +37,7 @@ struct CreateMemoFeature: ReducerProtocol {
         case nextButtonTapped
 
         // Network
-        case handleStatus(MeetingCreateStatus)
+        case handleResult(MeetingCreateResult)
         
         // Alert
         case presentAlert
@@ -95,15 +95,15 @@ struct CreateMemoFeature: ReducerProtocol {
                 state.isLoading = true
 
                 return .run { send in
-                    let meetingCreateStatus = await meetingCreateService.create(requestModel)
-                    await send(.handleStatus(meetingCreateStatus))
+                    let result = await meetingCreateService.create(requestModel)
+                    await send(.handleResult(result))
                 }
 
                 // Network
-            case .handleStatus(let status):
+            case .handleResult(let result):
                 state.isLoading = false
                 
-                switch status {
+                switch result {
                 case .success(let meetingSuccessModel):
                     return .run { send in
                         await send(.delegate(.moveToNext(meetingSuccessModel)))

@@ -11,7 +11,7 @@ import ComposableArchitecture
 import KakaoSDKUser
 
 struct LoginService {
-    var login: (LoginRequestModel, String) async -> LoginServiceStatus
+    var login: (LoginRequestModel, String) async -> LoginServiceResult
     var kakaoLogin: () async throws -> String
 }
 

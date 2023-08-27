@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MeetingCreateStatus: Equatable {
+enum MeetingCreateResult: Equatable {
     case success(MeetingSuccessModel)
     case duplicatedMeeting // 모임 중복
     case userError // 로컬 유저 정보 불러오는데 에러

@@ -13,7 +13,7 @@ import Moya
 typealias ResponseEmptyData = Bool
 
 struct WithdrawService {
-    var withdraw: () async -> WithdrawServiceStatus
+    var withdraw: () async -> WithdrawServiceResult
 }
 
 extension WithdrawService: DependencyKey {

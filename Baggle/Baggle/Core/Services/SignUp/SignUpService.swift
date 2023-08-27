@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Moya
 
 struct SignUpService {
-    var signUp: (SignUpRequestModel, String) async -> SignUpServiceStatus
+    var signUp: (SignUpRequestModel, String) async -> SignUpServiceResult
 }
 
 extension SignUpService: DependencyKey {

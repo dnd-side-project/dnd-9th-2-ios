@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HomeServiceStatus {
+enum HomeServiceResult {
     case success(Home)
     case fail(APIError)
 }
