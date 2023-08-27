@@ -399,7 +399,7 @@
 		2B7B4D6A2A849E9D00283248 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlamofireManager.swift; sourceTree = "<group>"; };
 		2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingDetail.swift; path = Baggle/Core/Models/Meeting/MeetingDetail/MeetingDetail.swift; sourceTree = SOURCE_ROOT; };
-		2B7B4D702A84A5C800283248 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = Baggle/Core/Models/Meeting/Meeting.swift; sourceTree = SOURCE_ROOT; };
+		2B7B4D702A84A5C800283248 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = Baggle/Core/Models/Meeting/HomeList/Meeting.swift; sourceTree = SOURCE_ROOT; };
 		2B7B4D732A84A5EC00283248 /* ProfileImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		2B7B4D762A84B41000283248 /* SignEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignEntity.swift; path = Baggle/Core/Models/Network/SignUp/SignEntity.swift; sourceTree = SOURCE_ROOT; };
 		2B7B4D7C2A853BED00283248 /* MeetingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAPI.swift; sourceTree = "<group>"; };
@@ -1002,6 +1002,92 @@
 			path = Success;
 			sourceTree = "<group>";
 		};
+		14A5102B2A9B4A05002AADAB /* NotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */,
+			);
+			path = NotificationCenter;
+			sourceTree = "<group>";
+		};
+		14A5102C2A9B4A0E002AADAB /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
+				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		14A5102D2A9B4A16002AADAB /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				2BDEAC752A86024E00D698E6 /* KeychainManager.swift */,
+			);
+			path = KeyChain;
+			sourceTree = "<group>";
+		};
+		14A5102E2A9B4A38002AADAB /* Safari */ = {
+			isa = PBXGroup;
+			children = (
+				146237472A87803F00FBE121 /* SafariWebView.swift */,
+			);
+			path = Safari;
+			sourceTree = "<group>";
+		};
+		14A5102F2A9B4A45002AADAB /* NotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */,
+			);
+			path = NotificationCenter;
+			sourceTree = "<group>";
+		};
+		14A510302A9B4A56002AADAB /* PhotoPickers */ = {
+			isa = PBXGroup;
+			children = (
+				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
+			);
+			path = PhotoPickers;
+			sourceTree = "<group>";
+		};
+		14A510312A9B4A60002AADAB /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				14B55AE62A9346C100EE2461 /* Task+.swift */,
+				14486D2D2A8B0D2900831DDD /* Print+.swift */,
+				1493A9172A7E01D800A2D7CC /* Int+.swift */,
+				140C543D2A74F54B00CF1CB4 /* String+.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		14A510322A9B4A70002AADAB /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */,
+				14783EE72A7E340E00EF58D5 /* CIImage+.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		14A510332A9B4A76002AADAB /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				14283FCE2A8DA32B00FE56F1 /* Moya+.swift */,
+			);
+			path = Moya;
+			sourceTree = "<group>";
+		};
+		14A510342A9B4A98002AADAB /* HomeList */ = {
+			isa = PBXGroup;
+			children = (
+				2BB0EF432A8D1A60003F9215 /* Home.swift */,
+				2B7B4D702A84A5C800283248 /* Meeting.swift */,
+			);
+			path = HomeList;
+			sourceTree = "<group>";
+		};
 		14B7A0422A753DA500B8E202 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,8 +1182,7 @@
 		14E083662A8368F00001CB21 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
-				2BB0EF432A8D1A60003F9215 /* Home.swift */,
-				2B7B4D702A84A5C800283248 /* Meeting.swift */,
+				14A510342A9B4A98002AADAB /* HomeList */,
 				1410AD222A84BE9B008793FB /* MeetingDetail */,
 				141FD7612A8CF5FC003DBFD7 /* MeetingSuccess */,
 				14C44B302A948741009E5379 /* Status */,
@@ -1292,15 +1377,11 @@
 			children = (
 				146C51DE2A79143400FF3142 /* Date */,
 				145210872A8E2D6B00150C57 /* UIImage */,
-				2BABCB272A76D08300AFECA3 /* PostObserverAction.swift */,
-				14F2D7B02A728A2B000ED0EE /* PhotosPickerItem+loadTransferable.swift */,
-				140C543D2A74F54B00CF1CB4 /* String+.swift */,
-				14783EE72A7E340E00EF58D5 /* CIImage+.swift */,
-				1493A9172A7E01D800A2D7CC /* Int+.swift */,
-				2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */,
-				14486D2D2A8B0D2900831DDD /* Print+.swift */,
-				14283FCE2A8DA32B00FE56F1 /* Moya+.swift */,
-				14B55AE62A9346C100EE2461 /* Task+.swift */,
+				14A5102F2A9B4A45002AADAB /* NotificationCenter */,
+				14A510302A9B4A56002AADAB /* PhotoPickers */,
+				14A510312A9B4A60002AADAB /* Foundation */,
+				14A510322A9B4A70002AADAB /* SwiftUI */,
+				14A510332A9B4A76002AADAB /* Moya */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1508,11 +1589,10 @@
 		2BABCB202A76CFD100AFECA3 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */,
-				2B30E33B2A6F9DD500949151 /* UserDefaultWrapper.swift */,
-				2B30E33D2A6F9DF000949151 /* UserDefaultKeyList.swift */,
-				2BDEAC752A86024E00D698E6 /* KeychainManager.swift */,
-				146237472A87803F00FBE121 /* SafariWebView.swift */,
+				14A5102E2A9B4A38002AADAB /* Safari */,
+				14A5102D2A9B4A16002AADAB /* KeyChain */,
+				14A5102C2A9B4A0E002AADAB /* UserDefault */,
+				14A5102B2A9B4A05002AADAB /* NotificationCenter */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
