@@ -45,7 +45,7 @@ struct EmergencyFeature: ReducerProtocol {
         case presentBaggleAlert(Bool)
         
         // Network
-        case handleEmergencyStatus(EmergencyServiceStatus)
+        case handleEmergencyStatus(EmergencyServiceResult)
         
         // Child
         case timerAction(TimerFeature.Action)

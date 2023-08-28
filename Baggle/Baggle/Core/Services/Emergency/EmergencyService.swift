@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Moya
 
 struct EmergencyService {
-    var emergency: (_ memberID: Int) async -> EmergencyServiceStatus
+    var emergency: (_ memberID: Int) async -> EmergencyServiceResult
 }
 
 extension EmergencyService: DependencyKey {

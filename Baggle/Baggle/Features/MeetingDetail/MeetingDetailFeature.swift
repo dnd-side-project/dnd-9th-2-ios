@@ -55,7 +55,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         case onAppear
         case notificationAppear(Int)
         
-        case handleResult(MeetingDetailStatus)
+        case handleResult(MeetingDetailResult)
         case updateData(MeetingDetail)
         case deleteMeeting
 
@@ -129,10 +129,10 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.meetingId = id
                 return .run { send in await send(.onAppear) }
 
-            case .handleResult(let status):
+            case .handleResult(let result):
                 state.isLoading = false
                 
-                switch status {
+                switch result {
                 case let .success(meetingDetail):
                     return .run { send in await send(.updateData(meetingDetail)) }
                 case .notFound:

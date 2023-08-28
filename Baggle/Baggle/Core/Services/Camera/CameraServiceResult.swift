@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-enum CameraStartStatus {
+enum CameraStartResult {
     case success
     case deniedAuthorization
     case error
 }
 
-enum CameraTakePhotoStatus {
+enum CameraTakePhotoResult {
     case success(UIImage)
     case error
 }

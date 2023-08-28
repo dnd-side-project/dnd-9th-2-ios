@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingListService {
-    var fetchMeetingList: (_ requestModel: HomeRequestModel) async -> HomeServiceStatus
+    var fetchMeetingList: (_ requestModel: HomeRequestModel) async -> HomeServiceResult
 }
 
 extension MeetingListService: DependencyKey {

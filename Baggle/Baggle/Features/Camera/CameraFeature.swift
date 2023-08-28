@@ -60,7 +60,7 @@ struct CameraFeature: ReducerProtocol {
         case uploadButtonTapped
 
         // Network
-        case handleFeedPhotoStatus(FeedPhotoStatus)
+        case handleFeedPhotoResult(FeedPhotoResult)
         
         // Timer
         case timer(TimerFeature.Action)
@@ -111,9 +111,9 @@ struct CameraFeature: ReducerProtocol {
 
             case .onAppear:                
                 return .run { send in
-                    let cameraStartStatus = await cameraService.start()
+                    let cameraStartResult = await cameraService.start()
 
-                    switch cameraStartStatus {
+                    switch cameraStartResult {
                     case .success:
 
                         let imageStream = cameraService.previewStream()
@@ -160,9 +160,9 @@ struct CameraFeature: ReducerProtocol {
                 }
                 #else
                 return .run { send in
-                    let cameraTakePhotoStatus = await cameraService.takePhoto()
+                    let cameraTakePhotoResult = await cameraService.takePhoto()
                     
-                    switch cameraTakePhotoStatus {
+                    switch cameraTakePhotoResult {
                     case .success(let resultImage):
                         await send(.completeTakePhoto(resultImage))
                     case .error:
@@ -209,15 +209,15 @@ struct CameraFeature: ReducerProtocol {
                 }
                 
                 return .run { send in
-                    let feedPhotoStatus = await feedPhotoService.upload(feedPhotoRequestModel)
-                    await send(.handleFeedPhotoStatus(feedPhotoStatus))
+                    let result = await feedPhotoService.upload(feedPhotoRequestModel)
+                    await send(.handleFeedPhotoResult(result))
                 }
                 
                 // MARK: - Network
                 
-            case .handleFeedPhotoStatus(let status):
+            case .handleFeedPhotoResult(let result):
                 state.isUploading = false
-                switch status {
+                switch result {
                 case .success(let feed):
                     return .run { send in
                         await send(.delegate(.uploadSuccess(feed: feed)))

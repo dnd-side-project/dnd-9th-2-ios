@@ -12,7 +12,7 @@ import ComposableArchitecture
 typealias Token = String
 
 struct FeedPhotoService {
-    var upload: (FeedPhotoRequestModel) async -> FeedPhotoStatus
+    var upload: (FeedPhotoRequestModel) async -> FeedPhotoResult
 }
 
 extension FeedPhotoService: DependencyKey {

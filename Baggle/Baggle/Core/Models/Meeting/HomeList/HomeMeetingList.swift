@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Home: Equatable {
+struct HomeMeetingList: Equatable {
     let progressCount: Int
     let completedCount: Int
     let meetings: [Meeting]?

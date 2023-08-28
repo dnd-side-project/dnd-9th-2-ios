@@ -17,7 +17,7 @@ struct JoinMeetingView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
-                if case let .enable(joinMeeting) = viewStore.joinMeeingStatus {
+                if case let .enable(joinMeeting) = viewStore.joinMeetingStatus {
                     VStack(alignment: .center, spacing: 0) {
                         createDescription()
                             .padding(.top, 46)
@@ -146,7 +146,7 @@ struct JoinMeetingView_Previews: PreviewProvider {
             store: Store(
                 initialState: JoinMeetingFeature.State(
                     meetingId: 100,
-                    joinMeeingStatus: .expired(.overlapMeetingTime)),
+                    joinMeetingStatus: .expired(.overlapMeetingTime)),
                 reducer: JoinMeetingFeature()
             )
         )

@@ -30,7 +30,7 @@ struct MyPageFeature: ReducerProtocol {
         case logoutButtonTapped
         case withdrawButtonTapped
         
-        case withdrawResult(WithdrawServiceStatus)
+        case withdrawResult(WithdrawServiceResult)
         
         case presentSafariView
         case delegate(Delegate)

@@ -1,5 +1,5 @@
 //
-//  SignUpServiceStatus.swift
+//  LoginServiceStatus.swift
 //  Baggle
 //
 //  Created by 양수빈 on 2023/08/16.
@@ -7,9 +7,8 @@
 
 import Foundation
 
-enum SignUpServiceStatus {
+enum LoginServiceResult {
     case success
+    case requireSignUp
     case fail(APIError)
-    case nicknameDuplicated
-    case keyChainError
 }

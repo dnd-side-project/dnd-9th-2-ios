@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum JoinMeetingStatus: Equatable {
+enum JoinMeetingResult: Equatable {
     case enable(JoinMeeting)
     case expired(APIError)
     case joined
     case fail(APIError)
 }
 
-enum JoinMeetingResultStatus: Equatable {
+enum JoinMeetingPostResult: Equatable {
     case success
     case fail(APIError)
 }

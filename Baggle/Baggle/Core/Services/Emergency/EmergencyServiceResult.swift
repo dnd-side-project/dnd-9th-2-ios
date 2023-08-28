@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum EmergencyServiceStatus: Equatable {
+enum EmergencyServiceResult: Equatable {
     case success(Date)
     
     case invalidAuthorizationTime

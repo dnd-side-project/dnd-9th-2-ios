@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FeedPhotoStatus: Equatable {
+enum FeedPhotoResult: Equatable {
     case success(Feed)
     
     case invalidAuthorizationTime

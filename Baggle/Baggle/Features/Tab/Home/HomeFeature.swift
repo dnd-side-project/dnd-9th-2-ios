@@ -52,7 +52,7 @@ struct HomeFeature: ReducerProtocol {
         case scrollReachEnd(Int)
         case changeHomeStatus(HomeStatus)
         case fetchMeetingList(MeetingHomeStatus)
-        case updateMeetingList(MeetingHomeStatus, Home)
+        case updateMeetingList(MeetingHomeStatus, HomeMeetingList)
         case refreshMeetingList
         case changeMeetingStatus(MeetingHomeStatus)
 

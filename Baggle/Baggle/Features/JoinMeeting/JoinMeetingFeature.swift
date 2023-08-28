@@ -15,7 +15,7 @@ struct JoinMeetingFeature: ReducerProtocol {
         
         // joinMeeting
         var meetingId: Int
-        var joinMeeingStatus: JoinMeetingStatus
+        var joinMeetingStatus: JoinMeetingResult
         
         // alert
         var alertType: AlertJoinMeetingType?
@@ -55,7 +55,7 @@ struct JoinMeetingFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                if case let .expired(error) = state.joinMeeingStatus {
+                if case let .expired(error) = state.joinMeetingStatus {
                     switch error {
                     case .overlapMeetingTime:
                         state.alertType = .overlap

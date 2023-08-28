@@ -35,9 +35,9 @@ struct MainTabFeature: ReducerProtocol {
         
         case createMeeting(PresentationAction<CreateTitleFeature.Action>)
         case enterJoinMeeting(Int)
-        case changeJoinMeetingStatus(Int, JoinMeetingStatus)
+        case changeJoinMeetingResult(Int, JoinMeetingResult)
         case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
-        case moveToJoinMeeting(Int, JoinMeetingStatus)
+        case moveToJoinMeeting(Int, JoinMeetingResult)
         
         // MARK: - Delegate
         case delegate(Delegate)
@@ -113,12 +113,12 @@ struct MainTabFeature: ReducerProtocol {
                 
             case .enterJoinMeeting(let id):
                 return .run { send in
-                    let status = await joinMeetingService.fetchMeetingInfo(id)
-                    await send(.changeJoinMeetingStatus(id, status))
+                    let result = await joinMeetingService.fetchMeetingInfo(id)
+                    await send(.changeJoinMeetingResult(id, result))
                 }
                 
-            case .changeJoinMeetingStatus(let id, let status):
-                if status == .joined {
+            case .changeJoinMeetingResult(let id, let result):
+                if result == .joined {
                     let delay = (state.selectedTab == .createMeeting) ? 0.2 : 0
                     let dispatchTime: DispatchTime = DispatchTime.now() + delay
                     DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
@@ -126,7 +126,7 @@ struct MainTabFeature: ReducerProtocol {
                     }
                 } else {
                     return .run { send in
-                        await send(.moveToJoinMeeting(id, status))
+                        await send(.moveToJoinMeeting(id, result))
                     }
                 }
                 return .none
@@ -142,7 +142,7 @@ struct MainTabFeature: ReducerProtocol {
 
             case .moveToJoinMeeting(let id, let status):
                 state.joinMeeting = JoinMeetingFeature.State(meetingId: id,
-                                                             joinMeeingStatus: status)
+                                                             joinMeetingStatus: status)
                 return .none
                 
                 // MARK: - Delegate
