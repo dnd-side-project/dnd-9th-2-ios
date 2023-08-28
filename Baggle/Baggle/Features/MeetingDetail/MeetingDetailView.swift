@@ -187,10 +187,10 @@ extension MeetingDetailView {
     func meetingTitleView(name: String, status: MeetingStampStatus) -> some View {
         HStack(alignment: .top) {
             Text("📌")
+                .fontWithLineSpacing(fontType: .subTitle1)
             
             Text("\(name)")
                 .fontWithLineSpacing(fontType: .subTitle1)
-                .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
                 .foregroundColor(.gray9)
             
@@ -204,7 +204,7 @@ extension MeetingDetailView {
                 }
             }
             .frame(width: 56, height: 23)
-            .padding(.top, name.width > 200 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
+            .padding(.top, 0)
             
             Spacer()
         }
@@ -414,7 +414,7 @@ extension MeetingDetailView {
 extension MeetingDetailView {
     func headerHeight(name: String, memo: String?) -> CGFloat {
         var height: CGFloat = 188
-        if name.width > 200 {
+        if name.contains("\n") {
             height += 31
         }
         if let width = memo?.width(15),
