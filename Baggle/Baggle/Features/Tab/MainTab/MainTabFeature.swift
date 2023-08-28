@@ -85,7 +85,6 @@ struct MainTabFeature: ReducerProtocol {
             case .homeAction:
                 return .none
                 
-                
                 // 모임 생성
             case .createMeeting(PresentationAction.dismiss):
                 let previousTab = state.previousTab
