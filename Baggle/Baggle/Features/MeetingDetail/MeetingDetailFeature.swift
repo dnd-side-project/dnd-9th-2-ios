@@ -174,6 +174,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // MARK: - Tap
 
             case .deleteButtonTapped:
+                state.alertType = .meetingDelete
                 return .none
                 
             case .editButtonTapped:
@@ -309,6 +310,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
                 case .invitation:
+                    return .none
+                case .meetingDelete:
+                    //방 폭파
                     return .none
                 case .delete:
                     // 삭제 요청
