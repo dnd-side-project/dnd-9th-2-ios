@@ -58,15 +58,21 @@ struct MainTabFeature: ReducerProtocol {
 
         enum State: Equatable {
             case meetingDetail(MeetingDetailFeature.State)
+            case meetingEdit(MeetingEditFeature.State)
         }
 
         enum Action: Equatable {
             case meetingDetail(MeetingDetailFeature.Action)
+            case meetingEdit(MeetingEditFeature.Action)
         }
 
         var body: some ReducerProtocolOf<Self> {
             Scope(state: /State.meetingDetail, action: /Action.meetingDetail) {
                 MeetingDetailFeature()
+            }
+            
+            Scope(state: /State.meetingEdit, action: /Action.meetingEdit) {
+                MeetingEditFeature()
             }
         }
     }
@@ -183,9 +189,30 @@ struct MainTabFeature: ReducerProtocol {
             case let .path(.element(id: id, action: .meetingDetail(.delegate(.onDisappear)))):
                 state.path.pop(from: id)
                 return .none
-                
+            
+            case let .path(.element(id: id, action: .meetingDetail(.delegate(.moveToEdit)))):
+                _ = id
+                state.path.append(
+                    .meetingEdit(
+                        MeetingEditFeature.State(
+                            meetingEdit: MeetingEdit(
+                                id: 0,
+                                title: "제목",
+                                place: "장소는 어디냐",
+                                date: Date(),
+                                memo: "메모메모"
+                            ),
+                            meetingDateButtonState: MeetingDateButtonFeature.State()
+                        )
+                    )
+                )
+                return .none
                 // 삭제시 home refresh
                 // 유저 에러시 로그인으로 
+                
+            case let .path(.element(id: id, action: .meetingEdit(.delegate(.moveToBack)))):
+                state.path.pop(from: id)
+                return .none
                 
             case .path:
                 return .none

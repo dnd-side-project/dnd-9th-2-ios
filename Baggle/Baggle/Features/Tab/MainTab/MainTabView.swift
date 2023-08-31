@@ -90,7 +90,6 @@ struct MainTabView: View {
                     }
                 )
             }
-            
         } destination: { pathState in
             switch pathState {
             case .meetingDetail:
@@ -99,6 +98,13 @@ struct MainTabView: View {
                     action: MainTabFeature.Child.Action.meetingDetail
                 ) { store in
                     MeetingDetailView(store: store)
+                }
+            case .meetingEdit:
+                CaseLet(
+                    /MainTabFeature.Child.State.meetingEdit,
+                    action: MainTabFeature.Child.Action.meetingEdit
+                ) { store in
+                    MeetingEditView(store: store)
                 }
             }
         }

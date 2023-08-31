@@ -39,10 +39,12 @@ struct HomeFeature: ReducerProtocol {
     }
 
     enum Action: Equatable {
-        // MARK: - Scope Action
 
+        // View
         case onAppear
         case scrollReachEnd(Int)
+
+        // State 관리
         case changeHomeStatus(HomeStatus)
         case fetchMeetingList(MeetingHomeStatus)
         case updateMeetingList(MeetingHomeStatus, HomeMeetingList)
@@ -188,7 +190,7 @@ struct HomeFeature: ReducerProtocol {
                     }
                 }
                 return .none
-
+                
             case .pushToMeetingDetail(let id):
                 return .run { send in await send(.delegate(.moveToMeetingDetail(id))) }
 

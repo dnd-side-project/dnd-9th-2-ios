@@ -64,6 +64,7 @@
 		14486D2C2A8B0C7400831DDD /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14486D2B2A8B0C7400831DDD /* DateFormatter+.swift */; };
 		14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14486D2D2A8B0D2900831DDD /* Print+.swift */; };
 		145210892A8E2D7800150C57 /* ImageSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145210882A8E2D7800150C57 /* ImageSizeType.swift */; };
+		14552E302AA0938C002E7E58 /* MeetingEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14552E2F2AA0938C002E7E58 /* MeetingEdit.swift */; };
 		1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B5FF2A7BA3F000A15706 /* BubbleView.swift */; };
 		1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */; };
 		1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1462373D2A87760E00FBE121 /* SettingListRow.swift */; };
@@ -297,6 +298,7 @@
 		14486D2B2A8B0C7400831DDD /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		14486D2D2A8B0D2900831DDD /* Print+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Print+.swift"; sourceTree = "<group>"; };
 		145210882A8E2D7800150C57 /* ImageSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizeType.swift; sourceTree = "<group>"; };
+		14552E2F2AA0938C002E7E58 /* MeetingEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingEdit.swift; sourceTree = "<group>"; };
 		1461B5FF2A7BA3F000A15706 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		1461B6012A7BA8C500A15706 /* RoundedTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTriangle.swift; sourceTree = "<group>"; };
 		1462373D2A87760E00FBE121 /* SettingListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListRow.swift; sourceTree = "<group>"; };
@@ -870,6 +872,14 @@
 			path = UIImage;
 			sourceTree = "<group>";
 		};
+		14552E2E2AA0937D002E7E58 /* MeetingEdit */ = {
+			isa = PBXGroup;
+			children = (
+				14552E2F2AA0938C002E7E58 /* MeetingEdit.swift */,
+			);
+			path = MeetingEdit;
+			sourceTree = "<group>";
+		};
 		1461B5FE2A7BA3EA00A15706 /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
@@ -1213,6 +1223,7 @@
 				14A510342A9B4A98002AADAB /* HomeList */,
 				1410AD222A84BE9B008793FB /* MeetingDetail */,
 				141FD7612A8CF5FC003DBFD7 /* MeetingSuccess */,
+				14552E2E2AA0937D002E7E58 /* MeetingEdit */,
 				14C44B302A948741009E5379 /* Status */,
 			);
 			path = Meeting;
@@ -2009,6 +2020,7 @@
 				14EA20B92A8DBFBD005C1289 /* BaggleAlertType.swift in Sources */,
 				14EF8C1F2A8CAB5600B0FA40 /* FeedPhotoEntity.swift in Sources */,
 				141392602A78E81D00249C8A /* PageIndicator.swift in Sources */,
+				14552E302AA0938C002E7E58 /* MeetingEdit.swift in Sources */,
 				2B308B912A7CDA1400B9846F /* SegmentedPickerView.swift in Sources */,
 				14E0836D2A836A8C0001CB21 /* MeetingDetailEntity.swift in Sources */,
 				14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */,

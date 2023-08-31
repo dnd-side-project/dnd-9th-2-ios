@@ -64,6 +64,7 @@ struct MeetingDateButton: View {
                     }
                 }
             }
+            .frame(height: dateButtonHeight)
         }
     }
 }

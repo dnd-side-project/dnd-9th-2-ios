@@ -61,6 +61,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // button
         case deleteButtonTapped
+        case editButtonTapped
         case leaveButtonTapped
         case backButtonTapped
         case cameraButtonTapped
@@ -92,6 +93,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             case deleteSuccess
             case onDisappear
             case moveToLogin
+            case moveToEdit
         }
     }
 
@@ -171,10 +173,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                     await send(.delegate(.deleteSuccess))
                 }
 
-                // Tap
+                // MARK: - Tap
 
             case .deleteButtonTapped:
                 return .none
+                
+            case .editButtonTapped:
+                return .run { send in await send(.delegate(.moveToEdit)) }
 
             case .leaveButtonTapped:
                 state.selectOwner = SelectOwnerFeature.State(
