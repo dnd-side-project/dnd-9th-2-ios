@@ -24,7 +24,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         var meetingId: Int
         var meetingData: MeetingDetail?
-        var memberID: Int = -1
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
 
@@ -150,7 +149,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .updateData(let data):
                 state.meetingData = data
-                state.memberID = data.memberId
                 
                 let emergencyStatus = data.emergencyStatus
 
@@ -186,7 +184,17 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
             case .leaveButtonTapped:
-                state.selectOwner = SelectOwnerFeature.State()
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingUnwrapping
+                    return .none
+                }
+                
+                // 방장 혼자만 있는 경우
+                if meetingData.members.count == 1 {
+                    state.alertType = .meetingLeaveFail
+                } else {
+                    state.selectOwner = SelectOwnerFeature.State()
+                }
                 return .none
 
             case .backButtonTapped:
@@ -194,10 +202,17 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .cameraButtonTapped:
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingUnwrapping
+                    return .none
+                }
+                
+                let memberID = meetingData.memberID
+                
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     let timerCount = emergencyButtonActiveTime.authenticationTimeout()
                     state.usingCamera = CameraFeature.State(
-                        memberID: state.memberID,
+                        memberID: memberID,
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {
@@ -206,15 +221,16 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .emergencyButtonTapped:
-                guard let remainTimeUntilExpired = state.meetingData?
-                    .emergencyButtonExpiredTime
-                    .remainingTime()
-                else {
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingUnwrapping
                     return .none
                 }
+                
+                let memberID = meetingData.memberID
+                let remainTimeUntilExpired = meetingData.emergencyButtonExpiredTime.remainingTime()
                         
                 state.emergencyState = EmergencyFeature.State(
-                    memberID: state.memberID,
+                    memberID: memberID,
                     remainTimeUntilExpired: remainTimeUntilExpired
                 )
                 return .none
@@ -288,7 +304,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError, .invalidAuthentication, .meetingUnwrapping:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping, .meetingLeaveFail:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}

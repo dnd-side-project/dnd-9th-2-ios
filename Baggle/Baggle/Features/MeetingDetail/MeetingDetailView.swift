@@ -152,16 +152,16 @@ struct MeetingDetailView: View {
                     state: \.$selectOwner,
                     action: { .selectOwner($0) })
             ) { selectOwnerStore in
-                if let members = viewStore.meetingData?.members {
+                if let meetingData = viewStore.meetingData {
                     SelectOwnerView(
                         store: selectOwnerStore,
                         meetingLeaveMember: meetingLeaveMemberList(
-                            memberID: viewStore.memberID,
-                            member: members
+                            memberID: meetingData.memberID,
+                            member: meetingData.members
                         )
                     )
                     .presentationDetents([
-                        .height(self.meetingLeaveMemberViewHeight(members.count))
+                        .height(self.meetingLeaveMemberViewHeight(meetingData.members.count))
                     ])
                 }
             }
