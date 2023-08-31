@@ -152,9 +152,18 @@ struct MeetingDetailView: View {
                     state: \.$selectOwner,
                     action: { .selectOwner($0) })
             ) { selectOwnerStore in
-                SelectOwnerView(store: selectOwnerStore)
-                    .presentationDetents([.height(340)])
-                    .presentationDragIndicator(.visible)
+                if let members = viewStore.meetingData?.members {
+                    SelectOwnerView(
+                        store: selectOwnerStore,
+                        meetingLeaveMember: meetingLeaveMemberList(
+                            memberID: viewStore.memberID,
+                            member: members
+                        )
+                    )
+                    .presentationDetents([
+                        .height(self.meetingLeaveMemberViewHeight(members.count))
+                    ])
+                }
             }
             .fullScreenCover(
                 store: self.store.scope(
@@ -423,11 +432,23 @@ extension MeetingDetailView {
 
 extension MeetingDetailView {
     
-    func failEmergencyAuthorization(meetingData: MeetingDetail?, certified: Bool) -> Bool {
+    // Member View에서 탈락 stamp를 위한 조건문
+    private func failEmergencyAuthorization(meetingData: MeetingDetail?, certified: Bool) -> Bool {
         guard let meetingData = meetingData else {
             return false
         }
         return meetingData.afterEmergencyAuthority() && !certified
+    }
+    
+    // 방장 넘기기 할 때 나빼고 남은 멤버들만
+    private func meetingLeaveMemberList(memberID: Int, member: [Member]) -> [MeetingLeaveMember] {
+        return member.filter {$0.id != memberID }.map { $0.meetingLeaveMember() }
+    }
+    
+    // 방장 넘기기 모달 높이
+    private func meetingLeaveMemberViewHeight(_ memberCount: Int) -> CGFloat {
+        // 본인 제외 하고 4명 이상 -> 2줄 됨
+        return memberCount - 1 >= 4 ? 460 : 360
     }
 }
 

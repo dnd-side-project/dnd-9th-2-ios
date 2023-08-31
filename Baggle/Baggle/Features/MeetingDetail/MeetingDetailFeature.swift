@@ -186,9 +186,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
             case .leaveButtonTapped:
-                state.selectOwner = SelectOwnerFeature.State(
-                    memberList: state.meetingData?.members ?? []
-                )
+                state.selectOwner = SelectOwnerFeature.State()
                 return .none
 
             case .backButtonTapped:

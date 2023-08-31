@@ -33,3 +33,15 @@ extension Member {
         )
     }
 }
+
+// 다른 모델 변환
+
+extension Member {
+    func meetingLeaveMember() -> MeetingLeaveMember {
+        MeetingLeaveMember(
+            id: self.id,
+            name: self.name,
+            profileURL: self.profileURL
+        )
+    }
+}
