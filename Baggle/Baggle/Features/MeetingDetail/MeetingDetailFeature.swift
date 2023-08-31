@@ -93,7 +93,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             case deleteSuccess
             case onDisappear
             case moveToLogin
-            case moveToEdit
+            case moveToEdit(MeetingEdit)
         }
     }
 
@@ -179,7 +179,11 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
                 
             case .editButtonTapped:
-                return .run { send in await send(.delegate(.moveToEdit)) }
+                guard let meetingEdit = state.meetingData?.meetingEdit() else {
+                    state.alertType = .meetingUnwrapping
+                    return .none // 실패시 MeetingDetail에서 Date생성하는 함수를 확인할 것
+                }
+                return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
             case .leaveButtonTapped:
                 state.selectOwner = SelectOwnerFeature.State(
@@ -286,7 +290,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError, .invalidAuthentication:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
@@ -355,7 +359,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     state.timerState.timerCount = emergencyButtonActiveTime.authenticationTimeout()
                 } else {
-                    print("언래핑 에러")
+                    state.alertType = .meetingUnwrapping
                 }
                 
                 // button의 onAppear 때 타이머 시작이 되기 때문에, 타이머 시간을 설정하고 버튼이 나타나야함

@@ -190,18 +190,17 @@ struct MainTabFeature: ReducerProtocol {
                 state.path.pop(from: id)
                 return .none
             
-            case let .path(.element(id: id, action: .meetingDetail(.delegate(.moveToEdit)))):
+            case let .path(
+                .element(
+                    id: id,
+                    action: .meetingDetail(.delegate(.moveToEdit(newMeetingEdit)))
+                )
+            ):
                 _ = id
                 state.path.append(
                     .meetingEdit(
                         MeetingEditFeature.State(
-                            meetingEdit: MeetingEdit(
-                                id: 0,
-                                title: "제목",
-                                place: "장소는 어디냐",
-                                date: Date(),
-                                memo: "메모메모"
-                            ),
+                            meetingEdit: newMeetingEdit,
                             meetingDateButtonState: MeetingDateButtonFeature.State()
                         )
                     )

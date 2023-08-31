@@ -90,3 +90,27 @@ extension MeetingDetail {
         return emergencyStatus == .past || emergencyStatus == .termination
     }
 }
+
+// 다른 모델로
+
+extension MeetingDetail {
+    func meetingEdit() -> MeetingEdit? {
+        guard let date = self.meetingDate() else {
+            return nil
+        }
+        return MeetingEdit(
+            id: self.id,
+            title: self.name,
+            place: self.place,
+            date: date,
+            memo: self.memo
+        )
+    }
+    
+    private func meetingDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 M월 d일HH:mm"
+        let dateString = self.date + self.time
+        return dateFormatter.date(from: dateString)
+    }
+}

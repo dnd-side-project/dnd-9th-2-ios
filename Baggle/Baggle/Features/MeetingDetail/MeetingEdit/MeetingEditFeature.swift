@@ -24,7 +24,7 @@ struct MeetingEditFeature: ReducerProtocol {
         
         var placeTextFieldState = BaggleTextFeature.State(
             maxCount: 15,
-            textFieldState: .inactive,
+            textFieldState: .valid,
             isFocused: false
         )
         
@@ -37,7 +37,7 @@ struct MeetingEditFeature: ReducerProtocol {
         // Text Editor
         var memoTextEditorState = BaggleTextFeature.State(
             maxCount: 50,
-            textFieldState: .inactive
+            textFieldState: .valid
         )
         
         var memoTextEditorFocused: Bool = false
