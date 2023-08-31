@@ -25,7 +25,7 @@ struct ShadeView: View {
             .animation(.easeInOut(duration: 0.2), value: self.isPresented)
             .onTapGesture {
                 if enableTouch {
-                    isPresented.toggle()
+                    withAnimation { isPresented.toggle() }
                 }
             }
     }
