@@ -10,18 +10,21 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MainTabView: View {
-
+    
     let store: StoreOf<MainTabFeature>
-
+    
     init(store: StoreOf<MainTabFeature>) {
         self.store = store
         UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray4)
     }
-
+    
     var body: some View {
-
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            NavigationStack {
+        
+        NavigationStackStore(self.store.scope(
+            state: \.path,
+            action: { .path($0)})
+        )  {
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 TabView(
                     selection: viewStore.binding(
                         get: \.selectedTab,
@@ -40,7 +43,7 @@ struct MainTabView: View {
                         Text("홈")
                     }
                     .tag(TapType.home)
-
+                    
                     ZStack {
                     }
                     .tabItem {
@@ -49,7 +52,7 @@ struct MainTabView: View {
                         Text("모임 생성")
                     }
                     .tag(TapType.createMeeting)
-
+                    
                     MyPageView(
                         store: self.store.scope(
                             state: \.myPageFeature,
@@ -86,6 +89,17 @@ struct MainTabView: View {
                         }
                     }
                 )
+            }
+            
+        } destination: { pathState in
+            switch pathState {
+            case .meetingDetail:
+                CaseLet(
+                    /MainTabFeature.Child.State.meetingDetail,
+                    action: MainTabFeature.Child.Action.meetingDetail
+                ) { store in
+                    MeetingDetailView(store: store)
+                }
             }
         }
     }

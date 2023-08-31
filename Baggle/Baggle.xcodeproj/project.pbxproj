@@ -91,6 +91,8 @@
 		147DFC812A8D191D00D176D1 /* JSONNULL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DFC802A8D191D00D176D1 /* JSONNULL.swift */; };
 		147E40EE2AA03BB90044698B /* MeetingDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E40ED2AA03BB90044698B /* MeetingDateButton.swift */; };
 		147E40F22AA03D6F0044698B /* MeetingDateButtonFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E40F12AA03D6F0044698B /* MeetingDateButtonFeature.swift */; };
+		147E40F52AA0454F0044698B /* MeetingEditFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E40F42AA0454F0044698B /* MeetingEditFeature.swift */; };
+		147E40F72AA045550044698B /* MeetingEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E40F62AA045550044698B /* MeetingEditView.swift */; };
 		147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81372A8A3790008B9B06 /* MeetingDetailService.swift */; };
 		147E813A2A8A3924008B9B06 /* MeetingDetailResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81392A8A3924008B9B06 /* MeetingDetailResult.swift */; };
 		1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */; };
@@ -322,6 +324,8 @@
 		147DFC802A8D191D00D176D1 /* JSONNULL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNULL.swift; sourceTree = "<group>"; };
 		147E40ED2AA03BB90044698B /* MeetingDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDateButton.swift; sourceTree = "<group>"; };
 		147E40F12AA03D6F0044698B /* MeetingDateButtonFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDateButtonFeature.swift; sourceTree = "<group>"; };
+		147E40F42AA0454F0044698B /* MeetingEditFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingEditFeature.swift; sourceTree = "<group>"; };
+		147E40F62AA045550044698B /* MeetingEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingEditView.swift; sourceTree = "<group>"; };
 		147E81372A8A3790008B9B06 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		147E81392A8A3924008B9B06 /* MeetingDetailResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailResult.swift; sourceTree = "<group>"; };
 		1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeature.swift; sourceTree = "<group>"; };
@@ -987,6 +991,15 @@
 			path = MeetingDateButton;
 			sourceTree = "<group>";
 		};
+		147E40F32AA045410044698B /* MeetingEdit */ = {
+			isa = PBXGroup;
+			children = (
+				147E40F42AA0454F0044698B /* MeetingEditFeature.swift */,
+				147E40F62AA045550044698B /* MeetingEditView.swift */,
+			);
+			path = MeetingEdit;
+			sourceTree = "<group>";
+		};
 		1493A90D2A7DE49000A2D7CC /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1614,6 +1627,7 @@
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
+				147E40F32AA045410044698B /* MeetingEdit */,
 				2B9F27152A813ABE009ED284 /* Common */,
 				2B7EC3302A826ECF00D78141 /* ImageDetail */,
 				14E577A82A80970C00119FB3 /* Emergency */,
@@ -1895,6 +1909,7 @@
 				2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */,
 				144733442A78C8D00090D15E /* BaggleTextEditor.swift in Sources */,
 				14315D862A76B1CB008F8064 /* CreateMemoView.swift in Sources */,
+				147E40F72AA045550044698B /* MeetingEditView.swift in Sources */,
 				141719722A92EBD200AF1C51 /* AlertEmergencyType.swift in Sources */,
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
 				2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */,
@@ -1976,6 +1991,7 @@
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
 				147E40EE2AA03BB90044698B /* MeetingDateButton.swift in Sources */,
 				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
+				147E40F52AA0454F0044698B /* MeetingEditFeature.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				147DFC7E2A8D124400D176D1 /* MeetingCreateEntity.swift in Sources */,

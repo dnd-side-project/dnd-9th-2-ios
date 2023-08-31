@@ -255,7 +255,7 @@ extension Date {
     // 모임 생성 가능한 시간 여부
 
     var canMeeting: Bool {
-        return self > Date().later(hours: 2)
+        return self > Date().later(hours: 1)
     }
 
     // Self가 다가올 날짜인지
