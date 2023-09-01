@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct BaggleActionSheet<Action: View>: View {
+struct BaggleActionSheet<Content: View>: View {
     
     @Binding var isShowing: Bool
     
-    private let action: Action
+    private let action: Content
     
-    init(isShowing: Binding<Bool>, @ViewBuilder action: @escaping () -> Action) {
+    init(isShowing: Binding<Bool>, @ViewBuilder action: @escaping () -> Content) {
         self._isShowing = isShowing
         self.action = action()
     }

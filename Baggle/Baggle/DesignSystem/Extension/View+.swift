@@ -124,7 +124,7 @@ extension View {
 // MARK: - ActionSheet
 
 extension View {
-    @ViewBuilder func presentDialog (
+    @ViewBuilder func presentActionSheet (
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> some View
     ) -> some View {
@@ -138,7 +138,7 @@ extension View {
         }
     }
     
-    func dialogAction(_ action: @escaping () -> Void, role: ButtonRole? = nil) -> Button<Self> {
+    func addAction(_ action: @escaping () -> Void, role: ButtonRole? = nil) -> Button<Self> {
         Button(role: role) {
             action()
             postObserverAction(.actionSheetDismiss)

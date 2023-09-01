@@ -15,7 +15,7 @@ struct MeetingDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State var isActionSheetShow: Bool = false
+    @State var isActionSheetPresented: Bool = false
     
     var body: some View {
         
@@ -72,7 +72,7 @@ struct MeetingDetailView: View {
                     NavigationBar(naviType: .more) {
                         viewStore.send(.backButtonTapped)
                     } rightButtonAction: {
-                        withAnimation { isActionSheetShow = true }
+                        withAnimation { isActionSheetPresented = true }
                     }
                     .background(Color.PrimaryLight)
                     
@@ -138,23 +138,23 @@ struct MeetingDetailView: View {
                     }
                 }
             )
-            .presentDialog(isPresented: $isActionSheetShow, content: {
+            .presentActionSheet(isPresented: $isActionSheetPresented, content: {
                 Text("방 정보 수정하기")
-                    .dialogAction {
+                    .addAction {
                         viewStore.send(.inviteButtonTapped)
                     }
                 
                 Divider().padding(.horizontal, 20)
                 
                 Text("방장 넘기고 나가기")
-                    .dialogAction {
+                    .addAction {
                         viewStore.send(.leaveButtonTapped)
                     }
                 
                 Divider().padding(.horizontal, 20)
                 
                 Text("방 폭파하기")
-                    .dialogAction({
+                    .addAction({
                         viewStore.send(.deleteButtonTapped)
                     }, role: .destructive)
             })
