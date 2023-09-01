@@ -160,7 +160,7 @@ struct BaggleTertiaryStyle: ButtonStyle {
 struct CancelActionButtonStyle: ButtonStyle {
     
     private let foregroundColor: Color = .white
-    private let backgroundColor: Color = .blue
+    private let backgroundColor: Color = .primaryNormal
     
     @Environment(\.isEnabled) private var isEnabled
     
@@ -174,7 +174,7 @@ struct CancelActionButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 16, weight: .semibold))
+            .font(.baggleFont(fontType: .button1))
             .frame(width: UIScreen.main.bounds.width - 40, height: 54)
             .foregroundColor(foregroundColor(configuration.isPressed))
             .background(backgroundColor(configuration.isPressed))
@@ -184,14 +184,14 @@ struct CancelActionButtonStyle: ButtonStyle {
 
 struct ActionButtonStyle: ButtonStyle {
     
-    private let foregroundColor: Color = .black
+    private let foregroundColor: Color = .gray11
     private let backgroundColor: Color = .white
     
     @Environment(\.isEnabled) private var isEnabled
     
     private func foregroundColor(_ isPressed: Bool, _ role: ButtonRole?) -> Color {
         if let role, role == .destructive {
-            return Color.red
+            return .baggleRed
         } else {
             return foregroundColor.opacity(isPressed ? 0.5 : 1)
         }
@@ -203,7 +203,7 @@ struct ActionButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 16, weight: .semibold))
+            .font(.baggleFont(fontType: .button1))
             .frame(width: UIScreen.main.bounds.width - 80, height: 63)
             .foregroundColor(foregroundColor(configuration.isPressed, configuration.role))
             .background(backgroundColor(configuration.isPressed))
