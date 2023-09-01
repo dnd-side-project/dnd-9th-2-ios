@@ -8,7 +8,6 @@
 import SwiftUI
 
 import ComposableArchitecture
-import KakaoSDKShare
 
 // swiftlint:disable:next type_body_length
 struct MeetingDetailFeature: ReducerProtocol {

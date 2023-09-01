@@ -15,7 +15,6 @@ struct MeetingDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    // 임시 액션시트
     @State var isActionSheetShow: Bool = false
     
     var body: some View {
