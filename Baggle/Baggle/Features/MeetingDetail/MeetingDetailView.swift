@@ -124,32 +124,6 @@ struct MeetingDetailView: View {
                    let image = viewStore.tappedImageUrl {
                     imageDetailView(image: image, viewStore: viewStore)
                 }
-                
-                // 액션시트
-                if isActionSheetShow {
-                    ShadeView(isPresented: $isActionSheetShow)
-                    
-                    ActionSheet(isShowing: $isActionSheetShow) {
-                        Button("방 정보 수정하기") { viewStore.send(.inviteButtonTapped) }
-                            .drawUnderline(spacing: 0, height: 0.5, padding: 40)
-
-                        Button("방장 넘기고 나가기") { viewStore.send(.leaveButtonTapped) }
-                            .drawUnderline(spacing: 0, height: 0.5, padding: 40)
-                        
-                        Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
-
-                        // 임시 버튼
-//                        Button("카메라") { viewStore.send(.cameraButtonTapped) }
-//
-//                        Button("긴급 버튼") { viewStore.send(.emergencyButtonTapped) }
-//
-//                        Button("초대장 보내기") { viewStore.send(.inviteButtonTapped) }
-                    }
-                    .opacity(isActionSheetShow ? 1 : 0)
-                    .transition(.move(edge: .bottom))
-                    .transition(.opacity.animation(.easeInOut))
-                    .animation(.easeInOut(duration: 0.2), value: isActionSheetShow)
-                }
             }
             .toolbar(.hidden, for: .navigationBar)
             .onAppear { viewStore.send(.onAppear) }
@@ -165,6 +139,26 @@ struct MeetingDetailView: View {
                     }
                 }
             )
+            .presentDialog(isPresented: $isActionSheetShow, content: {
+                Text("방 정보 수정하기")
+                    .dialogAction {
+                        viewStore.send(.inviteButtonTapped)
+                    }
+                
+                Divider().padding(.horizontal, 20)
+                
+                Text("방장 넘기고 나가기")
+                    .dialogAction {
+                        viewStore.send(.leaveButtonTapped)
+                    }
+                
+                Divider().padding(.horizontal, 20)
+                
+                Text("방 폭파하기")
+                    .dialogAction({
+                        viewStore.send(.deleteButtonTapped)
+                    }, role: .destructive)
+            })
             .sheet(
                 store: self.store.scope(
                     state: \.$selectOwner,

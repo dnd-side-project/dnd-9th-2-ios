@@ -120,3 +120,30 @@ extension View {
             }
     }
 }
+
+// MARK: - ActionSheet
+
+extension View {
+    @ViewBuilder func presentDialog (
+        isPresented: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
+        ZStack {
+            self
+            if isPresented.wrappedValue {
+                ShadeView(isPresented: isPresented)
+                
+                BaggleActionSheet(isShowing: isPresented, action: content)
+            }
+        }
+    }
+    
+    func dialogAction(_ action: @escaping () -> Void, role: ButtonRole? = nil) -> Button<Self> {
+        Button(role: role) {
+            action()
+            postObserverAction(.actionSheetDismiss)
+        } label: {
+            self
+        }
+    }
+}

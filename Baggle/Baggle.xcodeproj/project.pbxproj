@@ -217,7 +217,7 @@
 		2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEAC752A86024E00D698E6 /* KeychainManager.swift */; };
 		2BDEAC792A863D3A00D698E6 /* JoinMeetingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEAC782A863D3A00D698E6 /* JoinMeetingService.swift */; };
 		2BDEAC7C2A863DCB00D698E6 /* JoinMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEAC7B2A863DCB00D698E6 /* JoinMeeting.swift */; };
-		2BE4674F2AA0E352001F8B9C /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4674E2AA0E352001F8B9C /* ActionSheet.swift */; };
+		2BE4674F2AA0E352001F8B9C /* BaggleActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4674E2AA0E352001F8B9C /* BaggleActionSheet.swift */; };
 		2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5299D2A7D697800A53779 /* MeetingListCell.swift */; };
 		2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BE74F612A7771B600402068 /* GoogleService-Info.plist */; };
 		2BEFFBF32A8A0A5D00C6A008 /* JoinMeetingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFFBF22A8A0A5D00C6A008 /* JoinMeetingResult.swift */; };
@@ -444,7 +444,7 @@
 		2BDEAC752A86024E00D698E6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		2BDEAC782A863D3A00D698E6 /* JoinMeetingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingService.swift; sourceTree = "<group>"; };
 		2BDEAC7B2A863DCB00D698E6 /* JoinMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeeting.swift; sourceTree = "<group>"; };
-		2BE4674E2AA0E352001F8B9C /* ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheet.swift; sourceTree = "<group>"; };
+		2BE4674E2AA0E352001F8B9C /* BaggleActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleActionSheet.swift; sourceTree = "<group>"; };
 		2BE5299D2A7D697800A53779 /* MeetingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
 		2BE74F612A7771B600402068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BEFFBF22A8A0A5D00C6A008 /* JoinMeetingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingResult.swift; sourceTree = "<group>"; };
@@ -1655,7 +1655,7 @@
 		2BE4674D2AA0E346001F8B9C /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				2BE4674E2AA0E352001F8B9C /* ActionSheet.swift */,
+				2BE4674E2AA0E352001F8B9C /* BaggleActionSheet.swift */,
 			);
 			path = ActionSheet;
 			sourceTree = "<group>";
@@ -1886,7 +1886,7 @@
 				14458B482A81E92200C810FA /* BaggleStampStatus.swift in Sources */,
 				1471ECFB2A8A465C00D9FC93 /* ErrorID.swift in Sources */,
 				2BB0EF462A8D2357003F9215 /* HomeServiceResult.swift in Sources */,
-				2BE4674F2AA0E352001F8B9C /* ActionSheet.swift in Sources */,
+				2BE4674F2AA0E352001F8B9C /* BaggleActionSheet.swift in Sources */,
 				2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */,
 				14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */,
 				2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */,
