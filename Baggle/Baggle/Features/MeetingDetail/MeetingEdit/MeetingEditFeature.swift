@@ -88,9 +88,9 @@ struct MeetingEditFeature: ReducerProtocol {
             MeetingDateButtonFeature()
         }
         
-//        Scope(state: \.memoTextEditorState, action: /Action.memoTextEditorAction) {
-//            BaggleTextFeature()
-//        }
+        Scope(state: \.memoTextEditorState, action: /Action.memoTextEditorAction) {
+            BaggleTextFeature()
+        }
         
         // MARK: - Reduce
         

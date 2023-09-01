@@ -442,7 +442,7 @@ extension MeetingDetailView {
     
     // 방장 넘기기 할 때 나빼고 남은 멤버들만
     private func meetingLeaveMemberList(memberID: Int, member: [Member]) -> [MeetingLeaveMember] {
-        return member.filter {$0.id != memberID }.map { $0.meetingLeaveMember() }
+        return member.filter {$0.id != memberID }.map { $0.toMeetingLeaveMember() }
     }
     
     // 방장 넘기기 모달 높이

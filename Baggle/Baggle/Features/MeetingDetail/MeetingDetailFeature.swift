@@ -178,7 +178,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
                 
             case .editButtonTapped:
-                guard let meetingEdit = state.meetingData?.meetingEdit() else {
+                guard let meetingEdit = state.meetingData?.toMeetingEdit() else {
                     state.alertType = .meetingUnwrapping
                     return .none // 실패시 MeetingDetail에서 Date생성하는 함수를 확인할 것
                 }

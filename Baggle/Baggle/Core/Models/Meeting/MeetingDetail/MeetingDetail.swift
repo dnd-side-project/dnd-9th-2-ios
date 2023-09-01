@@ -91,10 +91,10 @@ extension MeetingDetail {
     }
 }
 
-// 다른 모델로
+// 모임 수정을 위한 Meeting Edit로 변환
 
 extension MeetingDetail {
-    func meetingEdit() -> MeetingEdit? {
+    func toMeetingEdit() -> MeetingEdit? {
         guard let date = self.meetingDate() else {
             return nil
         }
