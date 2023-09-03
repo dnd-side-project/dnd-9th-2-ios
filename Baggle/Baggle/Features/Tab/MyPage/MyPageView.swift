@@ -17,86 +17,78 @@ struct MyPageView: View {
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            
-            ZStack {
+            List {
                 
-                if viewStore.isLoading {
-                    LoadingView()
-                }
+                // MARK: - 프로필
                 
-                List {
-                    
-                    // MARK: - 프로필
-                    
-                    Section {
-                        HStack {
-                            Spacer()
+                Section {
+                    HStack {
+                        Spacer()
+                        
+                        VStack(spacing: 16) {
+                            CircleProfileView(
+                                imageUrl: viewStore.user.profileImageURL,
+                                size: .extraLarge
+                            )
                             
-                            VStack(spacing: 16) {
-                                CircleProfileView(
-                                    imageUrl: viewStore.user.profileImageURL,
-                                    size: .extraLarge
-                                )
+                            HStack(alignment: .top, spacing: 6) {
+                                Text(viewStore.user.name)
+                                    .font(.Baggle.subTitle1)
+                                    .foregroundColor(.gray11)
                                 
-                                HStack(alignment: .top, spacing: 6) {
-                                    Text(viewStore.user.name)
-                                        .font(.Baggle.subTitle1)
-                                        .foregroundColor(.gray11)
-                                    
-                                    PlatformLogoView(platform: viewStore.user.platform)
-                                }
+                                PlatformLogoView(platform: viewStore.user.platform)
                             }
-                            .padding(.top, 32)
-                            .padding(.bottom, 24)
-                            .padding(.horizontal, 20)
-                            
-                            Spacer()
                         }
-                    }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    
-                    // MARK: - 일반 설정
-                    
-                    Section {
-                        SettingListRow(text: "알림 설정") {
-                            viewStore.send(.notificationSettingButtonTapped)
-                        }
+                        .padding(.top, 32)
+                        .padding(.bottom, 24)
+                        .padding(.horizontal, 20)
                         
-                        SettingListRow(text: "개인정보 처리방침") {
-                            viewStore.send(.privacyPolicyButtonTapped)
-                        }
-                        
-                        SettingListRow(text: "서비스 이용약관") {
-                            viewStore.send(.termsOfServiceButtonTapped)
-                        }
-                    } header: {
-                        SettingListHeader(text: "일반 설정")
+                        Spacer()
                     }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    
-                    // MARK: - 계정
-                    
-                    Section {
-                        SettingListRow(text: "로그아웃", isArrow: false) {
-                            viewStore.send(.logoutButtonTapped)
-                        }
-                        SettingListRow(text: "계정 탈퇴", isArrow: false) {
-                            viewStore.send(.withdrawButtonTapped)
-                        }
-                    } header: {
-                        SettingListHeader(text: "계정")
-                    }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
                 }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
-                .listStyle(.plain)
+                
+                // MARK: - 일반 설정
+                
+                Section {
+                    SettingListRow(text: "알림 설정") {
+                        viewStore.send(.notificationSettingButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "개인정보 처리방침") {
+                        viewStore.send(.privacyPolicyButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "서비스 이용약관") {
+                        viewStore.send(.termsOfServiceButtonTapped)
+                    }
+                } header: {
+                    SettingListHeader(text: "일반 설정")
+                }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
+                
+                // MARK: - 계정
+                
+                Section {
+                    SettingListRow(text: "로그아웃", isArrow: false) {
+                        viewStore.send(.logoutButtonTapped)
+                    }
+                    SettingListRow(text: "계정 탈퇴", isArrow: false) {
+                        viewStore.send(.withdrawButtonTapped)
+                    }
+                } header: {
+                    SettingListHeader(text: "계정")
+                }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
             }
+            .listRowInsets(EdgeInsets())
+            .listStyle(.plain)
             .onAppear {
                 viewStore.send(.onAppear)
             }

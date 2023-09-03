@@ -21,6 +21,11 @@ struct MainTabFeature: ReducerProtocol {
         
         @PresentationState var createMeeting: CreateTitleFeature.State?
         @PresentationState var joinMeeting: JoinMeetingFeature.State?
+        
+        // MARK: - Alert
+        var alertType: AlertMainTabType?
+        
+        var isLoading: Bool = false
     }
 
     enum Action: Equatable {
@@ -39,6 +44,12 @@ struct MainTabFeature: ReducerProtocol {
         case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
         case moveToJoinMeeting(Int, JoinMeetingResult)
         
+        // MARK: - Alert
+        case presentAlert(Bool)
+        case alertButtonTapped
+        
+        case withdrawResult(WithdrawServiceResult)
+        
         // MARK: - Delegate
         case delegate(Delegate)
         
@@ -48,6 +59,7 @@ struct MainTabFeature: ReducerProtocol {
     }
     
     @Dependency(\.joinMeetingService) var joinMeetingService
+    @Dependency(\.withdrawService) var withdrawService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -107,9 +119,55 @@ struct MainTabFeature: ReducerProtocol {
                 
             case .myPageAction(.delegate(.moveToLogin)):
                 return .run { send in await send(.delegate(.moveToLogin))}
+                
+            case .myPageAction(.delegate(.presentLogout)):
+                state.alertType = .logout
+                return .none
+                
+            case .myPageAction(.delegate(.presentWithdraw)):
+                state.alertType = .withdraw
+                return .none
 
             case .myPageAction:
                 return.none
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                return .none
+                
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else { return .none }
+                state.alertType = nil
+                
+                // 서버 통신
+                switch alertType {
+                case .logout:
+                    // 로그아웃 통신 -> 성공 -> userdefault 삭제
+                    UserManager.shared.delete()
+                    return .run { send in await send(.delegate(.moveToLogin))}
+                case .withdraw:
+                    // 회원가입 통신 -> 성공 -> userdefault 삭제
+                    state.isLoading = true
+                    return .run { send in
+                        let widthdrawStatus = await withdrawService.withdraw()
+                        await send(.withdrawResult(widthdrawStatus))
+                    }
+                }
+                
+            case let .withdrawResult(status):
+                state.isLoading = false
+                switch status {
+                case .success:
+                    print("성공")
+                    return .run { send in await send(.delegate(.moveToLogin)) }
+                case let .fail(apiError):
+                    print("API Error \(apiError)")
+                case .keyChainError:
+                    print("키체인 에러")
+                }
+                return .none
                 
             case .enterJoinMeeting(let id):
                 return .run { send in
