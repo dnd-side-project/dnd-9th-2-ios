@@ -13,6 +13,7 @@ import Moya
 enum UserAPI {
     case signIn(requestModel: LoginRequestModel, token: String)
     case signUp(requestModel: SignUpRequestModel, token: String)
+    case signOut(token: String)
     case reissue
     case withdraw(token: String)
 }
@@ -27,6 +28,7 @@ extension UserAPI: BaseAPI {
         switch self {
         case .signIn: return "signin"
         case .signUp: return "signup"
+        case .signOut: return "signout"
         case .reissue: return "reissue"
         case .withdraw: return "withdraw"
         }
@@ -40,6 +42,8 @@ extension UserAPI: BaseAPI {
             return HeaderType.jsonWithAuthorization(token: token).value // 카카오 또는 애플 토큰
         case .signUp(_, let token):
             return HeaderType.multipart(token: token).value // 카카오 또는 애플 토큰
+        case .signOut(let token):
+            return HeaderType.jsonWithBearer(token: token).value
         case .reissue:
             return HeaderType.jsonWithAuthorization(token: "").value // refreshToken
         case .withdraw(let token):
@@ -55,7 +59,7 @@ extension UserAPI: BaseAPI {
             return .post
         case .reissue:
             return .get
-        case .withdraw:
+        case .withdraw, .signOut:
             return .patch
         }
     }
@@ -111,7 +115,7 @@ extension UserAPI: BaseAPI {
             
             return .uploadMultipart(multiPartData)
             
-        case .reissue, .withdraw:
+        case .reissue, .withdraw, .signOut:
             return .requestPlain
         }
     }
