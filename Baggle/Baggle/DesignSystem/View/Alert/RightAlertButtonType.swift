@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-enum BaggleAlertType {
+enum RightAlertButtonType {
     case none
     case destructive
 }
 
-extension BaggleAlertType {
+extension RightAlertButtonType {
     var backgroundColor: Color {
         switch self {
         case .none: return .primaryNormal
