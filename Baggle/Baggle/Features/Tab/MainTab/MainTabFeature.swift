@@ -49,6 +49,7 @@ struct MainTabFeature: ReducerProtocol {
         case alertButtonTapped
         
         case withdrawResult(WithdrawServiceResult)
+        case logoutResult(LogoutServiceResult)
         
         // MARK: - Delegate
         case delegate(Delegate)
@@ -60,6 +61,7 @@ struct MainTabFeature: ReducerProtocol {
     
     @Dependency(\.joinMeetingService) var joinMeetingService
     @Dependency(\.withdrawService) var withdrawService
+    @Dependency(\.logoutService) var logoutService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -141,20 +143,33 @@ struct MainTabFeature: ReducerProtocol {
                 guard let alertType = state.alertType else { return .none }
                 state.alertType = nil
                 
-                // 서버 통신
                 switch alertType {
                 case .logout:
-                    // 로그아웃 통신 -> 성공 -> userdefault 삭제
-                    UserManager.shared.delete()
-                    return .run { send in await send(.delegate(.moveToLogin))}
+                    state.isLoading = true
+                    return .run { send in
+                        let logoutStatus = await logoutService.logout()
+                        await send(.logoutResult(logoutStatus))
+                    }
                 case .withdraw:
-                    // 회원가입 통신 -> 성공 -> userdefault 삭제
                     state.isLoading = true
                     return .run { send in
                         let widthdrawStatus = await withdrawService.withdraw()
                         await send(.withdrawResult(widthdrawStatus))
                     }
                 }
+                
+            case let .logoutResult(status):
+                state.isLoading = false
+                switch status {
+                case .success:
+                    print("성공")
+                    return .run { send in await send(.delegate(.moveToLogin)) }
+                case .fail(let apiError):
+                    print("API Error \(apiError)")
+                case .keyChainError:
+                    print("키체인 에러")
+                }
+                return .none
                 
             case let .withdrawResult(status):
                 state.isLoading = false

@@ -159,6 +159,8 @@
 		2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3B64942A8014540082A05F /* FeedListCell.swift */; };
 		2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B409D7B2A80BE840051A3BC /* Font+.swift */; };
 		2B42A5832AA4A1E600E97CB1 /* AlertMainTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A5822AA4A1E600E97CB1 /* AlertMainTabType.swift */; };
+		2B42A5852AA4C26400E97CB1 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A5842AA4C26400E97CB1 /* LogoutService.swift */; };
+		2B42A5872AA4C27B00E97CB1 /* LogoutServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B42A5862AA4C27B00E97CB1 /* LogoutServiceResult.swift */; };
 		2B437FBA2A93B64C004DC68E /* AlertJoinMeetingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */; };
 		2B437FBD2A93BE37004DC68E /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437FBC2A93BE37004DC68E /* AlertType.swift */; };
 		2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45F2202A7B634400874783 /* MeetingDeleteType.swift */; };
@@ -390,6 +392,8 @@
 		2B3B64942A8014540082A05F /* FeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListCell.swift; sourceTree = "<group>"; };
 		2B409D7B2A80BE840051A3BC /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		2B42A5822AA4A1E600E97CB1 /* AlertMainTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMainTabType.swift; sourceTree = "<group>"; };
+		2B42A5842AA4C26400E97CB1 /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
+		2B42A5862AA4C27B00E97CB1 /* LogoutServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutServiceResult.swift; sourceTree = "<group>"; };
 		2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertJoinMeetingType.swift; sourceTree = "<group>"; };
 		2B437FBC2A93BE37004DC68E /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		2B45F2202A7B634400874783 /* MeetingDeleteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteType.swift; sourceTree = "<group>"; };
@@ -824,6 +828,8 @@
 			children = (
 				143C7BFB2A875421004D83FD /* WithdrawService.swift */,
 				143C7BFD2A875508004D83FD /* WithdrawServiceResult.swift */,
+				2B42A5862AA4C27B00E97CB1 /* LogoutServiceResult.swift */,
+				2B42A5842AA4C26400E97CB1 /* LogoutService.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -1857,6 +1863,7 @@
 				146237462A877CFB00FBE121 /* PlatformLogoView.swift in Sources */,
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				2B437FBA2A93B64C004DC68E /* AlertJoinMeetingType.swift in Sources */,
+				2B42A5852AA4C26400E97CB1 /* LogoutService.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
 				2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */,
@@ -2012,6 +2019,7 @@
 				2BEFFBF52A8A0B1D00C6A008 /* JoinMeetingEntity.swift in Sources */,
 				14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */,
 				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
+				2B42A5872AA4C27B00E97CB1 /* LogoutServiceResult.swift in Sources */,
 				14CF68EC2A847BEF00E457DF /* User.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 				146237482A87803F00FBE121 /* SafariWebView.swift in Sources */,
