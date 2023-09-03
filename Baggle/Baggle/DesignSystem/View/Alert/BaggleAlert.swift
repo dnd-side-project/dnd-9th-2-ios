@@ -73,7 +73,7 @@ struct BaggleAlertOneButton: View {
                 
                 VStack(spacing: 2) {
                     Text(title)
-                        .font(.system(size: 20))
+                        .font(.Baggle.subTitle2)
                         .foregroundColor(.gray11)
                         .padding(.vertical, 5)
                     
@@ -128,7 +128,7 @@ struct BaggleAlertTwoButton: View {
     
     private var title: String
     private var description: String?
-    private let alertType: BaggleAlertType
+    private let alertType: RightAlertButtonType
     
     private var leftButtonTitle: String
     private var rightButtonTitle: String
@@ -139,7 +139,7 @@ struct BaggleAlertTwoButton: View {
         isPresented: Binding<Bool>,
         title: String,
         description: String? = nil,
-        alertType: BaggleAlertType = .none,
+        alertType: RightAlertButtonType = .none,
         leftButtonTitle: String = "취소",
         rightButtonTitle: String = "네",
         leftButtonAction: (() -> Void)? = nil,
@@ -163,7 +163,7 @@ struct BaggleAlertTwoButton: View {
                 
                 VStack(spacing: 2) {
                     Text(title)
-                        .font(.system(size: 20))
+                        .font(.Baggle.subTitle2)
                         .foregroundColor(.gray11)
                         .padding(.vertical, 5)
                     
@@ -182,6 +182,7 @@ struct BaggleAlertTwoButton: View {
                         isPresented.toggle()
                     } label: {
                         Text(leftButtonTitle)
+                            .font(.Baggle.button1)
                             .foregroundColor(.gray7)
                             .frame(width: buttonWidth, height: 52)
                             .background(Color.gray4)
@@ -193,6 +194,7 @@ struct BaggleAlertTwoButton: View {
                         isPresented.toggle()
                     } label: {
                         Text(rightButtonTitle)
+                            .font(.Baggle.button1)
                             .foregroundColor(.white)
                             .frame(width: buttonWidth, height: 52)
                             .background(alertType.backgroundColor)
