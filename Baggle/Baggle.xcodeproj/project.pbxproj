@@ -611,6 +611,7 @@
 				14C8F9CF2A8B331B001690C5 /* Feed */,
 				1421C04F2A7A848E00C20497 /* Login */,
 				14B7A0422A753DA500B8E202 /* SignUp */,
+				143C7BFA2A875416004D83FD /* Tab */,
 				2BF268212A7785FE00F32ADF /* Home */,
 				141FD7602A8CF5BC003DBFD7 /* Meeting */,
 				140C54362A74F40E00CF1CB4 /* Nickname */,
@@ -818,13 +819,13 @@
 			path = Memo;
 			sourceTree = "<group>";
 		};
-		143C7BFA2A875416004D83FD /* MyPage */ = {
+		143C7BFA2A875416004D83FD /* Tab */ = {
 			isa = PBXGroup;
 			children = (
 				143C7BFB2A875421004D83FD /* WithdrawService.swift */,
 				143C7BFD2A875508004D83FD /* WithdrawServiceResult.swift */,
 			);
-			path = MyPage;
+			path = Tab;
 			sourceTree = "<group>";
 		};
 		14458B422A81E6B900C810FA /* Stamp */ = {
@@ -1293,7 +1294,7 @@
 			isa = PBXGroup;
 			children = (
 				14EA20B52A8DBC4C005C1289 /* Common */,
-				2B42A5812AA4A1BF00E97CB1 /* MyPage */,
+				2B42A5812AA4A1BF00E97CB1 /* Tab */,
 				2B437FBB2A93B693004DC68E /* JoinMeeting */,
 				14EA20AF2A8DAB13005C1289 /* CreateMeeting */,
 				14EA20B42A8DB65F005C1289 /* MeetingDetail */,
@@ -1448,12 +1449,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		2B42A5812AA4A1BF00E97CB1 /* MyPage */ = {
+		2B42A5812AA4A1BF00E97CB1 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
 				2B42A5822AA4A1E600E97CB1 /* AlertMainTabType.swift */,
 			);
-			path = MyPage;
+			path = Tab;
 			sourceTree = "<group>";
 		};
 		2B437FBB2A93B693004DC68E /* JoinMeeting */ = {
@@ -1663,7 +1664,6 @@
 		2BF268212A7785FE00F32ADF /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				143C7BFA2A875416004D83FD /* MyPage */,
 				2BF268222A77861300F32ADF /* HomeService.swift */,
 				2BB0EF452A8D2357003F9215 /* HomeServiceResult.swift */,
 			);
