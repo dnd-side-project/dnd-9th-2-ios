@@ -30,16 +30,14 @@ struct MyPageFeature: ReducerProtocol {
         case logoutButtonTapped
         case withdrawButtonTapped
         
-        case withdrawResult(WithdrawServiceResult)
-        
         case presentSafariView
         case delegate(Delegate)
         enum Delegate {
+            case presentLogout
+            case presentWithdraw
             case moveToLogin
         }
     }
-
-    @Dependency(\.withdrawService) var withdrawService
     
     var body: some ReducerProtocolOf<Self> {
 
@@ -69,29 +67,10 @@ struct MyPageFeature: ReducerProtocol {
                 return .none
                 
             case .logoutButtonTapped:
-                // 임시 로그아웃 연결
-                UserManager.shared.delete()
-                return .run { send in await send(.delegate(.moveToLogin)) }
+                return .run { send in await send(.delegate(.presentLogout)) }
                 
             case .withdrawButtonTapped:
-                state.isLoading = true
-                return .run { send in
-                    let withdrawStatus = await withdrawService.withdraw()
-                    await send(.withdrawResult(withdrawStatus))
-                }
-                
-            case let .withdrawResult(status):
-                state.isLoading = false
-                switch status {
-                case .success:
-                    print("성공")
-                    return .run { send in await send(.delegate(.moveToLogin)) }
-                case let .fail(apiError):
-                    print("API Error \(apiError)")
-                case .keyChainError:
-                    print("키체인 에러")
-                }
-                return .none
+                return .run { send in await send(.delegate(.presentWithdraw)) }
                 
             case .presentSafariView:
                 state.presentSafariView = false

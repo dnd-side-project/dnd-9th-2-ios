@@ -25,46 +25,78 @@ struct MainTabView: View {
             action: { .path($0)})
         )  {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
-                TabView(
-                    selection: viewStore.binding(
-                        get: \.selectedTab,
-                        send: MainTabFeature.Action.selectTab
-                    )
-                ) {
-                    HomeView(
-                        store: self.store.scope(
-                            state: \.homeFeature,
-                            action: MainTabFeature.Action.homeAction
+                ZStack {
+                    TabView(
+                        selection: viewStore.binding(
+                            get: \.selectedTab,
+                            send: MainTabFeature.Action.selectTab
                         )
-                    )
-                    .tabItem {
-                        Image.Icon.homeFill
-                            .renderingMode(.template)
-                        Text("홈")
-                    }
-                    .tag(TapType.home)
-                    
-                    ZStack {
-                    }
-                    .tabItem {
-                        Image.Icon.plusFill
-                            .renderingMode(.template)
-                        Text("모임 생성")
-                    }
-                    .tag(TapType.createMeeting)
-                    
-                    MyPageView(
-                        store: self.store.scope(
-                            state: \.myPageFeature,
-                            action: MainTabFeature.Action.myPageAction
+                    ) {
+                        HomeView(
+                            store: self.store.scope(
+                                state: \.homeFeature,
+                                action: MainTabFeature.Action.homeAction
+                            )
                         )
-                    )
-                    .tabItem {
-                        Image.Icon.myPageFill
-                            .renderingMode(.template)
-                        Text("마이페이지")
+                        .tabItem {
+                            Image.Icon.homeFill
+                                .renderingMode(.template)
+                            Text("홈")
+                        }
+                        .tag(TapType.home)
+                        
+                        ZStack {
+                        }
+                        .tabItem {
+                            Image.Icon.plusFill
+                                .renderingMode(.template)
+                            Text("모임 생성")
+                        }
+                        .tag(TapType.createMeeting)
+                        
+                        MyPageView(
+                            store: self.store.scope(
+                                state: \.myPageFeature,
+                                action: MainTabFeature.Action.myPageAction
+                            )
+                        )
+                        .tabItem {
+                            Image.Icon.myPageFill
+                                .renderingMode(.template)
+                            Text("마이페이지")
+                        }
+                        .tag(TapType.myPage)
                     }
-                    .tag(TapType.myPage)
+                    
+                    if let alertType = viewStore.alertType {
+                        if alertType.buttonType == .one {
+                            BaggleAlertOneButton(
+                                isPresented: Binding(
+                                    get: { viewStore.alertType != nil },
+                                    set: { viewStore.send(.presentAlert($0)) }
+                                ),
+                                title: alertType.title,
+                                description: alertType.description,
+                                buttonTitle: alertType.buttonTitle
+                            ) {
+                                viewStore.send(.alertButtonTapped)
+                            }
+                        } else if alertType.buttonType == .two {
+                            BaggleAlertTwoButton(
+                                isPresented: Binding(
+                                    get: { viewStore.alertType != nil },
+                                    set: { viewStore.send(.presentAlert($0)) }
+                                ),
+                                title: alertType.title,
+                                description: alertType.description,
+                                alertType: alertType.rightButtonType,
+                                rightButtonTitle: alertType.buttonTitle,
+                                leftButtonAction: nil
+                            ) {
+                                viewStore.send(.alertButtonTapped)
+                            }
+                        }
+                    }
                 }
                 .tint(.black)
                 .fullScreenCover(
@@ -95,14 +127,14 @@ struct MainTabView: View {
             case .meetingDetail:
                 CaseLet(
                     /MainTabFeature.Child.State.meetingDetail,
-                    action: MainTabFeature.Child.Action.meetingDetail
+                     action: MainTabFeature.Child.Action.meetingDetail
                 ) { store in
                     MeetingDetailView(store: store)
                 }
             case .meetingEdit:
                 CaseLet(
                     /MainTabFeature.Child.State.meetingEdit,
-                    action: MainTabFeature.Child.Action.meetingEdit
+                     action: MainTabFeature.Child.Action.meetingEdit
                 ) { store in
                     MeetingEditView(store: store)
                 }

@@ -33,7 +33,10 @@ extension WithdrawService: DependencyKey {
             
             return .success
         } catch {
-            return .fail(.network)
+            guard let error = error as? APIError else {
+                return .fail(.network)
+            }
+            return .fail(error)
         }
     }
 }

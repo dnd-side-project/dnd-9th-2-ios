@@ -22,6 +22,11 @@ struct MainTabFeature: ReducerProtocol {
         @PresentationState var createMeeting: CreateTitleFeature.State?
         @PresentationState var joinMeeting: JoinMeetingFeature.State?
         
+        // MARK: - Alert
+        var alertType: AlertMainTabType?
+        
+        var isLoading: Bool = false
+        
         
         // MARK: - Navigation Stack
         var path = StackState<Child.State>()
@@ -42,6 +47,13 @@ struct MainTabFeature: ReducerProtocol {
         case changeJoinMeetingResult(Int, JoinMeetingResult)
         case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
         case moveToJoinMeeting(Int, JoinMeetingResult)
+        
+        // MARK: - Alert
+        case presentAlert(Bool)
+        case alertButtonTapped
+        
+        case withdrawResult(WithdrawServiceResult)
+        case logoutResult(LogoutServiceResult)
         
         // MARK: - Navigation
         case path(StackAction<Child.State, Child.Action>)
@@ -78,6 +90,8 @@ struct MainTabFeature: ReducerProtocol {
     }
     
     @Dependency(\.joinMeetingService) var joinMeetingService
+    @Dependency(\.withdrawService) var withdrawService
+    @Dependency(\.logoutService) var logoutService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -145,9 +159,85 @@ struct MainTabFeature: ReducerProtocol {
                 
             case .myPageAction(.delegate(.moveToLogin)):
                 return .run { send in await send(.delegate(.moveToLogin))}
+                
+            case .myPageAction(.delegate(.presentLogout)):
+                state.alertType = .logout
+                return .none
+                
+            case .myPageAction(.delegate(.presentWithdraw)):
+                state.alertType = .withdraw
+                return .none
 
             case .myPageAction:
                 return.none
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                return .none
+                
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else { return .none }
+                state.alertType = nil
+                state.isLoading = true
+                
+                switch alertType {
+                case .logout:
+                    return .run { send in
+                        let logoutStatus = await logoutService.logout()
+                        await send(.logoutResult(logoutStatus))
+                    }
+                case .withdraw:
+                    return .run { send in
+                        let widthdrawStatus = await withdrawService.withdraw()
+                        await send(.withdrawResult(widthdrawStatus))
+                    }
+                case .networkError:
+                    return .none
+                case .error:
+                    return .none
+                case .keychainError:
+                    return .none
+                }
+                
+            case let .logoutResult(status):
+                state.isLoading = false
+                switch status {
+                case .success:
+                    print("성공")
+                    return .run { send in await send(.delegate(.moveToLogin)) }
+                case .fail(let apiError):
+                    if apiError == .network {
+                        state.alertType = .networkError
+                    } else {
+                        state.alertType = .error(apiError)
+                    }
+                    print("API Error \(apiError)")
+                case .keyChainError:
+                    state.alertType = .keychainError
+                    print("키체인 에러")
+                }
+                return .none
+                
+            case let .withdrawResult(status):
+                state.isLoading = false
+                switch status {
+                case .success:
+                    print("성공")
+                    return .run { send in await send(.delegate(.moveToLogin)) }
+                case let .fail(apiError):
+                    if apiError == .network {
+                        state.alertType = .networkError
+                    } else {
+                        state.alertType = .error(apiError)
+                    }
+                    print("API Error \(apiError)")
+                case .keyChainError:
+                    state.alertType = .keychainError
+                    print("키체인 에러")
+                }
+                return .none
                 
             case .enterJoinMeeting(let id):
                 return .run { send in
