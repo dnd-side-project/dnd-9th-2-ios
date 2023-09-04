@@ -28,8 +28,11 @@ extension LogoutService: DependencyKey {
             UserManager.shared.delete()
             
             return .success
-        } catch {
-            return .fail(.network)
+        } catch let error {
+            guard let error = error as? APIError else {
+                return .fail(.network)
+            }
+            return .fail(error)
         }
     }
 }

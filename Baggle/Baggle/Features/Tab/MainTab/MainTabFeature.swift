@@ -142,20 +142,25 @@ struct MainTabFeature: ReducerProtocol {
             case .alertButtonTapped:
                 guard let alertType = state.alertType else { return .none }
                 state.alertType = nil
+                state.isLoading = true
                 
                 switch alertType {
                 case .logout:
-                    state.isLoading = true
                     return .run { send in
                         let logoutStatus = await logoutService.logout()
                         await send(.logoutResult(logoutStatus))
                     }
                 case .withdraw:
-                    state.isLoading = true
                     return .run { send in
                         let widthdrawStatus = await withdrawService.withdraw()
                         await send(.withdrawResult(widthdrawStatus))
                     }
+                case .networkError:
+                    return .none
+                case .error:
+                    return .none
+                case .keychainError:
+                    return .none
                 }
                 
             case let .logoutResult(status):
@@ -165,8 +170,14 @@ struct MainTabFeature: ReducerProtocol {
                     print("성공")
                     return .run { send in await send(.delegate(.moveToLogin)) }
                 case .fail(let apiError):
+                    if apiError == .network {
+                        state.alertType = .networkError
+                    } else {
+                        state.alertType = .error(apiError)
+                    }
                     print("API Error \(apiError)")
                 case .keyChainError:
+                    state.alertType = .keychainError
                     print("키체인 에러")
                 }
                 return .none
@@ -178,8 +189,14 @@ struct MainTabFeature: ReducerProtocol {
                     print("성공")
                     return .run { send in await send(.delegate(.moveToLogin)) }
                 case let .fail(apiError):
+                    if apiError == .network {
+                        state.alertType = .networkError
+                    } else {
+                        state.alertType = .error(apiError)
+                    }
                     print("API Error \(apiError)")
                 case .keyChainError:
+                    state.alertType = .keychainError
                     print("키체인 에러")
                 }
                 return .none
