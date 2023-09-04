@@ -16,7 +16,7 @@ struct MeetingDetail: Equatable {
     let time: String // 모임 시간
     let memo: String? // 메모
     let members: [Member] // 참여자 정보
-    let memberId: Int // 모임 내 본인의 멤버id
+    let memberID: Int // 모임 내 본인의 멤버id
     let stampStatus: MeetingStampStatus // 제목 옆에 들어가는 약속 도장
     let emergencyStatus: MeetingEmergencyStatus // 긴급 버튼 상태
     let isEmergencyAuthority: Bool // 내가 긴급 버튼 권한자
@@ -45,7 +45,7 @@ extension MeetingDetail {
             time: date,
             memo: memo,
             members: members,
-            memberId: memberId,
+            memberID: memberID,
             stampStatus: stampStatus,
             emergencyStatus: .onGoing,
             isEmergencyAuthority: isEmergencyAuthority,
@@ -63,7 +63,7 @@ extension MeetingDetail {
     func updateFeed(_ feed: Feed) -> MeetingDetail {
         
         let updatedMembers = self.members.map {
-            return $0.id == self.memberId ? $0.updateFeed(certImage: feed.feedImageURL) : $0
+            return $0.id == self.memberID ? $0.updateFeed(certImage: feed.feedImageURL) : $0
         }
         
         return MeetingDetail(
@@ -74,7 +74,7 @@ extension MeetingDetail {
             time: self.time,
             memo: self.memo,
             members: updatedMembers,
-            memberId: self.memberId,
+            memberID: self.memberID,
             stampStatus: self.stampStatus,
             emergencyStatus: .termination,
             isEmergencyAuthority: self.isEmergencyAuthority,
@@ -88,5 +88,29 @@ extension MeetingDetail {
 
     func afterEmergencyAuthority() -> Bool {
         return emergencyStatus == .past || emergencyStatus == .termination
+    }
+}
+
+// 모임 수정을 위한 Meeting Edit로 변환
+
+extension MeetingDetail {
+    func toMeetingEdit() -> MeetingEdit? {
+        guard let date = self.meetingDate() else {
+            return nil
+        }
+        return MeetingEdit(
+            id: self.id,
+            title: self.name,
+            place: self.place,
+            date: date,
+            memo: self.memo
+        )
+    }
+    
+    private func meetingDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 M월 d일HH:mm"
+        let dateString = self.date + self.time
+        return dateFormatter.date(from: dateString)
     }
 }

@@ -23,7 +23,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         var meetingId: Int
         var meetingData: MeetingDetail?
-        var memberID: Int = -1
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
 
@@ -60,6 +59,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // button
         case deleteButtonTapped
+        case editButtonTapped
         case leaveButtonTapped
         case backButtonTapped
         case cameraButtonTapped
@@ -91,6 +91,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             case deleteSuccess
             case onDisappear
             case moveToLogin
+            case moveToEdit(MeetingEdit)
         }
     }
 
@@ -147,7 +148,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .updateData(let data):
                 state.meetingData = data
-                state.memberID = data.memberId
                 
                 let emergencyStatus = data.emergencyStatus
 
@@ -170,15 +170,31 @@ struct MeetingDetailFeature: ReducerProtocol {
                     await send(.delegate(.deleteSuccess))
                 }
 
-                // Tap
+                // MARK: - Tap
 
             case .deleteButtonTapped:
+                state.alertType = .meetingDelete
                 return .none
+                
+            case .editButtonTapped:
+                guard let meetingEdit = state.meetingData?.toMeetingEdit() else {
+                    state.alertType = .meetingUnwrapping
+                    return .none // 실패시 MeetingDetail에서 Date생성하는 함수를 확인할 것
+                }
+                return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
             case .leaveButtonTapped:
-                state.selectOwner = SelectOwnerFeature.State(
-                    memberList: state.meetingData?.members ?? []
-                )
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingUnwrapping
+                    return .none
+                }
+                
+                // 방장 혼자만 있는 경우
+                if meetingData.members.count == 1 {
+                    state.alertType = .meetingLeaveFail
+                } else {
+                    state.selectOwner = SelectOwnerFeature.State()
+                }
                 return .none
 
             case .backButtonTapped:
@@ -186,10 +202,17 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .cameraButtonTapped:
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingUnwrapping
+                    return .none
+                }
+                
+                let memberID = meetingData.memberID
+                
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     let timerCount = emergencyButtonActiveTime.authenticationTimeout()
                     state.usingCamera = CameraFeature.State(
-                        memberID: state.memberID,
+                        memberID: memberID,
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {
@@ -198,15 +221,16 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
 
             case .emergencyButtonTapped:
-                guard let remainTimeUntilExpired = state.meetingData?
-                    .emergencyButtonExpiredTime
-                    .remainingTime()
-                else {
+                guard let meetingData = state.meetingData else {
+                    state.alertType = .meetingUnwrapping
                     return .none
                 }
+                
+                let memberID = meetingData.memberID
+                let remainTimeUntilExpired = meetingData.emergencyButtonExpiredTime.remainingTime()
                         
                 state.emergencyState = EmergencyFeature.State(
-                    memberID: state.memberID,
+                    memberID: memberID,
                     remainTimeUntilExpired: remainTimeUntilExpired
                 )
                 return .none
@@ -280,11 +304,14 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError, .invalidAuthentication:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping, .meetingLeaveFail:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
                 case .invitation:
+                    return .none
+                case .meetingDelete:
+                    //방 폭파
                     return .none
                 case .delete:
                     // 삭제 요청
@@ -349,7 +376,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     state.timerState.timerCount = emergencyButtonActiveTime.authenticationTimeout()
                 } else {
-                    print("언래핑 에러")
+                    state.alertType = .meetingUnwrapping
                 }
                 
                 // button의 onAppear 때 타이머 시작이 되기 때문에, 타이머 시간을 설정하고 버튼이 나타나야함

@@ -72,7 +72,7 @@ struct BaggleTextEditor: View {
                                 .padding()
                         }
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 140)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 140, maxHeight: 140)
 
                     Text("\(viewStore.text.count) / 50")
                         .font(.Baggle.body2)
