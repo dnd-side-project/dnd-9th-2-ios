@@ -10,19 +10,22 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MainTabView: View {
-
+    
     let store: StoreOf<MainTabFeature>
-
+    
     init(store: StoreOf<MainTabFeature>) {
         self.store = store
         UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray4)
     }
-
+    
     var body: some View {
-
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            ZStack {
-                NavigationStack {
+        
+        NavigationStackStore(self.store.scope(
+            state: \.path,
+            action: { .path($0)})
+        )  {
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                ZStack {
                     TabView(
                         selection: viewStore.binding(
                             get: \.selectedTab,
@@ -64,59 +67,76 @@ struct MainTabView: View {
                         }
                         .tag(TapType.myPage)
                     }
-                    .tint(.black)
-                    .fullScreenCover(
-                        store: self.store.scope(
-                            state: \.$createMeeting,
-                            action: { .createMeeting($0) })
-                    ) { createMeetingTitleStore in
-                        CreateTitleView(store: createMeetingTitleStore)
-                    }
-                    .fullScreenCover(
-                        store: self.store.scope(
-                            state: \.$joinMeeting,
-                            action: { .joinMeeting($0) })
-                    ) { store in
-                        JoinMeetingView(store: store)
-                    }
-                    .onReceive(
-                        NotificationCenter.default.publisher(for: .joinMeeting),
-                        perform: { noti in
-                            if let id = noti.object as? Int {
-                                viewStore.send(.enterJoinMeeting(id))
+                    
+                    if let alertType = viewStore.alertType {
+                        if alertType.buttonType == .one {
+                            BaggleAlertOneButton(
+                                isPresented: Binding(
+                                    get: { viewStore.alertType != nil },
+                                    set: { viewStore.send(.presentAlert($0)) }
+                                ),
+                                title: alertType.title,
+                                description: alertType.description,
+                                buttonTitle: alertType.buttonTitle
+                            ) {
+                                viewStore.send(.alertButtonTapped)
+                            }
+                        } else if alertType.buttonType == .two {
+                            BaggleAlertTwoButton(
+                                isPresented: Binding(
+                                    get: { viewStore.alertType != nil },
+                                    set: { viewStore.send(.presentAlert($0)) }
+                                ),
+                                title: alertType.title,
+                                description: alertType.description,
+                                alertType: alertType.rightButtonType,
+                                rightButtonTitle: alertType.buttonTitle,
+                                leftButtonAction: nil
+                            ) {
+                                viewStore.send(.alertButtonTapped)
                             }
                         }
-                    )
+                    }
                 }
-                
-                if let alertType = viewStore.alertType {
-                    if alertType.buttonType == .one {
-                        BaggleAlertOneButton(
-                            isPresented: Binding(
-                                get: { viewStore.alertType != nil },
-                                set: { viewStore.send(.presentAlert($0)) }
-                            ),
-                            title: alertType.title,
-                            description: alertType.description,
-                            buttonTitle: alertType.buttonTitle
-                        ) {
-                            viewStore.send(.alertButtonTapped)
-                        }
-                    } else if alertType.buttonType == .two {
-                        BaggleAlertTwoButton(
-                            isPresented: Binding(
-                                get: { viewStore.alertType != nil },
-                                set: { viewStore.send(.presentAlert($0)) }
-                            ),
-                            title: alertType.title,
-                            description: alertType.description,
-                            alertType: alertType.rightButtonType,
-                            rightButtonTitle: alertType.buttonTitle,
-                            leftButtonAction: nil
-                        ) {
-                            viewStore.send(.alertButtonTapped)
+                .tint(.black)
+                .fullScreenCover(
+                    store: self.store.scope(
+                        state: \.$createMeeting,
+                        action: { .createMeeting($0) })
+                ) { createMeetingTitleStore in
+                    CreateTitleView(store: createMeetingTitleStore)
+                }
+                .fullScreenCover(
+                    store: self.store.scope(
+                        state: \.$joinMeeting,
+                        action: { .joinMeeting($0) })
+                ) { store in
+                    JoinMeetingView(store: store)
+                }
+                .onReceive(
+                    NotificationCenter.default.publisher(for: .joinMeeting),
+                    perform: { noti in
+                        if let id = noti.object as? Int {
+                            viewStore.send(.enterJoinMeeting(id))
                         }
                     }
+                )
+            }
+        } destination: { pathState in
+            switch pathState {
+            case .meetingDetail:
+                CaseLet(
+                    /MainTabFeature.Child.State.meetingDetail,
+                     action: MainTabFeature.Child.Action.meetingDetail
+                ) { store in
+                    MeetingDetailView(store: store)
+                }
+            case .meetingEdit:
+                CaseLet(
+                    /MainTabFeature.Child.State.meetingEdit,
+                     action: MainTabFeature.Child.Action.meetingEdit
+                ) { store in
+                    MeetingEditView(store: store)
                 }
             }
         }

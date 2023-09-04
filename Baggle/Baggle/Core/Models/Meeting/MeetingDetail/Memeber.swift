@@ -33,3 +33,15 @@ extension Member {
         )
     }
 }
+
+// 방장 넘기기를 위한 MeetingLeaveMember 모델로 수정
+
+extension Member {
+    func toMeetingLeaveMember() -> MeetingLeaveMember {
+        MeetingLeaveMember(
+            id: self.id,
+            name: self.name,
+            profileURL: self.profileURL
+        )
+    }
+}

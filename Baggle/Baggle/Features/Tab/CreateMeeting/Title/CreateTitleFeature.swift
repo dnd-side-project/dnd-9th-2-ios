@@ -155,7 +155,13 @@ struct CreateTitleFeature: ReducerProtocol {
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext(place))))):
                 _ = id
                 state.meetingCreate = state.meetingCreate.update(place: place)
-                state.path.append(.meetingDate(CreateDateFeature.State()))
+                state.path.append(
+                    .meetingDate(
+                        CreateDateFeature.State(
+                            meetingDateButtonState: MeetingDateButtonFeature.State()
+                        )
+                    )
+                )
                 return .none
                 
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToBack)))):

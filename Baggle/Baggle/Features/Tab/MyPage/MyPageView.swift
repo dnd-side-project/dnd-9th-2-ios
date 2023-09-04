@@ -28,7 +28,7 @@ struct MyPageView: View {
                         VStack(spacing: 16) {
                             CircleProfileView(
                                 imageUrl: viewStore.user.profileImageURL,
-                                size: .extraLarge
+                                size: .xxLarge
                             )
                             
                             HStack(alignment: .top, spacing: 6) {

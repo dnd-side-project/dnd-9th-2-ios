@@ -14,7 +14,7 @@ struct MainTabFeature: ReducerProtocol {
     struct State: Equatable {
         var selectedTab: TapType = .home
         var previousTab: TapType = .home
-
+        
         // MARK: - Child State
         var homeFeature: HomeFeature.State
         var myPageFeature: MyPageFeature.State
@@ -26,6 +26,10 @@ struct MainTabFeature: ReducerProtocol {
         var alertType: AlertMainTabType?
         
         var isLoading: Bool = false
+        
+        
+        // MARK: - Navigation Stack
+        var path = StackState<Child.State>()
     }
 
     enum Action: Equatable {
@@ -51,11 +55,37 @@ struct MainTabFeature: ReducerProtocol {
         case withdrawResult(WithdrawServiceResult)
         case logoutResult(LogoutServiceResult)
         
+        // MARK: - Navigation
+        case path(StackAction<Child.State, Child.Action>)
+        
         // MARK: - Delegate
         case delegate(Delegate)
         
         enum Delegate: Equatable {
             case moveToLogin
+        }
+    }
+    
+    struct Child: ReducerProtocol {
+
+        enum State: Equatable {
+            case meetingDetail(MeetingDetailFeature.State)
+            case meetingEdit(MeetingEditFeature.State)
+        }
+
+        enum Action: Equatable {
+            case meetingDetail(MeetingDetailFeature.Action)
+            case meetingEdit(MeetingEditFeature.Action)
+        }
+
+        var body: some ReducerProtocolOf<Self> {
+            Scope(state: /State.meetingDetail, action: /Action.meetingDetail) {
+                MeetingDetailFeature()
+            }
+            
+            Scope(state: /State.meetingEdit, action: /Action.meetingEdit) {
+                MeetingEditFeature()
+            }
         }
     }
     
@@ -95,6 +125,14 @@ struct MainTabFeature: ReducerProtocol {
                 // 홈
             case .homeAction(.delegate(.moveToLogin)):
                 return .run { send in await send(.delegate(.moveToLogin))}
+                
+            case let .homeAction(.delegate(.moveToMeetingDetail(id))):
+                state.path.append(
+                    .meetingDetail(
+                        MeetingDetailFeature.State(meetingId: id)
+                    )
+                )
+                return .none
                 
             case .homeAction:
                 return .none
@@ -235,6 +273,39 @@ struct MainTabFeature: ReducerProtocol {
                                                              joinMeetingStatus: status)
                 return .none
                 
+                // MARK: - Navigation
+                
+                // 모임 상세
+            case let .path(.element(id: id, action: .meetingDetail(.delegate(.onDisappear)))):
+                state.path.pop(from: id)
+                return .none
+            
+            case let .path(
+                .element(
+                    id: id,
+                    action: .meetingDetail(.delegate(.moveToEdit(newMeetingEdit)))
+                )
+            ):
+                _ = id
+                state.path.append(
+                    .meetingEdit(
+                        MeetingEditFeature.State(
+                            meetingEdit: newMeetingEdit,
+                            meetingDateButtonState: MeetingDateButtonFeature.State()
+                        )
+                    )
+                )
+                return .none
+                // 삭제시 home refresh
+                // 유저 에러시 로그인으로 
+                
+            case let .path(.element(id: id, action: .meetingEdit(.delegate(.moveToBack)))):
+                state.path.pop(from: id)
+                return .none
+                
+            case .path:
+                return .none
+                
                 // MARK: - Delegate
                 
             case .delegate(.moveToLogin):
@@ -244,6 +315,9 @@ struct MainTabFeature: ReducerProtocol {
             case .delegate:
                 return .none
             }
+        }
+        .forEach(\.path, action: /Action.path) {
+            Child()
         }
         .ifLet(\.$createMeeting, action: /Action.createMeeting) {
             CreateTitleFeature()

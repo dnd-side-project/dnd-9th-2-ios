@@ -83,7 +83,7 @@ struct BaggleTextField: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
 
                 if case let .title(title) = title {
                     Text(title)

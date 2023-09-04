@@ -33,7 +33,7 @@ extension MeetingDetailEntity {
             time: meetingTime.hourMinute(),
             memo: (memo ?? "").isEmpty ? nil : memo,
             members: members.map { $0.memberDomain(afterMeetingConfirmed: isMeetingConfirmed()) },
-            memberId: memberId(username: username, members: members),
+            memberID: memberId(username: username, members: members),
             stampStatus: status.meetingStampStatus(),
             emergencyStatus: status.meetingEmergencyStatus(),
             isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),

@@ -127,7 +127,6 @@ struct MeetingDetailView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .onAppear { viewStore.send(.onAppear) }
-            .onDisappear { viewStore.send(.delegate(.onDisappear)) }
             .onChange(of: viewStore.dismiss, perform: { _ in
                 dismiss()
             })
@@ -141,24 +140,30 @@ struct MeetingDetailView: View {
             )
             // 임시 액션시트
             .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
+
+                Button("방 정보 수정하기") { viewStore.send(.editButtonTapped) }
+                
                 Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
                 
                 Button("방장 넘기기") { viewStore.send(.leaveButtonTapped) }
-                
-                Button("카메라") { viewStore.send(.cameraButtonTapped) }
-                
-                Button("긴급 버튼") { viewStore.send(.emergencyButtonTapped) }
-                
-                Button("초대장 보내기") { viewStore.send(.inviteButtonTapped) }
             })
             .sheet(
                 store: self.store.scope(
                     state: \.$selectOwner,
                     action: { .selectOwner($0) })
             ) { selectOwnerStore in
-                SelectOwnerView(store: selectOwnerStore)
-                    .presentationDetents([.height(340)])
-                    .presentationDragIndicator(.visible)
+                if let meetingData = viewStore.meetingData {
+                    SelectOwnerView(
+                        store: selectOwnerStore,
+                        meetingLeaveMember: meetingLeaveMemberList(
+                            memberID: meetingData.memberID,
+                            member: meetingData.members
+                        )
+                    )
+                    .presentationDetents([
+                        .height(self.meetingLeaveMemberViewHeight(meetingData.members.count))
+                    ])
+                }
             }
             .fullScreenCover(
                 store: self.store.scope(
@@ -427,11 +432,23 @@ extension MeetingDetailView {
 
 extension MeetingDetailView {
     
-    func failEmergencyAuthorization(meetingData: MeetingDetail?, certified: Bool) -> Bool {
+    // Member View에서 탈락 stamp를 위한 조건문
+    private func failEmergencyAuthorization(meetingData: MeetingDetail?, certified: Bool) -> Bool {
         guard let meetingData = meetingData else {
             return false
         }
         return meetingData.afterEmergencyAuthority() && !certified
+    }
+    
+    // 방장 넘기기 할 때 나빼고 남은 멤버들만
+    private func meetingLeaveMemberList(memberID: Int, member: [Member]) -> [MeetingLeaveMember] {
+        return member.filter {$0.id != memberID }.map { $0.toMeetingLeaveMember() }
+    }
+    
+    // 방장 넘기기 모달 높이
+    private func meetingLeaveMemberViewHeight(_ memberCount: Int) -> CGFloat {
+        // 본인 제외 하고 4명 이상 -> 2줄 됨
+        return memberCount - 1 >= 4 ? 460 : 360
     }
 }
 
