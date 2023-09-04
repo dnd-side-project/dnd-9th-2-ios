@@ -34,22 +34,17 @@ struct HomeFeature: ReducerProtocol {
         var requestedProgressIndex: Set<Int> = []
         var requestedCompletedIndex: Set<Int> = []
         
-        // 모임 상세
-        var meetingDetailId: Int?
-        var pushMeetingDetail: Bool = false
-        var meetingDetailState = MeetingDetailFeature.State(
-            meetingId: Const.ErrorID.meeting
-        )
-        
         // 초기화
         var isRefreshing: Bool = false
     }
 
     enum Action: Equatable {
-        // MARK: - Scope Action
 
+        // View
         case onAppear
         case scrollReachEnd(Int)
+
+        // State 관리
         case changeHomeStatus(HomeStatus)
         case fetchMeetingList(MeetingHomeStatus)
         case updateMeetingList(MeetingHomeStatus, HomeMeetingList)
@@ -57,28 +52,20 @@ struct HomeFeature: ReducerProtocol {
         case changeMeetingStatus(MeetingHomeStatus)
 
         // 모임 상세
-
-        case meetingDetailAction(MeetingDetailFeature.Action)
         case pushToMeetingDetail(Int)
-        case pushMeetingDetail
         
         // Delegate
         case delegate(Delegate)
         
         enum Delegate: Equatable {
             case moveToLogin
+            case moveToMeetingDetail(Int)
         }
     }
-
+    
     @Dependency(\.meetingService) var meetingService
 
     var body: some ReducerProtocolOf<Self> {
-
-        // MARK: - Scope
-
-        Scope(state: \.meetingDetailState, action: /Action.meetingDetailAction) {
-            MeetingDetailFeature()
-        }
 
         // MARK: - Reduce
 
@@ -203,38 +190,9 @@ struct HomeFeature: ReducerProtocol {
                     }
                 }
                 return .none
-
+                
             case .pushToMeetingDetail(let id):
-                state.meetingDetailId = id
-                state.meetingDetailState = MeetingDetailFeature.State(
-                    meetingId: id
-                )
-                return .run { send in
-                    await send(.pushMeetingDetail)
-                }
-
-            case .pushMeetingDetail:
-                state.pushMeetingDetail = true
-                return .none
-
-                // MARK: - Child
-                
-                // Meeting Detail
-            case .meetingDetailAction(.delegate(.onDisappear)):
-                state.pushMeetingDetail = false
-                state.meetingDetailId = nil
-                return .none
-
-            case .meetingDetailAction(.delegate(.deleteSuccess)):
-                return .run { send in
-                    await send(.refreshMeetingList)
-                }
-
-            case .meetingDetailAction(.delegate(.moveToLogin)):
-                return .run { send in await send(.delegate(.moveToLogin)) }
-                
-            case .meetingDetailAction:
-                return .none
+                return .run { send in await send(.delegate(.moveToMeetingDetail(id))) }
 
             case .delegate:
                 return .none
