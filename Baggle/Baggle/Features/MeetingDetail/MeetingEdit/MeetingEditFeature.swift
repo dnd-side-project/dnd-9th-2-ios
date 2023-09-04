@@ -18,7 +18,7 @@ struct MeetingEditFeature: ReducerProtocol {
         // TextField
         var titleTextFieldState = BaggleTextFeature.State(
             maxCount: 15,
-            textFieldState: .inactive,
+            textFieldState: .valid,
             isFocused: false
         )
         
@@ -104,6 +104,9 @@ struct MeetingEditFeature: ReducerProtocol {
                 if let memo = state.meetingEdit.memo {
                     state.memoTextEditorState.text = memo
                 }
+                state.meetingDateButtonState.dateButtonStatus = .valid
+                state.meetingDateButtonState.timeButtonStatus = .valid
+                
                 return .none
                 
                 // MARK: - Tap
