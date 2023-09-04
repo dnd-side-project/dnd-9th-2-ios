@@ -31,9 +31,13 @@ extension View {
     func drawUnderline(
         spacing: CGFloat = 3,
         height: CGFloat = 1,
-        color: Color = .gray
+        color: Color = .gray,
+        padding: CGFloat = 0
     ) -> some View {
-        self.modifier(UnderlineView(spacing: spacing, height: height, color: color))
+        self.modifier(UnderlineView(spacing: spacing,
+                                    height: height,
+                                    color: color,
+                                    padding: padding))
     }
 
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {

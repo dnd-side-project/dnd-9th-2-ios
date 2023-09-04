@@ -13,4 +13,5 @@ extension Notification.Name {
     static let joinMeeting = Notification.Name("joinMeeting")
     static let skipSplashMeetingDetail = Notification.Name(rawValue: "skipSplashMeetingDetail")
     static let skipSplashJoinMeeting = Notification.Name("skipSplashJoinMeeting")
+    static let actionSheetDismiss = Notification.Name("actionSheetDismiss")
 }

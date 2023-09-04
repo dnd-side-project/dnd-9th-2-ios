@@ -15,8 +15,7 @@ struct MeetingDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    // 임시 액션시트
-    @State var isActionSheetShow: Bool = false
+    @State var isActionSheetPresented: Bool = false
     
     var body: some View {
         
@@ -73,7 +72,7 @@ struct MeetingDetailView: View {
                     NavigationBar(naviType: .more) {
                         viewStore.send(.backButtonTapped)
                     } rightButtonAction: {
-                        isActionSheetShow = true
+                        withAnimation { isActionSheetPresented = true }
                     }
                     .background(Color.PrimaryLight)
                     
@@ -138,14 +137,25 @@ struct MeetingDetailView: View {
                     }
                 }
             )
-            // 임시 액션시트
-            .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
-
-                Button("방 정보 수정하기") { viewStore.send(.editButtonTapped) }
+            .presentActionSheet(isPresented: $isActionSheetPresented, content: {
+                Text("방 정보 수정하기")
+                    .addAction {
+                        viewStore.send(.inviteButtonTapped)
+                    }
                 
-                Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
+                Divider().padding(.horizontal, 20)
                 
-                Button("방장 넘기기") { viewStore.send(.leaveButtonTapped) }
+                Text("방장 넘기고 나가기")
+                    .addAction {
+                        viewStore.send(.leaveButtonTapped)
+                    }
+                
+                Divider().padding(.horizontal, 20)
+                
+                Text("방 폭파하기")
+                    .addAction({
+                        viewStore.send(.deleteButtonTapped)
+                    }, role: .destructive)
             })
             .sheet(
                 store: self.store.scope(
