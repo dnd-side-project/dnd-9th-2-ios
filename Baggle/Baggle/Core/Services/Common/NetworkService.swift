@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 import Alamofire
+import ComposableArchitecture
 import Moya
 
 class NetworkService<Target: TargetType> {
@@ -39,6 +40,8 @@ class NetworkService<Target: TargetType> {
     }
     
     public init() {}
+    
+    @Dependency(\.refreshService) var refreshService
 }
 
 extension NetworkService {
@@ -48,50 +51,69 @@ extension NetworkService {
     }
     
     func request<T: Decodable>(_ target: API) async throws -> T {
-        let data = try await provider.request(target)
-        
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
-        guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
-            throw APIError.decoding
-        }
-        
-        let statusCode = body.status
-        let message = body.message
-        
-        switch statusCode {
-        case 200, 201:
-            guard let data = body.data else {
-                throw APIError.unwrapping
+        try await _Concurrency.Task.retrying {
+            let data = try await self.provider.request(target)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+            guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
+                throw APIError.decoding
             }
-            print("✅ data: \(data)")
-            return data
-        case 400..<500:
-            throw handleError400(statusCode: statusCode, message: message)
-        case 500:
-            throw APIError.server
-        default:
-            throw APIError.network
-        }
+            
+            let statusCode = body.status
+            let message = body.message
+            
+            switch statusCode {
+            case 200, 201:
+                guard let data = body.data else {
+                    throw APIError.unwrapping
+                }
+                print("✅ data: \(data)")
+                return data
+            case 400..<500:
+                throw await self.handleError400(statusCode: statusCode, message: message)
+            case 500:
+                throw APIError.server
+            default:
+                throw APIError.network
+            }
+        }.value
     }
     
     func requestWithNoResult(_ target: API) async throws {
-        let data = try await provider.request(target)
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
-        guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
-            throw APIError.decoding
-        }
-        
+        try await _Concurrency.Task.retrying {
+            let data = try await self.provider.request(target)
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+            guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
+                throw APIError.decoding
+            }
+            
+            let statusCode = body.status
+            let message = body.message
+            
+            switch statusCode {
+            case 200, 201:
+                return
+            case 400..<500:
+                throw await self.handleError400(statusCode: statusCode, message: message)
+            case 500:
+                throw APIError.server
+            default:
+                throw APIError.network
+            }
+        }.value
+    }
+    
+    private func handleResultWithNoResult(body: EntityContainer<JSONNull>) async throws {
         let statusCode = body.status
         let message = body.message
-
+        
         switch statusCode {
         case 200, 201:
             return
         case 400..<500:
-            throw handleError400(statusCode: statusCode, message: message)
+            throw await handleError400(statusCode: statusCode, message: message)
         case 500:
             throw APIError.server
         default:
@@ -99,7 +121,7 @@ extension NetworkService {
         }
     }
 
-    private func handleError400(statusCode: Int, message: String) -> APIError {
+    private func handleError400(statusCode: Int, message: String) async -> APIError {
         switch statusCode {
         case 400:
             if message == "모임 2시간 전후 일정이 존재합니다." {
@@ -107,7 +129,12 @@ extension NetworkService {
             }
             return APIError.badRequest
         case 401:
-            return APIError.unauthorized
+            let result = await refreshService.refresh()
+            switch result {
+            case .success: return APIError.authorizeRenewed
+            case .fail: return APIError.unauthorized
+            case .keyChainError: return APIError.unauthorized
+            }
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
                 return APIError.duplicatedMeeting
