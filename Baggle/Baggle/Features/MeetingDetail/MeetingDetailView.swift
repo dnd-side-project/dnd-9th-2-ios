@@ -15,8 +15,6 @@ struct MeetingDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State var isActionSheetPresented: Bool = false
-    
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -72,7 +70,7 @@ struct MeetingDetailView: View {
                     NavigationBar(naviType: .more) {
                         viewStore.send(.backButtonTapped)
                     } rightButtonAction: {
-                        withAnimation { isActionSheetPresented = true }
+                        viewStore.send(.presentActionSheet(true))
                     }
                     .background(Color.PrimaryLight)
                     
@@ -85,38 +83,6 @@ struct MeetingDetailView: View {
                 }
                 .animation(.easeOut(duration: 0.3), value: viewStore.buttonState)
                 .transition(.move(edge: .bottom))
-                
-                // Error - alert
-                
-                if let alertType = viewStore.alertType {
-                    if alertType.buttonType == .one {
-                        BaggleAlertOneButton(
-                            isPresented: Binding(
-                                get: { viewStore.alertType != nil },
-                                set: { viewStore.send(.presentAlert($0)) }
-                            ),
-                            title: alertType.title,
-                            description: alertType.description,
-                            buttonTitle: alertType.buttonTitle
-                        ) {
-                            viewStore.send(.alertButtonTapped)
-                        }
-                    } else if alertType.buttonType == .two {
-                        BaggleAlertTwoButton(
-                            isPresented: Binding(
-                                get: { viewStore.alertType != nil },
-                                set: { viewStore.send(.presentAlert($0)) }
-                            ),
-                            title: alertType.title,
-                            description: alertType.description,
-                            alertType: .destructive,
-                            rightButtonTitle: alertType.buttonTitle,
-                            leftButtonAction: nil
-                        ) {
-                            viewStore.send(.alertButtonTapped)
-                        }
-                    }
-                }
                 
                 // 이미지 상세
                 if viewStore.isImageTapped,
@@ -137,25 +103,39 @@ struct MeetingDetailView: View {
                     }
                 }
             )
-            .presentActionSheet(isPresented: $isActionSheetPresented, content: {
-                Text("방 정보 수정하기")
-                    .addAction {
-                        viewStore.send(.inviteButtonTapped)
-                    }
-                
-                Divider().padding(.horizontal, 20)
-                
-                Text("방장 넘기고 나가기")
-                    .addAction {
-                        viewStore.send(.leaveButtonTapped)
-                    }
-                
-                Divider().padding(.horizontal, 20)
-                
-                Text("방 폭파하기")
-                    .addAction({
-                        viewStore.send(.deleteButtonTapped)
-                    }, role: .destructive)
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { MeetingDetailFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
+            .presentActionSheet(
+                isPresented:
+                    viewStore.binding(
+                        get: { $0.isActionSheetPresented },
+                        send: { MeetingDetailFeature.Action.presentActionSheet($0) }
+                    ),
+                content: {
+                    Text("방 정보 수정하기")
+                        .addAction {
+                            viewStore.send(.inviteButtonTapped)
+                        }
+                    
+                    Divider().padding(.horizontal, 20)
+                    
+                    Text("방장 넘기고 나가기")
+                        .addAction {
+                            viewStore.send(.leaveButtonTapped)
+                        }
+                    
+                    Divider().padding(.horizontal, 20)
+                    
+                    Text("방 폭파하기")
+                        .addAction({
+                            viewStore.send(.deleteButtonTapped)
+                        }, role: .destructive)
             })
             .sheet(
                 store: self.store.scope(
