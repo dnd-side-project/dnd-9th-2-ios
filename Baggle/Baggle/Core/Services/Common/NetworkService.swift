@@ -105,22 +105,6 @@ extension NetworkService {
         }.value
     }
     
-    private func handleResultWithNoResult(body: EntityContainer<JSONNull>) async throws {
-        let statusCode = body.status
-        let message = body.message
-        
-        switch statusCode {
-        case 200, 201:
-            return
-        case 400..<500:
-            throw await handleError400(statusCode: statusCode, message: message)
-        case 500:
-            throw APIError.server
-        default:
-            throw APIError.network
-        }
-    }
-
     private func handleError400(statusCode: Int, message: String) async -> APIError {
         switch statusCode {
         case 400:
