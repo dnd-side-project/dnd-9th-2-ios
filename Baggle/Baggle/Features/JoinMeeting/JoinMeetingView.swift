@@ -146,7 +146,7 @@ struct JoinMeetingView_Previews: PreviewProvider {
             store: Store(
                 initialState: JoinMeetingFeature.State(
                     meetingId: 100,
-                    joinMeetingStatus: .expired(.overlapMeetingTime)),
+                    joinMeetingStatus: .expired(.duplicatedMeeting)),
                 reducer: JoinMeetingFeature()
             )
         )

@@ -44,10 +44,12 @@ extension MeetingCreateService: DependencyKey {
             
             return .success(model)
         } catch {
-            if let apiError = error as? APIError, apiError == .duplicatedMeeting {
-                return .duplicatedMeeting
-            } else if let keyChainError = error as? KeyChainError {
-                return .userError
+            if let apiError = error as? APIError {
+                if apiError == .duplicatedMeeting {
+                    return .duplicatedMeeting
+                } else if apiError == .limitMeetingCount {
+                    return .limitMeetingCount
+                }
             }
             return .networkError(error.localizedDescription)
         }

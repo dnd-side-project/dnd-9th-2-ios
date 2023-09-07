@@ -57,7 +57,7 @@ struct JoinMeetingFeature: ReducerProtocol {
             case .onAppear:
                 if case let .expired(error) = state.joinMeetingStatus {
                     switch error {
-                    case .overlapMeetingTime:
+                    case .duplicatedMeeting:
                         state.alertType = .overlap
                     case .exceedMemberCount:
                         state.alertType = .exceedMemberCount

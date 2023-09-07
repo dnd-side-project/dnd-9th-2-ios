@@ -103,14 +103,14 @@ extension NetworkService {
         switch statusCode {
         case 400:
             if message == "모임 2시간 전후 일정이 존재합니다." {
-                return APIError.overlapMeetingTime
+                return APIError.duplicatedMeeting
             }
             return APIError.badRequest
         case 401:
             return APIError.unauthorized
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
-                return APIError.duplicatedMeeting
+                return APIError.limitMeetingCount
             } else if message == "모임 인원이 초과됐습니다." {
                 return APIError.exceedMemberCount
             }
