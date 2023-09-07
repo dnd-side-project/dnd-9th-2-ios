@@ -54,7 +54,6 @@ struct JoinMeetingFeature: ReducerProtocol {
         case delegate(Delegate)
         
         enum Delegate {
-            case dismiss
             case moveToLogin
         }
     }
@@ -130,7 +129,7 @@ struct JoinMeetingFeature: ReducerProtocol {
                 
                 switch alertType {
                 case .expired, .overlap, .exceedMemberCount, .networkError:
-                    return .run { send in await send(.delegate(.dismiss))}
+                    return .run { _ in await self.dismiss() }
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
                 }

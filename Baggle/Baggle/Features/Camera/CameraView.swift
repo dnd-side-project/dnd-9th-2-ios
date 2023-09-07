@@ -51,22 +51,18 @@ struct CameraView: View {
                     )
                 }
                 
-                if let alertType = viewStore.alertType {
-                    BaggleAlertOneButton(
-                        isPresented: Binding(
-                            get: { viewStore.alertType != nil },
-                            set: { viewStore.send(.presentBaggleAlert($0))}
-                        ),
-                        title: alertType.title,
-                        description: alertType.description,
-                        buttonTitle: alertType.buttonTitle) {
-                            viewStore.send(.alertButtonTapped)
-                        }
-                }
             }
             .onAppear {
                 viewStore.send(.onAppear)
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { CameraFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .alert(
                 store: self.store.scope(
                     state: \.$alert,

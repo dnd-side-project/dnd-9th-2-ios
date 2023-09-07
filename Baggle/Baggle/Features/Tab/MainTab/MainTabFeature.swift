@@ -267,10 +267,6 @@ struct MainTabFeature: ReducerProtocol {
                 return .run { send in
                     await send(.selectTab(.home))
                 }
-
-            case .joinMeeting(PresentationAction.presented(.delegate(.dismiss))):
-                state.joinMeeting = nil
-                return .none
                 
             case .joinMeeting(PresentationAction.presented(.delegate(.moveToLogin))):
                 return .run { send in await send(.delegate(.moveToLogin))}
