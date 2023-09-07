@@ -187,7 +187,7 @@ struct MainTabFeature: ReducerProtocol {
             case .homeAction:
                 return .none
                 
-                // 모임 생성
+                // MARK: - 모임 생성
             case .createMeeting(PresentationAction.dismiss):
                 let previousTab = state.previousTab
                 return .run { send in
@@ -205,7 +205,7 @@ struct MainTabFeature: ReducerProtocol {
             case .createMeeting:
                 return .none
 
-                // 마이페이지
+                // MARK: - 마이페이지
                 
             case .myPageAction(.delegate(.moveToLogin)):
                 return .run { send in await send(.delegate(.moveToLogin))}
@@ -268,12 +268,21 @@ struct MainTabFeature: ReducerProtocol {
                     await send(.selectTab(.home))
                 }
 
+            case .joinMeeting(PresentationAction.presented(.delegate(.dismiss))):
+                state.joinMeeting = nil
+                return .none
+                
+            case .joinMeeting(PresentationAction.presented(.delegate(.moveToLogin))):
+                return .run { send in await send(.delegate(.moveToLogin))}
+                
             case .joinMeeting:
                 return .none
 
             case .moveToJoinMeeting(let id, let status):
-                state.joinMeeting = JoinMeetingFeature.State(meetingId: id,
-                                                             joinMeetingStatus: status)
+                state.joinMeeting = JoinMeetingFeature.State(
+                    meetingId: id,
+                    joinMeetingStatus: status
+                )
                 return .none
                 
                 // MARK: - Navigation

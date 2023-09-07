@@ -13,33 +13,50 @@ struct JoinMeetingFeature: ReducerProtocol {
 
     struct State: Equatable {
         
-        // joinMeeting
+        // MARK: - Join Meeting Model
+        
         var meetingId: Int
         var joinMeetingStatus: JoinMeetingResult
         
-        // alert
+        // MARK: - Alert
+        
+        var isAlertPresented: Bool = false
         var alertType: AlertJoinMeetingType?
     }
 
     enum Action: Equatable {
         
-        // view
+        // MARK: - View
+        
         case onAppear
         
-        // button
+        // MARK: - Button
+        
         case exitButtonTapped
         case joinButtonTapped
         
-        // response
+        // MARK: - Response
+
         case joinSuccess
         case joinFailed
         
-        // alert
+        // MARK: - Alert
+
         case presentAlert(Bool)
+        case alertTypeChanged(AlertJoinMeetingType)
         case alertButtonTapped
         
-        // meetingDetail
+        // MARK: - Move
+
         case moveToMeetingDetail
+        
+        // MARK: - Delegate
+        case delegate(Delegate)
+        
+        enum Delegate {
+            case dismiss
+            case moveToLogin
+        }
     }
 
     @Dependency(\.dismiss) var dismiss
@@ -47,26 +64,28 @@ struct JoinMeetingFeature: ReducerProtocol {
 
     var body: some ReducerProtocolOf<Self> {
 
-        // MARK: - Scope
-
         // MARK: - Reduce
 
         Reduce { state, action in
 
             switch action {
+                
+                // MARK: - View
+                
             case .onAppear:
                 if case let .expired(error) = state.joinMeetingStatus {
                     switch error {
                     case .duplicatedMeeting:
-                        state.alertType = .overlap
+                        return .run { send in await send(.alertTypeChanged(.overlap))}
                     case .exceedMemberCount:
-                        state.alertType = .exceedMemberCount
+                        return .run { send in await send(.alertTypeChanged(.exceedMemberCount))}
                     default:
-                        state.alertType = .expired
+                        return .run { send in await send(.alertTypeChanged(.expired))}
                     }
-                    return .run { send in await send(.presentAlert(true)) }
                 }
                 return .none
+                
+                // MARK: - Button
                 
             case .exitButtonTapped:
                 return .run { _ in await self.dismiss() }
@@ -81,11 +100,42 @@ struct JoinMeetingFeature: ReducerProtocol {
                     }
                 }
 
+                // MARK: - Response
+                
             case .joinSuccess:
                 return .run { send in await send(.moveToMeetingDetail) }
 
             case .joinFailed:
                 return .none
+                
+                // MARK: - Alert
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
+                return .none
+            
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+            
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .expired, .overlap, .exceedMemberCount, .networkError:
+                    return .run { send in await send(.delegate(.dismiss))}
+                case .userError:
+                    return .run { send in await send(.delegate(.moveToLogin))}
+                }
+                
+                // MARK: - Move
                 
             case .moveToMeetingDetail:
                 let id = state.meetingId
@@ -96,14 +146,9 @@ struct JoinMeetingFeature: ReducerProtocol {
                     }
                 }
                 
-            case .presentAlert(let isPresented):
-                if !isPresented {
-                    state.alertType = nil
-                }
-                return .none
+                // MARK: - Delegate
                 
-            case .alertButtonTapped:
-                if state.alertType != nil { state.alertType = nil }
+            case .delegate:
                 return .none
             }
         }

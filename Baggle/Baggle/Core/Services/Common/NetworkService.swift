@@ -102,7 +102,7 @@ extension NetworkService {
     private func handleError400(statusCode: Int, message: String) -> APIError {
         switch statusCode {
         case 400:
-            if message == "모임 2시간 전후 일정이 존재합니다." {
+            if message == "잘못된 요청입니다." {
                 return APIError.duplicatedMeeting
             }
             return APIError.badRequest

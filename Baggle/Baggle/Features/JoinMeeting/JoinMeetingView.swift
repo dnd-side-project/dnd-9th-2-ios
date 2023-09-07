@@ -10,11 +10,11 @@ import SwiftUI
 import ComposableArchitecture
 
 struct JoinMeetingView: View {
-
+    
     let store: StoreOf<JoinMeetingFeature>
-
+    
     var body: some View {
-
+        
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
                 if case let .enable(joinMeeting) = viewStore.joinMeetingStatus {
@@ -38,12 +38,16 @@ struct JoinMeetingView: View {
                         createButton(viewStore: viewStore)
                             .padding(.bottom, 16)
                     }
-                } else {
-                    if let alertType = viewStore.alertType {
-                        baggleAlert(viewStore: viewStore, alertType: alertType)
-                    }
                 }
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { JoinMeetingFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .onAppear { viewStore.send(.onAppear) }
         }
     }
@@ -124,19 +128,6 @@ extension JoinMeetingView {
                     .frame(width: screenSize.width-40, height: 54)
             }
         }
-    }
-    
-    func baggleAlert(viewStore: Viewstore, alertType: AlertType) -> some View {
-        BaggleAlertOneButton(
-            isPresented: Binding(
-                get: { viewStore.alertType != nil },
-                set: { viewStore.send(.presentAlert($0)) }
-            ),
-            title: alertType.title,
-            description: alertType.description,
-            buttonTitle: alertType.buttonTitle) {
-                viewStore.send(.exitButtonTapped)
-            }
     }
 }
 
