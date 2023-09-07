@@ -176,7 +176,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // MARK: - Tap
 
             case .deleteButtonTapped:
-                state.isAlertPresented = true
                 return .run { send in await send(.alertTypeChanged(.meetingDelete))}
                 
             case .editButtonTapped:
