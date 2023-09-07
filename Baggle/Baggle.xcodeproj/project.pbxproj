@@ -103,6 +103,8 @@
 		1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9172A7E01D800A2D7CC /* Int+.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
+		14ACEBB22AA962C900FFFE21 /* MeetingDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */; };
+		14ACEBB42AA963DA00FFFE21 /* MeetingDeleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */; };
 		14B55AE72A9346C100EE2461 /* Task+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55AE62A9346C100EE2461 /* Task+.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
@@ -342,6 +344,8 @@
 		1493A9172A7E01D800A2D7CC /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
+		14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteService.swift; sourceTree = "<group>"; };
+		14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteResult.swift; sourceTree = "<group>"; };
 		14B55AE62A9346C100EE2461 /* Task+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+.swift"; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -698,6 +702,7 @@
 			children = (
 				14C8F9D22A8B3B7A001690C5 /* MeetingCreate */,
 				2B5BE6B02A77A3F600F25474 /* MeetingDetail */,
+				14ACEBB02AA962B500FFFE21 /* MeetingDelete */,
 			);
 			path = Meeting;
 			sourceTree = "<group>";
@@ -1144,6 +1149,15 @@
 				2BB0EF432A8D1A60003F9215 /* HomeMeetingList.swift */,
 			);
 			path = HomeList;
+			sourceTree = "<group>";
+		};
+		14ACEBB02AA962B500FFFE21 /* MeetingDelete */ = {
+			isa = PBXGroup;
+			children = (
+				14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */,
+				14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */,
+			);
+			path = MeetingDelete;
 			sourceTree = "<group>";
 		};
 		14B7A0422A753DA500B8E202 /* SignUp */ = {
@@ -1998,6 +2012,7 @@
 				14E506502A6B8913008D5778 /* SignUpFeature.swift in Sources */,
 				14C44B2F2A9483CE009E5379 /* MeetingStatusEntity.swift in Sources */,
 				14038B572A8DF6F200A7C964 /* Image.swift in Sources */,
+				14ACEBB22AA962C900FFFE21 /* MeetingDeleteService.swift in Sources */,
 				2B2AFF882A8BE05D0028C96F /* EmergencyService.swift in Sources */,
 				2BB0EF422A8D18D1003F9215 /* HomeMeetingEntity.swift in Sources */,
 				2BB0EF442A8D1A60003F9215 /* HomeMeetingList.swift in Sources */,
@@ -2036,6 +2051,7 @@
 				142BEED92A8F213B00B91426 /* UserToken.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
+				14ACEBB42AA963DA00FFFE21 /* MeetingDeleteResult.swift in Sources */,
 				14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */,
 				14C8F9D42A8B3B82001690C5 /* MeetingCreateModel.swift in Sources */,
 				14EF8C1D2A8CAA5500B0FA40 /* FeedPhotoService.swift in Sources */,

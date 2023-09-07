@@ -296,9 +296,16 @@ struct MainTabFeature: ReducerProtocol {
                     )
                 )
                 return .none
-                // 삭제시 home refresh
-                // 유저 에러시 로그인으로 
                 
+            case let .path(
+                .element(
+                    id: id,
+                    action: .meetingDetail(.delegate(.deleteSuccess))
+                )
+            ):
+                state.path.pop(from: id)
+                return .run { send in await send(.homeAction(.refreshMeetingList)) }
+
             case let .path(.element(id: id, action: .meetingEdit(.delegate(.moveToBack)))):
                 state.path.pop(from: id)
                 return .none

@@ -14,7 +14,7 @@ struct SelectOwnerFeature: ReducerProtocol {
         // MARK: - Scope State
 
         var leaveButtonDisabled: Bool = true
-        var selectedMemberId: Int?
+        var selectedMemberID: Int?
     }
 
     enum Action: Equatable {
@@ -43,7 +43,7 @@ struct SelectOwnerFeature: ReducerProtocol {
                 return .run { _ in await self.dismiss() }
 
             case .selectMember(let id):
-                state.selectedMemberId = id
+                state.selectedMemberID = id
                 state.leaveButtonDisabled = false
                 return .none
             }

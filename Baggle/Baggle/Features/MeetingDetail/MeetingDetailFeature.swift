@@ -38,7 +38,6 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
-        var nextOwnerId: Int?
 
         // Camera
         @PresentationState var usingCamera: CameraFeature.State?
@@ -53,9 +52,13 @@ struct MeetingDetailFeature: ReducerProtocol {
         case onAppear
         case notificationAppear(Int)
         
-        case handleResult(MeetingDetailResult)
+        // Meeting Detail
+        case handleDetailResult(MeetingDetailResult)
         case updateData(MeetingDetail)
+        
+        // Meeting Delete
         case deleteMeeting
+        case handleDeleteResult(MeetingDeleteResult)
 
         // button
         case deleteButtonTapped
@@ -96,6 +99,7 @@ struct MeetingDetailFeature: ReducerProtocol {
     }
 
     @Dependency(\.meetingDetailService) var meetingDetailService
+    @Dependency(\.meetingDeleteService) var meetingDeleteService
     @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
@@ -122,14 +126,14 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
                 return .run { send in
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
-                    await send(.handleResult(result))
+                    await send(.handleDetailResult(result))
                 }
                 
             case .notificationAppear(let id):
                 state.meetingId = id
                 return .run { send in await send(.onAppear) }
 
-            case .handleResult(let result):
+            case .handleDetailResult(let result):
                 state.isLoading = false
                 
                 switch result {
@@ -164,12 +168,30 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .none
 
+                // MARK: - Meeting Delete
+                
             case .deleteMeeting:
                 return .run { send in
                     // 삭제 서버 통신에 따라 분기처리
                     await send(.delegate(.deleteSuccess))
                 }
-
+                
+            case .handleDeleteResult(let result):
+                switch result {
+                case .successDelegate:
+                    state.alertType = .meetingDelegateSuccess
+                    return .none
+                case .networkError:
+                    state.alertType = .networkError("네트워크 에러")
+                    return .none
+                case .expiredToken:
+                    state.alertType = .networkError("토큰 만료")
+                    return .none
+                case .userError:
+                    state.alertType = .userError
+                    return .none
+                }
+                
                 // MARK: - Tap
 
             case .deleteButtonTapped:
@@ -191,7 +213,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
                 // 방장 혼자만 있는 경우
                 if meetingData.members.count == 1 {
-                    state.alertType = .meetingLeaveFail
+                    state.alertType = .meetingDelegateFail
                 } else {
                     state.selectOwner = SelectOwnerFeature.State()
                 }
@@ -274,10 +296,21 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Child - Delete
 
             case .selectOwner(.presented(.leaveButtonTapped)):
-                if let nextOwnerId = state.selectOwner?.selectedMemberId {
-                    state.nextOwnerId = nextOwnerId
+                guard let nextOwnerID = state.selectOwner?.selectedMemberID else {
+                    print("방장 위임 - 선택된 ID 없음")
+                    return .none
                 }
-                return .none
+                
+                guard let myMemberID = state.meetingData?.memberID else {
+                    print("방장 위임 - 모델 언래핑")
+                    return .none
+                }
+                
+                // 방장 위임
+                return .run { send in
+                    let result = await meetingDeleteService.delegateOwner(myMemberID, nextOwnerID)
+                    await send(.handleDeleteResult(result))
+                }
 
             case .selectOwner:
                 return .none
@@ -304,7 +337,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError, .invalidAuthentication, .meetingUnwrapping, .meetingLeaveFail:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping, .meetingDelegateFail:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
@@ -313,6 +346,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .meetingDelete:
                     //방 폭파
                     return .none
+                case .meetingDelegateSuccess:
+                    return .run { send in await send(.delegate(.deleteSuccess)) }
                 case .delete:
                     // 삭제 요청
                     return .none
@@ -388,7 +423,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Delegate
 
             case .delegate(.deleteSuccess):
-                state.dismiss = true
                 return .none
 
             case .delegate(.onDisappear):
