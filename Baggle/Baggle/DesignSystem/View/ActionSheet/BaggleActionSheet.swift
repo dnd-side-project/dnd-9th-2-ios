@@ -19,31 +19,32 @@ struct BaggleActionSheet<Content: View>: View {
     }
     
     var body: some View {
-        VStack(spacing: 15) {
-            Spacer()
-            
-            // 액션 버튼
-            VStack(spacing: 0) {
-                action
+        VStack {
+            if isShowing {
+                VStack(spacing: 15) {
+                    Spacer()
+                    
+                    // 액션 버튼
+                    VStack(spacing: 0) {
+                        action
+                    }
+                    .buttonStyle(ActionButtonStyle())
+                    .frame(width: UIScreen.main.bounds.width - 40)
+                    .background(.white)
+                    .cornerRadius(8)
+                    
+                    // 취소 버튼
+                    Button("닫기") {
+                        isShowing = false
+                    }
+                    .buttonStyle(CancelActionButtonStyle())
+                }
+                .transition(.move(edge: .bottom))
+                .onReceive(NotificationCenter.default.publisher(for: .actionSheetDismiss)) { _ in
+                    isShowing = false
+                }
             }
-            .buttonStyle(ActionButtonStyle())
-            .frame(width: UIScreen.main.bounds.width - 40)
-            .background(.white)
-            .cornerRadius(8)
-            
-            // 취소 버튼
-            Button("닫기") {
-                withAnimation { isShowing = false }
-            }
-            .buttonStyle(CancelActionButtonStyle())
         }
-        .opacity(isShowing ? 1 : 0)
-        .transition(.move(edge: .bottom).combined(with: .opacity))
-        .animation(.easeInOut(duration: 0.2), value: isShowing)
-        .onReceive(NotificationCenter.default.publisher(for: .actionSheetDismiss)) { _ in
-            withAnimation {
-                isShowing = false
-            }
-        }
+        .animation(.easeInOut(duration: 0.3), value: isShowing)
     }
 }
