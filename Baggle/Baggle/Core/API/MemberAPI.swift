@@ -13,6 +13,7 @@ import Moya
 enum MemberAPI {
     case fetchMeetingInfo(meetingID: Int, token: String)
     case postJoinMeeting(meetingID: Int, token: String)
+    case delegateOwner(fromMemberID: Int, toMemberID: Int, token: String)
 }
 
 extension MemberAPI: BaseAPI {
@@ -25,6 +26,7 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo: return ""
         case .postJoinMeeting: return "participation"
+        case .delegateOwner: return "delegate"
         }
     }
     
@@ -36,6 +38,8 @@ extension MemberAPI: BaseAPI {
             return HeaderType.jsonWithBearer(token: token).value
         case .postJoinMeeting(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
+        case .delegateOwner(_, _, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -45,6 +49,7 @@ extension MemberAPI: BaseAPI {
         switch self {
         case .fetchMeetingInfo: return .get
         case .postJoinMeeting: return .post
+        case .delegateOwner: return .patch
         }
     }
     
@@ -58,6 +63,9 @@ extension MemberAPI: BaseAPI {
             params["meetingId"] = meetingID
         case .postJoinMeeting(let meetingID, _):
             params["meetingId"] = meetingID
+        case let .delegateOwner(fromMemberID, toMemberID, _):
+            params["fromMemberId"] = fromMemberID
+            params["toMemberId"] = toMemberID
         }
         
         return params
@@ -69,6 +77,8 @@ extension MemberAPI: BaseAPI {
             return ParameterEncodingWithNoSlash.init()
         case .postJoinMeeting:
             return JSONEncoding.default
+        case .delegateOwner:
+            return ParameterEncodingWithNoSlash.init()
         }
     }
     
@@ -77,11 +87,20 @@ extension MemberAPI: BaseAPI {
     var task: Task {
         switch self {
         case .fetchMeetingInfo:
-            return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: parameterEncoding)
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: parameterEncoding
+            )
         case .postJoinMeeting:
-            return .requestParameters(parameters: bodyParameters ?? [:],
-                                      encoding: parameterEncoding)
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: parameterEncoding
+            )
+        case .delegateOwner:
+            return .requestParameters(
+                parameters: bodyParameters ?? [:],
+                encoding: parameterEncoding
+            )
         }
     }
 }

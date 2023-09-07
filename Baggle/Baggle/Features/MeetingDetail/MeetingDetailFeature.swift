@@ -177,6 +177,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 
             case .handleDeleteResult(let result):
+                state.isLoading = false
+
                 switch result {
                 case .successDelegate:
                     state.alertType = .meetingDelegateSuccess
@@ -296,7 +298,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Child - Delete
 
             case .selectOwner(.presented(.leaveButtonTapped)):
-                guard let nextOwnerID = state.selectOwner?.selectedMemberID else {
+                guard let toMemberID = state.selectOwner?.selectedMemberID else {
                     print("방장 위임 - 선택된 ID 없음")
                     return .none
                 }
@@ -305,10 +307,15 @@ struct MeetingDetailFeature: ReducerProtocol {
                     print("방장 위임 - 모델 언래핑")
                     return .none
                 }
+
+                state.isLoading = true
                 
                 // 방장 위임
                 return .run { send in
-                    let result = await meetingDeleteService.delegateOwner(myMemberID, nextOwnerID)
+                    print("*****")
+                    print(myMemberID, toMemberID)
+                    print("*****")
+                    let result = await meetingDeleteService.delegateOwner(myMemberID, toMemberID)
                     await send(.handleDeleteResult(result))
                 }
 

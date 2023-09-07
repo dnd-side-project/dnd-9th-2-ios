@@ -15,10 +15,27 @@ struct MeetingDeleteService {
 
 extension MeetingDeleteService: DependencyKey {
     
-    static var liveValue = Self { fromMemberID, toMemberID in
-        return .successDelegate
-    }
+    static let networkService = NetworkService<MemberAPI>()
     
+    static var liveValue = Self { fromMemberID, toMemberID in
+        do {
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .userError
+            }
+            
+            try await networkService.requestWithNoResult(
+                .delegateOwner(
+                    fromMemberID: fromMemberID,
+                    toMemberID: toMemberID,
+                    token: accessToken
+                )
+            )
+            
+            return .successDelegate
+        } catch {
+            return .networkError
+        }
+    }
 }
 
 extension DependencyValues {
