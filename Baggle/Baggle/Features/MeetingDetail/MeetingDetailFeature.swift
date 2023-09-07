@@ -19,15 +19,19 @@ struct MeetingDetailFeature: ReducerProtocol {
         // View
         var isLoading: Bool = false
         
+        // Alert
+        var isAlertPresented: Bool = false
+        var alertType: AlertMeetingDetailType?
+        
+        // Action Sheet
+        var isActionSheetPresented: Bool = false
+
         // Meeting
 
         var meetingId: Int
         var meetingData: MeetingDetail?
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
-
-        // Alert
-        var alertType: AlertMeetingDetailType?
         
         // Feed
         var isImageTapped: Bool = false
@@ -75,8 +79,11 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // Alert
         case presentAlert(Bool)
-        case presentInvitationAlert
+        case alertTypeChanged(AlertMeetingDetailType)
         case alertButtonTapped
+        
+        // ActionSheet
+        case presentActionSheet(Bool)
         
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
@@ -119,8 +126,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 let meetingID = state.meetingId
                 
                 if meetingID == Const.ErrorID.meeting {
-                    state.alertType = .meetingIDError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingIDError))}
                 }
                 state.isLoading = true
                 
@@ -140,14 +146,11 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case let .success(meetingDetail):
                     return .run { send in await send(.updateData(meetingDetail)) }
                 case .notFound:
-                    state.alertType = .meetingNotFound
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingNotFound))}
                 case .userError:
-                    state.alertType = .userError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.userError))}
                 case .networkError(let description):
-                    state.alertType = .networkError(description)
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.networkError(description)))}
                 }
                 
             case .updateData(let data):
@@ -181,41 +184,36 @@ struct MeetingDetailFeature: ReducerProtocol {
 
                 switch result {
                 case .successDelegate:
-                    state.alertType = .meetingDelegateSuccess
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingDelegateSuccess))}
                 case .networkError:
-                    state.alertType = .networkError("네트워크 에러")
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.networkError("네트워크 에러")))}
                 case .expiredToken:
-                    state.alertType = .networkError("토큰 만료")
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.networkError("토큰 만료")))}
                 case .userError:
-                    state.alertType = .userError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.userError))}
                 }
                 
                 // MARK: - Tap
 
             case .deleteButtonTapped:
-                state.alertType = .meetingDelete
-                return .none
+                return .run { send in await send(.alertTypeChanged(.meetingDelete))}
                 
             case .editButtonTapped:
                 guard let meetingEdit = state.meetingData?.toMeetingEdit() else {
-                    state.alertType = .meetingUnwrapping
-                    return .none // 실패시 MeetingDetail에서 Date생성하는 함수를 확인할 것
+                    // 실패시 MeetingDetail에서 Date생성하는 함수를 확인할 것
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
             case .leaveButtonTapped:
+                
                 guard let meetingData = state.meetingData else {
-                    state.alertType = .meetingUnwrapping
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 
                 // 방장 혼자만 있는 경우
                 if meetingData.members.count == 1 {
-                    state.alertType = .meetingDelegateFail
+                    return .run { send in await send(.alertTypeChanged(.meetingDelegateFail))}
                 } else {
                     state.selectOwner = SelectOwnerFeature.State()
                 }
@@ -227,8 +225,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
             case .cameraButtonTapped:
                 guard let meetingData = state.meetingData else {
-                    state.alertType = .meetingUnwrapping
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 
                 let memberID = meetingData.memberID
@@ -240,14 +237,13 @@ struct MeetingDetailFeature: ReducerProtocol {
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {
-                    state.alertType = .invalidAuthentication
+                    return .run { send in await send(.alertTypeChanged(.invalidAuthentication))}
                 }
                 return .none
 
             case .emergencyButtonTapped:
                 guard let meetingData = state.meetingData else {
-                    state.alertType = .meetingUnwrapping
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 
                 let memberID = meetingData.memberID
@@ -312,9 +308,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
                 // 방장 위임
                 return .run { send in
-                    print("*****")
-                    print(myMemberID, toMemberID)
-                    print("*****")
                     let result = await meetingDeleteService.delegateOwner(myMemberID, toMemberID)
                     await send(.handleDeleteResult(result))
                 }
@@ -329,10 +322,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if !isPresented {
                     state.alertType = nil
                 }
+                state.isAlertPresented = isPresented
                 return .none
-                
-            case .presentInvitationAlert:
-                state.alertType = .invitation
+
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
                 return .none
 
             case .alertButtonTapped:
@@ -360,12 +355,16 @@ struct MeetingDetailFeature: ReducerProtocol {
                     return .none
                 }
 
+                // Action Sheet
+            case .presentActionSheet(let isPresented):
+                state.isActionSheetPresented = isPresented
+                return .none
+                
                 // Child - Camera
 
             case let .usingCamera(.presented(.delegate(.uploadSuccess(feed)))):
                 guard let meetingData = state.meetingData else {
-                    state.alertType = .meetingNotFound
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingNotFound))}
                 }
                 
                 // 피드 & 멤버 데이터 업데이트
@@ -418,7 +417,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     state.timerState.timerCount = emergencyButtonActiveTime.authenticationTimeout()
                 } else {
-                    state.alertType = .meetingUnwrapping
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 
                 // button의 onAppear 때 타이머 시작이 되기 때문에, 타이머 시간을 설정하고 버튼이 나타나야함

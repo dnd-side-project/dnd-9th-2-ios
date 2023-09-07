@@ -103,21 +103,21 @@ extension View {
     }
 }
 
-// MARK: - Error Alert
+// MARK: - Alert
 
 extension View {
-    func errorAlert(
+    func baggleAlert (
         isPresented: Binding<Bool>,
-        description: String,
+        alertType: AlertType?,
         action: @escaping () -> Void
     ) -> some View {
-        BaggleAlertOneButton(
-            isPresented: isPresented,
-            title: "에러가 발생했어요",
-            description: description,
-            buttonTitle: "돌아가기") {
-                action()
-            }
+        ZStack {
+            self
+            
+            ShadeView(isPresented: isPresented, enableTouch: false)
+            
+            BaggleAlert(isPresented: isPresented, alertType: alertType, action: action)
+        }
     }
 }
 
@@ -130,14 +130,13 @@ extension View {
     ) -> some View {
         ZStack {
             self
-            if isPresented.wrappedValue {
-                ShadeView(isPresented: isPresented)
-                
-                BaggleActionSheet(isShowing: isPresented, action: content)
-            }
+            
+            ShadeView(isPresented: isPresented)
+            
+            BaggleActionSheet(isShowing: isPresented, action: content)
         }
     }
-    
+
     func addAction(_ action: @escaping () -> Void, role: ButtonRole? = nil) -> Button<Self> {
         Button(role: role) {
             action()

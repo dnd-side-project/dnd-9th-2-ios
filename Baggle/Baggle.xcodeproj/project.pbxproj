@@ -29,6 +29,9 @@
 		141719762A9302C000AF1C51 /* SplashScreen_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 141719752A9302C000AF1C51 /* SplashScreen_animation.json */; };
 		141D376F2A681552001067E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D376E2A681552001067E3 /* MainTabView.swift */; };
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
+		141E8CF32AA8A8E000054EDA /* BaggleAlertOneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF22AA8A8E000054EDA /* BaggleAlertOneButton.swift */; };
+		141E8CF52AA8A95700054EDA /* BaggleAlertTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF42AA8A95700054EDA /* BaggleAlertTwoButton.swift */; };
+		141E8CF72AA8A9BD00054EDA /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */; };
 		141FD7632A8CF609003DBFD7 /* MeetingSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */; };
 		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
 		14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283FCE2A8DA32B00FE56F1 /* Moya+.swift */; };
@@ -190,7 +193,6 @@
 		2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */; };
 		2B7EC32F2A8251DC00D78141 /* HomeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */; };
 		2B7EC3322A826F4D00D78141 /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */; };
-		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
 		2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469642A6E7AE200D75D32 /* ShadeView.swift */; };
@@ -271,6 +273,9 @@
 		141719752A9302C000AF1C51 /* SplashScreen_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen_animation.json; sourceTree = "<group>"; };
 		141D376E2A681552001067E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
+		141E8CF22AA8A8E000054EDA /* BaggleAlertOneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlertOneButton.swift; sourceTree = "<group>"; };
+		141E8CF42AA8A95700054EDA /* BaggleAlertTwoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlertTwoButton.swift; sourceTree = "<group>"; };
+		141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSuccessModel.swift; sourceTree = "<group>"; };
 		1421C0502A7A84A200C20497 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		14283FCE2A8DA32B00FE56F1 /* Moya+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+.swift"; sourceTree = "<group>"; };
@@ -431,7 +436,6 @@
 		2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatus.swift; sourceTree = "<group>"; };
 		2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
-		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
 		2B8469642A6E7AE200D75D32 /* ShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
@@ -1609,7 +1613,9 @@
 		2B84695E2A6E7AE200D75D32 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */,
+				141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */,
+				141E8CF22AA8A8E000054EDA /* BaggleAlertOneButton.swift */,
+				141E8CF42AA8A95700054EDA /* BaggleAlertTwoButton.swift */,
 				14EA20B82A8DBFBD005C1289 /* RightAlertButtonType.swift */,
 			);
 			path = Alert;
@@ -1980,6 +1986,7 @@
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
 				2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
+				141E8CF52AA8A95700054EDA /* BaggleAlertTwoButton.swift in Sources */,
 				2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				143C7BFE2A875508004D83FD /* WithdrawServiceResult.swift in Sources */,
@@ -2002,6 +2009,7 @@
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				14486D2C2A8B0C7400831DDD /* DateFormatter+.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
+				141E8CF72AA8A9BD00054EDA /* BaggleAlert.swift in Sources */,
 				146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */,
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
@@ -2038,6 +2046,7 @@
 				14EF8C242A8CAC5B00B0FA40 /* FeedUser.swift in Sources */,
 				2B7B4D812A853ED300283248 /* FeedAPI.swift in Sources */,
 				14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */,
+				141E8CF32AA8A8E000054EDA /* BaggleAlertOneButton.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
 				14EA20BC2A8DCBCD005C1289 /* AlertCameraType.swift in Sources */,
 				14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */,
@@ -2059,7 +2068,6 @@
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
 				147E40EE2AA03BB90044698B /* MeetingDateButton.swift in Sources */,
-				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				147E40F52AA0454F0044698B /* MeetingEditFeature.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
