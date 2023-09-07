@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum HomeServiceResult {
+enum MeetingListServiceResult {
     case success(HomeMeetingList)
-    case fail(APIError)
+    case networkError(String)
+    case userError
 }

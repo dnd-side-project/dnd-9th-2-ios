@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingListService {
-    var fetchMeetingList: (_ requestModel: HomeRequestModel) async -> HomeServiceResult
+    var fetchMeetingList: (_ requestModel: HomeRequestModel) async -> MeetingListServiceResult
 }
 
 extension MeetingListService: DependencyKey {
@@ -20,23 +20,22 @@ extension MeetingListService: DependencyKey {
     static var liveValue = Self { requestModel in
         do {
             guard let accessToken = UserManager.shared.accessToken else {
-                return .fail(.network)
+                return .userError
             }
             let data: HomeEntity = try await networkService.request(
                 .meetingList(requestModel: requestModel, token: accessToken)
             )
             return .success(data.toDomain())
-        } catch let error {
+        } catch {
             print("❌ MeetingListService - error: \(error)")
-            return .fail(.network)
+            return .networkError(error.localizedDescription)
         }
     }
 }
 
 extension DependencyValues {
-    var meetingService: MeetingListService {
+    var meetingListService: MeetingListService {
         get { self[MeetingListService.self] }
         set { self[MeetingListService.self] = newValue }
     }
 }
-

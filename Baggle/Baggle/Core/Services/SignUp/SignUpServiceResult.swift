@@ -9,7 +9,7 @@ import Foundation
 
 enum SignUpServiceResult {
     case success
-    case fail(APIError)
     case nicknameDuplicated
-    case keyChainError
+    case networkError(String)
+    case userError
 }

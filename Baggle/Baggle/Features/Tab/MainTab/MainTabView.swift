@@ -67,37 +67,15 @@ struct MainTabView: View {
                         }
                         .tag(TapType.myPage)
                     }
-                    
-                    if let alertType = viewStore.alertType {
-                        if alertType.buttonType == .one {
-                            BaggleAlertOneButton(
-                                isPresented: Binding(
-                                    get: { viewStore.alertType != nil },
-                                    set: { viewStore.send(.presentAlert($0)) }
-                                ),
-                                title: alertType.title,
-                                description: alertType.description,
-                                buttonTitle: alertType.buttonTitle
-                            ) {
-                                viewStore.send(.alertButtonTapped)
-                            }
-                        } else if alertType.buttonType == .two {
-                            BaggleAlertTwoButton(
-                                isPresented: Binding(
-                                    get: { viewStore.alertType != nil },
-                                    set: { viewStore.send(.presentAlert($0)) }
-                                ),
-                                title: alertType.title,
-                                description: alertType.description,
-                                alertType: alertType.rightButtonType,
-                                rightButtonTitle: alertType.buttonTitle,
-                                leftButtonAction: nil
-                            ) {
-                                viewStore.send(.alertButtonTapped)
-                            }
-                        }
-                    }
                 }
+                .baggleAlert(
+                    isPresented: viewStore.binding(
+                        get: { $0.isAlertPresented },
+                        send: { MainTabFeature.Action.presentAlert($0) }
+                    ),
+                    alertType: viewStore.alertType,
+                    action: { viewStore.send(.alertButtonTapped) }
+                )
                 .tint(.black)
                 .fullScreenCover(
                     store: self.store.scope(

@@ -37,6 +37,11 @@ struct SignUpFeature: ReducerProtocol {
             textFieldState: .inactive
         )
 
+        // MARK: - Alert
+        
+        var isAlertPresented: Bool = false
+        var alertType: AlertSignUpType?
+        
         // MARK: - Child State
 
         var path = StackState<SignUpSuccessFeature.State>()
@@ -73,6 +78,12 @@ struct SignUpFeature: ReducerProtocol {
         case requestSignUp(SignUpRequestModel)
         case networkLoading(Bool)
 
+        // MARK: - Alert
+
+        case presentAlert(Bool)
+        case alertTypeChanged(AlertSignUpType)
+        case alertButtonTapped
+        
         // MARK: - Child Action
 
         case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
@@ -216,11 +227,10 @@ struct SignUpFeature: ReducerProtocol {
                         await send(.moveToSignUpSuccess)
                     case .nicknameDuplicated:
                         await send(.textFieldAction(.changeState(.invalid("중복되는 닉네임이 있습니다."))))
-                    case .fail:
-                        // Alert으로 변경 필요
-                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다."))))
-                    case .keyChainError:
-                        print("key 체인 에러") // Alert으로 변경 필요
+                    case .networkError(let description):
+                        await send(.alertTypeChanged(.networkError(description)))
+                    case .userError:
+                        await send(.alertTypeChanged(.userError))
                     }
                 }
 
@@ -228,6 +238,32 @@ struct SignUpFeature: ReducerProtocol {
                 state.isLoading = isLoading
                 return .none
 
+                // MARK: - Alert
+
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
+                return .none
+            
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+            
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .networkError, .userError:
+                    return .none
+                }
+                
+                
                 // MARK: - Child Action
 
             case let .path(.element(id: id, action: .delegate(.moveToHome))):

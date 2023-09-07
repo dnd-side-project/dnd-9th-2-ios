@@ -60,10 +60,11 @@ struct HomeFeature: ReducerProtocol {
         enum Delegate: Equatable {
             case moveToLogin
             case moveToMeetingDetail(Int)
+            case alert(AlertHomeType)
         }
     }
     
-    @Dependency(\.meetingService) var meetingService
+    @Dependency(\.meetingListService) var meetingListService
 
     var body: some ReducerProtocolOf<Self> {
 
@@ -113,12 +114,14 @@ struct HomeFeature: ReducerProtocol {
                 let page = (status == .scheduled) ? state.progressIndex : state.completedIndex
                 let requestModel = HomeRequestModel(status: status, page: page, size: state.size)
                 return .run { send in
-                    let result = await meetingService.fetchMeetingList(requestModel)
+                    let result = await meetingListService.fetchMeetingList(requestModel)
                     switch result {
                     case .success(let data):
                         await send(.updateMeetingList(status, data))
-                    case .fail:
+                    case .networkError:
                         await send(.changeHomeStatus(.error))
+                    case .userError:
+                        await send(.delegate(.alert(.userError)))
                     }
                 }
 
@@ -135,12 +138,14 @@ struct HomeFeature: ReducerProtocol {
                 state.requestedCompletedIndex.removeAll()
                 let requestModel = HomeRequestModel(status: .scheduled, page: 0, size: state.size)
                 return .run { send in
-                    let result = await meetingService.fetchMeetingList(requestModel)
+                    let result = await meetingListService.fetchMeetingList(requestModel)
                     switch result {
                     case .success(let data):
                         await send(.updateMeetingList(.scheduled, data))
-                    case .fail:
+                    case .networkError:
                         await send(.changeHomeStatus(.error))
+                    case .userError:
+                        await send(.delegate(.alert(.userError)))
                     }
                 }
 

@@ -15,7 +15,6 @@ struct SignUpSuccessFeature: ReducerProtocol {
     enum Action: Equatable {
         case nextButtonTapped
         case signUpSuccess
-        case signUpFailed
 
         case delegate(Delegate)
 
@@ -39,10 +38,6 @@ struct SignUpSuccessFeature: ReducerProtocol {
                 return .run { send in
                     await send(.delegate(.moveToHome))
                 }
-
-            case .signUpFailed:
-                // todo: 실패 Alert
-                return .none
 
             case .delegate:
                 return .none

@@ -35,17 +35,15 @@ extension LoginService: DependencyKey {
             
             return .success
         } catch let error {
-            print("LoginService - error: \(error)")
-            guard let error = error as? APIError else { return .fail(.network) }
-            
-            if error == .notFound {
-                return .requireSignUp
-            } else if error == .unauthorized {
-                // 리프레시 토큰으로 재로그인 요청
-                return .fail(.network)
-            } else {
-                return .fail(.network)
+            if let apiError = error as? APIError {
+                if apiError == .notFound {
+                    return .requireSignUp
+                }
+            } else if let userError = error as? KeyChainError {
+                return .userError
             }
+            
+            return .networkError(error.localizedDescription)
         }
     } kakaoLogin: {
         return try await withCheckedThrowingContinuation({ (continuation: TokenContinuation) in

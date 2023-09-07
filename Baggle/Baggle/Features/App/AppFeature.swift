@@ -45,7 +45,7 @@ struct AppFeature: ReducerProtocol {
 
             // Login Feature
 
-            case .login(.loginSuccess):
+            case .login(.delegate(.moveToMainTab)):
                 state.isLoggedIn = true
                 return .none
 
