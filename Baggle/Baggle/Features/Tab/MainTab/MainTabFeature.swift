@@ -160,7 +160,7 @@ struct MainTabFeature: ReducerProtocol {
                 case .networkError:
                     return .none
                 case .userError:
-                    return .none
+                    return .run { send in await send(.delegate(.moveToLogin)) }
                 }
                 
                 // MARK: - Child Action
@@ -176,6 +176,13 @@ struct MainTabFeature: ReducerProtocol {
                     )
                 )
                 return .none
+                
+            case .homeAction(.delegate(.alert(let alertHomeType))):
+                switch alertHomeType {
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError))}
+                }
+                
                 
             case .homeAction:
                 return .none
