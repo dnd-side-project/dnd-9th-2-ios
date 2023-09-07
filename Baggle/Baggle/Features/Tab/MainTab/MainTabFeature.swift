@@ -12,10 +12,13 @@ import ComposableArchitecture
 struct MainTabFeature: ReducerProtocol {
 
     struct State: Equatable {
+        
         var selectedTab: TapType = .home
         var previousTab: TapType = .home
+        var isLoading: Bool = false
         
         // MARK: - Child State
+        
         var homeFeature: HomeFeature.State
         var myPageFeature: MyPageFeature.State
         
@@ -23,12 +26,12 @@ struct MainTabFeature: ReducerProtocol {
         @PresentationState var joinMeeting: JoinMeetingFeature.State?
         
         // MARK: - Alert
+        
+        var isAlertPresented: Bool = false
         var alertType: AlertMainTabType?
         
-        var isLoading: Bool = false
-        
-        
         // MARK: - Navigation Stack
+        
         var path = StackState<Child.State>()
     }
 
@@ -38,7 +41,14 @@ struct MainTabFeature: ReducerProtocol {
 
         case selectTab(TapType)
 
+        // MARK: - Alert
+        
+        case presentAlert(Bool)
+        case alertTypeChanged(AlertMainTabType)
+        case alertButtonTapped
+        
         // MARK: - Child Action
+        
         case homeAction(HomeFeature.Action)
         case myPageAction(MyPageFeature.Action)
         
@@ -47,10 +57,6 @@ struct MainTabFeature: ReducerProtocol {
         case changeJoinMeetingResult(Int, JoinMeetingResult)
         case joinMeeting(PresentationAction<JoinMeetingFeature.Action>)
         case moveToJoinMeeting(Int, JoinMeetingResult)
-        
-        // MARK: - Alert
-        case presentAlert(Bool)
-        case alertButtonTapped
         
         case withdrawResult(WithdrawServiceResult)
         case logoutResult(LogoutServiceResult)
@@ -120,6 +126,43 @@ struct MainTabFeature: ReducerProtocol {
                 state.selectedTab = tabType
                 return .none
 
+                // MARK: - Alert
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
+                return .none
+            
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+            
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .logout:
+                    return .run { send in
+                        let result = await logoutService.logout()
+                        await send(.logoutResult(result))
+                    }
+                case .withdraw:
+                    return .run { send in
+                        let result = await withdrawService.withdraw()
+                        await send(.withdrawResult(result))
+                    }
+                case .networkError:
+                    return .none
+                case .userError:
+                    return .none
+                }
+                
                 // MARK: - Child Action
 
                 // 홈
@@ -161,64 +204,24 @@ struct MainTabFeature: ReducerProtocol {
                 return .run { send in await send(.delegate(.moveToLogin))}
                 
             case .myPageAction(.delegate(.presentLogout)):
-                state.alertType = .logout
-                return .none
+                return .run { send in await send(.alertTypeChanged(.logout))}
                 
             case .myPageAction(.delegate(.presentWithdraw)):
-                state.alertType = .withdraw
-                return .none
+                return .run { send in await send(.alertTypeChanged(.withdraw))}
 
             case .myPageAction:
                 return.none
                 
-            case .presentAlert(let isPresented):
-                if !isPresented {
-                    state.alertType = nil
-                }
-                return .none
-                
-            case .alertButtonTapped:
-                guard let alertType = state.alertType else { return .none }
-                state.alertType = nil
-                state.isLoading = true
-                
-                switch alertType {
-                case .logout:
-                    return .run { send in
-                        let logoutStatus = await logoutService.logout()
-                        await send(.logoutResult(logoutStatus))
-                    }
-                case .withdraw:
-                    return .run { send in
-                        let widthdrawStatus = await withdrawService.withdraw()
-                        await send(.withdrawResult(widthdrawStatus))
-                    }
-                case .networkError:
-                    return .none
-                case .error:
-                    return .none
-                case .keychainError:
-                    return .none
-                }
-                
-            case let .logoutResult(status):
+            case .logoutResult(let result):
                 state.isLoading = false
-                switch status {
+                switch result {
                 case .success:
-                    print("성공")
-                    return .run { send in await send(.delegate(.moveToLogin)) }
-                case .fail(let apiError):
-                    if apiError == .network {
-                        state.alertType = .networkError
-                    } else {
-                        state.alertType = .error(apiError)
-                    }
-                    print("API Error \(apiError)")
-                case .keyChainError:
-                    state.alertType = .keychainError
-                    print("키체인 에러")
+                    return .run { send in await send(.delegate(.moveToLogin))}
+                case .networkError(let description):
+                    return .run { send in await send(.alertTypeChanged(.networkError(description)))}
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError))}
                 }
-                return .none
                 
             case let .withdrawResult(status):
                 state.isLoading = false
@@ -226,18 +229,11 @@ struct MainTabFeature: ReducerProtocol {
                 case .success:
                     print("성공")
                     return .run { send in await send(.delegate(.moveToLogin)) }
-                case let .fail(apiError):
-                    if apiError == .network {
-                        state.alertType = .networkError
-                    } else {
-                        state.alertType = .error(apiError)
-                    }
-                    print("API Error \(apiError)")
-                case .keyChainError:
-                    state.alertType = .keychainError
-                    print("키체인 에러")
+                case .networkError(let description):
+                    return .run { send in await send(.alertTypeChanged(.networkError(description)))}
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError)) }
                 }
-                return .none
                 
             case .enterJoinMeeting(let id):
                 return .run { send in

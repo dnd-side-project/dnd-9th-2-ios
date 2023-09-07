@@ -9,5 +9,5 @@ import Foundation
 
 enum AlertButtonType: Equatable {
     case one
-    case two
+    case two(RightAlertButtonType)
 }
