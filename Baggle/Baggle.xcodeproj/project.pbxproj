@@ -106,6 +106,7 @@
 		1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9172A7E01D800A2D7CC /* Int+.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
+		14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */; };
 		14B55AE72A9346C100EE2461 /* Task+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55AE62A9346C100EE2461 /* Task+.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
@@ -347,6 +348,7 @@
 		1493A9172A7E01D800A2D7CC /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
+		14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSignUpType.swift; sourceTree = "<group>"; };
 		14B55AE62A9346C100EE2461 /* Task+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+.swift"; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -1150,6 +1152,30 @@
 			path = HomeList;
 			sourceTree = "<group>";
 		};
+		14ACEBBA2AA98D5500FFFE21 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				14EA20B42A8DB65F005C1289 /* MeetingDetail */,
+				14EA20AF2A8DAB13005C1289 /* CreateMeeting */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		14ACEBBB2AA98D8500FFFE21 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		14ACEBBC2AA98D8B00FFFE21 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		14B7A0422A753DA500B8E202 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,12 +1381,11 @@
 			isa = PBXGroup;
 			children = (
 				14EA20B52A8DBC4C005C1289 /* Common */,
-				2B42A5812AA4A1BF00E97CB1 /* Tab */,
 				2B437FBB2A93B693004DC68E /* JoinMeeting */,
-				14EA20AF2A8DAB13005C1289 /* CreateMeeting */,
-				14EA20B42A8DB65F005C1289 /* MeetingDetail */,
-				14EA20BA2A8DCBB9005C1289 /* Camera */,
-				141719702A92EB3000AF1C51 /* Emergency */,
+				14ACEBBB2AA98D8500FFFE21 /* Login */,
+				14ACEBBC2AA98D8B00FFFE21 /* SignUp */,
+				2B42A5812AA4A1BF00E97CB1 /* Tab */,
+				14ACEBBA2AA98D5500FFFE21 /* Home */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1376,6 +1401,8 @@
 		14EA20B42A8DB65F005C1289 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
+				14EA20BA2A8DCBB9005C1289 /* Camera */,
+				141719702A92EB3000AF1C51 /* Emergency */,
 				14EA20B22A8DB65E005C1289 /* AlertMeetingDetailType.swift */,
 			);
 			path = MeetingDetail;
@@ -2016,6 +2043,7 @@
 				147E813A2A8A3924008B9B06 /* MeetingDetailResult.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
+				14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */,
