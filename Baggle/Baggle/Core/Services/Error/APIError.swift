@@ -25,7 +25,6 @@ enum APIError: Error, Equatable {
     case jsonEncodingError // Encoding 에러
     case unwrapping // 데이터가 있어야 할 곳에 nil이 옴
     case providerRequest // Moya Provider Request시 에러
-    case authorizeRenewed // 토큰 갱신, 다시 요청하도록
 }
 
 extension APIError: LocalizedError {
@@ -48,7 +47,6 @@ extension APIError: LocalizedError {
         case .jsonEncodingError: return "인코딩 에러"
         case .unwrapping: return "데이터 빈 값"
         case .providerRequest: return "네트워크 요청 생성 에러"
-        case .authorizeRenewed: return "토큰 갱신되었습니다. 다시 요청해주세요."
         }
     }
 }

@@ -51,58 +51,54 @@ extension NetworkService {
     }
     
     func request<T: Decodable>(_ target: API) async throws -> T {
-        try await _Concurrency.Task.retrying {
-            let data = try await self.provider.request(target)
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
-            guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
-                throw APIError.decoding
+        let data = try await self.provider.request(target)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+        guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
+            throw APIError.decoding
+        }
+        
+        let statusCode = body.status
+        let message = body.message
+        
+        switch statusCode {
+        case 200, 201:
+            guard let data = body.data else {
+                throw APIError.unwrapping
             }
-            
-            let statusCode = body.status
-            let message = body.message
-            
-            switch statusCode {
-            case 200, 201:
-                guard let data = body.data else {
-                    throw APIError.unwrapping
-                }
-                print("✅ data: \(data)")
-                return data
-            case 400..<500:
-                throw await self.handleError400(statusCode: statusCode, message: message)
-            case 500:
-                throw APIError.server
-            default:
-                throw APIError.network
-            }
-        }.value
+            print("✅ data: \(data)")
+            return data
+        case 400..<500:
+            throw await self.handleError400(statusCode: statusCode, message: message)
+        case 500:
+            throw APIError.server
+        default:
+            throw APIError.network
+        }
     }
     
     func requestWithNoResult(_ target: API) async throws {
-        try await _Concurrency.Task.retrying {
-            let data = try await self.provider.request(target)
-            
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
-            guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
-                throw APIError.decoding
-            }
-            
-            let statusCode = body.status
-            let message = body.message
-            
-            switch statusCode {
-            case 200, 201:
-                return
-            case 400..<500:
-                throw await self.handleError400(statusCode: statusCode, message: message)
-            case 500:
-                throw APIError.server
-            default:
-                throw APIError.network
-            }
-        }.value
+        let data = try await self.provider.request(target)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
+        guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
+            throw APIError.decoding
+        }
+        
+        let statusCode = body.status
+        let message = body.message
+        
+        switch statusCode {
+        case 200, 201:
+            return
+        case 400..<500:
+            throw await self.handleError400(statusCode: statusCode, message: message)
+        case 500:
+            throw APIError.server
+        default:
+            throw APIError.network
+        }
     }
     
     private func handleError400(statusCode: Int, message: String) async -> APIError {
@@ -113,12 +109,7 @@ extension NetworkService {
             }
             return APIError.badRequest
         case 401:
-            let result = await refreshService.refresh()
-            switch result {
-            case .success: return APIError.authorizeRenewed
-            case .fail: return APIError.unauthorized
-            case .keyChainError: return APIError.unauthorized
-            }
+            return .unauthorized
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
                 return APIError.duplicatedMeeting

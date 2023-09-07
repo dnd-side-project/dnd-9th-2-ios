@@ -7,6 +7,8 @@
 
 import Foundation
 
+import ComposableArchitecture
+
 extension Task where Success == Never, Failure == Never {
     static func sleep(seconds: Double) async throws {
         let duration = UInt64(seconds * 1_000_000_000)
@@ -23,10 +25,17 @@ extension Task where Failure == Error {
         operation: @Sendable @escaping () async throws -> Success
     ) -> Task {
         Task(priority: priority) {
+            @Dependency(\.tokenRefreshService) var refreshService
+            
             for _ in 0..<maxRetryCount {
                 do {
                     return try await operation()
                 } catch {
+                    if let error = error as? APIError {
+                        if error == .unauthorized {
+                            if await refreshService.refresh() == .success { continue }
+                        }
+                    }
                     print("✅ retrying")
                     try await Task<Never, Never>.sleep(seconds: retryDelay)
                     continue

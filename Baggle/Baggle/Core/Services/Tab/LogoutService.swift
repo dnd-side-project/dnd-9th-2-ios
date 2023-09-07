@@ -8,7 +8,6 @@
 import Foundation
 
 import ComposableArchitecture
-import Moya
 
 struct LogoutService {
     var logout: () async -> LogoutServiceResult

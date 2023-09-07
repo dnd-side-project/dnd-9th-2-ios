@@ -34,6 +34,7 @@ extension TokenRefreshService: DependencyKey {
             
             return .success
         } catch {
+            print("🚨 error: \(error)")
             return .fail
         }
     }
