@@ -1,5 +1,5 @@
 //
-//  RefreshService.swift
+//  TokenRefreshService.swift
 //  Baggle
 //
 //  Created by 양수빈 on 2023/09/05.
@@ -10,11 +10,11 @@ import Foundation
 import ComposableArchitecture
 import Moya
 
-struct RefreshService {
+struct TokenRefreshService {
     var refresh: () async -> RefreshServiceResult
 }
 
-extension RefreshService: DependencyKey {
+extension TokenRefreshService: DependencyKey {
     
     static let networkService = NetworkService<UserAPI>()
     
@@ -25,7 +25,7 @@ extension RefreshService: DependencyKey {
             guard let refreshToken = UserManager.shared.refreshToken else { return .keyChainError }
             guard let user = UserManager.shared.user else { return .keyChainError }
             
-            let data: RefreshEntity = try await networkService.request(
+            let data: TokenRefreshEntity = try await networkService.request(
                 .reissue(token: refreshToken)
             )
             let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
@@ -40,8 +40,8 @@ extension RefreshService: DependencyKey {
 }
 
 extension DependencyValues {
-    var refreshService: RefreshService {
-        get { self[RefreshService.self] }
-        set { self[RefreshService.self] = newValue }
+    var tokenRefreshService: TokenRefreshService {
+        get { self[TokenRefreshService.self] }
+        set { self[TokenRefreshService.self] = newValue }
     }
 }

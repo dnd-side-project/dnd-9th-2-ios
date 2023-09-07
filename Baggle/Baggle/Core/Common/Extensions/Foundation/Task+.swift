@@ -28,9 +28,7 @@ extension Task where Failure == Error {
                     return try await operation()
                 } catch {
                     print("✅ retrying")
-                    let oneSecond = TimeInterval(1_000_000_000)
-                    let delay = UInt64(oneSecond * retryDelay)
-                    try await Task<Never, Never>.sleep(nanoseconds: delay)
+                    try await Task<Never, Never>.sleep(seconds: retryDelay)
                     continue
                 }
             }
