@@ -155,6 +155,9 @@
 		14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6D9FB2A80748600C8C19C /* Image+.swift */; };
 		14F6D9FE2A807E5B00C8C19C /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6D9FD2A807E5B00C8C19C /* Color+.swift */; };
 		14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7B0952A7BABC30068B1E4 /* BubbleType.swift */; };
+		2B0EC3622AA6C6430033C47F /* TokenRefreshService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EC3612AA6C6420033C47F /* TokenRefreshService.swift */; };
+		2B0EC3652AA6F35A0033C47F /* TokenRefreshEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EC3642AA6F35A0033C47F /* TokenRefreshEntity.swift */; };
+		2B0EC3682AA6F3930033C47F /* RefreshServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EC3672AA6F3930033C47F /* RefreshServiceResult.swift */; };
 		2B2191DB2A925D5300F72570 /* HomeRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2191DA2A925D5300F72570 /* HomeRequestModel.swift */; };
 		2B2AFF832A8BD3920028C96F /* EmergencyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */; };
 		2B2AFF882A8BE05D0028C96F /* EmergencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2AFF872A8BE05D0028C96F /* EmergencyService.swift */; };
@@ -400,6 +403,9 @@
 		14F6D9FD2A807E5B00C8C19C /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		14F7B0952A7BABC30068B1E4 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
 		2B0A07352A7171F700BA4182 /* Baggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Baggle.entitlements; sourceTree = "<group>"; };
+		2B0EC3612AA6C6420033C47F /* TokenRefreshService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshService.swift; sourceTree = "<group>"; };
+		2B0EC3642AA6F35A0033C47F /* TokenRefreshEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshEntity.swift; sourceTree = "<group>"; };
+		2B0EC3672AA6F3930033C47F /* RefreshServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServiceResult.swift; sourceTree = "<group>"; };
 		2B2191DA2A925D5300F72570 /* HomeRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRequestModel.swift; sourceTree = "<group>"; };
 		2B2AFF822A8BD3920028C96F /* EmergencyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyEntity.swift; sourceTree = "<group>"; };
 		2B2AFF872A8BE05D0028C96F /* EmergencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyService.swift; sourceTree = "<group>"; };
@@ -645,6 +651,7 @@
 				140C54362A74F40E00CF1CB4 /* Nickname */,
 				2BDEAC772A863D1500D698E6 /* JoinMeeting */,
 				142BEED42A8F196700B91426 /* SendInvitation */,
+				2B0EC3662AA6F37C0033C47F /* Refresh */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1312,6 +1319,7 @@
 				14C44B2D2A9483BA009E5379 /* MeetingStatus */,
 				14E083672A8368F70001CB21 /* SignUp */,
 				2B65B8112A8758DB00E3BF11 /* Login */,
+				2B0EC3632AA6F3500033C47F /* Refresh */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1492,6 +1500,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		2B0EC3632AA6F3500033C47F /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				2B0EC3642AA6F35A0033C47F /* TokenRefreshEntity.swift */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
+		2B0EC3662AA6F37C0033C47F /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				2B0EC3672AA6F3930033C47F /* RefreshServiceResult.swift */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
 		2B2AFF812A8BD3820028C96F /* Emergency */ = {
 			isa = PBXGroup;
 			children = (
@@ -1598,6 +1622,7 @@
 			isa = PBXGroup;
 			children = (
 				2B7B4D6A2A849E9D00283248 /* NetworkService.swift */,
+				2B0EC3612AA6C6420033C47F /* TokenRefreshService.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2021,6 +2046,7 @@
 				143B27082A76200200DFC0EE /* CreateMemoFeature.swift in Sources */,
 				2BA345A72A6EB6BF00B7E2BD /* BaggleTagColor.swift in Sources */,
 				2B42A5832AA4A1E600E97CB1 /* AlertMainTabType.swift in Sources */,
+				2B0EC3682AA6F3930033C47F /* RefreshServiceResult.swift in Sources */,
 				14E577AA2A80973300119FB3 /* EmergencyFeature.swift in Sources */,
 				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
 				2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */,
@@ -2048,10 +2074,12 @@
 				14EA20B72A8DBC52005C1289 /* AlertButtonType.swift in Sources */,
 				14783EE82A7E340E00EF58D5 /* CIImage+.swift in Sources */,
 				147E813A2A8A3924008B9B06 /* MeetingDetailResult.swift in Sources */,
+				2B0EC3652AA6F35A0033C47F /* TokenRefreshEntity.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
+				2B0EC3622AA6C6430033C47F /* TokenRefreshService.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
 				147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */,
 				1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */,

@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 import Alamofire
+import ComposableArchitecture
 import Moya
 
 class NetworkService<Target: TargetType> {
@@ -39,6 +40,7 @@ class NetworkService<Target: TargetType> {
     }
     
     public init() {}
+    
 }
 
 extension NetworkService {
@@ -48,8 +50,7 @@ extension NetworkService {
     }
     
     func request<T: Decodable>(_ target: API) async throws -> T {
-        let data = try await provider.request(target)
-        
+        let data = try await self.provider.request(target)
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
         guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
@@ -67,7 +68,7 @@ extension NetworkService {
             print("✅ data: \(data)")
             return data
         case 400..<500:
-            throw handleError400(statusCode: statusCode, message: message)
+            throw await self.handleError400(statusCode: statusCode, message: message)
         case 500:
             throw APIError.server
         default:
@@ -76,8 +77,8 @@ extension NetworkService {
     }
     
     func requestWithNoResult(_ target: API) async throws {
-        let data = try await provider.request(target)
-
+        let data = try await self.provider.request(target)
+        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
         guard let body = try? decoder.decode(EntityContainer<JSONNull>.self, from: data) else {
@@ -86,20 +87,20 @@ extension NetworkService {
         
         let statusCode = body.status
         let message = body.message
-
+        
         switch statusCode {
         case 200, 201:
             return
         case 400..<500:
-            throw handleError400(statusCode: statusCode, message: message)
+            throw await self.handleError400(statusCode: statusCode, message: message)
         case 500:
             throw APIError.server
         default:
             throw APIError.network
         }
     }
-
-    private func handleError400(statusCode: Int, message: String) -> APIError {
+    
+    private func handleError400(statusCode: Int, message: String) async -> APIError {
         switch statusCode {
         case 400:
             if message == "잘못된 요청입니다." {
@@ -107,7 +108,7 @@ extension NetworkService {
             }
             return APIError.badRequest
         case 401:
-            return APIError.unauthorized
+            return .unauthorized
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
                 return APIError.limitMeetingCount
