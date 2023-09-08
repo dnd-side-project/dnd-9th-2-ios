@@ -11,24 +11,24 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LoginView: View {
-
+    
     typealias LoginViewStore = ViewStore<LoginFeature.State, LoginFeature.Action>
-
+    
     let store: StoreOf<LoginFeature>
-
+    
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-
+            
             ZStack {
-
+                
                 LottieView(lottieType: .splash, completion: {
                     viewStore.send(.completeSplashAnimation)
                 })
                 .edgesIgnoringSafeArea(.all)
-
+                
                 if viewStore.completeSplashAnimation {
                     VStack(spacing: 8) {
-
+                        
                         Spacer()
                         kakaoLoginButton()
                         appleLoginButton()
@@ -37,6 +37,14 @@ struct LoginView: View {
                     .transition(.opacity.animation(.easeIn(duration: 0.3)))
                 }
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { LoginFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .fullScreenCover(store: self.store.scope(
                 state: \.$signUpNickname,
                 action: { .signUpNickname($0) })
@@ -51,20 +59,20 @@ struct LoginView: View {
 }
 
 extension LoginView {
-
+    
     func kakaoLoginButton() -> some View {
         Button {
             ViewStore(self.store, observe: { $0 }).send(.kakaoLoginButtonTapped)
         } label: {
             HStack(spacing: 6) {
                 Image.Icon.kakao
-
+                
                 Text("카카오로 로그인")
             }
         }
         .buttonStyle(KakaoLoginStyle())
     }
-
+    
     func appleLoginButton() -> some View {
         SignInWithAppleButton(
             onRequest: { request in
@@ -85,7 +93,7 @@ extension LoginView {
                     }
                 case .failure(let error):
                     print("error: ", error.localizedDescription)
-                    ViewStore(self.store, observe: { $0 }).send(.loginFail)
+                    ViewStore(self.store, observe: { $0 }).send(.appleLoginFailed)
                 }
             }
         )

@@ -86,17 +86,7 @@ extension MemberAPI: BaseAPI {
     
     var task: Task {
         switch self {
-        case .fetchMeetingInfo:
-            return .requestParameters(
-                parameters: bodyParameters ?? [:],
-                encoding: parameterEncoding
-            )
-        case .postJoinMeeting:
-            return .requestParameters(
-                parameters: bodyParameters ?? [:],
-                encoding: parameterEncoding
-            )
-        case .delegateOwner:
+        case .fetchMeetingInfo, .postJoinMeeting, .delegateOwner:
             return .requestParameters(
                 parameters: bodyParameters ?? [:],
                 encoding: parameterEncoding

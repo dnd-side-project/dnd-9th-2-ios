@@ -19,29 +19,32 @@ extension MeetingDetailService: DependencyKey {
     
     static var liveValue = Self { meetingID in
         do {
-            guard let token = UserManager.shared.accessToken else {
-                return .userError
-            }
-            
-            let meetingDetailEntity: MeetingDetailEntity = try await networkService.request(
-                .meetingDetail(meetingID: meetingID, token: token)
-            )
-            
-            guard let username = UserDefaultList.user?.name else {
-                return .userError
-            }
-            
-            let meetingDetail = meetingDetailEntity.toDomain(username: username)
-            print(meetingDetail)
-            return .success(meetingDetail)
+            return try await Task.retrying {
+                guard let token = UserManager.shared.accessToken,
+                      let username = UserDefaultList.user?.name else {
+                    return MeetingDetailResult.userError
+                }
+
+                let meetingDetailEntity: MeetingDetailEntity = try await networkService.request(
+                    .meetingDetail(meetingID: meetingID, token: token)
+                )
+
+                let meetingDetail = meetingDetailEntity.toDomain(username: username)
+                print(meetingDetail)
+
+                return .success(meetingDetail)
+            }.value
         } catch {
-            if let apiError = error as? APIError, apiError == .notFound {
-                return .notFound
+            if let apiError = error as? APIError {
+                if apiError == .notFound {
+                    return .notFound
+                } else if apiError == .unauthorized {
+                    return .userError
+                }
             } else if let keyChainError = error as? KeyChainError {
                 return .userError
-            } else {
-                return .networkError(error.localizedDescription)
             }
+            return .networkError(error.localizedDescription)
         }
     }
 }

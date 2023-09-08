@@ -39,7 +39,7 @@ extension AlertMeetingDetailType: AlertType {
                 .meetingDelegateSuccess:
             return .one
         case .delete, .meetingDelete:
-            return .two
+            return .two(.destructive)
         }
     }
     

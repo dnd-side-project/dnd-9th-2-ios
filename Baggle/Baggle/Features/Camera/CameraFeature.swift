@@ -13,26 +13,28 @@ struct CameraFeature: ReducerProtocol {
 
     struct State: Equatable {
         
-        // User
+        // MARK: - User
+        
         var memberID: Int
         
-        // Image
+        // MARK: - Image
+        
         var viewFinderImage: Image?
         var resultImage: UIImage?
 
-        // View - Image
         var flipImage: Image?
         var isFlipped: Bool = false
         var flipDegree: Double = 0.0
 
-        // Status
+        // MARK: - Status
         var cameraViewStatus: CameraViewStatus = .camera
         var isUploading: Bool = false
 
-        // System - Alert
+        // MARK: - System Alert - 권한 요청용
         @PresentationState var alert: AlertState<Action.SystemAlert>?
         
-        // Baggle - Alert
+        // MARK: - Baggle Alert
+        var isAlertPresented: Bool = false
         var alertType: AlertCameraType?
         
         // Timer
@@ -44,29 +46,35 @@ struct CameraFeature: ReducerProtocol {
 
         case onAppear
 
-        // Image
+        // MARK: - Image
+
         case viewFinderUpdate(Image?)
         case flipImageRemove
         case flipDegreeUpdate
         case completeTakePhoto(UIImage?)
 
-        // Tap - Camera
+        // MARK: - Tap - Camera
+        
         case shutterTapped
         case switchButtonTapped
         case cancelButtonTapped
 
-        // Tap - Photo
+        // MARK: - Tap - Photo
+        
         case reTakeButtonTapped
         case uploadButtonTapped
 
-        // Network
+        // MARK: - Network
+        
         case handleFeedPhotoResult(FeedPhotoResult)
         
-        // Timer
+        // MARK: - Timer
+        
         case timer(TimerFeature.Action)
         case isTimeOverChanged(Bool)
 
-        // Alert - System
+        // MARK: - Alert - System
+        
         case presentSystemAlert
         case systemAlert(PresentationAction<SystemAlert>)
         enum SystemAlert: Equatable {
@@ -74,12 +82,14 @@ struct CameraFeature: ReducerProtocol {
             case alertCancelTapped
         }
         
-        // Alert - Baggle
-        case alertType(AlertCameraType)
-        case alertButtonTapped
-        case presentBaggleAlert(Bool)
+        // MARK: - Alert - Baggle
         
-        // Delegate
+        case presentAlert(Bool)
+        case alertTypeChanged(AlertCameraType)
+        case alertButtonTapped
+        
+        // MARK: - Delegate
+        
         case delegate(Delegate)
 
         enum Delegate: Equatable {
@@ -127,7 +137,7 @@ struct CameraFeature: ReducerProtocol {
                     case .deniedAuthorization:
                         await send(.presentSystemAlert)
                     case .error:
-                        await send(.alertType(.cameraConfigureError))
+                        await send(.alertTypeChanged(.cameraConfigureError))
                     }
                 }
                 
@@ -195,8 +205,7 @@ struct CameraFeature: ReducerProtocol {
                 
                 guard let resultImage = state.resultImage else {
                     // 이미지 없음
-                    state.alertType = .noResultImage
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.noResultImage))}
                 }
                 
                 guard let feedPhotoRequestModel = FeedPhotoRequestModel(
@@ -204,8 +213,7 @@ struct CameraFeature: ReducerProtocol {
                     time: Date(),
                     feedImage: resultImage
                 ) else {
-                    state.alertType = .compressionError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.compressionError))}
                 }
                 
                 return .run { send in
@@ -224,23 +232,19 @@ struct CameraFeature: ReducerProtocol {
                         await self.dismiss()
                     }
                 case .invalidAuthorizationTime:
-                    state.alertType = .invalidAuthorizationTime
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.invalidAuthorizationTime))}
                 case .notFound:
-                    state.alertType = .notFound
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.notFound))}
                 case .alreadyUpload:
-                    state.alertType = .alreadyUpload
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.alreadyUpload))}
                 case .networkError(let description):
-                    state.alertType = .networkError(description)
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.networkError(description)))}
                 case .userError:
                     state.alertType = .userError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.userError))}
                 }
                 
-                // MARK: - Alert
+                // MARK: - System Alert
 
             case .presentSystemAlert:
                 state.alert = AlertState(title: {
@@ -271,11 +275,18 @@ struct CameraFeature: ReducerProtocol {
                 return .none
                 
                 // MARK: - Baggle Alert
-                
-            case .alertType(let alertType):
-                state.alertType = alertType
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
                 return .none
-                
+            
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+            
             case .alertButtonTapped:
                 guard let alertType = state.alertType else {
                     return .none
@@ -283,23 +294,17 @@ struct CameraFeature: ReducerProtocol {
                 state.alertType = nil
                 
                 switch alertType {
-                case .cameraConfigureError, .invalidAuthorizationTime, .alreadyUpload:
+                case .cameraConfigureError, .compressionError: // 카메라 에러
                     return .run { _ in await self.dismiss() }
-                case .userError:
-                    return .run { send in await send(.delegate(.moveToLogin)) }
+                case .notFound, .networkError, .invalidAuthorizationTime, .alreadyUpload: // 네트워크 에러
+                    return .run { _ in await self.dismiss() }
                 case .noResultImage:
                     state.resultImage = nil
                     state.cameraViewStatus = .camera
                     return .none
-                case .notFound, .networkError, .compressionError:
-                    return .run { _ in await self.dismiss() }
+                case .userError:
+                    return .run { send in await send(.delegate(.moveToLogin))}
                 }
-                
-            case .presentBaggleAlert(let isPresented):
-                if !isPresented {
-                    state.alertType = nil
-                }
-                return .none
 
                 // MARK: - Timer
 

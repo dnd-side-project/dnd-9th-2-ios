@@ -59,6 +59,14 @@ struct SignUpView: View {
                         nextButton(viewStore: viewStore)
                     }
                 }
+                .baggleAlert(
+                    isPresented: viewStore.binding(
+                        get: { $0.isAlertPresented },
+                        send: { SignUpFeature.Action.presentAlert($0) }
+                    ),
+                    alertType: viewStore.alertType,
+                    action: { viewStore.send(.alertButtonTapped) }
+                )
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("취소") {

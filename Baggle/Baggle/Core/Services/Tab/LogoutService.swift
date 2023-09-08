@@ -8,7 +8,6 @@
 import Foundation
 
 import ComposableArchitecture
-import Moya
 
 struct LogoutService {
     var logout: () async -> LogoutServiceResult
@@ -21,18 +20,15 @@ extension LogoutService: DependencyKey {
     static var liveValue = Self {
         do {
             guard let token = UserManager.shared.accessToken else {
-                return .keyChainError
+                return .userError
             }
             
             try await networkService.requestWithNoResult(.signOut(token: token))
             UserManager.shared.delete()
             
             return .success
-        } catch let error {
-            guard let error = error as? APIError else {
-                return .fail(.network)
-            }
-            return .fail(error)
+        } catch {
+            return .networkError(error.localizedDescription)
         }
     }
 }

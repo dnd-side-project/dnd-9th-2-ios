@@ -50,6 +50,14 @@ struct CreateMemoView: View {
                     hideKeyboard()
                 }
                 .navigationBarBackButtonHidden(true)
+                .baggleAlert(
+                    isPresented: viewStore.binding(
+                        get: { $0.isAlertPresented },
+                        send: { CreateMemoFeature.Action.presentAlert($0) }
+                    ),
+                    alertType: viewStore.alertType,
+                    action: { viewStore.send(.alertButtonTapped) }
+                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
@@ -65,20 +73,6 @@ struct CreateMemoView: View {
                         } label: {
                             Image.Icon.close
                         }
-                    }
-                }
-                
-                if let alertType = viewStore.alertType {
-                    BaggleAlertOneButton(
-                        isPresented: Binding(
-                            get: { viewStore.alertType != nil },
-                            set: { _ in viewStore.send(.presentAlert) }
-                        ),
-                        title: alertType.title,
-                        description: alertType.description,
-                        buttonTitle: alertType.buttonTitle
-                    ) {
-                        viewStore.send(.alertButtonTapped)
                     }
                 }
             }

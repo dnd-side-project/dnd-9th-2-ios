@@ -36,12 +36,12 @@ struct BaggleAlert: View {
                     ) {
                         action()
                     }
-                } else if alertType.buttonType == .two {
+                } else { // Button 2개
                     BaggleAlertTwoButton(
                         isPresented: $isPresented,
                         title: alertType.title,
                         description: alertType.description,
-                        alertType: .destructive,
+                        alertType: rightButtonType(alertType.buttonType),
                         rightButtonTitle: alertType.buttonTitle,
                         leftButtonAction: nil
                     ) {
@@ -51,6 +51,12 @@ struct BaggleAlert: View {
             }
         }
         .animation(.easeInOut(duration: 0.3), value: self.isPresented)
+    }
+}
+
+extension BaggleAlert {
+    private func rightButtonType(_ alertButtonType: AlertButtonType) -> RightAlertButtonType {
+        return alertButtonType == .two(.destructive) ? .destructive : .none
     }
 }
 

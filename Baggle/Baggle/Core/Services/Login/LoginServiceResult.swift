@@ -7,8 +7,9 @@
 
 import Foundation
 
-enum LoginServiceResult {
+enum LoginServiceResult: Equatable {
     case success
     case requireSignUp
-    case fail(APIError)
+    case networkError(String)
+    case userError
 }
