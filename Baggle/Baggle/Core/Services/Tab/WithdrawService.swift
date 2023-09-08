@@ -23,20 +23,16 @@ extension WithdrawService: DependencyKey {
     static var liveValue = Self {
         do {
             guard let token = UserManager.shared.accessToken else {
-                return .keyChainError
+                return .userError
             }
             // 네트워크로 회원 탈퇴 요청
             try await networkService.requestWithNoResult(.withdraw(token: token))
-            
             
             UserManager.shared.delete()
             
             return .success
         } catch {
-            guard let error = error as? APIError else {
-                return .fail(.network)
-            }
-            return .fail(error)
+            return .networkError(error.localizedDescription)
         }
     }
 }

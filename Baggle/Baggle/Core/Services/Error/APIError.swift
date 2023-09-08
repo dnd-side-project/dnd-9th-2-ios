@@ -9,9 +9,9 @@ import Foundation
 
 enum APIError: Error, Equatable {
     case badRequest // 400
-    case overlapMeetingTime // 400, 모임 2시간 전후 일정 존재
+    case duplicatedMeeting // 400, 모임 2시간 전후 일정 존재
     case unauthorized // 401, 토큰 에러
-    case duplicatedMeeting // 403, 모임 생성 최대 개수 초과
+    case limitMeetingCount // 403, 모임 생성 최대 개수 초과
     case exceedMemberCount // 403, 모임 참여 가능 인원 초과
     case forbidden // 403, 리소스 접근 제한
     case notFound // 404, 리소스 또는 유저 정보 없음
@@ -31,9 +31,9 @@ extension APIError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .badRequest: return "400 에러"
-        case .overlapMeetingTime: return "모임 2시간 전후 일정 존재"
+        case .duplicatedMeeting: return "모임 2시간 전후 일정 존재"
         case .unauthorized: return "401 에러"
-        case .duplicatedMeeting: return "모임 2시간 전후 생성 불가"
+        case .limitMeetingCount: return "모임 2시간 전후 생성 불가"
         case .exceedMemberCount: return "모임 참여 가능 인원 초과"
         case .forbidden: return "403 에러"
         case .notFound: return "404 에러"

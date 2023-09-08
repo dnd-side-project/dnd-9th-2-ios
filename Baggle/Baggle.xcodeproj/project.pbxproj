@@ -29,6 +29,9 @@
 		141719762A9302C000AF1C51 /* SplashScreen_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 141719752A9302C000AF1C51 /* SplashScreen_animation.json */; };
 		141D376F2A681552001067E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D376E2A681552001067E3 /* MainTabView.swift */; };
 		141D37712A681569001067E3 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D37702A681569001067E3 /* MainTabFeature.swift */; };
+		141E8CF32AA8A8E000054EDA /* BaggleAlertOneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF22AA8A8E000054EDA /* BaggleAlertOneButton.swift */; };
+		141E8CF52AA8A95700054EDA /* BaggleAlertTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF42AA8A95700054EDA /* BaggleAlertTwoButton.swift */; };
+		141E8CF72AA8A9BD00054EDA /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */; };
 		141FD7632A8CF609003DBFD7 /* MeetingSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */; };
 		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
 		14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283FCE2A8DA32B00FE56F1 /* Moya+.swift */; };
@@ -81,6 +84,7 @@
 		146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EF2A79429E00FF3142 /* SelectDateView.swift */; };
 		146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */; };
 		146C51F42A7950F500FF3142 /* SelectTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51F32A7950F500FF3142 /* SelectTimeView.swift */; };
+		146CE9D22AA9A0BF0035A88C /* AlertHomeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146CE9D12AA9A0BF0035A88C /* AlertHomeType.swift */; };
 		1471ECFB2A8A465C00D9FC93 /* ErrorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471ECFA2A8A465C00D9FC93 /* ErrorID.swift */; };
 		14783EDD2A7E2F4C00EF58D5 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDC2A7E2F4C00EF58D5 /* Camera.swift */; };
 		14783EDF2A7E2FBD00EF58D5 /* CameraSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */; };
@@ -103,6 +107,8 @@
 		1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9172A7E01D800A2D7CC /* Int+.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
+		14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */; };
+		14ACEBC02AA9911600FFFE21 /* AlertLoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */; };
 		14B55AE72A9346C100EE2461 /* Task+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55AE62A9346C100EE2461 /* Task+.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
@@ -191,7 +197,6 @@
 		2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */; };
 		2B7EC32F2A8251DC00D78141 /* HomeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */; };
 		2B7EC3322A826F4D00D78141 /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */; };
-		2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */; };
 		2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */; };
 		2B84696C2A6E7AE200D75D32 /* BaggleTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */; };
 		2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469642A6E7AE200D75D32 /* ShadeView.swift */; };
@@ -218,7 +223,7 @@
 		2BB0EF402A8D1034003F9215 /* HomeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF3F2A8D1034003F9215 /* HomeEntity.swift */; };
 		2BB0EF422A8D18D1003F9215 /* HomeMeetingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF412A8D18D1003F9215 /* HomeMeetingEntity.swift */; };
 		2BB0EF442A8D1A60003F9215 /* HomeMeetingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF432A8D1A60003F9215 /* HomeMeetingList.swift */; };
-		2BB0EF462A8D2357003F9215 /* HomeServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF452A8D2357003F9215 /* HomeServiceResult.swift */; };
+		2BB0EF462A8D2357003F9215 /* MeetingListServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EF452A8D2357003F9215 /* MeetingListServiceResult.swift */; };
 		2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */; };
 		2BB7FBC52A89289E0003B75C /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB7FBC42A89289E0003B75C /* URL.swift */; };
 		2BB7FBC72A892A520003B75C /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB7FBC62A892A520003B75C /* Const.swift */; };
@@ -234,7 +239,7 @@
 		2BE74F622A7771B700402068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BE74F612A7771B600402068 /* GoogleService-Info.plist */; };
 		2BEFFBF32A8A0A5D00C6A008 /* JoinMeetingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFFBF22A8A0A5D00C6A008 /* JoinMeetingResult.swift */; };
 		2BEFFBF52A8A0B1D00C6A008 /* JoinMeetingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFFBF42A8A0B1D00C6A008 /* JoinMeetingEntity.swift */; };
-		2BF268232A77861300F32ADF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF268222A77861300F32ADF /* HomeService.swift */; };
+		2BF268232A77861300F32ADF /* MeetingListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF268222A77861300F32ADF /* MeetingListService.swift */; };
 		2BF6EC1B2A7FF5DC006CA492 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6EC1A2A7FF5DC006CA492 /* NavigationBar.swift */; };
 		2BF8F9152A78DFCA00510EFA /* JoinMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8F9142A78DFCA00510EFA /* JoinMeetingFeature.swift */; };
 		2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8F9162A78DFD700510EFA /* JoinMeetingView.swift */; };
@@ -272,6 +277,9 @@
 		141719752A9302C000AF1C51 /* SplashScreen_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen_animation.json; sourceTree = "<group>"; };
 		141D376E2A681552001067E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		141D37702A681569001067E3 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
+		141E8CF22AA8A8E000054EDA /* BaggleAlertOneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlertOneButton.swift; sourceTree = "<group>"; };
+		141E8CF42AA8A95700054EDA /* BaggleAlertTwoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlertTwoButton.swift; sourceTree = "<group>"; };
+		141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSuccessModel.swift; sourceTree = "<group>"; };
 		1421C0502A7A84A200C20497 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		14283FCE2A8DA32B00FE56F1 /* Moya+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+.swift"; sourceTree = "<group>"; };
@@ -323,6 +331,7 @@
 		146C51EF2A79429E00FF3142 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		146C51F12A7950F000FF3142 /* SelectTimeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeFeature.swift; sourceTree = "<group>"; };
 		146C51F32A7950F500FF3142 /* SelectTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeView.swift; sourceTree = "<group>"; };
+		146CE9D12AA9A0BF0035A88C /* AlertHomeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHomeType.swift; sourceTree = "<group>"; };
 		1471ECFA2A8A465C00D9FC93 /* ErrorID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorID.swift; sourceTree = "<group>"; };
 		14783EDC2A7E2F4C00EF58D5 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		14783EDE2A7E2FBD00EF58D5 /* CameraSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetting.swift; sourceTree = "<group>"; };
@@ -345,6 +354,8 @@
 		1493A9172A7E01D800A2D7CC /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
+		14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSignUpType.swift; sourceTree = "<group>"; };
+		14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoginType.swift; sourceTree = "<group>"; };
 		14B55AE62A9346C100EE2461 /* Task+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+.swift"; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -433,7 +444,6 @@
 		2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatus.swift; sourceTree = "<group>"; };
 		2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
-		2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleAlert.swift; sourceTree = "<group>"; };
 		2B8469612A6E7AE200D75D32 /* BaggleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextField.swift; sourceTree = "<group>"; };
 		2B8469622A6E7AE200D75D32 /* BaggleTextFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggleTextFieldType.swift; sourceTree = "<group>"; };
 		2B8469642A6E7AE200D75D32 /* ShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadeView.swift; sourceTree = "<group>"; };
@@ -457,7 +467,7 @@
 		2BB0EF3F2A8D1034003F9215 /* HomeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEntity.swift; sourceTree = "<group>"; };
 		2BB0EF412A8D18D1003F9215 /* HomeMeetingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMeetingEntity.swift; sourceTree = "<group>"; };
 		2BB0EF432A8D1A60003F9215 /* HomeMeetingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMeetingList.swift; sourceTree = "<group>"; };
-		2BB0EF452A8D2357003F9215 /* HomeServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceResult.swift; sourceTree = "<group>"; };
+		2BB0EF452A8D2357003F9215 /* MeetingListServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListServiceResult.swift; sourceTree = "<group>"; };
 		2BB6BA8F2A82039300F04188 /* MeetingDetailButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailButtonType.swift; sourceTree = "<group>"; };
 		2BB7FBC42A89289E0003B75C /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		2BB7FBC62A892A520003B75C /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
@@ -473,7 +483,7 @@
 		2BE74F612A7771B600402068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BEFFBF22A8A0A5D00C6A008 /* JoinMeetingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingResult.swift; sourceTree = "<group>"; };
 		2BEFFBF42A8A0B1D00C6A008 /* JoinMeetingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingEntity.swift; sourceTree = "<group>"; };
-		2BF268222A77861300F32ADF /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		2BF268222A77861300F32ADF /* MeetingListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListService.swift; sourceTree = "<group>"; };
 		2BF6EC1A2A7FF5DC006CA492 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		2BF8F9142A78DFCA00510EFA /* JoinMeetingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingFeature.swift; sourceTree = "<group>"; };
 		2BF8F9162A78DFD700510EFA /* JoinMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingView.swift; sourceTree = "<group>"; };
@@ -1153,6 +1163,32 @@
 			path = HomeList;
 			sourceTree = "<group>";
 		};
+		14ACEBBA2AA98D5500FFFE21 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				146CE9D12AA9A0BF0035A88C /* AlertHomeType.swift */,
+				14EA20B42A8DB65F005C1289 /* MeetingDetail */,
+				14EA20AF2A8DAB13005C1289 /* CreateMeeting */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		14ACEBBB2AA98D8500FFFE21 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		14ACEBBC2AA98D8B00FFFE21 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		14B7A0422A753DA500B8E202 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1359,12 +1395,11 @@
 			isa = PBXGroup;
 			children = (
 				14EA20B52A8DBC4C005C1289 /* Common */,
-				2B42A5812AA4A1BF00E97CB1 /* Tab */,
 				2B437FBB2A93B693004DC68E /* JoinMeeting */,
-				14EA20AF2A8DAB13005C1289 /* CreateMeeting */,
-				14EA20B42A8DB65F005C1289 /* MeetingDetail */,
-				14EA20BA2A8DCBB9005C1289 /* Camera */,
-				141719702A92EB3000AF1C51 /* Emergency */,
+				14ACEBBB2AA98D8500FFFE21 /* Login */,
+				14ACEBBC2AA98D8B00FFFE21 /* SignUp */,
+				2B42A5812AA4A1BF00E97CB1 /* Tab */,
+				14ACEBBA2AA98D5500FFFE21 /* Home */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1380,6 +1415,8 @@
 		14EA20B42A8DB65F005C1289 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
+				14EA20BA2A8DCBB9005C1289 /* Camera */,
+				141719702A92EB3000AF1C51 /* Emergency */,
 				14EA20B22A8DB65E005C1289 /* AlertMeetingDetailType.swift */,
 			);
 			path = MeetingDetail;
@@ -1620,7 +1657,9 @@
 		2B84695E2A6E7AE200D75D32 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				2B84695F2A6E7AE200D75D32 /* BaggleAlert.swift */,
+				141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */,
+				141E8CF22AA8A8E000054EDA /* BaggleAlertOneButton.swift */,
+				141E8CF42AA8A95700054EDA /* BaggleAlertTwoButton.swift */,
 				14EA20B82A8DBFBD005C1289 /* RightAlertButtonType.swift */,
 			);
 			path = Alert;
@@ -1756,8 +1795,8 @@
 		2BF268212A7785FE00F32ADF /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2BF268222A77861300F32ADF /* HomeService.swift */,
-				2BB0EF452A8D2357003F9215 /* HomeServiceResult.swift */,
+				2BF268222A77861300F32ADF /* MeetingListService.swift */,
+				2BB0EF452A8D2357003F9215 /* MeetingListServiceResult.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1940,6 +1979,7 @@
 				2B8469712A6E7AE200D75D32 /* BaggleButtonStyle.swift in Sources */,
 				14E506582A6BC576008D5778 /* MyPageFeature.swift in Sources */,
 				14C8F9D12A8B3323001690C5 /* FeedPhotoResult.swift in Sources */,
+				146CE9D22AA9A0BF0035A88C /* AlertHomeType.swift in Sources */,
 				2B7B4D772A84B41000283248 /* SignEntity.swift in Sources */,
 				2BB6BA902A82039300F04188 /* MeetingDetailButtonType.swift in Sources */,
 				1461B6002A7BA3F000A15706 /* BubbleView.swift in Sources */,
@@ -1978,7 +2018,7 @@
 				1432BE702A682FDB0098AAA9 /* MyPageView.swift in Sources */,
 				14458B482A81E92200C810FA /* BaggleStampStatus.swift in Sources */,
 				1471ECFB2A8A465C00D9FC93 /* ErrorID.swift in Sources */,
-				2BB0EF462A8D2357003F9215 /* HomeServiceResult.swift in Sources */,
+				2BB0EF462A8D2357003F9215 /* MeetingListServiceResult.swift in Sources */,
 				2BE4674F2AA0E352001F8B9C /* BaggleActionSheet.swift in Sources */,
 				147E40F22AA03D6F0044698B /* MeetingDateButtonFeature.swift in Sources */,
 				2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */,
@@ -1991,6 +2031,7 @@
 				2B2BA5292A7AB67800A90AE7 /* SelectOwnerView.swift in Sources */,
 				2B7EC32D2A822E5B00D78141 /* UINavigationController+.swift in Sources */,
 				149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */,
+				141E8CF52AA8A95700054EDA /* BaggleAlertTwoButton.swift in Sources */,
 				2BDEAC762A86024E00D698E6 /* KeychainManager.swift in Sources */,
 				1432BE642A68168A0098AAA9 /* TabType.swift in Sources */,
 				143C7BFE2A875508004D83FD /* WithdrawServiceResult.swift in Sources */,
@@ -2014,6 +2055,7 @@
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				14486D2C2A8B0C7400831DDD /* DateFormatter+.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
+				141E8CF72AA8A9BD00054EDA /* BaggleAlert.swift in Sources */,
 				146237432A877C1600FBE121 /* SettingListHeader.swift in Sources */,
 				149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */,
 				2BA345A52A6EB02F00B7E2BD /* BaggleTag.swift in Sources */,
@@ -2035,6 +2077,7 @@
 				2B0EC3652AA6F35A0033C47F /* TokenRefreshEntity.swift in Sources */,
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
+				14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
 				2B0EC3622AA6C6430033C47F /* TokenRefreshService.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,
@@ -2043,6 +2086,7 @@
 				2BDEAC792A863D3A00D698E6 /* JoinMeetingService.swift in Sources */,
 				1410AD242A84BEA8008793FB /* Feed.swift in Sources */,
 				146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */,
+				14ACEBC02AA9911600FFFE21 /* AlertLoginType.swift in Sources */,
 				1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */,
 				14C44B322A948765009E5379 /* MeetingHomeStatus.swift in Sources */,
 				2BC5AD312A84983C00B73241 /* SignUpRequestModel.swift in Sources */,
@@ -2051,6 +2095,7 @@
 				14EF8C242A8CAC5B00B0FA40 /* FeedUser.swift in Sources */,
 				2B7B4D812A853ED300283248 /* FeedAPI.swift in Sources */,
 				14F6D9FC2A80748600C8C19C /* Image+.swift in Sources */,
+				141E8CF32AA8A8E000054EDA /* BaggleAlertOneButton.swift in Sources */,
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
 				14EA20BC2A8DCBCD005C1289 /* AlertCameraType.swift in Sources */,
 				14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */,
@@ -2071,7 +2116,6 @@
 				2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */,
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
 				147E40EE2AA03BB90044698B /* MeetingDateButton.swift in Sources */,
-				2B84696A2A6E7AE200D75D32 /* BaggleAlert.swift in Sources */,
 				147E40F52AA0454F0044698B /* MeetingEditFeature.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
@@ -2114,7 +2158,7 @@
 				14F055AC2A8220C50041B004 /* BadgeView.swift in Sources */,
 				2BEFFBF52A8A0B1D00C6A008 /* JoinMeetingEntity.swift in Sources */,
 				14486D2E2A8B0D2900831DDD /* Print+.swift in Sources */,
-				2BF268232A77861300F32ADF /* HomeService.swift in Sources */,
+				2BF268232A77861300F32ADF /* MeetingListService.swift in Sources */,
 				2B42A5872AA4C27B00E97CB1 /* LogoutServiceResult.swift in Sources */,
 				14CF68EC2A847BEF00E457DF /* User.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
