@@ -17,6 +17,7 @@ struct MeetingDetail: Equatable {
     let memo: String? // 메모
     let members: [Member] // 참여자 정보
     let memberID: Int // 모임 내 본인의 멤버id
+    let isOwner: Bool // 모임 내 방장여부
     let stampStatus: MeetingStampStatus // 제목 옆에 들어가는 약속 도장
     let emergencyStatus: MeetingEmergencyStatus // 긴급 버튼 상태
     let isEmergencyAuthority: Bool // 내가 긴급 버튼 권한자
@@ -46,6 +47,7 @@ extension MeetingDetail {
             memo: memo,
             members: members,
             memberID: memberID,
+            isOwner: isOwner,
             stampStatus: stampStatus,
             emergencyStatus: .onGoing,
             isEmergencyAuthority: isEmergencyAuthority,
@@ -75,6 +77,7 @@ extension MeetingDetail {
             memo: self.memo,
             members: updatedMembers,
             memberID: self.memberID,
+            isOwner: self.isOwner,
             stampStatus: self.stampStatus,
             emergencyStatus: .termination,
             isEmergencyAuthority: self.isEmergencyAuthority,

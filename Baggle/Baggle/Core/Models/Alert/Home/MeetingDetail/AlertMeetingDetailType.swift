@@ -16,6 +16,8 @@ enum AlertMeetingDetailType: Equatable {
     case meetingDelegateFail // 방장 넘기기 불가
     case meetingDelegateSuccess // 방장 넘기기 성공
     
+    case meetingLeave // 모임 나가기 (방장 아닌 사람)
+    
     case networkError(String) // 네트워크 에러
     case userError // 유저 에러
     case invitation
@@ -40,6 +42,8 @@ extension AlertMeetingDetailType: AlertType {
             return .one
         case .delete, .meetingDelete:
             return .two(.destructive)
+        case .meetingLeave:
+            return .two(.none)
         }
     }
     
@@ -48,9 +52,13 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingNotFound: return "해당하는 모임이 없어요"
         case .meetingIDError: return "모임 정보가 없어요"
         case .meetingUnwrapping: return "모임 정보 에러"
+            
         case .meetingDelete: return "정말 방을 폭파하시겠어요?"
         case .meetingDelegateFail: return "방장 넘기기 불가"
         case .meetingDelegateSuccess: return "방장 넘기기 성공"
+            
+        case .meetingLeave: return "정말 방을 나가시겠어요?"
+            
         case .networkError: return "네트워크 에러"
         case .userError: return "유저 정보 에러"
         case .invitation: return "초대"
@@ -64,9 +72,13 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingNotFound: return "서버에서 모임을 찾을 수 없어요."
         case .meetingIDError: return "홈에서 모임 정보를 전달하는데 실패했어요."
         case .meetingUnwrapping: return "모임 정보를 불러오는데 실패했어요. [언래핑]"
+            
         case .meetingDelegateFail: return "혼자 있을 때는 방장을 넘길 수 없어요."
         case .meetingDelegateSuccess: return "방장을 성공적으로 넘겼어요!"
         case .meetingDelete: return "입력하신 약속정보는 모두 삭제돼요!"
+            
+        case .meetingLeave: return "이 약속 방의 모든 정보가 사라져요."
+            
         case .networkError(let error): return "네트워크 에러가 발생했어요. 잠시 후 다시 시도해주세요. \(error)"
         case .userError: return "유저 정보를 불러오는데 에러가 발생했어요. 재로그인해주세요."
         case .invitation: return "초대를 할 수가 없어요."
@@ -80,9 +92,13 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingNotFound: return "돌아가기"
         case .meetingIDError: return "돌아가기"
         case .meetingUnwrapping: return "확인"
+            
         case .meetingDelete: return "방 폭파하기"
         case .meetingDelegateFail: return "확인"
         case .meetingDelegateSuccess: return "홈으로"
+            
+        case .meetingLeave: return "나가기"
+            
         case .networkError: return "확인"
         case .userError: return "재로그인"
         case .invitation: return "확인"

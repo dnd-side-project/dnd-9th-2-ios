@@ -11,6 +11,7 @@ import ComposableArchitecture
 
 struct MeetingDeleteService {
     var delegateOwner: (_ fromMemberID: Int, _ toMemberID: Int) async -> MeetingDeleteResult
+    var leave: (_ memberID: Int) async -> MeetingDeleteResult
 }
 
 extension MeetingDeleteService: DependencyKey {
@@ -32,6 +33,23 @@ extension MeetingDeleteService: DependencyKey {
             )
             
             return .successDelegate
+        } catch {
+            return .networkError
+        }
+    } leave: { memberID in
+        do {
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .userError
+            }
+            
+            try await networkService.requestWithNoResult(
+                .leaveMeeting(
+                    memberID: memberID,
+                    token: accessToken
+                )
+            )
+            
+            return .successLeave
         } catch {
             return .networkError
         }

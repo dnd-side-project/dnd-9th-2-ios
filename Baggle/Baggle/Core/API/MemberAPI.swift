@@ -14,6 +14,7 @@ enum MemberAPI {
     case fetchMeetingInfo(meetingID: Int, token: String)
     case postJoinMeeting(meetingID: Int, token: String)
     case delegateOwner(fromMemberID: Int, toMemberID: Int, token: String)
+    case leaveMeeting(memberID: Int, token: String)
 }
 
 extension MemberAPI: BaseAPI {
@@ -27,6 +28,7 @@ extension MemberAPI: BaseAPI {
         case .fetchMeetingInfo: return ""
         case .postJoinMeeting: return "participation"
         case .delegateOwner: return "delegate"
+        case .leaveMeeting: return "leave"
         }
     }
     
@@ -40,6 +42,8 @@ extension MemberAPI: BaseAPI {
             return HeaderType.jsonWithBearer(token: token).value
         case .delegateOwner(_, _, let token):
             return HeaderType.jsonWithBearer(token: token).value
+        case .leaveMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -50,6 +54,7 @@ extension MemberAPI: BaseAPI {
         case .fetchMeetingInfo: return .get
         case .postJoinMeeting: return .post
         case .delegateOwner: return .patch
+        case .leaveMeeting: return .patch
         }
     }
     
@@ -66,6 +71,8 @@ extension MemberAPI: BaseAPI {
         case let .delegateOwner(fromMemberID, toMemberID, _):
             params["fromMemberId"] = fromMemberID
             params["toMemberId"] = toMemberID
+        case .leaveMeeting(let memberID, _):
+            params["memberId"] = memberID
         }
         
         return params
@@ -73,12 +80,10 @@ extension MemberAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchMeetingInfo:
+        case .fetchMeetingInfo, .delegateOwner, .leaveMeeting:
             return ParameterEncodingWithNoSlash.init()
         case .postJoinMeeting:
             return JSONEncoding.default
-        case .delegateOwner:
-            return ParameterEncodingWithNoSlash.init()
         }
     }
     
@@ -86,7 +91,7 @@ extension MemberAPI: BaseAPI {
     
     var task: Task {
         switch self {
-        case .fetchMeetingInfo, .postJoinMeeting, .delegateOwner:
+        case .fetchMeetingInfo, .postJoinMeeting, .delegateOwner, .leaveMeeting:
             return .requestParameters(
                 parameters: bodyParameters ?? [:],
                 encoding: parameterEncoding

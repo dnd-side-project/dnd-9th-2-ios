@@ -9,6 +9,7 @@ import Foundation
 
 enum MeetingDeleteResult {
     case successDelegate
+    case successLeave
     case networkError
     case expiredToken
     case userError
