@@ -41,7 +41,6 @@ class NetworkService<Target: TargetType> {
     
     public init() {}
     
-    @Dependency(\.tokenRefreshService) var refreshService
 }
 
 extension NetworkService {

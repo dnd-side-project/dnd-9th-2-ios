@@ -7,18 +7,11 @@
 
 import Foundation
 
-import ComposableArchitecture
-import Moya
-
-struct TokenRefreshService {
-    var refresh: () async -> RefreshServiceResult
-}
-
-extension TokenRefreshService: DependencyKey {
+class TokenRefreshService {
     
     static let networkService = NetworkService<UserAPI>()
     
-    static var liveValue = Self {
+    static func refresh() async -> RefreshServiceResult {
         do {
             print("🔄 token expired - renewing")
             
@@ -37,12 +30,5 @@ extension TokenRefreshService: DependencyKey {
             print("🚨 error: \(error)")
             return .fail
         }
-    }
-}
-
-extension DependencyValues {
-    var tokenRefreshService: TokenRefreshService {
-        get { self[TokenRefreshService.self] }
-        set { self[TokenRefreshService.self] = newValue }
     }
 }
