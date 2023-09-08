@@ -208,6 +208,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     return .run { send in await send(.alertTypeChanged(.meetingDelegateSuccess))}
                 case .successLeave, .successDelete:
                     return .run { send in await send(.delegate(.deleteSuccess))}
+                case .invalidDeleteTime:
+                    return .run { send in await send(.alertTypeChanged(.invalidMeetingDelete))}
                 case .networkError:
                     return .run { send in await send(.alertTypeChanged(.networkError("네트워크 에러")))}
                 case .expiredToken:
@@ -366,7 +368,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError, .invalidAuthentication, .meetingUnwrapping, .meetingDelegateFail:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
@@ -378,6 +380,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                     return .run { send in await send(.delegate(.deleteSuccess)) }
                 case .meetingLeave: // 모임 나가기 (방장 아닌 사람)
                     return .run { send in await send(.leaveMeeting)}
+                case .meetingDelegateFail, .invalidMeetingDelete:
+                    return .none
                 }
 
                 // Action Sheet

@@ -36,6 +36,9 @@ extension MeetingDeleteService: DependencyKey {
             
             return .successDelegate
         } catch {
+            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
+                return .invalidDeleteTime
+            }
             return .networkError
         }
     } leave: { memberID in
@@ -53,6 +56,10 @@ extension MeetingDeleteService: DependencyKey {
             
             return .successLeave
         } catch {
+            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
+                return .invalidDeleteTime
+            }
+            
             return .networkError
         }
     } delete: { meetingID in
@@ -70,6 +77,10 @@ extension MeetingDeleteService: DependencyKey {
             
             return .successDelete
         } catch {
+            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
+                return .invalidDeleteTime
+            }
+            
             return .networkError
         }
     }

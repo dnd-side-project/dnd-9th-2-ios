@@ -18,6 +18,8 @@ enum AlertMeetingDetailType: Equatable {
     
     case meetingLeave // 모임 나가기 (방장 아닌 사람)
     
+    case invalidMeetingDelete // 모임 확정 이후에는 폭파, 넘기기, 나가기 불가
+    
     case networkError(String) // 네트워크 에러
     case userError // 유저 에러
     case invitation
@@ -36,7 +38,9 @@ extension AlertMeetingDetailType: AlertType {
                 .invalidAuthentication,
                 .meetingUnwrapping,
                 .meetingDelegateFail,
-                .meetingDelegateSuccess:
+                .meetingDelegateSuccess,
+                .invalidMeetingDelete
+            :
             return .one
         case .meetingDelete:
             return .two(.destructive)
@@ -57,6 +61,8 @@ extension AlertMeetingDetailType: AlertType {
             
         case .meetingLeave: return "정말 방을 나가시겠어요?"
             
+        case .invalidMeetingDelete: return "모임 나가기 불가"
+            
         case .networkError: return "네트워크 에러"
         case .userError: return "유저 정보 에러"
         case .invitation: return "초대"
@@ -76,6 +82,8 @@ extension AlertMeetingDetailType: AlertType {
             
         case .meetingLeave: return "이 약속 방의 모든 정보가 사라져요."
             
+        case .invalidMeetingDelete: return "약속이 확정된 이후에는 모임을 나갈 수 없어요."
+            
         case .networkError(let error): return "네트워크 에러가 발생했어요. 잠시 후 다시 시도해주세요. \(error)"
         case .userError: return "유저 정보를 불러오는데 에러가 발생했어요. 재로그인해주세요."
         case .invitation: return "초대를 할 수가 없어요."
@@ -94,6 +102,8 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingDelegateSuccess: return "홈으로"
             
         case .meetingLeave: return "나가기"
+            
+        case .invalidMeetingDelete: return "확인"
             
         case .networkError: return "확인"
         case .userError: return "재로그인"

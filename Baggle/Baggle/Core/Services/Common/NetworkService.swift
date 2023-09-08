@@ -105,6 +105,8 @@ extension NetworkService {
         case 400:
             if message == "잘못된 요청입니다." {
                 return APIError.duplicatedMeeting
+            } else if message == "유효하지 않은 모임 시간입니다." {
+                return APIError.invalidMeetingDeleteTime
             }
             return APIError.badRequest
         case 401:
