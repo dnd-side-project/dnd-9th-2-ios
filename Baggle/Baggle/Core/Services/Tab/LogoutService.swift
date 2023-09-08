@@ -19,14 +19,16 @@ extension LogoutService: DependencyKey {
     
     static var liveValue = Self {
         do {
-            guard let token = UserManager.shared.accessToken else {
-                return .userError
-            }
-            
-            try await networkService.requestWithNoResult(.signOut(token: token))
-            UserManager.shared.delete()
-            
-            return .success
+            return try await Task.retrying {
+                guard let token = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkService.requestWithNoResult(.signOut(token: token))
+                UserManager.shared.delete()
+                
+                return .success
+            }.value
         } catch {
             return .networkError(error.localizedDescription)
         }
