@@ -22,8 +22,6 @@ enum AlertMeetingDetailType: Equatable {
     case userError // 유저 에러
     case invitation
     case invalidAuthentication // 유효하지 않는 긴급 버튼 인증 시간
-
-    case delete
 }
 
 extension AlertMeetingDetailType: AlertType {
@@ -40,7 +38,7 @@ extension AlertMeetingDetailType: AlertType {
                 .meetingDelegateFail,
                 .meetingDelegateSuccess:
             return .one
-        case .delete, .meetingDelete:
+        case .meetingDelete:
             return .two(.destructive)
         case .meetingLeave:
             return .two(.none)
@@ -63,7 +61,6 @@ extension AlertMeetingDetailType: AlertType {
         case .userError: return "유저 정보 에러"
         case .invitation: return "초대"
         case .invalidAuthentication: return "인증 가능한 시간이 아니에요."
-        case .delete: return "정말 방을 폭파하시겠어요?"
         }
     }
     
@@ -83,7 +80,6 @@ extension AlertMeetingDetailType: AlertType {
         case .userError: return "유저 정보를 불러오는데 에러가 발생했어요. 재로그인해주세요."
         case .invitation: return "초대를 할 수가 없어요."
         case .invalidAuthentication: return "인증 가능한 시간에 다시 시도해주세요."
-        case .delete: return "입력하신 약속정보는 모두 삭제돼요!"
         }
     }
     
@@ -103,7 +99,6 @@ extension AlertMeetingDetailType: AlertType {
         case .userError: return "재로그인"
         case .invitation: return "확인"
         case .invalidAuthentication: return "확인"
-        case .delete: return "폭파하기"
         }
     }
 }

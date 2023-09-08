@@ -12,11 +12,13 @@ import ComposableArchitecture
 struct MeetingDeleteService {
     var delegateOwner: (_ fromMemberID: Int, _ toMemberID: Int) async -> MeetingDeleteResult
     var leave: (_ memberID: Int) async -> MeetingDeleteResult
+    var delete: (_ meetingID: Int) async -> MeetingDeleteResult
 }
 
 extension MeetingDeleteService: DependencyKey {
     
-    static let networkService = NetworkService<MemberAPI>()
+    static let networkMemberService = NetworkService<MemberAPI>()
+    static let networkMeetingService = NetworkService<MeetingAPI>()
     
     static var liveValue = Self { fromMemberID, toMemberID in
         do {
@@ -24,7 +26,7 @@ extension MeetingDeleteService: DependencyKey {
                 return .userError
             }
             
-            try await networkService.requestWithNoResult(
+            try await networkMemberService.requestWithNoResult(
                 .delegateOwner(
                     fromMemberID: fromMemberID,
                     toMemberID: toMemberID,
@@ -42,7 +44,7 @@ extension MeetingDeleteService: DependencyKey {
                 return .userError
             }
             
-            try await networkService.requestWithNoResult(
+            try await networkMemberService.requestWithNoResult(
                 .leaveMeeting(
                     memberID: memberID,
                     token: accessToken
@@ -50,6 +52,23 @@ extension MeetingDeleteService: DependencyKey {
             )
             
             return .successLeave
+        } catch {
+            return .networkError
+        }
+    } delete: { meetingID in
+        do {
+            guard let accessToken = UserManager.shared.accessToken else {
+                return .userError
+            }
+            
+            try await networkMeetingService.requestWithNoResult(
+                .deleteMeeting(
+                    meetingID: meetingID,
+                    token: accessToken
+                )
+            )
+            
+            return .successDelete
         } catch {
             return .networkError
         }
