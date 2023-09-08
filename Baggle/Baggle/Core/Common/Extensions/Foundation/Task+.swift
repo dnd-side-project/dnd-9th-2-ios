@@ -28,9 +28,11 @@ extension Task where Failure == Error {
                     return try await operation()
                 } catch {
                     if let error = error as? APIError {
-                        if error == .unauthorized {
+                        if error == .authorizeFail {
                             if await TokenRefreshService.refresh() == .success {
                                 continue
+                            } else {
+                                throw APIError.unauthorized
                             }
                         }
                     }

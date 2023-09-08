@@ -40,7 +40,6 @@ class NetworkService<Target: TargetType> {
     }
     
     public init() {}
-    
 }
 
 extension NetworkService {
@@ -108,7 +107,7 @@ extension NetworkService {
             }
             return APIError.badRequest
         case 401:
-            return .unauthorized
+            return .authorizeFail
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
                 return APIError.limitMeetingCount

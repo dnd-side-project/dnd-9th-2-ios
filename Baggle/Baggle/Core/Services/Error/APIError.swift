@@ -10,7 +10,8 @@ import Foundation
 enum APIError: Error, Equatable {
     case badRequest // 400
     case duplicatedMeeting // 400, 모임 2시간 전후 일정 존재
-    case unauthorized // 401, 토큰 에러
+    case authorizeFail // 401, 토큰 인증 실패
+    case unauthorized // 401, 토큰 만료 에러 (재발급 X)
     case limitMeetingCount // 403, 모임 생성 최대 개수 초과
     case exceedMemberCount // 403, 모임 참여 가능 인원 초과
     case forbidden // 403, 리소스 접근 제한
@@ -32,7 +33,8 @@ extension APIError: LocalizedError {
         switch self {
         case .badRequest: return "400 에러"
         case .duplicatedMeeting: return "모임 2시간 전후 일정 존재"
-        case .unauthorized: return "401 에러"
+        case .authorizeFail: return "401 인증 실패"
+        case .unauthorized: return "401 인증 불가"
         case .limitMeetingCount: return "모임 2시간 전후 생성 불가"
         case .exceedMemberCount: return "모임 참여 가능 인원 초과"
         case .forbidden: return "403 에러"
