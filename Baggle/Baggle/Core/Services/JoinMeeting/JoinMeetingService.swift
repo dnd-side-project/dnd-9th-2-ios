@@ -20,17 +20,20 @@ extension JoinMeetingService: DependencyKey {
     
     static var liveValue = Self { meetingID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .fail(.network)
-            }
-            
-            let data: JoinMeetingInfoEntity = try await networkService.request(
-                .fetchMeetingInfo(
-                    meetingID: meetingID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .fail(.network)
+                }
+                
+                let data: JoinMeetingInfoEntity = try await networkService.request(
+                    .fetchMeetingInfo(
+                        meetingID: meetingID,
+                        token: accessToken
+                    )
                 )
-            )
-            return JoinMeetingResult.enable(data.toDomain())
+                
+                return JoinMeetingResult.enable(data.toDomain())
+            }.value
         } catch let error {
             guard let error = error as? APIError else { return .fail(.network) }
             if error == .duplicatedJoinMeeting {
@@ -41,17 +44,20 @@ extension JoinMeetingService: DependencyKey {
         }
     } postJoinMeeting: { meetingID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .fail(.network)
-            }
-
-            try await networkService.requestWithNoResult(
-                .postJoinMeeting(
-                    meetingID: meetingID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .fail(.network)
+                }
+                
+                try await networkService.requestWithNoResult(
+                    .postJoinMeeting(
+                        meetingID: meetingID,
+                        token: accessToken
+                    )
                 )
-            )
-            return JoinMeetingPostResult.success
+                
+                return JoinMeetingPostResult.success
+            }.value
         } catch let error {
             guard let error = error as? APIError else { return .fail(.network) }
             return JoinMeetingPostResult.fail(error)
