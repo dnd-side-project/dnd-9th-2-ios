@@ -134,7 +134,7 @@ struct EmergencyFeature: ReducerProtocol {
                 case .notFound, .networkError:
                     state.isFetched = false
                     return .none
-                case .unAuthorized, .userError:
+                case .accessDenied, .userError:
                     return .run { send in await send(.delegate(.moveToLogin)) }
                 }
                 
@@ -160,7 +160,7 @@ struct EmergencyFeature: ReducerProtocol {
                     state.alertType = .invalidAuthorizationTime
                     return .none
                 case .unAuthorized:
-                    state.alertType = .unAuthorized
+                    state.alertType = .accessDenied
                     return .none
                 case .notFound:
                     state.alertType = .notFound

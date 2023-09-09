@@ -22,18 +22,20 @@ extension LoginService: DependencyKey {
 
     static var liveValue = Self { requestModel, token in
         do {
-            let data: SignEntity = try await networkService.request(
-                .signIn(
-                    requestModel: requestModel,
-                    token: token
+            return try await Task.retrying {
+                let data: SignEntity = try await networkService.request(
+                    .signIn(
+                        requestModel: requestModel,
+                        token: token
+                    )
                 )
-            )
-
-            let user = data.toDomain()
-            let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
-            try UserManager.shared.save(user: user, userToken: token)
-            
-            return .success
+                
+                let user = data.toDomain()
+                let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
+                try UserManager.shared.save(user: user, userToken: token)
+                
+                return .success
+            }.value
         } catch let error {
             if let apiError = error as? APIError {
                 if apiError == .notFound {
