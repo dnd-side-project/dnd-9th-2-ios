@@ -74,7 +74,8 @@ struct HomeFeature: ReducerProtocol {
 
             switch action {
             case .onAppear:
-                state.user = UserManager.shared.user ?? User.error()
+                guard let user = UserManager.shared.user else { return .none }
+                state.user = user
                 if state.progressList.isEmpty && state.completedList.isEmpty {
                     return .run { send in
                         await send(.fetchMeetingList(.scheduled))
