@@ -22,39 +22,44 @@ extension MeetingDeleteService: DependencyKey {
     
     static var liveValue = Self { fromMemberID, toMemberID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .userError
-            }
-            
-            try await networkMemberService.requestWithNoResult(
-                .delegateOwner(
-                    fromMemberID: fromMemberID,
-                    toMemberID: toMemberID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkMemberService.requestWithNoResult(
+                    .delegateOwner(
+                        fromMemberID: fromMemberID,
+                        toMemberID: toMemberID,
+                        token: accessToken
+                    )
                 )
-            )
-            
-            return .successDelegate
+                
+                return .successDelegate
+            }.value
         } catch {
             if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
                 return .invalidDeleteTime
             }
+            
             return .networkError
         }
     } leave: { memberID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .userError
-            }
-            
-            try await networkMemberService.requestWithNoResult(
-                .leaveMeeting(
-                    memberID: memberID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkMemberService.requestWithNoResult(
+                    .leaveMeeting(
+                        memberID: memberID,
+                        token: accessToken
+                    )
                 )
-            )
-            
-            return .successLeave
+                
+                return .successLeave
+            }.value
         } catch {
             if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
                 return .invalidDeleteTime
@@ -64,18 +69,20 @@ extension MeetingDeleteService: DependencyKey {
         }
     } delete: { meetingID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .userError
-            }
-            
-            try await networkMeetingService.requestWithNoResult(
-                .deleteMeeting(
-                    meetingID: meetingID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkMeetingService.requestWithNoResult(
+                    .deleteMeeting(
+                        meetingID: meetingID,
+                        token: accessToken
+                    )
                 )
-            )
-            
-            return .successDelete
+                
+                return .successDelete
+            }.value
         } catch {
             if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
                 return .invalidDeleteTime
