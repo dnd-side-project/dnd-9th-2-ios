@@ -8,7 +8,6 @@
 import Foundation
 
 import ComposableArchitecture
-import Moya
 
 struct EmergencyService {
     var emergency: (_ memberID: Int) async -> EmergencyServiceResult
@@ -20,19 +19,22 @@ extension EmergencyService: DependencyKey {
     
     static var liveValue = Self { memberID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .userError
-            }
-            let data: EmergencyEntity = try await networkService.request(
-                .emergency(
-                    memberID: memberID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                let data: EmergencyEntity = try await networkService.request(
+                    .emergency(
+                        memberID: memberID,
+                        token: accessToken
+                    )
                 )
-            )
-            
-            let certificationTime = data.certificationTime
-            
-            return .success(certificationTime)
+                
+                let certificationTime = data.certificationTime
+                
+                return .success(certificationTime)
+            }.value
         } catch {
             if let apiError = error as? APIError {
                 if apiError == .badRequest {

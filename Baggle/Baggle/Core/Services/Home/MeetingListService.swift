@@ -19,13 +19,17 @@ extension MeetingListService: DependencyKey {
 
     static var liveValue = Self { requestModel in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .userError
-            }
-            let data: HomeEntity = try await networkService.request(
-                .meetingList(requestModel: requestModel, token: accessToken)
-            )
-            return .success(data.toDomain())
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                let data: HomeEntity = try await networkService.request(
+                    .meetingList(requestModel: requestModel, token: accessToken)
+                )
+                
+                return .success(data.toDomain())
+            }.value
         } catch {
             print("❌ MeetingListService - error: \(error)")
             return .networkError(error.localizedDescription)

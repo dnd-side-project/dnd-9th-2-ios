@@ -8,7 +8,6 @@
 import Foundation
 
 import ComposableArchitecture
-import Moya
 
 typealias ResponseEmptyData = Bool
 
@@ -22,15 +21,17 @@ extension WithdrawService: DependencyKey {
     
     static var liveValue = Self {
         do {
-            guard let token = UserManager.shared.accessToken else {
-                return .userError
-            }
-            // 네트워크로 회원 탈퇴 요청
-            try await networkService.requestWithNoResult(.withdraw(token: token))
-            
-            UserManager.shared.delete()
-            
-            return .success
+            return try await Task.retrying {
+                guard let token = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkService.requestWithNoResult(.withdraw(token: token))
+                
+                UserManager.shared.delete()
+                
+                return .success
+            }.value
         } catch {
             return .networkError(error.localizedDescription)
         }

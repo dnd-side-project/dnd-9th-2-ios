@@ -16,11 +16,12 @@ enum APIError: Error, Equatable {
     case invalidMeetingDeleteTime // 400 모임 확정 이후 나갈 수 없음 (모임 확정 됨)
     
     // MARK: - 401
-    
-    case unauthorized // 401, 토큰 에러
+
+    case authorizeFail // 401, 토큰 인증 실패
+    case unauthorized // 401, 토큰 만료 에러 (재발급 X)
     
     // MARK: - 403
-    
+
     case limitMeetingCount // 403, 모임 생성 최대 개수 초과
     case exceedMemberCount // 403, 모임 참여 가능 인원 초과
     case forbidden // 403, 리소스 접근 제한
@@ -61,7 +62,8 @@ extension APIError: LocalizedError {
             
             // MARK: - 401
             
-        case .unauthorized: return "401 에러"
+        case .authorizeFail: return "401 인증 실패"
+        case .unauthorized: return "401 인증 불가"
             
             // MARK: - 403
             
