@@ -107,10 +107,10 @@
 		1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9172A7E01D800A2D7CC /* Int+.swift */; };
 		149C0F462A77850500B95A36 /* CreateSuccessFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */; };
 		149C0F482A77850A00B95A36 /* CreateSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C0F472A77850A00B95A36 /* CreateSuccessView.swift */; };
-		14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */; };
-		14ACEBC02AA9911600FFFE21 /* AlertLoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */; };
 		14ACEBB22AA962C900FFFE21 /* MeetingDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */; };
 		14ACEBB42AA963DA00FFFE21 /* MeetingDeleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */; };
+		14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */; };
+		14ACEBC02AA9911600FFFE21 /* AlertLoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */; };
 		14B55AE72A9346C100EE2461 /* Task+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55AE62A9346C100EE2461 /* Task+.swift */; };
 		14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0402A753D4800B8E202 /* SignUpService.swift */; };
 		14B7A0452A75409E00B8E202 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B7A0442A75409E00B8E202 /* APIError.swift */; };
@@ -186,6 +186,7 @@
 		2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */; };
 		2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */; };
 		2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8172A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift */; };
+		2B65EE702AAEEE090001C318 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B65EE6F2AAEEE090001C318 /* Settings.bundle */; };
 		2B7B4D6B2A849E9D00283248 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6A2A849E9D00283248 /* NetworkService.swift */; };
 		2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */; };
 		2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D702A84A5C800283248 /* Meeting.swift */; };
@@ -356,10 +357,10 @@
 		1493A9172A7E01D800A2D7CC /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		149C0F452A77850500B95A36 /* CreateSuccessFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessFeature.swift; sourceTree = "<group>"; };
 		149C0F472A77850A00B95A36 /* CreateSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessView.swift; sourceTree = "<group>"; };
-		14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSignUpType.swift; sourceTree = "<group>"; };
-		14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoginType.swift; sourceTree = "<group>"; };
 		14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteService.swift; sourceTree = "<group>"; };
 		14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteResult.swift; sourceTree = "<group>"; };
+		14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSignUpType.swift; sourceTree = "<group>"; };
+		14ACEBBF2AA9911600FFFE21 /* AlertLoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoginType.swift; sourceTree = "<group>"; };
 		14B55AE62A9346C100EE2461 /* Task+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+.swift"; sourceTree = "<group>"; };
 		14B7A0402A753D4800B8E202 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		14B7A0442A75409E00B8E202 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -436,6 +437,7 @@
 		2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
 		2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingInfoEntity.swift; sourceTree = "<group>"; };
 		2B65B8172A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodingWithNoSlash.swift; sourceTree = "<group>"; };
+		2B65EE6F2AAEEE090001C318 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B7B4D6A2A849E9D00283248 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlamofireManager.swift; sourceTree = "<group>"; };
 		2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingDetail.swift; path = Baggle/Core/Models/Meeting/MeetingDetail/MeetingDetail.swift; sourceTree = SOURCE_ROOT; };
@@ -531,6 +533,7 @@
 		140E88042A64B626005119F8 = {
 			isa = PBXGroup;
 			children = (
+				2B65EE6F2AAEEE090001C318 /* Settings.bundle */,
 				14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */,
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
 				2BABCB172A76CDD400AFECA3 /* XCConfig */,
@@ -1168,6 +1171,15 @@
 			path = HomeList;
 			sourceTree = "<group>";
 		};
+		14ACEBB02AA962B500FFFE21 /* MeetingDelete */ = {
+			isa = PBXGroup;
+			children = (
+				14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */,
+				14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */,
+			);
+			path = MeetingDelete;
+			sourceTree = "<group>";
+		};
 		14ACEBBA2AA98D5500FFFE21 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1192,15 +1204,6 @@
 				14ACEBBD2AA98DA300FFFE21 /* AlertSignUpType.swift */,
 			);
 			path = SignUp;
-			sourceTree = "<group>";
-		};
-		14ACEBB02AA962B500FFFE21 /* MeetingDelete */ = {
-			isa = PBXGroup;
-			children = (
-				14ACEBB12AA962C900FFFE21 /* MeetingDeleteService.swift */,
-				14ACEBB32AA963DA00FFFE21 /* MeetingDeleteResult.swift */,
-			);
-			path = MeetingDelete;
 			sourceTree = "<group>";
 		};
 		14B7A0422A753DA500B8E202 /* SignUp */ = {
@@ -1930,6 +1933,7 @@
 			files = (
 				14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */,
 				14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */,
+				2B65EE702AAEEE090001C318 /* Settings.bundle in Resources */,
 				2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */,
 				141719762A9302C000AF1C51 /* SplashScreen_animation.json in Resources */,
 				141719742A92F40700AF1C51 /* Button_animation.json in Resources */,
