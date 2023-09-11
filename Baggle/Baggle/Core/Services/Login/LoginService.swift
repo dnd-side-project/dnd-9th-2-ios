@@ -31,7 +31,10 @@ extension LoginService: DependencyKey {
                 )
                 
                 let user = data.toDomain()
-                let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
+                let token = UserToken(
+                    accessToken: data.accessToken,
+                    refreshToken: data.refreshToken
+                )
                 try UserManager.shared.save(user: user, userToken: token)
                 
                 return .success

@@ -11,28 +11,83 @@ import ComposableArchitecture
 
 struct MeetingDeleteService {
     var delegateOwner: (_ fromMemberID: Int, _ toMemberID: Int) async -> MeetingDeleteResult
+    var leave: (_ memberID: Int) async -> MeetingDeleteResult
+    var delete: (_ meetingID: Int) async -> MeetingDeleteResult
 }
 
 extension MeetingDeleteService: DependencyKey {
     
-    static let networkService = NetworkService<MemberAPI>()
+    static let networkMemberService = NetworkService<MemberAPI>()
+    static let networkMeetingService = NetworkService<MeetingAPI>()
     
     static var liveValue = Self { fromMemberID, toMemberID in
         do {
-            guard let accessToken = UserManager.shared.accessToken else {
-                return .userError
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkMemberService.requestWithNoResult(
+                    .delegateOwner(
+                        fromMemberID: fromMemberID,
+                        toMemberID: toMemberID,
+                        token: accessToken
+                    )
+                )
+                
+                return .successDelegate
+            }.value
+        } catch {
+            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
+                return .invalidDeleteTime
             }
             
-            try await networkService.requestWithNoResult(
-                .delegateOwner(
-                    fromMemberID: fromMemberID,
-                    toMemberID: toMemberID,
-                    token: accessToken
+            return .networkError
+        }
+    } leave: { memberID in
+        do {
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkMemberService.requestWithNoResult(
+                    .leaveMeeting(
+                        memberID: memberID,
+                        token: accessToken
+                    )
                 )
-            )
-            
-            return .successDelegate
+                
+                return .successLeave
+            }.value
         } catch {
+            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
+                return .invalidDeleteTime
+            }
+            
+            return .networkError
+        }
+    } delete: { meetingID in
+        do {
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                try await networkMeetingService.requestWithNoResult(
+                    .deleteMeeting(
+                        meetingID: meetingID,
+                        token: accessToken
+                    )
+                )
+                
+                return .successDelete
+            }.value
+        } catch {
+            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
+                return .invalidDeleteTime
+            }
+            
             return .networkError
         }
     }
