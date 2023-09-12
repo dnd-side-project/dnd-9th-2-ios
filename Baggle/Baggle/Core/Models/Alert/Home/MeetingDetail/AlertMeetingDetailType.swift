@@ -12,6 +12,9 @@ enum AlertMeetingDetailType: Equatable {
     case meetingIDError // 홈 -> 모임 상세에서 nil 값 전달
     case meetingUnwrapping // 모임 언래핑
     
+    case failCreateMeetingEdit // 모임 수정 모델 생성 에러
+    case invalidMeetingEdit // 약속 확정 이후 모임 수정 불가
+    
     case meetingDelete // 모임 폭파
     case meetingDelegateFail // 방장 넘기기 불가
     case meetingDelegateSuccess // 방장 넘기기 성공
@@ -39,7 +42,9 @@ extension AlertMeetingDetailType: AlertType {
                 .meetingUnwrapping,
                 .meetingDelegateFail,
                 .meetingDelegateSuccess,
-                .invalidMeetingDelete
+                .invalidMeetingDelete,
+                .invalidMeetingEdit,
+                .failCreateMeetingEdit
             :
             return .one
         case .meetingDelete:
@@ -54,6 +59,9 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingNotFound: return "해당하는 모임이 없어요"
         case .meetingIDError: return "모임 정보가 없어요"
         case .meetingUnwrapping: return "모임 정보 에러"
+            
+        case .failCreateMeetingEdit: return "모임 수정 에러"
+        case .invalidMeetingEdit: return "모임 수정 불가"
             
         case .meetingDelete: return "정말 방을 폭파하시겠어요?"
         case .meetingDelegateFail: return "방장 넘기기 불가"
@@ -76,6 +84,9 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingIDError: return "홈에서 모임 정보를 전달하는데 실패했어요."
         case .meetingUnwrapping: return "모임 정보를 불러오는데 실패했어요. [언래핑]"
             
+        case .failCreateMeetingEdit: return "모임 수정 모델을 만드는 데 실패했어요."
+        case .invalidMeetingEdit: return "모임 수정은 약속 확정 전에 가능해요."
+            
         case .meetingDelegateFail: return "혼자 있을 때는 방장을 넘길 수 없어요."
         case .meetingDelegateSuccess: return "방장을 성공적으로 넘겼어요!"
         case .meetingDelete: return "입력하신 약속정보는 모두 삭제돼요!"
@@ -96,6 +107,9 @@ extension AlertMeetingDetailType: AlertType {
         case .meetingNotFound: return "돌아가기"
         case .meetingIDError: return "돌아가기"
         case .meetingUnwrapping: return "확인"
+            
+        case .failCreateMeetingEdit: return "확인"
+        case .invalidMeetingEdit: return "확인"
             
         case .meetingDelete: return "방 폭파하기"
         case .meetingDelegateFail: return "확인"
