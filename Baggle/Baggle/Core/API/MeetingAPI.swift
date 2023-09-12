@@ -15,6 +15,7 @@ enum MeetingAPI {
     case meetingDetail(meetingID: Int, token: String)
     case createMeeting(requestModel: MeetingCreateRequestModel, token: String)
     case deleteMeeting(meetingID: Int, token: String)
+    case editMeeting(requestModel: MeetingEditRequestModel, token: String)
 }
 
 extension MeetingAPI: BaseAPI {
@@ -29,6 +30,7 @@ extension MeetingAPI: BaseAPI {
         case .meetingDetail: return "detail"
         case .createMeeting: return ""
         case .deleteMeeting: return ""
+        case .editMeeting: return ""
         }
     }
     
@@ -44,6 +46,8 @@ extension MeetingAPI: BaseAPI {
             return HeaderType.jsonWithBearer(token: token).value
         case .deleteMeeting(_ , let token):
             return HeaderType.jsonWithBearer(token: token).value
+        case .editMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -54,6 +58,7 @@ extension MeetingAPI: BaseAPI {
         case .meetingDetail, .meetingList: return .get
         case .createMeeting: return .post
         case .deleteMeeting: return .delete
+        case .editMeeting: return .patch
         }
     }
     
@@ -78,6 +83,20 @@ extension MeetingAPI: BaseAPI {
             }
         case .deleteMeeting(let meetingID, _):
             params["meetingId"] = meetingID
+        case .editMeeting(let requestModel, _):
+            params["meetingId"] = requestModel.meetingID
+            if let title = requestModel.title {
+                params["title"] = title
+            }
+            if let place = requestModel.place {
+                params["place"] = place
+            }
+            if let meetingTime = requestModel.meetingTime {
+                params["dateTime"] = meetingTime.toIsoDate()
+            }
+            if let memo = requestModel.memo {
+                params["memo"] = memo
+            }
         }
         
         return params
@@ -85,7 +104,7 @@ extension MeetingAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .createMeeting:
+        case .createMeeting, .editMeeting:
             return JSONEncoding.default
         case .meetingList, .meetingDetail, .deleteMeeting:
             return ParameterEncodingWithNoSlash.init()
@@ -96,7 +115,7 @@ extension MeetingAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
-        case .meetingList, .meetingDetail, .createMeeting, .deleteMeeting:
+        case .meetingList, .meetingDetail, .createMeeting, .deleteMeeting, .editMeeting:
             return .requestParameters(
                 parameters: bodyParameters ?? [:],
                 encoding: parameterEncoding

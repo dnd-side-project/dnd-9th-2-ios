@@ -13,7 +13,16 @@ struct MeetingEditFeature: ReducerProtocol {
 
     struct State: Equatable {
         
-        var meetingEdit: MeetingEdit
+        var beforeMeetingEdit: MeetingEditModel
+        var meetingEdit: MeetingEditModel
+        
+        var isLoading: Bool = false
+        var editButtonDisabled: Bool = true
+        
+        // Alert
+        var isAlertPresented: Bool = false
+        var alertType: AlertMeetingEditType?
+        
         
         // TextField
         var titleTextFieldState = BaggleTextFeature.State(
@@ -47,9 +56,18 @@ struct MeetingEditFeature: ReducerProtocol {
         
         case onAppear
         
+        case editModelChanged
+        
         // Tap
         case backButtonTapped
         case editButtonTapped
+        
+        case handleResult(MeetingEditResult)
+        
+        // Alert
+        case presentAlert(Bool)
+        case alertTypeChanged(AlertMeetingEditType)
+        case alertButtonTapped
         
         // Child
         // Text
@@ -67,10 +85,13 @@ struct MeetingEditFeature: ReducerProtocol {
         // Delegate
         case delegate(Delegate)
         
-        enum Delegate {
+        enum Delegate: Equatable {
             case moveToBack
+            case moveToLogin
         }
     }
+    
+    @Dependency(\.meetingEditService) var meetingEditService
 
     var body: some ReducerProtocolOf<Self> {
         
@@ -99,14 +120,18 @@ struct MeetingEditFeature: ReducerProtocol {
             switch action {
                 
             case .onAppear:
+                state.beforeMeetingEdit = state.meetingEdit
+                
                 state.titleTextFieldState.text = state.meetingEdit.title
                 state.placeTextFieldState.text = state.meetingEdit.place
-                if let memo = state.meetingEdit.memo {
-                    state.memoTextEditorState.text = memo
-                }
+                state.memoTextEditorState.text = state.meetingEdit.memo
                 state.meetingDateButtonState.dateButtonStatus = .valid
                 state.meetingDateButtonState.timeButtonStatus = .valid
                 
+                return .none
+                
+            case .editModelChanged:
+                state.editButtonDisabled = state.beforeMeetingEdit == state.meetingEdit
                 return .none
                 
                 // MARK: - Tap
@@ -115,15 +140,75 @@ struct MeetingEditFeature: ReducerProtocol {
                 return .run { send in await send(.delegate(.moveToBack)) }
                 
             case .editButtonTapped:
-                print(state.meetingEdit)
-                return .none
+                let beforeMeetingEdit = state.beforeMeetingEdit
+                let meetingEditModel = state.meetingEdit
                 
+                state.isLoading = true
+                return .run { send in
+                    let result = await meetingEditService.editMeeting(
+                        beforeMeetingEdit,
+                        meetingEditModel
+                    )
+                    await send(.handleResult(result))
+                }
+                
+            case .handleResult(let result):
+                state.isLoading = false
+                
+                switch result {
+                case .success:
+                    return .run { send in await send(.delegate(.moveToBack))}
+                case .notFound:
+                    return .run { send in await send(.alertTypeChanged(.meetingNotFound))}
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError))}
+                case .networkError(let description):
+                    return .run { send in await send(.alertTypeChanged(.networkError(description)))}
+                }
+                
+                
+                // MARK: - Alert
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
+                return .none
+
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .failCreateMeetingEdit:
+                    return .none
+                case .meetingNotFound, .networkError:
+                    return .run { send in await send(.delegate(.moveToBack))}
+                case .userError:
+                    return .run { send in await send(.delegate(.moveToLogin))}
+                }
                 
                 // MARK: - Child
 
                 // Text
+            case .titleTextFieldAction(.textChanged(let newTitle)):
+                state.meetingEdit = state.meetingEdit.update(title: newTitle)
+                return .run { send in await send(.editModelChanged)}
+                
             case .titleTextFieldAction:
                 return .none
+                
+            case .placeTextFieldAction(.textChanged(let newPlace)):
+                state.meetingEdit = state.meetingEdit.update(place: newPlace)
+                return .run { send in await send(.editModelChanged)}
                 
             case .placeTextFieldAction:
                 return .none
@@ -132,6 +217,10 @@ struct MeetingEditFeature: ReducerProtocol {
                 state.memoTextEditorFocused = isFocused
                 return .none
                 
+            case .memoTextEditorAction(.textChanged(let newMemo)):
+                state.meetingEdit = state.meetingEdit.update(memo: newMemo)
+                return .run { send in await send(.editModelChanged)}
+                
             case .memoTextEditorAction:
                 return .none
                 
@@ -139,7 +228,7 @@ struct MeetingEditFeature: ReducerProtocol {
                 
             case let .dateChanged(newDate):
                 state.meetingEdit = state.meetingEdit.update(date: newDate)
-                return .none
+                return .run { send in await send(.editModelChanged)}
                 
             case .meetingDateButtonAction(.selectDateButtonTapped):
                 state.selectDateState = SelectDateFeature.State(date: state.meetingEdit.date)
@@ -159,7 +248,7 @@ struct MeetingEditFeature: ReducerProtocol {
                 if let yearMonthDateState = state.selectDateState {
                     let newDate = yearMonthDateState.date
                     let newYearMonthDate = state.meetingEdit.date.yearMonthDate(of: newDate)
-                    state.meetingEdit = state.meetingEdit.update(date: newYearMonthDate)
+                    return .run { send in await send(.dateChanged(newYearMonthDate))}
                 }
                 return .none
                 
@@ -174,7 +263,7 @@ struct MeetingEditFeature: ReducerProtocol {
                 if let hourMinuteState = state.selectTimeState {
                     let newDate = hourMinuteState.time
                     let newHourMinute = state.meetingEdit.date.hourMinute(of: newDate)
-                    state.meetingEdit = state.meetingEdit.update(date: newHourMinute)
+                    return .run { send in await send(.dateChanged(newHourMinute))}
                 }
                 return .none
                 
@@ -186,7 +275,8 @@ struct MeetingEditFeature: ReducerProtocol {
                 return .none
                 
                 // MARK: - Delegate
-            case .delegate(.moveToBack):
+                
+            case .delegate:
                 return .none
             }
         }

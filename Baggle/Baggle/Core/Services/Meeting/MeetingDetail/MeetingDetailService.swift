@@ -11,6 +11,7 @@ import ComposableArchitecture
 
 struct  MeetingDetailService {
     var fetchMeetingDetail: (_ meetingID: Int) async -> MeetingDetailResult
+//    var editMeeting: (_ meetingEditModel: MeetingEditModel) async -> MeetingDetailResult
 }
 
 extension MeetingDetailService: DependencyKey {
@@ -24,14 +25,14 @@ extension MeetingDetailService: DependencyKey {
                       let username = UserDefaultList.user?.name else {
                     return MeetingDetailResult.userError
                 }
-
+                
                 let meetingDetailEntity: MeetingDetailEntity = try await networkService.request(
                     .meetingDetail(meetingID: meetingID, token: token)
                 )
-
+                
                 let meetingDetail = meetingDetailEntity.toDomain(username: username)
                 print(meetingDetail)
-
+                
                 return .success(meetingDetail)
             }.value
         } catch {

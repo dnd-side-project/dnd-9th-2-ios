@@ -87,6 +87,7 @@ struct MeetingEditView: View {
                             }
                             .buttonStyle(BagglePrimaryStyle())
                             .padding(.vertical, 20)
+                            .disabled(viewStore.editButtonDisabled)
                             .id(scrollBottomID)
                         }
                     }
@@ -122,6 +123,14 @@ struct MeetingEditView: View {
             .onAppear {
                 viewStore.send(.onAppear)
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { MeetingEditFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .sheet(
                 store: self.store.scope(
                     state: \.$selectDateState,
@@ -149,7 +158,14 @@ struct MeetingEditView_Previews: PreviewProvider {
         MeetingEditView(
             store: Store(
                 initialState: MeetingEditFeature.State(
-                    meetingEdit: MeetingEdit(
+                    beforeMeetingEdit: MeetingEditModel(
+                        id: 0,
+                        title: "제목",
+                        place: "장소는 어디냐",
+                        date: Date(),
+                        memo: "메모메모"
+                    ),
+                    meetingEdit: MeetingEditModel(
                         id: 0,
                         title: "제목",
                         place: "장소는 어디냐",
