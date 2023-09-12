@@ -91,4 +91,9 @@ extension Image {
         static let buttonOff = Image("Button_Off")
         static let buttonOn = Image("Button_On")
     }
+    
+    // MARK: - 온보딩
+    struct Onboarding {
+        static let pageOne = Image("Temp_Onboarding")
+    }
 }

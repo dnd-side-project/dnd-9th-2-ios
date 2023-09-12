@@ -129,6 +129,9 @@
 		14CF68E92A846EB700E457DF /* TestDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68E82A846EB700E457DF /* TestDateService.swift */; };
 		14CF68EC2A847BEF00E457DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68EB2A847BEF00E457DF /* User.swift */; };
 		14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */; };
+		14D1F1032AB12E0000778EEC /* OnboardingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D1F1022AB12E0000778EEC /* OnboardingFeature.swift */; };
+		14D1F1052AB12E0600778EEC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D1F1042AB12E0600778EEC /* OnboardingView.swift */; };
+		14D1F1082AB1318900778EEC /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D1F1072AB1318900778EEC /* OnboardingPage.swift */; };
 		14E0836A2A83690D0001CB21 /* EntityContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E083692A83690D0001CB21 /* EntityContainer.swift */; };
 		14E0836D2A836A8C0001CB21 /* MeetingDetailEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */; };
 		14E0836F2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */; };
@@ -378,6 +381,9 @@
 		14CF68E82A846EB700E457DF /* TestDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateService.swift; sourceTree = "<group>"; };
 		14CF68EB2A847BEF00E457DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPlatform.swift; sourceTree = "<group>"; };
+		14D1F1022AB12E0000778EEC /* OnboardingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFeature.swift; sourceTree = "<group>"; };
+		14D1F1042AB12E0600778EEC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		14D1F1072AB1318900778EEC /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		14E083692A83690D0001CB21 /* EntityContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityContainer.swift; sourceTree = "<group>"; };
 		14E0836C2A836A8C0001CB21 /* MeetingDetailEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailEntity.swift; sourceTree = "<group>"; };
 		14E0836E2A836C1D0001CB21 /* MeetingDetailMemberEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailMemberEntity.swift; sourceTree = "<group>"; };
@@ -1059,6 +1065,7 @@
 		1493A90D2A7DE49000A2D7CC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				14D1F0FF2AB12C5200778EEC /* Onboarding */,
 				147E40EC2AA03B970044698B /* MeetingDateButton */,
 				1493A90E2A7DE49B00A2D7CC /* Timer */,
 			);
@@ -1296,6 +1303,16 @@
 				14CF68ED2A847C5C00E457DF /* LoginPlatform.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		14D1F0FF2AB12C5200778EEC /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				14D1F1022AB12E0000778EEC /* OnboardingFeature.swift */,
+				14D1F1042AB12E0600778EEC /* OnboardingView.swift */,
+				14D1F1072AB1318900778EEC /* OnboardingPage.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		14E083662A8368F00001CB21 /* Meeting */ = {
@@ -1980,6 +1997,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14D1F1052AB12E0600778EEC /* OnboardingView.swift in Sources */,
 				14783EE62A7E33B600EF58D5 /* CameraService.swift in Sources */,
 				143C7C062A876A20004D83FD /* KeyChainError.swift in Sources */,
 				2BB0EF402A8D1034003F9215 /* HomeEntity.swift in Sources */,
@@ -2125,6 +2143,7 @@
 				2B7EC3322A826F4D00D78141 /* ImageDetailView.swift in Sources */,
 				1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
+				14D1F1032AB12E0000778EEC /* OnboardingFeature.swift in Sources */,
 				142BEED92A8F213B00B91426 /* UserToken.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
@@ -2137,6 +2156,7 @@
 				1462373E2A87760E00FBE121 /* SettingListRow.swift in Sources */,
 				147E40EE2AA03BB90044698B /* MeetingDateButton.swift in Sources */,
 				147E40F52AA0454F0044698B /* MeetingEditFeature.swift in Sources */,
+				14D1F1082AB1318900778EEC /* OnboardingPage.swift in Sources */,
 				14E577AC2A80973B00119FB3 /* EmergencyView.swift in Sources */,
 				2BCACB7F2A742C9000892D45 /* BaggleTextFeature.swift in Sources */,
 				147DFC7E2A8D124400D176D1 /* MeetingCreateEntity.swift in Sources */,
