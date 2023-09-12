@@ -36,7 +36,11 @@ struct MeetingLeaveMemberView: View {
 struct MeetingLeaveMemberView_Previews: PreviewProvider {
     static var previews: some View {
         MeetingLeaveMemberView(
-            meetingLeaveMember: MeetingLeaveMember(id: 1, name: "유탁", profileURL: "https://i.namu.wiki/i/OXmmnGpQrbZ_6dYNGRIrCQEkKqgHZhBwxBU-KmfbjLZVknsUN8iXU2jYzVWFQb4P9qbVVHKiM5SfCa1_DXGLlS58m7UthtaWsCTmHlHvyvl6FR2kGRSYhZZ6T4Nr9nAeBUKMJpMzFrF6U-jvpunjgQ.webp"),
+            meetingLeaveMember: MeetingLeaveMember(
+                id: 1,
+                name: "유탁",
+                // swiftlint:disable:next line_length
+                profileURL: "https://i.namu.wiki/i/OXmmnGpQrbZ_6dYNGRIrCQEkKqgHZhBwxBU-KmfbjLZVknsUN8iXU2jYzVWFQb4P9qbVVHKiM5SfCa1_DXGLlS58m7UthtaWsCTmHlHvyvl6FR2kGRSYhZZ6T4Nr9nAeBUKMJpMzFrF6U-jvpunjgQ.webp"),
             isSelected: true
         )
     }

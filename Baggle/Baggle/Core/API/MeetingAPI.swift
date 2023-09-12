@@ -42,7 +42,7 @@ extension MeetingAPI: BaseAPI {
             return HeaderType.jsonWithBearer(token: token).value
         case .createMeeting(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
-        case .deleteMeeting(_ , let token):
+        case .deleteMeeting(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
         }
     }

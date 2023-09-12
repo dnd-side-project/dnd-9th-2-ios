@@ -32,7 +32,7 @@ extension MeetingStatusEntity {
         }
     }
     
-    func meetingStampStatus(remainingDay: Int) ->  MeetingStampStatus {
+    func meetingStampStatus(remainingDay: Int) -> MeetingStampStatus {
         if self == .scheduled && remainingDay == 0 {
             return .dDay
         }

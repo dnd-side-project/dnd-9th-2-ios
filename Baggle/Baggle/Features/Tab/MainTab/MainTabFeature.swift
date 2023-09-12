@@ -121,8 +121,8 @@ struct MainTabFeature: ReducerProtocol {
             case .selectTab(let tabType):
                 if tabType == .createMeeting {
                     state.createMeeting = CreateTitleFeature.State()
-                    state.previousTab = state.selectedTab
                 }
+                state.previousTab = state.selectedTab
                 state.selectedTab = tabType
                 return .none
 
@@ -324,7 +324,7 @@ struct MainTabFeature: ReducerProtocol {
                 // MARK: - Delegate
                 
             case .delegate(.moveToLogin):
-                state.selectedTab = .home // 로그아웃 후 재 진입시 기본 화면 홈 화면으로 설정
+//                state.selectedTab = .home // 로그아웃 후 재 진입시 기본 화면 홈 화면으로 설정
                 return .none
                 
             case .delegate:
