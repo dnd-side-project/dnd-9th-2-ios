@@ -19,7 +19,7 @@ class TokenRefreshService {
             guard let user = UserManager.shared.user else { return .keyChainError }
             
             let data: TokenRefreshEntity = try await networkService.request(
-                .reissue(token: refreshToken)
+                .reissue(token: refreshToken, userID: user.id)
             )
             let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
             
