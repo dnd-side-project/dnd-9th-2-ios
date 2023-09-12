@@ -113,9 +113,18 @@ struct SelectOwnerView_Previews: PreviewProvider {
                 reducer: SelectOwnerFeature()
             ),
             meetingLeaveMember: [
-                MeetingLeaveMember(id: 1, name: "수빈", profileURL: "https://i.namu.wiki/i/OXmmnGpQrbZ_6dYNGRIrCQEkKqgHZhBwxBU-KmfbjLZVknsUN8iXU2jYzVWFQb4P9qbVVHKiM5SfCa1_DXGLlS58m7UthtaWsCTmHlHvyvl6FR2kGRSYhZZ6T4Nr9nAeBUKMJpMzFrF6U-jvpunjgQ.webp"),
-                MeetingLeaveMember(id: 2, name: "유탁", profileURL: "https://i.namu.wiki/i/KSlJDAdoBtpnTzmwMv8dt4fXffy8CzUt4mTrzEptnyuc3ZGD9V-Qh8GNX_C7D6NSiwxl5n6aKTVsl6ymcJH2Mr9HJ-N4BfF6-HxeEuileIky3J_MCBoqghRZSYjt1Zuh7pMlCqv28Em85p8q0RzBtA.webp"),
-//                MeetingLeaveMember(id: 3, name: "채이", profileURL: "")
+                MeetingLeaveMember(
+                    id: 1,
+                    name: "수빈",
+                    // swiftlint:disable:next line_length
+                    profileURL: "https://i.namu.wiki/i/OXmmnGpQrbZ_6dYNGRIrCQEkKqgHZhBwxBU-KmfbjLZVknsUN8iXU2jYzVWFQb4P9qbVVHKiM5SfCa1_DXGLlS58m7UthtaWsCTmHlHvyvl6FR2kGRSYhZZ6T4Nr9nAeBUKMJpMzFrF6U-jvpunjgQ.webp"
+                ),
+                MeetingLeaveMember(
+                    id: 2,
+                    name: "유탁",
+                    // swiftlint:disable:next line_length
+                    profileURL: "https://i.namu.wiki/i/KSlJDAdoBtpnTzmwMv8dt4fXffy8CzUt4mTrzEptnyuc3ZGD9V-Qh8GNX_C7D6NSiwxl5n6aKTVsl6ymcJH2Mr9HJ-N4BfF6-HxeEuileIky3J_MCBoqghRZSYjt1Zuh7pMlCqv28Em85p8q0RzBtA.webp"
+                )
             ]
         )
         .background(Color.blue.opacity(0.1))
@@ -127,11 +136,21 @@ struct SelectOwnerView_Previews: PreviewProvider {
                 reducer: SelectOwnerFeature()
             ),
             meetingLeaveMember: [
-                MeetingLeaveMember(id: 1, name: "수빈", profileURL: "https://i.namu.wiki/i/OXmmnGpQrbZ_6dYNGRIrCQEkKqgHZhBwxBU-KmfbjLZVknsUN8iXU2jYzVWFQb4P9qbVVHKiM5SfCa1_DXGLlS58m7UthtaWsCTmHlHvyvl6FR2kGRSYhZZ6T4Nr9nAeBUKMJpMzFrF6U-jvpunjgQ.webp"),
-                MeetingLeaveMember(id: 2, name: "유탁", profileURL: "https://i.namu.wiki/i/KSlJDAdoBtpnTzmwMv8dt4fXffy8CzUt4mTrzEptnyuc3ZGD9V-Qh8GNX_C7D6NSiwxl5n6aKTVsl6ymcJH2Mr9HJ-N4BfF6-HxeEuileIky3J_MCBoqghRZSYjt1Zuh7pMlCqv28Em85p8q0RzBtA.webp"),
+                MeetingLeaveMember(
+                    id: 1,
+                    name: "수빈",
+                    // swiftlint:disable:next line_length
+                    profileURL: "https://i.namu.wiki/i/OXmmnGpQrbZ_6dYNGRIrCQEkKqgHZhBwxBU-KmfbjLZVknsUN8iXU2jYzVWFQb4P9qbVVHKiM5SfCa1_DXGLlS58m7UthtaWsCTmHlHvyvl6FR2kGRSYhZZ6T4Nr9nAeBUKMJpMzFrF6U-jvpunjgQ.webp"
+                ),
+                MeetingLeaveMember(
+                    id: 2,
+                    name: "유탁",
+                    // swiftlint:disable:next line_length
+                    profileURL: "https://i.namu.wiki/i/KSlJDAdoBtpnTzmwMv8dt4fXffy8CzUt4mTrzEptnyuc3ZGD9V-Qh8GNX_C7D6NSiwxl5n6aKTVsl6ymcJH2Mr9HJ-N4BfF6-HxeEuileIky3J_MCBoqghRZSYjt1Zuh7pMlCqv28Em85p8q0RzBtA.webp"
+                ),
                 MeetingLeaveMember(id: 3, name: "채이", profileURL: ""),
                 MeetingLeaveMember(id: 4, name: "선웅", profileURL: ""),
-                MeetingLeaveMember(id: 5, name: "관곤", profileURL: ""),
+                MeetingLeaveMember(id: 5, name: "관곤", profileURL: "")
             ]
         )
         .background(Color.blue.opacity(0.1))

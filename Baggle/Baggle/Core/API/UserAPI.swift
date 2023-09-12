@@ -14,7 +14,7 @@ enum UserAPI {
     case signIn(requestModel: LoginRequestModel, token: String)
     case signUp(requestModel: SignUpRequestModel, token: String)
     case signOut(token: String)
-    case reissue(token: String)
+    case reissue(token: String, userID: Int)
     case withdraw(token: String)
 }
 
@@ -46,7 +46,7 @@ extension UserAPI: BaseAPI {
             return HeaderType.multipart(token: token).value
         case .signOut(let token):
             return HeaderType.jsonWithBearer(token: token).value
-        case .reissue(let token):
+        case .reissue(let token, _):
             // refreshToken
             return HeaderType.jsonWithAuthorization(token: token).value
         case .withdraw(let token):
@@ -58,10 +58,8 @@ extension UserAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .signIn, .signUp:
+        case .signIn, .signUp, .reissue:
             return .post
-        case .reissue:
-            return .get
         case .withdraw, .signOut:
             return .patch
         }
@@ -76,6 +74,8 @@ extension UserAPI: BaseAPI {
         case .signIn(let requestModel, _):
             params["platform"] = requestModel.platform.rawValue
             params["fcmToken"] = requestModel.fcmToken
+        case .reissue(_, let userID):
+            params["userId"] = userID
         default:
             break
         }
@@ -92,7 +92,7 @@ extension UserAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
-        case .signIn:
+        case .signIn, .reissue:
             return .requestParameters(parameters: bodyParameters ?? [:],
                                       encoding: parameterEncoding)
         case .signUp(let requestModel, _):
@@ -118,7 +118,7 @@ extension UserAPI: BaseAPI {
             
             return .uploadMultipart(multiPartData)
             
-        case .reissue, .withdraw, .signOut:
+        case .withdraw, .signOut:
             return .requestPlain
         }
     }

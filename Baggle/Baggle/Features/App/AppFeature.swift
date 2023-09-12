@@ -46,6 +46,10 @@ struct AppFeature: ReducerProtocol {
             // Login Feature
 
             case .login(.delegate(.moveToMainTab)):
+                state.mainTabFeature = MainTabFeature.State(
+                    homeFeature: HomeFeature.State(),
+                    myPageFeature: MyPageFeature.State()
+                )
                 state.isLoggedIn = true
                 return .none
 
@@ -57,11 +61,6 @@ struct AppFeature: ReducerProtocol {
             case .mainTab(.delegate(.moveToLogin)):
                 UserManager.shared.delete()
                 state.isLoggedIn = false
-                state.mainTabFeature = MainTabFeature.State(
-                    selectedTab: .home,
-                    homeFeature: HomeFeature.State(),
-                    myPageFeature: MyPageFeature.State()
-                )
                 return .none
 
             case .mainTab:

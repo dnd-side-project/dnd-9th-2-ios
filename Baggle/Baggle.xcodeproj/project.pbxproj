@@ -192,6 +192,7 @@
 		2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */; };
 		2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */; };
 		2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8172A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift */; };
+		2B65EE702AAEEE090001C318 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B65EE6F2AAEEE090001C318 /* Settings.bundle */; };
 		2B7B4D6B2A849E9D00283248 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6A2A849E9D00283248 /* NetworkService.swift */; };
 		2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */; };
 		2B7B4D722A84A5C800283248 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B4D702A84A5C800283248 /* Meeting.swift */; };
@@ -448,6 +449,7 @@
 		2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
 		2B65B8152A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingInfoEntity.swift; sourceTree = "<group>"; };
 		2B65B8172A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodingWithNoSlash.swift; sourceTree = "<group>"; };
+		2B65EE6F2AAEEE090001C318 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B7B4D6A2A849E9D00283248 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2B7B4D6D2A84A1FF00283248 /* DefaultAlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlamofireManager.swift; sourceTree = "<group>"; };
 		2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingDetail.swift; path = Baggle/Core/Models/Meeting/MeetingDetail/MeetingDetail.swift; sourceTree = SOURCE_ROOT; };
@@ -543,6 +545,7 @@
 		140E88042A64B626005119F8 = {
 			isa = PBXGroup;
 			children = (
+				2B65EE6F2AAEEE090001C318 /* Settings.bundle */,
 				14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */,
 				14134D522A64C944004A6AC4 /* .swiftlint.yml */,
 				2BABCB172A76CDD400AFECA3 /* XCConfig */,
@@ -1972,6 +1975,7 @@
 			files = (
 				14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */,
 				14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */,
+				2B65EE702AAEEE090001C318 /* Settings.bundle in Resources */,
 				2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */,
 				141719762A9302C000AF1C51 /* SplashScreen_animation.json in Resources */,
 				141719742A92F40700AF1C51 /* Button_animation.json in Resources */,

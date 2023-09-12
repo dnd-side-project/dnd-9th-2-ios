@@ -61,9 +61,8 @@ struct CreateTitleView: View {
                         }
                     }
                 }
-
                 .onOpenURL { url in
-                    if let id = url.params()?["id"] as? String {
+                    if url.params()?["id"] is String {
                         viewStore.send(.cancelButtonTapped)
                     }
                 }
