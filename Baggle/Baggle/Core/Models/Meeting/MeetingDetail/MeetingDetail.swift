@@ -26,10 +26,6 @@ struct MeetingDetail: Equatable {
     let emergencyButtonExpiredTime: Date // 긴급 버튼 만료 시간 - 모임 15분 전
     let isCertified: Bool
     let feeds: [Feed]
-
-    static func == (lhs: MeetingDetail, rhs: MeetingDetail) -> Bool {
-        return lhs.id == rhs.id
-    }
 }
 
 extension MeetingDetail {

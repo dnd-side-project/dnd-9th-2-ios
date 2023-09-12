@@ -86,6 +86,7 @@ struct MeetingEditFeature: ReducerProtocol {
         case delegate(Delegate)
         
         enum Delegate: Equatable {
+            case successEdit
             case moveToBack
             case moveToLogin
         }
@@ -131,7 +132,10 @@ struct MeetingEditFeature: ReducerProtocol {
                 return .none
                 
             case .editModelChanged:
-                state.editButtonDisabled = state.beforeMeetingEdit == state.meetingEdit
+                state.editButtonDisabled = (state.beforeMeetingEdit == state.meetingEdit
+                                            || state.meetingEdit.title.isEmpty
+                                            || state.meetingEdit.place.isEmpty
+                                            )
                 return .none
                 
                 // MARK: - Tap
@@ -142,6 +146,10 @@ struct MeetingEditFeature: ReducerProtocol {
             case .editButtonTapped:
                 let beforeMeetingEdit = state.beforeMeetingEdit
                 let meetingEditModel = state.meetingEdit
+                
+                guard meetingEditModel.date.canMeeting else {
+                    return .run { send in await send(.alertTypeChanged(.invalidMeetingTime))}
+                }
                 
                 state.isLoading = true
                 return .run { send in
@@ -157,7 +165,7 @@ struct MeetingEditFeature: ReducerProtocol {
                 
                 switch result {
                 case .success:
-                    return .run { send in await send(.delegate(.moveToBack))}
+                    return .run { send in await send(.delegate(.successEdit))}
                 case .notFound:
                     return .run { send in await send(.alertTypeChanged(.meetingNotFound))}
                 case .userError:
@@ -188,7 +196,7 @@ struct MeetingEditFeature: ReducerProtocol {
                 state.alertType = nil
                 
                 switch alertType {
-                case .failCreateMeetingEdit:
+                case .invalidMeetingTime, .failCreateMeetingEdit:
                     return .none
                 case .meetingNotFound, .networkError:
                     return .run { send in await send(.delegate(.moveToBack))}

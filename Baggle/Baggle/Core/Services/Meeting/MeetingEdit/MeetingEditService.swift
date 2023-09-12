@@ -30,10 +30,6 @@ extension MeetingEditService: DependencyKey {
                 
                 let meetingEditRequestModel = createRequestModel(beforeModel, meetingEditModel)
                 
-                print(meetingEditRequestModel)
-                
-                return .notFound
-                
                 let meetingEditEntity: MeetingEditEntity = try await networkService.request(
                     .editMeeting(requestModel: meetingEditRequestModel, token: token)
                 )

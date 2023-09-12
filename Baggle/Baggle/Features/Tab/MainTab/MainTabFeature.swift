@@ -317,6 +317,13 @@ struct MainTabFeature: ReducerProtocol {
                 
                 // MARK: - 모임 수정
                 
+            case let .path(.element(id: id, action: .meetingEdit(.delegate(.successEdit)))):
+                state.path.pop(from: id)
+                return .run { send in
+                    try await Task.sleep(seconds: 0.5)
+                    await send(.homeAction(.refreshMeetingList))
+                }
+
             case let .path(.element(id: id, action: .meetingEdit(.delegate(.moveToBack)))):
                 state.path.pop(from: id)
                 return .none
