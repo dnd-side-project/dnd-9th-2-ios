@@ -55,7 +55,7 @@ struct SelectOwnerView: View {
                     ) { member in
                         MeetingLeaveMemberView(
                             meetingLeaveMember: member,
-                            isSelected: viewStore.selectedMemberId == member.id
+                            isSelected: viewStore.selectedMemberID == member.id
                         )
                         .onTapGesture {
                             viewStore.send(.selectMember(member.id))
@@ -71,7 +71,7 @@ struct SelectOwnerView: View {
                         ) { member in
                             MeetingLeaveMemberView(
                                 meetingLeaveMember: member,
-                                isSelected: viewStore.selectedMemberId == member.id
+                                isSelected: viewStore.selectedMemberID == member.id
                             )
                             .onTapGesture {
                                 viewStore.send(.selectMember(member.id))
