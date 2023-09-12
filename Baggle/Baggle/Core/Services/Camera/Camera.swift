@@ -367,7 +367,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     // 사진 촬영 완료후 실행되는 메소드
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
 
-        if let error = error {
+        if error != nil {
             resultImageContinuation?.resume(throwing: CameraError.capture)
             return
         }

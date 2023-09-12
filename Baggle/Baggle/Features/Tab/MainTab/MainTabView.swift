@@ -105,6 +105,7 @@ struct MainTabView: View {
             case .meetingDetail:
                 CaseLet(
                     /MainTabFeature.Child.State.meetingDetail,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
                      action: MainTabFeature.Child.Action.meetingDetail
                 ) { store in
                     MeetingDetailView(store: store)
@@ -112,6 +113,7 @@ struct MainTabView: View {
             case .meetingEdit:
                 CaseLet(
                     /MainTabFeature.Child.State.meetingEdit,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
                      action: MainTabFeature.Child.Action.meetingEdit
                 ) { store in
                     MeetingEditView(store: store)

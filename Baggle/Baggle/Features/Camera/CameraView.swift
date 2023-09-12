@@ -50,7 +50,6 @@ struct CameraView: View {
                         text: "시간이 초과되었습니다"
                     )
                 }
-                
             }
             .onAppear {
                 viewStore.send(.onAppear)
