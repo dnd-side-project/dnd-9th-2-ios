@@ -23,7 +23,7 @@ struct MainTabView: View {
         NavigationStackStore(self.store.scope(
             state: \.path,
             action: { .path($0)})
-        )  {
+        ) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
                 ZStack {
                     TabView(

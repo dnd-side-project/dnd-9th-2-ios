@@ -118,24 +118,34 @@ struct MeetingDetailView: View {
                         send: { MeetingDetailFeature.Action.presentActionSheet($0) }
                     ),
                 content: {
-                    Text("방 정보 수정하기")
-                        .addAction {
-                            viewStore.send(.inviteButtonTapped)
-                        }
                     
-                    Divider().padding(.horizontal, 20)
-                    
-                    Text("방장 넘기고 나가기")
-                        .addAction {
-                            viewStore.send(.leaveButtonTapped)
-                        }
-                    
-                    Divider().padding(.horizontal, 20)
-                    
-                    Text("방 폭파하기")
-                        .addAction({
-                            viewStore.send(.deleteButtonTapped)
-                        }, role: .destructive)
+                    if let meetingData = viewStore.meetingData, meetingData.isOwner {
+                        Text("방 정보 수정하기")
+                            .addAction {
+                                viewStore.send(.inviteButtonTapped)
+                            }
+                        
+                        Divider().padding(.horizontal, 20)
+                        
+                        Text("방장 넘기고 나가기")
+                            .addAction {
+                                viewStore.send(.delegateButtonTapped)
+                            }
+                        
+                        Divider().padding(.horizontal, 20)
+                        
+                        Text("방 폭파하기")
+                            .addAction({
+                                viewStore.send(.deleteButtonTapped)},
+                                role: .destructive
+                            )
+                    } else {
+                        Text("방 나가기")
+                            .addAction({
+                                viewStore.send(.leaveButtonTapped)},
+                                role: .destructive
+                            )
+                    }
             })
             .sheet(
                 store: self.store.scope(

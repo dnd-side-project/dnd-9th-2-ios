@@ -34,6 +34,7 @@ extension MeetingDetailEntity {
             memo: (memo ?? "").isEmpty ? nil : memo,
             members: members.map { $0.memberDomain(afterMeetingConfirmed: isMeetingConfirmed()) },
             memberID: memberId(username: username, members: members),
+            isOwner: isOwner(username: username, members: members),
             stampStatus: status.meetingStampStatus(),
             emergencyStatus: status.meetingEmergencyStatus(),
             isEmergencyAuthority: isEmergencyAuthority(username: username, members: self.members),
@@ -56,6 +57,10 @@ extension MeetingDetailEntity {
         return members.filter({ $0.nickname == username }).first?.memberID ?? -1
     }
 
+    private func isOwner(username: String, members: [MeetingDetailMemberEntity]) -> Bool {
+        return members.contains { $0.nickname == username && $0.meetingAuthority }
+    }
+    
     private func isEmergencyAuthority(
         username: String,
         members: [MeetingDetailMemberEntity]

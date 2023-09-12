@@ -67,7 +67,7 @@ struct BaggleAlert_Previews: PreviewProvider {
             
             BaggleAlert(
                 isPresented: .constant(true),
-                alertType: AlertMeetingDetailType.delete
+                alertType: AlertMeetingDetailType.meetingDelete
             ) {
                 print("눌렀어")
             }

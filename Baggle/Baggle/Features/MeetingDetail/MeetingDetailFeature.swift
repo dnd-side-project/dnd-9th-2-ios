@@ -62,12 +62,15 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // Meeting Delete
         case deleteMeeting
+        case leaveMeeting
         case handleDeleteResult(MeetingDeleteResult)
 
         // button
         case deleteButtonTapped
         case editButtonTapped
+        case delegateButtonTapped
         case leaveButtonTapped
+        
         case backButtonTapped
         case cameraButtonTapped
         case emergencyButtonTapped
@@ -174,9 +177,27 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // MARK: - Meeting Delete
                 
             case .deleteMeeting:
+                guard let meetingID = state.meetingData?.id else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                state.isLoading = true
+                
                 return .run { send in
-                    // 삭제 서버 통신에 따라 분기처리
-                    await send(.delegate(.deleteSuccess))
+                    let result = await meetingDeleteService.delete(meetingID)
+                    await send(.handleDeleteResult(result))
+                }
+                
+            case .leaveMeeting:
+                guard let memberID = state.meetingData?.memberID else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                state.isLoading = true
+                
+                return .run { send in
+                    let result = await meetingDeleteService.leave(memberID)
+                    await send(.handleDeleteResult(result))
                 }
                 
             case .handleDeleteResult(let result):
@@ -185,6 +206,10 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch result {
                 case .successDelegate:
                     return .run { send in await send(.alertTypeChanged(.meetingDelegateSuccess))}
+                case .successLeave, .successDelete:
+                    return .run { send in await send(.delegate(.deleteSuccess))}
+                case .invalidDeleteTime:
+                    return .run { send in await send(.alertTypeChanged(.invalidMeetingDelete))}
                 case .networkError:
                     return .run { send in await send(.alertTypeChanged(.networkError("네트워크 에러")))}
                 case .expiredToken:
@@ -205,8 +230,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
-            case .leaveButtonTapped:
-                
+            case .delegateButtonTapped:
                 guard let meetingData = state.meetingData else {
                     return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
@@ -218,7 +242,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                     state.selectOwner = SelectOwnerFeature.State()
                 }
                 return .none
+                
+            case .leaveButtonTapped:
+                return .run { send in await send(.alertTypeChanged(.meetingLeave)) }
 
+                
+                
             case .backButtonTapped:
                 state.dismiss = true
                 return .none
@@ -339,19 +368,19 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError, .invalidAuthentication, .meetingUnwrapping, .meetingDelegateFail:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
                 case .invitation:
                     return .none
-                case .meetingDelete:
-                    //방 폭파
-                    return .none
+                case .meetingDelete: // 방 폭파
+                    return .run { send in await send(.deleteMeeting)}
                 case .meetingDelegateSuccess:
                     return .run { send in await send(.delegate(.deleteSuccess)) }
-                case .delete:
-                    // 삭제 요청
+                case .meetingLeave: // 모임 나가기 (방장 아닌 사람)
+                    return .run { send in await send(.leaveMeeting)}
+                case .meetingDelegateFail, .invalidMeetingDelete:
                     return .none
                 }
 
