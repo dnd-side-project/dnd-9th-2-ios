@@ -11,7 +11,6 @@ import ComposableArchitecture
 
 struct  MeetingDetailService {
     var fetchMeetingDetail: (_ meetingID: Int) async -> MeetingDetailResult
-//    var editMeeting: (_ meetingEditModel: MeetingEditModel) async -> MeetingDetailResult
 }
 
 extension MeetingDetailService: DependencyKey {
