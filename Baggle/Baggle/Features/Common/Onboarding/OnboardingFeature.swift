@@ -19,7 +19,7 @@ struct OnboardingFeature: ReducerProtocol {
         case delegate(Delegate)
         
         enum Delegate: Equatable {
-            case buttonTapped
+            case moveToHome
         }
     }
 
@@ -31,9 +31,9 @@ struct OnboardingFeature: ReducerProtocol {
 
             switch action {
             case .buttonTapped:
-                return .run { send in await send(.delegate(.buttonTapped))}
+                return .run { send in await send(.delegate(.moveToHome))}
                 
-            case .delegate(.buttonTapped):
+            case .delegate(.moveToHome):
                 return .none
             }
         }

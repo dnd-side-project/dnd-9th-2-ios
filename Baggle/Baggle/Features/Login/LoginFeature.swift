@@ -153,7 +153,7 @@ struct LoginFeature: ReducerProtocol {
                 
                 // MARK: - Child Action
                 
-            case .signUpNickname(.presented(.delegate(.successSignUp))):
+            case .signUpNickname(.presented(.delegate(.moveToHome))):
                 state.disableDismissAnimation = true // 홈 화면 이동시 화면 전환 애니메이션 비활성화
                 return .run { send in await send(.delegate(.moveToMainTab)) }
                 

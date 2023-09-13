@@ -78,8 +78,27 @@ struct SignUpView: View {
             .onTapGesture {
                 hideKeyboard()
             }
-        } destination: { store in
-            SignUpSuccessView(store: store)
+        } destination: { pathState in
+            switch pathState {
+            case .signUpSuccess:
+                CaseLet(
+                    /SignUpFeature.Child.State.signUpSuccess,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
+                     action: SignUpFeature.Child.Action.signUpSuccess
+                ) { store in
+                    SignUpSuccessView(store: store)
+                        .navigationBarBackButtonHidden()
+                }
+            case .onboarding:
+                CaseLet(
+                    /SignUpFeature.Child.State.onboarding,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
+                     action: SignUpFeature.Child.Action.onboarding
+                ) { store in
+                    OnboardingView(store: store)
+                        .navigationBarBackButtonHidden()
+                }
+            }
         }
     }
 }
