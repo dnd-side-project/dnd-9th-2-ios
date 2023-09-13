@@ -12,11 +12,11 @@ struct OnboardingPage: View {
     let image: Image
     
     var body: some View {
+        
         VStack {
             image
-                .scaledToFit()
-            
-            Spacer()
+                .resizable()
+                .scaledToFill()
         }
     }
 }
@@ -24,7 +24,7 @@ struct OnboardingPage: View {
 struct OnboardingPage_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingPage(
-            image: Image.Onboarding.pageOne
+            image: Image.Onboarding.pageTwo
         )
     }
 }

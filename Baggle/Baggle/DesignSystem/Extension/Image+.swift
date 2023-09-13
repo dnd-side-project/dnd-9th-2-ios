@@ -94,6 +94,8 @@ extension Image {
     
     // MARK: - 온보딩
     struct Onboarding {
-        static let pageOne = Image("Temp_Onboarding")
+        static let pageOne = Image("Onboarding_One")
+        static let pageTwo = Image("Onboarding_Two")
+        static let pageThree = Image("Onboarding_Three")
     }
 }
