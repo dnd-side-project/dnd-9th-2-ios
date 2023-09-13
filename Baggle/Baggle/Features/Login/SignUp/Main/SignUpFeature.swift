@@ -305,7 +305,7 @@ struct SignUpFeature: ReducerProtocol {
                 return .none
 
 
-            case let .path(.element(id: id, action: .onboarding(.delegate(.moveToHome)))):
+            case let .path(.element(id: id, action: .onboarding(.delegate(.buttonTapped)))):
                 _ = id
                 state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
 
