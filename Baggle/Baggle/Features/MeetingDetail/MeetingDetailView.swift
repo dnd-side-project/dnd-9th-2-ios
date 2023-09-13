@@ -122,7 +122,7 @@ struct MeetingDetailView: View {
                     if let meetingData = viewStore.meetingData, meetingData.isOwner {
                         Text("방 정보 수정하기")
                             .addAction {
-                                viewStore.send(.inviteButtonTapped)
+                                viewStore.send(.editButtonTapped)
                             }
                         
                         Divider().padding(.horizontal, 20)

@@ -91,7 +91,7 @@ struct CreateDateFeature: ReducerProtocol {
                     let meetingTime = state.meetingDate
                     return .run { send in await send(.delegate(.moveToNext(meetingTime))) }
                 } else {
-                    state.errorMessage = "모임은 2시간 이후부터 가능해요."
+                    state.errorMessage = "모임은 1시간 이후부터 가능해요."
                     state.meetingDateButtonState.dateButtonStatus = .invalid
                     state.meetingDateButtonState.timeButtonStatus = .invalid
                 }

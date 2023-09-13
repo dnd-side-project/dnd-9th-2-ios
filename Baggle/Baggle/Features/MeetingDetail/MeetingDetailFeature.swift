@@ -59,6 +59,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         // Meeting Detail
         case handleDetailResult(MeetingDetailResult)
         case updateData(MeetingDetail)
+        case updateAfterMeetingEdit(MeetingEditSuccessModel)
         
         // Meeting Delete
         case deleteMeeting
@@ -104,7 +105,7 @@ struct MeetingDetailFeature: ReducerProtocol {
             case deleteSuccess
             case onDisappear
             case moveToLogin
-            case moveToEdit(MeetingEdit)
+            case moveToEdit(MeetingEditModel)
         }
     }
 
@@ -174,6 +175,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .none
 
+            case .updateAfterMeetingEdit(let editedData):
+                guard let editedMeeting = state.meetingData?.updateMeetingEdit(editedData) else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                return .run { send in await send(.updateData(editedMeeting))}
+                
                 // MARK: - Meeting Delete
                 
             case .deleteMeeting:
@@ -224,10 +231,18 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .run { send in await send(.alertTypeChanged(.meetingDelete))}
                 
             case .editButtonTapped:
-                guard let meetingEdit = state.meetingData?.toMeetingEdit() else {
-                    // 실패시 MeetingDetail에서 Date생성하는 함수를 확인할 것
+                guard let meetingData = state.meetingData else {
                     return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
+                
+                guard meetingData.emergencyStatus == .scheduled else {
+                    return .run { send in await send(.alertTypeChanged(.invalidMeetingEdit))}
+                }
+                
+                guard let meetingEdit = meetingData.toMeetingEdit() else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
                 return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
             case .delegateButtonTapped:
@@ -381,6 +396,8 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .meetingLeave: // 모임 나가기 (방장 아닌 사람)
                     return .run { send in await send(.leaveMeeting)}
                 case .meetingDelegateFail, .invalidMeetingDelete:
+                    return .none
+                case .invalidMeetingEdit:
                     return .none
                 }
 
