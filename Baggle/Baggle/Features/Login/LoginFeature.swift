@@ -22,11 +22,13 @@ struct LoginFeature: ReducerProtocol {
         // MARK: - Child State
         
         @PresentationState var signUpNickname: SignUpFeature.State?
+        @PresentationState var onboardingState: OnboardingFeature.State?
     }
     
     enum Action: Equatable {
         
         case completeSplashAnimation
+        case showOnboarding
         
         // MARK: - Button Tapped
         
@@ -48,6 +50,7 @@ struct LoginFeature: ReducerProtocol {
         // MARK: - Child Action
         
         case signUpNickname(PresentationAction<SignUpFeature.Action>)
+        case onboardingAction(PresentationAction<OnboardingFeature.Action>)
         
         // MARK: - Delegate
         case delegate(Delegate)
@@ -66,8 +69,14 @@ struct LoginFeature: ReducerProtocol {
                 
             case .completeSplashAnimation:
                 state.completeSplashAnimation = true
-                return .none
+                return .run { send in
+                    try await Task.sleep(seconds: Const.Animation.loginButton)
+                    await send(.showOnboarding)
+                }
                 
+            case .showOnboarding:
+                state.onboardingState = OnboardingFeature.State()
+                return .none
                 
                 // MARK: - Button Tapped
                 
@@ -160,6 +169,9 @@ struct LoginFeature: ReducerProtocol {
             case .signUpNickname:
                 return .none
                 
+            case .onboardingAction:
+                return .none
+                
                 // MARK: - Delegate
                 
             case .delegate:
@@ -168,6 +180,9 @@ struct LoginFeature: ReducerProtocol {
         }
         .ifLet(\.$signUpNickname, action: /Action.signUpNickname) {
             SignUpFeature()
+        }
+        .ifLet(\.$onboardingState, action: /Action.onboardingAction) {
+            OnboardingFeature()
         }
     }
 }

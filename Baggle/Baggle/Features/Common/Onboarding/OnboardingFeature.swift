@@ -23,6 +23,8 @@ struct OnboardingFeature: ReducerProtocol {
         }
     }
 
+    @Dependency(\.dismiss) var dismiss
+    
     var body: some ReducerProtocolOf<Self> {
 
         // MARK: - Reduce
@@ -31,7 +33,10 @@ struct OnboardingFeature: ReducerProtocol {
 
             switch action {
             case .buttonTapped:
-                return .run { send in await send(.delegate(.buttonTapped))}
+                return .run { send in
+                    await send(.delegate(.buttonTapped))
+                    await self.dismiss()
+                }
                 
             case .delegate(.buttonTapped):
                 return .none

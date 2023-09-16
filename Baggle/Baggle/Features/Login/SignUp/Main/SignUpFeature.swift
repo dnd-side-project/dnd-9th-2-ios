@@ -103,21 +103,15 @@ struct SignUpFeature: ReducerProtocol {
 
         enum State: Equatable {
             case signUpSuccess(SignUpSuccessFeature.State)
-            case onboarding(OnboardingFeature.State)
         }
 
         enum Action: Equatable {
             case signUpSuccess(SignUpSuccessFeature.Action)
-            case onboarding(OnboardingFeature.Action)
         }
 
         var body: some ReducerProtocolOf<Self> {
             Scope(state: /State.signUpSuccess, action: /Action.signUpSuccess) {
                 SignUpSuccessFeature()
-            }
-            
-            Scope(state: /State.onboarding, action: /Action.onboarding) {
-                OnboardingFeature()
             }
         }
     }
@@ -296,16 +290,6 @@ struct SignUpFeature: ReducerProtocol {
                 // MARK: - Child Action
 
             case let .path(.element(id: id, action: .signUpSuccess(.delegate(.moveToNext)))):
-                _ = id
-                state.path.append(
-                    .onboarding(
-                        OnboardingFeature.State()
-                    )
-                )
-                return .none
-
-
-            case let .path(.element(id: id, action: .onboarding(.delegate(.buttonTapped)))):
                 _ = id
                 state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
 

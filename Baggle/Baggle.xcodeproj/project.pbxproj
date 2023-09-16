@@ -101,6 +101,7 @@
 		147E40F72AA045550044698B /* MeetingEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E40F62AA045550044698B /* MeetingEditView.swift */; };
 		147E81382A8A3790008B9B06 /* MeetingDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81372A8A3790008B9B06 /* MeetingDetailService.swift */; };
 		147E813A2A8A3924008B9B06 /* MeetingDetailResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E81392A8A3924008B9B06 /* MeetingDetailResult.swift */; };
+		1486559E2AB57C28004002A7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1486559D2AB57C28004002A7 /* Animation.swift */; };
 		1493A9102A7DE4A500A2D7CC /* TimerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */; };
 		1493A9122A7DE4AB00A2D7CC /* SmallTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */; };
 		1493A9162A7DE7CB00A2D7CC /* LargeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */; };
@@ -354,6 +355,7 @@
 		147E40F62AA045550044698B /* MeetingEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingEditView.swift; sourceTree = "<group>"; };
 		147E81372A8A3790008B9B06 /* MeetingDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailService.swift; sourceTree = "<group>"; };
 		147E81392A8A3924008B9B06 /* MeetingDetailResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailResult.swift; sourceTree = "<group>"; };
+		1486559D2AB57C28004002A7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		1493A90F2A7DE4A500A2D7CC /* TimerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeature.swift; sourceTree = "<group>"; };
 		1493A9112A7DE4AB00A2D7CC /* SmallTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTimerView.swift; sourceTree = "<group>"; };
 		1493A9152A7DE7CB00A2D7CC /* LargeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTimerView.swift; sourceTree = "<group>"; };
@@ -1797,6 +1799,7 @@
 				14038B562A8DF6F200A7C964 /* Image.swift */,
 				1471ECFA2A8A465C00D9FC93 /* ErrorID.swift */,
 				2BB7FBC62A892A520003B75C /* Const.swift */,
+				1486559D2AB57C28004002A7 /* Animation.swift */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -2204,6 +2207,7 @@
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
 				146237482A87803F00FBE121 /* SafariWebView.swift in Sources */,
 				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,
+				1486559E2AB57C28004002A7 /* Animation.swift in Sources */,
 				146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */,
 				2BF6EC1B2A7FF5DC006CA492 /* NavigationBar.swift in Sources */,
 				14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */,

@@ -89,15 +89,6 @@ struct SignUpView: View {
                     SignUpSuccessView(store: store)
                         .navigationBarBackButtonHidden()
                 }
-            case .onboarding:
-                CaseLet(
-                    /SignUpFeature.Child.State.onboarding,
-                     // swiftlint:disable:next vertical_parameter_alignment_on_call
-                     action: SignUpFeature.Child.Action.onboarding
-                ) { store in
-                    OnboardingView(store: store)
-                        .navigationBarBackButtonHidden()
-                }
             }
         }
     }

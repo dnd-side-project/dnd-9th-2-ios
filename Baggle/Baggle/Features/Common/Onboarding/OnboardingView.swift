@@ -26,6 +26,7 @@ struct OnboardingView: View {
             VStack {
                 TabView {
                     OnboardingPage(image: Image.Onboarding.pageOne)
+                    OnboardingPage(image: Image.Onboarding.pageOne)
                     OnboardingPage(image: Image.Onboarding.pageTwo)
                     OnboardingPage(image: Image.Onboarding.pageThree)
                 }
