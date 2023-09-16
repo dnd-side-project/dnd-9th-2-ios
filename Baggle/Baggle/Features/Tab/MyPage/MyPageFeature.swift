@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct MyPageFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var user = UserDefaultList.user ?? User.error()
+        var user = UserDefaultManager.user ?? User.error()
         
         var isLoading: Bool = false
         var presentSafariView: Bool = false

@@ -142,7 +142,7 @@ struct SignUpFeature: ReducerProtocol {
                     nickname: nickname,
                     profilImageUrl: state.selectedImage,
                     platform: state.loginPlatform,
-                    fcmToken: UserDefaultList.fcmToken ?? ""
+                    fcmToken: UserDefaultManager.fcmToken ?? ""
                 )
 
                 if nicknameValidator.isValidate(nickname) {

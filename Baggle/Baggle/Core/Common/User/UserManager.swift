@@ -16,11 +16,11 @@ class UserManager {
     private init() {}
     
     var isLoggedIn: Bool {
-        UserDefaultList.user != nil
+        UserDefaultManager.user != nil
     }
     
     var user: User? {
-        UserDefaultList.user
+        UserDefaultManager.user
     }
     
     var accessToken: String? {
@@ -51,12 +51,12 @@ class UserManager {
     func save(user: User, userToken: UserToken) throws {
         checkKeyChain()
         try KeychainManager.shared.createUserToken(userToken)
-        UserDefaultList.user = user
+        UserDefaultManager.user = user
     }
 
     func delete() {
         do {
-            UserDefaultList.user = nil
+            UserDefaultManager.user = nil
             try keychainManager.deleteUserToken()
         } catch {
             print(error) // 삭제 에러 -> 원래 데이터가 없었음 -> 따로 처리 필요 x

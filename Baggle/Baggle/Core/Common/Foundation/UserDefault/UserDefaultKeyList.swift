@@ -29,16 +29,19 @@ import Foundation
 enum UserDefaultKey {
     case user
     case fcmToken
+    case isOnboarding
 
     var rawValue: String {
         switch self {
         case .user: return "user"
         case .fcmToken: return "fcmToken"
+        case .isOnboarding: return "isOnboarding"
         }
     }
 }
 
-public struct UserDefaultList {
+public struct UserDefaultManager {
     @UserDefaultWrapper<User>(key: .user) public static var user
     @UserDefaultWrapper<String>(key: .fcmToken) public static var fcmToken
+    @UserDefaultWrapper<Bool>(key: .isOnboarding, defaultValue: true) public static var isOnboarding
 }

@@ -75,7 +75,10 @@ struct LoginFeature: ReducerProtocol {
                 }
                 
             case .showOnboarding:
-                state.onboardingState = OnboardingFeature.State()
+                if let isOnboarding = UserDefaultManager.isOnboarding, isOnboarding {
+                    state.onboardingState = OnboardingFeature.State()
+                    UserDefaultManager.isOnboarding = false
+                }
                 return .none
                 
                 // MARK: - Button Tapped
@@ -103,7 +106,7 @@ struct LoginFeature: ReducerProtocol {
             case .requestLogin(let platform, let token):
                 let requestModel = LoginRequestModel(
                     platform: platform,
-                    fcmToken: UserDefaultList.fcmToken ?? ""
+                    fcmToken: UserDefaultManager.fcmToken ?? ""
                 )
                 
                 return .run { send in
