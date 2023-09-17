@@ -71,6 +71,8 @@ extension Image {
         static let home = Image("Background_home")
         static let homeShort = Image("Background_home_short")
         static let empty = Image("no_baggle")
+        static let error = Image("img_error")
+        static let loading = Image("img_loading")
     }
     
     // MARK: - Logo
