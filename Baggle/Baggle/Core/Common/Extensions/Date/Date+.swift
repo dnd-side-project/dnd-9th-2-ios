@@ -253,6 +253,7 @@ extension Date {
 extension Date {
 
     // 모임 생성 가능한 시간 여부
+    // 1시간 전 (약속확정 전까지)
 
     var canMeeting: Bool {
         return self > Date().later(hours: 1)

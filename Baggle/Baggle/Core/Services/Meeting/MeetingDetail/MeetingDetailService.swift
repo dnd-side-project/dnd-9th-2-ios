@@ -24,14 +24,14 @@ extension MeetingDetailService: DependencyKey {
                       let username = UserDefaultList.user?.name else {
                     return MeetingDetailResult.userError
                 }
-
+                
                 let meetingDetailEntity: MeetingDetailEntity = try await networkService.request(
                     .meetingDetail(meetingID: meetingID, token: token)
                 )
-
+                
                 let meetingDetail = meetingDetailEntity.toDomain(username: username)
                 print(meetingDetail)
-
+                
                 return .success(meetingDetail)
             }.value
         } catch {

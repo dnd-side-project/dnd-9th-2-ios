@@ -298,6 +298,7 @@ struct MainTabFeature: ReducerProtocol {
                 state.path.append(
                     .meetingEdit(
                         MeetingEditFeature.State(
+                            beforeMeetingEdit: newMeetingEdit,
                             meetingEdit: newMeetingEdit,
                             meetingDateButtonState: MeetingDateButtonFeature.State()
                         )
@@ -313,10 +314,23 @@ struct MainTabFeature: ReducerProtocol {
             ):
                 state.path.pop(from: id)
                 return .run { send in await send(.homeAction(.refreshMeetingList)) }
+                
+                // MARK: - 모임 수정
+                
+            case let .path(.element(id: id, action: .meetingEdit(.delegate(.successEdit)))):
+                state.path.pop(from: id)
+                return .run { send in
+                    try await Task.sleep(seconds: 0.5)
+                    await send(.homeAction(.refreshMeetingList))
+                }
 
             case let .path(.element(id: id, action: .meetingEdit(.delegate(.moveToBack)))):
                 state.path.pop(from: id)
                 return .none
+                
+            case let .path(.element(id: id, action: .meetingEdit(.delegate(.moveToLogin)))):
+                _ = id
+                return .run { send in await send(.delegate(.moveToLogin)) }
                 
             case .path:
                 return .none
