@@ -9,7 +9,7 @@ import Foundation
 
 import ComposableArchitecture
 
-struct  MeetingDetailService {
+struct MeetingDetailService {
     var fetchMeetingDetail: (_ meetingID: Int) async -> MeetingDetailResult
 }
 

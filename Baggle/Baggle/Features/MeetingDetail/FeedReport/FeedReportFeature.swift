@@ -27,7 +27,7 @@ struct FeedReportFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { state, action in
+        Reduce { _, action in
             switch action {
             case .reportTypeSelected:
                 return .run { _ in await self.dismiss() }

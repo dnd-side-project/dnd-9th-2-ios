@@ -87,6 +87,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         // feed
         case imageTapped(String?)
         case updateFeedReport(FeedReportRequestModel)
+        case handleReportResult(FeedReportResult)
 
         // Alert
         case presentAlert(Bool)
@@ -120,6 +121,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
     @Dependency(\.meetingDetailService) var meetingDetailService
     @Dependency(\.meetingDeleteService) var meetingDeleteService
+    @Dependency(\.feedReportService) var feedReportService
     @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
@@ -425,12 +427,26 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.isFeedActionSheetPresented = isPresented
                 return .none
                 
-            case .feedReport(.presented(.reportTypeSelected(let reportType))):
-                if let requestModel = state.feedReportRequestModel {
-                    state.feedReportRequestModel = requestModel.updateReportType(reportType: reportType)
-                    // TODO: - 신고 서버 통신
+            case .handleReportResult(let result):
+                switch result {
+                case .success:
+                    return .none
+                case .fail(let error):
+                    return .run { send in
+                        await send(.alertTypeChanged(.networkError(error.errorDescription ?? "")))
+                    }
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError)) }
                 }
-                return .none
+                
+            case .feedReport(.presented(.reportTypeSelected(let reportType))):
+                guard let requestModel = state.feedReportRequestModel else { return .none }
+                let updatedRequestModel = requestModel.updateReportType(reportType: reportType)
+                
+                return .run { send in
+                    let result = await feedReportService.postFeedReport(updatedRequestModel)
+                    await send(.handleReportResult(result))
+                }
                 
             case .feedReport(.presented(.disappear)):
                 state.feedReportRequestModel = nil
