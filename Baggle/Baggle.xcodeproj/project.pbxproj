@@ -187,6 +187,10 @@
 		2B437FBA2A93B64C004DC68E /* AlertJoinMeetingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */; };
 		2B437FBD2A93BE37004DC68E /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437FBC2A93BE37004DC68E /* AlertType.swift */; };
 		2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45F2202A7B634400874783 /* MeetingDeleteType.swift */; };
+		2B4D69FD2AB8162E0086DC78 /* FeedReportFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D69FC2AB8162E0086DC78 /* FeedReportFeature.swift */; };
+		2B4D69FF2AB816BE0086DC78 /* FeedReportRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D69FE2AB816BE0086DC78 /* FeedReportRequestModel.swift */; };
+		2B4D6A012AB8187B0086DC78 /* FeedReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D6A002AB8187B0086DC78 /* FeedReportView.swift */; };
+		2B4D6A032AB88C130086DC78 /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D6A022AB88C130086DC78 /* ReportType.swift */; };
 		2B5CF2682A6EC889004D3033 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CF2672A6EC889004D3033 /* View+.swift */; };
 		2B604DDA2A7F60E7000E2DE2 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */; };
 		2B65B8132A8758E900E3BF11 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */; };
@@ -444,6 +448,10 @@
 		2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertJoinMeetingType.swift; sourceTree = "<group>"; };
 		2B437FBC2A93BE37004DC68E /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		2B45F2202A7B634400874783 /* MeetingDeleteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDeleteType.swift; sourceTree = "<group>"; };
+		2B4D69FC2AB8162E0086DC78 /* FeedReportFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReportFeature.swift; sourceTree = "<group>"; };
+		2B4D69FE2AB816BE0086DC78 /* FeedReportRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReportRequestModel.swift; sourceTree = "<group>"; };
+		2B4D6A002AB8187B0086DC78 /* FeedReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReportView.swift; sourceTree = "<group>"; };
+		2B4D6A022AB88C130086DC78 /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
 		2B5CF2672A6EC889004D3033 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		2B604DD92A7F60E7000E2DE2 /* CircleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
 		2B65B8122A8758E900E3BF11 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
@@ -1525,6 +1533,7 @@
 			children = (
 				1410AD232A84BEA8008793FB /* Feed.swift */,
 				14EF8C232A8CAC5B00B0FA40 /* FeedUser.swift */,
+				2B4D69FE2AB816BE0086DC78 /* FeedReportRequestModel.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1640,6 +1649,16 @@
 				2B437FB92A93B64C004DC68E /* AlertJoinMeetingType.swift */,
 			);
 			path = JoinMeeting;
+			sourceTree = "<group>";
+		};
+		2B4D69FB2AB8161C0086DC78 /* FeedReport */ = {
+			isa = PBXGroup;
+			children = (
+				2B4D69FC2AB8162E0086DC78 /* FeedReportFeature.swift */,
+				2B4D6A002AB8187B0086DC78 /* FeedReportView.swift */,
+				2B4D6A022AB88C130086DC78 /* ReportType.swift */,
+			);
+			path = FeedReport;
 			sourceTree = "<group>";
 		};
 		2B5BE6B02A77A3F600F25474 /* MeetingDetail */ = {
@@ -1793,6 +1812,7 @@
 		2BABCB292A76D19000AFECA3 /* MeetingDetail */ = {
 			isa = PBXGroup;
 			children = (
+				2B4D69FB2AB8161C0086DC78 /* FeedReport */,
 				147E40F32AA045410044698B /* MeetingEdit */,
 				2B9F27152A813ABE009ED284 /* Common */,
 				2B7EC3302A826ECF00D78141 /* ImageDetail */,
@@ -2082,6 +2102,7 @@
 				2BB0EF462A8D2357003F9215 /* MeetingListServiceResult.swift in Sources */,
 				2BE4674F2AA0E352001F8B9C /* BaggleActionSheet.swift in Sources */,
 				147E40F22AA03D6F0044698B /* MeetingDateButtonFeature.swift in Sources */,
+				2B4D6A032AB88C130086DC78 /* ReportType.swift in Sources */,
 				2B65B8182A89225000E3BF11 /* ParameterEncodingWithNoSlash.swift in Sources */,
 				14783EE22A7E330700EF58D5 /* CameraFeature.swift in Sources */,
 				2B7B4D6E2A84A1FF00283248 /* DefaultAlamofireManager.swift in Sources */,
@@ -2150,6 +2171,7 @@
 				2BDEAC792A863D3A00D698E6 /* JoinMeetingService.swift in Sources */,
 				1410AD242A84BEA8008793FB /* Feed.swift in Sources */,
 				146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */,
+				2B4D6A012AB8187B0086DC78 /* FeedReportView.swift in Sources */,
 				14ACEBC02AA9911600FFFE21 /* AlertLoginType.swift in Sources */,
 				1493A9182A7E01D800A2D7CC /* Int+.swift in Sources */,
 				14CA245B2AAFF3F000DA08AD /* MeetingEditEntity.swift in Sources */,
@@ -2164,6 +2186,7 @@
 				146C51F02A79429E00FF3142 /* SelectDateView.swift in Sources */,
 				14EA20BC2A8DCBCD005C1289 /* AlertCameraType.swift in Sources */,
 				14CF68EE2A847C5C00E457DF /* LoginPlatform.swift in Sources */,
+				2B4D69FD2AB8162E0086DC78 /* FeedReportFeature.swift in Sources */,
 				2B437FBD2A93BE37004DC68E /* AlertType.swift in Sources */,
 				2BE5299E2A7D697800A53779 /* MeetingListCell.swift in Sources */,
 				14B7A0412A753D4800B8E202 /* SignUpService.swift in Sources */,
@@ -2172,6 +2195,7 @@
 				1461B6022A7BA8C500A15706 /* RoundedTriangle.swift in Sources */,
 				14E5064E2A6B88F7008D5778 /* SignUpView.swift in Sources */,
 				142BEED92A8F213B00B91426 /* UserToken.swift in Sources */,
+				2B4D69FF2AB816BE0086DC78 /* FeedReportRequestModel.swift in Sources */,
 				14EBE4BE2A68130F007537C8 /* LoginView.swift in Sources */,
 				1406858B2A7B676D00824A93 /* CreateDescription.swift in Sources */,
 				14ACEBB42AA963DA00FFFE21 /* MeetingDeleteResult.swift in Sources */,

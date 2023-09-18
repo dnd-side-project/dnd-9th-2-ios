@@ -25,6 +25,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // Action Sheet
         var isActionSheetPresented: Bool = false
+        var isFeedActionSheetPresented: Bool = false
 
         // Meeting
 
@@ -36,6 +37,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         // Feed
         var isImageTapped: Bool = false
         var tappedImageUrl: String?
+        var feedReportRequestModel: FeedReportRequestModel?
 
         // Child
         var timerState = TimerFeature.State(timerCount: 0)
@@ -48,6 +50,9 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // Emergency
         @PresentationState var emergencyState: EmergencyFeature.State?
+        
+        // report
+        @PresentationState var feedReport: FeedReportFeature.State?
     }
 
     enum Action: Equatable {
@@ -77,9 +82,11 @@ struct MeetingDetailFeature: ReducerProtocol {
         case emergencyButtonTapped
         case inviteButtonTapped
         case eventButtonTapped
+        case reportButtonTapped
 
         // feed
         case imageTapped(String?)
+        case updateFeedReport(FeedReportRequestModel)
 
         // Alert
         case presentAlert(Bool)
@@ -88,12 +95,14 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // ActionSheet
         case presentActionSheet(Bool)
+        case presentFeedActionSheet(Bool)
         
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
         case emergencyAction(PresentationAction<EmergencyFeature.Action>)
         case timerAction(TimerFeature.Action)
+        case feedReport(PresentationAction<FeedReportFeature.Action>)
 
         // Timer - State
         case timerCountChanged
@@ -260,8 +269,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .leaveButtonTapped:
                 return .run { send in await send(.alertTypeChanged(.meetingLeave)) }
-
-                
                 
             case .backButtonTapped:
                 state.dismiss = true
@@ -334,6 +341,14 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.isImageTapped.toggle()
                 state.tappedImageUrl = imageUrl
                 return .none
+                
+            case .updateFeedReport(let requestModel):
+                state.feedReportRequestModel = requestModel
+                return .none
+                
+            case .reportButtonTapped:
+                state.feedReport = FeedReportFeature.State()
+                return .none
 
                 // Child - Delete
 
@@ -404,6 +419,24 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Action Sheet
             case .presentActionSheet(let isPresented):
                 state.isActionSheetPresented = isPresented
+                return .none
+                
+            case .presentFeedActionSheet(let isPresented):
+                state.isFeedActionSheetPresented = isPresented
+                return .none
+                
+            case .feedReport(.presented(.reportTypeSelected(let reportType))):
+                if let requestModel = state.feedReportRequestModel {
+                    state.feedReportRequestModel = requestModel.updateReportType(reportType: reportType)
+                    // TODO: - 신고 서버 통신
+                }
+                return .none
+                
+            case .feedReport(.presented(.disappear)):
+                state.feedReportRequestModel = nil
+                return .none
+                
+            case .feedReport:
                 return .none
                 
                 // Child - Camera
@@ -495,6 +528,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         }
         .ifLet(\.$emergencyState, action: /Action.emergencyAction) {
             EmergencyFeature()
+        }
+        .ifLet(\.$feedReport, action: /Action.feedReport) {
+            FeedReportFeature()
         }
     }
 }
