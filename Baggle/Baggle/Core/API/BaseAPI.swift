@@ -14,6 +14,7 @@ enum APIType {
     case meeting
     case member
     case feed
+    case report
 }
 
 protocol BaseAPI: TargetType {
@@ -33,6 +34,8 @@ extension BaseAPI {
             base += "/api/member"
         case .feed:
             base += "/api/feed"
+        case .report:
+            base += "/api/report"
         }
         
         guard let url = URL(string: base) else {
