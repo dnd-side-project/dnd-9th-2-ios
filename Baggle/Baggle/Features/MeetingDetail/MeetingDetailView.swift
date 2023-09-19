@@ -25,6 +25,10 @@ struct MeetingDetailView: View {
                     LoadingView()
                 }
                 
+                if viewStore.isToastShown {
+                    ToastView("신고가 정상적으로 접수되었습니다.")
+                }
+                
                 ScrollView {
                     VStack(spacing: 0) {
                         if let data = viewStore.meetingData {

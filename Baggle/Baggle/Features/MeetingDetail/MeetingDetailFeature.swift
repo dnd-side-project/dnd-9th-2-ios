@@ -18,6 +18,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // View
         var isLoading: Bool = false
+        var isToastShown: Bool = false
         
         // Alert
         var isAlertPresented: Bool = false
@@ -88,6 +89,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         case imageTapped(String?)
         case updateFeedReport(FeedReportRequestModel)
         case handleReportResult(FeedReportResult)
+        case showToast(Bool)
 
         // Alert
         case presentAlert(Bool)
@@ -430,7 +432,11 @@ struct MeetingDetailFeature: ReducerProtocol {
             case .handleReportResult(let result):
                 switch result {
                 case .success:
-                    return .none
+                    return .run { send in
+                        await send(.showToast(true))
+                        try await Task.sleep(seconds: 2)
+                        await send(.showToast(false))
+                    }
                 case .fail(let error):
                     return .run { send in
                         await send(.alertTypeChanged(.networkError(error.errorDescription ?? "")))
@@ -438,6 +444,10 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .userError:
                     return .run { send in await send(.alertTypeChanged(.userError)) }
                 }
+                
+            case .showToast(let isShow):
+                state.isToastShown = isShow
+                return .none
                 
             case .feedReport(.presented(.reportTypeSelected(let reportType))):
                 guard let requestModel = state.feedReportRequestModel else { return .none }
