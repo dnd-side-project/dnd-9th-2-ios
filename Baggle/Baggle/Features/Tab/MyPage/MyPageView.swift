@@ -7,12 +7,16 @@
 
 import SwiftUI
 
+import Foundation
+import MessageUI
+
 import ComposableArchitecture
 import Kingfisher
 
 struct MyPageView: View {
     
     let store: StoreOf<MyPageFeature>
+    private let mailComposeDelegate = MailDelegate()
     
     var body: some View {
         
@@ -64,6 +68,10 @@ struct MyPageView: View {
                     SettingListRow(text: "서비스 이용약관") {
                         viewStore.send(.termsOfServiceButtonTapped)
                     }
+                    
+                    SettingListRow(text: "문의하기") {
+                        self.presentMailView()
+                    }
                 } header: {
                     SettingListHeader(text: "일반 설정")
                 }
@@ -103,6 +111,44 @@ struct MyPageView: View {
                 }
             }
         }
+    }
+}
+
+extension MyPageView {
+    
+    private class MailDelegate: NSObject, MFMailComposeViewControllerDelegate {
+        func mailComposeController(
+            _ controller: MFMailComposeViewController,
+            didFinishWith result: MFMailComposeResult,
+            error: Error?
+        ) {
+            controller.dismiss(animated: true)
+        }
+    }
+    
+    func presentMailView() {
+        guard MFMailComposeViewController.canSendMail() else { return }
+        guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
+                as? String else { return }
+        
+        let rootVC = UIApplication.shared.currentKeyWindow?.rootViewController
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = mailComposeDelegate
+        
+        composeVC.setToRecipients(["kingzzangssang@gmail.com"])
+        composeVC.setSubject("Baggle 문의 사항")
+        composeVC.setMessageBody("""
+        
+        Device: \(UIDevice.iPhoneModel)
+        OS Version: \(UIDevice.iOSVersion)
+        App Version: \(appVersion)
+        ----------------------------
+        
+        문의 사항을 작성해주세요.
+        
+        """, isHTML: false)
+        
+        rootVC?.present(composeVC, animated: true)
     }
 }
 
