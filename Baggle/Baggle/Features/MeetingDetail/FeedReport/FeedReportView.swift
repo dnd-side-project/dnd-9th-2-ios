@@ -17,7 +17,6 @@ struct FeedReportView: View {
 
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading) {
-                
                 HStack {
                     Spacer()
 
@@ -26,23 +25,24 @@ struct FeedReportView: View {
                     } label: {
                         Image.Icon.close
                     }
+                    .padding(.trailing, 4)
                 }
+                .padding(.vertical, 16)
                 
-                VStack(spacing: 2) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("게시글 신고하기")
-                        .font(.Baggle.subTitle2)
+                        .fontWithLineSpacing(fontType: .subTitle2)
                         .foregroundColor(.gray11)
                     
                     Text("신고하는 이유가 무엇인가요?")
-                        .font(.Baggle.body2)
+                        .fontWithLineSpacing(fontType: .body2)
                         .foregroundColor(.gray8)
                 }
-                .padding(.bottom, 34)
+                .padding(.bottom, 20)
                 
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 10) {
                     ForEach(ReportType.allCases, id: \.self) { type in
                         HStack {
-                            
                             if let selectedType = viewStore.selectedType,
                                selectedType == type {
                                 Image.Icon.checkCircle
@@ -53,7 +53,16 @@ struct FeedReportView: View {
                             Text(type.description)
                                 .font(.baggleFont(size: 18, weight: .medium))
                                 .foregroundColor(.gray11)
+                            
+                            Spacer()
                         }
+                        .padding(.vertical, 16)
+                        .padding(.horizontal, 12)
+                        .overlay(RoundedRectangle(cornerRadius: 8)
+                            .stroke(
+                                viewStore.selectedType == type ? Color.primaryNormal : Color.gray4
+                            )
+                        )
                         .onTapGesture {
                             viewStore.send(.reportTypeSelected(type))
                         }
@@ -68,7 +77,6 @@ struct FeedReportView: View {
                 .buttonStyle(BagglePrimaryStyle())
                 .disabled(viewStore.reportButtonDisabled)
             }
-            .padding(.top, 30)
             .padding(.horizontal, 20)
             .onDisappear {
                 viewStore.send(.disappear)

@@ -181,8 +181,7 @@ struct MeetingDetailView: View {
                     action: { .feedReport($0) })
             ) { feedReportStore in
                 FeedReportView(store: feedReportStore)
-                    .presentationDetents([.fraction(0.5)])
-                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.fraction(0.8)])
             }
             .fullScreenCover(
                 store: self.store.scope(
