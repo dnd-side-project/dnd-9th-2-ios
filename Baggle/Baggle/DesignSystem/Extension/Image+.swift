@@ -32,6 +32,8 @@ extension Image {
         static let share = Image("Share")
         static let siren = Image("Siren")
         static let kakao = Image("kakaotalk")
+        static let emptyCircle = Image("icon_emptyCircle")
+        static let checkCircle = Image("icon_checkCircle")
 
         // Navigation
         static let back = Image("Back")
