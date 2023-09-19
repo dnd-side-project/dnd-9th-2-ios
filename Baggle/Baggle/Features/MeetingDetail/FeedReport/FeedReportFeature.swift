@@ -12,9 +12,14 @@ struct FeedReportFeature: ReducerProtocol {
     struct State: Equatable {
         
         // MARK: - Scope State
+        
+        var selectedType: ReportType?
+        var reportButtonDisabled: Bool = true
     }
     
     enum Action: Equatable {
+        case cancelButtonTapped
+        case reportButtonTapped
         case reportTypeSelected(ReportType)
         case disappear
     }
@@ -27,10 +32,18 @@ struct FeedReportFeature: ReducerProtocol {
 
         // MARK: - Reduce
 
-        Reduce { _, action in
+        Reduce { state, action in
             switch action {
-            case .reportTypeSelected:
+            case .cancelButtonTapped:
                 return .run { _ in await self.dismiss() }
+                
+            case .reportButtonTapped:
+                return .run { _ in await self.dismiss() }
+                
+            case .reportTypeSelected(let reportType):
+                state.selectedType = reportType
+                state.reportButtonDisabled = false
+                return .none
                 
             case .disappear:
                 return .none
