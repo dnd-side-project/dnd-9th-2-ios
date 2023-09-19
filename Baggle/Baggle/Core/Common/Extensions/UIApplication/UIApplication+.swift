@@ -17,4 +17,8 @@ extension UIApplication {
             .filter { $0.isKeyWindow }
             .first
     }
+    
+    var statusBarHeight: CGFloat {
+        Self.shared.currentKeyWindow?.safeAreaInsets.top ?? 0
+    }
 }
