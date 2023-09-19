@@ -441,12 +441,18 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .feedReport(.presented(.reportTypeSelected(let reportType))):
                 guard let requestModel = state.feedReportRequestModel else { return .none }
-                let updatedRequestModel = requestModel.updateReportType(reportType: reportType)
+                state.feedReportRequestModel = requestModel.updateReportType(reportType: reportType)
+                
+                return .none
+                
+            case .feedReport(.presented(.reportButtonTapped)):
+                guard let requestModel = state.feedReportRequestModel else { return .none }
                 
                 return .run { send in
-                    let result = await feedReportService.postFeedReport(updatedRequestModel)
+                    let result = await feedReportService.postFeedReport(requestModel)
                     await send(.handleReportResult(result))
                 }
+                
                 
             case .feedReport(.presented(.disappear)):
                 state.feedReportRequestModel = nil

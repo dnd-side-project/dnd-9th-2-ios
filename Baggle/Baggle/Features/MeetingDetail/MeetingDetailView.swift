@@ -152,10 +152,10 @@ struct MeetingDetailView: View {
                     send: { MeetingDetailFeature.Action.presentFeedActionSheet($0)}
                 ),
                 content: {
-                    Text("게시물 신고하기")
-                        .addAction {
+                    Text("게시글 신고하기")
+                        .addAction({
                             viewStore.send(.reportButtonTapped)
-                        }
+                        }, role: .destructive)
                 })
             .sheet( // 방장 선택
                 store: self.store.scope(
