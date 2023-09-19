@@ -148,7 +148,7 @@ struct MeetingDetailView: View {
             })
             .presentActionSheet( // 게시물 더보기 버튼
                 isPresented: viewStore.binding(
-                    get: { $0.isFeedActionSheetPresented },
+                    get: { $0.isFeedReportActionSheetPresented },
                     send: { MeetingDetailFeature.Action.presentFeedActionSheet($0)}
                 ),
                 content: {

@@ -25,7 +25,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // Action Sheet
         var isActionSheetPresented: Bool = false
-        var isFeedActionSheetPresented: Bool = false
+        var isFeedReportActionSheetPresented: Bool = false
 
         // Meeting
 
@@ -424,7 +424,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
                 
             case .presentFeedActionSheet(let isPresented):
-                state.isFeedActionSheetPresented = isPresented
+                state.isFeedReportActionSheetPresented = isPresented
                 return .none
                 
             case .handleReportResult(let result):
