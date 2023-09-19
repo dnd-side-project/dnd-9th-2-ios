@@ -99,6 +99,7 @@ extension NetworkService {
         }
     }
     
+    // swiftlint:disable:next cyclomatic_complexity
     private func handleError400(statusCode: Int, message: String) async -> APIError {
         switch statusCode {
         case 400:

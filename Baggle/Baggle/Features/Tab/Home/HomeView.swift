@@ -93,7 +93,7 @@ extension HomeView {
                     endPoint: .bottom
                 )
             )
-            .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+            .frame(height: UIApplication.shared.statusBarHeight)
     }
     
     func emptyView(_ status: HomeStatus) -> some View {
