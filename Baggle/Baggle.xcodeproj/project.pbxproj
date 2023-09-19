@@ -180,6 +180,7 @@
 		2B35E4ED2A70B6DB00915876 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2B35E4EC2A70B6DB00915876 /* KakaoSDK */; };
 		2B35EF1A2AB94A2A00AC7D26 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35EF192AB94A2A00AC7D26 /* UIDevice+.swift */; };
 		2B35EF1E2AB953BA00AC7D26 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35EF1D2AB953BA00AC7D26 /* UIApplication+.swift */; };
+		2B35EF212AB957E100AC7D26 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35EF202AB957E100AC7D26 /* Account.swift */; };
 		2B39F21C2A738BB100E034A3 /* SendInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39F21B2A738BB100E034A3 /* SendInvitation.swift */; };
 		2B3B64952A8014540082A05F /* FeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3B64942A8014540082A05F /* FeedListCell.swift */; };
 		2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B409D7B2A80BE840051A3BC /* Font+.swift */; };
@@ -439,6 +440,7 @@
 		2B30E3452A6FA8E800949151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2B35EF192AB94A2A00AC7D26 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		2B35EF1D2AB953BA00AC7D26 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		2B35EF202AB957E100AC7D26 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		2B39F21B2A738BB100E034A3 /* SendInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitation.swift; sourceTree = "<group>"; };
 		2B3B64942A8014540082A05F /* FeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListCell.swift; sourceTree = "<group>"; };
 		2B409D7B2A80BE840051A3BC /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
@@ -1844,6 +1846,7 @@
 				14038B562A8DF6F200A7C964 /* Image.swift */,
 				1471ECFA2A8A465C00D9FC93 /* ErrorID.swift */,
 				2BB7FBC62A892A520003B75C /* Const.swift */,
+				2B35EF202AB957E100AC7D26 /* Account.swift */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -2253,6 +2256,7 @@
 				2B42A5872AA4C27B00E97CB1 /* LogoutServiceResult.swift in Sources */,
 				14CF68EC2A847BEF00E457DF /* User.swift in Sources */,
 				140E88112A64B626005119F8 /* BaggleApp.swift in Sources */,
+				2B35EF212AB957E100AC7D26 /* Account.swift in Sources */,
 				146237482A87803F00FBE121 /* SafariWebView.swift in Sources */,
 				14F7B0962A7BABC30068B1E4 /* BubbleType.swift in Sources */,
 				2B35EF1A2AB94A2A00AC7D26 /* UIDevice+.swift in Sources */,

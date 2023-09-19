@@ -135,7 +135,7 @@ extension MyPageView {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = mailComposeDelegate
         
-        composeVC.setToRecipients(["kingzzangssang@gmail.com"])
+        composeVC.setToRecipients([Const.Account.mail])
         composeVC.setSubject("Baggle 문의 사항")
         composeVC.setMessageBody("""
         
