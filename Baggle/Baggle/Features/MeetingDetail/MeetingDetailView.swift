@@ -44,7 +44,7 @@ struct MeetingDetailView: View {
                             if !data.feeds.isEmpty {
                                 feedView(
                                     feeds: data.feeds,
-                                    viewStroe: viewStore
+                                    viewStore: viewStore
                                 )
                                 .padding(
                                     EdgeInsets(top: 14,
@@ -111,14 +111,13 @@ struct MeetingDetailView: View {
                 alertType: viewStore.alertType,
                 action: { viewStore.send(.alertButtonTapped) }
             )
-            .presentActionSheet(
+            .presentActionSheet( // 네비바 더보기 버튼
                 isPresented:
                     viewStore.binding(
                         get: { $0.isActionSheetPresented },
                         send: { MeetingDetailFeature.Action.presentActionSheet($0) }
                     ),
                 content: {
-                    
                     if let meetingData = viewStore.meetingData, meetingData.isOwner {
                         Text("방 정보 수정하기")
                             .addAction {
@@ -147,7 +146,18 @@ struct MeetingDetailView: View {
                             )
                     }
             })
-            .sheet(
+            .presentActionSheet( // 게시물 더보기 버튼
+                isPresented: viewStore.binding(
+                    get: { $0.isFeedReportActionSheetPresented },
+                    send: { MeetingDetailFeature.Action.presentFeedActionSheet($0)}
+                ),
+                content: {
+                    Text("게시물 신고하기")
+                        .addAction {
+                            viewStore.send(.reportButtonTapped)
+                        }
+                })
+            .sheet( // 방장 선택
                 store: self.store.scope(
                     state: \.$selectOwner,
                     action: { .selectOwner($0) })
@@ -164,6 +174,15 @@ struct MeetingDetailView: View {
                         .height(self.meetingLeaveMemberViewHeight(meetingData.members.count))
                     ])
                 }
+            }
+            .sheet( // 게시물 신고
+                store: self.store.scope(
+                    state: \.$feedReport,
+                    action: { .feedReport($0) })
+            ) { feedReportStore in
+                FeedReportView(store: feedReportStore)
+                    .presentationDetents([.fraction(0.5)])
+                    .presentationDragIndicator(.visible)
             }
             .fullScreenCover(
                 store: self.store.scope(
@@ -351,11 +370,17 @@ extension MeetingDetailView {
         .scrollIndicators(.hidden)
     }
     
-    func feedView(feeds: [Feed], viewStroe: MeetingDetailViewStore) -> some View {
+    func feedView(feeds: [Feed], viewStore: MeetingDetailViewStore) -> some View {
         VStack(spacing: 16) {
             ForEach(feeds, id: \.id) { feed in
                 FeedListCell(feed: feed) {
-                    print("더보기 버튼 탭")
+                    let requestModel = FeedReportRequestModel(
+                        participationID: feed.userID,
+                        feedID: feed.id,
+                        reportType: .none
+                    )
+                    viewStore.send(.updateFeedReport(requestModel))
+                    viewStore.send(.presentFeedActionSheet(true))
                 }
             }
         }
