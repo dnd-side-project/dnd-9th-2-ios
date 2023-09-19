@@ -309,6 +309,7 @@ extension MeetingDetailView {
         .padding(.top, 56)
     }
     
+    // swiftlint:disable:next function_body_length
     func memberListView(viewStore: MeetingDetailViewStore) -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
