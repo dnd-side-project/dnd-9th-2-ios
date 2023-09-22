@@ -97,5 +97,6 @@ extension Image {
         static let pageOne = Image("Onboarding_One")
         static let pageTwo = Image("Onboarding_Two")
         static let pageThree = Image("Onboarding_Three")
+        static let pageFour = Image("Onboarding_Four")
     }
 }
