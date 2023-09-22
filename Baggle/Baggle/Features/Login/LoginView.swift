@@ -37,14 +37,6 @@ struct LoginView: View {
                     .transition(.opacity.animation(.easeIn(duration: Const.Animation.loginButton)))
                 }
             }
-            .baggleAlert(
-                isPresented: viewStore.binding(
-                    get: { $0.isAlertPresented },
-                    send: { LoginFeature.Action.presentAlert($0) }
-                ),
-                alertType: viewStore.alertType,
-                action: { viewStore.send(.alertButtonTapped) }
-            )
             .fullScreenCover(store: self.store.scope(
                 state: \.$signUpNickname,
                 action: { .signUpNickname($0) })
@@ -57,6 +49,14 @@ struct LoginView: View {
             ) { store in
                 OnboardingView(store: store)
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { LoginFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .transaction { transaction in
                 transaction.disablesAnimations = viewStore.disableDismissAnimation
             }
