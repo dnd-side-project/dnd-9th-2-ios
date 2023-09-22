@@ -34,8 +34,20 @@ struct LoginView: View {
                         appleLoginButton()
                             .padding(.bottom, 36)
                     }
-                    .transition(.opacity.animation(.easeIn(duration: 0.3)))
+                    .transition(.opacity.animation(.easeIn(duration: Const.Animation.loginButton)))
                 }
+            }
+            .fullScreenCover(store: self.store.scope(
+                state: \.$signUpNickname,
+                action: { .signUpNickname($0) })
+            ) { signupStore in
+                SignUpView(store: signupStore)
+            }
+            .fullScreenCover(store: self.store.scope(
+                state: \.$onboardingState,
+                action: { .onboardingAction($0) })
+            ) { store in
+                OnboardingView(store: store)
             }
             .baggleAlert(
                 isPresented: viewStore.binding(
@@ -45,12 +57,6 @@ struct LoginView: View {
                 alertType: viewStore.alertType,
                 action: { viewStore.send(.alertButtonTapped) }
             )
-            .fullScreenCover(store: self.store.scope(
-                state: \.$signUpNickname,
-                action: { .signUpNickname($0) })
-            ) { signupStore in
-                SignUpView(store: signupStore)
-            }
             .transaction { transaction in
                 transaction.disablesAnimations = viewStore.disableDismissAnimation
             }

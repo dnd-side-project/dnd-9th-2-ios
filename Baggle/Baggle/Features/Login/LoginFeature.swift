@@ -22,11 +22,13 @@ struct LoginFeature: ReducerProtocol {
         // MARK: - Child State
         
         @PresentationState var signUpNickname: SignUpFeature.State?
+        @PresentationState var onboardingState: OnboardingFeature.State?
     }
     
     enum Action: Equatable {
         
         case completeSplashAnimation
+        case showOnboarding
         
         // MARK: - Button Tapped
         
@@ -48,6 +50,7 @@ struct LoginFeature: ReducerProtocol {
         // MARK: - Child Action
         
         case signUpNickname(PresentationAction<SignUpFeature.Action>)
+        case onboardingAction(PresentationAction<OnboardingFeature.Action>)
         
         // MARK: - Delegate
         case delegate(Delegate)
@@ -66,8 +69,17 @@ struct LoginFeature: ReducerProtocol {
                 
             case .completeSplashAnimation:
                 state.completeSplashAnimation = true
-                return .none
+                return .run { send in
+                    try await Task.sleep(seconds: Const.Animation.loginButton)
+                    await send(.showOnboarding)
+                }
                 
+            case .showOnboarding:
+                if let isOnboarding = UserDefaultManager.isOnboarding, isOnboarding {
+                    state.onboardingState = OnboardingFeature.State()
+                    UserDefaultManager.isOnboarding = false
+                }
+                return .none
                 
                 // MARK: - Button Tapped
                 
@@ -94,7 +106,7 @@ struct LoginFeature: ReducerProtocol {
             case .requestLogin(let platform, let token):
                 let requestModel = LoginRequestModel(
                     platform: platform,
-                    fcmToken: UserDefaultList.fcmToken ?? ""
+                    fcmToken: UserDefaultManager.fcmToken ?? ""
                 )
                 
                 return .run { send in
@@ -153,11 +165,14 @@ struct LoginFeature: ReducerProtocol {
                 
                 // MARK: - Child Action
                 
-            case .signUpNickname(.presented(.delegate(.successSignUp))):
+            case .signUpNickname(.presented(.delegate(.moveToHome))):
                 state.disableDismissAnimation = true // 홈 화면 이동시 화면 전환 애니메이션 비활성화
                 return .run { send in await send(.delegate(.moveToMainTab)) }
                 
             case .signUpNickname:
+                return .none
+                
+            case .onboardingAction:
                 return .none
                 
                 // MARK: - Delegate
@@ -168,6 +183,9 @@ struct LoginFeature: ReducerProtocol {
         }
         .ifLet(\.$signUpNickname, action: /Action.signUpNickname) {
             SignUpFeature()
+        }
+        .ifLet(\.$onboardingState, action: /Action.onboardingAction) {
+            OnboardingFeature()
         }
     }
 }

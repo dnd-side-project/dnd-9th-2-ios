@@ -24,7 +24,7 @@ extension MeetingEditService: DependencyKey {
         do {
             return try await Task.retrying {
                 guard let token = UserManager.shared.accessToken,
-                      let username = UserDefaultList.user?.name else {
+                      let username = UserManager.shared.user?.name else {
                     return .userError
                 }
                 

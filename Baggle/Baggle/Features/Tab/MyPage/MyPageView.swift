@@ -56,6 +56,10 @@ struct MyPageView: View {
                 // MARK: - 일반 설정
                 
                 Section {
+                    SettingListRow(text: "Baggle 사용법") {
+                        viewStore.send(.onboardingButtonTapped)
+                    }
+                    
                     SettingListRow(text: "알림 설정") {
                         viewStore.send(.notificationSettingButtonTapped)
                     }
@@ -108,6 +112,13 @@ struct MyPageView: View {
                 if let url = URL(string: viewStore.state.safariURL) {
                     SafariWebView(url: url)
                 }
+            }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$onboarding,
+                    action: { .onboarding($0) })
+            ) { store in
+                OnboardingView(store: store)
             }
         }
     }

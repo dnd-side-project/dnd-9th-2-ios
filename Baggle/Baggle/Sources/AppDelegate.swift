@@ -98,7 +98,7 @@ extension AppDelegate: MessagingDelegate {
         _ messaging: Messaging,
         didReceiveRegistrationToken fcmToken: String?
     ) {
-        UserDefaultList.fcmToken = fcmToken
-        print("fcmToken 확인용: \(String(describing: UserDefaultList.fcmToken))")
+        UserDefaultManager.fcmToken = fcmToken
+        print("fcmToken 확인용: \(String(describing: UserDefaultManager.fcmToken))")
     }
 }
