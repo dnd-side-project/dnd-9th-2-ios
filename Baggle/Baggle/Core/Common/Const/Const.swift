@@ -28,5 +28,9 @@ struct Const {
         static let user: Int = -999
         static let meeting: Int = -999
     }
+    
+    struct Animation {
+        static let loginButton: CGFloat = 0.3
+    }
 }
 // swiftlint:enable all

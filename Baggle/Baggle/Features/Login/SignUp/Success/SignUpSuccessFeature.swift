@@ -19,7 +19,7 @@ struct SignUpSuccessFeature: ReducerProtocol {
         case delegate(Delegate)
 
         enum Delegate: Equatable {
-            case moveToHome
+            case moveToNext
         }
     }
 
@@ -36,7 +36,7 @@ struct SignUpSuccessFeature: ReducerProtocol {
 
             case .signUpSuccess:
                 return .run { send in
-                    await send(.delegate(.moveToHome))
+                    await send(.delegate(.moveToNext))
                 }
 
             case .delegate:

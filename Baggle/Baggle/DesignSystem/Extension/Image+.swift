@@ -32,6 +32,8 @@ extension Image {
         static let share = Image("Share")
         static let siren = Image("Siren")
         static let kakao = Image("kakaotalk")
+        static let emptyCircle = Image("icon_emptyCircle")
+        static let checkCircle = Image("icon_checkCircle")
 
         // Navigation
         static let back = Image("Back")
@@ -92,5 +94,13 @@ extension Image {
     struct Emergency {
         static let buttonOff = Image("Button_Off")
         static let buttonOn = Image("Button_On")
+    }
+    
+    // MARK: - 온보딩
+    struct Onboarding {
+        static let pageOne = Image("Onboarding_One")
+        static let pageTwo = Image("Onboarding_Two")
+        static let pageThree = Image("Onboarding_Three")
+        static let pageFour = Image("Onboarding_Four")
     }
 }
