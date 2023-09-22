@@ -119,6 +119,7 @@ extension HomeView {
                     .foregroundColor(.white)
                 
                 Image.BaggleText.mainHome
+                    .padding(.leading, 2)
             }
             
             Spacer()
