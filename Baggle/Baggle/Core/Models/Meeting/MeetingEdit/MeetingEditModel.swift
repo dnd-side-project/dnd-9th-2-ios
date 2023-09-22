@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct MeetingEdit: Equatable {
+struct MeetingEditModel: Equatable {
     let id: Int
     let title: String
     let place: String
     let date: Date
-    let memo: String?
+    let memo: String
 }
 
-extension MeetingEdit {
+extension MeetingEditModel {
     
     // title
-    func update(title: String) -> MeetingEdit {
-        MeetingEdit(
+    func update(title: String) -> MeetingEditModel {
+        MeetingEditModel(
             id: self.id,
             title: title,
             place: self.place,
@@ -29,8 +29,8 @@ extension MeetingEdit {
     }
     
     // place
-    func update(place: String) -> MeetingEdit {
-        MeetingEdit(
+    func update(place: String) -> MeetingEditModel {
+        MeetingEditModel(
             id: self.id,
             title: self.title,
             place: place,
@@ -40,8 +40,8 @@ extension MeetingEdit {
     }
 
     // date
-    func update(date: Date) -> MeetingEdit {
-        MeetingEdit(
+    func update(date: Date) -> MeetingEditModel {
+        MeetingEditModel(
             id: self.id,
             title: self.title,
             place: self.place,
@@ -51,8 +51,8 @@ extension MeetingEdit {
     }
     
     // memo
-    func update(memo: String) -> MeetingEdit {
-        MeetingEdit(
+    func update(memo: String) -> MeetingEditModel {
+        MeetingEditModel(
             id: self.id,
             title: self.title,
             place: self.place,

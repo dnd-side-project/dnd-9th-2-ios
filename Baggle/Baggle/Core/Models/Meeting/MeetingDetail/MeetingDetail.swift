@@ -26,10 +26,6 @@ struct MeetingDetail: Equatable {
     let emergencyButtonExpiredTime: Date // 긴급 버튼 만료 시간 - 모임 15분 전
     let isCertified: Bool
     let feeds: [Feed]
-
-    static func == (lhs: MeetingDetail, rhs: MeetingDetail) -> Bool {
-        return lhs.id == rhs.id
-    }
 }
 
 extension MeetingDetail {
@@ -55,7 +51,8 @@ extension MeetingDetail {
             emergencyButtonActiveTime: emergencyActiveTime,
             emergencyButtonExpiredTime: emergencyButtonExpiredTime,
             isCertified: isCertified,
-            feeds: feeds)
+            feeds: feeds
+        )
     }
     
 
@@ -91,21 +88,43 @@ extension MeetingDetail {
     func afterEmergencyAuthority() -> Bool {
         return emergencyStatus == .past || emergencyStatus == .termination
     }
+
+    func updateMeetingEdit(_ meetingEditSuccessModel: MeetingEditSuccessModel) -> MeetingDetail {
+        MeetingDetail(
+            id: meetingEditSuccessModel.meetingID,
+            name: meetingEditSuccessModel.title,
+            place: meetingEditSuccessModel.place,
+            date: meetingEditSuccessModel.meetingTime.koreanDate(),
+            time: meetingEditSuccessModel.meetingTime.hourMinute(),
+            memo: meetingEditSuccessModel.memo,
+            members: self.members,
+            memberID: self.memberID,
+            isOwner: self.isOwner,
+            stampStatus: self.stampStatus,
+            emergencyStatus: self.emergencyStatus,
+            isEmergencyAuthority: self.isEmergencyAuthority,
+            emergencyButtonActive: self.emergencyButtonActive,
+            emergencyButtonActiveTime: self.emergencyButtonActiveTime,
+            emergencyButtonExpiredTime: self.emergencyButtonExpiredTime,
+            isCertified: self.isCertified,
+            feeds: self.feeds
+        )
+    }
 }
 
 // 모임 수정을 위한 Meeting Edit로 변환
 
 extension MeetingDetail {
-    func toMeetingEdit() -> MeetingEdit? {
+    func toMeetingEdit() -> MeetingEditModel? {
         guard let date = self.meetingDate() else {
             return nil
         }
-        return MeetingEdit(
+        return MeetingEditModel(
             id: self.id,
             title: self.name,
             place: self.place,
             date: date,
-            memo: self.memo
+            memo: self.memo ?? ""
         )
     }
     

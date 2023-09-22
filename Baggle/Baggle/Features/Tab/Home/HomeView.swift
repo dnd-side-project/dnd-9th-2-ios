@@ -93,13 +93,13 @@ extension HomeView {
                     endPoint: .bottom
                 )
             )
-            .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+            .frame(height: UIApplication.shared.statusBarHeight)
     }
     
     func emptyView(_ status: HomeStatus) -> some View {
         VStack(spacing: 12) {
-            Image.Background.empty
-                .padding(.top, screenSize.height*0.2)
+            status.image
+                .padding(.top, screenSize.height*status.ratio)
             
             VStack(spacing: 4) {
                 Text(status.title ?? "")
