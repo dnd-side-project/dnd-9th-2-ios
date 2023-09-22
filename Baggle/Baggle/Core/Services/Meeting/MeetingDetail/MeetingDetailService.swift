@@ -21,7 +21,7 @@ extension MeetingDetailService: DependencyKey {
         do {
             return try await Task.retrying {
                 guard let token = UserManager.shared.accessToken,
-                      let username = UserDefaultList.user?.name else {
+                      let username = UserDefaultManager.user?.name else {
                     return MeetingDetailResult.userError
                 }
                 

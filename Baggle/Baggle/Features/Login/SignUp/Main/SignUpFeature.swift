@@ -44,7 +44,7 @@ struct SignUpFeature: ReducerProtocol {
         
         // MARK: - Child State
 
-        var path = StackState<SignUpSuccessFeature.State>()
+        var path = StackState<Child.State>()
     }
 
     enum Action: Equatable {
@@ -86,17 +86,36 @@ struct SignUpFeature: ReducerProtocol {
         
         // MARK: - Child Action
 
-        case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
+        case path(StackAction<Child.State, Child.Action>)
 
         // MARK: - Delegate
 
         case delegate(Delegate)
 
         enum Delegate: Equatable {
-            case successSignUp
+            case moveToHome
         }
     }
 
+    // MARK: - Child
+    
+    struct Child: ReducerProtocol {
+
+        enum State: Equatable {
+            case signUpSuccess(SignUpSuccessFeature.State)
+        }
+
+        enum Action: Equatable {
+            case signUpSuccess(SignUpSuccessFeature.Action)
+        }
+
+        var body: some ReducerProtocolOf<Self> {
+            Scope(state: /State.signUpSuccess, action: /Action.signUpSuccess) {
+                SignUpSuccessFeature()
+            }
+        }
+    }
+    
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.nicknameValidator) var nicknameValidator
     @Dependency(\.signUpService) var signUpService
@@ -123,7 +142,7 @@ struct SignUpFeature: ReducerProtocol {
                     nickname: nickname,
                     profilImageUrl: state.selectedImage,
                     platform: state.loginPlatform,
-                    fcmToken: UserDefaultList.fcmToken ?? ""
+                    fcmToken: UserDefaultManager.fcmToken ?? ""
                 )
 
                 if nicknameValidator.isValidate(nickname) {
@@ -158,12 +177,16 @@ struct SignUpFeature: ReducerProtocol {
                 // MARK: - Screen Move
 
             case .moveToSignUpSuccess:
-                state.path.append(SignUpSuccessFeature.State())
+                state.path.append(
+                    .signUpSuccess(
+                        SignUpSuccessFeature.State()
+                    )
+                )
                 return .none
 
             case .moveToHome:
                 return .run { send in
-                    await send(.delegate(.successSignUp))
+                    await send(.delegate(.moveToHome))
                     await self.dismiss()
                 }
 
@@ -266,14 +289,14 @@ struct SignUpFeature: ReducerProtocol {
                 
                 // MARK: - Child Action
 
-            case let .path(.element(id: id, action: .delegate(.moveToHome))):
+            case let .path(.element(id: id, action: .signUpSuccess(.delegate(.moveToNext)))):
+                _ = id
                 state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
 
-                state.path.pop(from: id)
                 return .run { send in
                     await send(.moveToHome)
                 }
-
+                
             case .path:
                 return .none
 
@@ -284,7 +307,7 @@ struct SignUpFeature: ReducerProtocol {
             }
         }
         .forEach(\.path, action: /Action.path) {
-            SignUpSuccessFeature()
+            Child()
         }
     }
 }
