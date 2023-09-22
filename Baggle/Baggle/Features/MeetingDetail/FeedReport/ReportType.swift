@@ -23,11 +23,11 @@ enum ReportType: CaseIterable, Equatable {
     var description: String {
         switch self {
         case .sexually:
-            return "성적으로 부적절함"
+            return "성적으로 부적절한 게시글"
         case .violent:
-            return "폭력적이거나 금지된 콘텐츠임"
+            return "폭력적이거나 금지된 콘텐츠"
         case .unpleasant:
-            return "불쾌한 게시글임"
+            return "불쾌한 게시글"
         }
     }
 }

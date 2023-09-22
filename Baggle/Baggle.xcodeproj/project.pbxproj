@@ -266,6 +266,7 @@
 		2BF6EC1B2A7FF5DC006CA492 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6EC1A2A7FF5DC006CA492 /* NavigationBar.swift */; };
 		2BF8F9152A78DFCA00510EFA /* JoinMeetingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8F9142A78DFCA00510EFA /* JoinMeetingFeature.swift */; };
 		2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8F9162A78DFD700510EFA /* JoinMeetingView.swift */; };
+		2BFBEC612AB9E96F006F79A9 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFBEC602AB9E96F006F79A9 /* ToastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -533,6 +534,7 @@
 		2BF6EC1A2A7FF5DC006CA492 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		2BF8F9142A78DFCA00510EFA /* JoinMeetingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingFeature.swift; sourceTree = "<group>"; };
 		2BF8F9162A78DFD700510EFA /* JoinMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingView.swift; sourceTree = "<group>"; };
+		2BFBEC602AB9E96F006F79A9 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1810,6 +1812,7 @@
 				2B8469652A6E7AE200D75D32 /* UnderlineView.swift */,
 				2BF6EC1A2A7FF5DC006CA492 /* NavigationBar.swift */,
 				143C7C032A87645E004D83FD /* LoadingView.swift */,
+				2BFBEC602AB9E96F006F79A9 /* ToastView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2221,6 +2224,7 @@
 				2B2BA52B2A7AB6A900A90AE7 /* SelectOwnerFeature.swift in Sources */,
 				1478999A2A7A0BC20071DAE3 /* DateInputStatus.swift in Sources */,
 				14ACEBBE2AA98DA300FFFE21 /* AlertSignUpType.swift in Sources */,
+				2BFBEC612AB9E96F006F79A9 /* ToastView.swift in Sources */,
 				2BF8F9172A78DFD700510EFA /* JoinMeetingView.swift in Sources */,
 				2B0EC3622AA6C6430033C47F /* TokenRefreshService.swift in Sources */,
 				2B84696E2A6E7AE200D75D32 /* UnderlineView.swift in Sources */,

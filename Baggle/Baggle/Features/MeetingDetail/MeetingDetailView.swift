@@ -25,6 +25,10 @@ struct MeetingDetailView: View {
                     LoadingView()
                 }
                 
+                if viewStore.isToastShown {
+                    ToastView("신고가 정상적으로 접수되었습니다.")
+                }
+                
                 ScrollView {
                     VStack(spacing: 0) {
                         if let data = viewStore.meetingData {
@@ -152,10 +156,10 @@ struct MeetingDetailView: View {
                     send: { MeetingDetailFeature.Action.presentFeedActionSheet($0)}
                 ),
                 content: {
-                    Text("게시물 신고하기")
-                        .addAction {
+                    Text("게시글 신고하기")
+                        .addAction({
                             viewStore.send(.reportButtonTapped)
-                        }
+                        }, role: .destructive)
                 })
             .sheet( // 방장 선택
                 store: self.store.scope(
@@ -181,8 +185,7 @@ struct MeetingDetailView: View {
                     action: { .feedReport($0) })
             ) { feedReportStore in
                 FeedReportView(store: feedReportStore)
-                    .presentationDetents([.fraction(0.5)])
-                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.fraction(0.8)])
             }
             .fullScreenCover(
                 store: self.store.scope(
