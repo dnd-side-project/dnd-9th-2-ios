@@ -426,7 +426,8 @@ extension MeetingDetailView {
             isPresented: Binding(
                 get: { viewStore.isImageTapped },
                 set: { _ in viewStore.send(.imageTapped(viewStore.tappedImageUrl)) }),
-            imageURL: image
+            imageURL: image,
+            isBlocked: true
         ) {
             viewStore.send(.imageTapped(nil))
         }

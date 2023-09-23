@@ -31,14 +31,26 @@ struct FeedListCell: View {
                 }
             }
 
-            KFImage(URL(string: feed.feedImageURL))
-                .placeholder({ _ in
-                    Color.gray2
-                })
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fill)
-                .cornerRadius(12)
-                .clipped()
+            ZStack {
+                KFImage(URL(string: feed.feedImageURL))
+                    .placeholder({ _ in
+                        Color.gray2
+                    })
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fill)
+                    .blur(radius: 40, opaque: true)
+                    .cornerRadius(12)
+                    .clipped()
+                
+                Text("신고가 접수된 게시글입니다.\n확인 후 24시간 내에 처리될 예정입니다.")
+                    .multilineTextAlignment(.center)
+                    .fontWithLineSpacing(fontType: .body2)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 16)
+                    .background(.black)
+                    .cornerRadius(12)
+            }
         }
     }
 }
