@@ -377,12 +377,7 @@ extension MeetingDetailView {
         VStack(spacing: 16) {
             ForEach(feeds, id: \.id) { feed in
                 FeedListCell(feed: feed) {
-                    let requestModel = FeedReportRequestModel(
-                        participationID: feed.userID,
-                        feedID: feed.id,
-                        reportType: .none
-                    )
-                    viewStore.send(.updateFeedReport(requestModel))
+                    viewStore.send(.updateFeedReport(feed.id))
                     viewStore.send(.presentFeedActionSheet(true))
                 }
             }

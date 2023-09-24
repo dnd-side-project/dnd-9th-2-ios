@@ -66,6 +66,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         case handleDetailResult(MeetingDetailResult)
         case updateData(MeetingDetail)
         case updateAfterMeetingEdit(MeetingEditSuccessModel)
+        case updateAfterReport(Int) // FeedID
         
         // Meeting Delete
         case deleteMeeting
@@ -87,7 +88,7 @@ struct MeetingDetailFeature: ReducerProtocol {
 
         // feed
         case imageTapped(Member?)
-        case updateFeedReport(FeedReportRequestModel)
+        case updateFeedReport(Int) // 신고 feed ID
         case handleReportResult(FeedReportResult)
         case showToast(Bool)
 
@@ -193,6 +194,21 @@ struct MeetingDetailFeature: ReducerProtocol {
                     return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 return .run { send in await send(.updateData(editedMeeting))}
+                
+                
+            case .updateAfterReport(let reportFeedID):
+                guard let meetingDetail = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                guard let reportedMeetingDetail = meetingDetail.updateReport(reportFeedID: reportFeedID) else {
+                    return .run { send in await send(.onAppear) }
+                }
+                
+                print("업데이트")
+                
+                state.meetingData = reportedMeetingDetail
+                return .none
                 
                 // MARK: - Meeting Delete
                 
@@ -346,7 +362,17 @@ struct MeetingDetailFeature: ReducerProtocol {
                 state.tappedMember = member
                 return .none
                 
-            case .updateFeedReport(let requestModel):
+            case .updateFeedReport(let reportFeedID):
+                guard let myMemberID = state.meetingData?.memberID else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                let requestModel = FeedReportRequestModel(
+                    memberID: myMemberID,
+                    feedID: reportFeedID,
+                    reportType: .none
+                )
+
                 state.feedReportRequestModel = requestModel
                 return .none
                 
@@ -430,9 +456,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 return .none
                 
             case .handleReportResult(let result):
+                state.isLoading = false
+                
                 switch result {
-                case .success:
+                case .success(let reportFeedID):
                     return .run { send in
+                        await send(.updateAfterReport(reportFeedID))
                         await send(.showToast(true))
                         try await Task.sleep(seconds: 2)
                         await send(.showToast(false))
@@ -457,6 +486,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .feedReport(.presented(.reportButtonTapped)):
                 guard let requestModel = state.feedReportRequestModel else { return .none }
+                state.isLoading = true
                 
                 return .run { send in
                     let result = await feedReportService.postFeedReport(requestModel)

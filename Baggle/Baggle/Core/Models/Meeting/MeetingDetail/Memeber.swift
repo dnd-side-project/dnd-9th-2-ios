@@ -34,6 +34,20 @@ extension Member {
             isReport: self.isReport
         )
     }
+    
+    // 신고 이후 업데이트
+    func updateAfterReport(reportMemberID: Int) -> Member {
+        return Member(
+            id: self.id,
+            name: self.name,
+            profileURL: self.profileURL,
+            isMeetingAuthority: self.isMeetingAuthority,
+            isButtonAuthority: self.isButtonAuthority,
+            certified: self.certified,
+            certImage: self.certImage,
+            isReport: self.id == reportMemberID
+        )
+    }
 }
 
 // 방장 넘기기를 위한 MeetingLeaveMember 모델로 수정

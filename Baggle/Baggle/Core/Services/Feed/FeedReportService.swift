@@ -31,7 +31,9 @@ extension FeedReportService: DependencyKey {
                     )
                 )
                 
-                return .success
+                let reportFeedID = requestModel.feedID
+                
+                return .success(reportFeedID)
             }).value
         } catch {
             guard let error = error as? APIError else { return .fail(.network) }

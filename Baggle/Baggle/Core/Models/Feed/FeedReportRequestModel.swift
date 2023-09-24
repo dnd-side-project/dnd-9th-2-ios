@@ -8,7 +8,7 @@
 import Foundation
 
 struct FeedReportRequestModel: Equatable {
-    let participationID: Int
+    let memberID: Int
     let feedID: Int
     let reportType: ReportType?
 }
@@ -16,7 +16,7 @@ struct FeedReportRequestModel: Equatable {
 extension FeedReportRequestModel {
     func updateReportType(reportType: ReportType) -> FeedReportRequestModel {
         return FeedReportRequestModel(
-            participationID: participationID,
+            memberID: memberID,
             feedID: feedID,
             reportType: reportType
         )
