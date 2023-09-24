@@ -278,7 +278,7 @@
 		1406858A2A7B676D00824A93 /* CreateDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDescription.swift; sourceTree = "<group>"; };
 		140C54372A74F42900CF1CB4 /* NicknameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameValidator.swift; sourceTree = "<group>"; };
 		140C543D2A74F54B00CF1CB4 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		140E880D2A64B626005119F8 /* Baggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		140E880D2A64B626005119F8 /* Baggle Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baggle Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		140E88102A64B626005119F8 /* BaggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleApp.swift; sourceTree = "<group>"; };
 		140E88122A64B626005119F8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		140E88142A64B627005119F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -579,7 +579,7 @@
 		140E880E2A64B626005119F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				140E880D2A64B626005119F8 /* Baggle.app */,
+				140E880D2A64B626005119F8 /* Baggle Develop.app */,
 				146C51D22A79139900FF3142 /* BaggleTests.xctest */,
 			);
 			name = Products;
@@ -1959,7 +1959,7 @@
 				14C8DAC62A8F542800371374 /* Lottie */,
 			);
 			productName = promiseDemo;
-			productReference = 140E880D2A64B626005119F8 /* Baggle.app */;
+			productReference = 140E880D2A64B626005119F8 /* Baggle Develop.app */;
 			productType = "com.apple.product-type.application";
 		};
 		146C51D12A79139900FF3142 /* BaggleTests */ = {
@@ -2462,6 +2462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUNDLE_ID_SUFFIX = ".Baggle-dev";
 				CODE_SIGN_ENTITLEMENTS = Baggle/Baggle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -2484,8 +2485,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.Baggle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.youtak$(BUNDLE_ID_SUFFIX)";
+				PRODUCT_NAME = "$(TARGET_NAME) Develop";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Baggle Development";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2502,6 +2503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUNDLE_ID_SUFFIX = .Baggle;
 				CODE_SIGN_ENTITLEMENTS = Baggle/Baggle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -2524,7 +2526,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.youtak.Baggle;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.youtak$(BUNDLE_ID_SUFFIX)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Baggle Distribution";
