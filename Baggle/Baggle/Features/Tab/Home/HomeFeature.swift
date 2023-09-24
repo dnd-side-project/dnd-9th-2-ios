@@ -9,9 +9,6 @@ import Foundation
 import SwiftUI
 
 import ComposableArchitecture
-import KakaoSDKCommon
-import KakaoSDKShare
-import KakaoSDKTemplate
 
 struct HomeFeature: ReducerProtocol {
 

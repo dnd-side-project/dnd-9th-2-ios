@@ -8,7 +8,7 @@
 import Foundation
 
 enum FeedReportResult: Equatable {
-    case success
+    case success(Int) // 신고한 Feed ID
     case fail(APIError)
     case userError
 }

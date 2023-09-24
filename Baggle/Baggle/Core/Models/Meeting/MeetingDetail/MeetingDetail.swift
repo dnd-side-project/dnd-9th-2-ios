@@ -89,6 +89,7 @@ extension MeetingDetail {
         return emergencyStatus == .past || emergencyStatus == .termination
     }
 
+    // 모임 수정 이후 업데이트
     func updateMeetingEdit(_ meetingEditSuccessModel: MeetingEditSuccessModel) -> MeetingDetail {
         MeetingDetail(
             id: meetingEditSuccessModel.meetingID,
@@ -108,6 +109,35 @@ extension MeetingDetail {
             emergencyButtonExpiredTime: self.emergencyButtonExpiredTime,
             isCertified: self.isCertified,
             feeds: self.feeds
+        )
+    }
+    
+    
+    // 신고 이후 업데이트
+    func updateReport(reportFeedID: Int) -> MeetingDetail? {
+        
+        guard let reportMemberID = self.feeds.filter({ $0.id == reportFeedID }).first?.userID else {
+            return nil
+        }
+        
+        return MeetingDetail(
+            id: self.id,
+            name: self.name,
+            place: self.place,
+            date: self.date,
+            time: self.time,
+            memo: self.memo,
+            members: self.members.map { $0.updateAfterReport(reportMemberID: reportMemberID) },
+            memberID: self.memberID,
+            isOwner: self.isOwner,
+            stampStatus: self.stampStatus,
+            emergencyStatus: self.emergencyStatus,
+            isEmergencyAuthority: self.isEmergencyAuthority,
+            emergencyButtonActive: self.emergencyButtonActive,
+            emergencyButtonActiveTime: self.emergencyButtonActiveTime,
+            emergencyButtonExpiredTime: self.emergencyButtonExpiredTime,
+            isCertified: self.isCertified,
+            feeds: self.feeds.map { $0.updateAfterReport(reportFeedID: reportFeedID) }
         )
     }
 }

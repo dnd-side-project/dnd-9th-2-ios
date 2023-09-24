@@ -50,7 +50,7 @@ extension ReportAPI: BaseAPI {
         
         switch self {
         case .feedReport(let requestModel, _):
-            params["participationId"] = requestModel.participationID
+            params["memberId"] = requestModel.memberID
             params["feedId"] = requestModel.feedID
             params["reportType"] = requestModel.reportType?.rawValue
         }

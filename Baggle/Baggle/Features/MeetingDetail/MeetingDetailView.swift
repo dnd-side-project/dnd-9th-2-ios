@@ -90,8 +90,8 @@ struct MeetingDetailView: View {
                 
                 // 이미지 상세
                 if viewStore.isImageTapped,
-                   let image = viewStore.tappedImageUrl {
-                    imageDetailView(image: image, viewStore: viewStore)
+                   let tappedMember = viewStore.tappedMember {
+                    imageDetailView(member: tappedMember, viewStore: viewStore)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
@@ -326,7 +326,7 @@ extension MeetingDetailView {
                             )
                             .onTapGesture {
                                 if member.certified {
-                                    viewStore.send(.imageTapped(member.certImage))
+                                    viewStore.send(.imageTapped(member))
                                 }
                             }
                             
@@ -377,12 +377,7 @@ extension MeetingDetailView {
         VStack(spacing: 16) {
             ForEach(feeds, id: \.id) { feed in
                 FeedListCell(feed: feed) {
-                    let requestModel = FeedReportRequestModel(
-                        participationID: feed.userID,
-                        feedID: feed.id,
-                        reportType: .none
-                    )
-                    viewStore.send(.updateFeedReport(requestModel))
+                    viewStore.send(.updateFeedReport(feed.id))
                     viewStore.send(.presentFeedActionSheet(true))
                 }
             }
@@ -421,12 +416,13 @@ extension MeetingDetailView {
         }
     }
     
-    func imageDetailView(image: String, viewStore: MeetingDetailViewStore) -> some View {
+    func imageDetailView(member: Member, viewStore: MeetingDetailViewStore) -> some View {
         ImageDetailView(
             isPresented: Binding(
                 get: { viewStore.isImageTapped },
-                set: { _ in viewStore.send(.imageTapped(viewStore.tappedImageUrl)) }),
-            imageURL: image
+                set: { _ in viewStore.send(.imageTapped(viewStore.tappedMember)) }),
+            imageURL: member.certImage,
+            isBlocked: member.isReport
         ) {
             viewStore.send(.imageTapped(nil))
         }

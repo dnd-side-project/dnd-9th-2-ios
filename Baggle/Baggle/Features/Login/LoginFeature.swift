@@ -14,6 +14,11 @@ struct LoginFeature: ReducerProtocol {
         var disableDismissAnimation: Bool = false
         var completeSplashAnimation: Bool = false
         
+        // MARK: - Safari
+        
+        var presentSafariView: Bool = false
+        var safariURL: String = ""
+        
         // MARK: - Alert
         
         var isAlertPresented: Bool = false
@@ -36,6 +41,13 @@ struct LoginFeature: ReducerProtocol {
         case kakaoLoginButtonTapped
         case requestLogin(LoginPlatform, String)
         case moveToSignUp(LoginPlatform, String)
+        
+        case termsOfServiceButtonTapped
+        case privacyPolicyButtonTapped
+        
+        // MARK: - Safari
+        
+        case presentSafariView
         
         // MARK: - Apple Login
         
@@ -131,6 +143,22 @@ struct LoginFeature: ReducerProtocol {
                     loginPlatform: platform,
                     socialLoginToken: token
                 )
+                return .none
+                
+            case .privacyPolicyButtonTapped:
+                state.safariURL = Const.URL.privacyPolicy
+                state.presentSafariView = true
+                return .none
+                
+            case .termsOfServiceButtonTapped:
+                state.safariURL = Const.URL.termsOfService
+                state.presentSafariView = true
+                return .none
+                
+                // MARK: - Safari
+                
+            case .presentSafariView:
+                state.presentSafariView = false
                 return .none
                 
                 // MARK: - Apple Login

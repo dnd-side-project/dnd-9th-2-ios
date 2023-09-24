@@ -13,12 +13,14 @@ struct MeetingDetailMemberEntity: Codable {
     let profileImageURL: String?
     let meetingAuthority: Bool
     let buttonAuthority: Bool
+    let isReport: Bool
     let feedID: Int?
     let feedImageURL: String
 
     enum CodingKeys: String, CodingKey {
         case memberID = "memberId"
         case profileImageURL = "profileImageUrl"
+        case isReport = "report"
         case feedID = "feedId"
         case feedImageURL = "feedImageUrl"
         case nickname, meetingAuthority, buttonAuthority
@@ -36,7 +38,8 @@ extension MeetingDetailMemberEntity {
             isMeetingAuthority: self.meetingAuthority,
             isButtonAuthority: afterMeetingConfirmed ? self.buttonAuthority : false,
             certified: self.feedID != nil,
-            certImage: self.feedImageURL
+            certImage: self.feedImageURL,
+            isReport: self.isReport
         )
     }
 
@@ -47,7 +50,8 @@ extension MeetingDetailMemberEntity {
             userID: self.memberID,
             username: self.nickname,
             userImageURL: self.profileImageURL,
-            feedImageURL: self.feedImageURL
+            feedImageURL: self.feedImageURL,
+            isReport: self.isReport
         )
     }
 }
