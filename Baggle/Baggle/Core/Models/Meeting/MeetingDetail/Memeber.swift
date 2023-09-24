@@ -45,7 +45,7 @@ extension Member {
             isButtonAuthority: self.isButtonAuthority,
             certified: self.certified,
             certImage: self.certImage,
-            isReport: self.id == reportMemberID
+            isReport: self.id == reportMemberID ? true : self.isReport
         )
     }
 }

@@ -25,7 +25,7 @@ extension Feed {
             username: self.username,
             userImageURL: self.userImageURL,
             feedImageURL: self.feedImageURL,
-            isReport: self.id == reportFeedID
+            isReport: self.id == reportFeedID ? true : self.isReport
         )
     }
 }
