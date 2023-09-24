@@ -30,10 +30,14 @@ struct LoginView: View {
                     VStack(spacing: 8) {
                         
                         Spacer()
+                        
                         kakaoLoginButton()
+                        
                         appleLoginButton()
-                            .padding(.bottom, 36)
+                        
+                        description(viewStore: viewStore)
                     }
+                    .padding(.bottom, 16)
                     .transition(.opacity.animation(.easeIn(duration: Const.Animation.loginButton)))
                 }
             }
@@ -57,6 +61,16 @@ struct LoginView: View {
                 alertType: viewStore.alertType,
                 action: { viewStore.send(.alertButtonTapped) }
             )
+            .fullScreenCover(
+                isPresented: viewStore.binding(
+                    get: \.presentSafariView,
+                    send: { _ in LoginFeature.Action.presentSafariView }
+                )
+            ) {
+                if let url = URL(string: viewStore.state.safariURL) {
+                    SafariWebView(url: url)
+                }
+            }
             .transaction { transaction in
                 transaction.disablesAnimations = viewStore.disableDismissAnimation
             }
@@ -106,13 +120,40 @@ extension LoginView {
         .frame(width: screenSize.width - 40, height: 54)
         .cornerRadius(5)
     }
+    
+    func description(viewStore: LoginViewStore) -> some View {
+        HStack(spacing: 0) {
+            Text("로그인 시 ")
+            
+            Text("이용약관")
+                .font(.Baggle.caption3)
+                .foregroundColor(.primaryNormal)
+                .onTapGesture {
+                    viewStore.send(.termsOfServiceButtonTapped)
+                }
+            
+            Text("과 ")
+            
+            Text("개인정보 처리 방침")
+                .font(.Baggle.caption3)
+                .foregroundColor(.primaryNormal)
+                .onTapGesture {
+                    viewStore.send(.privacyPolicyButtonTapped)
+                }
+            
+            Text("에 동의하게 됩니다.")
+        }
+        .font(.Baggle.caption4)
+        .foregroundColor(.gray7)
+        .padding(.top, 4)
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(
             store: Store(
-                initialState: LoginFeature.State(),
+                initialState: LoginFeature.State(completeSplashAnimation: true),
                 reducer: LoginFeature()._printChanges()
             )
         )
