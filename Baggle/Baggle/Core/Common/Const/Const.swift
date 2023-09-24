@@ -10,8 +10,8 @@ import Foundation
 // swiftlint:disable all
 struct Const {
     struct URL {
-        static let privacyPolicy = "https://www.dnd.ac/"
-        static let termsOfService = "https://www.naver.com/"
+        static let privacyPolicy = "https://astonishing-grip-068.notion.site/80761a06565b4b94af888d6d902e42a3?pvs=4"
+        static let termsOfService = "https://astonishing-grip-068.notion.site/22159fe196184050b444824606bb6e46?pvs=4"
         static let invitationThumbnail = "https://bagglebucket.s3.ap-northeast-2.amazonaws.com/link_participation.png"
         static let kakaoAppStore = "itms-apps://itunes.apple.com/app/362057947"
     }
