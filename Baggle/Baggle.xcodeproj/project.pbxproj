@@ -17,7 +17,7 @@
 		140E88232A64C3C2005119F8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 140E88222A64C3C2005119F8 /* CombineMoya */; };
 		140E88252A64C3C2005119F8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 140E88242A64C3C2005119F8 /* Moya */; };
 		1410AD242A84BEA8008793FB /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410AD232A84BEA8008793FB /* Feed.swift */; };
-		1410AD262A84BEB6008793FB /* Memeber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410AD252A84BEB6008793FB /* Memeber.swift */; };
+		1410AD262A84BEB6008793FB /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410AD252A84BEB6008793FB /* Member.swift */; };
 		14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D522A64C944004A6AC4 /* .swiftlint.yml */; };
 		14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */ = {isa = PBXBuildFile; fileRef = 14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */; };
 		1413925E2A78E66600249C8A /* CircleNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413925D2A78E66600249C8A /* CircleNumberView.swift */; };
@@ -284,7 +284,7 @@
 		140E88142A64B627005119F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140E88172A64B627005119F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1410AD232A84BEA8008793FB /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		1410AD252A84BEB6008793FB /* Memeber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memeber.swift; sourceTree = "<group>"; };
+		1410AD252A84BEB6008793FB /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		14134D522A64C944004A6AC4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		14134D532A64C944004A6AC4 /* .swiftlint.auto.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.auto.yml; sourceTree = "<group>"; };
 		1413925D2A78E66600249C8A /* CircleNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleNumberView.swift; sourceTree = "<group>"; };
@@ -612,7 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				2B7B4D6F2A84A5C800283248 /* MeetingDetail.swift */,
-				1410AD252A84BEB6008793FB /* Memeber.swift */,
+				1410AD252A84BEB6008793FB /* Member.swift */,
 			);
 			path = MeetingDetail;
 			sourceTree = "<group>";
@@ -2178,7 +2178,7 @@
 				2B45F2212A7B634400874783 /* MeetingDeleteType.swift in Sources */,
 				2B65B8162A88A7CE00E3BF11 /* JoinMeetingInfoEntity.swift in Sources */,
 				143F5FC02A88A08F004351F9 /* CameraError.swift in Sources */,
-				1410AD262A84BEB6008793FB /* Memeber.swift in Sources */,
+				1410AD262A84BEB6008793FB /* Member.swift in Sources */,
 				14E506542A6B8ED3008D5778 /* SignUpSuccessView.swift in Sources */,
 				14486D2C2A8B0C7400831DDD /* DateFormatter+.swift in Sources */,
 				2B84696B2A6E7AE200D75D32 /* BaggleTextField.swift in Sources */,
