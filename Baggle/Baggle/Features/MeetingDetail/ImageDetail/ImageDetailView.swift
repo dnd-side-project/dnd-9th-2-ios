@@ -36,14 +36,16 @@ struct ImageDetailView: View {
                         .blur(radius: isBlocked ? 40 : 0, opaque: true)
                         .cornerRadius(12)
                     
-                    Text("신고가 접수된 게시글입니다.\n확인 후 24시간 내에 처리될 예정입니다.")
-                        .multilineTextAlignment(.center)
-                        .fontWithLineSpacing(fontType: .body2)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                        .background(.black)
-                        .cornerRadius(12)
+                    if isBlocked {
+                        Text("신고가 접수된 게시글입니다.\n확인 후 24시간 내에 처리될 예정입니다.")
+                            .multilineTextAlignment(.center)
+                            .fontWithLineSpacing(fontType: .body2)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .background(.black)
+                            .cornerRadius(12)
+                    }
                 }
                 .padding(.top, 70)
                 

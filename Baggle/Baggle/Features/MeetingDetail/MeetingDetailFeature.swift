@@ -37,7 +37,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // Feed
         var isImageTapped: Bool = false
-        var tappedImageUrl: String?
+        var tappedMember: Member?
         var feedReportRequestModel: FeedReportRequestModel?
 
         // Child
@@ -86,7 +86,7 @@ struct MeetingDetailFeature: ReducerProtocol {
         case reportButtonTapped
 
         // feed
-        case imageTapped(String?)
+        case imageTapped(Member?)
         case updateFeedReport(FeedReportRequestModel)
         case handleReportResult(FeedReportResult)
         case showToast(Bool)
@@ -341,9 +341,9 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .none
 
-            case .imageTapped(let imageUrl):
+            case .imageTapped(let member):
                 state.isImageTapped.toggle()
-                state.tappedImageUrl = imageUrl
+                state.tappedMember = member
                 return .none
                 
             case .updateFeedReport(let requestModel):

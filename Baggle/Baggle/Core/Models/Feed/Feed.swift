@@ -12,4 +12,5 @@ struct Feed: Equatable {
     let username: String
     let userImageURL: String?
     let feedImageURL: String
+    let isReport: Bool
 }

@@ -14,6 +14,7 @@ struct Member: Identifiable, Hashable {
     let isButtonAuthority: Bool // 긴급 버튼 할당자 여부
     let certified: Bool // 인증 여부
     let certImage: String // 인증 사진, 별도 분리 가능 O
+    let isReport: Bool // 신고 여부
 
     static func == (lhs: Member, rhs: Member) -> Bool {
         return lhs.id == rhs.id
@@ -29,7 +30,8 @@ extension Member {
             isMeetingAuthority: self.isMeetingAuthority,
             isButtonAuthority: self.isButtonAuthority,
             certified: true,
-            certImage: certImage
+            certImage: certImage,
+            isReport: self.isReport
         )
     }
 }

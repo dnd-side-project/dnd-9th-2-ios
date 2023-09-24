@@ -90,8 +90,8 @@ struct MeetingDetailView: View {
                 
                 // 이미지 상세
                 if viewStore.isImageTapped,
-                   let image = viewStore.tappedImageUrl {
-                    imageDetailView(image: image, viewStore: viewStore)
+                   let tappedMember = viewStore.tappedMember {
+                    imageDetailView(member: tappedMember, viewStore: viewStore)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
@@ -326,7 +326,7 @@ extension MeetingDetailView {
                             )
                             .onTapGesture {
                                 if member.certified {
-                                    viewStore.send(.imageTapped(member.certImage))
+                                    viewStore.send(.imageTapped(member))
                                 }
                             }
                             
@@ -421,13 +421,13 @@ extension MeetingDetailView {
         }
     }
     
-    func imageDetailView(image: String, viewStore: MeetingDetailViewStore) -> some View {
+    func imageDetailView(member: Member, viewStore: MeetingDetailViewStore) -> some View {
         ImageDetailView(
             isPresented: Binding(
                 get: { viewStore.isImageTapped },
-                set: { _ in viewStore.send(.imageTapped(viewStore.tappedImageUrl)) }),
-            imageURL: image,
-            isBlocked: true
+                set: { _ in viewStore.send(.imageTapped(viewStore.tappedMember)) }),
+            imageURL: member.certImage,
+            isBlocked: member.isReport
         ) {
             viewStore.send(.imageTapped(nil))
         }
