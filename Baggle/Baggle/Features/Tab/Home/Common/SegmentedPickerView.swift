@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Segment: Identifiable {
-    var id: MeetingStatus
+    var id: MeetingHomeStatus
     let count: Int
     let isSelected: Bool
     let action: () -> Void
@@ -39,12 +39,12 @@ struct SegmentedPickerView_Previews: PreviewProvider {
     static var previews: some View {
         SegmentedPickerView(segment: [
             Segment(
-                id: .ready,
+                id: .scheduled,
                 count: 10,
                 isSelected: true,
                 action: { print("예정된 약속") }),
             Segment(
-                id: .completed,
+                id: .past,
                 count: 1,
                 isSelected: false,
                 action: { print("지난 약속") })

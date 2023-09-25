@@ -10,59 +10,72 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MainTabView: View {
-
+    
     let store: StoreOf<MainTabFeature>
-
+    
     init(store: StoreOf<MainTabFeature>) {
         self.store = store
         UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray4)
     }
-
+    
     var body: some View {
-
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            NavigationStack {
-                TabView(
-                    selection: viewStore.binding(
-                        get: \.selectedTab,
-                        send: MainTabFeature.Action.selectTab
-                    )
-                ) {
-                    HomeView(
-                        store: self.store.scope(
-                            state: \.homeFeature,
-                            action: MainTabFeature.Action.homeAction
+        
+        NavigationStackStore(self.store.scope(
+            state: \.path,
+            action: { .path($0)})
+        ) {
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                ZStack {
+                    TabView(
+                        selection: viewStore.binding(
+                            get: \.selectedTab,
+                            send: MainTabFeature.Action.selectTab
                         )
-                    )
-                    .tabItem {
-                        Image.Icon.homeFill
-                            .renderingMode(.template)
-                        Text("홈")
-                    }
-                    .tag(TapType.home)
-
-                    ZStack {
-                    }
-                    .tabItem {
-                        Image.Icon.plusFill
-                            .renderingMode(.template)
-                        Text("모임 생성")
-                    }
-                    .tag(TapType.createMeeting)
-
-                    MyPageView(
-                        store: self.store.scope(
-                            state: \.myPageFeature,
-                            action: MainTabFeature.Action.myPageAction
+                    ) {
+                        HomeView(
+                            store: self.store.scope(
+                                state: \.homeFeature,
+                                action: MainTabFeature.Action.homeAction
+                            )
                         )
-                    )
-                    .tabItem {
-                        Image.Icon.myPageFill
-                            .renderingMode(.template)
-                        Text("마이페이지")
+                        .tabItem {
+                            Image.Icon.homeFill
+                                .renderingMode(.template)
+                            Text("홈")
+                        }
+                        .tag(TapType.home)
+                        
+                        ZStack {
+                        }
+                        .tabItem {
+                            Image.Icon.plusFill
+                                .renderingMode(.template)
+                            Text("모임 생성")
+                        }
+                        .tag(TapType.createMeeting)
+                        
+                        MyPageView(
+                            store: self.store.scope(
+                                state: \.myPageFeature,
+                                action: MainTabFeature.Action.myPageAction
+                            )
+                        )
+                        .tabItem {
+                            Image.Icon.myPageFill
+                                .renderingMode(.template)
+                            Text("마이페이지")
+                        }
+                        .tag(TapType.myPage)
                     }
-                    .tag(TapType.myPage)
                 }
+                .baggleAlert(
+                    isPresented: viewStore.binding(
+                        get: { $0.isAlertPresented },
+                        send: { MainTabFeature.Action.presentAlert($0) }
+                    ),
+                    alertType: viewStore.alertType,
+                    action: { viewStore.send(.alertButtonTapped) }
+                )
                 .tint(.black)
                 .fullScreenCover(
                     store: self.store.scope(
@@ -78,12 +91,32 @@ struct MainTabView: View {
                 ) { store in
                     JoinMeetingView(store: store)
                 }
-                .onOpenURL { url in
-                    if let id = url.params()?["id"] as? String,
-                       let id = Int(id) {
-                        print("MainTabView - id: \(id)")
-                        viewStore.send(.enterJoinMeeting(id))
+                .onReceive(
+                    NotificationCenter.default.publisher(for: .joinMeeting),
+                    perform: { noti in
+                        if let id = noti.object as? Int {
+                            viewStore.send(.enterJoinMeeting(id))
+                        }
                     }
+                )
+            }
+        } destination: { pathState in
+            switch pathState {
+            case .meetingDetail:
+                CaseLet(
+                    /MainTabFeature.Child.State.meetingDetail,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
+                     action: MainTabFeature.Child.Action.meetingDetail
+                ) { store in
+                    MeetingDetailView(store: store)
+                }
+            case .meetingEdit:
+                CaseLet(
+                    /MainTabFeature.Child.State.meetingEdit,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
+                     action: MainTabFeature.Child.Action.meetingEdit
+                ) { store in
+                    MeetingEditView(store: store)
                 }
             }
         }

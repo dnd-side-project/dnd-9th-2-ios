@@ -10,145 +10,180 @@ import SwiftUI
 import ComposableArchitecture
 
 struct EmergencyView: View {
-
+    
     typealias EmergencyViewStore = ViewStore<EmergencyFeature.State, EmergencyFeature.Action>
-
+    
     let store: StoreOf<EmergencyFeature>
-
+    
     var body: some View {
-
+        
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-
-            GeometryReader { _ in
-
-                // MARK: - Background
-
-                if viewStore.isEmergency {
-                    Image.Background.home
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                }
-
-                VStack(spacing: 0) {
-
-                    // MARK: - Status Bar
-
-                    HStack {
-                        Spacer()
-
-                        Button {
-                            viewStore.send(.closeButtonTapped)
-                        } label: {
-                            Image.Icon.close
-                                .frame(width: 24, height: 24)
-                                .padding(10)
-                        }
-                    }
-                    .padding(.horizontal, 10)
+            
+            ZStack {
+                GeometryReader { proxy in
 
                     // MARK: - Content
-
-                    if viewStore.isEmergency {
-                        afterEmergency(viewStore: viewStore)
+                    
+                    if viewStore.isFetched {
+                        afterEmergency(viewStore: viewStore, proxy: proxy)
+                        if viewStore.isEmergency {
+                            successEmergency(viewStore: viewStore, proxy: proxy)
+                        }
                     } else {
-                        beforeEmergency(viewStore: viewStore)
+                        beforeEmergency(viewStore: viewStore, proxy: proxy)
+                    }
+                    
+                    VStack(spacing: 0) {
+                        
+                        // MARK: - Status Bar
+                        
+                        HStack {
+                            Spacer()
+                            
+                            Button {
+                                viewStore.send(.closeButtonTapped)
+                            } label: {
+                                Image.Icon.close
+                                    .frame(width: 24, height: 24)
+                                    .padding(10)
+                            }
+                        }
+                        .padding(.horizontal, 10)
                     }
                 }
+                
+                if viewStore.isTimeExpired {
+                    DescriptionView(
+                        isPresented: Binding(
+                            get: { viewStore.isTimeExpired },
+                            set: { viewStore.send(.timeExpiredChanged($0))}
+                        ),
+                        text: "시간 경과로 긴급 버튼이 자동으로 호출됐습니다"
+                    )
+                }
+                
+                if let alertType = viewStore.alertType {
+                    BaggleAlertOneButton(
+                        isPresented: Binding(
+                            get: { viewStore.alertType != nil },
+                            set: { viewStore.send(.presentBaggleAlert($0))}
+                        ),
+                        title: alertType.title,
+                        description: alertType.description,
+                        buttonTitle: alertType.buttonTitle) {
+                            viewStore.send(.alertButtonTapped)
+                        }
+                }
             }
-            .animation(.easeIn(duration: 0.3), value: viewStore.isEmergency)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
+            .onDisappear {
+                viewStore.send(.onDisappear)
+            }
         }
     }
 }
 
 extension EmergencyView {
-
-    private func beforeEmergency(viewStore: EmergencyViewStore) -> some View {
-        VStack {
-
-            VStack {
-                Text(
-                    attributedColorString(
-                        str: "긴급버튼을 눌러\n참여자를 호출하세요",
-                        targetStr: "긴급버튼",
-                        color: .gray11,
-                        targetColor: .baggleRed
-                    )
-                )
-                .font(.Baggle.title)
-                .padding(.vertical, 8)
-
-                Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
-                    .font(.Baggle.body2)
-                    .foregroundColor(.gray7)
-            }
-            .padding(.top, 8)
-            .multilineTextAlignment(.center)
-
-            Spacer()
-
-            VStack(spacing: 30) {
-                BubbleView(
-                    size: .medium,
-                    color: .secondary,
-                    text: "긴급 버튼을 눌러보세요!"
-                )
-
-                Button {
+    
+    private func beforeEmergency(viewStore: EmergencyViewStore, proxy: GeometryProxy) -> some View {
+        ZStack(alignment: .bottom) {
+            
+            Image.Emergency.buttonOff
+                .resizable()
+                .scaledToFit()
+                .frame(width: proxy.size.width * 0.586)
+                .offset(y: -proxy.size.height * 0.155)
+                .onTapGesture {
                     viewStore.send(.emergencyButtonTapped)
-                } label: {
-                    Image(systemName: "light.beacon.max")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 220)
                 }
+            
+            VStack {
+               
+                HStack {
+                    Spacer()
+                    
+                    VStack {
+                        Text(
+                            attributedColorString(
+                                str: "긴급버튼을 눌러\n참여자를 호출하세요",
+                                targetStr: "긴급버튼",
+                                color: .gray11,
+                                targetColor: .baggleRed
+                            )
+                        )
+                        .font(.Baggle.title)
+                        .padding(.vertical, 8)
+                        
+                        Text("긴급버튼을 누르면 5분 내로 현재 상황을\n인증해야해요!")
+                            .font(.Baggle.body2)
+                            .foregroundColor(.gray7)
+                    }
+                    .padding(.top, 8)
+                    .multilineTextAlignment(.center)
+                    
+                    Spacer()
+                }
+                
+                Spacer()
             }
-            .padding(.bottom, 120)
+            .padding(.top, 56)
         }
     }
-
-    private func afterEmergency(viewStore: EmergencyViewStore) -> some View {
+    
+    private func afterEmergency(viewStore: EmergencyViewStore, proxy: GeometryProxy) -> some View {
         ZStack(alignment: .bottom) {
-            VStack {
-
-                // Temp
-                VStack(spacing: 0) {
-                    Text("Warning")
-                        .font(.title)
-                }
-                .frame(width: 310, height: 96)
-                .background(Color.yellow)
-
-                LargeTimerView(
-                    store: self.store.scope(
-                        state: \.timerState,
-                        action: EmergencyFeature.Action.timerAction
-                    )
-                )
-                .padding(.top, 15)
-
-                Spacer()
-
-                Image(systemName: "light.beacon.max.fill")
-                    .resizable()
-                    .foregroundColor(.red)
-                    .scaledToFit()
-                    .frame(width: 220)
-                    .padding(.bottom, 120)
-            }
-
-            Button {
-                viewStore.send(.cameraButtonTapped)
-            } label: {
-                HStack(spacing: 8) {
-                    Image.Icon.cameraColor
-
-                    Text("사진 인증하기")
-                }
-            }
-            .buttonStyle(BaggleSecondaryStyle())
-            .padding(.bottom, 16)
+            
+            LottieView(lottieType: .button)
+                .ignoresSafeArea()
+            
+            Image.Emergency.buttonOn
+                .resizable()
+                .scaledToFit()
+                .frame(width: proxy.size.width * 0.586)
+                .offset(y: -proxy.size.height * 0.155)
         }
+    }
+    
+    private func successEmergency(
+        viewStore: EmergencyViewStore,
+        proxy: GeometryProxy
+    ) -> some View {
+        VStack {
+            
+            Spacer()
+                .frame(maxHeight: proxy.size.height * 0.24)
+            
+            LargeTimerView(
+                store: self.store.scope(
+                    state: \.timer,
+                    action: EmergencyFeature.Action.timerAction
+                ),
+                color: .black
+            )
+            
+            Spacer()
+            
+            HStack {
+                Spacer()
+                
+                Button {
+                    viewStore.send(.cameraButtonTapped)
+                } label: {
+                    HStack(spacing: 8) {
+                        Image.Icon.cameraColor
+                        
+                        Text("사진 인증하기")
+                    }
+                }
+                .buttonStyle(BaggleSecondaryStyle())
+                .padding(.bottom, 16)
+                
+                Spacer()
+            }
+        }
+        .transition(.opacity.animation(.easeIn(duration: 0.3)))
     }
 }
 
@@ -156,7 +191,10 @@ struct EmergencyView_Previews: PreviewProvider {
     static var previews: some View {
         EmergencyView(
             store: Store(
-                initialState: EmergencyFeature.State(memberID: 100),
+                initialState: EmergencyFeature.State(
+                    memberID: 100,
+                    remainTimeUntilExpired: 1000
+                ),
                 reducer: EmergencyFeature()
             )
         )

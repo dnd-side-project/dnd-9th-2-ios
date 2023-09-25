@@ -26,7 +26,7 @@ struct BaggleApp: App {
             AppView(
                 store: Store(
                     initialState: AppFeature.State(
-                        isLoggedIn: UserDefaultList.user != nil,
+                        isLoggedIn: UserManager.shared.isLoggedIn,
                         loginFeature: LoginFeature.State(),
                         mainTabFeature: MainTabFeature.State(
                             selectedTab: .home,
@@ -40,6 +40,14 @@ struct BaggleApp: App {
             .onOpenURL { url in
                 if AuthApi.isKakaoTalkLoginUrl(url) {
                     _ = AuthController.handleOpenUrl(url: url)
+                }
+                
+                if let id = url.params()?["id"] as? String,
+                   let id = Int(id) {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                        self.postObserverAction(.skipSplashJoinMeeting, object: id)
+                    }
+                    print("카카오톡 타고 들어온 Meeting ID : \(id)")
                 }
             }
         }

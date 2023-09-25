@@ -15,55 +15,66 @@ struct MeetingDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    // 임시 액션시트
-    @State var isActionSheetShow: Bool = false
-    
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            // zstack 순서: alert > navigationBar > scrollView
+            // zstack 순서: alert > navigationBar > scrollView > background
             ZStack(alignment: .top) {
                 
                 if viewStore.isLoading {
                     LoadingView()
                 }
                 
+                if viewStore.isToastShown {
+                    ToastView("신고가 정상적으로 접수되었습니다.")
+                }
+                
                 ScrollView {
-                    
-                    if let data = viewStore.meetingData {
-                        // header
-                        headerView(data: data)
-                        
-                        // 참여자 목록
-                        memberListView(viewStore: viewStore)
-                            .padding(.horizontal, 20)
-                            .drawUnderline(
-                                spacing: 0,
-                                height: 0.5,
-                                color: .gray4
-                            )
-                        
-                        // 인증 피드
-                        if !data.feeds.isEmpty {
-                            feedView(
-                                feeds: data.feeds,
-                                viewStroe: viewStore
-                            )
-                            .padding(EdgeInsets(top: 14, leading: 20, bottom: 20, trailing: 20))
-                        } else {
-                            // 엠티뷰
-                            emptyView()
+                    VStack(spacing: 0) {
+                        if let data = viewStore.meetingData {
+                            // header
+                            headerView(data: data)
+                            
+                            // 참여자 목록
+                            memberListView(viewStore: viewStore)
+                                .drawUnderline(
+                                    spacing: 0,
+                                    height: 0.5,
+                                    color: .gray4
+                                )
+                                .background(.white)
+                            
+                            // 인증 피드
+                            if !data.feeds.isEmpty {
+                                feedView(
+                                    feeds: data.feeds,
+                                    viewStore: viewStore
+                                )
+                                .padding(
+                                    EdgeInsets(top: 14,
+                                               leading: 20,
+                                               bottom: 20,
+                                               trailing: 20)
+                                )
+                                .background(.white)
+                            } else {
+                                // 엠티뷰
+                                emptyView()
+                                    .background(.white)
+                            }
                         }
                     }
                 }
-                .refreshable { viewStore.send(.onAppear) }
+                .refreshable {
+                    viewStore.send(.onAppear)
+                }
                 
                 VStack {
                     // navibar
                     NavigationBar(naviType: .more) {
                         viewStore.send(.backButtonTapped)
                     } rightButtonAction: {
-                        isActionSheetShow = true
+                        viewStore.send(.presentActionSheet(true))
                     }
                     .background(Color.PrimaryLight)
                     
@@ -77,65 +88,104 @@ struct MeetingDetailView: View {
                 .animation(.easeOut(duration: 0.3), value: viewStore.buttonState)
                 .transition(.move(edge: .bottom))
                 
-                // Error - alert
-                
-                if let alertType = viewStore.alertType {
-                    if alertType.buttonType == .one {
-                        BaggleAlertOneButton(
-                            isPresented: Binding(
-                                get: { viewStore.alertType != nil },
-                                set: { viewStore.send(.presentAlert($0)) }
-                            ),
-                            title: alertType.title,
-                            description: alertType.description,
-                            buttonTitle: alertType.buttonTitle
-                        ) {
-                            viewStore.send(.alertButtonTapped)
-                        }
-                    } else if alertType.buttonType == .two {
-                        BaggleAlertTwoButton(
-                            isPresented: Binding(
-                                get: { viewStore.alertType != nil },
-                                set: { viewStore.send(.presentAlert($0)) }
-                            ),
-                            title: alertType.title,
-                            description: alertType.description,
-                            alertType: .destructive,
-                            rightButtonTitle: alertType.buttonTitle,
-                            leftButtonAction: nil
-                        ) {
-                            viewStore.send(.alertButtonTapped)
-                        }
-                    }
-                }
-                
                 // 이미지 상세
                 if viewStore.isImageTapped,
-                   let image = viewStore.tappedImageUrl {
-                    imageDetailView(image: image, viewStore: viewStore)
+                   let tappedMember = viewStore.tappedMember {
+                    imageDetailView(member: tappedMember, viewStore: viewStore)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
-            // 임시 액션시트
-            .confirmationDialog("임시 액션시트", isPresented: $isActionSheetShow, actions: {
-                Button("방 폭파하기") { viewStore.send(.deleteButtonTapped) }
-                
-                Button("방장 넘기기") { viewStore.send(.leaveButtonTapped) }
-                
-                Button("카메라") { viewStore.send(.cameraButtonTapped) }
-                
-                Button("긴급 버튼") { viewStore.send(.emergencyButtonTapped) }
-                
-                Button("초대장 보내기") { viewStore.send(.inviteButtonTapped) }
+            .onAppear { viewStore.send(.onAppear) }
+            .onChange(of: viewStore.dismiss, perform: { _ in
+                dismiss()
             })
-            .sheet(
+            .onReceive(
+                NotificationCenter.default.publisher(for: .moveMeetingDetail),
+                perform: { notification in
+                    if let id = notification.object as? Int {
+                        viewStore.send(.notificationAppear(id))
+                    }
+                }
+            )
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { MeetingDetailFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
+            .presentActionSheet( // 네비바 더보기 버튼
+                isPresented:
+                    viewStore.binding(
+                        get: { $0.isActionSheetPresented },
+                        send: { MeetingDetailFeature.Action.presentActionSheet($0) }
+                    ),
+                content: {
+                    if let meetingData = viewStore.meetingData, meetingData.isOwner {
+                        Text("방 정보 수정하기")
+                            .addAction {
+                                viewStore.send(.editButtonTapped)
+                            }
+                        
+                        Divider().padding(.horizontal, 20)
+                        
+                        Text("방장 넘기고 나가기")
+                            .addAction {
+                                viewStore.send(.delegateButtonTapped)
+                            }
+                        
+                        Divider().padding(.horizontal, 20)
+                        
+                        Text("방 폭파하기")
+                            .addAction({
+                                viewStore.send(.deleteButtonTapped)},
+                                role: .destructive
+                            )
+                    } else {
+                        Text("방 나가기")
+                            .addAction({
+                                viewStore.send(.leaveButtonTapped)},
+                                role: .destructive
+                            )
+                    }
+            })
+            .presentActionSheet( // 게시물 더보기 버튼
+                isPresented: viewStore.binding(
+                    get: { $0.isFeedReportActionSheetPresented },
+                    send: { MeetingDetailFeature.Action.presentFeedActionSheet($0)}
+                ),
+                content: {
+                    Text("게시글 신고하기")
+                        .addAction({
+                            viewStore.send(.reportButtonTapped)
+                        }, role: .destructive)
+                })
+            .sheet( // 방장 선택
                 store: self.store.scope(
                     state: \.$selectOwner,
                     action: { .selectOwner($0) })
             ) { selectOwnerStore in
-                SelectOwnerView(store: selectOwnerStore)
-                    .presentationDetents([.height(340)])
-                    .presentationDragIndicator(.visible)
+                if let meetingData = viewStore.meetingData {
+                    SelectOwnerView(
+                        store: selectOwnerStore,
+                        meetingLeaveMember: meetingLeaveMemberList(
+                            memberID: meetingData.memberID,
+                            member: meetingData.members
+                        )
+                    )
+                    .presentationDetents([
+                        .height(self.meetingLeaveMemberViewHeight(meetingData.members.count))
+                    ])
+                }
+            }
+            .sheet( // 게시물 신고
+                store: self.store.scope(
+                    state: \.$feedReport,
+                    action: { .feedReport($0) })
+            ) { feedReportStore in
+                FeedReportView(store: feedReportStore)
+                    .presentationDetents([.fraction(0.8)])
             }
             .fullScreenCover(
                 store: self.store.scope(
@@ -153,39 +203,35 @@ struct MeetingDetailView: View {
             ) { emergencyStore in
                 EmergencyView(store: emergencyStore)
             }
-            .onAppear { viewStore.send(.onAppear) }
-            .onDisappear { viewStore.send(.delegate(.onDisappear)) }
-            .onChange(of: viewStore.dismiss, perform: { _ in
-                dismiss()
-            })
         }
     }
 }
 
 extension MeetingDetailView {
+    // swiftlint:disable:next line_length
     typealias MeetingDetailViewStore = ViewStore<MeetingDetailFeature.State, MeetingDetailFeature.Action>
     
-    func meetingTitleView(name: String, status: MeetingStatus) -> some View {
+    func meetingTitleView(name: String, status: MeetingStampStatus) -> some View {
         HStack(alignment: .top) {
             Text("📌")
+                .fontWithLineSpacing(fontType: .subTitle1)
             
             Text("\(name)")
                 .fontWithLineSpacing(fontType: .subTitle1)
-                .frame(maxWidth: name.width > 200 ? 200 : .none, alignment: .leading)
                 .padding(.trailing, 4)
                 .foregroundColor(.gray9)
             
             Group {
-                if status == .completed {
+                if status == .termination {
                     Image.Stamp.complete
                         .resizable()
-                } else if status == .confirmed {
+                } else if status == .confirmation {
                     Image.Stamp.confirm
                         .resizable()
                 }
             }
             .frame(width: 56, height: 23)
-            .padding(.top, name.width > 200 ? 2.5 : 0) // 두 줄인 경우 상단 패딩 추가
+            .padding(.top, 0)
             
             Spacer()
         }
@@ -232,28 +278,41 @@ extension MeetingDetailView {
     }
     
     func headerView(data: MeetingDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // 모임방 이름, 스탬프
-            meetingTitleView(
-                name: data.name,
-                status: data.status
-            )
+        GeometryReader { geo in
+            let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
             
-            // 장소, 시간
-            meetingDateView(
-                place: data.place,
-                date: data.date,
-                time: data.time
-            )
-            
-            // 메모
-            meetingMemoView(memo: data.memo)
-                .padding(.top, 10)
+            ZStack(alignment: .bottomLeading) {
+                Color.PrimaryLight
+                    .frame(width: geo.size.width, height: geo.size.height - yOffset)
+                    .offset(y: yOffset)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    // 모임방 이름, 스탬프
+                    meetingTitleView(
+                        name: data.name,
+                        status: data.stampStatus
+                    )
+                    
+                    // 장소, 시간
+                    meetingDateView(
+                        place: data.place,
+                        date: data.date,
+                        time: data.time
+                    )
+                    
+                    // 메모
+                    meetingMemoView(memo: data.memo)
+                        .padding(.top, 10)
+                }
+                .padding(EdgeInsets(top: 8, leading: 20, bottom: 24, trailing: 20))
+                .offset(y: yOffset)
+            }
         }
-        .padding(EdgeInsets(top: 64, leading: 20, bottom: 24, trailing: 20))
-        .background(Color.PrimaryLight)
+        .frame(height: headerHeight(name: data.name, memo: data.memo))
+        .padding(.top, 56)
     }
     
+    // swiftlint:disable:next function_body_length
     func memberListView(viewStore: MeetingDetailViewStore) -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
@@ -267,8 +326,16 @@ extension MeetingDetailView {
                             )
                             .onTapGesture {
                                 if member.certified {
-                                    viewStore.send(.imageTapped(member.certImage))
+                                    viewStore.send(.imageTapped(member))
                                 }
+                            }
+                            
+                            if failEmergencyAuthorization(
+                                meetingData: viewStore.meetingData,
+                                certified: member.certified
+                            ) {
+                                Circle()
+                                    .fill(Color.gray10.opacity(0.7))
                             }
                             
                             HStack(spacing: -10) {
@@ -280,6 +347,15 @@ extension MeetingDetailView {
                                     ProfileBadgeView(tag: .button)
                                 }
                             }
+                            
+                            if failEmergencyAuthorization(
+                                meetingData: viewStore.meetingData,
+                                certified: member.certified
+                            ) {
+                                BaggleStamp(status: .fail)
+                                    .frame(width: 60, height: 40)
+                                    .offset(x: -2, y: -12)
+                            }
                         }
                         
                         Text(member.name)
@@ -290,16 +366,19 @@ extension MeetingDetailView {
                     .padding(.all, 2)
                 }
             }
+            .padding(.horizontal, 20)
         }
         .padding(.top, 20)
         .padding(.bottom, 16)
+        .scrollIndicators(.hidden)
     }
     
-    func feedView(feeds: [Feed], viewStroe: MeetingDetailViewStore) -> some View {
+    func feedView(feeds: [Feed], viewStore: MeetingDetailViewStore) -> some View {
         VStack(spacing: 16) {
             ForEach(feeds, id: \.id) { feed in
                 FeedListCell(feed: feed) {
-                    print("더보기 버튼 탭")
+                    viewStore.send(.updateFeedReport(feed.id))
+                    viewStore.send(.presentFeedActionSheet(true))
                 }
             }
         }
@@ -337,12 +416,13 @@ extension MeetingDetailView {
         }
     }
     
-    func imageDetailView(image: String, viewStore: MeetingDetailViewStore) -> some View {
+    func imageDetailView(member: Member, viewStore: MeetingDetailViewStore) -> some View {
         ImageDetailView(
             isPresented: Binding(
                 get: { viewStore.isImageTapped },
-                set: { _ in viewStore.send(.imageTapped(viewStore.tappedImageUrl)) }),
-            imageURL: image
+                set: { _ in viewStore.send(.imageTapped(viewStore.tappedMember)) }),
+            imageURL: member.certImage,
+            isBlocked: member.isReport
         ) {
             viewStore.send(.imageTapped(nil))
         }
@@ -357,6 +437,43 @@ extension MeetingDetailView {
                 .font(.Baggle.body2)
                 .foregroundColor(.gray6)
         }
+        .frame(width: screenSize.width)
+    }
+}
+
+extension MeetingDetailView {
+    func headerHeight(name: String, memo: String?) -> CGFloat {
+        var height: CGFloat = 188
+        if name.contains("\n") {
+            height += 31
+        }
+        if let width = memo?.width(15),
+            width >= screenSize.width - 40 {
+            height += 21
+        }
+        return height
+    }
+}
+
+extension MeetingDetailView {
+    
+    // Member View에서 탈락 stamp를 위한 조건문
+    private func failEmergencyAuthorization(meetingData: MeetingDetail?, certified: Bool) -> Bool {
+        guard let meetingData = meetingData else {
+            return false
+        }
+        return meetingData.afterEmergencyAuthority() && !certified
+    }
+    
+    // 방장 넘기기 할 때 나빼고 남은 멤버들만
+    private func meetingLeaveMemberList(memberID: Int, member: [Member]) -> [MeetingLeaveMember] {
+        return member.filter {$0.id != memberID }.map { $0.toMeetingLeaveMember() }
+    }
+    
+    // 방장 넘기기 모달 높이
+    private func meetingLeaveMemberViewHeight(_ memberCount: Int) -> CGFloat {
+        // 본인 제외 하고 4명 이상 -> 2줄 됨
+        return memberCount - 1 >= 4 ? 460 : 360
     }
 }
 

@@ -51,6 +51,7 @@ struct CreateTitleFeature: ReducerProtocol {
         case delegate(Delegate)
         
         enum Delegate: Equatable {
+            case createSuccess
             case moveToLogin
         }
     }
@@ -154,7 +155,13 @@ struct CreateTitleFeature: ReducerProtocol {
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToNext(place))))):
                 _ = id
                 state.meetingCreate = state.meetingCreate.update(place: place)
-                state.path.append(.meetingDate(CreateDateFeature.State()))
+                state.path.append(
+                    .meetingDate(
+                        CreateDateFeature.State(
+                            meetingDateButtonState: MeetingDateButtonFeature.State()
+                        )
+                    )
+                )
                 return .none
                 
             case let .path(.element(id: id, action: .meetingPlace(.delegate(.moveToBack)))):
@@ -193,7 +200,9 @@ struct CreateTitleFeature: ReducerProtocol {
                 state.path.append(.createSuccess(
                     CreateSuccessFeature.State(meetingSuccessModel: meetingSuccessModel))
                 )
-                return .none
+                return .run { send in
+                    await send(.delegate(.createSuccess))
+                }
                 
             case let .path(.element(id: id, action: .meetingMemo(.delegate(.moveToBack)))):
                 state.path.pop(from: id)

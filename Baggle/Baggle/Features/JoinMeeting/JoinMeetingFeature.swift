@@ -12,22 +12,50 @@ import ComposableArchitecture
 struct JoinMeetingFeature: ReducerProtocol {
 
     struct State: Equatable {
-        // MARK: - Scope State
+        
+        // MARK: - Join Meeting Model
+        
         var meetingId: Int
-        var joinMeeingStatus: JoinMeetingStatus
+        var joinMeetingStatus: JoinMeetingResult
+        
+        // MARK: - Alert
+        
         var isAlertPresented: Bool = false
+        var alertType: AlertJoinMeetingType?
     }
 
     enum Action: Equatable {
-        // MARK: - Scope Action
+        
+        // MARK: - View
         
         case onAppear
+        
+        // MARK: - Button
+        
         case exitButtonTapped
         case joinButtonTapped
+        
+        // MARK: - Response
+
         case joinSuccess
         case joinFailed
-        case presentAlert
+        
+        // MARK: - Alert
+
+        case presentAlert(Bool)
+        case alertTypeChanged(AlertJoinMeetingType)
+        case alertButtonTapped
+        
+        // MARK: - Move
+
         case moveToMeetingDetail
+        
+        // MARK: - Delegate
+        case delegate(Delegate)
+        
+        enum Delegate {
+            case moveToLogin
+        }
     }
 
     @Dependency(\.dismiss) var dismiss
@@ -35,18 +63,28 @@ struct JoinMeetingFeature: ReducerProtocol {
 
     var body: some ReducerProtocolOf<Self> {
 
-        // MARK: - Scope
-
         // MARK: - Reduce
 
         Reduce { state, action in
 
             switch action {
+                
+                // MARK: - View
+                
             case .onAppear:
-                if state.joinMeeingStatus == .expired {
-                    return .run { send in await send(.presentAlert) }
+                if case let .expired(error) = state.joinMeetingStatus {
+                    switch error {
+                    case .duplicatedMeeting:
+                        return .run { send in await send(.alertTypeChanged(.overlap))}
+                    case .exceedMemberCount:
+                        return .run { send in await send(.alertTypeChanged(.exceedMemberCount))}
+                    default:
+                        return .run { send in await send(.alertTypeChanged(.expired))}
+                    }
                 }
                 return .none
+                
+                // MARK: - Button
                 
             case .exitButtonTapped:
                 return .run { _ in await self.dismiss() }
@@ -61,11 +99,42 @@ struct JoinMeetingFeature: ReducerProtocol {
                     }
                 }
 
+                // MARK: - Response
+                
             case .joinSuccess:
                 return .run { send in await send(.moveToMeetingDetail) }
 
             case .joinFailed:
                 return .none
+                
+                // MARK: - Alert
+                
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
+                return .none
+            
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+            
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .expired, .overlap, .exceedMemberCount, .networkError:
+                    return .run { _ in await self.dismiss() }
+                case .userError:
+                    return .run { send in await send(.delegate(.moveToLogin))}
+                }
+                
+                // MARK: - Move
                 
             case .moveToMeetingDetail:
                 let id = state.meetingId
@@ -76,8 +145,9 @@ struct JoinMeetingFeature: ReducerProtocol {
                     }
                 }
                 
-            case .presentAlert:
-                state.isAlertPresented.toggle()
+                // MARK: - Delegate
+                
+            case .delegate:
                 return .none
             }
         }

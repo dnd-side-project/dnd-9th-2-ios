@@ -7,102 +7,99 @@
 
 import SwiftUI
 
+import MessageUI
+
 import ComposableArchitecture
 import Kingfisher
 
 struct MyPageView: View {
     
     let store: StoreOf<MyPageFeature>
+    private let mailComposeDelegate = MailDelegate()
     
     var body: some View {
         
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            
-            ZStack {
+            List {
                 
-                if viewStore.isLoading {
-                    LoadingView()
-                }
+                // MARK: - 프로필
                 
-                List {
-                    
-                    // MARK: - 프로필
-                    
-                    Section {
-                        HStack {
-                            Spacer()
+                Section {
+                    HStack {
+                        Spacer()
+                        
+                        VStack(spacing: 16) {
+                            CircleProfileView(
+                                imageUrl: viewStore.user.profileImageURL,
+                                size: .xxLarge
+                            )
                             
-                            VStack(spacing: 16) {
-                                KFImage(URL(string: viewStore.user.profileImageURL ?? ""))
-                                    .placeholder({ _ in
-                                        Image.Profile.profilDefault
-                                            .resizable()
-                                    })
-                                    .resizable()
-                                    .aspectRatio(1.0, contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(50)
-                                    .clipped()
+                            HStack(alignment: .top, spacing: 6) {
+                                Text(viewStore.user.name)
+                                    .font(.Baggle.subTitle1)
+                                    .foregroundColor(.gray11)
                                 
-                                HStack(alignment: .top, spacing: 6) {
-                                    Text(viewStore.user.name)
-                                        .font(.Baggle.subTitle1)
-                                        .foregroundColor(.gray11)
-                                    
-                                    PlatformLogoView(platform: viewStore.user.platform)
-                                }
+                                PlatformLogoView(platform: viewStore.user.platform)
                             }
-                            .padding(.top, 32)
-                            .padding(.bottom, 24)
-                            .padding(.horizontal, 20)
-                            
-                            Spacer()
                         }
-                    }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    
-                    // MARK: - 일반 설정
-                    
-                    Section {
-                        SettingListRow(text: "알림 설정") {
-                            viewStore.send(.notificationSettingButtonTapped)
-                        }
+                        .padding(.top, 32)
+                        .padding(.bottom, 24)
+                        .padding(.horizontal, 20)
                         
-                        SettingListRow(text: "개인정보 처리방침") {
-                            viewStore.send(.privacyPolicyButtonTapped)
-                        }
-                        
-                        SettingListRow(text: "서비스 이용약관") {
-                            viewStore.send(.termsOfServiceButtonTapped)
-                        }
-                    } header: {
-                        SettingListHeader(text: "일반 설정")
+                        Spacer()
                     }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    
-                    // MARK: - 계정
-                    
-                    Section {
-                        SettingListRow(text: "로그아웃", isArrow: false) {
-                            viewStore.send(.logoutButtonTapped)
-                        }
-                        SettingListRow(text: "계정 탈퇴", isArrow: false) {
-                            viewStore.send(.withdrawButtonTapped)
-                        }
-                    } header: {
-                        SettingListHeader(text: "계정")
-                    }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
                 }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
-                .listStyle(.plain)
+                
+                // MARK: - 일반 설정
+                
+                Section {
+                    SettingListRow(text: "Baggle 사용법") {
+                        viewStore.send(.onboardingButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "알림 설정") {
+                        viewStore.send(.notificationSettingButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "개인정보 처리방침") {
+                        viewStore.send(.privacyPolicyButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "서비스 이용약관") {
+                        viewStore.send(.termsOfServiceButtonTapped)
+                    }
+                    
+                    SettingListRow(text: "문의하기") {
+                        self.presentMailView()
+                    }
+                } header: {
+                    SettingListHeader(text: "일반 설정")
+                }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
+                
+                // MARK: - 계정
+                
+                Section {
+                    SettingListRow(text: "로그아웃", isArrow: false) {
+                        viewStore.send(.logoutButtonTapped)
+                    }
+                    SettingListRow(text: "계정 탈퇴", isArrow: false) {
+                        viewStore.send(.withdrawButtonTapped)
+                    }
+                } header: {
+                    SettingListHeader(text: "계정")
+                }
+                .listRowSeparator(.hidden)
+                .listSectionSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
             }
+            .listRowInsets(EdgeInsets())
+            .listStyle(.plain)
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -116,7 +113,52 @@ struct MyPageView: View {
                     SafariWebView(url: url)
                 }
             }
+            .fullScreenCover(
+                store: self.store.scope(
+                    state: \.$onboarding,
+                    action: { .onboarding($0) })
+            ) { store in
+                OnboardingView(store: store)
+            }
         }
+    }
+}
+
+extension MyPageView {
+    
+    private class MailDelegate: NSObject, MFMailComposeViewControllerDelegate {
+        func mailComposeController(
+            _ controller: MFMailComposeViewController,
+            didFinishWith result: MFMailComposeResult,
+            error: Error?
+        ) {
+            controller.dismiss(animated: true)
+        }
+    }
+    
+    func presentMailView() {
+        guard MFMailComposeViewController.canSendMail() else { return }
+        guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
+                as? String else { return }
+        
+        let rootVC = UIApplication.shared.currentKeyWindow?.rootViewController
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = mailComposeDelegate
+        
+        composeVC.setToRecipients([Const.Account.mail])
+        composeVC.setSubject("Baggle 문의 사항")
+        composeVC.setMessageBody("""
+        
+        Device: \(UIDevice.iPhoneModel)
+        OS Version: \(UIDevice.iOSVersion)
+        App Version: \(appVersion)
+        ----------------------------
+        
+        문의 사항을 작성해주세요.
+        
+        """, isHTML: false)
+        
+        rootVC?.present(composeVC, animated: true)
     }
 }
 

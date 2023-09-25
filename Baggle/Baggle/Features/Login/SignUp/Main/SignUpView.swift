@@ -59,6 +59,14 @@ struct SignUpView: View {
                         nextButton(viewStore: viewStore)
                     }
                 }
+                .baggleAlert(
+                    isPresented: viewStore.binding(
+                        get: { $0.isAlertPresented },
+                        send: { SignUpFeature.Action.presentAlert($0) }
+                    ),
+                    alertType: viewStore.alertType,
+                    action: { viewStore.send(.alertButtonTapped) }
+                )
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("취소") {
@@ -70,8 +78,18 @@ struct SignUpView: View {
             .onTapGesture {
                 hideKeyboard()
             }
-        } destination: { store in
-            SignUpSuccessView(store: store)
+        } destination: { pathState in
+            switch pathState {
+            case .signUpSuccess:
+                CaseLet(
+                    /SignUpFeature.Child.State.signUpSuccess,
+                     // swiftlint:disable:next vertical_parameter_alignment_on_call
+                     action: SignUpFeature.Child.Action.signUpSuccess
+                ) { store in
+                    SignUpSuccessView(store: store)
+                        .navigationBarBackButtonHidden()
+                }
+            }
         }
     }
 }

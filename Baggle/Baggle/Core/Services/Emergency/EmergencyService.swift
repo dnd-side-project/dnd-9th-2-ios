@@ -8,10 +8,9 @@
 import Foundation
 
 import ComposableArchitecture
-import Moya
 
 struct EmergencyService {
-    var emergency: (_ memberID: Int) async -> EmergencyServiceStatus
+    var emergency: (_ memberID: Int) async -> EmergencyServiceResult
 }
 
 extension EmergencyService: DependencyKey {
@@ -20,17 +19,33 @@ extension EmergencyService: DependencyKey {
     
     static var liveValue = Self { memberID in
         do {
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
-            let data: EmergencyEntity = try await networkService.request(
-                .emergency(
-                    memberID: memberID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .userError
+                }
+                
+                let data: EmergencyEntity = try await networkService.request(
+                    .emergency(
+                        memberID: memberID,
+                        token: accessToken
+                    )
                 )
-            )
-            return .success
-        } catch let error {
-            print("EmergencyService error - \(error)")
-            return .fail(.network)
+                
+                let certificationTime = data.certificationTime
+                
+                return .success(certificationTime)
+            }.value
+        } catch {
+            if let apiError = error as? APIError {
+                if apiError == .badRequest {
+                    return .invalidAuthorizationTime
+                } else if apiError == .unauthorized {
+                    return .unAuthorized
+                } else if apiError == .notFound {
+                    return .notFound
+                }
+            }
+            return .networkError(error.localizedDescription)
         }
     }
 }

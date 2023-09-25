@@ -46,7 +46,6 @@ struct SignUpSuccessView: View {
                 }
                 .buttonStyle(BagglePrimaryStyle())
             }
-            .navigationBarBackButtonHidden()
         }
     }
 }

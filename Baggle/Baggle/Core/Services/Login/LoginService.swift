@@ -11,7 +11,7 @@ import ComposableArchitecture
 import KakaoSDKUser
 
 struct LoginService {
-    var login: (LoginRequestModel, String) async -> LoginServiceStatus
+    var login: (LoginRequestModel, String) async -> LoginServiceResult
     var kakaoLogin: () async throws -> String
 }
 
@@ -22,33 +22,33 @@ extension LoginService: DependencyKey {
 
     static var liveValue = Self { requestModel, token in
         do {
-            let data: SignEntity = try await networkService.request(
-                .signIn(
-                    requestModel: requestModel,
-                    token: token
+            return try await Task.retrying {
+                let data: SignEntity = try await networkService.request(
+                    .signIn(
+                        requestModel: requestModel,
+                        token: token
+                    )
                 )
-            )
-            // 키체인 저장, 저장 전에 이미 있는 데이터  삭제
-            checkKeyChain()
-            let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
-            try KeychainManager.shared.createUserToken(token)
-            
-            // 유저 Default 저장
-            saveUser(data: data.toDomain())
-            
-            return .success
+                
+                let user = data.toDomain()
+                let token = UserToken(
+                    accessToken: data.accessToken,
+                    refreshToken: data.refreshToken
+                )
+                try UserManager.shared.save(user: user, userToken: token)
+                
+                return .success
+            }.value
         } catch let error {
-            print("LoginService - error: \(error)")
-            guard let error = error as? APIError else { return .fail(.network) }
-            
-            if error == .notFound {
-                return .requireSignUp
-            } else if error == .unauthorized {
-                // 리프레시 토큰으로 재로그인 요청
-                return .fail(.network)
-            } else {
-                return .fail(.network)
+            if let apiError = error as? APIError {
+                if apiError == .notFound {
+                    return .requireSignUp
+                }
+            } else if let userError = error as? KeyChainError {
+                return .userError
             }
+            
+            return .networkError(error.localizedDescription)
         }
     } kakaoLogin: {
         return try await withCheckedThrowingContinuation({ (continuation: TokenContinuation) in
@@ -78,19 +78,6 @@ extension LoginService: DependencyKey {
                 }
             }
         })
-    }
-    
-    static func checkKeyChain() {
-        do {
-            _ = try KeychainManager.shared.readUserToken()
-            try KeychainManager.shared.deleteUserToken()
-        } catch {
-            return
-        }
-    }
-    
-    static func saveUser(data: User) {
-        UserDefaultList.user = data
     }
 }
 

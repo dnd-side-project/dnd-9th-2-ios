@@ -10,14 +10,14 @@ import SwiftUI
 import ComposableArchitecture
 
 struct JoinMeetingView: View {
-
+    
     let store: StoreOf<JoinMeetingFeature>
-
+    
     var body: some View {
-
+        
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
-                if case let .enable(joinMeeting) = viewStore.joinMeeingStatus {
+                if case let .enable(joinMeeting) = viewStore.joinMeetingStatus {
                     VStack(alignment: .center, spacing: 0) {
                         createDescription()
                             .padding(.top, 46)
@@ -38,10 +38,16 @@ struct JoinMeetingView: View {
                         createButton(viewStore: viewStore)
                             .padding(.bottom, 16)
                     }
-                } else {
-                    baggleAlert(viewStore: viewStore)
                 }
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { JoinMeetingFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .onAppear { viewStore.send(.onAppear) }
         }
     }
@@ -123,25 +129,15 @@ extension JoinMeetingView {
             }
         }
     }
-    
-    func baggleAlert(viewStore: Viewstore) -> some View {
-        BaggleAlertOneButton(
-            isPresented: Binding(
-                get: { viewStore.isAlertPresented },
-                set: { _ in viewStore.send(.presentAlert) }
-            ),
-            title: "이미 만료된 방이에요!",
-            buttonTitle: "약속 1시간 전까지만 입장이 가능해요.") {
-                viewStore.send(.exitButtonTapped)
-            }
-    }
 }
 
 struct JoinMeetingView_Previews: PreviewProvider {
     static var previews: some View {
         JoinMeetingView(
             store: Store(
-                initialState: JoinMeetingFeature.State(meetingId: 100, joinMeeingStatus: .expired),
+                initialState: JoinMeetingFeature.State(
+                    meetingId: 100,
+                    joinMeetingStatus: .expired(.duplicatedMeeting)),
                 reducer: JoinMeetingFeature()
             )
         )

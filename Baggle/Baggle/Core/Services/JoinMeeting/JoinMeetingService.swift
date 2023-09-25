@@ -10,8 +10,8 @@ import Foundation
 import ComposableArchitecture
 
 struct JoinMeetingService {
-    var fetchMeetingInfo: (_ meetingID: Int) async -> JoinMeetingStatus
-    var postJoinMeeting: (_ meetingID: Int) async -> JoinMeetingResultStatus
+    var fetchMeetingInfo: (_ meetingID: Int) async -> JoinMeetingResult
+    var postJoinMeeting: (_ meetingID: Int) async -> JoinMeetingPostResult
 }
 
 extension JoinMeetingService: DependencyKey {
@@ -20,35 +20,47 @@ extension JoinMeetingService: DependencyKey {
     
     static var liveValue = Self { meetingID in
         do {
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
-            let data: JoinMeetingInfoEntity = try await networkService.request(
-                .fetchMeetingInfo(
-                    meetingID: meetingID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .fail(.network)
+                }
+                
+                let data: JoinMeetingInfoEntity = try await networkService.request(
+                    .fetchMeetingInfo(
+                        meetingID: meetingID,
+                        token: accessToken
+                    )
                 )
-            )
-            return JoinMeetingStatus.enable(data.toDomain())
+                
+                return JoinMeetingResult.enable(data.toDomain())
+            }.value
         } catch let error {
             guard let error = error as? APIError else { return .fail(.network) }
             if error == .duplicatedJoinMeeting {
-                return JoinMeetingStatus.joined
+                return JoinMeetingResult.joined
             } else {
-                return JoinMeetingStatus.expired
+                return JoinMeetingResult.expired(error)
             }
         }
     } postJoinMeeting: { meetingID in
         do {
-            let accessToken = try KeychainManager.shared.readUserToken().accessToken
-            try await networkService.requestWithNoResult(
-                .postJoinMeeting(
-                    meetingID: meetingID,
-                    token: accessToken
+            return try await Task.retrying {
+                guard let accessToken = UserManager.shared.accessToken else {
+                    return .fail(.network)
+                }
+                
+                try await networkService.requestWithNoResult(
+                    .postJoinMeeting(
+                        meetingID: meetingID,
+                        token: accessToken
+                    )
                 )
-            )
-            return JoinMeetingResultStatus.success
+                
+                return JoinMeetingPostResult.success
+            }.value
         } catch let error {
             guard let error = error as? APIError else { return .fail(.network) }
-            return JoinMeetingResultStatus.fail(error)
+            return JoinMeetingPostResult.fail(error)
         }
     }
 }
@@ -61,7 +73,7 @@ extension DependencyValues {
 }
 
 struct JoinMeetingRepository {
-    func mockJoinMeetingState() async throws -> JoinMeetingStatus {
+    func mockJoinMeetingState() async throws -> JoinMeetingResult {
         return try await withCheckedThrowingContinuation({ continuation in
             let info = JoinMeeting(meetingId: 0,
                                    title: "수빈님네 집들이",

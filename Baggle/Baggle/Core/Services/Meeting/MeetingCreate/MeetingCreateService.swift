@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 struct MeetingCreateService {
-    var create: (_ meetingCreateModel: MeetingCreateModel) async -> MeetingCreateStatus
+    var create: (_ meetingCreateModel: MeetingCreateModel) async -> MeetingCreateResult
 }
 
 extension MeetingCreateService: DependencyKey {
@@ -19,8 +19,9 @@ extension MeetingCreateService: DependencyKey {
     
     static var liveValue = Self { meetingCreateModel in
         do {
-            let userToken = try KeychainManager.shared.readUserToken()
-            let token = userToken.accessToken
+            guard let token = UserManager.shared.accessToken else {
+                return .userError
+            }
             
             guard let requestModel = MeetingCreateRequestModel(
                 meetingCreateModel: meetingCreateModel
@@ -43,10 +44,12 @@ extension MeetingCreateService: DependencyKey {
             
             return .success(model)
         } catch {
-            if let apiError = error as? APIError, apiError == .duplicatedMeeting {
-                return .duplicatedMeeting
-            } else if let keyChainError = error as? KeyChainError {
-                return .userError
+            if let apiError = error as? APIError {
+                if apiError == .duplicatedMeeting {
+                    return .duplicatedMeeting
+                } else if apiError == .limitMeetingCount {
+                    return .limitMeetingCount
+                }
             }
             return .networkError(error.localizedDescription)
         }

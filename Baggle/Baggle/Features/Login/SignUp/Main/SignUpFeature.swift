@@ -37,9 +37,14 @@ struct SignUpFeature: ReducerProtocol {
             textFieldState: .inactive
         )
 
+        // MARK: - Alert
+        
+        var isAlertPresented: Bool = false
+        var alertType: AlertSignUpType?
+        
         // MARK: - Child State
 
-        var path = StackState<SignUpSuccessFeature.State>()
+        var path = StackState<Child.State>()
     }
 
     enum Action: Equatable {
@@ -73,19 +78,44 @@ struct SignUpFeature: ReducerProtocol {
         case requestSignUp(SignUpRequestModel)
         case networkLoading(Bool)
 
+        // MARK: - Alert
+
+        case presentAlert(Bool)
+        case alertTypeChanged(AlertSignUpType)
+        case alertButtonTapped
+        
         // MARK: - Child Action
 
-        case path(StackAction<SignUpSuccessFeature.State, SignUpSuccessFeature.Action>)
+        case path(StackAction<Child.State, Child.Action>)
 
         // MARK: - Delegate
 
         case delegate(Delegate)
 
         enum Delegate: Equatable {
-            case successSignUp
+            case moveToHome
         }
     }
 
+    // MARK: - Child
+    
+    struct Child: ReducerProtocol {
+
+        enum State: Equatable {
+            case signUpSuccess(SignUpSuccessFeature.State)
+        }
+
+        enum Action: Equatable {
+            case signUpSuccess(SignUpSuccessFeature.Action)
+        }
+
+        var body: some ReducerProtocolOf<Self> {
+            Scope(state: /State.signUpSuccess, action: /Action.signUpSuccess) {
+                SignUpSuccessFeature()
+            }
+        }
+    }
+    
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.nicknameValidator) var nicknameValidator
     @Dependency(\.signUpService) var signUpService
@@ -112,7 +142,7 @@ struct SignUpFeature: ReducerProtocol {
                     nickname: nickname,
                     profilImageUrl: state.selectedImage,
                     platform: state.loginPlatform,
-                    fcmToken: UserDefaultList.fcmToken ?? ""
+                    fcmToken: UserDefaultManager.fcmToken ?? ""
                 )
 
                 if nicknameValidator.isValidate(nickname) {
@@ -147,12 +177,16 @@ struct SignUpFeature: ReducerProtocol {
                 // MARK: - Screen Move
 
             case .moveToSignUpSuccess:
-                state.path.append(SignUpSuccessFeature.State())
+                state.path.append(
+                    .signUpSuccess(
+                        SignUpSuccessFeature.State()
+                    )
+                )
                 return .none
 
             case .moveToHome:
                 return .run { send in
-                    await send(.delegate(.successSignUp))
+                    await send(.delegate(.moveToHome))
                     await self.dismiss()
                 }
 
@@ -178,8 +212,10 @@ struct SignUpFeature: ReducerProtocol {
                 return .run { send in await send(.disableButtonChanged) }
 
             case let .successImageChange(image):
-                state.imageState = .success(Image(uiImage: image).resizable())
-                state.selectedImage = image.jpegData(compressionQuality: 0.5)
+                state.imageState = .success(Image(uiImage: image))
+                state.selectedImage = image.jpegData(
+                    compressionQuality: Const.Image.jpegCompression
+                )
                 return .run { send in await send(.disableButtonChanged) }
 
             case .failImageChange:
@@ -214,11 +250,10 @@ struct SignUpFeature: ReducerProtocol {
                         await send(.moveToSignUpSuccess)
                     case .nicknameDuplicated:
                         await send(.textFieldAction(.changeState(.invalid("중복되는 닉네임이 있습니다."))))
-                    case .fail:
-                        // Alert으로 변경 필요
-                        await send(.textFieldAction(.changeState(.invalid("네트워크 에러입니다."))))
-                    case .keyChainError:
-                        print("key 체인 에러") // Alert으로 변경 필요
+                    case .networkError(let description):
+                        await send(.alertTypeChanged(.networkError(description)))
+                    case .userError:
+                        await send(.alertTypeChanged(.userError))
                     }
                 }
 
@@ -226,16 +261,42 @@ struct SignUpFeature: ReducerProtocol {
                 state.isLoading = isLoading
                 return .none
 
+                // MARK: - Alert
+
+            case .presentAlert(let isPresented):
+                if !isPresented {
+                    state.alertType = nil
+                }
+                state.isAlertPresented = isPresented
+                return .none
+            
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
+                return .none
+            
+            case .alertButtonTapped:
+                guard let alertType = state.alertType else {
+                    return .none
+                }
+                state.alertType = nil
+                
+                switch alertType {
+                case .networkError, .userError:
+                    return .none
+                }
+                
+                
                 // MARK: - Child Action
 
-            case let .path(.element(id: id, action: .delegate(.moveToHome))):
+            case let .path(.element(id: id, action: .signUpSuccess(.delegate(.moveToNext)))):
+                _ = id
                 state.disableDismissAnimation = true // 회원 가입 완료하고 홈 화면 이동시 화면 전환 애니메이션 비활성화
 
-                state.path.pop(from: id)
                 return .run { send in
                     await send(.moveToHome)
                 }
-
+                
             case .path:
                 return .none
 
@@ -246,7 +307,7 @@ struct SignUpFeature: ReducerProtocol {
             }
         }
         .forEach(\.path, action: /Action.path) {
-            SignUpSuccessFeature()
+            Child()
         }
     }
 }

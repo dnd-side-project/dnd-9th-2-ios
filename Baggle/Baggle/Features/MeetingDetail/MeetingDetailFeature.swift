@@ -8,8 +8,8 @@
 import SwiftUI
 
 import ComposableArchitecture
-import KakaoSDKShare
 
+// swiftlint:disable:next type_body_length
 struct MeetingDetailFeature: ReducerProtocol {
 
     @Environment(\.openURL) private var openURL
@@ -18,66 +18,95 @@ struct MeetingDetailFeature: ReducerProtocol {
         
         // View
         var isLoading: Bool = false
+        var isToastShown: Bool = false
         
+        // Alert
+        var isAlertPresented: Bool = false
+        var alertType: AlertMeetingDetailType?
+        
+        // Action Sheet
+        var isActionSheetPresented: Bool = false
+        var isFeedReportActionSheetPresented: Bool = false
+
         // Meeting
 
         var meetingId: Int
         var meetingData: MeetingDetail?
-        var memberId: Int = -1
         var dismiss: Bool = false
         var buttonState: MeetingDetailButtonType = .none
-
-        // Alert
-        var alertType: AlertMeetingDetailType?
         
         // Feed
         var isImageTapped: Bool = false
-        var tappedImageUrl: String?
+        var tappedMember: Member?
+        var feedReportRequestModel: FeedReportRequestModel?
 
         // Child
         var timerState = TimerFeature.State(timerCount: 0)
 
         // delete
         @PresentationState var selectOwner: SelectOwnerFeature.State?
-        var nextOwnerId: Int?
 
         // Camera
         @PresentationState var usingCamera: CameraFeature.State?
 
         // Emergency
         @PresentationState var emergencyState: EmergencyFeature.State?
+        
+        // report
+        @PresentationState var feedReport: FeedReportFeature.State?
     }
 
     enum Action: Equatable {
         // MARK: - Scope Action
 
         case onAppear
-        case handleResult(MeetingDetailStatus)
+        case notificationAppear(Int)
+        
+        // Meeting Detail
+        case handleDetailResult(MeetingDetailResult)
         case updateData(MeetingDetail)
+        case updateAfterMeetingEdit(MeetingEditSuccessModel)
+        case updateAfterReport(Int) // FeedID
+        
+        // Meeting Delete
         case deleteMeeting
+        case leaveMeeting
+        case handleDeleteResult(MeetingDeleteResult)
 
         // button
         case deleteButtonTapped
+        case editButtonTapped
+        case delegateButtonTapped
         case leaveButtonTapped
+        
         case backButtonTapped
         case cameraButtonTapped
         case emergencyButtonTapped
         case inviteButtonTapped
         case eventButtonTapped
+        case reportButtonTapped
 
         // feed
-        case imageTapped(String?)
+        case imageTapped(Member?)
+        case updateFeedReport(Int) // 신고 feed ID
+        case handleReportResult(FeedReportResult)
+        case showToast(Bool)
 
         // Alert
         case presentAlert(Bool)
-        case presentInvitationAlert
+        case alertTypeChanged(AlertMeetingDetailType)
         case alertButtonTapped
+        
+        // ActionSheet
+        case presentActionSheet(Bool)
+        case presentFeedActionSheet(Bool)
         
         // Child
         case selectOwner(PresentationAction<SelectOwnerFeature.Action>)
         case usingCamera(PresentationAction<CameraFeature.Action>)
         case emergencyAction(PresentationAction<EmergencyFeature.Action>)
         case timerAction(TimerFeature.Action)
+        case feedReport(PresentationAction<FeedReportFeature.Action>)
 
         // Timer - State
         case timerCountChanged
@@ -89,10 +118,13 @@ struct MeetingDetailFeature: ReducerProtocol {
             case deleteSuccess
             case onDisappear
             case moveToLogin
+            case moveToEdit(MeetingEditModel)
         }
     }
 
     @Dependency(\.meetingDetailService) var meetingDetailService
+    @Dependency(\.meetingDeleteService) var meetingDeleteService
+    @Dependency(\.feedReportService) var feedReportService
     @Dependency(\.sendInvitation) private var sendInvitation
 
     var body: some ReducerProtocolOf<Self> {
@@ -112,104 +144,203 @@ struct MeetingDetailFeature: ReducerProtocol {
                 let meetingID = state.meetingId
                 
                 if meetingID == Const.ErrorID.meeting {
-                    state.alertType = .meetingIDError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingIDError))}
                 }
                 state.isLoading = true
                 
                 return .run { send in
                     let result = await meetingDetailService.fetchMeetingDetail(meetingID)
-                    await send(.handleResult(result))
+                    await send(.handleDetailResult(result))
                 }
+                
+            case .notificationAppear(let id):
+                state.meetingId = id
+                return .run { send in await send(.onAppear) }
 
-            case .handleResult(let status):
+            case .handleDetailResult(let result):
                 state.isLoading = false
                 
-                switch status {
+                switch result {
                 case let .success(meetingDetail):
                     return .run { send in await send(.updateData(meetingDetail)) }
                 case .notFound:
-                    state.alertType = .meetingNotFound
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.meetingNotFound))}
                 case .userError:
-                    state.alertType = .userError
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.userError))}
                 case .networkError(let description):
-                    state.alertType = .networkError(description)
-                    return .none
+                    return .run { send in await send(.alertTypeChanged(.networkError(description)))}
                 }
                 
             case .updateData(let data):
                 state.meetingData = data
-                state.memberId = data.memberId
                 
-                // 약속 상태가 ready 또는 progress이면 invite
-                // 약속 상태가 confirmed이고, !emergencyButtonActive이고, 본인이 button 관리자이면 emergency
-                // 약속 상태가 confirmed이고 emergencyButtonActive이고, 본인이 !certified이면
-                if data.status == .ready || data.status == .progress {
+                let emergencyStatus = data.emergencyStatus
+
+                if emergencyStatus == .scheduled {
                     state.buttonState = .invite
-                } else if data.status == .confirmed {
+                } else if emergencyStatus == .confirmation {
                     if !data.emergencyButtonActive && data.isEmergencyAuthority {
                         state.buttonState = .emergency
-                    } else if data.emergencyButtonActive && !data.isCertified {
-                        return .run { send in await send(.timerCountChanged) }
                     }
+                } else if emergencyStatus == .onGoing && !data.isCertified {
+                    return .run { send in await send(.timerCountChanged) }
+                } else {
+                    state.buttonState = .none
                 }
-
                 return .none
 
-            case .deleteMeeting:
-                return .run { send in
-                    // 삭제 서버 통신에 따라 분기처리
-                    await send(.delegate(.deleteSuccess))
+            case .updateAfterMeetingEdit(let editedData):
+                guard let editedMeeting = state.meetingData?.updateMeetingEdit(editedData) else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
+                return .run { send in await send(.updateData(editedMeeting))}
+                
+                
+            case .updateAfterReport(let reportFeedID):
+                guard let meetingDetail = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                guard let reportedMeetingDetail = meetingDetail.updateReport(reportFeedID: reportFeedID) else {
+                    return .run { send in await send(.onAppear) }
+                }
+                
+                print("업데이트")
+                
+                state.meetingData = reportedMeetingDetail
+                return .none
+                
+                // MARK: - Meeting Delete
+                
+            case .deleteMeeting:
+                guard let meetingID = state.meetingData?.id else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                state.isLoading = true
+                
+                return .run { send in
+                    let result = await meetingDeleteService.delete(meetingID)
+                    await send(.handleDeleteResult(result))
+                }
+                
+            case .leaveMeeting:
+                guard let memberID = state.meetingData?.memberID else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                state.isLoading = true
+                
+                return .run { send in
+                    let result = await meetingDeleteService.leave(memberID)
+                    await send(.handleDeleteResult(result))
+                }
+                
+            case .handleDeleteResult(let result):
+                state.isLoading = false
 
-                // Tap
+                switch result {
+                case .successDelegate:
+                    return .run { send in await send(.alertTypeChanged(.meetingDelegateSuccess))}
+                case .successLeave, .successDelete:
+                    return .run { send in await send(.delegate(.deleteSuccess))}
+                case .invalidDeleteTime:
+                    return .run { send in await send(.alertTypeChanged(.invalidMeetingDelete))}
+                case .networkError:
+                    return .run { send in await send(.alertTypeChanged(.networkError("네트워크 에러")))}
+                case .expiredToken:
+                    return .run { send in await send(.alertTypeChanged(.networkError("토큰 만료")))}
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError))}
+                }
+                
+                // MARK: - Tap
 
             case .deleteButtonTapped:
-                return .none
+                return .run { send in await send(.alertTypeChanged(.meetingDelete))}
+                
+            case .editButtonTapped:
+                guard let meetingData = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                guard meetingData.emergencyStatus == .scheduled else {
+                    return .run { send in await send(.alertTypeChanged(.invalidMeetingEdit))}
+                }
+                
+                guard let meetingEdit = meetingData.toMeetingEdit() else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                return .run { send in await send(.delegate(.moveToEdit(meetingEdit))) }
 
+            case .delegateButtonTapped:
+                guard let meetingData = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                // 방장 혼자만 있는 경우
+                if meetingData.members.count == 1 {
+                    return .run { send in await send(.alertTypeChanged(.meetingDelegateFail))}
+                } else {
+                    state.selectOwner = SelectOwnerFeature.State()
+                }
+                return .none
+                
             case .leaveButtonTapped:
-                state.selectOwner = SelectOwnerFeature.State(
-                    memberList: state.meetingData?.members ?? []
-                )
-                return .none
-
+                return .run { send in await send(.alertTypeChanged(.meetingLeave)) }
+                
             case .backButtonTapped:
                 state.dismiss = true
                 return .none
 
             case .cameraButtonTapped:
+                guard let meetingData = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                let memberID = meetingData.memberID
+                
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     let timerCount = emergencyButtonActiveTime.authenticationTimeout()
                     state.usingCamera = CameraFeature.State(
+                        memberID: memberID,
                         timer: TimerFeature.State(timerCount: timerCount)
                     )
                 } else {
-                    print("언래핑 에러")
+                    return .run { send in await send(.alertTypeChanged(.invalidAuthentication))}
                 }
                 return .none
 
             case .emergencyButtonTapped:
-                state.emergencyState = EmergencyFeature.State(memberID: state.meetingId)
+                guard let meetingData = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                let memberID = meetingData.memberID
+                let remainTimeUntilExpired = meetingData.emergencyButtonExpiredTime.remainingTime()
+                        
+                state.emergencyState = EmergencyFeature.State(
+                    memberID: memberID,
+                    remainTimeUntilExpired: remainTimeUntilExpired
+                )
                 return .none
 
             case .inviteButtonTapped:
                 guard let meetingData = state.meetingData else { return .none }
-                return .run { send in
-                    if ShareApi.isKakaoTalkSharingAvailable() {
-                        if let url = await sendInvitation(
+                return .run { _ in
+                    do {
+                        if let url = try await sendInvitation(
                             name: meetingData.name,
-                            id: 12
-                        ) { // TODO: - meetingData.id로 수정 (임시 id)
+                            id: meetingData.id
+                        ) {
                             openURL(url)
                         } else {
-                            await send(.presentInvitationAlert)
-                        }
-                    } else {
-                        if let url = URL(string: Const.URL.kakaoAppStore) {
+                            guard let url = URL(string: Const.URL.kakaoAppStore) else { return }
                             openURL(url)
                         }
+                    } catch {
+                        print("카카오 링크 공유 실패")
                     }
                 }
 
@@ -218,7 +349,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 case .emergency:
                     return .run { send in await send(.emergencyButtonTapped) }
                 case .invite:
-                    print("초대장 보내기")
                     return .run { send in await send(.inviteButtonTapped) }
                 case .authorize:
                     return .run { send in await send(.cameraButtonTapped) }
@@ -227,18 +357,49 @@ struct MeetingDetailFeature: ReducerProtocol {
                 }
                 return .none
 
-            case .imageTapped(let imageUrl):
+            case .imageTapped(let member):
                 state.isImageTapped.toggle()
-                state.tappedImageUrl = imageUrl
+                state.tappedMember = member
+                return .none
+                
+            case .updateFeedReport(let reportFeedID):
+                guard let myMemberID = state.meetingData?.memberID else {
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
+                }
+                
+                let requestModel = FeedReportRequestModel(
+                    memberID: myMemberID,
+                    feedID: reportFeedID,
+                    reportType: .none
+                )
+
+                state.feedReportRequestModel = requestModel
+                return .none
+                
+            case .reportButtonTapped:
+                state.feedReport = FeedReportFeature.State()
                 return .none
 
                 // Child - Delete
 
             case .selectOwner(.presented(.leaveButtonTapped)):
-                if let nextOwnerId = state.selectOwner?.selectedMemberId {
-                    state.nextOwnerId = nextOwnerId
+                guard let toMemberID = state.selectOwner?.selectedMemberID else {
+                    print("방장 위임 - 선택된 ID 없음")
+                    return .none
                 }
-                return .none
+                
+                guard let myMemberID = state.meetingData?.memberID else {
+                    print("방장 위임 - 모델 언래핑")
+                    return .none
+                }
+
+                state.isLoading = true
+                
+                // 방장 위임
+                return .run { send in
+                    let result = await meetingDeleteService.delegateOwner(myMemberID, toMemberID)
+                    await send(.handleDeleteResult(result))
+                }
 
             case .selectOwner:
                 return .none
@@ -250,10 +411,12 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if !isPresented {
                     state.alertType = nil
                 }
+                state.isAlertPresented = isPresented
                 return .none
-                
-            case .presentInvitationAlert:
-                state.alertType = .invitation
+
+            case .alertTypeChanged(let alertType):
+                state.alertType = alertType
+                state.isAlertPresented = true
                 return .none
 
             case .alertButtonTapped:
@@ -265,24 +428,91 @@ struct MeetingDetailFeature: ReducerProtocol {
                 switch alertType {
                 case .meetingNotFound, .meetingIDError:
                     return .run { send in await send(.delegate(.onDisappear))}
-                case .networkError:
+                case .networkError, .invalidAuthentication, .meetingUnwrapping:
                     return .none
                 case .userError:
                     return .run { send in await send(.delegate(.moveToLogin))}
                 case .invitation:
                     return .none
-                case .delete:
-                    // 삭제 요청
+                case .meetingDelete: // 방 폭파
+                    return .run { send in await send(.deleteMeeting)}
+                case .meetingDelegateSuccess:
+                    return .run { send in await send(.delegate(.deleteSuccess)) }
+                case .meetingLeave: // 모임 나가기 (방장 아닌 사람)
+                    return .run { send in await send(.leaveMeeting)}
+                case .meetingDelegateFail, .invalidMeetingDelete:
+                    return .none
+                case .invalidMeetingEdit:
                     return .none
                 }
 
+                // Action Sheet
+            case .presentActionSheet(let isPresented):
+                state.isActionSheetPresented = isPresented
+                return .none
+                
+            case .presentFeedActionSheet(let isPresented):
+                state.isFeedReportActionSheetPresented = isPresented
+                return .none
+                
+            case .handleReportResult(let result):
+                state.isLoading = false
+                
+                switch result {
+                case .success(let reportFeedID):
+                    return .run { send in
+                        await send(.updateAfterReport(reportFeedID))
+                        await send(.showToast(true))
+                        try await Task.sleep(seconds: 2)
+                        await send(.showToast(false))
+                    }
+                case .fail(let error):
+                    return .run { send in
+                        await send(.alertTypeChanged(.networkError(error.errorDescription ?? "")))
+                    }
+                case .userError:
+                    return .run { send in await send(.alertTypeChanged(.userError)) }
+                }
+                
+            case .showToast(let isShow):
+                state.isToastShown = isShow
+                return .none
+                
+            case .feedReport(.presented(.reportTypeSelected(let reportType))):
+                guard let requestModel = state.feedReportRequestModel else { return .none }
+                state.feedReportRequestModel = requestModel.updateReportType(reportType: reportType)
+                
+                return .none
+                
+            case .feedReport(.presented(.reportButtonTapped)):
+                guard let requestModel = state.feedReportRequestModel else { return .none }
+                state.isLoading = true
+                
+                return .run { send in
+                    let result = await feedReportService.postFeedReport(requestModel)
+                    await send(.handleReportResult(result))
+                }
+                
+                
+            case .feedReport(.presented(.disappear)):
+                state.feedReportRequestModel = nil
+                return .none
+                
+            case .feedReport:
+                return .none
+                
                 // Child - Camera
 
             case let .usingCamera(.presented(.delegate(.uploadSuccess(feed)))):
-                if let meetingData = state.meetingData {
-                    state.meetingData = meetingData.updateFeed(feed)
+                guard let meetingData = state.meetingData else {
+                    return .run { send in await send(.alertTypeChanged(.meetingNotFound))}
                 }
-                return .none
+                
+                // 피드 & 멤버 데이터 업데이트
+                let newMeeting = meetingData.updateFeed(feed)
+                
+                // 긴급 버튼 업데이트
+                return .run { send in await send(.updateData(newMeeting))}
                 
             case .usingCamera(.presented(.delegate(.moveToLogin))):
                 return .run { send in await send(.delegate(.moveToLogin))}
@@ -294,8 +524,22 @@ struct MeetingDetailFeature: ReducerProtocol {
                 
             case .emergencyAction(.presented(.delegate(.usingCamera))):
                 state.emergencyState = nil
-                return .run { send in await send(.cameraButtonTapped)}
+                return .run { send in await send(.cameraButtonTapped) }
 
+            case .emergencyAction(.presented(.delegate(.moveToBack))):
+                state.emergencyState = nil
+                return .none
+                
+            case .emergencyAction(.presented(.delegate(.moveToLogin))):
+                return .run { send in await send(.delegate(.moveToLogin)) }
+                
+            case .emergencyAction(.presented(.delegate(.updateEmergencyState(let date)))):
+                if let meetingData = state.meetingData {
+                    let newData = meetingData.updateEmergemcy(date)
+                    return .run { send in await send(.updateData(newData)) }
+                }
+                return .none
+            
             case .emergencyAction:
                 return .none
 
@@ -314,7 +558,7 @@ struct MeetingDetailFeature: ReducerProtocol {
                 if let emergencyButtonActiveTime = state.meetingData?.emergencyButtonActiveTime {
                     state.timerState.timerCount = emergencyButtonActiveTime.authenticationTimeout()
                 } else {
-                    print("언래핑 에러")
+                    return .run { send in await send(.alertTypeChanged(.meetingUnwrapping))}
                 }
                 
                 // button의 onAppear 때 타이머 시작이 되기 때문에, 타이머 시간을 설정하고 버튼이 나타나야함
@@ -326,7 +570,6 @@ struct MeetingDetailFeature: ReducerProtocol {
                 // Delegate
 
             case .delegate(.deleteSuccess):
-                state.dismiss = true
                 return .none
 
             case .delegate(.onDisappear):
@@ -347,6 +590,9 @@ struct MeetingDetailFeature: ReducerProtocol {
         }
         .ifLet(\.$emergencyState, action: /Action.emergencyAction) {
             EmergencyFeature()
+        }
+        .ifLet(\.$feedReport, action: /Action.feedReport) {
+            FeedReportFeature()
         }
     }
 }

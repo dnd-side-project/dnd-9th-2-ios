@@ -71,7 +71,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     ) {
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        self.postObserverAction(.moveMeetingDetail, object: 1)
+        
+        if let meetingId: Int = Int(userInfo["meetingId"] as? String ?? "") {
+            postObserverAction(.moveMeetingDetail, object: meetingId)
+        }
 
         let applicationState = UIApplication.shared.applicationState
         print("didReceive - applicationState: \(applicationState)")
@@ -95,7 +98,7 @@ extension AppDelegate: MessagingDelegate {
         _ messaging: Messaging,
         didReceiveRegistrationToken fcmToken: String?
     ) {
-        UserDefaultList.fcmToken = fcmToken
-        print("fcmToken 확인용: \(String(describing: UserDefaultList.fcmToken))")
+        UserDefaultManager.fcmToken = fcmToken
+        print("fcmToken 확인용: \(String(describing: UserDefaultManager.fcmToken))")
     }
 }

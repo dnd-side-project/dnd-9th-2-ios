@@ -14,6 +14,7 @@ enum APIType {
     case meeting
     case member
     case feed
+    case report
 }
 
 protocol BaseAPI: TargetType {
@@ -22,7 +23,12 @@ protocol BaseAPI: TargetType {
 
 extension BaseAPI {
     var baseURL: URL {
+        #if DEBUG
+        var base = Bundle.main.object(forInfoDictionaryKey: "TestURL") as? String ?? ""
+        #else
         var base = Bundle.main.object(forInfoDictionaryKey: "BaseURL") as? String ?? ""
+        #endif
+        
         
         switch Self.apiType {
         case .user:
@@ -33,6 +39,8 @@ extension BaseAPI {
             base += "/api/member"
         case .feed:
             base += "/api/feed"
+        case .report:
+            base += "/api/report"
         }
         
         guard let url = URL(string: base) else {

@@ -31,9 +31,13 @@ extension View {
     func drawUnderline(
         spacing: CGFloat = 3,
         height: CGFloat = 1,
-        color: Color = .gray
+        color: Color = .gray,
+        padding: CGFloat = 0
     ) -> some View {
-        self.modifier(UnderlineView(spacing: spacing, height: height, color: color))
+        self.modifier(UnderlineView(spacing: spacing,
+                                    height: height,
+                                    color: color,
+                                    padding: padding))
     }
 
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
@@ -43,7 +47,7 @@ extension View {
     /// baggleFont + lineSpacing 설정하는 함수
     func fontWithLineSpacing(fontType: FontType) -> some View {
         return self
-            .font(.Baggle.body2)
+            .font(.baggleFont(fontType: fontType))
             .lineSpacing(fontType.size * 0.3)
     }
 

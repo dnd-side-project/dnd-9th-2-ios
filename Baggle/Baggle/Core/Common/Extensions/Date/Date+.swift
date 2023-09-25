@@ -105,6 +105,9 @@ extension Date {
     func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "ko_kr")
         return dateFormatter.string(from: self)
     }
 
@@ -148,7 +151,8 @@ extension Date {
         let calendar = Calendar.current
         let component = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
         // swiftlint:disable:next force_unwrapping
-        return calendar.date(from: component)!
+        let now = calendar.date(from: component)!
+        return now
     }
     
     // n 시간 이후 생성
@@ -249,9 +253,10 @@ extension Date {
 extension Date {
 
     // 모임 생성 가능한 시간 여부
+    // 1시간 전 (약속확정 전까지)
 
     var canMeeting: Bool {
-        return self > Date().later(hours: 2)
+        return self > Date().later(hours: 1)
     }
 
     // Self가 다가올 날짜인지
@@ -323,6 +328,8 @@ extension Date {
 // MARK: - 타이머
 extension Date {
 
+    // MARK: 긴급버튼
+    
     func authenticationTimeout() -> Int {
         self.later(minutes: 5).remainingTime()
     }
@@ -336,14 +343,23 @@ extension Date {
             return 0
         }
     }
+
+    // 자동 호출 시간
+    // 약속 시간 15분 전
+    func emergencyTimeOut() -> Date {
+        self.before(minutes: 15)
+    }
 }
 
 
 #if DEBUG
 extension Date {
+    // swiftlint:disable:next line_length
     static func createDate(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int) -> Date {
+        // swiftlint:disable:next line_length
         let targetDateComponents = DateComponents(year: year, month: month, day: day, hour: hour, minute: minute)
         let targetDate = Calendar.current.date(from: targetDateComponents)
+        // swiftlint:disable:next force_unwrapping
         return targetDate!
     }
 }

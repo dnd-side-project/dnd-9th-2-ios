@@ -10,10 +10,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CameraService {
-    public let start: () async -> CameraStartStatus
+    public let start: () async -> CameraStartResult
     public let stop: () -> Void
     public let switchCaptureDevice: () async -> Void
-    public let takePhoto: () async -> CameraTakePhotoStatus
+    public let takePhoto: () async -> CameraTakePhotoResult
     public let previewStream: () -> AsyncStream<CIImage>
 }
 

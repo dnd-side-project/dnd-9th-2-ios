@@ -12,11 +12,15 @@ import ComposableArchitecture
 struct MyPageFeature: ReducerProtocol {
 
     struct State: Equatable {
-        var user = UserDefaultList.user ?? User.error()
+        var user = UserDefaultManager.user ?? User.error()
         
         var isLoading: Bool = false
         var presentSafariView: Bool = false
         var safariURL: String = ""
+        
+        // Child
+        
+        @PresentationState var onboarding: OnboardingFeature.State?
     }
 
     enum Action: Equatable {
@@ -27,30 +31,35 @@ struct MyPageFeature: ReducerProtocol {
         case notificationSettingButtonTapped
         case privacyPolicyButtonTapped
         case termsOfServiceButtonTapped
+        case onboardingButtonTapped
+        
         case logoutButtonTapped
         case withdrawButtonTapped
         
-        case withdrawResult(WithdrawServiceStatus)
-        
         case presentSafariView
+        
+        case onboarding(PresentationAction<OnboardingFeature.Action>)
+        
         case delegate(Delegate)
         enum Delegate {
+            case presentLogout
+            case presentWithdraw
             case moveToLogin
         }
     }
-
-    @Dependency(\.withdrawService) var withdrawService
     
     var body: some ReducerProtocolOf<Self> {
 
         Reduce { state, action in
             switch action {
             case .onAppear:
-                state.user = UserDefaultList.user ?? User.error()
+                state.user = UserManager.shared.user ?? User.error()
                 return .none
 
             case .logoutMyPage:
                 return .none
+                
+                // MARK: - 설정 버튼
                 
             case .notificationSettingButtonTapped:
                 if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -68,39 +77,32 @@ struct MyPageFeature: ReducerProtocol {
                 state.presentSafariView = true
                 return .none
                 
+            case .onboardingButtonTapped:
+                state.onboarding = OnboardingFeature.State()
+                return .none
+                
+                // MARK: - 계정 버튼
+                
             case .logoutButtonTapped:
-                // 임시 로그아웃 연결
-                do {
-                    try KeychainManager.shared.deleteUserToken()
-                } catch let error {
-                    print("Keychain error - \(error)")
-                }
-                UserDefaultList.user = nil
-                return .run { send in await send(.delegate(.moveToLogin)) }
+                return .run { send in await send(.delegate(.presentLogout)) }
                 
             case .withdrawButtonTapped:
-                state.isLoading = true
-                return .run { send in
-                    let withdrawStatus = await withdrawService.withdraw()
-                    await send(.withdrawResult(withdrawStatus))
-                }
-                
-            case let .withdrawResult(status):
-                state.isLoading = false
-                switch status {
-                case .success:
-                    print("성공")
-                    return .run { send in await send(.delegate(.moveToLogin)) }
-                case let .fail(apiError):
-                    print("API Error \(apiError)")
-                case .keyChainError:
-                    print("키체인 에러")
-                }
-                return .none
+                return .run { send in await send(.delegate(.presentWithdraw)) }
                 
             case .presentSafariView:
                 state.presentSafariView = false
                 return .none
+                
+                // MARK: - 온보딩
+                
+            case .onboarding(.presented(.delegate(.buttonTapped))):
+                state.onboarding = nil
+                return .none
+                
+            case .onboarding:
+                return .none
+                
+                // MARK: - Delegate
                 
             case .delegate(.moveToLogin):
                 return .none
@@ -108,6 +110,9 @@ struct MyPageFeature: ReducerProtocol {
             case .delegate:
                 return .none
             }
+        }
+        .ifLet(\.$onboarding, action: /Action.onboarding) {
+            OnboardingFeature()
         }
     }
 }

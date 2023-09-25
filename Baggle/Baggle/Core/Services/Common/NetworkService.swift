@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 import Alamofire
+import ComposableArchitecture
 import Moya
 
 class NetworkService<Target: TargetType> {
@@ -48,8 +49,7 @@ extension NetworkService {
     }
     
     func request<T: Decodable>(_ target: API) async throws -> T {
-        let data = try await provider.request(target)
-        
+        let data = try await self.provider.request(target)
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
         guard let body = try? decoder.decode(EntityContainer<T>.self, from: data) else {
@@ -64,9 +64,10 @@ extension NetworkService {
             guard let data = body.data else {
                 throw APIError.unwrapping
             }
+            print("✅ data: \(data)")
             return data
         case 400..<500:
-            throw handleError400(statusCode: statusCode, message: message)
+            throw await self.handleError400(statusCode: statusCode, message: message)
         case 500:
             throw APIError.server
         default:
@@ -75,7 +76,7 @@ extension NetworkService {
     }
     
     func requestWithNoResult(_ target: API) async throws {
-        let data = try await provider.request(target)
+        let data = try await self.provider.request(target)
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.baggleFormat)
@@ -85,31 +86,38 @@ extension NetworkService {
         
         let statusCode = body.status
         let message = body.message
-
+        
         switch statusCode {
         case 200, 201:
             return
         case 400..<500:
-            throw handleError400(statusCode: statusCode, message: message)
+            throw await self.handleError400(statusCode: statusCode, message: message)
         case 500:
             throw APIError.server
         default:
             throw APIError.network
         }
     }
-
-    private func handleError400(statusCode: Int, message: String) -> APIError {
+    
+    // swiftlint:disable:next cyclomatic_complexity
+    private func handleError400(statusCode: Int, message: String) async -> APIError {
         switch statusCode {
         case 400:
+            if message == "잘못된 요청입니다." {
+                return APIError.duplicatedMeeting
+            } else if message == "유효하지 않은 모임 시간입니다." {
+                return APIError.invalidMeetingDeleteTime
+            }
             return APIError.badRequest
         case 401:
-            return APIError.unauthorized
+            return .authorizeFail
         case 403:
             if message == "모임은 하루에 2개까지만 생성 가능합니다." {
-                return APIError.duplicatedMeeting
-            } else {
-                return APIError.forbidden
+                return APIError.limitMeetingCount
+            } else if message == "모임 인원이 초과됐습니다." {
+                return APIError.exceedMemberCount
             }
+            return APIError.forbidden
         case 404:
             return APIError.notFound
         case 409:
@@ -117,9 +125,8 @@ extension NetworkService {
                 return APIError.duplicatedNickname
             } else if message == "이미 존재하는 참가자입니다." {
                 return APIError.duplicatedJoinMeeting
-            } else {
-                return APIError.duplicatedUser
             }
+            return APIError.duplicatedUser
         default:
             return APIError.network
         }

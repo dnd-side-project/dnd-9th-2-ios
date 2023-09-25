@@ -42,25 +42,26 @@ struct CameraView: View {
                 .background(Color.black)
                 
                 if viewStore.isTimeOver {
-                    timeOverView(viewStore: viewStore)
-                }
-                
-                if let alertType = viewStore.alertType {
-                    BaggleAlertOneButton(
-                        isPresented: Binding(
-                            get: { viewStore.alertType != nil },
-                            set: { viewStore.send(.presentBaggleAlert($0))}
+                    DescriptionView(
+                        isPresented: viewStore.binding(
+                            get: \.isTimeOver,
+                            send: { CameraFeature.Action.isTimeOverChanged($0) }
                         ),
-                        title: alertType.title,
-                        description: alertType.description,
-                        buttonTitle: alertType.buttonTitle) {
-                            viewStore.send(.alertButtonTapped)
-                        }
+                        text: "시간이 초과되었습니다"
+                    )
                 }
             }
             .onAppear {
                 viewStore.send(.onAppear)
             }
+            .baggleAlert(
+                isPresented: viewStore.binding(
+                    get: { $0.isAlertPresented },
+                    send: { CameraFeature.Action.presentAlert($0) }
+                ),
+                alertType: viewStore.alertType,
+                action: { viewStore.send(.alertButtonTapped) }
+            )
             .alert(
                 store: self.store.scope(
                     state: \.$alert,
@@ -98,10 +99,11 @@ extension CameraView {
     
     private func viewFinderView(viewStore: CameraFeatureViewStore) -> some View {
         ZStack {
-            if viewStore.isCompleted {
-                resultPhotoView(viewStore: viewStore)
-            } else {
+            switch viewStore.cameraViewStatus {
+            case .camera:
                 cameraPreview(viewStore: viewStore)
+            case .result:
+                resultPhotoView(viewStore: viewStore)
             }
         }
         .frame(width: viewFinderWidth, height: viewFinderHeight)
@@ -115,6 +117,8 @@ extension CameraView {
             if let image = viewStore.state.viewFinderImage {
                 image
                     .resizable()
+            } else {
+                ProgressView()
             }
             
             if let flipImage = viewStore.state.flipImage {
@@ -145,7 +149,7 @@ extension CameraView {
     
     private func buttonsView(viewStore: CameraFeatureViewStore) -> some View {
         VStack {
-            if viewStore.isCompleted {
+            if viewStore.cameraViewStatus == .result {
                 photoButtons(viewStore: viewStore)
             } else {
                 cameraButtons(viewStore: viewStore)
@@ -244,30 +248,5 @@ extension CameraView {
         }
         .font(.system(size: 18).bold())
         .padding(.horizontal, 20)
-    }
-    
-    // MARK: - 시간 초과
-    
-    private func timeOverView(viewStore: CameraFeatureViewStore) -> some View {
-        ZStack {
-            ShadeView(
-                isPresented: viewStore.binding(
-                    get: \.isTimeOver,
-                    send: { CameraFeature.Action.isTimeOverChanged($0) }
-                )
-            )
-            
-            Text("시간이 초과되었습니다.")
-                .font(.Baggle.subTitle1)
-                .foregroundColor(.white)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 16)
-                .background(.black)
-                .cornerRadius(12)
-        }
-        .animation(.easeInOut(duration: 0.2), value: viewStore.isTimeOver)
-        .onTapGesture {
-            viewStore.send(.isTimeOverChanged(false))
-        }
     }
 }

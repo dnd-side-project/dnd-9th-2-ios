@@ -8,10 +8,9 @@
 import Foundation
 
 import ComposableArchitecture
-import Moya
 
 struct SignUpService {
-    var signUp: (SignUpRequestModel, String) async -> SignUpServiceStatus
+    var signUp: (SignUpRequestModel, String) async -> SignUpServiceResult
 }
 
 extension SignUpService: DependencyKey {
@@ -20,46 +19,32 @@ extension SignUpService: DependencyKey {
     
     static var liveValue = Self { requestModel, token  in
         do {
-            // 네트워크 요청
-            let data: SignEntity = try await networkService.request(
-                .signUp(
-                    requestModel: requestModel,
-                    token: token
+            return try await Task.retrying {
+                let data: SignEntity = try await networkService.request(
+                    .signUp(
+                        requestModel: requestModel,
+                        token: token
+                    )
                 )
-            )
-            print("data: \(data)")
-            
-            // 키체인 저장, 저장 전에 이미 있는 데이터  삭제
-            checkKeyChain()
-            let token = UserToken(accessToken: data.accessToken, refreshToken: data.refreshToken)
-            try KeychainManager.shared.createUserToken(token)
-            
-            // 유저 Default 저장
-            saveUser(data: data.toDomain())
-            
-            return .success
+                
+                let user = data.toDomain()
+                let token = UserToken(
+                    accessToken: data.accessToken,
+                    refreshToken: data.refreshToken
+                )
+                try UserManager.shared.save(user: user, userToken: token)
+                
+                return .success
+            }.value
         } catch {
             if (error as? APIError) == APIError.duplicatedNickname {
                 return .nicknameDuplicated
             } else if let error = error as? KeyChainError {
-                return .keyChainError
+                return .userError
             } else {
-                return .fail(.network)
+                return .networkError(error.localizedDescription)
             }
         }
-    }
-
-    static func checkKeyChain() {
-        do {
-            _ = try KeychainManager.shared.readUserToken()
-            try KeychainManager.shared.deleteUserToken()
-        } catch {
-            return
-        }
-    }
-    
-    static func saveUser(data: User) {
-        UserDefaultList.user = data
     }
 }
 

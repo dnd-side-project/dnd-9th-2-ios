@@ -11,9 +11,11 @@ import Alamofire
 import Moya
 
 enum MeetingAPI {
-    case meetingList
+    case meetingList(requestModel: HomeRequestModel, token: String)
     case meetingDetail(meetingID: Int, token: String)
     case createMeeting(requestModel: MeetingCreateRequestModel, token: String)
+    case deleteMeeting(meetingID: Int, token: String)
+    case editMeeting(requestModel: MeetingEditRequestModel, token: String)
 }
 
 extension MeetingAPI: BaseAPI {
@@ -24,9 +26,11 @@ extension MeetingAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case .meetingList: return "list"
+        case .meetingList: return ""
         case .meetingDetail: return "detail"
         case .createMeeting: return ""
+        case .deleteMeeting: return ""
+        case .editMeeting: return ""
         }
     }
     
@@ -34,11 +38,16 @@ extension MeetingAPI: BaseAPI {
     
     var headers: [String: String]? {
         switch self {
+        case .meetingList(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         case .meetingDetail(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
         case .createMeeting(_, let token):
             return HeaderType.jsonWithBearer(token: token).value
-        case .meetingList: return HeaderType.json.value
+        case .deleteMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
+        case .editMeeting(_, let token):
+            return HeaderType.jsonWithBearer(token: token).value
         }
     }
     
@@ -48,6 +57,8 @@ extension MeetingAPI: BaseAPI {
         switch self {
         case .meetingDetail, .meetingList: return .get
         case .createMeeting: return .post
+        case .deleteMeeting: return .delete
+        case .editMeeting: return .patch
         }
     }
     
@@ -57,6 +68,10 @@ extension MeetingAPI: BaseAPI {
         var params: Parameters = [:]
         
         switch self {
+        case .meetingList(let requestModel, _):
+            params["period"] = requestModel.status.period
+            params["page"] = requestModel.page
+            params["size"] = requestModel.size
         case .meetingDetail(let meetingID, _):
             params["meetingId"] = meetingID
         case .createMeeting(let requestModel, _):
@@ -66,8 +81,22 @@ extension MeetingAPI: BaseAPI {
             if let memo = requestModel.memo {
                 params["memo"] = memo
             }
-        case .meetingList:
-            break
+        case .deleteMeeting(let meetingID, _):
+            params["meetingId"] = meetingID
+        case .editMeeting(let requestModel, _):
+            params["meetingId"] = requestModel.meetingID
+            if let title = requestModel.title {
+                params["title"] = title
+            }
+            if let place = requestModel.place {
+                params["place"] = place
+            }
+            if let meetingTime = requestModel.meetingTime {
+                params["dateTime"] = meetingTime.toIsoDate()
+            }
+            if let memo = requestModel.memo {
+                params["memo"] = memo
+            }
         }
         
         return params
@@ -75,8 +104,10 @@ extension MeetingAPI: BaseAPI {
     
     private var parameterEncoding: ParameterEncoding {
         switch self {
-        case .createMeeting: return JSONEncoding.default
-        default: return JSONEncoding.default
+        case .createMeeting, .editMeeting:
+            return JSONEncoding.default
+        case .meetingList, .meetingDetail, .deleteMeeting:
+            return ParameterEncodingWithNoSlash.init()
         }
     }
     
@@ -84,18 +115,11 @@ extension MeetingAPI: BaseAPI {
     
     var task: Moya.Task {
         switch self {
-        case .meetingDetail:
-            return .requestParameters(
-                parameters: bodyParameters ?? [:],
-                encoding: ParameterEncodingWithNoSlash()
-            )
-        case .createMeeting:
+        case .meetingList, .meetingDetail, .createMeeting, .deleteMeeting, .editMeeting:
             return .requestParameters(
                 parameters: bodyParameters ?? [:],
                 encoding: parameterEncoding
             )
-        default:
-            return .requestPlain
         }
     }
 }
