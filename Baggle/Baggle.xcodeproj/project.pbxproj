@@ -76,7 +76,6 @@
 		146237482A87803F00FBE121 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237472A87803F00FBE121 /* SafariWebView.swift */; };
 		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
 		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
-		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
 		146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */; };
 		146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */; };
 		146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51ED2A79429400FF3142 /* SelectDateFeature.swift */; };
@@ -2260,7 +2259,6 @@
 				14B7A0452A75409E00B8E202 /* APIError.swift in Sources */,
 				2BA760BB2A81EB610089878D /* String+.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
-				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,
 				14C8DACE2A8F645D00371374 /* LottieView.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
 				146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */,
