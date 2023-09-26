@@ -24,7 +24,6 @@ struct BaggleTimePickerView: View {
         }
         .labelsHidden()
         .datePickerStyle(.wheel)
-        .environment(\.locale, Locale.init(identifier: "ko_kr"))
     }
 }
 

@@ -105,9 +105,9 @@ extension Date {
     func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+//        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.locale = Locale(identifier: "ko_kr")
+//        dateFormatter.locale = Locale(identifier: "ko_kr")
         return dateFormatter.string(from: self)
     }
 
@@ -212,17 +212,17 @@ extension Date {
     func meetingStartTime() -> Date {
 
         // 2시간 이후
-        let twoHoursLater = self.later(hours: 2)
+        let oneHoursLater = self.later(hours: 1)
 
         // 5분 이후
-        var twoHoursFiveMinutesLater = twoHoursLater.later(minutes: 10)
+        var oneHoursFiveMinutesLater = oneHoursLater.later(minutes: 10)
 
         // 5분 단위로 만들기
-        while twoHoursFiveMinutesLater.minute % 5 != 0 {
-            twoHoursFiveMinutesLater.minute -= 1
+        while oneHoursFiveMinutesLater.minute % 5 != 0 {
+            oneHoursFiveMinutesLater.minute -= 1
         }
 
-        return twoHoursFiveMinutesLater
+        return oneHoursFiveMinutesLater
     }
 
 

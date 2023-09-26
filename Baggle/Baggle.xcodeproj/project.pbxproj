@@ -33,6 +33,7 @@
 		141E8CF72AA8A9BD00054EDA /* BaggleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E8CF62AA8A9BD00054EDA /* BaggleAlert.swift */; };
 		141FD7632A8CF609003DBFD7 /* MeetingSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FD7622A8CF609003DBFD7 /* MeetingSuccessModel.swift */; };
 		1421C0512A7A84A200C20497 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421C0502A7A84A200C20497 /* LoginService.swift */; };
+		142749132AC268D3009590A8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
 		14283FCF2A8DA32B00FE56F1 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283FCE2A8DA32B00FE56F1 /* Moya+.swift */; };
 		142BEED72A8F19A100B91426 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED62A8F19A100B91426 /* UserManager.swift */; };
 		142BEED92A8F213B00B91426 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BEED82A8F213B00B91426 /* UserToken.swift */; };
@@ -76,7 +77,6 @@
 		146237482A87803F00FBE121 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146237472A87803F00FBE121 /* SafariWebView.swift */; };
 		146C51D52A79139900FF3142 /* BaggleDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51D42A79139900FF3142 /* BaggleDateTests.swift */; };
 		146C51DD2A7913B400FF3142 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 146C51DC2A7913B400FF3142 /* FirebaseMessaging */; };
-		146C51E02A79143A00FF3142 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51DF2A79143A00FF3142 /* Date+.swift */; };
 		146C51E92A793D3F00FF3142 /* BaggleDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51E82A793D3F00FF3142 /* BaggleDatePickerView.swift */; };
 		146C51EB2A79406700FF3142 /* BaggleTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51EA2A79406700FF3142 /* BaggleTimePickerView.swift */; };
 		146C51EE2A79429400FF3142 /* SelectDateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C51ED2A79429400FF3142 /* SelectDateFeature.swift */; };
@@ -2114,6 +2114,7 @@
 				2B84696D2A6E7AE200D75D32 /* ShadeView.swift in Sources */,
 				2B437FBA2A93B64C004DC68E /* AlertJoinMeetingType.swift in Sources */,
 				2B42A5852AA4C26400E97CB1 /* LogoutService.swift in Sources */,
+				142749132AC268D3009590A8 /* Date+.swift in Sources */,
 				2BABCB282A76D08400AFECA3 /* PostObserverAction.swift in Sources */,
 				1432BE6D2A682FCB0098AAA9 /* HomeView.swift in Sources */,
 				2B409D7C2A80BE840051A3BC /* Font+.swift in Sources */,
@@ -2260,7 +2261,6 @@
 				14B7A0452A75409E00B8E202 /* APIError.swift in Sources */,
 				2BA760BB2A81EB610089878D /* String+.swift in Sources */,
 				140C54382A74F42900CF1CB4 /* NicknameValidator.swift in Sources */,
-				146C51E02A79143A00FF3142 /* Date+.swift in Sources */,
 				14C8DACE2A8F645D00371374 /* LottieView.swift in Sources */,
 				2B30E33C2A6F9DD500949151 /* UserDefaultWrapper.swift in Sources */,
 				146C51F22A7950F000FF3142 /* SelectTimeFeature.swift in Sources */,
