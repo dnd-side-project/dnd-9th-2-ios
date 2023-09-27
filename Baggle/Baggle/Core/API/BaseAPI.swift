@@ -23,12 +23,7 @@ protocol BaseAPI: TargetType {
 
 extension BaseAPI {
     var baseURL: URL {
-        #if DEBUG
-        var base = Bundle.main.object(forInfoDictionaryKey: "TestURL") as? String ?? ""
-        #else
         var base = Bundle.main.object(forInfoDictionaryKey: "BaseURL") as? String ?? ""
-        #endif
-        
         
         switch Self.apiType {
         case .user:

@@ -229,7 +229,7 @@
 		2BA760BB2A81EB610089878D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C543D2A74F54B00CF1CB4 /* String+.swift */; };
 		2BABCB142A76CDA400AFECA3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB132A76CDA400AFECA3 /* FirebaseAnalytics */; };
 		2BABCB162A76CDA400AFECA3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2BABCB152A76CDA400AFECA3 /* FirebaseMessaging */; };
-		2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */; };
+		2BABCB192A76CDD400AFECA3 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2BABCB182A76CDD400AFECA3 /* Release.xcconfig */; };
 		2BABCB222A76CFDC00AFECA3 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */; };
 		2BABCB252A76D03300AFECA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */; };
 		2BABCB262A76D03300AFECA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BABCB242A76D03300AFECA3 /* AppDelegate.swift */; };
@@ -479,6 +479,7 @@
 		2B7B4D7C2A853BED00283248 /* MeetingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAPI.swift; sourceTree = "<group>"; };
 		2B7B4D7E2A853E8800283248 /* MemberAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberAPI.swift; sourceTree = "<group>"; };
 		2B7B4D802A853ED300283248 /* FeedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAPI.swift; sourceTree = "<group>"; };
+		2B7D948D2AC3B206000D58A4 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
 		2B7EC32C2A822E5B00D78141 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		2B7EC32E2A8251DC00D78141 /* HomeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatus.swift; sourceTree = "<group>"; };
 		2B7EC3312A826F4D00D78141 /* ImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
@@ -492,7 +493,7 @@
 		2B9F27162A813AEA009ED284 /* ProfileBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBadgeView.swift; sourceTree = "<group>"; };
 		2BA345A42A6EB02F00B7E2BD /* BaggleTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTag.swift; sourceTree = "<group>"; };
 		2BA345A62A6EB6BF00B7E2BD /* BaggleTagColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggleTagColor.swift; sourceTree = "<group>"; };
-		2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Baggle.xcconfig; sourceTree = "<group>"; };
+		2BABCB182A76CDD400AFECA3 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		2BABCB212A76CFDC00AFECA3 /* Notification+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		2BABCB232A76D03300AFECA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2BABCB242A76D03300AFECA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1838,7 +1839,8 @@
 		2BABCB172A76CDD400AFECA3 /* XCConfig */ = {
 			isa = PBXGroup;
 			children = (
-				2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */,
+				2BABCB182A76CDD400AFECA3 /* Release.xcconfig */,
+				2B7D948D2AC3B206000D58A4 /* Develop.xcconfig */,
 			);
 			path = XCConfig;
 			sourceTree = "<group>";
@@ -2038,7 +2040,7 @@
 				14134D552A64C944004A6AC4 /* .swiftlint.auto.yml in Resources */,
 				14134D542A64C944004A6AC4 /* .swiftlint.yml in Resources */,
 				2B65EE702AAEEE090001C318 /* Settings.bundle in Resources */,
-				2BABCB192A76CDD400AFECA3 /* Baggle.xcconfig in Resources */,
+				2BABCB192A76CDD400AFECA3 /* Release.xcconfig in Resources */,
 				141719762A9302C000AF1C51 /* SplashScreen_animation.json in Resources */,
 				141719742A92F40700AF1C51 /* Button_animation.json in Resources */,
 				14E083732A836C800001CB21 /* MockUpMeetingDetail.json in Resources */,
@@ -2343,7 +2345,7 @@
 /* Begin XCBuildConfiguration section */
 		140E88192A64B627005119F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */;
+			baseConfigurationReference = 2B7D948D2AC3B206000D58A4 /* Develop.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2404,7 +2406,7 @@
 		};
 		140E881A2A64B627005119F8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BABCB182A76CDD400AFECA3 /* Baggle.xcconfig */;
+			baseConfigurationReference = 2BABCB182A76CDD400AFECA3 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2459,6 +2461,7 @@
 		};
 		140E881C2A64B627005119F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B7D948D2AC3B206000D58A4 /* Develop.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2500,6 +2503,7 @@
 		};
 		140E881D2A64B627005119F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BABCB182A76CDD400AFECA3 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
