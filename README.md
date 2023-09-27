@@ -7,6 +7,8 @@
 친구들과의 약속, 정해진 시간에 모두가 모이기 어렵지 않으신가요?  
 이제 Baggle이 약속을 관리해드릴게요!
 
+  <a href="https://apps.apple.com/us/app/baggle/id6461166641" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-US?size=250x83&amp" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
+
 </div>
 
 ## 기능 소개
