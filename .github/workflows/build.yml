@@ -27,7 +27,7 @@ jobs:
       - name: Create xcconfig
         run: |
             mkdir ./Baggle/XCConfig
-            echo "APP_KEY = ${APP_KEY}" >> ./Baggle/XCConfig/Baggle.xcconfig
+            echo "APP_KEY = ${APP_KEY}" >> ./Baggle/XCConfig/Release.xcconfig
             
       - name: Create GoogleService-info.plist
         run: |
