@@ -51,7 +51,7 @@ struct HomeView: View {
                             .padding(.vertical, 23)
                         }
                     } else {
-                        emptyView(viewStore.homeStatus)
+                        HomeMeetingListEmptyView(status: viewStore.homeStatus)
                     }
                 }
                 .refreshable {
@@ -95,41 +95,7 @@ extension HomeView {
             )
             .frame(height: UIApplication.shared.statusBarHeight)
     }
-    
-    func emptyView(_ status: HomeStatus) -> some View {
-        VStack(spacing: 12) {
-            status.image
-                .padding(.top, screenSize.height*status.ratio)
-            
-            VStack(spacing: 4) {
-                Text(status.title ?? "")
-                    .foregroundColor(.gray6)
-                
-                Text(status.description ?? "")
-                    .foregroundColor(.gray5)
-            }
-        }
-    }
-    
-    func userInfo(user: User) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("\(user.name)님의")
-                    .font(.Baggle.title)
-                    .foregroundColor(.white)
-                
-                Image.BaggleText.mainHome
-                    .padding(.leading, 2)
-            }
-            
-            Spacer()
-            
-            CircleProfileView(imageUrl: user.profileImageURL, size: .large)
-        }
-        .frame(height: 72)
-        .padding(.horizontal, 20)
-    }
-    
+
     func header(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
         GeometryReader { geo in
             let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
@@ -145,7 +111,7 @@ extension HomeView {
                 
                 VStack(spacing: 64) {
                     // 유저 정보
-                    userInfo(user: viewStore.user)
+                    HomeUserInfoView(user: viewStore.user)
                     
                     // segmentedPicker
                     SegmentedPickerView(
