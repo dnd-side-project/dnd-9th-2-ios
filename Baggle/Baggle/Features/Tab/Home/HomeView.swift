@@ -15,14 +15,14 @@ struct HomeView: View {
     let store: StoreOf<HomeFeature>
     
     var body: some View {
-
+        
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-
+            
             ZStack(alignment: .top) {
                 
                 ScrollView {
                     // userInfo + segmentedPicker
-                    header(viewStore: viewStore)
+                    HomeHeaderView(store: self.store)
                     
                     if viewStore.homeStatus == .normal {
                         Section {
@@ -95,47 +95,55 @@ extension HomeView {
             )
             .frame(height: UIApplication.shared.statusBarHeight)
     }
+}
 
-    func header(viewStore: ViewStore<HomeFeature.State, HomeFeature.Action>) -> some View {
-        GeometryReader { geo in
-            let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
-            
-            ZStack(alignment: .bottomLeading) {
+struct HomeHeaderView: View {
+    
+    let store: StoreOf<HomeFeature>
+    
+    var body: some View {
+        
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            GeometryReader { geo in
+                let yOffset = geo.frame(in: .global).minY > 0 ? -geo.frame(in: .global).minY : 0
                 
-                Image.Background.homeShort
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geo.size.width, height: geo.size.height - yOffset)
-                    .clipped()
-                    .offset(y: yOffset)
-                
-                VStack(spacing: 64) {
-                    // 유저 정보
-                    HomeUserInfoView(user: viewStore.user)
+                ZStack(alignment: .bottomLeading) {
                     
-                    // segmentedPicker
-                    SegmentedPickerView(
-                        segment: [
-                            Segment(
-                                id: .scheduled,
-                                count: viewStore.progressCount,
-                                isSelected: viewStore.meetingStatus == .scheduled,
-                                action: {
-                                    viewStore.send(.changeMeetingStatus(.scheduled))
-                                }),
-                            Segment(
-                                id: .past,
-                                count: viewStore.completedCount,
-                                isSelected: viewStore.meetingStatus == .past,
-                                action: {
-                                    viewStore.send(.changeMeetingStatus(.past))
-                                })
-                        ])
+                    Image.Background.homeShort
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geo.size.width, height: geo.size.height - yOffset)
+                        .clipped()
+                        .offset(y: yOffset)
+                    
+                    VStack(spacing: 64) {
+                        // 유저 정보
+                        HomeUserInfoView(user: viewStore.user)
+                        
+                        // segmentedPicker
+                        SegmentedPickerView(
+                            segment: [
+                                Segment(
+                                    id: .scheduled,
+                                    count: viewStore.progressCount,
+                                    isSelected: viewStore.meetingStatus == .scheduled,
+                                    action: {
+                                        viewStore.send(.changeMeetingStatus(.scheduled))
+                                    }),
+                                Segment(
+                                    id: .past,
+                                    count: viewStore.completedCount,
+                                    isSelected: viewStore.meetingStatus == .past,
+                                    action: {
+                                        viewStore.send(.changeMeetingStatus(.past))
+                                    })
+                            ])
+                    }
+                    .offset(y: yOffset)
                 }
-                .offset(y: yOffset)
             }
+            .frame(height: 260)
         }
-        .frame(height: 260)
     }
 }
 

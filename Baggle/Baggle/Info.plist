@@ -23,6 +23,11 @@
 		<string>kakaolink</string>
 		<string>itms-apps</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>TestURL</key>
 	<string>$(TEST_URL)</string>
 	<key>UIBackgroundModes</key>
