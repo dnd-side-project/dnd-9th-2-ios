@@ -38,7 +38,7 @@ extension MeetingDetailService: DependencyKey {
             if let apiError = error as? APIError {
                 if apiError == .notFound {
                     return .notFound
-                } else if apiError == .unauthorized {
+                } else if apiError == .unauthorized || apiError == .tokenExpired {
                     return .userError
                 }
             } else if let keyChainError = error as? KeyChainError {

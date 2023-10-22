@@ -39,6 +39,9 @@ extension MeetingEditService: DependencyKey {
                 return .success(meetingEditSuccessModel)
             }.value
         } catch {
+            if error as? APIError == .tokenExpired {
+                return .userError
+            }
             return .networkError(error.localizedDescription)
         }
     }
