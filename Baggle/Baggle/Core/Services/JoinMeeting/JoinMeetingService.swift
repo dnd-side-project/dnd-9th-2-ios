@@ -38,6 +38,8 @@ extension JoinMeetingService: DependencyKey {
             guard let error = error as? APIError else { return .fail(.network) }
             if error == .duplicatedJoinMeeting {
                 return JoinMeetingResult.joined
+            } else if error == .tokenExpired {
+                return JoinMeetingResult.expired(.tokenExpired)
             } else {
                 return JoinMeetingResult.expired(error)
             }
