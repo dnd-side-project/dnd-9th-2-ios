@@ -39,6 +39,8 @@ extension SignUpService: DependencyKey {
         } catch {
             if (error as? APIError) == APIError.duplicatedNickname {
                 return .nicknameDuplicated
+            } else if (error as? APIError) == .tokenExpired {
+                return .userError
             } else if let error = error as? KeyChainError {
                 return .userError
             } else {
