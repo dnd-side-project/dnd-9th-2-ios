@@ -19,6 +19,7 @@ enum APIError: Error, Equatable {
 
     case authorizeFail // 401, 토큰 인증 실패
     case unauthorized // 401, 토큰 만료 에러 (재발급 X)
+    case tokenExpired // 401, 리프레시 토큰 만료
     
     // MARK: - 403
 
@@ -64,6 +65,7 @@ extension APIError: LocalizedError {
             
         case .authorizeFail: return "401 인증 실패"
         case .unauthorized: return "401 인증 불가"
+        case .tokenExpired: return "401 토큰 만료"
             
             // MARK: - 403
             

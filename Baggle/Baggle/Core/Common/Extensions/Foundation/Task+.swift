@@ -32,7 +32,7 @@ extension Task where Failure == Error {
                             if await TokenRefreshService.refresh() == .success {
                                 continue
                             } else {
-                                throw APIError.unauthorized
+                                throw APIError.tokenExpired
                             }
                         }
                     }
