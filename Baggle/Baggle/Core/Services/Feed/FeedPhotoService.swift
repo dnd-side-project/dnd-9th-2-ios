@@ -45,6 +45,8 @@ extension FeedPhotoService: DependencyKey {
                     return .notFound
                 case .duplicatedUser:
                     return .alreadyUpload
+                case .tokenExpired:
+                    return .userError
                 default:
                     return .networkError(apiError.localizedDescription)
                 }

@@ -43,6 +43,8 @@ extension EmergencyService: DependencyKey {
                     return .unAuthorized
                 } else if apiError == .notFound {
                     return .notFound
+                } else if apiError == .tokenExpired {
+                    return .userError
                 }
             }
             return .networkError(error.localizedDescription)
