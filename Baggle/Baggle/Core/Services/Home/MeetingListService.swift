@@ -32,6 +32,9 @@ extension MeetingListService: DependencyKey {
             }.value
         } catch {
             print("❌ MeetingListService - error: \(error)")
+            if error as? APIError == .tokenExpired {
+                return .userError
+            }
             return .networkError(error.localizedDescription)
         }
     }

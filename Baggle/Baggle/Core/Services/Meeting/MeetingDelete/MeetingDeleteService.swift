@@ -38,8 +38,12 @@ extension MeetingDeleteService: DependencyKey {
                 return .successDelegate
             }.value
         } catch {
-            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
-                return .invalidDeleteTime
+            if let apiError = error as? APIError {
+                if apiError == .invalidMeetingDeleteTime {
+                    return .invalidDeleteTime
+                } else if apiError == .tokenExpired {
+                    return .userError
+                }
             }
             
             return .networkError
@@ -61,8 +65,12 @@ extension MeetingDeleteService: DependencyKey {
                 return .successLeave
             }.value
         } catch {
-            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
-                return .invalidDeleteTime
+            if let apiError = error as? APIError {
+                if apiError == .invalidMeetingDeleteTime {
+                    return .invalidDeleteTime
+                } else if apiError == .tokenExpired {
+                    return .userError
+                }
             }
             
             return .networkError
@@ -84,8 +92,12 @@ extension MeetingDeleteService: DependencyKey {
                 return .successDelete
             }.value
         } catch {
-            if let apiError = error as? APIError, apiError == .invalidMeetingDeleteTime {
-                return .invalidDeleteTime
+            if let apiError = error as? APIError {
+                if apiError == .invalidMeetingDeleteTime {
+                    return .invalidDeleteTime
+                } else if apiError == .tokenExpired {
+                    return .userError
+                }
             }
             
             return .networkError

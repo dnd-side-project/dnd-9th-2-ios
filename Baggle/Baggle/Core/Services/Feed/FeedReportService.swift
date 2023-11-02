@@ -37,6 +37,9 @@ extension FeedReportService: DependencyKey {
             }).value
         } catch {
             guard let error = error as? APIError else { return .fail(.network) }
+            if error == .tokenExpired {
+                return .userError
+            }
             return .fail(error)
         }
     }

@@ -78,6 +78,8 @@ struct JoinMeetingFeature: ReducerProtocol {
                         return .run { send in await send(.alertTypeChanged(.overlap))}
                     case .exceedMemberCount:
                         return .run { send in await send(.alertTypeChanged(.exceedMemberCount))}
+                    case .tokenExpired:
+                        return .run { send in await send(.alertTypeChanged(.userError)) }
                     default:
                         return .run { send in await send(.alertTypeChanged(.expired))}
                     }

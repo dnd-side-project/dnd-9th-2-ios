@@ -30,6 +30,9 @@ extension LogoutService: DependencyKey {
                 return .success
             }.value
         } catch {
+            if error as? APIError == APIError.tokenExpired {
+                return .userError
+            }
             return .networkError(error.localizedDescription)
         }
     }

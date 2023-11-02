@@ -49,6 +49,8 @@ extension MeetingCreateService: DependencyKey {
                     return .duplicatedMeeting
                 } else if apiError == .limitMeetingCount {
                     return .limitMeetingCount
+                } else if apiError == .tokenExpired {
+                    return .userError
                 }
             }
             return .networkError(error.localizedDescription)

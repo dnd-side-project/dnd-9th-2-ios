@@ -33,6 +33,9 @@ extension WithdrawService: DependencyKey {
                 return .success
             }.value
         } catch {
+            if error as? APIError == .tokenExpired {
+                return .userError
+            }
             return .networkError(error.localizedDescription)
         }
     }
